@@ -1,205 +1,284 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN" data-theme="light">
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>ByteVibe</title>
+<meta name="description" content="一个关于 Vibe Coding、AI 辅助编程和现代开发实践的技术博客">
+<meta name="author" content="ByteVibe">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="/css/style.css">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+<script>
+  (function() {
+    var t = localStorage.getItem('theme');
+    if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
 
-  
-  
 <meta name="generator" content="Hexo 7.3.0"></head>
-
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
+  <div class="reading-progress" id="readingProgress"></div>
+  <header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a class="site-logo" href="/">
+      ByteVibe
+    </a>
+    <nav class="site-nav" id="siteNav">
       
+        <a class="nav-link" href="/">首页</a>
+      
+        <a class="nav-link" href="/archives">归档</a>
+      
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <span class="icon-sun"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+        <span class="icon-moon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    
+      <a class="mobile-nav-link" href="/">首页</a>
+    
+      <a class="mobile-nav-link" href="/archives">归档</a>
+    
   </div>
 </header>
 
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/07/01/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2024-07-02T02:21:14.702Z" itemprop="datePublished">2024-07-01</time>
-</a>
+  <main class="main-content">
+    <section class="hero-section">
+  <div class="container">
+    <h1 class="hero-title">ByteVibe</h1>
+    
+    <p class="hero-subtitle">探索 Vibe Coding 与 AI 编程的无限可能</p>
+    
+    
+    <p class="hero-description">一个关于 Vibe Coding、AI 辅助编程和现代开发实践的技术博客</p>
     
   </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/07/01/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/07/01/hello-world/" data-id="cly3s9tui0000pcwfbcdt4y87" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
 </section>
-        
-          <aside id="sidebar">
-  
-    
 
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">July 2024</a></li></ul>
+<section class="posts-section">
+  <div class="container">
+    <div class="posts-grid">
+      
+      <article class="post-card animate-on-scroll">
+        <div class="post-card-inner">
+          <div class="post-card-meta">
+            <time class="post-date">2025年06月30日</time>
+            
+            <span class="post-category">
+              
+                <a href="/categories/%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/">深度思考</a>
+              
+            </span>
+            
+          </div>
+          <h2 class="post-card-title">
+            <a href="/2025/06/30/future-of-vibe-coding/">Vibe Coding 的未来：当编程不再需要编程</a>
+          </h2>
+          <div class="post-card-excerpt">
+            
+              当 AI 可以理解并实现我们的编程意图时，软件开发的本质将如何改变？让我们一起展望 Vibe Coding 的未来图景。
+            
+          </div>
+          
+          <div class="post-card-tags">
+            
+              <a class="tag-pill" href="/tags/Vibe-Coding/">#Vibe Coding</a>
+            
+              <a class="tag-pill" href="/tags/%E6%9C%AA%E6%9D%A5%E8%B6%8B%E5%8A%BF/">#未来趋势</a>
+            
+              <a class="tag-pill" href="/tags/AI%E7%BC%96%E7%A8%8B/">#AI编程</a>
+            
+              <a class="tag-pill" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">#软件工程</a>
+            
+          </div>
+          
+          <a class="read-more" href="/2025/06/30/future-of-vibe-coding/">阅读全文 →</a>
+        </div>
+      </article>
+      
+      <article class="post-card animate-on-scroll">
+        <div class="post-card-inner">
+          <div class="post-card-meta">
+            <time class="post-date">2025年06月25日</time>
+            
+            <span class="post-category">
+              
+                <a href="/categories/%E5%B7%A5%E5%85%B7%E6%8E%A8%E8%8D%90/">工具推荐</a>
+              
+            </span>
+            
+          </div>
+          <h2 class="post-card-title">
+            <a href="/2025/06/25/ai-coding-tools-2025/">2025 年最值得关注的 AI 编程工具全景</a>
+          </h2>
+          <div class="post-card-excerpt">
+            
+              从 Cursor 到 GitHub Copilot，从 Claude 到 GPT-4，全面盘点 2025 年最强大的 AI 编程工具，帮你找到最适合自己的那一款。
+            
+          </div>
+          
+          <div class="post-card-tags">
+            
+              <a class="tag-pill" href="/tags/AI%E5%B7%A5%E5%85%B7/">#AI工具</a>
+            
+              <a class="tag-pill" href="/tags/Cursor/">#Cursor</a>
+            
+              <a class="tag-pill" href="/tags/GitHub-Copilot/">#GitHub Copilot</a>
+            
+              <a class="tag-pill" href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">#开发工具</a>
+            
+          </div>
+          
+          <a class="read-more" href="/2025/06/25/ai-coding-tools-2025/">阅读全文 →</a>
+        </div>
+      </article>
+      
+      <article class="post-card animate-on-scroll">
+        <div class="post-card-inner">
+          <div class="post-card-meta">
+            <time class="post-date">2025年06月20日</time>
+            
+            <span class="post-category">
+              
+                <a href="/categories/%E5%AE%9E%E8%B7%B5%E6%8A%80%E5%B7%A7/">实践技巧</a>
+              
+            </span>
+            
+          </div>
+          <h2 class="post-card-title">
+            <a href="/2025/06/20/vibe-coding-best-practices/">Vibe Coding 最佳实践：如何高效地与 AI 结对编程</a>
+          </h2>
+          <div class="post-card-excerpt">
+            
+              掌握这些 Vibe Coding 最佳实践，让你的 AI 编程效率提升 10 倍。从 Prompt 技巧到代码审查，全面提升你的 Vibe Coding 能力。
+            
+          </div>
+          
+          <div class="post-card-tags">
+            
+              <a class="tag-pill" href="/tags/Vibe-Coding/">#Vibe Coding</a>
+            
+              <a class="tag-pill" href="/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">#最佳实践</a>
+            
+              <a class="tag-pill" href="/tags/Prompt-Engineering/">#Prompt Engineering</a>
+            
+          </div>
+          
+          <a class="read-more" href="/2025/06/20/vibe-coding-best-practices/">阅读全文 →</a>
+        </div>
+      </article>
+      
+      <article class="post-card animate-on-scroll">
+        <div class="post-card-inner">
+          <div class="post-card-meta">
+            <time class="post-date">2025年06月15日</time>
+            
+            <span class="post-category">
+              
+                <a href="/categories/%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">入门指南</a>
+              
+            </span>
+            
+          </div>
+          <h2 class="post-card-title">
+            <a href="/2025/06/15/what-is-vibe-coding/">什么是 Vibe Coding？一文读懂 AI 时代的编程新范式</a>
+          </h2>
+          <div class="post-card-excerpt">
+            
+              Vibe Coding 是由 Andrej Karpathy 提出的编程理念，强调通过自然语言与 AI 协作完成编程任务。本文带你全面了解这一革命性的编程方式。
+            
+          </div>
+          
+          <div class="post-card-tags">
+            
+              <a class="tag-pill" href="/tags/Vibe-Coding/">#Vibe Coding</a>
+            
+              <a class="tag-pill" href="/tags/AI%E7%BC%96%E7%A8%8B/">#AI编程</a>
+            
+              <a class="tag-pill" href="/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/">#编程范式</a>
+            
+          </div>
+          
+          <a class="read-more" href="/2025/06/15/what-is-vibe-coding/">阅读全文 →</a>
+        </div>
+      </article>
+      
+      <article class="post-card animate-on-scroll">
+        <div class="post-card-inner">
+          <div class="post-card-meta">
+            <time class="post-date">2025年06月10日</time>
+            
+            <span class="post-category">
+              
+                <a href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a>
+              
+            </span>
+            
+          </div>
+          <h2 class="post-card-title">
+            <a href="/2025/06/10/hello-world/">欢迎来到 ByteVibe</a>
+          </h2>
+          <div class="post-card-excerpt">
+            
+              欢迎来到 ByteVibe！这是一个关于 Vibe Coding 和 AI 编程的技术博客，在这里我们将一起探索 AI 时代的编程新范式。
+            
+          </div>
+          
+          <div class="post-card-tags">
+            
+              <a class="tag-pill" href="/tags/%E5%85%AC%E5%91%8A/">#公告</a>
+            
+          </div>
+          
+          <a class="read-more" href="/2025/06/10/hello-world/">阅读全文 →</a>
+        </div>
+      </article>
+      
     </div>
-  </div>
-
-
-  
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2024/07/01/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
 
-  
-</aside>
+  </div>
+</section>
+
+  </main>
+  <footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <p class="copyright">&copy; 2026 ByteVibe. All rights reserved.</p>
+      <p class="powered-by">Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a></p>
+      
+      <div class="social-links">
+        
+          <a class="social-link" href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
         
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
       
-      &copy; 2024 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
 
-    </div>
-    <nav id="mobile-nav">
+  <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
   
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
+<script src="/js/main.js"></script>
 
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
 </body>
 </html>
