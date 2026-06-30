@@ -198,6 +198,17 @@ document.addEventListener('DOMContentLoaded', function () {
       tex.wrapT = THREE.ClampToEdgeWrapping;
       tex.minFilter = THREE.LinearFilter;
       tex.magFilter = THREE.LinearFilter;
+      tex.needsUpdate = true; // Force texture upload to GPU
+      
+      // Update materials if meshes are already initialized (resolves slow-network asynchronous loading race condition)
+      if (waterMesh && waterMesh.material) {
+        waterMesh.material.uniforms.uTexture.value = tex;
+        waterMesh.material.needsUpdate = true;
+      }
+      if (floorMesh && floorMesh.material) {
+        floorMesh.material.map = tex;
+        floorMesh.material.needsUpdate = true;
+      }
     });
 
     // Array to manage active mathematical ripples
