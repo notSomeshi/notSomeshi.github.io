@@ -8,7 +8,7 @@
 <meta name="author" content="ByteVibe">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Great+Vibes&family=Playball&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="/css/style.css">
 
@@ -23,8 +23,9 @@
 
 <meta name="generator" content="Hexo 7.3.0"></head>
 <body>
-  <div class="reading-progress" id="readingProgress"></div>
-  <header class="site-header" id="siteHeader">
+  <div id="app-wrapper" data-theme="light">
+    <div class="reading-progress" id="readingProgress"></div>
+    <header class="site-header" id="siteHeader">
   <div class="header-inner">
     <a class="site-logo" href="/">
       ByteVibe
@@ -57,8 +58,8 @@
   </div>
 </header>
 
-  <main class="main-content">
-    <section class="tag-section">
+    <main class="main-content">
+      <section class="tag-section">
   <div class="container">
     <div class="post-content-wrapper">
       
@@ -94,8 +95,8 @@
   </div>
 </section>
 
-  </main>
-  <footer class="site-footer">
+    </main>
+    <footer class="site-footer">
   <div class="container">
     <div class="footer-content">
       <p class="copyright">&copy; 2026 ByteVibe. All rights reserved.</p>
@@ -111,13 +112,16 @@
   </div>
 </footer>
 
-  <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="18 15 12 9 6 15"></polyline>
-    </svg>
-  </button>
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15"></polyline>
+      </svg>
+    </button>
+  </div>
   
 <script src="/js/main.js"></script>
 
+  <!-- Three.js CDN for natural WebGL water and koi fish pond rendering -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </body>
 </html>

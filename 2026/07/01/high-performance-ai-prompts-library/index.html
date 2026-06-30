@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>如何撰写黄金级 AI Prompt：从“做个功能”到“系统级交付” | ByteVibe</title>
+<meta name="description" content="一个关于 Vibe Coding、AI 辅助编程和现代开发实践的技术博客">
+<meta name="author" content="ByteVibe">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Great+Vibes&family=Playball&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script>
+  (function() {
+    var t = localStorage.getItem('theme');
+    if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+  <div id="app-wrapper" data-theme="light">
+    <div class="reading-progress" id="readingProgress"></div>
+    <header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a class="site-logo" href="/">
+      ByteVibe
+    </a>
+    <nav class="site-nav" id="siteNav">
+      
+        <a class="nav-link" href="/">首页</a>
+      
+        <a class="nav-link" href="/archives">归档</a>
+      
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <span class="icon-sun"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+        <span class="icon-moon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    
+      <a class="mobile-nav-link" href="/">首页</a>
+    
+      <a class="mobile-nav-link" href="/archives">归档</a>
+    
+  </div>
+</header>
+
+    <main class="main-content">
+      <article class="post-detail">
+  <div class="container-docs">
+    <div class="post-layout-grid">
+      <!-- 1. Left Sidebar: Documentation Navigation -->
+      <aside class="post-sidebar-left">
+        <div class="sidebar-sticky">
+          <h3 class="sidebar-title">全部文章</h3>
+          <ul class="sidebar-list">
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/no-code-mvp-to-solopreneur/">从 Vibe Coding 到超级个体：2026 年全栈独立开发的新叙事</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/yolo-mode-and-ai-safety-guardrails/">YOLO 模式下的安全边界：如何防止 AI 删库跑路</a>
+              </li>
+            
+              <li class="sidebar-item active">
+                <a href="/2026/07/01/high-performance-ai-prompts-library/">如何撰写黄金级 AI Prompt：从“做个功能”到“系统级交付”</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/mcp-server-practical-recipes/">Model Context Protocol (MCP) 深度指南：连接你的 AI 与现实数据</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/advanced-vibe-coding-roo-clinic/">Cline 与 Roo Code 实战：下一代 Vibe Coding 的工程范式</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/04/01/claude-code-complete-guide/">Claude Code 从入门到精通：面向工程师与产品经理的 AI 编程完全指南</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/30/future-of-vibe-coding/">Vibe Coding 的未来：当编程不再需要编程</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/25/ai-coding-tools-2025/">2025 年最值得关注的 AI 编程工具全景</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/20/vibe-coding-best-practices/">Vibe Coding 最佳实践：如何高效地与 AI 结对编程</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/15/what-is-vibe-coding/">什么是 Vibe Coding？一文读懂 AI 时代的编程新范式</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/10/hello-world/">欢迎来到 ByteVibe</a>
+              </li>
+            
+          </ul>
+        </div>
+      </aside>
+
+      <!-- 2. Middle Column: Main Article Content -->
+      <div class="post-content-main">
+        <header class="post-header">
+          <div class="post-meta">
+            <time class="post-date">2026年07月01日</time>
+            
+            <span class="post-meta-sep">·</span>
+            <span class="post-category">
+              
+                <a href="/categories/%E5%AE%9E%E8%B7%B5%E6%8A%80%E5%B7%A7/">实践技巧</a>
+              
+            </span>
+            
+            <span class="post-meta-sep">·</span>
+            <span class="reading-time">4 分钟阅读</span>
+          </div>
+          <h1 class="post-title">如何撰写黄金级 AI Prompt：从“做个功能”到“系统级交付”</h1>
+          
+          <div class="post-tags">
+            
+              <a class="tag-pill" href="/tags/Prompt-Engineering/">#Prompt Engineering</a>
+            
+              <a class="tag-pill" href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/">#提示词工程</a>
+            
+              <a class="tag-pill" href="/tags/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/">#开发效率</a>
+            
+          </div>
+          
+        </header>
+        
+        <div class="post-body">
+          <h2 id="引言：别让模糊性毁掉你的-AI-编程效率"><a href="#引言：别让模糊性毁掉你的-AI-编程效率" class="headerlink" title="引言：别让模糊性毁掉你的 AI 编程效率"></a>引言：别让模糊性毁掉你的 AI 编程效率</h2><p>在与 AI 协同编程的过程中，许多开发者经常陷入一种困境：</p>
+<blockquote>
+<p>“我让 AI 帮我写一个‘好看的登录页面’，结果它写出来的代码不仅样式奇丑无比，而且连基本的表单校验都没做。AI 根本不好用！”</p>
+</blockquote>
+<p>这种现象被称为 <strong>Vibe Coding 的模糊词陷阱</strong>。AI Agent 具有强大的执行力，但前提是它必须拥有清晰的边界和输入。如果你给出的指令充满了“好看的”、“鲁棒的”、“简单的”这种主观性极强的词汇，AI 只能基于其概率模型进行猜测，导致最终交付物与你的预期大相径庭。</p>
+<hr>
+<h2 id="一、-ICCE-黄金法则"><a href="#一、-ICCE-黄金法则" class="headerlink" title="一、 ICCE 黄金法则"></a>一、 ICCE 黄金法则</h2><p>为了从“随便做个功能”升级到“系统级交付”，我们需要在撰写提示词时严格遵循 <strong>ICCE 黄金法则</strong>。一个优秀的系统级 Prompt 应该包含以下四个核心部分：</p>
+<ol>
+<li>**Input (输入)**：明确告诉 AI 要处理的数据、代码段或具体的模块。</li>
+<li>**Context (上下文&#x2F;背景)**：解释这个功能运行在什么环境里，依赖哪些组件，以及业务目的是什么。</li>
+<li>**Constraint (约束&#x2F;限制条件)**：明确列出性能要求、技术栈限制、安全策略以及禁止使用的反模式。</li>
+<li>**Examples (示例&#x2F;Few-Shot)**：给出一个高标准的样本代码或期望的输出格式。</li>
+</ol>
+<h3 id="ICCE-结构对比示例"><a href="#ICCE-结构对比示例" class="headerlink" title="ICCE 结构对比示例"></a>ICCE 结构对比示例</h3><ul>
+<li><p><strong>反面教材（模糊词陷阱）</strong>：</p>
+<blockquote>
+<p>“帮我重构一下这个 API，让它跑得更快、更稳。”</p>
+</blockquote>
+</li>
+<li><p><strong>正面教材（符合 ICCE 法则）</strong>：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">【Input】: </span><br><span class="line">重构 src/api/users.ts 中的 <span class="code">`fetchUserProfile`</span> 函数。</span><br><span class="line"></span><br><span class="line">【Context】: </span><br><span class="line">这个函数会被高频调用，目前在网络抖动时容易导致前端页面奔溃。我们使用 React Query 管理状态。</span><br><span class="line"></span><br><span class="line">【Constraint】: </span><br><span class="line"><span class="bullet">1.</span> 必须使用 try-catch 捕获异常，并使用 @/utils/logger 记录日志。</span><br><span class="line"><span class="bullet">2.</span> 实现指数退避重试（Exponential Backoff Retry），最多重试 3 次。</span><br><span class="line"><span class="bullet">3.</span> 不能引入额外的外部依赖包，使用原生的 fetch。</span><br><span class="line"></span><br><span class="line">【Examples】:</span><br><span class="line">异常处理格式应类似于：</span><br><span class="line">try &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125; catch (error) &#123;</span><br><span class="line">  logger.error(&quot;Fetch profile failed&quot;, &#123; userId, error &#125;);</span><br><span class="line">  return fallbackProfile;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="二、-复杂项目的系统级交付链路"><a href="#二、-复杂项目的系统级交付链路" class="headerlink" title="二、 复杂项目的系统级交付链路"></a>二、 复杂项目的系统级交付链路</h2><p>当面对大型、跨模块的复杂项目开发时，直接把需求丢给 AI 往往会导致代码库被改得支离破碎。推荐使用以下<strong>三阶段交付法</strong>：</p>
+<h3 id="阶段-1：调研与可行性分析-Research-Session"><a href="#阶段-1：调研与可行性分析-Research-Session" class="headerlink" title="阶段 1：调研与可行性分析 (Research Session)"></a>阶段 1：调研与可行性分析 (Research Session)</h3><p>在新开的干净 session 中，先让 AI 作为一个资深的系统架构师，对整个项目的可行性进行调研。</p>
+<ul>
+<li><strong>Prompt 示例</strong>：<em>“我现在想在现有系统中加入 WebAuthn 指纹登录功能。请分析我们的前端（Next.js）与后端（Express）架构，列出需要新增的库、潜在的安全风险以及推荐的数据库 Schema 改动，暂时不要写代码。”</em></li>
+</ul>
+<h3 id="阶段-2：输出技术-Spec-Spec-Generation"><a href="#阶段-2：输出技术-Spec-Spec-Generation" class="headerlink" title="阶段 2：输出技术 Spec (Spec Generation)"></a>阶段 2：输出技术 Spec (Spec Generation)</h3><p>在调研结果基础上，与 AI 进行多轮讨论，细化所有的技术细节，并让 AI 输出一份详尽的 <code>IMPLEMENTATION_SPEC.md</code>。</p>
+<ul>
+<li><strong>Spec 内容应包含</strong>：文件修改清单、新增依赖、核心逻辑流程图、以及明确的测试用例。</li>
+</ul>
+<h3 id="阶段-3：开干净的-Session-执行-Clean-Execution-Session"><a href="#阶段-3：开干净的-Session-执行-Clean-Execution-Session" class="headerlink" title="阶段 3：开干净的 Session 执行 (Clean Execution Session)"></a>阶段 3：开干净的 Session 执行 (Clean Execution Session)</h3><p>拿到 Spec 后，<strong>在终端中执行 <code>/clear</code> 清除历史上下文，或者新开一个干净的会话</strong>。将 <code>IMPLEMENTATION_SPEC.md</code> 作为背景上下文喂给 Agent：</p>
+<ul>
+<li><strong>Prompt 示例</strong>：<em>“请根据 <code>IMPLEMENTATION_SPEC.md</code> 的内容，一步步执行代码修改。每修改完一个模块，请立即运行对应的测试，确保没有破坏现有功能。”</em></li>
+</ul>
+<p>通过这种“调研 -&gt; 写 spec -&gt; 干净执行”的隔离式链路，可以把复杂项目的交付成功率提升数倍，彻底告别上下文污染。</p>
+
+        </div>
+        
+        <footer class="post-footer">
+          <nav class="post-nav">
+            
+            <a class="post-nav-item post-nav-prev" href="/2026/07/01/yolo-mode-and-ai-safety-guardrails/">
+              <span class="post-nav-label">← 上一篇</span>
+              <span class="post-nav-title">YOLO 模式下的安全边界：如何防止 AI 删库跑路</span>
+            </a>
+            
+            
+            <a class="post-nav-item post-nav-next" href="/2026/07/01/mcp-server-practical-recipes/">
+              <span class="post-nav-label">下一篇 →</span>
+              <span class="post-nav-title">Model Context Protocol (MCP) 深度指南：连接你的 AI 与现实数据</span>
+            </a>
+            
+          </nav>
+        </footer>
+      </div>
+
+      <!-- 3. Right Sidebar: Outline TOC Jump -->
+      <aside class="post-sidebar-right">
+        
+          <div class="toc-sticky">
+            <h3 class="toc-title">目录大纲</h3>
+            <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%BC%95%E8%A8%80%EF%BC%9A%E5%88%AB%E8%AE%A9%E6%A8%A1%E7%B3%8A%E6%80%A7%E6%AF%81%E6%8E%89%E4%BD%A0%E7%9A%84-AI-%E7%BC%96%E7%A8%8B%E6%95%88%E7%8E%87"><span class="toc-list-text">引言：别让模糊性毁掉你的 AI 编程效率</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81-ICCE-%E9%BB%84%E9%87%91%E6%B3%95%E5%88%99"><span class="toc-list-text">一、 ICCE 黄金法则</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#ICCE-%E7%BB%93%E6%9E%84%E5%AF%B9%E6%AF%94%E7%A4%BA%E4%BE%8B"><span class="toc-list-text">ICCE 结构对比示例</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81-%E5%A4%8D%E6%9D%82%E9%A1%B9%E7%9B%AE%E7%9A%84%E7%B3%BB%E7%BB%9F%E7%BA%A7%E4%BA%A4%E4%BB%98%E9%93%BE%E8%B7%AF"><span class="toc-list-text">二、 复杂项目的系统级交付链路</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E9%98%B6%E6%AE%B5-1%EF%BC%9A%E8%B0%83%E7%A0%94%E4%B8%8E%E5%8F%AF%E8%A1%8C%E6%80%A7%E5%88%86%E6%9E%90-Research-Session"><span class="toc-list-text">阶段 1：调研与可行性分析 (Research Session)</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E9%98%B6%E6%AE%B5-2%EF%BC%9A%E8%BE%93%E5%87%BA%E6%8A%80%E6%9C%AF-Spec-Spec-Generation"><span class="toc-list-text">阶段 2：输出技术 Spec (Spec Generation)</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E9%98%B6%E6%AE%B5-3%EF%BC%9A%E5%BC%80%E5%B9%B2%E5%87%80%E7%9A%84-Session-%E6%89%A7%E8%A1%8C-Clean-Execution-Session"><span class="toc-list-text">阶段 3：开干净的 Session 执行 (Clean Execution Session)</span></a></li></ol></li></ol>
+          </div>
+        
+      </aside>
+    </div>
+  </div>
+</article>
+
+    </main>
+    <footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <p class="copyright">&copy; 2026 ByteVibe. All rights reserved.</p>
+      <p class="powered-by">Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a></p>
+      
+      <div class="social-links">
+        
+          <a class="social-link" href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15"></polyline>
+      </svg>
+    </button>
+  </div>
+  
+<script src="/js/main.js"></script>
+
+  <!-- Three.js CDN for natural WebGL water and koi fish pond rendering -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</body>
+</html>
