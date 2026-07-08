@@ -402,7 +402,8 @@ var Rain = (function () {
   var W = 0, H = 0;
   var drops = [], ripples = [], splashes = [], puddles = [];
   var spawnCarry = 0, lastTime = 0, elapsed = 0;
-  var audioCtx = null, gainNode = null, lowpass = null;
+  var audioCtx = null, masterGain = null, bedGain = null, bedLowpass = null, bedModDepth = null, noiseBuffer = null;
+  var plinkCarry = 0, activePlinks = 0, lastDingAt = 0, nextThunderAt = 0, flashAlpha = 0;
   var gestureBound = false;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var MAX_DROPS = 240;
@@ -466,6 +467,17 @@ var Rain = (function () {
       max: (inPuddle ? 16 : 7) + 22 * d.z,
       z: d.z
     });
+    // 音画同步:落进水坑的雨滴按概率触发一声带谐振的"plip",克制点缀
+    if (inPuddle && Math.random() < 0.1 && elapsed - lastDingAt > 0.15) {
+      lastDingAt = elapsed;
+      playPlink(
+        1100 + Math.random() * 1400,
+        0.012 + Math.random() * 0.01,
+        0.09 + Math.random() * 0.07,
+        Math.max(-0.7, Math.min(0.7, (d.x / W) * 1.4 - 0.7)),
+        9
+      );
+    }
     var n = inPuddle ? 2 : 3;
     for (var j = 0; j < n; j++) {
       splashes.push({
@@ -550,6 +562,15 @@ var Rain = (function () {
       ctx.fillStyle = 'rgba(190, 210, 235, ' + (s.life * 1.1).toFixed(3) + ')';
       ctx.fillRect(s.x, s.y, 1.4, 1.4);
     }
+
+    // 雷声伴随的极淡闪光,数帧内衰减
+    if (flashAlpha > 0.002) {
+      ctx.fillStyle = 'rgba(215, 225, 255, ' + flashAlpha.toFixed(3) + ')';
+      ctx.fillRect(0, 0, W, H);
+      flashAlpha *= 0.8;
+    } else if (flashAlpha !== 0) {
+      flashAlpha = 0;
+    }
   }
 
   function loop(now) {
@@ -562,47 +583,164 @@ var Rain = (function () {
     // 同一条强度曲线同时驱动视觉密度与音量/音色
     spawnCarry += intensity * dt * (W / 8.5);
     while (spawnCarry >= 1) { spawnDrop(); spawnCarry -= 1; }
+
+    // 离散雨点"嗒"声:密度随雨强 10~40 次/秒,低 Q 融入雨幕
+    plinkCarry += (10 + 30 * intensity) * dt;
+    while (plinkCarry >= 1) {
+      plinkCarry -= 1;
+      playPlink(
+        2800 + Math.random() * 3700,
+        0.004 + Math.random() * 0.009,
+        0.02 + Math.random() * 0.05,
+        (Math.random() * 2 - 1) * 0.8,
+        1.2
+      );
+    }
+
+    // 随机远雷:25~90 秒一次,雨越大越容易触发
+    if (nextThunderAt === 0) nextThunderAt = elapsed + 18 + Math.random() * 40;
+    if (elapsed >= nextThunderAt) {
+      if (Math.random() < 0.3 + 0.6 * intensity) playThunder(intensity);
+      nextThunderAt = elapsed + 25 + Math.random() * 65;
+    }
+
     draw(dt, intensity);
     updateAudio(intensity);
 
     rafId = requestAnimationFrame(loop);
   }
 
-  /* ---------- 音频:过滤白噪声 ≈ 雨声 ---------- */
+  /* ---------- 音频:雨幕底噪 + 离散雨滴 + 远雷 ----------
+     底噪只保留低频(去掉电视雪花般的宽频嘶声);
+     "清脆感"来自随机调度的短促高频瞬态(滴答声);
+     远雷为低通噪声长衰减突发,音量刻意压低。 */
 
   function initAudio() {
     var AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return;
     audioCtx = new AC();
+
+    // 粉红噪声(Paul Kellet 滤波法):比白噪声柔和,是"助眠雨声"的频谱基础
     var len = audioCtx.sampleRate * 2;
-    var buf = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
-    var data = buf.getChannelData(0);
-    for (var i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
-    var src = audioCtx.createBufferSource();
-    src.buffer = buf;
-    src.loop = true;
-    var highpass = audioCtx.createBiquadFilter();
-    highpass.type = 'highpass';
-    highpass.frequency.value = 380;
-    lowpass = audioCtx.createBiquadFilter();
-    lowpass.type = 'lowpass';
-    lowpass.frequency.value = 2000;
-    lowpass.Q.value = 0.4;
-    gainNode = audioCtx.createGain();
-    gainNode.gain.value = 0;
-    src.connect(highpass);
-    highpass.connect(lowpass);
-    lowpass.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
-    src.start();
+    noiseBuffer = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
+    var data = noiseBuffer.getChannelData(0);
+    var b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+    for (var i = 0; i < len; i++) {
+      var white = Math.random() * 2 - 1;
+      b0 = 0.99886 * b0 + white * 0.0555179;
+      b1 = 0.99332 * b1 + white * 0.0750759;
+      b2 = 0.969 * b2 + white * 0.153852;
+      b3 = 0.8665 * b3 + white * 0.3104856;
+      b4 = 0.55 * b4 + white * 0.5329522;
+      b5 = -0.7616 * b5 - white * 0.016898;
+      data[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.11;
+      b6 = white * 0.115926;
+    }
+
+    masterGain = audioCtx.createGain();
+    masterGain.gain.value = 1;
+    masterGain.connect(audioCtx.destination);
+
+    // 雨幕:粉噪声保留到 ~4kHz 的"沙"声空气感,去掉低频轰隆
+    var bedSrc = audioCtx.createBufferSource();
+    bedSrc.buffer = noiseBuffer;
+    bedSrc.loop = true;
+    var bedHP = audioCtx.createBiquadFilter();
+    bedHP.type = 'highpass';
+    bedHP.frequency.value = 220; // 低频段留给雷声
+    bedLowpass = audioCtx.createBiquadFilter();
+    bedLowpass.type = 'lowpass';
+    bedLowpass.frequency.value = 4200;
+    bedLowpass.Q.value = 0.4;
+    bedGain = audioCtx.createGain();
+    bedGain.gain.value = 0;
+    bedSrc.connect(bedHP);
+    bedHP.connect(bedLowpass);
+    bedLowpass.connect(bedGain);
+    bedGain.connect(masterGain);
+    bedSrc.start();
+
+    // 淅沥质感:用 ~14Hz 以下的随机低频信号轻微抖动雨幕音量,
+    // 让它听起来是"落着的雨"而不是平直的嘶声
+    var modSrc = audioCtx.createBufferSource();
+    modSrc.buffer = noiseBuffer;
+    modSrc.loop = true;
+    var modLP = audioCtx.createBiquadFilter();
+    modLP.type = 'lowpass';
+    modLP.frequency.value = 14;
+    bedModDepth = audioCtx.createGain();
+    bedModDepth.gain.value = 0;
+    modSrc.connect(modLP);
+    modLP.connect(bedModDepth);
+    bedModDepth.connect(bedGain.gain);
+    modSrc.start(0, 0.73); // 错开相位,避免与主源同步
   }
 
   function updateAudio(intensity) {
-    if (!audioCtx || audioCtx.state !== 'running') return;
+    if (!audioCtx || audioCtx.state !== 'running' || !bedGain) return;
     var t = audioCtx.currentTime;
-    // 雨越大:音量越大、频谱越亮
-    gainNode.gain.setTargetAtTime(running ? 0.035 + 0.1 * intensity : 0, t, 0.45);
-    lowpass.frequency.setTargetAtTime(1100 + 1700 * intensity, t, 0.45);
+    // 雨越大:雨幕稍强、稍亮;抖动深度跟随底噪基准
+    var base = running ? 0.035 + 0.075 * intensity : 0;
+    bedGain.gain.setTargetAtTime(base, t, 0.45);
+    bedLowpass.frequency.setTargetAtTime(3000 + 2200 * intensity, t, 0.45);
+    if (bedModDepth) bedModDepth.gain.setTargetAtTime(base * 2.2, t, 0.45);
+  }
+
+  /* 单个雨滴:带通滤波的噪声短突发——听感是雨点打在物面上的"嗒",
+     而不是音乐性的"叮咚"。q 越高谐振越明显(水坑滴落用高 q 的"plip")。 */
+  function playPlink(freq, peak, decaySec, pan, q) {
+    if (!audioCtx || audioCtx.state !== 'running' || !noiseBuffer || activePlinks > 24) return;
+    activePlinks++;
+    var t = audioCtx.currentTime;
+    var src = audioCtx.createBufferSource();
+    src.buffer = noiseBuffer;
+    var bp = audioCtx.createBiquadFilter();
+    bp.type = 'bandpass';
+    bp.frequency.value = freq;
+    bp.Q.value = q || 1.2;
+    var g = audioCtx.createGain();
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(peak, t + 0.002);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + decaySec);
+    var out = g;
+    if (audioCtx.createStereoPanner) {
+      var p = audioCtx.createStereoPanner();
+      p.pan.value = pan;
+      g.connect(p);
+      out = p;
+    }
+    out.connect(masterGain);
+    src.connect(bp);
+    bp.connect(g);
+    src.start(t, Math.random() * 1.5, decaySec + 0.05);
+    src.onended = function () { activePlinks--; };
+  }
+
+  /* 远雷:低通噪声,慢起音 + 长衰减,滤波频率缓慢下扫出"滚雷"感 */
+  function playThunder(intensity) {
+    if (!audioCtx || audioCtx.state !== 'running' || !noiseBuffer) return;
+    var t = audioCtx.currentTime;
+    var dur = 3 + Math.random() * 3;
+    var src = audioCtx.createBufferSource();
+    src.buffer = noiseBuffer;
+    src.loop = true;
+    var lp = audioCtx.createBiquadFilter();
+    lp.type = 'lowpass';
+    lp.frequency.setValueAtTime(150 + Math.random() * 60, t);
+    lp.frequency.exponentialRampToValueAtTime(55, t + dur);
+    lp.Q.value = 0.5;
+    var g = audioCtx.createGain();
+    var peak = 0.02 + 0.02 * intensity; // 刻意压低,不喧宾夺主
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(peak, t + 0.35 + Math.random() * 0.45);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    src.connect(lp);
+    lp.connect(g);
+    g.connect(masterGain);
+    src.start(t);
+    src.stop(t + dur + 0.1);
+    // 极淡的一帧画面闪光,与雷声呼应
+    flashAlpha = 0.04;
   }
 
   function resumeAudio() {
@@ -645,6 +783,9 @@ var Rain = (function () {
       resize();
       resumeAudio();
       bindGestureResume();
+      if (audioCtx && masterGain) {
+        masterGain.gain.setTargetAtTime(1, audioCtx.currentTime, 0.2);
+      }
       if (!reduceMotion) {
         lastTime = performance.now();
         rafId = requestAnimationFrame(loop);
@@ -656,9 +797,10 @@ var Rain = (function () {
       if (rafId) cancelAnimationFrame(rafId);
       rafId = null;
       drops = []; ripples = []; splashes = [];
+      plinkCarry = 0; nextThunderAt = 0; flashAlpha = 0;
       if (ctx) ctx.clearRect(0, 0, W, H);
-      if (audioCtx && gainNode) {
-        gainNode.gain.setTargetAtTime(0, audioCtx.currentTime, 0.2);
+      if (audioCtx && masterGain) {
+        masterGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.2);
         setTimeout(function () {
           if (!running && audioCtx && audioCtx.state === 'running') audioCtx.suspend();
         }, 900);
