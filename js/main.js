@@ -403,9 +403,9 @@ var Rain = (function () {
   var drops = [], ripples = [], splashes = [], puddles = [];
   var spawnCarry = 0, lastTime = 0, elapsed = 0;
   /* 雨声素材来源(在雨夜模式下后台循环播放):
-     "Rain and Thunder Ambience" — 作者 sagamusix,CC0(公有领域)
-     https://freesound.org/people/sagamusix/sounds/700358/
-     夏季雷雨实录,作者设计为首尾无缝循环,自带真实雷声。
+     "Heavy Rain" — 作者 NachtmahrTV,CC0(公有领域)
+     https://freesound.org/people/NachtmahrTV/sounds/618108/
+     约 5 分钟密集大雨,制作型环境音(与助眠雨视频同风格)。
      解码失败时回退到合成雨幕。 */
   var RAIN_SRC = '/audio/rain.mp3';
   var usingRecording = false;
@@ -650,9 +650,20 @@ var Rain = (function () {
     masterGain.gain.value = 1;
     masterGain.connect(audioCtx.destination);
 
+    // 响度链:压缩器抬升整体响度(对齐"助眠雨"视频的听感),防削波
     bedGain = audioCtx.createGain();
     bedGain.gain.value = 0;
-    bedGain.connect(masterGain);
+    var comp = audioCtx.createDynamicsCompressor();
+    comp.threshold.value = -24;
+    comp.knee.value = 12;
+    comp.ratio.value = 4;
+    comp.attack.value = 0.02;
+    comp.release.value = 0.3;
+    var makeup = audioCtx.createGain();
+    makeup.gain.value = 1.8;
+    bedGain.connect(comp);
+    comp.connect(makeup);
+    makeup.connect(masterGain);
 
     // 首选:真实雨声录音无缝循环(素材来源见模块顶部注释)
     fetch(RAIN_SRC)
@@ -662,10 +673,10 @@ var Rain = (function () {
         var src = audioCtx.createBufferSource();
         src.buffer = buf;
         src.loop = true;
-        // 素材本身首尾无缝,只跳过 MP3 编码器附加的起始静音
-        var margin = 0.06;
+        // 跳过首尾边缘,循环点落在稳态雨声中(宽频噪声可掩蔽接缝)
+        var margin = 0.15;
         src.loopStart = margin;
-        src.loopEnd = buf.duration - 0.02;
+        src.loopEnd = buf.duration - margin;
         src.connect(bedGain);
         src.start(0, margin);
         usingRecording = true;
@@ -710,7 +721,7 @@ var Rain = (function () {
     var t = audioCtx.currentTime;
     // 雨越大音量越大;录音与合成雨幕的响度基准不同
     var base = running
-      ? (usingRecording ? 0.55 + 0.45 * intensity : 0.035 + 0.075 * intensity)
+      ? (usingRecording ? 0.7 + 0.3 * intensity : 0.035 + 0.075 * intensity)
       : 0;
     bedGain.gain.setTargetAtTime(base, t, 0.45);
     if (bedLowpass) bedLowpass.frequency.setTargetAtTime(3000 + 2200 * intensity, t, 0.45);
