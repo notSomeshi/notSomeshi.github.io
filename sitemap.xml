@@ -262,27 +262,6 @@
   </url>
   
   <url>
-    <loc>https://notsomeshi.github.io/tags/%E5%B0%B1%E4%B8%9A/</loc>
-    <lastmod>2026-07-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://notsomeshi.github.io/tags/%E9%98%B6%E5%B1%82%E5%8F%98%E8%BF%81/</loc>
-    <lastmod>2026-07-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://notsomeshi.github.io/tags/AI%E5%89%8D%E6%99%AF/</loc>
-    <lastmod>2026-07-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://notsomeshi.github.io/tags/Claude-Code/</loc>
     <lastmod>2026-07-08</lastmod>
     <changefreq>weekly</changefreq>
@@ -305,6 +284,27 @@
   
   <url>
     <loc>https://notsomeshi.github.io/tags/%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://notsomeshi.github.io/tags/%E5%B0%B1%E4%B8%9A/</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://notsomeshi.github.io/tags/%E9%98%B6%E5%B1%82%E5%8F%98%E8%BF%81/</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://notsomeshi.github.io/tags/AI%E5%89%8D%E6%99%AF/</loc>
     <lastmod>2026-07-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

@@ -402,6 +402,12 @@ var Rain = (function () {
   var W = 0, H = 0;
   var drops = [], ripples = [], splashes = [], puddles = [];
   var spawnCarry = 0, lastTime = 0, elapsed = 0;
+  /* 雨声素材来源(在雨夜模式下后台循环播放):
+     "Rain against the window" — 作者 cori,公有领域(Public Domain)
+     https://commons.wikimedia.org/wiki/File:Rain_against_the_window.ogg
+     浏览器不支持 ogg 解码时(如 Safari)回退到合成雨幕。 */
+  var RAIN_SRC = '/audio/rain.ogg';
+  var usingRecording = false;
   var audioCtx = null, masterGain = null, bedGain = null, bedLowpass = null, bedModDepth = null, noiseBuffer = null;
   var plinkCarry = 0, activePlinks = 0, lastDingAt = 0, nextThunderAt = 0, flashAlpha = 0;
   var gestureBound = false;
@@ -584,17 +590,19 @@ var Rain = (function () {
     spawnCarry += intensity * dt * (W / 8.5);
     while (spawnCarry >= 1) { spawnDrop(); spawnCarry -= 1; }
 
-    // 离散雨点"嗒"声:密度随雨强 10~40 次/秒,低 Q 融入雨幕
-    plinkCarry += (10 + 30 * intensity) * dt;
-    while (plinkCarry >= 1) {
-      plinkCarry -= 1;
-      playPlink(
-        2800 + Math.random() * 3700,
-        0.004 + Math.random() * 0.009,
-        0.02 + Math.random() * 0.05,
-        (Math.random() * 2 - 1) * 0.8,
-        1.2
-      );
+    // 合成雨点"嗒"声:仅在录音降级模式下补充质感(录音本身自带雨点声)
+    if (!usingRecording) {
+      plinkCarry += (10 + 30 * intensity) * dt;
+      while (plinkCarry >= 1) {
+        plinkCarry -= 1;
+        playPlink(
+          2800 + Math.random() * 3700,
+          0.004 + Math.random() * 0.009,
+          0.02 + Math.random() * 0.05,
+          (Math.random() * 2 - 1) * 0.8,
+          1.2
+        );
+      }
     }
 
     // 随机远雷:25~90 秒一次,雨越大越容易触发
@@ -641,7 +649,31 @@ var Rain = (function () {
     masterGain.gain.value = 1;
     masterGain.connect(audioCtx.destination);
 
-    // 雨幕:粉噪声保留到 ~4kHz 的"沙"声空气感,去掉低频轰隆
+    bedGain = audioCtx.createGain();
+    bedGain.gain.value = 0;
+    bedGain.connect(masterGain);
+
+    // 首选:真实雨声录音无缝循环(素材来源见模块顶部注释)
+    fetch(RAIN_SRC)
+      .then(function (r) { if (!r.ok) throw new Error('fetch failed'); return r.arrayBuffer(); })
+      .then(function (ab) { return audioCtx.decodeAudioData(ab); })
+      .then(function (buf) {
+        var src = audioCtx.createBufferSource();
+        src.buffer = buf;
+        src.loop = true;
+        // 避开录音首尾可能的渐入渐出,取中段做采样级无缝循环
+        var margin = Math.min(1, buf.duration * 0.05);
+        src.loopStart = margin;
+        src.loopEnd = buf.duration - margin;
+        src.connect(bedGain);
+        src.start(0, margin);
+        usingRecording = true;
+      })
+      .catch(function () { synthBed(); });
+  }
+
+  /* 降级方案:浏览器无法解码录音时,用粉红噪声合成雨幕 */
+  function synthBed() {
     var bedSrc = audioCtx.createBufferSource();
     bedSrc.buffer = noiseBuffer;
     bedSrc.loop = true;
@@ -652,16 +684,12 @@ var Rain = (function () {
     bedLowpass.type = 'lowpass';
     bedLowpass.frequency.value = 4200;
     bedLowpass.Q.value = 0.4;
-    bedGain = audioCtx.createGain();
-    bedGain.gain.value = 0;
     bedSrc.connect(bedHP);
     bedHP.connect(bedLowpass);
     bedLowpass.connect(bedGain);
-    bedGain.connect(masterGain);
     bedSrc.start();
 
-    // 淅沥质感:用 ~14Hz 以下的随机低频信号轻微抖动雨幕音量,
-    // 让它听起来是"落着的雨"而不是平直的嘶声
+    // 淅沥质感:低频随机信号轻微抖动雨幕音量
     var modSrc = audioCtx.createBufferSource();
     modSrc.buffer = noiseBuffer;
     modSrc.loop = true;
@@ -679,11 +707,13 @@ var Rain = (function () {
   function updateAudio(intensity) {
     if (!audioCtx || audioCtx.state !== 'running' || !bedGain) return;
     var t = audioCtx.currentTime;
-    // 雨越大:雨幕稍强、稍亮;抖动深度跟随底噪基准
-    var base = running ? 0.035 + 0.075 * intensity : 0;
+    // 雨越大音量越大;录音与合成雨幕的响度基准不同
+    var base = running
+      ? (usingRecording ? 0.3 + 0.4 * intensity : 0.035 + 0.075 * intensity)
+      : 0;
     bedGain.gain.setTargetAtTime(base, t, 0.45);
-    bedLowpass.frequency.setTargetAtTime(3000 + 2200 * intensity, t, 0.45);
-    if (bedModDepth) bedModDepth.gain.setTargetAtTime(base * 2.2, t, 0.45);
+    if (bedLowpass) bedLowpass.frequency.setTargetAtTime(3000 + 2200 * intensity, t, 0.45);
+    if (bedModDepth) bedModDepth.gain.setTargetAtTime(base * 0.6, t, 0.45);
   }
 
   /* 单个雨滴:带通滤波的噪声短突发——听感是雨点打在物面上的"嗒",
