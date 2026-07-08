@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>前景、困难与阶层重排:AI 正在改写谁的命运? | ByteVibe</title>
+<meta name="description" content="一个关于 Vibe Coding、AI 辅助编程和现代开发实践的技术博客">
+<meta name="author" content="ByteVibe">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='0,0 100,0 100,78 78,100 0,100' fill='%23ffd802'/><text x='50' y='70' font-size='58' font-weight='800' font-family='ui-monospace,monospace' fill='%230d0d0f' text-anchor='middle'>B</text></svg>">
+<link rel="alternate" type="application/atom+xml" title="ByteVibe" href="/atom.xml">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script>
+  // 暗色优先:light 显式切亮色;rain 提前打上标记避免闪烁
+  (function() {
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else if (t === 'rain') {
+        document.documentElement.setAttribute('data-rain', '');
+      }
+    } catch (e) {}
+  })();
+</script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+  
+  <canvas class="rain-canvas" id="rainCanvas" aria-hidden="true"></canvas>
+  <div class="reading-progress" id="readingProgress"></div>
+  <header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a class="site-logo" href="/">
+      ByteVibe
+    </a>
+    <nav class="site-nav" id="siteNav">
+      
+      
+        
+        
+        <a class="nav-link" href="/">首页</a>
+      
+        
+        
+        <a class="nav-link" href="/archives/">归档</a>
+      
+        
+        
+        <a class="nav-link" href="/categories/">分类</a>
+      
+        
+        
+        <a class="nav-link" href="/tags/">标签</a>
+      
+        
+        
+        <a class="nav-link" href="/about/">关于</a>
+      
+    </nav>
+    <div class="header-actions">
+      <button class="header-icon-btn" id="searchToggle" aria-label="搜索" title="搜索 (Ctrl+K)">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+      <button class="header-icon-btn theme-toggle" id="themeToggle" aria-label="切换显示模式(浅色 / 深色 / 雨夜)" title="显示模式:浅色 → 深色 → 雨夜">
+        <span class="icon-sun"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+        <span class="icon-moon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+        <span class="icon-umbrella"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 12a11.05 11.05 0 0 0-22 0Z"></path><path d="M12 12v7a2 2 0 0 0 4 0"></path></svg></span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打开菜单">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    
+      <a class="mobile-nav-link" href="/">首页</a>
+    
+      <a class="mobile-nav-link" href="/archives/">归档</a>
+    
+      <a class="mobile-nav-link" href="/categories/">分类</a>
+    
+      <a class="mobile-nav-link" href="/tags/">标签</a>
+    
+      <a class="mobile-nav-link" href="/about/">关于</a>
+    
+  </div>
+</header>
+
+  <main class="main-content">
+    <article class="post-detail">
+  <div class="container-docs">
+    <div class="post-layout-grid">
+      <!-- 1. Left Sidebar: Documentation Navigation -->
+      <aside class="post-sidebar-left">
+        <div class="sidebar-sticky">
+          <h3 class="sidebar-title">全部文章</h3>
+          <ul class="sidebar-list">
+            
+              <li class="sidebar-item active">
+                <a href="/2026/07/08/ai-prospects-and-strata/">前景、困难与阶层重排:AI 正在改写谁的命运?</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-dividend-paradox/">AI 红利悖论:我们为 AI 买单三年,红利为何还没普惠?</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-capital-markets-2026/">资本市场视角下的 AI 局势:7250 亿美元 Capex、循环交易与泡沫之辩</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/no-code-mvp-to-solopreneur/">从 Vibe Coding 到超级个体：2026 年全栈独立开发的新叙事</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/yolo-mode-and-ai-safety-guardrails/">YOLO 模式下的安全边界：如何防止 AI 删库跑路</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/high-performance-ai-prompts-library/">如何撰写黄金级 AI Prompt：从“做个功能”到“系统级交付”</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/mcp-server-practical-recipes/">Model Context Protocol (MCP) 深度指南：连接你的 AI 与现实数据</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/advanced-vibe-coding-roo-clinic/">Cline 与 Roo Code 实战：下一代 Vibe Coding 的工程范式</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/04/01/claude-code-complete-guide/">Claude Code 从入门到精通：面向工程师与产品经理的 AI 编程完全指南</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/30/future-of-vibe-coding/">Vibe Coding 的未来：当编程不再需要编程</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/25/ai-coding-tools-2025/">2025 年最值得关注的 AI 编程工具全景</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/20/vibe-coding-best-practices/">Vibe Coding 最佳实践：如何高效地与 AI 结对编程</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/15/what-is-vibe-coding/">什么是 Vibe Coding？一文读懂 AI 时代的编程新范式</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/10/hello-world/">欢迎来到 ByteVibe</a>
+              </li>
+            
+          </ul>
+        </div>
+      </aside>
+
+      <!-- 2. Middle Column: Main Article Content -->
+      <div class="post-content-main">
+        <header class="post-header">
+          <div class="post-meta">
+            <time class="post-date">2026年07月08日</time>
+            
+            <span class="post-meta-sep">·</span>
+            <span class="post-category">
+              
+                <a href="/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察</a>
+              
+            </span>
+            
+            <span class="post-meta-sep">·</span>
+            <span class="reading-time">6 分钟阅读</span>
+          </div>
+          <h1 class="post-title">前景、困难与阶层重排:AI 正在改写谁的命运?</h1>
+          
+          <div class="post-tags">
+            
+              <a class="tag-pill" href="/tags/%E5%B0%B1%E4%B8%9A/">#就业</a>
+            
+              <a class="tag-pill" href="/tags/%E9%98%B6%E5%B1%82%E5%8F%98%E8%BF%81/">#阶层变迁</a>
+            
+              <a class="tag-pill" href="/tags/AI%E5%89%8D%E6%99%AF/">#AI前景</a>
+            
+          </div>
+          
+        </header>
+        
+        
+        
+        <details class="mobile-toc">
+          <summary>目录 / Contents</summary>
+          <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E6%99%AF-%E4%BB%8E%E2%80%9D%E8%81%8A%E5%A4%A9%E6%A1%86%E2%80%9D%E5%88%B0%E2%80%9D%E4%BB%A3%E7%90%86%E2%80%9D-%E6%96%B9%E5%90%91%E5%B7%B2%E7%BB%8F%E6%B8%85%E6%99%B0"><span class="toc-list-text">一、前景:从”聊天框”到”代理”,方向已经清晰</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E5%9B%B0%E9%9A%BE-%E5%9B%9B%E9%81%93%E5%87%8F%E9%80%9F%E5%B8%A6"><span class="toc-list-text">二、困难:四道减速带</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E9%98%B6%E5%B1%82%E9%87%8D%E6%8E%92-%E6%95%B0%E6%8D%AE%E8%AF%B4%E4%BA%86%E4%BB%80%E4%B9%88"><span class="toc-list-text">三、阶层重排:数据说了什么</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E7%BB%99%E6%99%AE%E9%80%9A%E4%BA%BA%E7%9A%84%E4%B8%89%E6%9D%A1%E5%8A%A1%E5%AE%9E%E5%BB%BA%E8%AE%AE"><span class="toc-list-text">四、给普通人的三条务实建议</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+        </details>
+        
+
+        <div class="post-body">
+          <p>关于 AI 的公共讨论常在两个极端之间摆动:要么是”超级智能将解决一切”,要么是”泡沫破裂一地鸡毛”。但对绝大多数人而言,真正重要的问题朴素得多:**这项技术会怎样改变我的工作、我的收入、我孩子的第一份工作?**本文基于目前最扎实的实证研究,把前景、困难和阶层影响分开来谈。</p>
+<span id="more"></span>
+
+<h2 id="一、前景-从”聊天框”到”代理”-方向已经清晰"><a href="#一、前景-从”聊天框”到”代理”-方向已经清晰" class="headerlink" title="一、前景:从”聊天框”到”代理”,方向已经清晰"></a>一、前景:从”聊天框”到”代理”,方向已经清晰</h2><p>抛开营销话术,过去一年半技术演进的主线只有一条:AI 从”回答问题的工具”变成”完成任务的代理(Agent)”。编程领域是最成熟的样板——从代码补全到能自主运行测试、修复错误、提交代码的终端 Agent,人类的角色从”操作者”上移为”验收者”。客服、财务对账、法律文书初稿、医学影像初筛,都在沿同一条曲线移动。</p>
+<p>产业侧的信心也是真金白银:四大云厂商 2026 年合计约 7250 亿美元的资本开支(详见本站《资本市场视角下的 AI 局势》),本质上是对”代理化”路线的下注。前景的问题从来不是”方向对不对”,而是”多快、多贵、谁受益”。</p>
+<h2 id="二、困难-四道减速带"><a href="#二、困难-四道减速带" class="headerlink" title="二、困难:四道减速带"></a>二、困难:四道减速带</h2><p><strong>可靠性天花板。</strong> METR 的随机对照试验显示,资深开发者使用 AI 工具反而慢了 19%——审查和修正 AI 输出的成本,吃掉了生成的收益。在容错率低的领域(医疗、法律、金融),”90 分的自动化”往往不如”0 分的自动化”,因为剩下 10 分的验证成本由人承担。</p>
+<p><strong>电力与物理瓶颈。</strong> 数据中心的电力需求已经成为比芯片更硬的约束。2026 年 3 月那轮市场回调的诱因之一,正是中东冲突推升能源成本——AI 基础设施对能源价格的敏感度,第一次被资本市场明码标价。</p>
+<p><strong>经济性磨合。</strong> MIT NANDA 报告揭示的”95% 试点无回报”,说明技术可用与商业可用之间存在漫长的组织重构期(详见本站《AI 红利悖论》)。</p>
+<p><strong>信任与监管。</strong> 从版权诉讼到深度伪造立法,规则仍在追赶技术。规则未定型本身就是投资和部署的抑制因素。</p>
+<h2 id="三、阶层重排-数据说了什么"><a href="#三、阶层重排-数据说了什么" class="headerlink" title="三、阶层重排:数据说了什么"></a>三、阶层重排:数据说了什么</h2><p>这是本文最想认真对待的部分,因为它已经不是预测,而是正在发生的统计事实。</p>
+<p><strong>最先受冲击的是”职业阶梯的第一级”。</strong> 斯坦福数字经济实验室的埃里克·布林约尔松(Erik Brynjolfsson)、Bharat Chandar 与 Ruyu Chen 基于 ADP 数百万条工资记录的研究(即”煤矿里的金丝雀”研究)发现:自生成式 AI 普及以来,<strong>22–25 岁年轻人在 AI 高暴露职业中的就业量相对下滑了 13%</strong>;其中 22–25 岁软件开发者的就业较 2022 年底峰值下降近 20%。截至 2026 年 4 月的最新数据显示,这一群体在高暴露职业中的就业正以每年 3.8% 的速度收缩,且趋势在加速而非企稳。</p>
+<p><strong>冲击的分界线不是”白领&#x2F;蓝领”,而是”自动化&#x2F;增强”。</strong> 同一研究的关键发现是:在 AI 主要”替代任务”的职业里,入门岗位萎缩;在 AI 主要”增强人类”的职业里,入门就业持平甚至增长。耶鲁 CELI 的杰弗里·索南菲尔德(Jeffrey Sonnenfeld)团队的判断更尖锐:<strong>AI 短期内杀死的不是你的工作,而是通往第一份工作的路径。</strong></p>
+<p>由此可以粗略勾勒各阶层的处境:</p>
+<table>
+<thead>
+<tr>
+<th>群体</th>
+<th>当前处境</th>
+<th>关键变量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>应届生 &#x2F; 初级白领</td>
+<td>承压最重:入门岗位被 AI 直接吸收</td>
+<td>能否用 AI 把自己”越级”到中级产出</td>
+</tr>
+<tr>
+<td>资深专业者</td>
+<td>短期溢价:验收 AI 产出需要经验</td>
+<td>经验的半衰期;是否掌握 AI 工作流</td>
+</tr>
+<tr>
+<td>蓝领 &#x2F; 高接触职业(护理、教师、技工)</td>
+<td>相对免疫,稀缺度上升</td>
+<td>物理世界自动化(机器人)的进度</td>
+</tr>
+<tr>
+<td>创作者</td>
+<td>产能暴增但单价承压,头部效应加剧</td>
+<td>独特性与分发渠道的掌控力</td>
+</tr>
+<tr>
+<td>资本 &#x2F; 基础设施持有者</td>
+<td>最大受益方:红利先流向算力与模型资产</td>
+<td>泡沫风险与监管再分配</td>
+</tr>
+</tbody></table>
+<p>阿西莫格鲁对此的警告值得记录:如果 AI 的部署继续偏向”自动化”而非”增强人类”,即使总产出增长,劳动收入份额也会进一步向资本倾斜——<strong>技术方向本身是一个社会选择,而不是物理定律。</strong></p>
+<h2 id="四、给普通人的三条务实建议"><a href="#四、给普通人的三条务实建议" class="headerlink" title="四、给普通人的三条务实建议"></a>四、给普通人的三条务实建议</h2><ol>
+<li><strong>把 AI 从”聊天对象”升级为”工作流”。</strong> 数据反复显示,红利属于重构流程的人,而不是订阅工具的人。哪怕只是把自己岗位上一个完整环节交给 AI 并建立验收标准,你就已经进入了”增强”象限。</li>
+<li><strong>向”高接触 + 高判断”迁移。</strong> 无论蓝领白领,含有物理接触、情境判断、责任兜底的环节最抗替代。</li>
+<li><strong>警惕”第一级阶梯”陷阱,也利用它。</strong> 如果入门岗位在消失,传统的”熬资历”路径就在失效;反过来,一个会用 AI 的新人可以直接生产过去需要三年经验的产出——阶梯断裂对个体既是危险也是跳板。</li>
+</ol>
+<p>技术的前景越确定,分配的问题就越尖锐。AI 大概率不会”平等地”改变所有人的命运——但知道数据指向哪里,至少能让你选择站的位置。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li>Erik Brynjolfsson, Bharat Chandar, Ruyu Chen(Stanford Digital Economy Lab),<em>Canaries in the Coal Mine? Six Facts about the Recent Employment Effects of AI</em>;报道见 <a target="_blank" rel="noopener" href="https://www.cnbc.com/2025/08/28/generative-ai-reshapes-us-job-market-stanford-study-shows-entry-level-young-workers.html">CNBC</a>、<a target="_blank" rel="noopener" href="https://time.com/7312205/ai-jobs-stanford/">Time</a>、<a target="_blank" rel="noopener" href="https://fortune.com/2026/06/27/what-is-ai-impact-entry-level-jobs-stanford-adp-canaries-brynjolfsson-richardson/">Fortune(2026 年 6 月追踪)</a></li>
+<li>Jeffrey Sonnenfeld 等(Yale CELI),<a target="_blank" rel="noopener" href="https://fortune.com/2026/04/29/ai-agentic-entry-level-jobs-disappearing-yale-celi-sonnenfeld/">AI won’t kill your job — it will kill the path to your first one</a>,Fortune</li>
+<li>Joel Becker 等(METR),<a target="_blank" rel="noopener" href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/">Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity</a></li>
+<li>Aditya Challapally 等(MIT Project NANDA),<em>The GenAI Divide: State of AI in Business 2025</em></li>
+<li>Daron Acemoglu,<a target="_blank" rel="noopener" href="https://www.nber.org/papers/w32487">The Simple Macroeconomics of AI</a>,NBER Working Paper 32487</li>
+<li>Tom’s Hardware,<a target="_blank" rel="noopener" href="https://www.tomshardware.com/tech-industry/big-tech/big-techs-ai-spending-plans-reach-725-billion">Big Tech’s AI spending plans reach $725 billion</a></li>
+</ol>
+<blockquote>
+<p>本文由 ByteVibe 撰写(AI 辅助研究整理)。文中观点的原始出处均已在正文与参考文献中标注,版权归原作者所有。</p>
+</blockquote>
+
+        </div>
+        
+        <footer class="post-footer">
+          <nav class="post-nav">
+            
+            
+            <a class="post-nav-item post-nav-next" href="/2026/07/08/ai-dividend-paradox/">
+              <span class="post-nav-label">下一篇 →</span>
+              <span class="post-nav-title">AI 红利悖论:我们为 AI 买单三年,红利为何还没普惠?</span>
+            </a>
+            
+          </nav>
+        </footer>
+      </div>
+
+      <!-- 3. Right Sidebar: Outline TOC Jump -->
+      <aside class="post-sidebar-right">
+        
+          <div class="toc-sticky">
+            <h3 class="toc-title">目录大纲</h3>
+            <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E6%99%AF-%E4%BB%8E%E2%80%9D%E8%81%8A%E5%A4%A9%E6%A1%86%E2%80%9D%E5%88%B0%E2%80%9D%E4%BB%A3%E7%90%86%E2%80%9D-%E6%96%B9%E5%90%91%E5%B7%B2%E7%BB%8F%E6%B8%85%E6%99%B0"><span class="toc-list-text">一、前景:从”聊天框”到”代理”,方向已经清晰</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E5%9B%B0%E9%9A%BE-%E5%9B%9B%E9%81%93%E5%87%8F%E9%80%9F%E5%B8%A6"><span class="toc-list-text">二、困难:四道减速带</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E9%98%B6%E5%B1%82%E9%87%8D%E6%8E%92-%E6%95%B0%E6%8D%AE%E8%AF%B4%E4%BA%86%E4%BB%80%E4%B9%88"><span class="toc-list-text">三、阶层重排:数据说了什么</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E7%BB%99%E6%99%AE%E9%80%9A%E4%BA%BA%E7%9A%84%E4%B8%89%E6%9D%A1%E5%8A%A1%E5%AE%9E%E5%BB%BA%E8%AE%AE"><span class="toc-list-text">四、给普通人的三条务实建议</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+          </div>
+        
+      </aside>
+    </div>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <p class="copyright">&copy; 2026 ByteVibe. All rights reserved.</p>
+      <p class="powered-by">Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a></p>
+      
+      <div class="social-links">
+        
+          <a class="social-link" href="https://github.com/notSomeshi" target="_blank" rel="noopener noreferrer">GitHub</a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+
+  <div class="search-overlay" id="searchOverlay" hidden>
+  <div class="search-backdrop" id="searchBackdrop"></div>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="站内搜索">
+    <div class="search-input-wrap">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="searchInput" class="search-input" placeholder="搜索文章…" autocomplete="off" spellcheck="false">
+      <button class="search-close" id="searchClose" aria-label="关闭搜索">ESC</button>
+    </div>
+    <div class="search-results" id="searchResults">
+      <p class="search-hint">输入关键词搜索标题、标签与正文</p>
+    </div>
+  </div>
+</div>
+
+  <button class="scroll-to-top" id="scrollToTop" aria-label="回到顶部">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+  
+<script src="/js/main.js"></script>
+
+</body>
+</html>
