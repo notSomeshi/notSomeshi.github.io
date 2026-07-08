@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>ByteVibe</title>
+<meta name="description" content="一个关于 Vibe Coding、AI 辅助编程和现代开发实践的技术博客">
+<meta name="author" content="ByteVibe">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='0,0 100,0 100,78 78,100 0,100' fill='%23ffd802'/><text x='50' y='70' font-size='58' font-weight='800' font-family='ui-monospace,monospace' fill='%230d0d0f' text-anchor='middle'>B</text></svg>">
+<link rel="alternate" type="application/atom+xml" title="ByteVibe" href="/atom.xml">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script>
+  // 暗色优先:light 显式切亮色;rain 提前打上标记避免闪烁
+  (function() {
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else if (t === 'rain') {
+        document.documentElement.setAttribute('data-rain', '');
+      }
+    } catch (e) {}
+  })();
+</script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+  
+  <div class="site-cover" id="siteCover" role="button" aria-label="点击进入">
+  <div class="cover-scan"></div>
+  <div class="cover-frame">
+    <i class="cover-corner cover-corner-tr"></i>
+    <i class="cover-corner cover-corner-bl"></i>
+  </div>
+  <div class="cover-top">BYTEVIBE TERMINAL // OS v2.1.0</div>
+  <div class="cover-inner">
+    <p class="cover-eyebrow">// CONNECTION ESTABLISHED</p>
+    <h1 class="cover-title">ByteVibe</h1>
+    <p class="cover-sub">VIBE CODING // AI ENGINEERING</p>
+    <div class="cover-boot">
+      <span style="animation-delay:.15s">&gt; SYSTEM CHECK ............ <em>OK</em></span>
+      <span style="animation-delay:.45s">&gt; LOADING ARTICLE DATABASE . <em>OK</em></span>
+      <span style="animation-delay:.75s">&gt; RENDER PIPELINE .......... <em>READY</em></span>
+    </div>
+    <p class="cover-press">PRESS ANY KEY / 点击进入</p>
+  </div>
+  <div class="cover-bottom">&copy; 2026 BYTEVIBE — ALL SYSTEMS NOMINAL</div>
+</div>
+<script>
+  // 预绘制阶段判断:本会话已进入过则直接隐藏封面,否则锁定滚动
+  (function () {
+    try {
+      if (sessionStorage.getItem('bv-entered')) {
+        document.getElementById('siteCover').style.display = 'none';
+      } else {
+        document.documentElement.classList.add('cover-lock');
+      }
+    } catch (e) {}
+  })();
+</script>
+<noscript><style>.site-cover { display: none !important; }</style></noscript>
+
+  
+  <canvas class="rain-canvas" id="rainCanvas" aria-hidden="true"></canvas>
+  <div class="reading-progress" id="readingProgress"></div>
+  <header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a class="site-logo" href="/">
+      ByteVibe
+    </a>
+    <nav class="site-nav" id="siteNav">
+      
+      
+        
+        
+        <a class="nav-link is-active" href="/">首页</a>
+      
+        
+        
+        <a class="nav-link" href="/archives/">归档</a>
+      
+        
+        
+        <a class="nav-link" href="/categories/">分类</a>
+      
+        
+        
+        <a class="nav-link" href="/tags/">标签</a>
+      
+        
+        
+        <a class="nav-link" href="/about/">关于</a>
+      
+    </nav>
+    <div class="header-actions">
+      <button class="header-icon-btn" id="searchToggle" aria-label="搜索" title="搜索 (Ctrl+K)">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+      <button class="header-icon-btn theme-toggle" id="themeToggle" aria-label="切换显示模式(浅色 / 深色 / 雨夜)" title="显示模式:浅色 → 深色 → 雨夜">
+        <span class="icon-sun"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+        <span class="icon-moon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+        <span class="icon-umbrella"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 12a11.05 11.05 0 0 0-22 0Z"></path><path d="M12 12v7a2 2 0 0 0 4 0"></path></svg></span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打开菜单">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    
+      <a class="mobile-nav-link" href="/">首页</a>
+    
+      <a class="mobile-nav-link" href="/archives/">归档</a>
+    
+      <a class="mobile-nav-link" href="/categories/">分类</a>
+    
+      <a class="mobile-nav-link" href="/tags/">标签</a>
+    
+      <a class="mobile-nav-link" href="/about/">关于</a>
+    
+  </div>
+</header>
+
+  <main class="main-content">
+    <section class="hero-section">
+  <div class="container">
+    <p class="hero-eyebrow">Vibe Coding // AI Engineering</p>
+    <h1 class="hero-title">ByteVibe</h1>
+    <p class="hero-subtitle">探索 Vibe Coding 与 AI 编程的无限可能</p>
+  </div>
+</section>
+
+<section class="posts-section">
+  <div class="container">
+    <div class="posts-grid">
+      
+      
+      <article class="post-card animate-on-scroll post-card-featured">
+        <a class="post-card-link" href="/2026/07/01/no-code-mvp-to-solopreneur/" aria-label="从 Vibe Coding 到超级个体：2026 年全栈独立开发的新叙事"></a>
+        <span class="post-card-index">01</span>
+        <div class="post-card-inner">
+          <div class="post-card-meta">
+            <time class="post-date">2026-07-01</time>
+            
+            <span class="post-category">
+              
+                <a href="/categories/%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/">深度思考</a>
+              
+            </span>
+            
+          </div>
+          <h2 class="post-card-title">
+            <a href="/2026/07/01/no-code-mvp-to-solopreneur/">从 Vibe Coding 到超级个体：2026 年全栈独立开发的新叙事</a>
+          </h2>
+          <div class="post-card-excerpt">
+            
+              
+              <p>在软件开发的历史上，技术壁垒曾经是不可逾越的鸿沟。一个人想要把脑海中的点子变成一个可以运行并能收款的 App，需要学习 HTML、CSS、JavaScript、数据库、Linux 运维等一整套复杂的知识体系。
+然而到了 2026 年，随着 Cline、Roo Code 以及各种终端 AI Agent 的高度成熟，...</p>
+            
+          </div>
+          
+          <div class="post-card-tags">
+            
+              <a class="tag-pill" href="/tags/%E7%8B%AC%E7%AB%8B%E5%BC%80%E5%8F%91/">#独立开发</a>
+            
+              <a class="tag-pill" href="/tags/%E8%B6%85%E7%BA%A7%E4%B8%AA%E4%BD%93/">#超级个体</a>
+            
+              <a class="tag-pill" href="/tags/%E5%95%86%E4%B8%9A%E5%AE%9E%E8%B7%B5/">#商业实践</a>
+            
+          </div>
+          
+          <span class="read-more">阅读全文 →</span>
+        </div>
+      </article>
+      
+      
+      <article class="post-card animate-on-scroll">
+        <a class="post-card-link" href="/2026/07/01/yolo-mode-and-ai-safety-guardrails/" aria-label="YOLO 模式下的安全边界：如何防止 AI 删库跑路"></a>
+        <span class="post-card-index">02</span>
+        <div class="post-card-inner">
+          <div class="post-card-meta">
+            <time class="post-date">2026-07-01</time>
+            
+            <span class="post-category">
+              
+                <a href="/categories/%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/">深度思考</a>
+              
+            </span>
+            
+          </div>
+          <h2 class="post-card-title">
+            <a href="/2026/07/01/yolo-mode-and-ai-safety-guardrails/">YOLO 模式下的安全边界：如何防止 AI 删库跑路</a>
+          </h2>
+          <div class="post-card-excerpt">
+            
+              
+              <p>在 Cline、Roo Code 以及 Claude Code 等现代 Agent 的加持下，开发者只需输入一行文字，AI 就能在终端里疯狂输出，自动执行十几次编译与测试。
+但当这种高度自动化的“YOLO 模式”进入企业生产环境，或者面对拥有敏感数据的本地数据库时，一个巨大的隐患随之浮现：如何防止 AI 删库跑路...</p>
+            
+          </div>
+          
+          <div class="post-card-tags">
+            
+              <a class="tag-pill" href="/tags/%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86/">#安全管理</a>
+            
+              <a class="tag-pill" href="/tags/YOLO%E6%A8%A1%E5%BC%8F/">#YOLO模式</a>
+            
+              <a class="tag-pill" href="/tags/AI%E5%AE%89%E5%85%A8/">#AI安全</a>
+            
+          </div>
+          
+          <span class="read-more">阅读全文 →</span>
+        </div>
+      </article>
+      
+      
+      <article class="post-card animate-on-scroll">
+        <a class="post-card-link" href="/2026/07/01/high-performance-ai-prompts-library/" aria-label="如何撰写黄金级 AI Prompt：从“做个功能”到“系统级交付”"></a>
+        <span class="post-card-index">03</span>
+        <div class="post-card-inner">
+          <div class="post-card-meta">
+            <time class="post-date">2026-07-01</time>
+            
+            <span class="post-category">
+              
+                <a href="/categories/%E5%AE%9E%E8%B7%B5%E6%8A%80%E5%B7%A7/">实践技巧</a>
+              
+            </span>
+            
+          </div>
+          <h2 class="post-card-title">
+            <a href="/2026/07/01/high-performance-ai-prompts-library/">如何撰写黄金级 AI Prompt：从“做个功能”到“系统级交付”</a>
+          </h2>
+          <div class="post-card-excerpt">
+            
+              
+              <p>在与 AI 协同编程的过程中，许多开发者经常陷入一种困境：
+
+“我让 AI 帮我写一个‘好看的登录页面’，结果它写出来的代码不仅样式奇丑无比，而且连基本的表单校验都没做。AI 根本不好用！”
+
+这种现象被称为 Vibe Coding 的模糊词陷阱。AI Agent 具有强大的执行力，但前提是它必须拥有清晰的边界和...</p>
+            
+          </div>
+          
+          <div class="post-card-tags">
+            
+              <a class="tag-pill" href="/tags/Prompt-Engineering/">#Prompt Engineering</a>
+            
+              <a class="tag-pill" href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/">#提示词工程</a>
+            
+              <a class="tag-pill" href="/tags/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/">#开发效率</a>
+            
+          </div>
+          
+          <span class="read-more">阅读全文 →</span>
+        </div>
+      </article>
+      
+      
+      <article class="post-card animate-on-scroll">
+        <a class="post-card-link" href="/2026/07/01/mcp-server-practical-recipes/" aria-label="Model Context Protocol (MCP) 深度指南：连接你的 AI 与现实数据"></a>
+        <span class="post-card-index">04</span>
+        <div class="post-card-inner">
+          <div class="post-card-meta">
+            <time class="post-date">2026-07-01</time>
+            
+            <span class="post-category">
+              
+                <a href="/categories/%E5%B7%A5%E5%85%B7%E4%B8%8E%E7%8E%AF%E5%A2%83/">工具与环境</a>
+              
+            </span>
+            
+          </div>
+          <h2 class="post-card-title">
+            <a href="/2026/07/01/mcp-server-practical-recipes/">Model Context Protocol (MCP) 深度指南：连接你的 AI 与现实数据</a>
+          </h2>
+          <div class="post-card-excerpt">
+            
+              
+              <p>尽管大语言模型（LLM）已经掌握了人类的大部分编程知识，但在实际的日常开发中，它们仍然像处在一个断网的“信息孤岛”中：
+
+AI 不知道你的本地 PostgreSQL 数据库里有哪些表，除非你手动复制 \d 的输出。
+AI 无法感知你在 Jira 上的 Bug 描述，除非你截图上传。
+AI 无法直接读取 Figma...</p>
+            
+          </div>
+          
+          <div class="post-card-tags">
+            
+              <a class="tag-pill" href="/tags/Anthropic/">#Anthropic</a>
+            
+              <a class="tag-pill" href="/tags/MCP/">#MCP</a>
+            
+              <a class="tag-pill" href="/tags/%E6%95%B0%E6%8D%AE%E8%BF%9E%E6%8E%A5/">#数据连接</a>
+            
+          </div>
+          
+          <span class="read-more">阅读全文 →</span>
+        </div>
+      </article>
+      
+      
+      <article class="post-card animate-on-scroll">
+        <a class="post-card-link" href="/2026/07/01/advanced-vibe-coding-roo-clinic/" aria-label="Cline 与 Roo Code 实战：下一代 Vibe Coding 的工程范式"></a>
+        <span class="post-card-index">05</span>
+        <div class="post-card-inner">
+          <div class="post-card-meta">
+            <time class="post-date">2026-07-01</time>
+            
+            <span class="post-category">
+              
+                <a href="/categories/%E5%89%8D%E6%B2%BF%E5%AE%9E%E8%B7%B5/">前沿实践</a>
+              
+            </span>
+            
+          </div>
+          <h2 class="post-card-title">
+            <a href="/2026/07/01/advanced-vibe-coding-roo-clinic/">Cline 与 Roo Code 实战：下一代 Vibe Coding 的工程范式</a>
+          </h2>
+          <div class="post-card-excerpt">
+            
+              
+              <p>在 2025 年，“Vibe Coding”（氛围感编程）一词火遍开发者社区。它描述了一种“开发者只负责描述愿景、AI 负责写出全部代码，开发者靠着对代码运行氛围的直觉进行调试”的全新状态。
+而到了 2026 年，Cline（原名 Claude Dev）以及其社区最强分支 Roo Code 的爆发，正式将这种“氛...</p>
+            
+          </div>
+          
+          <div class="post-card-tags">
+            
+              <a class="tag-pill" href="/tags/Roo-Code/">#Roo Code</a>
+            
+              <a class="tag-pill" href="/tags/Cline/">#Cline</a>
+            
+              <a class="tag-pill" href="/tags/Vibe-Coding/">#Vibe Coding</a>
+            
+          </div>
+          
+          <span class="read-more">阅读全文 →</span>
+        </div>
+      </article>
+      
+      
+      <article class="post-card animate-on-scroll">
+        <a class="post-card-link" href="/2026/04/01/claude-code-complete-guide/" aria-label="Claude Code 从入门到精通：面向工程师与产品经理的 AI 编程完全指南"></a>
+        <span class="post-card-index">06</span>
+        <div class="post-card-inner">
+          <div class="post-card-meta">
+            <time class="post-date">2026-04-01</time>
+            
+            <span class="post-category">
+              
+                <a href="/categories/%E5%AE%98%E6%96%B9%E6%89%8B%E5%86%8C%E7%A7%BB%E6%A4%8D/">官方手册移植</a>
+              
+            </span>
+            
+          </div>
+          <h2 class="post-card-title">
+            <a href="/2026/04/01/claude-code-complete-guide/">Claude Code 从入门到精通：面向工程师与产品经理的 AI 编程完全指南</a>
+          </h2>
+          <div class="post-card-excerpt">
+            
+              本文为「花叔」主笔的《Claude Code 从入门到精通》（2026年4月·第2版）高清无删减移植版。深度拆解 Anthropic 官方终端 Agent 编程工具，囊括三代工具演变、环境配置、新闻聚合器实战、项目“宪法” CLAUDE.md、Hooks 自动检测、MCP 服务绑定，以及附录中关于 51 万行泄露源码揭示的 KAIROS、ULTRAPLAN、BUDDY AI 宠物等藏在 Feature Flags 里的未来技术。
+            
+          </div>
+          
+          <div class="post-card-tags">
+            
+              <a class="tag-pill" href="/tags/Claude-Code/">#Claude Code</a>
+            
+              <a class="tag-pill" href="/tags/AI%E7%BC%96%E7%A8%8B/">#AI编程</a>
+            
+              <a class="tag-pill" href="/tags/Anthropic/">#Anthropic</a>
+            
+              <a class="tag-pill" href="/tags/%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7/">#开发者工具</a>
+            
+          </div>
+          
+          <span class="read-more">阅读全文 →</span>
+        </div>
+      </article>
+      
+      
+      <article class="post-card animate-on-scroll">
+        <a class="post-card-link" href="/2025/06/30/future-of-vibe-coding/" aria-label="Vibe Coding 的未来：当编程不再需要编程"></a>
+        <span class="post-card-index">07</span>
+        <div class="post-card-inner">
+          <div class="post-card-meta">
+            <time class="post-date">2025-06-30</time>
+            
+            <span class="post-category">
+              
+                <a href="/categories/%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/">深度思考</a>
+              
+            </span>
+            
+          </div>
+          <h2 class="post-card-title">
+            <a href="/2025/06/30/future-of-vibe-coding/">Vibe Coding 的未来：当编程不再需要编程</a>
+          </h2>
+          <div class="post-card-excerpt">
+            
+              当 AI 可以理解并实现我们的编程意图时，软件开发的本质将如何改变？让我们一起展望 Vibe Coding 的未来图景。
+            
+          </div>
+          
+          <div class="post-card-tags">
+            
+              <a class="tag-pill" href="/tags/Vibe-Coding/">#Vibe Coding</a>
+            
+              <a class="tag-pill" href="/tags/AI%E7%BC%96%E7%A8%8B/">#AI编程</a>
+            
+              <a class="tag-pill" href="/tags/%E6%9C%AA%E6%9D%A5%E8%B6%8B%E5%8A%BF/">#未来趋势</a>
+            
+              <a class="tag-pill" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">#软件工程</a>
+            
+          </div>
+          
+          <span class="read-more">阅读全文 →</span>
+        </div>
+      </article>
+      
+      
+      <article class="post-card animate-on-scroll">
+        <a class="post-card-link" href="/2025/06/25/ai-coding-tools-2025/" aria-label="2025 年最值得关注的 AI 编程工具全景"></a>
+        <span class="post-card-index">08</span>
+        <div class="post-card-inner">
+          <div class="post-card-meta">
+            <time class="post-date">2025-06-25</time>
+            
+            <span class="post-category">
+              
+                <a href="/categories/%E5%B7%A5%E5%85%B7%E6%8E%A8%E8%8D%90/">工具推荐</a>
+              
+            </span>
+            
+          </div>
+          <h2 class="post-card-title">
+            <a href="/2025/06/25/ai-coding-tools-2025/">2025 年最值得关注的 AI 编程工具全景</a>
+          </h2>
+          <div class="post-card-excerpt">
+            
+              从 Cursor 到 GitHub Copilot，从 Claude 到 GPT-4，全面盘点 2025 年最强大的 AI 编程工具，帮你找到最适合自己的那一款。
+            
+          </div>
+          
+          <div class="post-card-tags">
+            
+              <a class="tag-pill" href="/tags/AI%E5%B7%A5%E5%85%B7/">#AI工具</a>
+            
+              <a class="tag-pill" href="/tags/Cursor/">#Cursor</a>
+            
+              <a class="tag-pill" href="/tags/GitHub-Copilot/">#GitHub Copilot</a>
+            
+              <a class="tag-pill" href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">#开发工具</a>
+            
+          </div>
+          
+          <span class="read-more">阅读全文 →</span>
+        </div>
+      </article>
+      
+      
+      <article class="post-card animate-on-scroll">
+        <a class="post-card-link" href="/2025/06/20/vibe-coding-best-practices/" aria-label="Vibe Coding 最佳实践：如何高效地与 AI 结对编程"></a>
+        <span class="post-card-index">09</span>
+        <div class="post-card-inner">
+          <div class="post-card-meta">
+            <time class="post-date">2025-06-20</time>
+            
+            <span class="post-category">
+              
+                <a href="/categories/%E5%AE%9E%E8%B7%B5%E6%8A%80%E5%B7%A7/">实践技巧</a>
+              
+            </span>
+            
+          </div>
+          <h2 class="post-card-title">
+            <a href="/2025/06/20/vibe-coding-best-practices/">Vibe Coding 最佳实践：如何高效地与 AI 结对编程</a>
+          </h2>
+          <div class="post-card-excerpt">
+            
+              掌握这些 Vibe Coding 最佳实践，让你的 AI 编程效率提升 10 倍。从 Prompt 技巧到代码审查，全面提升你的 Vibe Coding 能力。
+            
+          </div>
+          
+          <div class="post-card-tags">
+            
+              <a class="tag-pill" href="/tags/Vibe-Coding/">#Vibe Coding</a>
+            
+              <a class="tag-pill" href="/tags/Prompt-Engineering/">#Prompt Engineering</a>
+            
+              <a class="tag-pill" href="/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">#最佳实践</a>
+            
+          </div>
+          
+          <span class="read-more">阅读全文 →</span>
+        </div>
+      </article>
+      
+      
+      <article class="post-card animate-on-scroll">
+        <a class="post-card-link" href="/2025/06/15/what-is-vibe-coding/" aria-label="什么是 Vibe Coding？一文读懂 AI 时代的编程新范式"></a>
+        <span class="post-card-index">10</span>
+        <div class="post-card-inner">
+          <div class="post-card-meta">
+            <time class="post-date">2025-06-15</time>
+            
+            <span class="post-category">
+              
+                <a href="/categories/%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">入门指南</a>
+              
+            </span>
+            
+          </div>
+          <h2 class="post-card-title">
+            <a href="/2025/06/15/what-is-vibe-coding/">什么是 Vibe Coding？一文读懂 AI 时代的编程新范式</a>
+          </h2>
+          <div class="post-card-excerpt">
+            
+              Vibe Coding 是由 Andrej Karpathy 提出的编程理念，强调通过自然语言与 AI 协作完成编程任务。本文带你全面了解这一革命性的编程方式。
+            
+          </div>
+          
+          <div class="post-card-tags">
+            
+              <a class="tag-pill" href="/tags/Vibe-Coding/">#Vibe Coding</a>
+            
+              <a class="tag-pill" href="/tags/AI%E7%BC%96%E7%A8%8B/">#AI编程</a>
+            
+              <a class="tag-pill" href="/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/">#编程范式</a>
+            
+          </div>
+          
+          <span class="read-more">阅读全文 →</span>
+        </div>
+      </article>
+      
+    </div>
+    
+<nav class="pagination">
+  <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">→</a>
+</nav>
+
+
+  </div>
+</section>
+
+  </main>
+  <footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <p class="copyright">&copy; 2026 ByteVibe. All rights reserved.</p>
+      <p class="powered-by">Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a></p>
+      
+      <div class="social-links">
+        
+          <a class="social-link" href="https://github.com/notSomeshi" target="_blank" rel="noopener noreferrer">GitHub</a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+
+  <div class="search-overlay" id="searchOverlay" hidden>
+  <div class="search-backdrop" id="searchBackdrop"></div>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="站内搜索">
+    <div class="search-input-wrap">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="searchInput" class="search-input" placeholder="搜索文章…" autocomplete="off" spellcheck="false">
+      <button class="search-close" id="searchClose" aria-label="关闭搜索">ESC</button>
+    </div>
+    <div class="search-results" id="searchResults">
+      <p class="search-hint">输入关键词搜索标题、标签与正文</p>
+    </div>
+  </div>
+</div>
+
+  <button class="scroll-to-top" id="scrollToTop" aria-label="回到顶部">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+  
+<script src="/js/main.js"></script>
+
+</body>
+</html>

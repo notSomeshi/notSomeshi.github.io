@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>从 Vibe Coding 到超级个体：2026 年全栈独立开发的新叙事 | ByteVibe</title>
+<meta name="description" content="一个关于 Vibe Coding、AI 辅助编程和现代开发实践的技术博客">
+<meta name="author" content="ByteVibe">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='0,0 100,0 100,78 78,100 0,100' fill='%23ffd802'/><text x='50' y='70' font-size='58' font-weight='800' font-family='ui-monospace,monospace' fill='%230d0d0f' text-anchor='middle'>B</text></svg>">
+<link rel="alternate" type="application/atom+xml" title="ByteVibe" href="/atom.xml">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script>
+  // 暗色优先:light 显式切亮色;rain 提前打上标记避免闪烁
+  (function() {
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else if (t === 'rain') {
+        document.documentElement.setAttribute('data-rain', '');
+      }
+    } catch (e) {}
+  })();
+</script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+  
+  <canvas class="rain-canvas" id="rainCanvas" aria-hidden="true"></canvas>
+  <div class="reading-progress" id="readingProgress"></div>
+  <header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a class="site-logo" href="/">
+      ByteVibe
+    </a>
+    <nav class="site-nav" id="siteNav">
+      
+      
+        
+        
+        <a class="nav-link" href="/">首页</a>
+      
+        
+        
+        <a class="nav-link" href="/archives/">归档</a>
+      
+        
+        
+        <a class="nav-link" href="/categories/">分类</a>
+      
+        
+        
+        <a class="nav-link" href="/tags/">标签</a>
+      
+        
+        
+        <a class="nav-link" href="/about/">关于</a>
+      
+    </nav>
+    <div class="header-actions">
+      <button class="header-icon-btn" id="searchToggle" aria-label="搜索" title="搜索 (Ctrl+K)">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+      <button class="header-icon-btn theme-toggle" id="themeToggle" aria-label="切换显示模式(浅色 / 深色 / 雨夜)" title="显示模式:浅色 → 深色 → 雨夜">
+        <span class="icon-sun"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+        <span class="icon-moon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+        <span class="icon-umbrella"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 12a11.05 11.05 0 0 0-22 0Z"></path><path d="M12 12v7a2 2 0 0 0 4 0"></path></svg></span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打开菜单">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    
+      <a class="mobile-nav-link" href="/">首页</a>
+    
+      <a class="mobile-nav-link" href="/archives/">归档</a>
+    
+      <a class="mobile-nav-link" href="/categories/">分类</a>
+    
+      <a class="mobile-nav-link" href="/tags/">标签</a>
+    
+      <a class="mobile-nav-link" href="/about/">关于</a>
+    
+  </div>
+</header>
+
+  <main class="main-content">
+    <article class="post-detail">
+  <div class="container-docs">
+    <div class="post-layout-grid">
+      <!-- 1. Left Sidebar: Documentation Navigation -->
+      <aside class="post-sidebar-left">
+        <div class="sidebar-sticky">
+          <h3 class="sidebar-title">全部文章</h3>
+          <ul class="sidebar-list">
+            
+              <li class="sidebar-item active">
+                <a href="/2026/07/01/no-code-mvp-to-solopreneur/">从 Vibe Coding 到超级个体：2026 年全栈独立开发的新叙事</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/yolo-mode-and-ai-safety-guardrails/">YOLO 模式下的安全边界：如何防止 AI 删库跑路</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/high-performance-ai-prompts-library/">如何撰写黄金级 AI Prompt：从“做个功能”到“系统级交付”</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/mcp-server-practical-recipes/">Model Context Protocol (MCP) 深度指南：连接你的 AI 与现实数据</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/advanced-vibe-coding-roo-clinic/">Cline 与 Roo Code 实战：下一代 Vibe Coding 的工程范式</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/04/01/claude-code-complete-guide/">Claude Code 从入门到精通：面向工程师与产品经理的 AI 编程完全指南</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/30/future-of-vibe-coding/">Vibe Coding 的未来：当编程不再需要编程</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/25/ai-coding-tools-2025/">2025 年最值得关注的 AI 编程工具全景</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/20/vibe-coding-best-practices/">Vibe Coding 最佳实践：如何高效地与 AI 结对编程</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/15/what-is-vibe-coding/">什么是 Vibe Coding？一文读懂 AI 时代的编程新范式</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/10/hello-world/">欢迎来到 ByteVibe</a>
+              </li>
+            
+          </ul>
+        </div>
+      </aside>
+
+      <!-- 2. Middle Column: Main Article Content -->
+      <div class="post-content-main">
+        <header class="post-header">
+          <div class="post-meta">
+            <time class="post-date">2026年07月01日</time>
+            
+            <span class="post-meta-sep">·</span>
+            <span class="post-category">
+              
+                <a href="/categories/%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/">深度思考</a>
+              
+            </span>
+            
+            <span class="post-meta-sep">·</span>
+            <span class="reading-time">4 分钟阅读</span>
+          </div>
+          <h1 class="post-title">从 Vibe Coding 到超级个体：2026 年全栈独立开发的新叙事</h1>
+          
+          <div class="post-tags">
+            
+              <a class="tag-pill" href="/tags/%E7%8B%AC%E7%AB%8B%E5%BC%80%E5%8F%91/">#独立开发</a>
+            
+              <a class="tag-pill" href="/tags/%E8%B6%85%E7%BA%A7%E4%B8%AA%E4%BD%93/">#超级个体</a>
+            
+              <a class="tag-pill" href="/tags/%E5%95%86%E4%B8%9A%E5%AE%9E%E8%B7%B5/">#商业实践</a>
+            
+          </div>
+          
+        </header>
+        
+        
+        
+        <details class="mobile-toc">
+          <summary>目录 / Contents</summary>
+          <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81-2026%EF%BC%8C%E4%BA%BA%E4%BA%BA%E7%9A%86%E5%8F%AF%E4%BA%A4%E4%BB%98%E7%9A%84%E6%97%B6%E4%BB%A3"><span class="toc-list-text">一、 2026，人人皆可交付的时代</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81-%E6%A0%B8%E5%BF%83%E8%BD%AC%E5%8F%98%EF%BC%9A%E4%BB%8E%E2%80%9C%E7%A8%8B%E5%BA%8F%E5%91%98%E2%80%9D%E5%88%B0%E2%80%9C%E4%BA%A7%E5%93%81%E4%B8%8E%E9%A1%B9%E7%9B%AE%E7%BB%8F%E7%90%86%E2%80%9D"><span class="toc-list-text">二、 核心转变：从“程序员”到“产品与项目经理”</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81-%E8%B6%85%E7%BA%A7%E4%B8%AA%E4%BD%93%E7%9A%84%E6%95%8F%E6%8D%B7%E9%93%BE%E8%B7%AF%EF%BC%9A%E4%B8%80%E5%A4%A9%E5%86%85%E4%BB%8E%E5%8E%9F%E5%9E%8B%E5%88%B0%E5%8F%91%E5%B8%83"><span class="toc-list-text">三、 超级个体的敏捷链路：一天内从原型到发布</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#Step-1%EF%BC%9A%E7%94%BB%E7%BA%B8%E5%8E%9F%E5%9E%8B%E4%B8%8E%E8%AE%BE%E8%AE%A1-Spec-0-5%E5%B0%8F%E6%97%B6"><span class="toc-list-text">Step 1：画纸原型与设计 Spec (0.5小时)</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#Step-2%EF%BC%9A%E7%94%A8-AI-Agent-%E5%BF%AB%E9%80%9F%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B9%E7%9B%AE-1%E5%B0%8F%E6%97%B6"><span class="toc-list-text">Step 2：用 AI Agent 快速初始化项目 (1小时)</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#Step-3%EF%BC%9A%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E8%BF%AD%E4%BB%A3%E4%B8%8E-Vibe-Coding-4%E5%B0%8F%E6%97%B6"><span class="toc-list-text">Step 3：核心功能迭代与 Vibe Coding (4小时)</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#Step-4%EF%BC%9A%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%88%B0-Vercel-0-5%E5%B0%8F%E6%97%B6"><span class="toc-list-text">Step 4：一键部署到 Vercel (0.5小时)</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81-%E7%BB%93%E8%AF%AD"><span class="toc-list-text">四、 结语</span></a></li></ol>
+        </details>
+        
+
+        <div class="post-body">
+          <h2 id="一、-2026，人人皆可交付的时代"><a href="#一、-2026，人人皆可交付的时代" class="headerlink" title="一、 2026，人人皆可交付的时代"></a>一、 2026，人人皆可交付的时代</h2><p>在软件开发的历史上，技术壁垒曾经是不可逾越的鸿沟。一个人想要把脑海中的点子变成一个可以运行并能收款的 App，需要学习 HTML、CSS、JavaScript、数据库、Linux 运维等一整套复杂的知识体系。</p>
+<p>然而到了 2026 年，随着 Cline、Roo Code 以及各种终端 AI Agent 的高度成熟，这种叙事被彻底改写了。</p>
+<p>前特斯拉 AI 总监 Andrej Karpathy 频繁在社交媒体展示自己如何完全依靠 AI 指令在几小时内构建复杂的 Web 工具；国内知名创作者“花叔”更是凭借非传统的编程背景，利用 AI 开发出了多款诸如“小猫补光灯”等非常有趣且成功变现的付费 App。</p>
+<p>这标志着一个全新时代的到来：<strong>不懂代码，但能交付产品</strong>的“超级个体”时代。</p>
+<hr>
+<h2 id="二、-核心转变：从“程序员”到“产品与项目经理”"><a href="#二、-核心转变：从“程序员”到“产品与项目经理”" class="headerlink" title="二、 核心转变：从“程序员”到“产品与项目经理”"></a>二、 核心转变：从“程序员”到“产品与项目经理”</h2><p>在传统的软件开发模式中，个人的大部分精力消耗在“语法报错”、“环境配置”和“调试 API”上。而在 AI 驱动的独立开发模式下，个人的角色发生了根本性的转变：</p>
+<pre><code class="hljs plaintext">┌──────────────────────────────────────────────┐
+│                  超级个体                    │
+│  (核心职责: 业务定义、用户体验设计、项目把控)  │
+└──────────────────────┬───────────────────────┘
+                       │ 需求 &amp; 边界定义
+                       ▼
+┌──────────────────────────────────────────────┐
+│                 AI Agent                     │
+│  (核心职责: 代码实现、Bug 修复、自动化测试)    │
+└──────────────────────────────────────────────┘</code></pre>
+
+<ol>
+<li><strong>你成为产品经理 (Product Manager)<strong>：你的核心竞争力不再是写代码的速度，而是</strong>定义问题</strong>的能力。哪个需求是痛点？界面的交互逻辑是否足够简单？如何设计商业变现闭环？</li>
+<li>**你成为项目经理 (Project Manager)**：你负责给 AI 拆解任务，制定开发里程碑，并在 AI 偏离方向或遇到技术死锁时，及时进行干预与调整。</li>
+</ol>
+<hr>
+<h2 id="三、-超级个体的敏捷链路：一天内从原型到发布"><a href="#三、-超级个体的敏捷链路：一天内从原型到发布" class="headerlink" title="三、 超级个体的敏捷链路：一天内从原型到发布"></a>三、 超级个体的敏捷链路：一天内从原型到发布</h2><p>如何利用 AI 在一天内做出产品原型并上线发布？以下是经过实践检验的黄金敏捷链路：</p>
+<h3 id="Step-1：画纸原型与设计-Spec-0-5小时"><a href="#Step-1：画纸原型与设计-Spec-0-5小时" class="headerlink" title="Step 1：画纸原型与设计 Spec (0.5小时)"></a>Step 1：画纸原型与设计 Spec (0.5小时)</h3><p>在动手写代码前，先用纸笔或 Excalidraw 画出极其简易的界面草图。然后，使用 ICCE 法则写出一份项目描述，明确包含：</p>
+<ul>
+<li>核心功能（只做 1 个最痛点的 feature）。</li>
+<li>选用技术栈（推荐前端使用 Next.js，样式使用 CSS&#x2F;Tailwind，托管使用 Vercel，数据库使用 Supabase，全部为 Serverless 架构以降低成本）。</li>
+</ul>
+<h3 id="Step-2：用-AI-Agent-快速初始化项目-1小时"><a href="#Step-2：用-AI-Agent-快速初始化项目-1小时" class="headerlink" title="Step 2：用 AI Agent 快速初始化项目 (1小时)"></a>Step 2：用 AI Agent 快速初始化项目 (1小时)</h3><p>启动 VS Code，在 Roo Code 中切换到 <code>Architect</code> 模式或在终端使用 <code>npx -y create-next-app@latest</code>。<br>让 Agent 自动搭建好项目脚手架，并生成基础的路由结构。</p>
+<h3 id="Step-3：核心功能迭代与-Vibe-Coding-4小时"><a href="#Step-3：核心功能迭代与-Vibe-Coding-4小时" class="headerlink" title="Step 3：核心功能迭代与 Vibe Coding (4小时)"></a>Step 3：核心功能迭代与 Vibe Coding (4小时)</h3><p>开启 YOLO 模式或通过单轮确认，让 Agent 逐步实现核心业务逻辑。</p>
+<ul>
+<li>遇到报错时，直接将编译报错信息或控制台堆栈贴给 Agent，让其利用“观察-尝试”循环自动修复。</li>
+<li>用真实的测试数据填充页面，确保主要交互逻辑跑通。</li>
+</ul>
+<h3 id="Step-4：一键部署到-Vercel-0-5小时"><a href="#Step-4：一键部署到-Vercel-0-5小时" class="headerlink" title="Step 4：一键部署到 Vercel (0.5小时)"></a>Step 4：一键部署到 Vercel (0.5小时)</h3><p>将代码提交到 GitHub 仓库，并在 Vercel 后台点击导入该项目。<br>Vercel 会自动读取你的 Next.js 配置，完成云端构建，并在几分钟内给你一个全球加速的 production 域名。</p>
+<hr>
+<h2 id="四、-结语"><a href="#四、-结语" class="headerlink" title="四、 结语"></a>四、 结语</h2><p>在 2026 年，独立开发不再是一群极客的专利，而是一场人人都可以参与的商业实践。不要再把时间浪费在学习复杂的底层语法细节上。像一个真正的产品经理那样去思考，借助 AI 的力量，把你的创意以最快的速度推向市场。毕竟，在当今时代，<strong>交付的速度和解决用户痛点的精度，才是超级个体的终极护城河</strong>。</p>
+
+        </div>
+        
+        <footer class="post-footer">
+          <nav class="post-nav">
+            
+            
+            <a class="post-nav-item post-nav-next" href="/2026/07/01/yolo-mode-and-ai-safety-guardrails/">
+              <span class="post-nav-label">下一篇 →</span>
+              <span class="post-nav-title">YOLO 模式下的安全边界：如何防止 AI 删库跑路</span>
+            </a>
+            
+          </nav>
+        </footer>
+      </div>
+
+      <!-- 3. Right Sidebar: Outline TOC Jump -->
+      <aside class="post-sidebar-right">
+        
+          <div class="toc-sticky">
+            <h3 class="toc-title">目录大纲</h3>
+            <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81-2026%EF%BC%8C%E4%BA%BA%E4%BA%BA%E7%9A%86%E5%8F%AF%E4%BA%A4%E4%BB%98%E7%9A%84%E6%97%B6%E4%BB%A3"><span class="toc-list-text">一、 2026，人人皆可交付的时代</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81-%E6%A0%B8%E5%BF%83%E8%BD%AC%E5%8F%98%EF%BC%9A%E4%BB%8E%E2%80%9C%E7%A8%8B%E5%BA%8F%E5%91%98%E2%80%9D%E5%88%B0%E2%80%9C%E4%BA%A7%E5%93%81%E4%B8%8E%E9%A1%B9%E7%9B%AE%E7%BB%8F%E7%90%86%E2%80%9D"><span class="toc-list-text">二、 核心转变：从“程序员”到“产品与项目经理”</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81-%E8%B6%85%E7%BA%A7%E4%B8%AA%E4%BD%93%E7%9A%84%E6%95%8F%E6%8D%B7%E9%93%BE%E8%B7%AF%EF%BC%9A%E4%B8%80%E5%A4%A9%E5%86%85%E4%BB%8E%E5%8E%9F%E5%9E%8B%E5%88%B0%E5%8F%91%E5%B8%83"><span class="toc-list-text">三、 超级个体的敏捷链路：一天内从原型到发布</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#Step-1%EF%BC%9A%E7%94%BB%E7%BA%B8%E5%8E%9F%E5%9E%8B%E4%B8%8E%E8%AE%BE%E8%AE%A1-Spec-0-5%E5%B0%8F%E6%97%B6"><span class="toc-list-text">Step 1：画纸原型与设计 Spec (0.5小时)</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#Step-2%EF%BC%9A%E7%94%A8-AI-Agent-%E5%BF%AB%E9%80%9F%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B9%E7%9B%AE-1%E5%B0%8F%E6%97%B6"><span class="toc-list-text">Step 2：用 AI Agent 快速初始化项目 (1小时)</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#Step-3%EF%BC%9A%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E8%BF%AD%E4%BB%A3%E4%B8%8E-Vibe-Coding-4%E5%B0%8F%E6%97%B6"><span class="toc-list-text">Step 3：核心功能迭代与 Vibe Coding (4小时)</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#Step-4%EF%BC%9A%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%88%B0-Vercel-0-5%E5%B0%8F%E6%97%B6"><span class="toc-list-text">Step 4：一键部署到 Vercel (0.5小时)</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81-%E7%BB%93%E8%AF%AD"><span class="toc-list-text">四、 结语</span></a></li></ol>
+          </div>
+        
+      </aside>
+    </div>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <p class="copyright">&copy; 2026 ByteVibe. All rights reserved.</p>
+      <p class="powered-by">Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a></p>
+      
+      <div class="social-links">
+        
+          <a class="social-link" href="https://github.com/notSomeshi" target="_blank" rel="noopener noreferrer">GitHub</a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+
+  <div class="search-overlay" id="searchOverlay" hidden>
+  <div class="search-backdrop" id="searchBackdrop"></div>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="站内搜索">
+    <div class="search-input-wrap">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="searchInput" class="search-input" placeholder="搜索文章…" autocomplete="off" spellcheck="false">
+      <button class="search-close" id="searchClose" aria-label="关闭搜索">ESC</button>
+    </div>
+    <div class="search-results" id="searchResults">
+      <p class="search-hint">输入关键词搜索标题、标签与正文</p>
+    </div>
+  </div>
+</div>
+
+  <button class="scroll-to-top" id="scrollToTop" aria-label="回到顶部">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+  
+<script src="/js/main.js"></script>
+
+</body>
+</html>
