@@ -403,10 +403,11 @@ var Rain = (function () {
   var drops = [], ripples = [], splashes = [], puddles = [];
   var spawnCarry = 0, lastTime = 0, elapsed = 0;
   /* 雨声素材来源(在雨夜模式下后台循环播放):
-     "Rain against the window" — 作者 cori,公有领域(Public Domain)
-     https://commons.wikimedia.org/wiki/File:Rain_against_the_window.ogg
-     浏览器不支持 ogg 解码时(如 Safari)回退到合成雨幕。 */
-  var RAIN_SRC = '/audio/rain.ogg';
+     "Rain and Thunder Ambience" — 作者 sagamusix,CC0(公有领域)
+     https://freesound.org/people/sagamusix/sounds/700358/
+     夏季雷雨实录,作者设计为首尾无缝循环,自带真实雷声。
+     解码失败时回退到合成雨幕。 */
+  var RAIN_SRC = '/audio/rain.mp3';
   var usingRecording = false;
   var audioCtx = null, masterGain = null, bedGain = null, bedLowpass = null, bedModDepth = null, noiseBuffer = null;
   var plinkCarry = 0, activePlinks = 0, lastDingAt = 0, nextThunderAt = 0, flashAlpha = 0;
@@ -605,11 +606,11 @@ var Rain = (function () {
       }
     }
 
-    // 随机远雷:25~90 秒一次,雨越大越容易触发
-    if (nextThunderAt === 0) nextThunderAt = elapsed + 18 + Math.random() * 40;
+    // 随机合成远雷(录音已自带真实雷声,这里放得很稀疏,主要提供闪光同步)
+    if (nextThunderAt === 0) nextThunderAt = elapsed + 30 + Math.random() * 60;
     if (elapsed >= nextThunderAt) {
       if (Math.random() < 0.3 + 0.6 * intensity) playThunder(intensity);
-      nextThunderAt = elapsed + 25 + Math.random() * 65;
+      nextThunderAt = elapsed + 60 + Math.random() * 120;
     }
 
     draw(dt, intensity);
@@ -661,10 +662,10 @@ var Rain = (function () {
         var src = audioCtx.createBufferSource();
         src.buffer = buf;
         src.loop = true;
-        // 避开录音首尾可能的渐入渐出,取中段做采样级无缝循环
-        var margin = Math.min(1, buf.duration * 0.05);
+        // 素材本身首尾无缝,只跳过 MP3 编码器附加的起始静音
+        var margin = 0.06;
         src.loopStart = margin;
-        src.loopEnd = buf.duration - margin;
+        src.loopEnd = buf.duration - 0.02;
         src.connect(bedGain);
         src.start(0, margin);
         usingRecording = true;
@@ -709,7 +710,7 @@ var Rain = (function () {
     var t = audioCtx.currentTime;
     // 雨越大音量越大;录音与合成雨幕的响度基准不同
     var base = running
-      ? (usingRecording ? 0.3 + 0.4 * intensity : 0.035 + 0.075 * intensity)
+      ? (usingRecording ? 0.55 + 0.45 * intensity : 0.035 + 0.075 * intensity)
       : 0;
     bedGain.gain.setTargetAtTime(base, t, 0.45);
     if (bedLowpass) bedLowpass.frequency.setTargetAtTime(3000 + 2200 * intensity, t, 0.45);
