@@ -407,7 +407,7 @@ var Rain = (function () {
      https://freesound.org/people/NachtmahrTV/sounds/618108/
      约 5 分钟密集大雨,制作型环境音(与助眠雨视频同风格)。
      解码失败时回退到合成雨幕。 */
-  var RAIN_SRC = '/audio/rain.mp3';
+  var RAIN_SRC = '/audio/rain.mp3?v=3'; // 换音源时递增 v,绕过浏览器缓存
   var usingRecording = false;
   var audioCtx = null, masterGain = null, bedGain = null, bedLowpass = null, bedModDepth = null, noiseBuffer = null;
   var plinkCarry = 0, activePlinks = 0, lastDingAt = 0, nextThunderAt = 0, flashAlpha = 0;
