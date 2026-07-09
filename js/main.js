@@ -1,6 +1,8 @@
 /**
  * Apple Theme - Main JavaScript
  * 纯原生 JS,零依赖
+ * 站内跳转使用 PJAX(fetch + 替换正文),页面不整体重载,
+ * 因此雨夜模式的音频与 Canvas 跨页面连续不中断。
  */
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -105,42 +107,13 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* ==========================================
-     2. 滚动入场动画 (IntersectionObserver)
-     ========================================== */
-  var animatedElements = document.querySelectorAll('.animate-on-scroll');
-
-  if ('IntersectionObserver' in window && animatedElements.length > 0) {
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          var parent = entry.target.parentElement;
-          if (parent) {
-            var siblings = parent.querySelectorAll('.animate-on-scroll');
-            var index = Array.prototype.indexOf.call(siblings, entry.target);
-            entry.target.style.transitionDelay = (Math.min(index, 6) * 0.06) + 's';
-          }
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-    animatedElements.forEach(function (el) { observer.observe(el); });
-  } else {
-    animatedElements.forEach(function (el) { el.classList.add('is-visible'); });
-  }
-
-  /* ==========================================
-     3. 回到顶部 / 顶栏阴影 / 阅读进度条
+     2. 回到顶部 / 顶栏阴影 / 阅读进度条
+     isPostPage 由 initPage() 按当前页内容刷新
      ========================================== */
   var scrollToTopBtn = document.getElementById('scrollToTop');
   var siteHeader = document.getElementById('siteHeader');
   var progressBar = document.getElementById('readingProgress');
-  var isPost = document.querySelector('.post-body') !== null;
-
-  if (progressBar && !isPost) {
-    progressBar.style.display = 'none';
-  }
+  var isPostPage = false;
 
   function onScroll() {
     var y = window.scrollY;
@@ -150,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (siteHeader) {
       siteHeader.classList.toggle('is-scrolled', y > 10);
     }
-    if (progressBar && isPost) {
+    if (progressBar && isPostPage) {
       var max = document.documentElement.scrollHeight - window.innerHeight;
       var progress = max > 0 ? Math.min(Math.max(y / max * 100, 0), 100) : 0;
       progressBar.style.width = progress + '%';
@@ -158,7 +131,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
 
   if (scrollToTopBtn) {
     scrollToTopBtn.addEventListener('click', function () {
@@ -167,109 +139,28 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* ==========================================
-     4. 移动端菜单
+     3. 移动端菜单(事件委托,PJAX 换菜单内容后依然有效)
      ========================================== */
   var mobileMenuToggle = document.getElementById('mobileMenuToggle');
   var mobileNav = document.getElementById('mobileNav');
+
+  function closeMobileNav() {
+    if (mobileMenuToggle) mobileMenuToggle.classList.remove('is-active');
+    if (mobileNav) mobileNav.classList.remove('is-active');
+  }
 
   if (mobileMenuToggle && mobileNav) {
     mobileMenuToggle.addEventListener('click', function () {
       mobileMenuToggle.classList.toggle('is-active');
       mobileNav.classList.toggle('is-active');
     });
-    mobileNav.querySelectorAll('.mobile-nav-link').forEach(function (link) {
-      link.addEventListener('click', function () {
-        mobileMenuToggle.classList.remove('is-active');
-        mobileNav.classList.remove('is-active');
-      });
+    mobileNav.addEventListener('click', function (e) {
+      if (e.target.closest('.mobile-nav-link')) closeMobileNav();
     });
   }
 
   /* ==========================================
-     5. 文章页:外链新窗口打开
-     ========================================== */
-  var postBody = document.querySelector('.post-body');
-  if (postBody) {
-    postBody.querySelectorAll('a[href^="http"]').forEach(function (link) {
-      if (!link.getAttribute('target')) {
-        link.setAttribute('target', '_blank');
-        link.setAttribute('rel', 'noopener noreferrer');
-      }
-    });
-  }
-
-  /* ==========================================
-     6. 代码块:复制按钮 + 语言标签
-     ========================================== */
-  if (postBody) {
-    postBody.querySelectorAll('pre').forEach(function (pre) {
-      var code = pre.querySelector('code');
-      if (!code) return;
-
-      var wrapper = document.createElement('div');
-      wrapper.className = 'code-block';
-      pre.parentNode.insertBefore(wrapper, pre);
-      wrapper.appendChild(pre);
-
-      var lang = '';
-      code.classList.forEach(function (cls) {
-        if (cls !== 'hljs' && cls !== 'highlight' && !lang) lang = cls;
-      });
-
-      var bar = document.createElement('div');
-      bar.className = 'code-block-bar';
-      bar.innerHTML = '<span class="code-lang">' + (lang || 'code') + '</span>';
-
-      var btn = document.createElement('button');
-      btn.className = 'code-copy';
-      btn.type = 'button';
-      btn.textContent = '复制';
-      btn.addEventListener('click', function () {
-        navigator.clipboard.writeText(code.innerText).then(function () {
-          btn.textContent = '已复制';
-          btn.classList.add('is-copied');
-          setTimeout(function () {
-            btn.textContent = '复制';
-            btn.classList.remove('is-copied');
-          }, 1500);
-        });
-      });
-      bar.appendChild(btn);
-      wrapper.insertBefore(bar, pre);
-    });
-  }
-
-  /* ==========================================
-     7. 文章页:目录滚动高亮 (Scroll Spy)
-     ========================================== */
-  var tocLinks = document.querySelectorAll('.toc-list-link');
-  if (postBody && tocLinks.length > 0 && 'IntersectionObserver' in window) {
-    var headings = postBody.querySelectorAll('h2[id], h3[id], h4[id]');
-    var linkMap = {};
-    tocLinks.forEach(function (link) {
-      var id = decodeURIComponent((link.getAttribute('href') || '').replace('#', ''));
-      if (id) linkMap[id] = link;
-    });
-
-    var activeLink = null;
-    var spy = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          var link = linkMap[entry.target.id];
-          if (link) {
-            if (activeLink) activeLink.classList.remove('active');
-            link.classList.add('active');
-            activeLink = link;
-          }
-        }
-      });
-    }, { rootMargin: '-64px 0px -70% 0px' });
-
-    headings.forEach(function (h) { spy.observe(h); });
-  }
-
-  /* ==========================================
-     8. 站内搜索
+     4. 站内搜索
      ========================================== */
   var searchOverlay = document.getElementById('searchOverlay');
   var searchToggle = document.getElementById('searchToggle');
@@ -364,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   /* ==========================================
-     9. 封面页(PRESS ANY KEY)
+     5. 封面页(PRESS ANY KEY)
      ========================================== */
   var cover = document.getElementById('siteCover');
   if (cover && cover.style.display !== 'none') {
@@ -384,8 +275,193 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* ==========================================
-     10. 雨天模式:载入时恢复
+     6. 每页初始化(首次载入与每次 PJAX 换页后都会执行)
      ========================================== */
+  var pageObservers = [];
+
+  function initPage() {
+    // 断开上一页遗留的观察器
+    pageObservers.forEach(function (o) { o.disconnect(); });
+    pageObservers = [];
+
+    // --- 滚动入场动画 ---
+    var animatedElements = document.querySelectorAll('.animate-on-scroll:not(.is-visible)');
+    if ('IntersectionObserver' in window && animatedElements.length > 0) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var parent = entry.target.parentElement;
+            if (parent) {
+              var siblings = parent.querySelectorAll('.animate-on-scroll');
+              var index = Array.prototype.indexOf.call(siblings, entry.target);
+              entry.target.style.transitionDelay = (Math.min(index, 6) * 0.06) + 's';
+            }
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      animatedElements.forEach(function (el) { observer.observe(el); });
+      pageObservers.push(observer);
+    } else {
+      animatedElements.forEach(function (el) { el.classList.add('is-visible'); });
+    }
+
+    var postBody = document.querySelector('.post-body');
+    isPostPage = postBody !== null;
+    if (progressBar) {
+      progressBar.style.display = isPostPage ? '' : 'none';
+      progressBar.style.width = '0';
+    }
+
+    if (postBody) {
+      // --- 外链新窗口打开 ---
+      postBody.querySelectorAll('a[href^="http"]').forEach(function (link) {
+        if (!link.getAttribute('target')) {
+          link.setAttribute('target', '_blank');
+          link.setAttribute('rel', 'noopener noreferrer');
+        }
+      });
+
+      // --- 代码块:复制按钮 + 语言标签 ---
+      postBody.querySelectorAll('pre').forEach(function (pre) {
+        if (pre.parentElement && pre.parentElement.classList.contains('code-block')) return;
+        var code = pre.querySelector('code');
+        if (!code) return;
+
+        var wrapper = document.createElement('div');
+        wrapper.className = 'code-block';
+        pre.parentNode.insertBefore(wrapper, pre);
+        wrapper.appendChild(pre);
+
+        var lang = '';
+        code.classList.forEach(function (cls) {
+          if (cls !== 'hljs' && cls !== 'highlight' && !lang) lang = cls;
+        });
+
+        var bar = document.createElement('div');
+        bar.className = 'code-block-bar';
+        bar.innerHTML = '<span class="code-lang">' + (lang || 'code') + '</span>';
+
+        var btn = document.createElement('button');
+        btn.className = 'code-copy';
+        btn.type = 'button';
+        btn.textContent = '复制';
+        btn.addEventListener('click', function () {
+          navigator.clipboard.writeText(code.innerText).then(function () {
+            btn.textContent = '已复制';
+            btn.classList.add('is-copied');
+            setTimeout(function () {
+              btn.textContent = '复制';
+              btn.classList.remove('is-copied');
+            }, 1500);
+          });
+        });
+        bar.appendChild(btn);
+        wrapper.insertBefore(bar, pre);
+      });
+
+      // --- 目录滚动高亮 (Scroll Spy) ---
+      var tocLinks = document.querySelectorAll('.toc-list-link');
+      if (tocLinks.length > 0 && 'IntersectionObserver' in window) {
+        var headings = postBody.querySelectorAll('h2[id], h3[id], h4[id]');
+        var linkMap = {};
+        tocLinks.forEach(function (link) {
+          var id = decodeURIComponent((link.getAttribute('href') || '').replace('#', ''));
+          if (id) linkMap[id] = link;
+        });
+
+        var activeLink = null;
+        var spy = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var link = linkMap[entry.target.id];
+              if (link) {
+                if (activeLink) activeLink.classList.remove('active');
+                link.classList.add('active');
+                activeLink = link;
+              }
+            }
+          });
+        }, { rootMargin: '-64px 0px -70% 0px' });
+
+        headings.forEach(function (h) { spy.observe(h); });
+        pageObservers.push(spy);
+      }
+    }
+
+    onScroll();
+  }
+
+  /* ==========================================
+     7. PJAX 无刷新导航:站内链接 fetch 换正文,
+     AudioContext / 雨幕 Canvas 全程存活,雨声不断
+     ========================================== */
+  var pjaxContainer = document.querySelector('.main-content');
+
+  function pjaxNavigate(url, push) {
+    fetch(url)
+      .then(function (r) {
+        if (!r.ok) throw new Error('bad status');
+        return r.text();
+      })
+      .then(function (html) {
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        var newMain = doc.querySelector('.main-content');
+        if (!newMain) throw new Error('no main');
+        document.title = doc.title;
+        pjaxContainer.innerHTML = newMain.innerHTML;
+        // 同步导航当前页高亮(服务端渲染的 is-active)
+        var newNav = doc.getElementById('siteNav');
+        var curNav = document.getElementById('siteNav');
+        if (newNav && curNav) curNav.innerHTML = newNav.innerHTML;
+        var newMobile = doc.getElementById('mobileNav');
+        if (newMobile && mobileNav) mobileNav.innerHTML = newMobile.innerHTML;
+        if (push) history.pushState({ pjax: true }, '', url);
+        window.scrollTo(0, 0);
+        closeMobileNav();
+        closeSearch();
+        initPage();
+      })
+      .catch(function () {
+        // 任意失败都回退为整页跳转,保证可达性
+        location.href = url;
+      });
+  }
+
+  if (pjaxContainer && window.history && history.pushState) {
+    document.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target.closest ? e.target.closest('a') : null;
+      if (!a || a.target === '_blank' || a.hasAttribute('download')) return;
+      var href = a.getAttribute('href');
+      if (!href || href.charAt(0) === '#') return;
+      var url;
+      try { url = new URL(a.href, location.href); } catch (err) { return; }
+      if (url.origin !== location.origin) return;
+      // 跳过非页面资源(atom.xml、search.json 等)
+      if (/\.\w+$/.test(url.pathname) && !/\.html?$/.test(url.pathname)) return;
+      // 同页锚点交给浏览器默认行为(目录跳转)
+      if (url.pathname === location.pathname && url.hash) return;
+      e.preventDefault();
+      if (url.pathname === location.pathname && url.search === location.search) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      pjaxNavigate(url.pathname + url.search, true);
+    });
+
+    window.addEventListener('popstate', function () {
+      pjaxNavigate(location.pathname + location.search, false);
+    });
+  }
+
+  /* ==========================================
+     8. 首次初始化 + 雨天模式恢复
+     ========================================== */
+  initPage();
+
   if (getCurrentTheme() === 'rain') {
     Rain.setEnabled(true);
   }
@@ -393,7 +469,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 /* ==============================================================
-   Rain Engine — Canvas 雨景 + Web Audio 白噪声雨声
+   Rain Engine — Canvas 雨景 + Web Audio 雨声
    视觉密度与音量共用同一条强度曲线(intensity 0~1 缓慢漂移)
    ============================================================== */
 var Rain = (function () {
@@ -619,17 +695,14 @@ var Rain = (function () {
     rafId = requestAnimationFrame(loop);
   }
 
-  /* ---------- 音频:雨幕底噪 + 离散雨滴 + 远雷 ----------
-     底噪只保留低频(去掉电视雪花般的宽频嘶声);
-     "清脆感"来自随机调度的短促高频瞬态(滴答声);
-     远雷为低通噪声长衰减突发,音量刻意压低。 */
+  /* ---------- 音频 ---------- */
 
   function initAudio() {
     var AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return;
     audioCtx = new AC();
 
-    // 粉红噪声(Paul Kellet 滤波法):比白噪声柔和,是"助眠雨声"的频谱基础
+    // 粉红噪声(Paul Kellet 滤波法):供雷声与降级雨幕使用
     var len = audioCtx.sampleRate * 2;
     noiseBuffer = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
     var data = noiseBuffer.getChannelData(0);
