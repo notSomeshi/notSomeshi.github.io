@@ -2379,6 +2379,156 @@ body::before {
 
 .rk-miss-mark { font-family: var(--font-mono); }
 
+/* --- 板块切换(能力天梯 / 订阅性价比) --- */
+.rk-boards {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0;
+}
+
+.rk-board-tab {
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 10px 26px;
+  background: transparent;
+  color: var(--text-tertiary);
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: color var(--transition-base), border-color var(--transition-base);
+}
+
+.rk-board-tab:hover { color: var(--text-primary); }
+
+.rk-board-tab.is-active {
+  color: var(--text-primary);
+  border-bottom-color: var(--accent);
+}
+
+.rk-board { display: none; }
+
+.rk-board.is-active {
+  display: block;
+  animation: fadeInUp 0.35s ease;
+}
+
+/* --- 订阅性价比表 --- */
+.rk-price-table { min-width: 960px; }
+
+.rk-price-table th,
+.rk-price-table td {
+  text-align: left;
+  white-space: normal;
+  vertical-align: top;
+}
+
+.rk-price-table td {
+  font-size: 0.8125rem;
+  line-height: 1.65;
+}
+
+.rk-pt-plat { min-width: 130px; }
+
+.rk-plat {
+  position: relative;
+  cursor: help;
+  outline: none;
+}
+
+.rk-plat > a {
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+  border-bottom: 1px dashed var(--accent-ink);
+  padding-bottom: 1px;
+}
+
+.rk-plat > a:hover,
+.rk-plat:focus > a {
+  color: var(--accent-ink);
+}
+
+.rk-pt-plans { min-width: 150px; }
+
+.rk-plan {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 2px 8px;
+  margin: 0 6px 6px 0;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* 高倍率档(x5/x20/顶配)黄框强调 */
+.rk-plan-x {
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  background: var(--accent-dim);
+}
+
+.rk-pt-note {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 0.65625rem;
+  color: var(--accent-ink);
+}
+
+/* --- 悬停解析浮层 --- */
+.rk-tipcard {
+  position: fixed;
+  z-index: 1500;
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  border-left: 3px solid var(--accent);
+  padding: 14px 16px;
+  font-size: 0.8125rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  pointer-events: none;
+}
+
+.rk-tipcard.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.rk-tipcard b { color: var(--text-primary); }
+
+.rk-tip-title {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.71875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin-bottom: 8px;
+}
+
+[data-theme='light'] .rk-tipcard {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+[data-rain] .rk-tipcard {
+  background: rgba(20, 22, 28, 0.9);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
 /* ============================================
    封面页(PRESS ANY KEY)
    ============================================ */

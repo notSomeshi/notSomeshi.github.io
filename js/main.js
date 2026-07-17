@@ -625,6 +625,57 @@ document.addEventListener('DOMContentLoaded', function () {
 
     renderInsts();
     render(false);
+
+    /* --- 板块切换(能力天梯 / 订阅性价比) --- */
+    var boardTabs = document.querySelectorAll('.rk-board-tab');
+    var boards = document.querySelectorAll('.rk-board');
+    boardTabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        if (tab.classList.contains('is-active')) return;
+        boardTabs.forEach(function (t) { t.classList.toggle('is-active', t === tab); });
+        boards.forEach(function (b) {
+          b.classList.toggle('is-active', b.dataset.board === tab.dataset.board);
+        });
+      });
+    });
+
+    /* --- 平台悬停解析卡(共享浮层,fixed 定位避免被滚动容器裁剪) --- */
+    var tipCard = document.getElementById('rkTipCard');
+    if (!tipCard) {
+      tipCard = document.createElement('div');
+      tipCard.id = 'rkTipCard';
+      tipCard.className = 'rk-tipcard';
+      tipCard.hidden = true;
+      document.body.appendChild(tipCard);
+    }
+
+    function showTip(plat) {
+      var html = plat.querySelector('.rk-tip-html');
+      if (!html) return;
+      tipCard.innerHTML = html.innerHTML;
+      tipCard.hidden = false;
+      var r = plat.getBoundingClientRect();
+      var cw = Math.min(340, window.innerWidth - 24);
+      tipCard.style.width = cw + 'px';
+      tipCard.style.left = Math.min(Math.max(12, r.left), window.innerWidth - cw - 12) + 'px';
+      var top = r.top - tipCard.offsetHeight - 10;
+      if (top < 64) top = r.bottom + 10; // 顶部放不下就放到下方
+      tipCard.style.top = top + 'px';
+      tipCard.getBoundingClientRect(); // 强制回流,确保过渡从初始态开始
+      tipCard.classList.add('is-visible');
+    }
+
+    function hideTip() {
+      tipCard.classList.remove('is-visible');
+      tipCard.hidden = true;
+    }
+
+    document.querySelectorAll('.rk-plat').forEach(function (plat) {
+      plat.addEventListener('mouseenter', function () { showTip(plat); });
+      plat.addEventListener('mouseleave', hideTip);
+      plat.addEventListener('focus', function () { showTip(plat); });
+      plat.addEventListener('blur', hideTip);
+    });
   }
 
   /* ==========================================
