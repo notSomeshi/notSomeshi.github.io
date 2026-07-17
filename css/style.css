@@ -2014,6 +2014,372 @@ body::before {
 }
 
 /* ============================================
+   模型天梯(/rankings/)+ 首页左侧悬浮入口
+   ============================================ */
+
+.rankings-entry {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 9px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  border-left: none;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+  transition: transform var(--transition-base), border-color var(--transition-base), background-color var(--transition-base);
+}
+
+.rankings-entry:hover {
+  transform: translateY(-50%) translateX(4px);
+  border-color: var(--accent);
+}
+
+.rankings-entry-mark {
+  width: 9px;
+  height: 9px;
+  background: var(--accent);
+  clip-path: polygon(0 0, 100% 0, 100% 60%, 60% 100%, 0 100%);
+}
+
+.rankings-entry-label {
+  writing-mode: vertical-rl;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: var(--text-primary);
+}
+
+.rankings-entry-sub {
+  writing-mode: vertical-rl;
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--accent-ink);
+}
+
+[data-rain] .rankings-entry {
+  background: rgba(20, 22, 28, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* --- 天梯页 --- */
+.rankings-section {
+  padding: 56px 0 80px;
+}
+
+.rk-dims {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.rk-dim {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 7px 22px;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+  transition: background-color var(--transition-base), color var(--transition-base), border-color var(--transition-base);
+}
+
+.rk-dim:hover {
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+.rk-dim.is-active {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--accent);
+}
+
+.rk-controls {
+  display: flex;
+  gap: 16px 24px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.rk-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  height: 38px;
+  min-width: 220px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-tertiary);
+}
+
+.rk-search {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  width: 170px;
+}
+
+.rk-search::placeholder { color: var(--text-tertiary); }
+
+.rk-insts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 10px 24px;
+  flex: 1;
+  min-width: 280px;
+}
+
+.rk-inst {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+}
+
+.rk-inst.is-na { opacity: 0.45; }
+
+.rk-inst input[type='checkbox'] {
+  accent-color: var(--accent);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.rk-inst-name {
+  font-family: var(--font-mono);
+  font-size: 0.71875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  min-width: 118px;
+  white-space: nowrap;
+}
+
+.rk-inst-name:hover { color: var(--accent-ink); }
+
+.rk-weight {
+  flex: 1;
+  min-width: 60px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.rk-weight-num {
+  font-family: var(--font-mono);
+  font-size: 0.71875rem;
+  font-weight: 700;
+  color: var(--accent-ink);
+  min-width: 24px;
+  text-align: right;
+}
+
+.rk-inst-na {
+  font-family: var(--font-mono);
+  font-size: 0.65625rem;
+  color: var(--text-tertiary);
+}
+
+.rk-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%);
+}
+
+[data-rain] .rk-table-wrap {
+  background: rgba(20, 22, 28, 0.52);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+}
+
+.rk-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  min-width: 780px;
+}
+
+.rk-table th {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  text-align: right;
+  padding: 12px 14px;
+  border-bottom: 2px solid var(--accent);
+  white-space: nowrap;
+}
+
+.rk-table th.rk-col-model,
+.rk-table td.rk-col-model {
+  text-align: left;
+}
+
+.rk-table th.rk-col-rank,
+.rk-table td.rk-col-rank {
+  text-align: left;
+  width: 44px;
+}
+
+.rk-sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.rk-sortable:hover { color: var(--text-primary); }
+
+.rk-sortable.is-sorted { color: var(--accent-ink); }
+
+.rk-sortable.is-sorted::after {
+  content: ' ▼';
+  font-size: 0.5625rem;
+}
+
+.rk-unit {
+  display: block;
+  font-size: 0.5625rem;
+  letter-spacing: 0.12em;
+  color: var(--text-tertiary);
+}
+
+.rk-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--border-color);
+  text-align: right;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.rk-table tbody tr {
+  will-change: transform;
+  transition: background-color 0.18s ease;
+}
+
+.rk-table tbody tr:hover { background: var(--bg-secondary); }
+
+[data-rain] .rk-table tbody tr:hover { background: rgba(255, 255, 255, 0.04); }
+
+.rk-table td.rk-col-rank {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--text-tertiary);
+}
+
+.rk-table tbody tr:nth-child(-n+3) td.rk-col-rank {
+  color: var(--accent-ink);
+}
+
+.rk-model-link {
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+}
+
+.rk-model-link:hover { color: var(--accent-ink); }
+
+.rk-vendor {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.65625rem;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+.rk-open {
+  font-style: normal;
+  color: var(--accent-ink);
+}
+
+.rk-raw {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.rk-norm {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--text-tertiary);
+}
+
+.rk-norm::before { content: '→ '; }
+
+.rk-miss { color: var(--text-tertiary); }
+
+.rk-col-comp { min-width: 130px; }
+
+.rk-bar {
+  height: 5px;
+  background: var(--bg-tertiary);
+  margin-bottom: 4px;
+  overflow: hidden;
+}
+
+.rk-bar i {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.rk-comp-num {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--accent-ink);
+}
+
+.rk-table td.rk-col-cov {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-tertiary);
+}
+
+.rk-empty {
+  padding: 32px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+.rk-notes { margin-top: 22px; }
+
+.rk-note {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  line-height: 1.8;
+  margin-bottom: 8px;
+}
+
+.rk-note strong { color: var(--text-secondary); }
+
+.rk-note a { color: var(--accent-ink); }
+
+.rk-miss-mark { font-family: var(--font-mono); }
+
+/* ============================================
    封面页(PRESS ANY KEY)
    ============================================ */
 
@@ -2189,6 +2555,20 @@ html.cover-lock { overflow: hidden; }
   .cover-sub { letter-spacing: 0.2em; }
 
   .hero-section .container::after { display: none; }
+
+  .rankings-entry {
+    top: auto;
+    bottom: 84px;
+    transform: none;
+    padding: 12px 7px 10px;
+    gap: 8px;
+  }
+
+  .rankings-entry:hover { transform: translateX(4px); }
+
+  .rk-controls { flex-direction: column; }
+
+  .rk-insts { width: 100%; }
 }
 
 /* --- Print --- */
@@ -2204,7 +2584,8 @@ html.cover-lock { overflow: hidden; }
   .mobile-toc,
   .search-overlay,
   .site-cover,
-  .rain-canvas {
+  .rain-canvas,
+  .rankings-entry {
     display: none !important;
   }
 

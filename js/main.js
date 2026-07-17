@@ -391,7 +391,240 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
+    initRankings();
     onScroll();
+  }
+
+  /* ==========================================
+     6.5 模型天梯页(/rankings/)
+     数据在页面内的 JSON 岛,渲染/筛选/加权/FLIP 动画在此
+     ========================================== */
+  function initRankings() {
+    var app = document.getElementById('rankingsApp');
+    if (!app || app.dataset.ready) return;
+    app.dataset.ready = '1';
+
+    var DATA;
+    try {
+      DATA = JSON.parse(document.getElementById('rankingsData').textContent);
+    } catch (e) { return; }
+
+    var INSTS = DATA.institutions;
+    var DIMS = DATA.dimensions;
+    var instKeys = Object.keys(INSTS);
+
+    var state = { dim: 'overall', query: '', sortBy: 'composite', enabled: {}, weights: {} };
+    instKeys.forEach(function (k) {
+      state.enabled[k] = true;
+      state.weights[k] = DATA.defaultWeights[k] || 25;
+    });
+
+    var dimsEl = document.getElementById('rkDims');
+    var instsEl = document.getElementById('rkInsts');
+    var headEl = document.getElementById('rkHead');
+    var bodyEl = document.getElementById('rkBody');
+    var emptyEl = document.getElementById('rkEmpty');
+    var searchEl = document.getElementById('rkSearch');
+
+    function metricOf(inst) { return DIMS[state.dim].metrics[inst]; }
+
+    function rawScore(model, inst) {
+      var mk = metricOf(inst);
+      if (!mk) return null;
+      var s = model.scores[inst];
+      return (s && s[mk] != null) ? s[mk] : null;
+    }
+
+    function activeInsts() {
+      return instKeys.filter(function (k) { return state.enabled[k] && metricOf(k); });
+    }
+
+    function compute() {
+      var act = activeInsts();
+      // 每项机构得分在全部 20 个模型内做 min-max 归一化
+      var range = {};
+      act.forEach(function (k) {
+        var vals = DATA.models
+          .map(function (m) { return rawScore(m, k); })
+          .filter(function (v) { return v != null; });
+        range[k] = { min: Math.min.apply(null, vals), max: Math.max.apply(null, vals) };
+      });
+
+      var rows = DATA.models.map(function (m) {
+        var cells = {}, wSum = 0, acc = 0, covered = 0;
+        act.forEach(function (k) {
+          var v = rawScore(m, k);
+          if (v == null) { cells[k] = null; return; }
+          var r = range[k];
+          var norm = r.max > r.min ? (v - r.min) / (r.max - r.min) * 100 : 100;
+          cells[k] = { raw: v, norm: norm };
+          // 缺失项不计权重:按可用项重新归一
+          wSum += state.weights[k];
+          acc += norm * state.weights[k];
+          covered++;
+        });
+        return {
+          model: m, cells: cells,
+          composite: wSum > 0 ? acc / wSum : null,
+          coverage: covered, total: act.length
+        };
+      });
+
+      var q = state.query.trim().toLowerCase();
+      if (q) {
+        rows = rows.filter(function (r) {
+          return (r.model.name + ' ' + r.model.vendor).toLowerCase().indexOf(q) !== -1;
+        });
+      }
+
+      rows.sort(function (a, b) {
+        if (state.sortBy === 'composite') return (b.composite || -1) - (a.composite || -1);
+        var av = a.cells[state.sortBy], bv = b.cells[state.sortBy];
+        return (bv ? bv.norm : -1) - (av ? av.norm : -1);
+      });
+
+      return { rows: rows, act: act };
+    }
+
+    function fmt(inst, v) {
+      return inst === 'arena' ? String(Math.round(v)) : v.toFixed(1);
+    }
+
+    function render(animate) {
+      var res = compute();
+      var act = res.act;
+
+      // FLIP 第一步:记录每行旧位置
+      var prev = {};
+      if (animate) {
+        bodyEl.querySelectorAll('tr[data-id]').forEach(function (tr) {
+          prev[tr.dataset.id] = tr.getBoundingClientRect().top;
+        });
+      }
+
+      var h = '<tr><th class="rk-col-rank">#</th><th class="rk-col-model">模型</th>';
+      act.forEach(function (k) {
+        h += '<th class="rk-sortable' + (state.sortBy === k ? ' is-sorted' : '') + '" data-sort="' + k + '">' +
+          INSTS[k].short + '<span class="rk-unit">' + INSTS[k].unit + '</span></th>';
+      });
+      h += '<th class="rk-sortable rk-col-comp' + (state.sortBy === 'composite' ? ' is-sorted' : '') + '" data-sort="composite">综合分<span class="rk-unit">0-100</span></th>' +
+        '<th class="rk-col-cov">覆盖</th></tr>';
+      headEl.innerHTML = h;
+
+      bodyEl.innerHTML = res.rows.map(function (r, i) {
+        var m = r.model;
+        var cellsHtml = act.map(function (k) {
+          var c = r.cells[k];
+          if (!c) return '<td class="rk-miss" title="该机构暂未收录此模型">—</td>';
+          return '<td><span class="rk-raw">' + fmt(k, c.raw) + '</span><span class="rk-norm">' + c.norm.toFixed(0) + '</span></td>';
+        }).join('');
+        var comp = r.composite == null ? '—' : r.composite.toFixed(1);
+        return '<tr data-id="' + m.id + '">' +
+          '<td class="rk-col-rank">' + (i + 1 < 10 ? '0' + (i + 1) : i + 1) + '</td>' +
+          '<td class="rk-col-model">' +
+            '<a class="rk-model-link" href="' + m.url + '" target="_blank" rel="noopener">' + m.name + '</a>' +
+            '<span class="rk-vendor">' + m.vendor + (m.open ? ' · <em class="rk-open">开源权重</em>' : '') + '</span>' +
+          '</td>' +
+          cellsHtml +
+          '<td class="rk-col-comp"><div class="rk-bar"><i style="width:' + (r.composite || 0) + '%"></i></div><span class="rk-comp-num">' + comp + '</span></td>' +
+          '<td class="rk-col-cov">' + r.coverage + '/' + r.total + '</td>' +
+          '</tr>';
+      }).join('');
+      emptyEl.hidden = res.rows.length > 0;
+
+      // FLIP 第二步:从旧位置平滑滑入新位置;新出现的行淡入
+      if (animate) {
+        bodyEl.querySelectorAll('tr[data-id]').forEach(function (tr) {
+          var was = prev[tr.dataset.id];
+          if (was == null) {
+            tr.style.opacity = '0';
+            requestAnimationFrame(function () {
+              tr.style.transition = 'opacity 0.3s ease';
+              tr.style.opacity = '1';
+            });
+            return;
+          }
+          var dy = was - tr.getBoundingClientRect().top;
+          if (dy) {
+            tr.style.transform = 'translateY(' + dy + 'px)';
+            tr.style.transition = 'none';
+            requestAnimationFrame(function () {
+              tr.style.transition = 'transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1)';
+              tr.style.transform = '';
+            });
+          }
+        });
+      }
+    }
+
+    function renderInsts() {
+      instsEl.innerHTML = instKeys.map(function (k) {
+        var has = !!metricOf(k);
+        return '<div class="rk-inst' + (has ? '' : ' is-na') + '">' +
+          '<input type="checkbox" data-inst="' + k + '"' + (state.enabled[k] ? ' checked' : '') + (has ? '' : ' disabled') + ' aria-label="启用 ' + INSTS[k].name + '">' +
+          '<a href="' + INSTS[k].url + '" target="_blank" rel="noopener" class="rk-inst-name">' + INSTS[k].name + '</a>' +
+          (has
+            ? '<input type="range" min="0" max="100" step="5" value="' + state.weights[k] + '" data-weight="' + k + '" class="rk-weight"' + (state.enabled[k] ? '' : ' disabled') + ' aria-label="' + INSTS[k].name + ' 权重">' +
+              '<span class="rk-weight-num" data-wnum="' + k + '">' + state.weights[k] + '</span>'
+            : '<span class="rk-inst-na">该维度无评分</span>') +
+          '</div>';
+      }).join('');
+    }
+
+    // 维度切换
+    dimsEl.innerHTML = Object.keys(DIMS).map(function (d) {
+      return '<button type="button" class="rk-dim' + (d === state.dim ? ' is-active' : '') + '" data-dim="' + d + '">' + DIMS[d].label + '</button>';
+    }).join('');
+    dimsEl.addEventListener('click', function (e) {
+      var btn = e.target.closest('.rk-dim');
+      if (!btn || btn.dataset.dim === state.dim) return;
+      state.dim = btn.dataset.dim;
+      dimsEl.querySelectorAll('.rk-dim').forEach(function (b) {
+        b.classList.toggle('is-active', b === btn);
+      });
+      if (state.sortBy !== 'composite' && !DIMS[state.dim].metrics[state.sortBy]) {
+        state.sortBy = 'composite';
+      }
+      renderInsts();
+      render(true);
+    });
+
+    // 机构启用/停用
+    instsEl.addEventListener('change', function (e) {
+      var cb = e.target.closest('input[type="checkbox"]');
+      if (!cb) return;
+      state.enabled[cb.dataset.inst] = cb.checked;
+      if (state.sortBy === cb.dataset.inst && !cb.checked) state.sortBy = 'composite';
+      renderInsts();
+      render(true);
+    });
+
+    // 权重滑杆
+    instsEl.addEventListener('input', function (e) {
+      var sl = e.target.closest('input[type="range"]');
+      if (!sl) return;
+      state.weights[sl.dataset.weight] = +sl.value;
+      var num = instsEl.querySelector('[data-wnum="' + sl.dataset.weight + '"]');
+      if (num) num.textContent = sl.value;
+      render(true);
+    });
+
+    // 列头排序
+    headEl.addEventListener('click', function (e) {
+      var th = e.target.closest('.rk-sortable');
+      if (!th || th.dataset.sort === state.sortBy) return;
+      state.sortBy = th.dataset.sort;
+      render(true);
+    });
+
+    // 搜索
+    searchEl.addEventListener('input', function () {
+      state.query = searchEl.value;
+      render(true);
+    });
+
+    renderInsts();
+    render(false);
   }
 
   /* ==========================================
