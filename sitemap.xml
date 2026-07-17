@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://notsomeshi.github.io/2026/07/17/openrouter-power-shift/</loc>
+    
+    <lastmod>2026-07-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://notsomeshi.github.io/2026/07/17/ai-frontier-briefing-2026-07/</loc>
+    
+    <lastmod>2026-07-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://notsomeshi.github.io/rankings/index.html</loc>
     
     <lastmod>2026-07-17</lastmod>
@@ -271,6 +289,27 @@
   </url>
   
   <url>
+    <loc>https://notsomeshi.github.io/tags/%E5%89%8D%E6%B2%BF%E9%80%9F%E8%A7%88/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://notsomeshi.github.io/tags/AI%E6%96%B0%E9%97%BB/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://notsomeshi.github.io/tags/Agent/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://notsomeshi.github.io/tags/%E5%B0%B1%E4%B8%9A/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>weekly</changefreq>
@@ -292,7 +331,7 @@
   </url>
   
   <url>
-    <loc>https://notsomeshi.github.io/tags/Claude-Code/</loc>
+    <loc>https://notsomeshi.github.io/tags/%E6%9C%AA%E6%9D%A5%E8%B6%8B%E5%8A%BF/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -306,35 +345,7 @@
   </url>
   
   <url>
-    <loc>https://notsomeshi.github.io/tags/Anthropic/</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://notsomeshi.github.io/tags/%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://notsomeshi.github.io/tags/%E6%9C%AA%E6%9D%A5%E8%B6%8B%E5%8A%BF/</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://notsomeshi.github.io/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://notsomeshi.github.io/tags/%E5%85%AC%E5%91%8A/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -362,6 +373,34 @@
   </url>
   
   <url>
+    <loc>https://notsomeshi.github.io/tags/Claude-Code/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://notsomeshi.github.io/tags/Anthropic/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://notsomeshi.github.io/tags/%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://notsomeshi.github.io/tags/%E5%85%AC%E5%91%8A/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://notsomeshi.github.io/tags/MCP/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>weekly</changefreq>
@@ -370,13 +409,6 @@
   
   <url>
     <loc>https://notsomeshi.github.io/tags/%E6%95%B0%E6%8D%AE%E8%BF%9E%E6%8E%A5/</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://notsomeshi.github.io/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -404,7 +436,35 @@
   </url>
   
   <url>
+    <loc>https://notsomeshi.github.io/tags/%E5%BC%80%E6%BA%90%E6%A8%A1%E5%9E%8B/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://notsomeshi.github.io/tags/OpenRouter/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://notsomeshi.github.io/tags/%E5%B8%82%E5%9C%BA%E4%BB%BD%E9%A2%9D/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://notsomeshi.github.io/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://notsomeshi.github.io/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -455,13 +515,6 @@
   </url>
   
   <url>
-    <loc>https://notsomeshi.github.io/categories/%E5%AE%98%E6%96%B9%E6%89%8B%E5%86%8C%E7%A7%BB%E6%A4%8D/</loc>
-    <lastmod>2026-07-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://notsomeshi.github.io/categories/%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>weekly</changefreq>
@@ -469,14 +522,21 @@
   </url>
   
   <url>
-    <loc>https://notsomeshi.github.io/categories/%E5%8D%9A%E5%AE%A2/</loc>
+    <loc>https://notsomeshi.github.io/categories/%E5%AE%9E%E8%B7%B5%E6%8A%80%E5%B7%A7/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://notsomeshi.github.io/categories/%E5%AE%9E%E8%B7%B5%E6%8A%80%E5%B7%A7/</loc>
+    <loc>https://notsomeshi.github.io/categories/%E5%AE%98%E6%96%B9%E6%89%8B%E5%86%8C%E7%A7%BB%E6%A4%8D/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://notsomeshi.github.io/categories/%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
