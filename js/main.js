@@ -684,7 +684,17 @@ document.addEventListener('DOMContentLoaded', function () {
      ========================================== */
   var pjaxContainer = document.querySelector('.main-content');
 
+  // 加载反馈:顶部黄色扫动条 + 正文降透明度,消除"点了没反应"的错觉
+  var pjaxBar = document.createElement('div');
+  pjaxBar.className = 'pjax-bar';
+  document.body.appendChild(pjaxBar);
+
+  function setPjaxLoading(on) {
+    document.body.classList.toggle('pjax-loading', on);
+  }
+
   function pjaxNavigate(url, push) {
+    setPjaxLoading(true);
     fetch(url)
       .then(function (r) {
         if (!r.ok) throw new Error('bad status');
@@ -707,9 +717,11 @@ document.addEventListener('DOMContentLoaded', function () {
         closeMobileNav();
         closeSearch();
         initPage();
+        setPjaxLoading(false);
       })
       .catch(function () {
         // 任意失败都回退为整页跳转,保证可达性
+        setPjaxLoading(false);
         location.href = url;
       });
   }
@@ -767,8 +779,9 @@ var Rain = (function () {
      https://freesound.org/people/NachtmahrTV/sounds/618108/
      约 5 分钟密集大雨,制作型环境音(与助眠雨视频同风格)。
      解码失败时回退到合成雨幕。 */
-  var RAIN_SRC = '/audio/rain.mp3?v=3'; // 换音源时递增 v,绕过浏览器缓存
+  var RAIN_SRC = '/audio/rain.mp3?v=3'; // 换音源时递增 v,绕过浏览器缓存(head.ejs 的预载链接需同步)
   var usingRecording = false;
+  var rainEl = null; // 流式播放的 <audio> 元素
   var audioCtx = null, masterGain = null, bedGain = null, bedLowpass = null, bedModDepth = null, noiseBuffer = null;
   var plinkCarry = 0, activePlinks = 0, lastDingAt = 0, nextThunderAt = 0, flashAlpha = 0;
   var gestureBound = false;
@@ -1022,23 +1035,27 @@ var Rain = (function () {
     comp.connect(makeup);
     makeup.connect(masterGain);
 
-    // 首选:真实雨声录音无缝循环(素材来源见模块顶部注释)
-    fetch(RAIN_SRC)
-      .then(function (r) { if (!r.ok) throw new Error('fetch failed'); return r.arrayBuffer(); })
-      .then(function (ab) { return audioCtx.decodeAudioData(ab); })
-      .then(function (buf) {
-        var src = audioCtx.createBufferSource();
-        src.buffer = buf;
-        src.loop = true;
-        // 跳过首尾边缘,循环点落在稳态雨声中(宽频噪声可掩蔽接缝)
-        var margin = 0.15;
-        src.loopStart = margin;
-        src.loopEnd = buf.duration - margin;
-        src.connect(bedGain);
-        src.start(0, margin);
-        usingRecording = true;
-      })
-      .catch(function () { synthBed(); });
+    // 首选:流式播放真实雨声录音(素材来源见模块顶部注释)。
+    // 用 <audio> 元素而非 fetch+decode:数百 KB 缓冲即可出声,
+    // 不必等 7MB 全量下载;经 MediaElementSource 仍接入增益/压缩链。
+    try {
+      rainEl = new Audio(RAIN_SRC);
+      rainEl.loop = true;
+      rainEl.preload = 'auto';
+      rainEl.addEventListener('error', function () {
+        if (usingRecording) {
+          usingRecording = false;
+          rainEl = null;
+          synthBed();
+        }
+      });
+      var mediaSrc = audioCtx.createMediaElementSource(rainEl);
+      mediaSrc.connect(bedGain);
+      usingRecording = true;
+      rainEl.play().catch(function () {}); // 无手势时静默失败,交给 resumeAudio
+    } catch (e) {
+      synthBed();
+    }
   }
 
   /* 降级方案:浏览器无法解码录音时,用粉红噪声合成雨幕 */
@@ -1078,7 +1095,7 @@ var Rain = (function () {
     var t = audioCtx.currentTime;
     // 雨越大音量越大;录音与合成雨幕的响度基准不同
     var base = running
-      ? (usingRecording ? 0.7 + 0.3 * intensity : 0.035 + 0.075 * intensity)
+      ? (usingRecording ? 0.4 + 0.2 * intensity : 0.035 + 0.075 * intensity)
       : 0;
     bedGain.gain.setTargetAtTime(base, t, 0.45);
     if (bedLowpass) bedLowpass.frequency.setTargetAtTime(3000 + 2200 * intensity, t, 0.45);
@@ -1148,6 +1165,9 @@ var Rain = (function () {
     if (audioCtx && audioCtx.state === 'suspended') {
       audioCtx.resume().catch(function () {});
     }
+    if (rainEl && rainEl.paused) {
+      rainEl.play().catch(function () {});
+    }
   }
 
   /* 自动播放被拦截时,等首个用户手势再启动雨声 */
@@ -1201,7 +1221,10 @@ var Rain = (function () {
       if (audioCtx && masterGain) {
         masterGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.2);
         setTimeout(function () {
-          if (!running && audioCtx && audioCtx.state === 'running') audioCtx.suspend();
+          if (!running) {
+            if (rainEl) rainEl.pause();
+            if (audioCtx && audioCtx.state === 'running') audioCtx.suspend();
+          }
         }, 900);
       }
     }
@@ -1213,6 +1236,7 @@ var Rain = (function () {
     if (document.hidden) {
       if (rafId) cancelAnimationFrame(rafId);
       rafId = null;
+      if (rainEl) rainEl.pause();
       if (audioCtx && audioCtx.state === 'running') audioCtx.suspend();
     } else {
       resumeAudio();

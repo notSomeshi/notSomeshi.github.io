@@ -20,6 +20,12 @@
         document.documentElement.setAttribute('data-theme', 'light');
       } else if (t === 'rain') {
         document.documentElement.setAttribute('data-rain', '');
+        // 雨夜模式:页面加载的同时就开始预载雨声(与 main.js 的 RAIN_SRC 保持一致)
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.as = 'audio';
+        l.href = '/audio/rain.mp3?v=3';
+        document.head.appendChild(l);
       }
     } catch (e) {}
   })();
