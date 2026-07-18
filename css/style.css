@@ -2503,6 +2503,30 @@ body::before {
   user-select: none;
 }
 
+/* 真实厂牌 logo(本地资源,白底芯片保证深浅色主题都清晰;字母作为加载失败的回退) */
+.rk-ico[class*='b-'] {
+  background-color: #fff;
+  background-size: 72%;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: transparent;
+}
+
+.b-anthropic { background-image: url('/img/brands/anthropic.png'); }
+.b-openai { background-image: url('/img/brands/openai.png'); }
+.b-google { background-image: url('/img/brands/google.png'); }
+.b-moonshot { background-image: url('/img/brands/moonshot.png'); }
+.b-xai { background-image: url('/img/brands/xai.png'); }
+.b-deepseek { background-image: url('/img/brands/deepseek.png'); }
+.b-qwen { background-image: url('/img/brands/qwen.png'); }
+.b-minimax { background-image: url('/img/brands/minimax.png'); }
+.b-zai { background-image: url('/img/brands/zai.png'); }
+.b-mistral { background-image: url('/img/brands/mistral.png'); }
+.b-cursor { background-image: url('/img/brands/cursor.png'); }
+.b-github { background-image: url('/img/brands/github.png'); }
+.b-tencent { background-image: url('/img/brands/tencent.png'); }
+.b-bytedance { background-image: url('/img/brands/bytedance.png'); }
+
 .rk-mwrap {
   display: flex;
   align-items: flex-start;
@@ -2530,10 +2554,54 @@ body::before {
   max-width: 720px;
 }
 
+/* 统计芯片行 */
+.rkc-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.rkc-stat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border: 1px solid var(--border-color);
+  border-left: 3px solid var(--accent);
+  background: var(--bg-card);
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+}
+
+.rkc-stat b {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--accent-ink);
+  white-space: nowrap;
+}
+
+.rkc-stat span {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+  color: var(--text-tertiary);
+}
+
+[data-rain] .rkc-stat {
+  background: rgba(20, 22, 28, 0.52);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.rkc-chart-wrap { overflow-x: auto; }
+
 .rkc-chart {
   border: 1px solid var(--border-color);
   background: var(--bg-card);
   padding: 20px 22px;
+  min-width: 720px;
   clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%);
 }
 
@@ -2545,10 +2613,32 @@ body::before {
 
 .rkc-row {
   display: grid;
-  grid-template-columns: 20px 148px 1fr 72px 64px;
+  grid-template-columns: 20px 146px 1fr 66px 56px 54px 44px;
   gap: 10px;
   align-items: center;
   padding: 5px 0;
+}
+
+/* 表头行 */
+.rkc-row.rkc-head {
+  padding-bottom: 10px;
+  margin-bottom: 8px;
+  border-bottom: 2px solid var(--accent);
+}
+
+.rkc-head span {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  text-align: right;
+}
+
+.rkc-head .rkc-name,
+.rkc-head .rkc-axis {
+  text-align: left;
 }
 
 .rkc-name {
@@ -2594,12 +2684,65 @@ body::before {
   text-align: right;
 }
 
+.rkc-task {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-secondary);
+  text-align: right;
+}
+
+.rkc-eff {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-align: right;
+}
+
+/* 每分智能成本 < $10:绿色标注"单位智能便宜" */
+.rkc-eff.good { color: #3fb950; }
+
 .rkc-score {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   color: var(--accent-ink);
   text-align: right;
 }
+
+/* 解读区 */
+.rkc-reading {
+  margin-top: 18px;
+  border: 1px solid var(--border-color);
+  border-left: 3px solid var(--accent);
+  background: var(--bg-secondary);
+  padding: 16px 20px;
+}
+
+.rkc-reading-title {
+  font-family: var(--font-mono);
+  font-size: 0.71875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin-bottom: 10px;
+}
+
+.rkc-reading ul {
+  margin: 0;
+  padding-left: 1.3em;
+}
+
+.rkc-reading li {
+  font-size: 0.8125rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.rkc-reading li:last-child { margin-bottom: 0; }
+
+.rkc-reading strong { color: var(--text-primary); }
 
 .rkc-note {
   margin-top: 14px;
@@ -2611,8 +2754,9 @@ body::before {
 .rkc-note a { color: var(--accent-ink); }
 
 @media (max-width: 768px) {
-  .rkc-row { grid-template-columns: 20px 108px 1fr 62px 52px; gap: 8px; }
+  .rkc-row { grid-template-columns: 20px 118px 1fr 60px 52px 50px 40px; gap: 8px; }
   .rkc-chart { padding: 14px; }
+  .rkc-stat b { font-size: 1.0625rem; }
 }
 
 .rk-pt-plat { min-width: 130px; }

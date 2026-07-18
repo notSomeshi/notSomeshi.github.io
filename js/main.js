@@ -490,24 +490,24 @@ document.addEventListener('DOMContentLoaded', function () {
       return inst === 'arena' ? String(Math.round(v)) : v.toFixed(1);
     }
 
-    /* 厂商徽章:品牌色 + 字母,零外部依赖 */
+    /* 厂商徽章:本地化的官方 logo(见 /img/brands/),字母兜底 */
     var VENDOR_META = {
-      'Anthropic': ['#D97757', 'A'],
-      'OpenAI': ['#10A37F', 'O'],
-      'Google': ['#4285F4', 'G'],
-      'Moonshot': ['#7C5CFF', 'K'],
-      'xAI': ['#71767B', 'X'],
-      'DeepSeek': ['#4D6BFE', 'D'],
-      'Alibaba': ['#615CED', 'Q'],
-      'MiniMax': ['#F23F5D', 'MX'],
-      'Z.ai': ['#2F6BFF', 'Z'],
-      'Mistral': ['#FA520F', 'M']
+      'Anthropic': ['anthropic', 'A'],
+      'OpenAI': ['openai', 'O'],
+      'Google': ['google', 'G'],
+      'Moonshot': ['moonshot', 'K'],
+      'xAI': ['xai', 'X'],
+      'DeepSeek': ['deepseek', 'D'],
+      'Alibaba': ['qwen', 'Q'],
+      'MiniMax': ['minimax', 'MX'],
+      'Z.ai': ['zai', 'Z'],
+      'Mistral': ['mistral', 'M']
     };
 
     function icoHtml(vendor) {
       var meta = VENDOR_META[vendor];
       if (!meta) return '';
-      return '<span class="rk-ico" style="background:' + meta[0] + '">' + meta[1] + '</span>';
+      return '<span class="rk-ico b-' + meta[0] + '">' + meta[1] + '</span>';
     }
 
     function render(animate) {
