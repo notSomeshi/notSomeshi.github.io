@@ -2455,7 +2455,7 @@ body::before {
 }
 
 /* --- 订阅性价比表 --- */
-.rk-price-table { min-width: 1080px; }
+.rk-price-table { min-width: 1220px; }
 
 .rk-price-table th,
 .rk-price-table td {
@@ -2466,7 +2466,153 @@ body::before {
 
 .rk-price-table td {
   font-size: 0.8125rem;
-  line-height: 1.65;
+  line-height: 1.7;
+  padding: 14px;
+}
+
+/* 关键列宽(按列序:4 额度 / 5 极限 / 6 折算 / 7 API):价格数字列不换行、不挤压 */
+.rk-price-table td:nth-child(4) { min-width: 190px; }
+.rk-price-table td:nth-child(5) { min-width: 150px; }
+
+.rk-price-table td:nth-child(6),
+.rk-price-table td:nth-child(7) {
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.9;
+}
+
+.rk-price-table td:nth-child(6) { min-width: 165px; }
+.rk-price-table td:nth-child(7) { min-width: 215px; }
+
+/* --- 厂商图标(品牌色字母徽章,零外部依赖) --- */
+.rk-ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  color: #fff;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%);
+  margin-right: 8px;
+  vertical-align: -4px;
+  user-select: none;
+}
+
+.rk-mwrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+}
+
+.rk-mwrap .rk-ico { margin: 2px 0 0; }
+
+/* --- 成本对比图(同卷不同价) --- */
+.rkc { margin-top: 36px; }
+
+.rkc-title {
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.rkc-sub {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  margin-bottom: 20px;
+  max-width: 720px;
+}
+
+.rkc-chart {
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  padding: 20px 22px;
+  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%);
+}
+
+[data-rain] .rkc-chart {
+  background: rgba(20, 22, 28, 0.52);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+}
+
+.rkc-row {
+  display: grid;
+  grid-template-columns: 20px 148px 1fr 72px 64px;
+  gap: 10px;
+  align-items: center;
+  padding: 5px 0;
+}
+
+.rkc-name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rkc-bar {
+  height: 10px;
+  background: var(--bg-tertiary);
+  overflow: hidden;
+}
+
+.rkc-bar i {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  width: var(--w);
+}
+
+/* 板块切入时柱条从 0 生长 */
+.rk-board.is-active .rkc-bar i {
+  animation: rkcGrow 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes rkcGrow {
+  from { width: 0; }
+  to { width: var(--w); }
+}
+
+/* 最贵三名的柱条改警示红,强化对比 */
+.rkc-row.is-costly .rkc-bar i { background: #e5484d; }
+
+.rkc-cost {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: right;
+}
+
+.rkc-score {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--accent-ink);
+  text-align: right;
+}
+
+.rkc-note {
+  margin-top: 14px;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  line-height: 1.7;
+}
+
+.rkc-note a { color: var(--accent-ink); }
+
+@media (max-width: 768px) {
+  .rkc-row { grid-template-columns: 20px 108px 1fr 62px 52px; gap: 8px; }
+  .rkc-chart { padding: 14px; }
 }
 
 .rk-pt-plat { min-width: 130px; }
