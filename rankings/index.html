@@ -157,7 +157,8 @@
               <th class="rk-pt-models">可用模型</th>
               <th class="rk-pt-quota">额度制度</th>
               <th class="rk-pt-max">极限用量<span class="rk-unit">估算 ※</span></th>
-              <th class="rk-pt-api">API 对照价<span class="rk-unit">$/百万 token 输入/输出</span></th>
+              <th class="rk-pt-eff">会员折算价<span class="rk-unit">满负荷 $/M ※</span></th>
+              <th class="rk-pt-api">API 标价<span class="rk-unit">$/百万 token 输入/输出</span></th>
             </tr>
           </thead>
           <tbody>
@@ -168,7 +169,8 @@
               <td>Opus 4.8 · Fable 5 · Sonnet 5 · Haiku 4.5<br><em class="rk-pt-note">全档含 Claude Code</em></td>
               <td>5 小时滚动窗口 + 周上限;Max 档为 Pro 的 5× / 20×</td>
               <td>Max 20x ≈ 2–4 亿 token/月(Opus 档,Sonnet 档更高)</td>
-              <td>Opus $15 / $75<br>Sonnet $3 / $15</td>
+              <td>Max 20x ≈ $0.5–1 /M<br>Pro 轻用 ≈ $2–10 /M</td>
+              <td>Fable 5 $10 / $50<br>Opus 4.8 $15 / $75<br>Sonnet 5 $3 / $15<br>Haiku 4.5 $1 / $5</td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><a href="https://openai.com/chatgpt" target="_blank" rel="noopener">ChatGPT + Codex</a>
@@ -177,7 +179,8 @@
               <td>GPT-5.6 Luna / Terra / Sol · o4-mini<br><em class="rk-pt-note">含 Codex 云端代理</em></td>
               <td>对话近乎不限;Codex 云任务按配额,Pro 档解锁 Sol 高强度</td>
               <td>Pro ≈ 数亿 token/月(Codex 并行任务折算)</td>
-              <td>GPT-5.6 $1–5 / $30(按尺寸)</td>
+              <td>Pro 满负荷 ≈ $0.3–0.8 /M</td>
+              <td>5.6 Luna $1 / $8 · Terra $2.5 / $15<br>5.6 Sol $5 / $30 · o4-mini $1.1 / $4.4</td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><a href="https://cursor.com/" target="_blank" rel="noopener">Cursor</a>
@@ -186,7 +189,8 @@
               <td>Claude / GPT / Gemini / DeepSeek 等任选</td>
               <td>按模型算力计量;Ultra ≈ Pro 的 20×</td>
               <td>Ultra ≈ 月合 $400+ 模型用量(混合 3–6 亿 token)</td>
-              <td>超额部分按各家 API 价直转</td>
+              <td>Ultra ≈ $0.4–0.7 /M(混合)</td>
+              <td>按所选模型的官方 API 价直转</td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><a href="https://github.com/features/copilot" target="_blank" rel="noopener">GitHub Copilot</a>
@@ -195,6 +199,7 @@
               <td>GPT-5.6 · Claude Sonnet 5 · Gemini(按档)</td>
               <td>2026-06 起 AI Credits 制:补全免费不限,Agent/高级模型按 credits 计量</td>
               <td>补全 ∞;Pro+ ≈ 1500 次高级请求/月量级</td>
+              <td>补全趋近 $0<br>代理 ≈ $0.02–0.04 /请求</td>
               <td>无(纯订阅制)</td>
             </tr>
             <tr>
@@ -204,7 +209,8 @@
               <td>Gemini 3.1 Pro · 3 Flash · Deep Think</td>
               <td>档内高配额 + 图像/视频生成 credits,绑定云存储</td>
               <td>Ultra 的 Deep Think 配额为行业最高一档</td>
-              <td>3.1 Pro ≈ $1.25–2.5 / $10–15</td>
+              <td>Ultra ≈ $0.8–2 /M(Deep Think 档)</td>
+              <td>3.1 Pro ≈ $1.25–2.5 / $10–15<br>3 Flash ≈ $0.1 / $0.4</td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><a href="https://z.ai/" target="_blank" rel="noopener">GLM Coding Plan</a>
@@ -213,7 +219,8 @@
               <td>GLM-5.2 · GLM-5</td>
               <td>5 小时窗口按 prompt 计;官方对标"Claude Pro 3 倍用量、约 1/10 价格"</td>
               <td>Pro ≈ 数亿 token/月(自家模型)</td>
-              <td>≈ $0.6 / $2.2</td>
+              <td>Pro ≈ $0.05–0.15 /M(全场最低档)</td>
+              <td>GLM-5.2 ≈ $0.6 / $2.2</td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><a href="https://www.deepseek.com/" target="_blank" rel="noopener">DeepSeek(API 直连)</a>
@@ -222,18 +229,62 @@
               <td>V4 Flash · V4 Pro Max</td>
               <td>无窗口限制,纯按量;错峰时段半价</td>
               <td>取决于预算(无人为上限)</td>
+              <td>无会员,即 API 价(错峰 ≈ 半价)</td>
               <td>≈ $0.3 / $1.2(错峰更低)</td>
+            </tr>
+            <tr>
+              <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><a href="https://www.kimi.com/membership/pricing" target="_blank" rel="noopener">Kimi(月之暗面)</a>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Kimi 会员(四档)</strong><b>适合谁:</b>中文长文重度用户 + Agent 编程双修的人;四档音乐速度命名(Moderato→Vivace)对应用量逐级放大。<br><b>技术栈:</b>Kimi Code 兼容主流 CLI 编程工作流,长上下文啃论文/合同是招牌。<br><b>在用它做:</b>长文档研读、K3 攻坚推理、K2.6 开源版自部署。$19 的 Moderato 是中文侧对标 $20 档的直接答案。</span></span></td>
+              <td class="rk-pt-plans"><span class="rk-plan">Moderato $19</span><span class="rk-plan">Allegretto $39</span><span class="rk-plan rk-plan-x">Allegro $99</span><span class="rk-plan rk-plan-x">Vivace $199</span></td>
+              <td>K3 · K2.7 Code · K2.6(开源)</td>
+              <td>按档位放大用量;年付有折扣;Kimi Code 面向 CLI 编程</td>
+              <td>Vivace ≈ 数亿 token/月</td>
+              <td>Vivace 满负荷 ≈ $0.4–0.8 /M</td>
+              <td>K3 ≈ $2 / $8<br>K2.6 ≈ $0.6 / $2.5</td>
+            </tr>
+            <tr>
+              <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><a href="https://yuanbao.tencent.com/" target="_blank" rel="noopener">腾讯元宝 · 混元</a>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// 元宝 App + 混元 API</strong><b>适合谁:</b>微信生态用户、想要免费主力助手的轻量用户。<br><b>技术栈:</b>微信/小程序集成最顺,中文创作与检索增强见长。<br><b>在用它做:</b>日常问答、公众号内容、小程序 AI 功能。App 免费为主没有付费墙焦虑;Hy3 Preview 位居 OpenRouter 用量榜第二,API 侧需求是真实的。</span></span></td>
+              <td class="rk-pt-plans"><span class="rk-plan">App 免费为主</span></td>
+              <td>混元 Hy3 Preview · Hy3 Flash</td>
+              <td>App 侧配额宽松;API 按量计费</td>
+              <td>—(免费档无硬性承诺)</td>
+              <td>免费档即 $0</td>
+              <td>Hy3 ≈ $0.6 / $2.4<br>Hy3 Flash ≈ $0.15 / $0.6</td>
+            </tr>
+            <tr>
+              <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><a href="https://www.trae.ai/" target="_blank" rel="noopener">豆包 · Trae(字节)</a>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// 豆包 App + Trae IDE</strong><b>适合谁:</b>预算压到极限的学生党、国内网络环境的开发者。<br><b>技术栈:</b>Trae 是 Cursor 的字节平替($10 对 $20),内置多家模型可选,国内直连不折腾。<br><b>在用它做:</b>豆包做日常问答与语音陪伴,Trae 写课程项目、小工具与副业代码。Lite $3 档几乎是"零门槛试用 AI IDE"。</span></span></td>
+              <td class="rk-pt-plans"><span class="rk-plan">豆包免费</span><span class="rk-plan">Trae Lite $3</span><span class="rk-plan">Pro $10</span><span class="rk-plan">Pro+ $30</span><span class="rk-plan rk-plan-x">Ultra $100</span></td>
+              <td>Doubao 2.x 系列;Trae 内可选 Claude / GPT 等</td>
+              <td>Trae 按快速请求数分档;豆包 App 免费宽额</td>
+              <td>Trae Ultra ≈ 数亿 token/月(混合)</td>
+              <td>Trae Pro ≈ $0.1–0.3 /M(混合)</td>
+              <td>Doubao ≈ $0.15 / $0.6(火山引擎)</td>
+            </tr>
+            <tr>
+              <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><a href="https://qwen.ai/" target="_blank" rel="noopener">通义千问(Qwen)</a>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Qwen Chat + 开源全家桶</strong><b>适合谁:</b>要私有化部署开源权重的团队、阿里云生态用户。<br><b>技术栈:</b>HuggingFace 开源生态最全(从 0.5B 到 Max),微调与蒸馏底座首选之一。<br><b>在用它做:</b>私有化部署、领域微调、多语言应用。网页版免费即可日常使用,自部署后成本只剩算力。</span></span></td>
+              <td class="rk-pt-plans"><span class="rk-plan">Qwen Chat 免费为主</span></td>
+              <td>Qwen3.7 Max · 开源全系(可自部署)</td>
+              <td>网页宽松;API 走阿里云百炼按量</td>
+              <td>—(自部署无上限)</td>
+              <td>免费档 $0;自部署仅算力成本</td>
+              <td>Qwen3.7 Max ≈ $0.8 / $3.2<br>开源版自部署 $0</td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="rk-notes">
-        <p class="rk-note"><strong>※ 极限用量</strong>为按各家官方额度窗口满负荷折算的<em>数量级估算</em>,不同任务类型(补全/对话/Agent)折算差异极大,仅供比较参考,以官方说明为准。</p>
-        <p class="rk-note"><strong>价格快照 2026-07-17</strong>,来源:
+        <p class="rk-note"><strong>※ 极限用量</strong>为按各家官方额度窗口满负荷折算的<em>数量级估算</em>,不同任务类型(补全/对话/Agent)折算差异极大,仅供比较参考,以官方说明为准。<strong>会员折算价</strong> = 订阅月费 ÷ 估算极限用量,即"把额度用满时每百万 token 的实际成本"——用得越少,实际单价越高;与右侧 API 标价对照,可以直观看出会员在什么用量下开始划算。国产平台的 API 价按当期汇率近似换算为美元。</p>
+        <p class="rk-note"><strong>价格快照 2026-07-18</strong>,来源:
           <a href="https://www.aipricing.guru/subscriptions/" target="_blank" rel="noopener">AI Pricing Guru</a> ·
           <a href="https://spectrumailab.com/blog/ai-coding-tools-pricing-compared-2026" target="_blank" rel="noopener">SpectrumAI Lab(编程工具对比)</a> ·
           <a href="https://automationatlas.io/answers/github-copilot-pricing-explained-2026/" target="_blank" rel="noopener">Automation Atlas(Copilot Credits 制)</a> ·
-          <a href="https://www.nxcode.io/resources/news/claude-code-pricing-2026-free-api-costs-max-plan" target="_blank" rel="noopener">NxCode(Claude Code 定价)</a>。
+          <a href="https://www.ayautomate.com/blog/claude-fable-5-pricing-explained" target="_blank" rel="noopener">AY Automate(Fable 5 定价)</a> ·
+          <a href="https://www.kimi.com/help/membership/membership-pricing" target="_blank" rel="noopener">Kimi 官方定价</a> ·
+          <a href="https://aiidelist.com/blog/trae-ai-ide-pricing-2026" target="_blank" rel="noopener">AI IDE List(Trae 定价)</a> ·
+          <a href="https://pricepertoken.com/pricing-page/model/anthropic-claude-fable-5" target="_blank" rel="noopener">PricePerToken</a>。
           各平台促销与地区定价可能不同,购买前请以官网为准。</p>
       </div>
     </div>

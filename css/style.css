@@ -2455,7 +2455,7 @@ body::before {
 }
 
 /* --- 订阅性价比表 --- */
-.rk-price-table { min-width: 960px; }
+.rk-price-table { min-width: 1080px; }
 
 .rk-price-table th,
 .rk-price-table td {
