@@ -696,6 +696,52 @@ document.addEventListener('DOMContentLoaded', function () {
       plat.addEventListener('focus', function () { showTip(plat); });
       plat.addEventListener('blur', hideTip);
     });
+
+    /* --- Excel 式列宽拖拽(订阅性价比表) --- */
+    var priceTable = document.querySelector('.rk-price-table');
+    if (priceTable) {
+      var priceCols = priceTable.querySelectorAll('colgroup col');
+
+      function colW(col) {
+        return parseInt(col.style.width || col.getAttribute('width'), 10) || 150;
+      }
+
+      function syncTableWidth() {
+        var sum = 0;
+        priceCols.forEach(function (c) { sum += colW(c); });
+        priceTable.style.width = sum + 'px';
+      }
+
+      priceTable.querySelectorAll('thead th').forEach(function (th, i) {
+        var col = priceCols[i];
+        if (!col) return;
+        var grip = document.createElement('span');
+        grip.className = 'rk-resizer';
+        th.appendChild(grip);
+        grip.addEventListener('pointerdown', function (e) {
+          e.preventDefault();
+          var startX = e.clientX;
+          var startW = colW(col);
+          grip.classList.add('is-dragging');
+          try { grip.setPointerCapture(e.pointerId); } catch (err) {}
+          var move = function (ev) {
+            col.style.width = Math.max(90, startW + (ev.clientX - startX)) + 'px';
+            syncTableWidth();
+          };
+          var up = function () {
+            grip.classList.remove('is-dragging');
+            grip.removeEventListener('pointermove', move);
+            grip.removeEventListener('pointerup', up);
+            grip.removeEventListener('pointercancel', up);
+          };
+          grip.addEventListener('pointermove', move);
+          grip.addEventListener('pointerup', up);
+          grip.addEventListener('pointercancel', up);
+        });
+      });
+
+      syncTableWidth();
+    }
   }
 
   /* ==========================================

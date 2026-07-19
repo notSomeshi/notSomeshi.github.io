@@ -2455,35 +2455,71 @@ body::before {
 }
 
 /* --- 订阅性价比表 --- */
-.rk-price-table { min-width: 1220px; }
+/* 固定布局:列宽由 colgroup 控制,可被拖拽调整(Excel 式) */
+.rk-price-table {
+  table-layout: fixed;
+  width: 1520px;
+}
 
 .rk-price-table th,
 .rk-price-table td {
   text-align: left;
   white-space: normal;
   vertical-align: top;
+  overflow-wrap: break-word;
 }
 
 .rk-price-table td {
   font-size: 0.8125rem;
-  line-height: 1.7;
+  line-height: 1.75;
   padding: 14px;
 }
 
-/* 关键列宽(按列序:4 额度 / 5 极限 / 6 折算 / 7 API):价格数字列不换行、不挤压 */
-.rk-price-table td:nth-child(4) { min-width: 190px; }
-.rk-price-table td:nth-child(5) { min-width: 150px; }
+.rk-price-table th { position: relative; }
 
-.rk-price-table td:nth-child(6),
-.rk-price-table td:nth-child(7) {
-  white-space: nowrap;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  line-height: 1.9;
+/* 列宽拖拽手柄 */
+.rk-resizer {
+  position: absolute;
+  top: 0;
+  right: -5px;
+  bottom: 0;
+  width: 10px;
+  cursor: col-resize;
+  z-index: 3;
+  touch-action: none;
 }
 
-.rk-price-table td:nth-child(6) { min-width: 165px; }
-.rk-price-table td:nth-child(7) { min-width: 215px; }
+.rk-resizer::after {
+  content: '';
+  position: absolute;
+  top: 18%;
+  bottom: 18%;
+  right: 4px;
+  width: 2px;
+  background: var(--border-strong);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.rk-resizer:hover::after,
+.rk-resizer.is-dragging::after {
+  opacity: 1;
+  background: var(--accent);
+}
+
+.rk-drag-hint {
+  margin: 10px 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+}
+
+.rk-plan em {
+  font-style: normal;
+  font-size: 0.625rem;
+  color: var(--text-tertiary);
+}
 
 /* --- 厂商图标(品牌色字母徽章,零外部依赖) --- */
 .rk-ico {

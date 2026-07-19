@@ -150,6 +150,9 @@
     <div class="rk-board" data-board="pricing">
       <div class="rk-table-wrap">
         <table class="rk-table rk-price-table">
+          <colgroup>
+            <col width="150"><col width="205"><col width="185"><col width="330"><col width="205"><col width="185"><col width="260">
+          </colgroup>
           <thead>
             <tr>
               <th class="rk-pt-plat">平台<span class="rk-unit">悬停看解析</span></th>
@@ -165,116 +168,118 @@
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-anthropic">A</span><a href="https://claude.ai/" target="_blank" rel="noopener">Claude</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Claude Pro / Max</strong><b>适合谁:</b>重度 Agent 编程者、全栈独立开发者——想把"API 账单"包月封顶的人。<br><b>技术栈:</b>语言通吃,终端工作流(Claude Code)体验目前最强,长程重构与大型代码库尤佳。<br><b>在用它做:</b>跑数小时级代码代理、整仓重构、技术写作。x20 档是重度用户的最优解,轻用户买它纯浪费。</span></span></td>
-              <td class="rk-pt-plans"><span class="rk-plan">Pro $20</span><span class="rk-plan rk-plan-x">Max 5x $100</span><span class="rk-plan rk-plan-x">Max 20x $200</span></td>
-              <td>Opus 4.8 · Fable 5 · Sonnet 5 · Haiku 4.5<br><em class="rk-pt-note">全档含 Claude Code</em></td>
-              <td>5 小时滚动窗口 + 周上限;Max 档为 Pro 的 5× / 20×</td>
-              <td>Max 20x ≈ 2–4 亿 token/月(Opus 档,Sonnet 档更高)</td>
-              <td>Max 20x ≈ $0.5–1 /M<br>Pro 轻用 ≈ $2–10 /M</td>
-              <td>Fable 5 $10 / $50<br>Opus 4.8 $15 / $75<br>Sonnet 5 $3 / $15<br>Haiku 4.5 $1 / $5</td>
+              <td class="rk-pt-plans"><span class="rk-plan">Free $0</span><span class="rk-plan">Pro $20<em>(年付折 $17/月)</em></span><span class="rk-plan rk-plan-x">Max 5x $100</span><span class="rk-plan rk-plan-x">Max 20x $200</span><span class="rk-plan">Team $25–30/席</span><span class="rk-plan">Enterprise 定制</span></td>
+              <td>Opus 4.8 · Fable 5 · Sonnet 5 · Haiku 4.5<br><em class="rk-pt-note">Pro 及以上全档含 Claude Code(终端编程代理)</em></td>
+              <td>全档采用「5 小时滚动窗口 + 每周上限」双重限制,窗口内用完只能等重置:<br>· Free:每日少量消息,基础模型<br>· Pro ≈ 45 条消息 / 5 小时(网页、App、Claude Code 共用同一个池)<br>· Max 5x / 20x = Pro 的 5 倍 / 20 倍窗口额度<br>· 超限两条路:等窗口重置,或按 API 价加购(extra usage)</td>
+              <td>按 Opus 档满负荷估算:<br>· Pro ≈ 2000–5000 万 token/月<br>· Max 5x ≈ 1–2 亿/月<br>· Max 20x ≈ 2–4 亿/月<br>· 换用 Sonnet 约 ×5,Haiku 更高</td>
+              <td>· Pro ≈ $2–10 /M<br>· Max 5x ≈ $0.7–1.5 /M<br>· Max 20x ≈ $0.5–1 /M<br><em class="rk-pt-note">用得越少,实际单价越贵</em></td>
+              <td>Fable 5 $10 / $50<br>Opus 4.8 $15 / $75<br>Sonnet 5 $3 / $15<br>Haiku 4.5 $1 / $5<br><em class="rk-pt-note">规则:输出价约为输入 5 倍;提示缓存写入 1.25×、命中仅 0.1×;Batch 批处理五折;超 20 万 token 长上下文输入加价</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-openai">O</span><a href="https://openai.com/chatgpt" target="_blank" rel="noopener">ChatGPT + Codex</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// ChatGPT Plus / Pro</strong><b>适合谁:</b>"什么都要一点"的通才、产品经理、研究型用户;2026-07 新增的 $100 Pro 档就是冲着 Claude Max 用户来的。<br><b>技术栈:</b>生态插件与多模态最全;Codex 云端并行改代码适合多任务并行的团队节奏。<br><b>在用它做:</b>研究写作、数据分析、让 Codex 在云上并行修 bug。纯编程吞吐性价比略逊 Claude/Cursor 专档。</span></span></td>
-              <td class="rk-pt-plans"><span class="rk-plan">Plus $20</span><span class="rk-plan rk-plan-x">Pro $100</span></td>
-              <td>GPT-5.6 Luna / Terra / Sol · o4-mini<br><em class="rk-pt-note">含 Codex 云端代理</em></td>
-              <td>对话近乎不限;Codex 云任务按配额,Pro 档解锁 Sol 高强度</td>
-              <td>Pro ≈ 数亿 token/月(Codex 并行任务折算)</td>
-              <td>Pro 满负荷 ≈ $0.3–0.8 /M</td>
-              <td>5.6 Luna $1 / $8 · Terra $2.5 / $15<br>5.6 Sol $5 / $30 · o4-mini $1.1 / $4.4</td>
+              <td class="rk-pt-plans"><span class="rk-plan">Free $0</span><span class="rk-plan">Plus $20</span><span class="rk-plan rk-plan-x">Pro $100<em>(2026-07 新档)</em></span><span class="rk-plan">Team $25–30/席</span><span class="rk-plan">Enterprise 定制</span></td>
+              <td>GPT-5.6 Luna / Terra / Sol · o4-mini<br><em class="rk-pt-note">Plus 及以上含 Codex(云端编程代理)</em></td>
+              <td>· Free:基础模型限量对话<br>· Plus:日常对话高额度(默认 Terra 档);Sol 高强度推理限量;Codex 云任务约 30–150 个 / 5 小时<br>· Pro:对话近乎不限 + Sol 高强度 + Codex 高并发(可同时挂多个任务)<br>· o4-mini 各付费档近乎不限</td>
+              <td>· Plus ≈ 3000 万–1 亿 token/月<br>· Pro ≈ 2–6 亿/月(含 Codex 并行任务折算)</td>
+              <td>· Plus ≈ $0.5–2 /M<br>· Pro ≈ $0.3–0.8 /M</td>
+              <td>5.6 Luna $1 / $8<br>5.6 Terra $2.5 / $15<br>5.6 Sol $5 / $30<br>o4-mini $1.1 / $4.4<br><em class="rk-pt-note">规则:缓存命中的输入约 0.25×;Batch 批处理五折;推理过程产生的 token 按输出价计费</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-cursor">C</span><a href="https://cursor.com/" target="_blank" rel="noopener">Cursor</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Cursor Pro / Ultra</strong><b>适合谁:</b>IDE 重度用户、想在一个编辑器里自由切换各家前沿模型的人。<br><b>技术栈:</b>TypeScript/前端与全栈生态体验最好,tab 补全流独一档。<br><b>在用它做:</b>多文件重构、补全流开发、跨模型对比。官方自己承认重度 Agent 用户实际月花落在 $60–100——预算按这个准备。</span></span></td>
-              <td class="rk-pt-plans"><span class="rk-plan">Pro $20</span><span class="rk-plan">Pro+ $60</span><span class="rk-plan rk-plan-x">Ultra $200</span></td>
-              <td>Claude / GPT / Gemini / DeepSeek 等任选</td>
-              <td>按模型算力计量;Ultra ≈ Pro 的 20×</td>
-              <td>Ultra ≈ 月合 $400+ 模型用量(混合 3–6 亿 token)</td>
-              <td>Ultra ≈ $0.4–0.7 /M(混合)</td>
-              <td>按所选模型的官方 API 价直转</td>
+              <td class="rk-pt-plans"><span class="rk-plan">Hobby Free</span><span class="rk-plan">Pro $20</span><span class="rk-plan">Pro+ $60</span><span class="rk-plan rk-plan-x">Ultra $200</span><span class="rk-plan">Teams $40/席</span></td>
+              <td>Claude / GPT / Gemini / DeepSeek 等前沿模型任选</td>
+              <td>订阅额度按「等值模型调用量」计:Pro 约含 $20、Pro+ 约 $60、Ultra 约 $400+ 的等值调用:<br>· Tab 补全(打字时编辑器自动给出的灰色续写建议)付费档不限量<br>· Agent / 对话按所选模型的 API 价折算扣额度——选贵模型烧得快<br>· 额度耗尽:转按量付费(可设上限)或降为慢速</td>
+              <td>· Pro ≈ 3000 万–1 亿混合 token/月<br>· Ultra ≈ 3–6 亿/月(约合 $400+ 模型成本)</td>
+              <td>· Pro ≈ $0.3–0.7 /M<br>· Ultra ≈ $0.4–0.7 /M<br><em class="rk-pt-note">取决于所选模型贵贱</em></td>
+              <td>无自有模型<br><em class="rk-pt-note">超出订阅额度的部分按所选模型官方 API 价直转计费</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-github">GH</span><a href="https://github.com/features/copilot" target="_blank" rel="noopener">GitHub Copilot</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Copilot Pro / Pro+ / Max</strong><b>适合谁:</b>预算敏感的在职工程师、以补全为主的日常开发。<br><b>技术栈:</b>任何主流 IDE 与语言,GitHub 工作流(PR/Issue)集成最深。<br><b>在用它做:</b>无限补全 + 偶尔的 Agent 任务。$10 档仍是入门性价比之王;但 2026-06 改 AI Credits 后,重代理用户会很快撞上额度墙。</span></span></td>
-              <td class="rk-pt-plans"><span class="rk-plan">Free $0</span><span class="rk-plan">Pro $10</span><span class="rk-plan">Pro+ $39</span><span class="rk-plan rk-plan-x">Max $100</span></td>
-              <td>GPT-5.6 · Claude Sonnet 5 · Gemini(按档)</td>
-              <td>2026-06 起 AI Credits 制:补全免费不限,Agent/高级模型按 credits 计量</td>
-              <td>补全 ∞;Pro+ ≈ 1500 次高级请求/月量级</td>
-              <td>补全趋近 $0<br>代理 ≈ $0.02–0.04 /请求</td>
-              <td>无(纯订阅制)</td>
+              <td class="rk-pt-plans"><span class="rk-plan">Free $0</span><span class="rk-plan">Pro $10</span><span class="rk-plan">Pro+ $39</span><span class="rk-plan rk-plan-x">Max $100</span><span class="rk-plan">Business $19/席</span><span class="rk-plan">Enterprise $39/席</span></td>
+              <td>GPT-5.6 · Claude Sonnet 5 · Gemini 系列(可选档随订阅级别)</td>
+              <td>两种用量分开计(2026-06 起 AI Credits 新规):<br>· <strong>代码补全</strong> = 打字时 IDE 自动弹出的灰色续写建议,按 Tab 接受——付费档一律<strong>不限量</strong>(Free 档 2000 次/月)<br>· <strong>高级请求</strong> = 让 Agent 自动改代码、或指定 Claude / Gemini 等高级模型对话——按 Credits 计数:Free 50 · Pro ≈ 300 · Pro+ ≈ 1500 · Max ≈ 4000+ 次/月<br>· 超出可按约 $0.04/次 加购</td>
+              <td>· 补全:不限量<br>· 高级请求:见左侧各档次数上限</td>
+              <td>· 纯补全用户 ≈ $0(全含在月费里)<br>· 代理用户 ≈ $0.026–0.04 /次请求</td>
+              <td>无(纯订阅制,不单卖 token)</td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-google">G</span><a href="https://gemini.google/" target="_blank" rel="noopener">Gemini(Google AI)</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Google AI Pro / Ultra</strong><b>适合谁:</b>多模态与视频生成需求者、Google 全家桶深度用户。<br><b>技术栈:</b>安卓与 Workspace 集成最深,1M 上下文啃大文档一绝。<br><b>在用它做:</b>长文档/代码库分析、Veo 视频生成、NotebookLM 知识库。Ultra 贵但捆绑存储与全家桶,单为模型买不划算。</span></span></td>
-              <td class="rk-pt-plans"><span class="rk-plan">AI Pro $19.99</span><span class="rk-plan rk-plan-x">AI Ultra $249.99</span></td>
-              <td>Gemini 3.1 Pro · 3 Flash · Deep Think</td>
-              <td>档内高配额 + 图像/视频生成 credits,绑定云存储</td>
-              <td>Ultra 的 Deep Think 配额为行业最高一档</td>
-              <td>Ultra ≈ $0.8–2 /M(Deep Think 档)</td>
-              <td>3.1 Pro ≈ $1.25–2.5 / $10–15<br>3 Flash ≈ $0.1 / $0.4</td>
+              <td class="rk-pt-plans"><span class="rk-plan">Free $0</span><span class="rk-plan">AI Pro $19.99</span><span class="rk-plan rk-plan-x">AI Ultra $249.99</span><span class="rk-plan">学生/新户促销价常有</span></td>
+              <td>Gemini 3.1 Pro · 3 Flash · Deep Think(深度思考模式)</td>
+              <td>· Pro:3.1 Pro 高额度对话 + Deep Think 每日限量 + Veo 视频生成月度 credits + 2TB 云盘<br>· Ultra:Deep Think 高配额 + Veo 更大额度 + Agent 功能优先体验 + 30TB 云盘<br>· 图像 / 视频按 credits 单独扣,与对话额度分开计</td>
+              <td>对话侧宽松、官方无明确 token 承诺;创作类(视频/图像)以 credits 为准<br>· Ultra 的 Deep Think 配额为行业最高一档</td>
+              <td>捆绑云盘/视频等权益,难按 token 单独折算<br>· 纯 Deep Think 重度 ≈ $0.8–2 /M</td>
+              <td>3.1 Pro $1.25 / $10(≤20 万上下文)<br>3.1 Pro $2.5 / $15(>20 万)<br>3 Flash $0.1 / $0.4<br><em class="rk-pt-note">规则:缓存命中约 0.25×;Batch 批处理五折</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-zai">Z</span><a href="https://z.ai/" target="_blank" rel="noopener">GLM Coding Plan</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// GLM Coding Lite / Pro</strong><b>适合谁:</b>个人开发者、学生党、把预算压到极限的副业玩家。<br><b>技术栈:</b>兼容 Claude Code 的 CLI 接口,一行配置把后端换成 GLM;中文项目表现好。<br><b>在用它做:</b>批量脚本、中文应用、MVP 快速试错。80 分能力卖 3 美元——本板块存在的理由,也是价格战的风向标。</span></span></td>
-              <td class="rk-pt-plans"><span class="rk-plan">Lite $3</span><span class="rk-plan">Pro $15</span></td>
+              <td class="rk-pt-plans"><span class="rk-plan">Lite $3</span><span class="rk-plan">Pro $15</span><span class="rk-plan"><em>官方常有半价/首月促销</em></span></td>
               <td>GLM-5.2 · GLM-5</td>
-              <td>5 小时窗口按 prompt 计;官方对标"Claude Pro 3 倍用量、约 1/10 价格"</td>
-              <td>Pro ≈ 数亿 token/月(自家模型)</td>
-              <td>Pro ≈ $0.05–0.15 /M(全场最低档)</td>
-              <td>GLM-5.2 ≈ $0.6 / $2.2</td>
+              <td>5 小时滚动窗口,按 prompt(发送次数)计:<br>· Lite ≈ 120 条 / 5 小时(官方对标"Claude Pro 的 3 倍用量、约 1/10 价格")<br>· Pro ≈ 600 条 / 5 小时<br>· 兼容 Claude Code / Cline / Roo Code 等工具,改一行 API 地址即可接入</td>
+              <td>· Lite ≈ 0.6–1.5 亿 token/月<br>· Pro ≈ 3–8 亿/月(自家模型)</td>
+              <td>· Lite ≈ $0.02–0.05 /M<br>· Pro ≈ $0.03–0.1 /M<br><em class="rk-pt-note">全场最低档</em></td>
+              <td>GLM-5.2 ≈ $0.6 / $2.2<br>GLM-5 ≈ $0.4 / $1.6<br><em class="rk-pt-note">规则:缓存命中减免;并发上限随账户等级放宽</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-deepseek">D</span><a href="https://www.deepseek.com/" target="_blank" rel="noopener">DeepSeek(API 直连)</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// DeepSeek API</strong><b>适合谁:</b>自建工具链的工程师、海量批处理任务的团队——没有订阅,充值即用。<br><b>技术栈:</b>OpenAI 兼容接口即插即用,任何框架无缝切换。<br><b>在用它做:</b>批量翻译/摘要、Agent 底座、蒸馏数据。OpenRouter 流量之王(单家 16.3%),见本站《OpenRouter 上的权力转移》。</span></span></td>
-              <td class="rk-pt-plans"><span class="rk-plan">无订阅 · 按量付费</span></td>
-              <td>V4 Flash · V4 Pro Max</td>
-              <td>无窗口限制,纯按量;错峰时段半价</td>
-              <td>取决于预算(无人为上限)</td>
-              <td>无会员,即 API 价(错峰 ≈ 半价)</td>
-              <td>≈ $0.3 / $1.2(错峰更低)</td>
+              <td class="rk-pt-plans"><span class="rk-plan">无订阅 · 充值即用</span><span class="rk-plan">无最低充值门槛</span></td>
+              <td>V4 Flash · V4 Pro Max(均开源可自部署)</td>
+              <td>无窗口、无条数限制,纯按 token 量计费:<br>· 错峰时段(约北京时间 00:30–08:30)约五折<br>· 提示缓存命中的输入约 0.1×<br>· OpenAI 兼容接口,任何框架即插即用</td>
+              <td>无人为上限,取决于预算</td>
+              <td>无会员概念,即 API 价<br>· 错峰 + 缓存叠加可低至 ≈ $0.1 /M 级</td>
+              <td>V4 Pro Max ≈ $0.3 / $1.2<br>V4 Flash ≈ $0.1 / $0.4<br><em class="rk-pt-note">规则:错峰约五折;缓存命中 0.1×;开源自部署 $0</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-moonshot">K</span><a href="https://www.kimi.com/membership/pricing" target="_blank" rel="noopener">Kimi(月之暗面)</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Kimi 会员(四档)</strong><b>适合谁:</b>中文长文重度用户 + Agent 编程双修的人;四档音乐速度命名(Moderato→Vivace)对应用量逐级放大。<br><b>技术栈:</b>Kimi Code 兼容主流 CLI 编程工作流,长上下文啃论文/合同是招牌。<br><b>在用它做:</b>长文档研读、K3 攻坚推理、K2.6 开源版自部署。$19 的 Moderato 是中文侧对标 $20 档的直接答案。</span></span></td>
-              <td class="rk-pt-plans"><span class="rk-plan">Moderato $19</span><span class="rk-plan">Allegretto $39</span><span class="rk-plan rk-plan-x">Allegro $99</span><span class="rk-plan rk-plan-x">Vivace $199</span></td>
+              <td class="rk-pt-plans"><span class="rk-plan">Free $0</span><span class="rk-plan">Moderato $19</span><span class="rk-plan">Allegretto $39</span><span class="rk-plan rk-plan-x">Allegro $99</span><span class="rk-plan rk-plan-x">Vivace $199</span><span class="rk-plan"><em>年付分别省 $48/$96/$240/$480</em></span></td>
               <td>K3 · K2.7 Code · K2.6(开源)</td>
-              <td>按档位放大用量;年付有折扣;Kimi Code 面向 CLI 编程</td>
-              <td>Vivace ≈ 数亿 token/月</td>
-              <td>Vivace 满负荷 ≈ $0.4–0.8 /M</td>
-              <td>K3 ≈ $2 / $8<br>K2.6 ≈ $0.6 / $2.5</td>
+              <td>对话、Agent、Kimi Code 共用一个用量池,按档位倍增:<br>· Moderato 为基准档,Allegretto ≈ 2×,Allegro ≈ 5×,Vivace ≈ 10×+<br>· K3 深度推理单独限次,档位越高次数越多<br>· Kimi Code 面向 CLI 编程(类 Claude Code 工作流)</td>
+              <td>· Moderato ≈ 3000–8000 万 token/月<br>· Vivace ≈ 3–6 亿/月</td>
+              <td>· Moderato ≈ $0.3–0.6 /M<br>· Vivace ≈ $0.4–0.8 /M</td>
+              <td>K3 ≈ $2 / $8<br>K2.6 ≈ $0.6 / $2.5<br><em class="rk-pt-note">规则:缓存命中低价;K2.6 开源可自部署 $0</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-tencent">腾</span><a href="https://yuanbao.tencent.com/" target="_blank" rel="noopener">腾讯元宝 · 混元</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// 元宝 App + 混元 API</strong><b>适合谁:</b>微信生态用户、想要免费主力助手的轻量用户。<br><b>技术栈:</b>微信/小程序集成最顺,中文创作与检索增强见长。<br><b>在用它做:</b>日常问答、公众号内容、小程序 AI 功能。App 免费为主没有付费墙焦虑;Hy3 Preview 位居 OpenRouter 用量榜第二,API 侧需求是真实的。</span></span></td>
-              <td class="rk-pt-plans"><span class="rk-plan">App 免费为主</span></td>
+              <td class="rk-pt-plans"><span class="rk-plan">App 免费为主</span><span class="rk-plan">无公开付费墙</span></td>
               <td>混元 Hy3 Preview · Hy3 Flash</td>
-              <td>App 侧配额宽松;API 按量计费</td>
-              <td>—(免费档无硬性承诺)</td>
+              <td>· App 侧日常对话配额宽松<br>· 深度思考模式每日限次<br>· API 走腾讯云按量计费,新用户有免费赠量</td>
+              <td>—(免费档无硬性承诺,以实际体验为准)</td>
               <td>免费档即 $0</td>
-              <td>Hy3 ≈ $0.6 / $2.4<br>Hy3 Flash ≈ $0.15 / $0.6</td>
+              <td>Hy3 ≈ $0.6 / $2.4<br>Hy3 Flash ≈ $0.15 / $0.6<br><em class="rk-pt-note">规则:新户赠量;并发随云账号等级</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-bytedance">豆</span><a href="https://www.trae.ai/" target="_blank" rel="noopener">豆包 · Trae(字节)</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// 豆包 App + Trae IDE</strong><b>适合谁:</b>预算压到极限的学生党、国内网络环境的开发者。<br><b>技术栈:</b>Trae 是 Cursor 的字节平替($10 对 $20),内置多家模型可选,国内直连不折腾。<br><b>在用它做:</b>豆包做日常问答与语音陪伴,Trae 写课程项目、小工具与副业代码。Lite $3 档几乎是"零门槛试用 AI IDE"。</span></span></td>
-              <td class="rk-pt-plans"><span class="rk-plan">豆包免费</span><span class="rk-plan">Trae Lite $3</span><span class="rk-plan">Pro $10</span><span class="rk-plan">Pro+ $30</span><span class="rk-plan rk-plan-x">Ultra $100</span></td>
-              <td>Doubao 2.x 系列;Trae 内可选 Claude / GPT 等</td>
-              <td>Trae 按快速请求数分档;豆包 App 免费宽额</td>
-              <td>Trae Ultra ≈ 数亿 token/月(混合)</td>
-              <td>Trae Pro ≈ $0.1–0.3 /M(混合)</td>
-              <td>Doubao ≈ $0.15 / $0.6(火山引擎)</td>
+              <td class="rk-pt-plans"><span class="rk-plan">豆包 App 免费</span><span class="rk-plan">Trae Free $0</span><span class="rk-plan">Trae Lite $3</span><span class="rk-plan">Trae Pro $10</span><span class="rk-plan">Pro+ $30</span><span class="rk-plan rk-plan-x">Ultra $100</span></td>
+              <td>Doubao 2.x 系列;Trae 内可选 Claude / GPT 等前沿模型</td>
+              <td>Trae 按「快速请求」条数分档:<br>· Free 少量快速请求,用完进慢速队列(排队但不收费)<br>· Pro ≈ 600 次/月,Pro+ / Ultra 按倍数放大<br>· 选 Claude / GPT 等高级模型时按倍率加速扣减<br>· 豆包 App 免费且额度宽松</td>
+              <td>· Trae Pro ≈ 3000 万–1 亿混合 token/月<br>· Ultra ≈ 数亿/月</td>
+              <td>· Trae Pro ≈ $0.1–0.3 /M(混合)</td>
+              <td>Doubao Pro ≈ $0.15 / $0.6<br>Doubao Lite ≈ $0.05 / $0.2<br><em class="rk-pt-note">走火山引擎,常伴大额免费赠量</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-qwen">Q</span><a href="https://qwen.ai/" target="_blank" rel="noopener">通义千问(Qwen)</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Qwen Chat + 开源全家桶</strong><b>适合谁:</b>要私有化部署开源权重的团队、阿里云生态用户。<br><b>技术栈:</b>HuggingFace 开源生态最全(从 0.5B 到 Max),微调与蒸馏底座首选之一。<br><b>在用它做:</b>私有化部署、领域微调、多语言应用。网页版免费即可日常使用,自部署后成本只剩算力。</span></span></td>
               <td class="rk-pt-plans"><span class="rk-plan">Qwen Chat 免费为主</span></td>
-              <td>Qwen3.7 Max · 开源全系(可自部署)</td>
-              <td>网页宽松;API 走阿里云百炼按量</td>
-              <td>—(自部署无上限)</td>
+              <td>Qwen3.7 Max · 开源全系(0.5B 到 Max,可自部署)</td>
+              <td>· 网页 / App 宽松使用<br>· API 走阿里云百炼,按量计费,新户有赠额<br>· 开源版自部署后无任何额度概念</td>
+              <td>—(自部署无上限,只受算力约束)</td>
               <td>免费档 $0;自部署仅算力成本</td>
-              <td>Qwen3.7 Max ≈ $0.8 / $3.2<br>开源版自部署 $0</td>
+              <td>Qwen3.7 Max ≈ $0.8 / $3.2<br>开源版自部署 $0<br><em class="rk-pt-note">规则:百炼有 Batch/缓存折扣与新户免费额度</em></td>
             </tr>
           </tbody>
         </table>
       </div>
+      <p class="rk-drag-hint">// 列宽可调:像 Excel 一样,按住表头右缘的分隔线左右拖拽;窄屏下表格可横向滚动</p>
+
       <!-- 同卷不同价:统一评测的成本对比 -->
       <div class="rkc">
         <h3 class="rkc-title">// 同卷不同价:跑完同一套评测,各模型烧多少钱</h3>
