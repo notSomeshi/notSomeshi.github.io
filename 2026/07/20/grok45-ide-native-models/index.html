@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>Cline 与 Roo Code 实战：下一代 Vibe Coding 的工程范式 | ByteVibe</title>
+<title>Grok 4.5 与「IDE 原生」模型:当编辑器成为训练场 | ByteVibe</title>
 <meta name="description" content="一个关于 Vibe Coding、AI 辅助编程和现代开发实践的技术博客">
 <meta name="author" content="ByteVibe">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='0,0 100,0 100,78 78,100 0,100' fill='%23ffd802'/><text x='50' y='70' font-size='58' font-weight='800' font-family='ui-monospace,monospace' fill='%230d0d0f' text-anchor='middle'>B</text></svg>">
@@ -106,7 +106,7 @@
           <h3 class="sidebar-title">全部文章</h3>
           <ul class="sidebar-list">
             
-              <li class="sidebar-item ">
+              <li class="sidebar-item active">
                 <a href="/2026/07/20/grok45-ide-native-models/">Grok 4.5 与「IDE 原生」模型:当编辑器成为训练场</a>
               </li>
             
@@ -150,7 +150,7 @@
                 <a href="/2026/07/01/mcp-server-practical-recipes/">Model Context Protocol (MCP) 深度指南：连接你的 AI 与现实数据</a>
               </li>
             
-              <li class="sidebar-item active">
+              <li class="sidebar-item ">
                 <a href="/2026/07/01/advanced-vibe-coding-roo-clinic/">Cline 与 Roo Code 实战：下一代 Vibe Coding 的工程范式</a>
               </li>
             
@@ -186,27 +186,27 @@
       <div class="post-content-main">
         <header class="post-header">
           <div class="post-meta">
-            <time class="post-date">2026年07月01日</time>
+            <time class="post-date">2026年07月20日</time>
             
             <span class="post-meta-sep">·</span>
             <span class="post-category">
               
-                <a href="/categories/%E5%89%8D%E6%B2%BF%E5%AE%9E%E8%B7%B5/">前沿实践</a>
+                <a href="/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察</a>
               
             </span>
             
             <span class="post-meta-sep">·</span>
             <span class="reading-time">4 分钟阅读</span>
           </div>
-          <h1 class="post-title">Cline 与 Roo Code 实战：下一代 Vibe Coding 的工程范式</h1>
+          <h1 class="post-title">Grok 4.5 与「IDE 原生」模型:当编辑器成为训练场</h1>
           
           <div class="post-tags">
             
-              <a class="tag-pill" href="/tags/Roo-Code/">#Roo Code</a>
+              <a class="tag-pill" href="/tags/Grok/">#Grok</a>
             
-              <a class="tag-pill" href="/tags/Cline/">#Cline</a>
+              <a class="tag-pill" href="/tags/%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B/">#编程模型</a>
             
-              <a class="tag-pill" href="/tags/Vibe-Coding/">#Vibe Coding</a>
+              <a class="tag-pill" href="/tags/%E8%AE%AD%E7%BB%83%E6%96%B9%E6%B3%95/">#训练方法</a>
             
           </div>
           
@@ -216,65 +216,51 @@
         
         <details class="mobile-toc">
           <summary>目录 / Contents</summary>
-          <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%BC%95%E8%A8%80%EF%BC%9A%E5%BD%93-Vibe-Coding-%E8%B5%B0%E5%90%91%E5%B7%A5%E7%A8%8B%E5%8C%96"><span class="toc-list-text">引言：当 Vibe Coding 走向工程化</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81-Cline-%E4%B8%8E-Roo-Code%EF%BC%9AVS-Code-%E9%87%8C%E7%9A%84%E5%85%A8%E8%83%BD-Agent"><span class="toc-list-text">一、 Cline 与 Roo Code：VS Code 里的全能 Agent</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81-%E9%87%8A%E6%94%BE%E6%9C%80%E9%AB%98%E6%9D%83%E9%99%90%EF%BC%9AYOLO-%E6%A8%A1%E5%BC%8F%E4%B8%8E-Auto-approve"><span class="toc-list-text">二、 释放最高权限：YOLO 模式与 Auto-approve</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-1-YOLO-%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%B4%E8%B5%B7"><span class="toc-list-text">2.1 YOLO 模式的兴起</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81-%E6%89%93%E9%80%A0%E4%B8%AA%E6%80%A7%E5%8C%96-Agent%EF%BC%9A%E9%85%8D%E7%BD%AE-clinerules-%E4%B8%8E-roomodes"><span class="toc-list-text">三、 打造个性化 Agent：配置 .clinerules 与 .roomodes</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-1-%E4%BD%BF%E7%94%A8-clinerules-%E7%BA%A6%E6%9D%9F%E8%A1%8C%E4%B8%BA"><span class="toc-list-text">3.1 使用 .clinerules 约束行为</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-2-Roo-Code-%E4%B8%93%E5%B1%9E%EF%BC%9A%E7%94%A8-roomodes-%E5%88%92%E5%88%86%E8%A7%92%E8%89%B2"><span class="toc-list-text">3.2 Roo Code 专属：用 .roomodes 划分角色</span></a></li></ol></li></ol>
+          <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E2%80%9DIDE-%E5%8E%9F%E7%94%9F%E2%80%9D%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D"><span class="toc-list-text">一、”IDE 原生”是什么意思</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%9D%A1%E8%B7%AF%E6%9C%89%E6%95%88"><span class="toc-list-text">二、为什么这条路有效</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E8%BF%99%E5%B8%A6%E6%9D%A5%E4%B8%80%E4%B8%AA%E5%B0%B4%E5%B0%AC%E7%9A%84%E5%BE%AA%E7%8E%AF"><span class="toc-list-text">三、这带来一个尴尬的循环</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E8%B6%8B%E5%8A%BF%E5%A4%96%E6%8E%A8-%E4%B8%93%E7%94%A8%E5%8C%96%E7%9A%84%E4%B8%80%E4%B8%AA%E6%A0%B7%E6%9C%AC"><span class="toc-list-text">四、趋势外推:专用化的一个样本</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
         </details>
         
 
         <div class="post-body">
-          <h2 id="引言：当-Vibe-Coding-走向工程化"><a href="#引言：当-Vibe-Coding-走向工程化" class="headerlink" title="引言：当 Vibe Coding 走向工程化"></a>引言：当 Vibe Coding 走向工程化</h2><p>在 2025 年，“Vibe Coding”（氛围感编程）一词火遍开发者社区。它描述了一种“开发者只负责描述愿景、AI 负责写出全部代码，开发者靠着对代码运行氛围的直觉进行调试”的全新状态。</p>
-<p>而到了 2026 年，Cline（原名 Claude Dev）以及其社区最强分支 <strong>Roo Code</strong> 的爆发，正式将这种“氛围感编程”规范化、系统化，转变为一种高效率、高确定性的<strong>下一代 AI Agent 工程范式</strong>。</p>
-<hr>
-<h2 id="一、-Cline-与-Roo-Code：VS-Code-里的全能-Agent"><a href="#一、-Cline-与-Roo-Code：VS-Code-里的全能-Agent" class="headerlink" title="一、 Cline 与 Roo Code：VS Code 里的全能 Agent"></a>一、 Cline 与 Roo Code：VS Code 里的全能 Agent</h2><p>Cline 和 Roo Code 是 VS Code 插件生态中极其强悍的开源 Agent。与传统的 Chat 侧边栏不同，它们不仅拥有代码建议权，还被赋予了以下最高维度的操作权限：</p>
-<ol>
-<li><strong>本地文件系统操作</strong>：自主创建、读取、编辑、重命名和删除项目中的任意文件。</li>
-<li><strong>命令行终端执行</strong>：在编辑器后台直接运行 shell 终端，执行安装依赖、运行构建、启动测试或执行部署脚本。</li>
-<li><strong>内置浏览器环境（Browser Action）</strong>：当遇到前端界面渲染或端到端（E2E）测试时，它们甚至能隐式开启一个 Puppeteer 浏览器实例，截图并分析页面元素，自动排查渲染 Bug。</li>
+          <p>7 月 8 日,xAI 发布 Grok 4.5,一款用 Cursor 编程数据训练的编程强化模型。它最引人注意的不是分数(尽管分数不低),而是训练思路:<strong>不再用”通用互联网 + 代码仓库”泛泛训练,而是直接对着一个真实 IDE 的使用数据做优化。</strong>这可能是编程模型演进的一个转折点。</p>
+<span id="more"></span>
+
+<h2 id="一、”IDE-原生”是什么意思"><a href="#一、”IDE-原生”是什么意思" class="headerlink" title="一、”IDE 原生”是什么意思"></a>一、”IDE 原生”是什么意思</h2><p>过去的编程模型,数据主力是 GitHub 上的静态代码——写好的、已提交的、结果正确的代码。但真实开发不是这样的:开发者是在<strong>编辑器里跳来跳去、反复试错、根据报错回改</strong>。静态代码只记录了”最终答案”,丢失了”怎么想出来的”这个过程。</p>
+<p>Grok 4.5 的路子(据 xAI 与相关报道)是把训练锚定在 IDE 的交互轨迹上:补全被接受还是拒绝、Agent 改完代码后测试是否通过、开发者如何在多文件间来回修改。**这等于让模型见识”解题过程”而非只看”标准答案”**——更接近人类程序员真正在做的事。效果直接反映在分数上:Grok 4.5 的编程与 SWE-bench 分较 4.1 大幅跃升,挤进第一梯队(已并入本站<a href="/rankings/">模型天梯</a>)。</p>
+<h2 id="二、为什么这条路有效"><a href="#二、为什么这条路有效" class="headerlink" title="二、为什么这条路有效"></a>二、为什么这条路有效</h2><p><strong>其一,过程数据稀缺且珍贵。</strong> 全世界的静态代码是有限的、且大多被各家爬完了(数据枯竭是当前训练的真实瓶颈)。而”开发者与 AI 协作的交互轨迹”是一座还在持续生产的新矿——每一次补全的接受&#x2F;拒绝,都是一个带标签的偏好信号。谁掌握 IDE,谁就掌握这座矿。</p>
+<p><strong>其二,反馈信号可验证。</strong> 代码有个别的领域没有的好处:<strong>对错可以自动判定</strong>(编译、跑测试)。这让强化学习有了干净的奖励函数——模型改完,测试绿了就是正反馈。IDE 恰好是这个反馈闭环发生的地方。</p>
+<p><strong>其三,分布对齐。</strong> 模型最终要在 IDE 里被使用,那么在 IDE 数据上训练,就消除了”训练场景”与”使用场景”的错位。这也是本站 METR 相关讨论(<a href="/2026/07/08/ai-dividend-paradox/">《AI 红利悖论》</a>)里提到的痛点——通用模型在真实工作流里反而拖慢资深开发者,部分正源于这种错位。</p>
+<h2 id="三、这带来一个尴尬的循环"><a href="#三、这带来一个尴尬的循环" class="headerlink" title="三、这带来一个尴尬的循环"></a>三、这带来一个尴尬的循环</h2><p>但”IDE 即训练场”也埋着一个值得警惕的结构:<strong>数据护城河与产品护城河合流了。</strong></p>
+<ul>
+<li>Cursor 有海量用户交互数据 → 训练出更强的编程模型 → 更强的模型吸引更多用户 → 更多数据。这是个正反馈飞轮。</li>
+<li>对没有自己 IDE 的模型厂商,这是坏消息:你可以追平算法,但追不平别人用户每天产生的独家交互数据。</li>
+<li>对开发者,则要意识到:<strong>你在 AI 编辑器里的每一次操作,都是在为下一代模型标注数据。</strong>这既是你免费享受产品的对价,也是一个隐私与数据归属的问题——你的代码习惯,正在成为别人的训练资产。</li>
+</ul>
+<h2 id="四、趋势外推-专用化的一个样本"><a href="#四、趋势外推-专用化的一个样本" class="headerlink" title="四、趋势外推:专用化的一个样本"></a>四、趋势外推:专用化的一个样本</h2><p>Grok 4.5 是<a href="/2026/07/20/frontier-convergence-2026/">前沿收敛</a>大背景下”专用化突围”的典型样本。当通用能力拉不开差距,<strong>在一个垂直场景里用独家数据做深</strong>,就成了后来者弯道超车的可行路径:</p>
+<ul>
+<li>编程 → 用 IDE 交互数据(Grok 4.5 &#x2F; Cursor)</li>
+<li>长文档 → 用超长上下文与检索数据(Kimi)</li>
+<li>视觉&#x2F;UI → 用截图与网页渲染数据(Gemini)</li>
+</ul>
+<p>对使用者的启示很实际:<strong>选编程模型时,”它是不是在真实开发数据上训练过”会越来越重要</strong>,而不只是看它 SWE-bench 考了多少分。同一个分数,一个来自刷题、一个来自真实工作流,在你的项目里表现可能天差地别。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li>llm-stats,<a target="_blank" rel="noopener" href="https://llm-stats.com/ai-news">LLM News Today (July 2026) – AI Model Releases</a></li>
+<li>Fello AI,<a target="_blank" rel="noopener" href="https://felloai.com/best-ai-models/">Best AI Models in July 2026: ChatGPT, Claude, Gemini &amp; Grok</a></li>
+<li>Raulji Technologies,<a target="_blank" rel="noopener" href="https://www.rauljitechnologies.com/blog/july-2026-ai-model-wave/">The July 2026 AI Model Wave: What It Means for You</a></li>
+<li>METR,<a target="_blank" rel="noopener" href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/">Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity</a></li>
 </ol>
-<hr>
-<h2 id="二、-释放最高权限：YOLO-模式与-Auto-approve"><a href="#二、-释放最高权限：YOLO-模式与-Auto-approve" class="headerlink" title="二、 释放最高权限：YOLO 模式与 Auto-approve"></a>二、 释放最高权限：YOLO 模式与 Auto-approve</h2><p>在默认情况下，Cline 的每一次写入或终端命令执行都需要人类开发者点击 “Approve” 按钮。但这极大地打断了编程的流畅度。</p>
-<h3 id="2-1-YOLO-模式的兴起"><a href="#2-1-YOLO-模式的兴起" class="headerlink" title="2.1 YOLO 模式的兴起"></a>2.1 YOLO 模式的兴起</h3><p>通过开启 <strong>Auto-approve（自动授权）</strong> 选项（在 Roo Code 中常被称为 YOLO 模式），你可以预先给 Agent 授信。例如：</p>
-<ul>
-<li>允许其自由读取所有文件。</li>
-<li>允许其自动运行非破坏性的终端命令（如 <code>npm run test</code>、<code>vitest</code> 等）。</li>
-<li>允许其在特定目录下自由写入代码。</li>
-</ul>
-<p>在这种模式下，Agent 可以自顾自地进行几十轮“编写 - 编译 - 报错 - 修复 - 再测试”的自主闭环，直到达成最终交付标准。</p>
 <blockquote>
-<p>[!WARNING]<br>开启 YOLO 模式虽然效率极高，但也存在一定的安全风险。切勿在没有 Git 保护的本地未提交工作区，或者在生产数据库环境变量直接暴露的环境下给 Agent 开启全局 <code>Auto-approve</code> 终端执行权限。</p>
+<p>本文由 ByteVibe 撰写(AI 辅助研究整理)。文中对训练方法的描述基于公开报道与合理推断,具体实现以 xAI 官方说明为准;版权归原作者所有。</p>
 </blockquote>
-<hr>
-<h2 id="三、-打造个性化-Agent：配置-clinerules-与-roomodes"><a href="#三、-打造个性化-Agent：配置-clinerules-与-roomodes" class="headerlink" title="三、 打造个性化 Agent：配置 .clinerules 与 .roomodes"></a>三、 打造个性化 Agent：配置 <code>.clinerules</code> 与 <code>.roomodes</code></h2><p>如何让 Agent 表现得像一个经验丰富的团队老手，而不是经常犯低级错误的实习生？答案就在于<strong>自定义规则</strong>。</p>
-<h3 id="3-1-使用-clinerules-约束行为"><a href="#3-1-使用-clinerules-约束行为" class="headerlink" title="3.1 使用 .clinerules 约束行为"></a>3.1 使用 <code>.clinerules</code> 约束行为</h3><p>在项目根目录下创建一个 <code>.clinerules</code> 文件。Agent 在每次启动会话时都会强制阅读该文件。</p>
-<pre><code class="hljs markdown"><span class="hljs-section"># Cline Rules for This Project</span>
-
-<span class="hljs-bullet">-</span> <span class="hljs-strong">**Tech Stack**</span>: Next.js (App Router), TailwindCSS, Prisma, TypeScript.
-<span class="hljs-bullet">-</span> <span class="hljs-strong">**State Management**</span>: Prefer React Context for simple state, Zustand for complex global state.
-<span class="hljs-bullet">-</span> <span class="hljs-strong">**Git Commit Guidelines**</span>: 
-<span class="hljs-bullet">  -</span> Every time a task is completed, offer to commit changes with a clean &#x27;feat:&#x27; or &#x27;fix:&#x27; conventional commit message.
-<span class="hljs-bullet">-</span> <span class="hljs-strong">**Safety**</span>: Never run <span class="hljs-code">`rm -rf`</span> commands under any circumstance.</code></pre>
-
-<h3 id="3-2-Roo-Code-专属：用-roomodes-划分角色"><a href="#3-2-Roo-Code-专属：用-roomodes-划分角色" class="headerlink" title="3.2 Roo Code 专属：用 .roomodes 划分角色"></a>3.2 Roo Code 专属：用 <code>.roomodes</code> 划分角色</h3><p>Roo Code 引入了更高级的 <strong>Custom Modes（自定义模式）</strong>。你可以通过 <code>.roomodes</code> 配置定义不同的 Agent 角色，并在侧边栏下拉菜单中随意切换。例如：</p>
-<ul>
-<li>**Architect (架构师模式)**：专注于系统设计，只允许编写 <code>.md</code> 设计文档，不允许修改业务代码。</li>
-<li>**Code Monkey (代码搬砖模式)**：拥有完全的写权限，必须严格遵守架构师留下的 Spec。</li>
-<li>**QA Tester (测试专家模式)**：专注于编写测试用例，运行测试覆盖率分析。</li>
-</ul>
-<p>通过这种细粒度的规则配置，Vibe Coding 不再是杂乱无章的撞运气，而是成为了一套井然有序的现代化软件工程流水线。</p>
 
         </div>
         
         <footer class="post-footer">
           <nav class="post-nav">
             
-            <a class="post-nav-item post-nav-prev" href="/2026/07/01/mcp-server-practical-recipes/">
-              <span class="post-nav-label">← 上一篇</span>
-              <span class="post-nav-title">Model Context Protocol (MCP) 深度指南：连接你的 AI 与现实数据</span>
-            </a>
             
-            
-            <a class="post-nav-item post-nav-next" href="/2026/04/01/claude-code-complete-guide/">
+            <a class="post-nav-item post-nav-next" href="/2026/07/20/frontier-convergence-2026/">
               <span class="post-nav-label">下一篇 →</span>
-              <span class="post-nav-title">Claude Code 从入门到精通：面向工程师与产品经理的 AI 编程完全指南</span>
+              <span class="post-nav-title">前沿收敛:为什么 2026 年榜单顶部挤成了一团</span>
             </a>
             
           </nav>
@@ -286,7 +272,7 @@
         
           <div class="toc-sticky">
             <h3 class="toc-title">目录大纲</h3>
-            <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%BC%95%E8%A8%80%EF%BC%9A%E5%BD%93-Vibe-Coding-%E8%B5%B0%E5%90%91%E5%B7%A5%E7%A8%8B%E5%8C%96"><span class="toc-list-text">引言：当 Vibe Coding 走向工程化</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81-Cline-%E4%B8%8E-Roo-Code%EF%BC%9AVS-Code-%E9%87%8C%E7%9A%84%E5%85%A8%E8%83%BD-Agent"><span class="toc-list-text">一、 Cline 与 Roo Code：VS Code 里的全能 Agent</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81-%E9%87%8A%E6%94%BE%E6%9C%80%E9%AB%98%E6%9D%83%E9%99%90%EF%BC%9AYOLO-%E6%A8%A1%E5%BC%8F%E4%B8%8E-Auto-approve"><span class="toc-list-text">二、 释放最高权限：YOLO 模式与 Auto-approve</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#2-1-YOLO-%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%B4%E8%B5%B7"><span class="toc-list-text">2.1 YOLO 模式的兴起</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81-%E6%89%93%E9%80%A0%E4%B8%AA%E6%80%A7%E5%8C%96-Agent%EF%BC%9A%E9%85%8D%E7%BD%AE-clinerules-%E4%B8%8E-roomodes"><span class="toc-list-text">三、 打造个性化 Agent：配置 .clinerules 与 .roomodes</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-1-%E4%BD%BF%E7%94%A8-clinerules-%E7%BA%A6%E6%9D%9F%E8%A1%8C%E4%B8%BA"><span class="toc-list-text">3.1 使用 .clinerules 约束行为</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#3-2-Roo-Code-%E4%B8%93%E5%B1%9E%EF%BC%9A%E7%94%A8-roomodes-%E5%88%92%E5%88%86%E8%A7%92%E8%89%B2"><span class="toc-list-text">3.2 Roo Code 专属：用 .roomodes 划分角色</span></a></li></ol></li></ol>
+            <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E2%80%9DIDE-%E5%8E%9F%E7%94%9F%E2%80%9D%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D"><span class="toc-list-text">一、”IDE 原生”是什么意思</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%9D%A1%E8%B7%AF%E6%9C%89%E6%95%88"><span class="toc-list-text">二、为什么这条路有效</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E8%BF%99%E5%B8%A6%E6%9D%A5%E4%B8%80%E4%B8%AA%E5%B0%B4%E5%B0%AC%E7%9A%84%E5%BE%AA%E7%8E%AF"><span class="toc-list-text">三、这带来一个尴尬的循环</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E8%B6%8B%E5%8A%BF%E5%A4%96%E6%8E%A8-%E4%B8%93%E7%94%A8%E5%8C%96%E7%9A%84%E4%B8%80%E4%B8%AA%E6%A0%B7%E6%9C%AC"><span class="toc-list-text">四、趋势外推:专用化的一个样本</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
           </div>
         
       </aside>
