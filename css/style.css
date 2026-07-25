@@ -2730,6 +2730,30 @@ body::before {
 /* 最贵三名的柱条改警示红,强化对比 */
 .rkc-row.is-costly .rkc-bar i { background: #e5484d; }
 
+/* 性价比突出者:整行黄底强调 */
+.rkc-row.is-star {
+  background: var(--accent-dim);
+  margin: 2px -8px;
+  padding: 5px 8px;
+  border-left: 2px solid var(--accent);
+}
+
+.rkc-row.is-star .rkc-name { font-weight: 700; }
+
+.rkc-row.is-star .rkc-eff { color: var(--accent-ink); }
+
+.rkc-tag {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  padding: 1px 5px;
+  margin-left: 6px;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  vertical-align: 1px;
+}
+
 .rkc-cost {
   font-family: var(--font-mono);
   font-size: 0.75rem;
