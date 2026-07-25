@@ -291,8 +291,14 @@
 
       <!-- 同卷不同价:统一评测的成本对比 -->
       <div class="rkc">
-        <h3 class="rkc-title">// 同卷不同价:跑完同一套评测,各模型烧多少钱</h3>
-        <p class="rkc-sub">Artificial Analysis 让所有模型跑<strong>同一套智能指数题集</strong>(约 2,160 道题,覆盖推理/编程/数学/知识),按各家 API 的输入、缓存、推理、输出 token 逐项实际计费。这是目前最接近"完成同一目标要花多少钱"的公开口径——它同时反映模型的<strong>单价</strong>和<strong>话多不多</strong>(token 效率)。</p>
+        <h3 class="rkc-title">// 同卷不同价:跑完同一套评测,各模型烧多少钱<span class="rkc-effort-badge">MAX EFFORT</span></h3>
+        <p class="rkc-sub">Artificial Analysis 让所有模型跑<strong>同一套智能指数题集</strong>,按各家 API 的输入、缓存、推理、输出 token 逐项实际计费。这是目前最接近"完成同一目标要花多少钱"的公开口径——它同时反映模型的<strong>单价</strong>和<strong>话多不多</strong>(token 效率)。</p>
+        <div class="rkc-effort">
+          <p class="rkc-effort-title">⚠ 重要前提:下表全部是「最高 effort」下的成绩与账单</p>
+          <p>AA 对推理模型采用厂商披露的<strong>最高推理强度</strong>(榜单条目标注为 Adaptive Reasoning, <strong>Max Effort</strong>;同一模型的不同档位会被列为独立条目,例如 GPT-5.6 Sol (max) 59 分与 (xhigh) 58 分)。</p>
+          <p><strong>effort 不改变每 token 单价,改变的是一道题烧掉多少 token</strong>:高 effort 让模型花更多 token 规划、自检、返工。以 Claude Opus 5 的五档(low / medium / high / xhigh / max)为例,<strong>low 到 max 的每次成本差约 3 倍</strong>,high 约为 medium 的 2 倍。</p>
+          <p class="rkc-effort-key">💡 因此下表是<strong>成本上限</strong>,不是日常开销。Anthropic 官方反而建议广泛使用 low/medium——FrontierCode 基准显示 <strong>Opus 5 在 medium effort 就达到编程峰值</strong>(主集 53.4%、扩展集 63.6%),再往上收益递减。<strong>日常按 medium 用,账单可能只有表中的一半,编程质量还未必更差。</strong></p>
+        </div>
         <div class="rkc-stats">
           <div class="rkc-stat"><b>23×</b><span>评测总成本极差<br>$170 → $3,850</span></div>
           <div class="rkc-stat"><b>22.5 分</b><span>智能指数跨度<br>38.9 → 61.4</span></div>
@@ -327,9 +333,10 @@
             <li><strong>顶部智能的边际价格陡增。</strong>从 GLM-5.2 的 48.3 分爬到 Opus 4.8 的 61.4 分,每分成本从 $5.6 涨到 $62.7,涨了 11 倍——"最后 13 分"是全场最贵的商品。这正是「批量任务用开源、攻坚任务上旗舰」分层的定量依据(参见本站《OpenRouter 上的权力转移》)。</li>
             <li><strong>⭐ 新格局:Opus 5 重新定义了旗舰性价比。</strong>2026-07-24 发布的 Claude Opus 5 以 $5/$25 的定价(Opus 4.8 的三分之一)拿到 60.8 分,单位智能成本 <strong>$22.2/分</strong>——比 Fable 5($40.4)便宜 45%,比 Opus 4.8($62.7)便宜 65%,却只差 0.6 分。这是目前 <strong>60 分以上档位里唯一低于 $25/分的模型</strong>,旗舰档的性价比标杆已被它改写。</li>
             <li><strong>甜点区在哪:</strong>50 分以上阵营里,DeepSeek-V4($7.8/分)和 Qwen3.7 Max($10.0/分)是单位智能最便宜的选择;需要 60 分级能力时,Opus 5($22.2/分)现在是无争议的首选。</li>
+            <li><strong>省钱的第二个旋钮:调低 effort。</strong>换模型之外,还有一条被忽视的省钱路径——<strong>同一个模型降一档推理强度</strong>。表中数字是 max 档的上限,而 low→max 成本差约 3 倍。对多数日常任务(补全、常规改代码、问答),medium 甚至 low 就够;Anthropic 官方也是这么建议的。<strong>先调 effort,再考虑换更便宜的模型</strong>,往往能在不牺牲质量的前提下砍掉一半账单。</li>
           </ul>
         </div>
-        <p class="rkc-note">口径:<a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking" target="_blank" rel="noopener">Artificial Analysis「Cost to Run Intelligence Index」</a>——按各模型 API 的输入/缓存/推理/输出 token 实际计费汇总。实测锚点:Kimi K3 全套 $2,709.75;Claude Opus 4.8 为最贵档,约 $1.78/题;「$/题」按全卷约 2,160 题折算。其余为按各模型 API 定价与耗token量折算的估算值,数据快照 2026-07-25,以 <a href="https://artificialanalysis.ai/models" target="_blank" rel="noopener">AA 官网实时数据</a>为准。</p>
+        <p class="rkc-note">口径:<a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking" target="_blank" rel="noopener">Artificial Analysis「Cost to Run Intelligence Index」</a>(当前为 <a href="https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-1" target="_blank" rel="noopener">v4.1</a>,含 GDPval-AA v2、Terminal-Bench v2.1、SciCode、HLE、GPQA Diamond 等 9 项评测)——按各模型 API 的输入/缓存/推理/输出 token 实际计费汇总,<strong>推理模型均取厂商披露的最高 effort 设置</strong>。实测锚点:Kimi K3 全套 $2,709.75;Claude Opus 4.8 约 $1.78/题;「$/题」按全卷题量折算。其余为按各模型 API 定价与耗 token 量折算的估算值,数据快照 2026-07-25,以 <a href="https://artificialanalysis.ai/models" target="_blank" rel="noopener">AA 官网实时数据</a>为准。effort 档位说明参考 <a href="https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5" target="_blank" rel="noopener">Anthropic 官方文档</a>。</p>
       </div>
 
       <div class="rk-notes">

@@ -2649,6 +2649,54 @@ body::before {
   -webkit-backdrop-filter: blur(10px);
 }
 
+/* effort 前提说明块 */
+.rkc-effort {
+  border: 1px solid var(--border-color);
+  border-left: 3px solid #e5484d;
+  background: var(--bg-secondary);
+  padding: 16px 20px;
+  margin-bottom: 18px;
+}
+
+.rkc-effort-title {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #e5484d;
+  margin-bottom: 10px;
+}
+
+.rkc-effort p {
+  font-size: 0.8125rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.rkc-effort p:last-child { margin-bottom: 0; }
+
+.rkc-effort strong { color: var(--text-primary); }
+
+.rkc-effort-key {
+  padding: 10px 14px;
+  background: var(--accent-dim);
+  border-left: 2px solid var(--accent);
+}
+
+.rkc-effort-badge {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 2px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  background: #e5484d;
+  color: #fff;
+  vertical-align: 2px;
+}
+
 .rkc-chart-wrap { overflow-x: auto; }
 
 .rkc-chart {
