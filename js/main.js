@@ -434,13 +434,11 @@ document.addEventListener('DOMContentLoaded', function () {
         ]
       },
       {
-        id: 'budget', title: '每月预算大概多少?', hint: '按人民币约 7 倍换算',
+        id: 'rhythm', title: '你的使用节奏是哪种?', hint: '这决定「包月」还是「按量」更划算',
         options: [
-          { v: 0, label: '尽量免费', desc: '$0' },
-          { v: 10, label: '$10 以内', desc: '约 ¥70' },
-          { v: 20, label: '$20 左右', desc: '约 ¥140,最主流的档位' },
-          { v: 100, label: '$50–100', desc: '专业用户档' },
-          { v: 9999, label: '不设上限', desc: '要最好的' }
+          { v: 'steady', label: '每天都用,比较平均', desc: '天天要干活,用量稳定' },
+          { v: 'burst', label: '阶段性集中猛用', desc: '几天赶一个大项目,之后闲很久' },
+          { v: 'occasional', label: '想起来才用', desc: '没有规律,偶尔一次' }
         ]
       },
       {
@@ -555,62 +553,99 @@ document.addEventListener('DOMContentLoaded', function () {
       if (nextBtn) nextBtn.addEventListener('click', function () { state.step++; renderQuestion(); });
     }
 
+    /* ---------- 费用计算 ----------
+       按量付费:按输入 70% / 输出 30% 的典型比例估算实际月账单
+       订阅制:固定月费 */
+    function monthlyCost(plan, need) {
+      if (!plan.payg) return plan.price;
+      var mTok = need / 1000000;
+      return mTok * (plan.priceIn * 0.7 + plan.priceOut * 0.3);
+    }
+
+    function fmtCost(c) {
+      if (c === 0) return '免费';
+      if (c < 1) return '< $1';
+      return '$' + (c < 10 ? c.toFixed(1) : Math.round(c));
+    }
+
     /* ---------- 推荐算法 ---------- */
     function score(plan) {
       var a = state.answers;
       var reasons = [], why = [];
 
-      // 硬性过滤
-      var budget = a.budget != null ? a.budget : 9999;
-      if (plan.price > budget) return null;
+      // 硬性过滤(不再按预算过滤——费用在结果里如实列出,由用户自己权衡)
       if (a.region === 'cn' && plan.tags.indexOf('cn-direct') === -1) return null;
       var prefs = a.prefs || [];
       if (prefs.indexOf('openweight') !== -1 && plan.tags.indexOf('openweight') === -1) return null;
 
       var need = state.calcTokens || USAGE_TOKENS[a.usage] || 30000000;
+      var rhythm = a.rhythm || 'steady';
+      var cost = monthlyCost(plan, need);
 
-      // 1) 用量匹配 40 分
+      // 1) 用量与节奏匹配 40 分
       var quotaScore, ratio = need / plan.tokens;
       if (plan.payg) {
-        quotaScore = 34; // 按量付费不会撞墙,但要自己搭工具
-        why.push('按量付费,不受额度限制');
+        // 按量付费:没有窗口限制,爆发期不会被卡;闲置期不花钱
+        if (rhythm === 'burst') {
+          quotaScore = 40;
+          why.push('没有额度窗口限制,爆发期可以连续猛跑不被卡');
+        } else if (rhythm === 'occasional') {
+          quotaScore = 38;
+          why.push('不用时一分钱不花,偶尔用最划算');
+        } else {
+          quotaScore = 30;
+          reasons.push('每天稳定使用的话,包月订阅通常比按量更省');
+        }
       } else if (ratio > 1.15) {
         quotaScore = Math.max(4, 40 - (ratio - 1) * 45);
         reasons.push('额度可能不够用,月中容易撞墙');
       } else if (ratio >= 0.55) {
         quotaScore = 40;
         why.push('额度与你的用量高度匹配,几乎不浪费');
-      } else if (ratio >= 0.25) {
-        quotaScore = 32;
-        why.push('额度充裕,还有余量');
+      } else if (ratio >= 0.2) {
+        // 额度充裕本身不是缺点(是否"买贵了"由下面的单位成本项判断)
+        quotaScore = 38;
+        why.push('额度充裕,还有很大余量');
       } else {
-        quotaScore = Math.max(10, 26 - (0.25 - ratio) * 60);
-        reasons.push('额度远超你的需要,多付的钱用不上');
+        quotaScore = 30;
+        reasons.push('额度远超你的需要,如果不打算加量,买小一档更划算');
       }
 
-      // 「不设上限,要最好的」→ 能力优先,性价比让位
-      var maxQuality = budget >= 9999;
-      var capWeight = maxQuality ? 45 : 30;
-      var costWeight = maxQuality ? 5 : 20;
+      // 节奏修正:订阅制在爆发/偶尔使用场景下有结构性缺陷
+      if (!plan.payg && plan.price > 0) {
+        if (rhythm === 'burst') {
+          // 小额度订阅在爆发期会被 5 小时窗口卡住;大额度订阅反而是爆发期的稳妥选择
+          if (plan.tokens < 100000000) {
+            quotaScore -= 10;
+            reasons.push('爆发期集中猛用时,额度窗口容易把你卡住');
+          } else {
+            quotaScore += 6;
+            why.push('额度大,爆发期扛得住,且月费固定不会超支');
+          }
+        } else if (rhythm === 'occasional') {
+          quotaScore -= 8;
+          reasons.push('不用的月份月费照扣');
+        }
+      }
 
-      // 2) 能力匹配(默认 30 分;追求最好时 45 分)
+      // 2) 能力匹配 30 分
       var uses = (a.use && a.use.length) ? a.use : ['daily'];
       var capSum = 0;
       uses.forEach(function (u) { capSum += (plan.caps[u] || 60); });
       var capAvg = capSum / uses.length;
-      var capScore = (capAvg / 100) * capWeight;
+      var capScore = (capAvg / 100) * 30;
       if (capAvg >= 85) why.push('在你选的用途上是第一梯队水平');
       else if (capAvg < 65) reasons.push('在你选的用途上只能算够用');
 
-      // 3) 性价比(默认 20 分;追求最好时降为 5 分)
-      var effPrice = plan.payg ? plan.priceIn + plan.priceOut : (plan.price / (plan.tokens / 1000000));
-      var costRatio;
-      if (plan.price === 0 && !plan.payg) { costRatio = 1; if (!maxQuality) why.push('完全免费'); }
-      else if (effPrice <= 0.2) { costRatio = 1; if (!maxQuality) why.push('单位成本极低,同价位里用量最大'); }
-      else if (effPrice <= 0.6) costRatio = 0.8;
-      else if (effPrice <= 1.5) costRatio = 0.55;
-      else costRatio = 0.3;
-      var costScore = costRatio * costWeight;
+      // 3) 花得值不值 20 分:实际月费 ÷ 你的用量
+      var effPrice = cost > 0 ? cost / (need / 1000000) : 0;
+      var costScore;
+      if (cost === 0) { costScore = 20; why.push('完全免费'); }
+      else if (effPrice <= 0.2) { costScore = 20; why.push('单位成本极低,同等花费下用量最大'); }
+      else if (effPrice <= 0.6) costScore = 16;
+      else if (effPrice <= 1.5) costScore = 11;
+      else if (effPrice <= 4) costScore = 6;
+      else { costScore = 2; reasons.push('单位成本偏高,预算敏感的话要算清楚'); }
 
       // 4) 偏好加成 10 分
       var prefHit = 0;
@@ -618,15 +653,13 @@ document.addEventListener('DOMContentLoaded', function () {
       var prefScore = prefs.length ? (prefHit / prefs.length) * 10 : 7;
       if (prefs.length && prefHit === prefs.length) why.push('满足你提出的全部特殊要求');
 
-      // 预算利用:预算充足时不必优先最便宜的,但也不鼓励爆预算
-      var total = quotaScore + capScore + costScore + prefScore;
-
       return {
         plan: plan,
-        total: Math.round(total),
+        total: Math.round(Math.max(0, quotaScore) + capScore + costScore + prefScore),
         why: why,
         cons: reasons.concat([plan.cons]),
         need: need,
+        cost: cost,
         effPrice: effPrice
       };
     }
@@ -647,28 +680,22 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      var top = ranked[0], alts = ranked.slice(1, 3);
+      var top = ranked[0], alts = ranked.slice(1, 4);
       var a = state.answers;
+      var RHYTHM_LABEL = { steady: '每天稳定使用', burst: '阶段性集中猛用', occasional: '想起来才用' };
 
-      // 省钱提示:与走 API 按量付费对比(按 Sonnet 5 档 $2/$10 混合约 $4/M 估)
-      var apiCost = (top.need / 1000000) * 4;
-      var saveTip = '';
-      if (!top.plan.payg && top.plan.price > 0 && apiCost > top.plan.price * 1.3) {
-        saveTip = '你的用量下,买这个会员比按 API 付费省约 <strong>$' +
-          Math.round(apiCost - top.plan.price) + '/月</strong>(API 估算 $' + Math.round(apiCost) + ')';
-      } else if (top.plan.price === 0) {
-        saveTip = '你的用量完全在免费额度内,<strong>不必付费</strong>';
-      } else if (!top.plan.payg && apiCost < top.plan.price * 0.7) {
-        saveTip = '提示:你的用量偏小,直接按 API 付费可能只要 <strong>$' + Math.max(1, Math.round(apiCost)) +
-          '/月</strong>,比订阅更省';
+      function priceTag(r) {
+        if (r.plan.payg) return '按量付费 · 预估 ' + fmtCost(r.cost) + '/月';
+        if (r.plan.price === 0) return '免费';
+        return '$' + r.plan.price + ' / 月';
       }
 
       var html = '<div class="adv-card adv-card-top">' +
-        '<div class="adv-card-badge">⭐ 为你推荐</div>' +
+        '<div class="adv-card-badge">⭐ 最推荐</div>' +
         '<div class="adv-card-head">' + brandIco(top.plan.brand) +
           '<div><a class="adv-card-name" href="' + top.plan.url + '" target="_blank" rel="noopener">' +
           top.plan.platform + ' ' + top.plan.tier + '</a>' +
-          '<span class="adv-card-price">' + (top.plan.payg ? '按量付费' : (top.plan.price === 0 ? '免费' : '$' + top.plan.price + ' / 月')) + '</span></div>' +
+          '<span class="adv-card-price">' + priceTag(top) + '</span></div>' +
           '<div class="adv-match"><svg viewBox="0 0 36 36" class="adv-ring"><path class="adv-ring-bg" d="M18 2.5a15.5 15.5 0 1 1 0 31 15.5 15.5 0 0 1 0-31"/>' +
           '<path class="adv-ring-fg" style="stroke-dasharray:' + top.total + ',100" d="M18 2.5a15.5 15.5 0 1 1 0 31 15.5 15.5 0 0 1 0-31"/></svg>' +
           '<span class="adv-match-num">' + top.total + '</span><span class="adv-match-label">匹配</span></div>' +
@@ -682,19 +709,16 @@ document.addEventListener('DOMContentLoaded', function () {
           '<div class="adv-block adv-block-warn"><p class="adv-block-title">// 你可能牺牲了</p><ul>' +
             top.cons.slice(0, 3).map(function (c) { return '<li>' + c + '</li>'; }).join('') +
           '</ul></div>' +
-        '</div>' +
-        (saveTip ? '<p class="adv-save">💡 ' + saveTip + '</p>' : '') +
-        '<p class="adv-warn">⚠ Claude Sonnet 5 现为促销价($2/$10),2026-08-31 后涨至 $3/$15;各家价格随时可能变动,请以官网为准。</p>' +
-        '</div>';
+        '</div></div>';
 
       if (alts.length) {
-        html += '<p class="adv-alts-title">// 备选方案</p><div class="adv-alts">';
-        alts.forEach(function (r, i) {
+        html += '<p class="adv-alts-title">// 其他值得考虑的方案</p><div class="adv-alts">';
+        alts.forEach(function (r) {
           html += '<div class="adv-card adv-card-alt">' +
             '<div class="adv-card-head">' + brandIco(r.plan.brand) +
               '<div><a class="adv-card-name" href="' + r.plan.url + '" target="_blank" rel="noopener">' +
               r.plan.platform + ' ' + r.plan.tier + '</a>' +
-              '<span class="adv-card-price">' + (r.plan.payg ? '按量付费' : (r.plan.price === 0 ? '免费' : '$' + r.plan.price + ' / 月')) + '</span></div>' +
+              '<span class="adv-card-price">' + priceTag(r) + '</span></div>' +
               '<span class="adv-alt-match">' + r.total + '</span>' +
             '</div>' +
             '<p class="adv-alt-note">' + (r.why[0] || r.plan.quota) + '</p>' +
@@ -704,21 +728,82 @@ document.addEventListener('DOMContentLoaded', function () {
         html += '</div>';
       }
 
+      /* ---- 花费一览表(用户要求:费用集中列在最后) ---- */
+      var listed = ranked.slice(0, 6);
+      var cheapest = listed.reduce(function (m, r) { return r.cost < m.cost ? r : m; }, listed[0]);
+
+      html += '<div class="adv-costs">' +
+        '<p class="adv-costs-title">// 大约要花多少钱</p>' +
+        '<p class="adv-costs-sub">按你的用量(<strong>' + fmtTok(top.need) + ' token/月</strong>,' +
+          (state.calcTokens ? '按自测估算' : USAGE_LABEL[a.usage] + '档') + ' · ' + (RHYTHM_LABEL[a.rhythm] || '') +
+          ')估算。<strong>订阅制</strong>是固定月费,用不完不退、用超了要等额度重置;<strong>按量付费</strong>没有月费,账单随实际用量浮动——下面按你的用量算出的是预估值。</p>' +
+        '<table class="adv-costs-table"><thead><tr>' +
+          '<th>方案</th><th>计费方式</th><th>预估月花费</th><th>说明</th>' +
+        '</tr></thead><tbody>';
+
+      listed.forEach(function (r) {
+        var isTop = r === top;
+        var isCheap = r === cheapest && r.cost > 0;
+        html += '<tr' + (isTop ? ' class="is-top"' : '') + '>' +
+          '<td class="adv-ct-name">' + brandIco(r.plan.brand) +
+            '<a href="' + r.plan.url + '" target="_blank" rel="noopener">' + r.plan.platform + ' ' + r.plan.tier + '</a>' +
+            (isTop ? '<em class="adv-ct-flag">最推荐</em>' : '') +
+            (isCheap && !isTop ? '<em class="adv-ct-flag adv-ct-cheap">最省</em>' : '') +
+          '</td>' +
+          '<td>' + (r.plan.payg ? '按量付费' : (r.plan.price === 0 ? '免费' : '订阅制')) + '</td>' +
+          '<td class="adv-ct-cost">' + fmtCost(r.cost) +
+            (r.plan.payg ? '<em>用多少付多少</em>' : (r.plan.price > 0 ? '<em>固定月费</em>' : '')) + '</td>' +
+          '<td class="adv-ct-note">' + (r.plan.payg
+            ? '按 $' + r.plan.priceIn + ' 输入 / $' + r.plan.priceOut + ' 输出每百万 token,以 7:3 混合比估算'
+            : r.plan.quota) + '</td>' +
+        '</tr>';
+      });
+
+      html += '</tbody></table>';
+
+      // 订阅 vs 按量 的直接对比提示(只比较额度真能覆盖用量的订阅,避免推荐会撞墙的方案)
+      var subs = listed.filter(function (r) {
+        return !r.plan.payg && r.plan.price > 0 && r.plan.tokens >= r.need;
+      });
+      var paygs = listed.filter(function (r) { return r.plan.payg; });
+      if (subs.length && paygs.length) {
+        var cheapSub = subs.reduce(function (m, r) { return r.cost < m.cost ? r : m; }, subs[0]);
+        var cheapPayg = paygs.reduce(function (m, r) { return r.cost < m.cost ? r : m; }, paygs[0]);
+        var diff = Math.abs(cheapSub.cost - cheapPayg.cost);
+        if (cheapPayg.cost < cheapSub.cost * 0.75) {
+          html += '<p class="adv-save">💡 你的用量下,<strong>' + cheapPayg.plan.platform +
+            ' 按量付费(约 ' + fmtCost(cheapPayg.cost) + ')比最便宜的订阅(' + cheapSub.plan.platform + ' ' +
+            fmtCost(cheapSub.cost) + ')还省约 $' + Math.round(diff) + '/月</strong>——用量不大或不规律时,不必买会员。</p>';
+        } else if (cheapSub.cost < cheapPayg.cost * 0.75) {
+          html += '<p class="adv-save">💡 你的用量下,<strong>' + cheapSub.plan.platform + ' ' + cheapSub.plan.tier +
+            '(' + fmtCost(cheapSub.cost) + '/月)比按量付费省约 $' + Math.round(diff) +
+            '/月</strong>——用量够大时,包月把成本封顶更划算。</p>';
+        }
+      } else if (top.cost === 0) {
+        html += '<p class="adv-save">💡 你的用量完全在免费额度内,<strong>不必付费</strong>。</p>';
+      }
+
+      html += '<p class="adv-warn">⚠ 花费为按公开定价的估算,实际账单受输入/输出比例、缓存命中、错峰折扣影响,可能有较大出入。' +
+        'Claude Sonnet 5 现为促销价($2/$10),2026-08-31 后涨至 $3/$15;新发布的 Claude Opus 5 为 $5/$25。各家价格随时变动,请以官网为准。</p>' +
+        '</div>';
+
       // 用量 vs 额度对比图
       html += '<div class="adv-chart"><p class="adv-chart-title">// 你的用量 vs 各方案额度</p>' +
         '<p class="adv-chart-sub">你的预估用量:<strong>' + fmtTok(top.need) + ' token/月</strong>(' +
-        (state.calcTokens ? '按自测估算' : USAGE_LABEL[a.usage] + '档') + ')。柱子越长额度越大,黄线是你的用量位置——柱子没到线就会撞墙,远超线则是浪费。</p>';
+        (state.calcTokens ? '按自测估算' : USAGE_LABEL[a.usage] + '档') + ')。柱子越长额度越大,黄色虚线是你的用量位置——' +
+        '<strong>柱子没到线(标红)就会撞墙</strong>,远超线则是花钱买了用不上的额度;<strong>灰底柱</strong>为按量付费方案(无额度上限,右侧为预估账单)。</p>';
 
       var maxTok = 500000000;
       var needPct = Math.min(100, (top.need / maxTok) * 100);
       html += '<div class="adv-chart-body" style="--need:' + needPct + '%">';
       ranked.slice(0, 8).forEach(function (r) {
-        var w = Math.min(100, (r.plan.tokens / maxTok) * 100);
-        var enough = r.plan.payg || r.plan.tokens >= r.need;
+        var isPayg = r.plan.payg;
+        var w = isPayg ? 100 : Math.min(100, (r.plan.tokens / maxTok) * 100);
+        var enough = isPayg || r.plan.tokens >= r.need;
         html += '<div class="adv-crow">' + brandIco(r.plan.brand) +
           '<span class="adv-cname">' + r.plan.platform + ' ' + r.plan.tier + '</span>' +
-          '<div class="adv-cbar"><i class="' + (enough ? '' : 'is-short') + '" style="--w:' + w + '%"></i></div>' +
-          '<span class="adv-cprice">' + (r.plan.payg ? '按量' : (r.plan.price === 0 ? '免费' : '$' + r.plan.price)) + '</span>' +
+          '<div class="adv-cbar"><i class="' + (enough ? '' : 'is-short') + (isPayg ? ' is-payg' : '') + '" style="--w:' + w + '%"></i></div>' +
+          '<span class="adv-cprice">' + fmtCost(r.cost) + '</span>' +
           '</div>';
       });
       html += '<div class="adv-needline"><span>你的用量</span></div></div></div>';

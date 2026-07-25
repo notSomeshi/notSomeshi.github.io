@@ -3320,6 +3320,148 @@ body::before {
 
 .adv-cbar i.is-short { background: #e5484d; }
 
+/* 按量付费:无额度上限,用斜纹表示"不封顶" */
+.adv-cbar i.is-payg {
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--border-strong) 0,
+    var(--border-strong) 5px,
+    var(--bg-tertiary) 5px,
+    var(--bg-tertiary) 10px
+  );
+}
+
+/* 花费一览表 */
+.adv-costs {
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  padding: 22px;
+  margin-top: 28px;
+  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%);
+}
+
+[data-rain] .adv-costs {
+  background: rgba(20, 22, 28, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.adv-costs-title {
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.adv-costs-sub {
+  font-size: 0.8125rem;
+  line-height: 1.8;
+  color: var(--text-tertiary);
+  margin-bottom: 18px;
+}
+
+.adv-costs-sub strong { color: var(--text-secondary); }
+
+.adv-costs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+
+.adv-costs-table th {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 2px solid var(--accent);
+  white-space: nowrap;
+}
+
+.adv-costs-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  vertical-align: top;
+}
+
+.adv-costs-table tr.is-top {
+  background: var(--accent-dim);
+}
+
+.adv-ct-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-width: 180px;
+}
+
+.adv-ct-name .rk-ico { margin: 0; }
+
+.adv-ct-name a {
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.adv-ct-name a:hover { color: var(--accent-ink); }
+
+.adv-ct-flag {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 2px 6px;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  white-space: nowrap;
+}
+
+.adv-ct-cheap {
+  background: #3fb950;
+  color: #fff;
+}
+
+.adv-ct-cost {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--accent-ink);
+  white-space: nowrap;
+}
+
+.adv-ct-cost em {
+  display: block;
+  font-style: normal;
+  font-size: 0.625rem;
+  font-weight: 400;
+  color: var(--text-tertiary);
+  letter-spacing: 0.04em;
+}
+
+.adv-ct-note {
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--text-tertiary);
+  min-width: 200px;
+}
+
+.adv-costs .adv-save { margin-top: 16px; }
+
+.adv-costs .adv-warn { margin-top: 12px; }
+
+@media (max-width: 768px) {
+  .adv-costs { padding: 14px; overflow-x: auto; }
+  .adv-costs-table { min-width: 620px; }
+}
+
 .adv-cprice {
   font-family: var(--font-mono);
   font-size: 0.71875rem;
