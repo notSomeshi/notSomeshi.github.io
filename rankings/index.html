@@ -104,6 +104,14 @@
       <p class="archive-desc">TOP 20 AI MODELS · 多机构综合排名 · 数据快照 2026-07-20</p>
     </header>
 
+    <a class="rk-advisor-cta" href="/advisor/">
+      <span>
+        <strong>不知道选哪个?</strong><br>
+        <span>回答 5 个问题,直接告诉你该买哪个方案、每月花多少钱</span>
+      </span>
+      <em>用选购助手 →</em>
+    </a>
+
     <!-- 板块切换:能力天梯 / 订阅性价比 -->
     <div class="rk-boards" id="rkBoards">
       <button type="button" class="rk-board-tab is-active" data-board="ladder">能力天梯</button>
@@ -135,7 +143,7 @@
       <!-- 说明与来源 -->
       <div class="rk-notes">
         <p class="rk-note"><strong>综合分算法</strong>:每项机构得分在当前 20 个模型内做 min-max 归一化(0–100),按左侧权重加权平均;某模型缺失某项评分时,该项不计入并按剩余权重重新归一。<span class="rk-miss-mark">—</span> 表示该机构暂未收录此模型。点击列头可按该机构得分排序,点击模型名跳转官网。</p>
-        <p class="rk-note"><strong>近期动态(截至 2026-07-20)</strong>:xAI 于 7 月 8 日发布 <strong>Grok 4.5</strong>——一款用 Cursor 编程数据训练的编程强化模型,编程与 SWE 分较 4.1 大幅跃升,已并入本榜;Moonshot 于 7 月 16 日发布 <strong>Kimi K3</strong>;Meta 于 7 月 9 日推出首个付费模型 <strong>Muse Spark 1.1</strong>。榜单顶部约 55 ELO 挤成一团,是有记录以来最窄的头部差距(详见新文《前沿收敛》)。</p>
+        <p class="rk-note"><strong>近期动态(截至 2026-07-21)</strong>:xAI 于 7 月 8 日发布 <strong>Grok 4.5</strong>(Cursor 编程数据训练,编程与 SWE 分较 4.1 大幅跃升,已并入本榜);<strong>GPT-5.6</strong> 于 7 月 9 日成为 ChatGPT 默认模型;Moonshot 于 7 月 16 日发布 <strong>Kimi K3</strong>;Meta 于 7 月 9 日推出首个付费模型 <strong>Muse Spark 1.1</strong>。<strong>价格警报</strong>:Claude Sonnet 5 当前 $2/$10 为促销价,<strong>2026-08-31 后将涨至 $3/$15</strong>。榜单顶部约 55 ELO 挤成一团,是有记录以来最窄的头部差距(详见《前沿收敛》)。</p>
         <p class="rk-note"><strong>「社区体感」维度</strong>:由 Arena 众测投票(百万级用户盲测偏好)与 OpenRouter 用量份额(真实付费流量占比,截至 2026-07-18)组成——前者是"觉得谁好用",后者是"钱包投给了谁"。注意用量受价格影响很大,开源低价模型天然占优,故该项不计入「综合」维度。</p>
         <p class="rk-note"><strong>数据来源(快照日 2026-07-20,以各机构官网实时数据为准)</strong>:
           <a href="https://arena.ai/leaderboard/text" target="_blank" rel="noopener">Arena(原 LMArena)</a> ·
@@ -174,13 +182,13 @@
               <td>全档采用「5 小时滚动窗口 + 每周上限」双重限制,窗口内用完只能等重置:<br>· Free:每日少量消息,基础模型<br>· Pro ≈ 45 条消息 / 5 小时(网页、App、Claude Code 共用同一个池)<br>· Max 5x / 20x = Pro 的 5 倍 / 20 倍窗口额度<br>· 超限两条路:等窗口重置,或按 API 价加购(extra usage)</td>
               <td>按 Opus 档满负荷估算:<br>· Pro ≈ 2000–5000 万 token/月<br>· Max 5x ≈ 1–2 亿/月<br>· Max 20x ≈ 2–4 亿/月<br>· 换用 Sonnet 约 ×5,Haiku 更高</td>
               <td>· Pro ≈ $2–10 /M<br>· Max 5x ≈ $0.7–1.5 /M<br>· Max 20x ≈ $0.5–1 /M<br><em class="rk-pt-note">用得越少,实际单价越贵</em></td>
-              <td>Fable 5 $10 / $50<br>Opus 4.8 $15 / $75<br>Sonnet 5 $3 / $15<br>Haiku 4.5 $1 / $5<br><em class="rk-pt-note">规则:输出价约为输入 5 倍;提示缓存写入 1.25×、命中仅 0.1×;Batch 批处理五折;超 20 万 token 长上下文输入加价</em></td>
+              <td>Fable 5 $10 / $50<br>Opus 4.8 $15 / $75<br><strong>Sonnet 5 $2 / $10</strong><br>Haiku 4.5 $1 / $5<br><em class="rk-pt-note">⚠ Sonnet 5 现为促销价,<strong>2026-08-31 后涨至 $3 / $15</strong><br>规则:输出价约为输入 5 倍;提示缓存写入 1.25×、命中仅 0.1×;Batch 批处理五折;超 20 万 token 长上下文输入加价</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-openai">O</span><a href="https://openai.com/chatgpt" target="_blank" rel="noopener">ChatGPT + Codex</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// ChatGPT Plus / Pro</strong><b>适合谁:</b>"什么都要一点"的通才、产品经理、研究型用户;2026-07 新增的 $100 Pro 档就是冲着 Claude Max 用户来的。<br><b>技术栈:</b>生态插件与多模态最全;Codex 云端并行改代码适合多任务并行的团队节奏。<br><b>在用它做:</b>研究写作、数据分析、让 Codex 在云上并行修 bug。纯编程吞吐性价比略逊 Claude/Cursor 专档。</span></span></td>
               <td class="rk-pt-plans"><span class="rk-plan">Free $0</span><span class="rk-plan">Plus $20</span><span class="rk-plan rk-plan-x">Pro $100<em>(2026-07 新档)</em></span><span class="rk-plan">Team $25–30/席</span><span class="rk-plan">Enterprise 定制</span></td>
-              <td>GPT-5.6 Luna / Terra / Sol · o4-mini<br><em class="rk-pt-note">Plus 及以上含 Codex(云端编程代理)</em></td>
+              <td>GPT-5.6 Luna / Terra / Sol · o4-mini<br><em class="rk-pt-note">GPT-5.6 已于 2026-07-09 成为 ChatGPT 默认模型<br>Plus 及以上含 Codex(云端编程代理)</em></td>
               <td>· Free:基础模型限量对话<br>· Plus:日常对话高额度(默认 Terra 档);Sol 高强度推理限量;Codex 云任务约 30–150 个 / 5 小时<br>· Pro:对话近乎不限 + Sol 高强度 + Codex 高并发(可同时挂多个任务)<br>· o4-mini 各付费档近乎不限</td>
               <td>· Plus ≈ 3000 万–1 亿 token/月<br>· Pro ≈ 2–6 亿/月(含 Codex 并行任务折算)</td>
               <td>· Plus ≈ $0.5–2 /M<br>· Pro ≈ $0.3–0.8 /M</td>

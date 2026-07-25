@@ -392,7 +392,413 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     initRankings();
+    initAdvisor();
     onScroll();
+  }
+
+  /* ==========================================
+     6.6 选购助手(/advisor/)
+     五步问卷 → 规则过滤 + 加权匹配 → 结果卡
+     ========================================== */
+  function initAdvisor() {
+    var app = document.getElementById('advApp');
+    if (!app || app.dataset.ready) return;
+    app.dataset.ready = '1';
+
+    var DATA;
+    try {
+      DATA = JSON.parse(document.getElementById('advisorData').textContent);
+    } catch (e) { return; }
+
+    var PLANS = DATA.plans;
+
+    // 用途 → 能力维度键
+    var QUESTIONS = [
+      {
+        id: 'use', multi: true, title: '你主要拿 AI 做什么?', hint: '可多选,决定看重哪方面能力',
+        options: [
+          { v: 'coding', label: '写代码 / 做网站或 App', desc: '编程、调试、重构' },
+          { v: 'writing', label: '写文章、报告、邮件', desc: '内容创作与润色' },
+          { v: 'research', label: '查资料、读论文或长文档', desc: '检索、总结、理解长文' },
+          { v: 'data', label: '做表格、分析数据、画图表', desc: '数据处理与可视化' },
+          { v: 'daily', label: '日常问答、学习、翻译', desc: '通用助手' }
+        ]
+      },
+      {
+        id: 'usage', title: '你大概每天用多久?', hint: '这一问最关键——它决定你需要多大的额度',
+        options: [
+          { v: 'light', label: '偶尔用一下', desc: '每周几次,每次几个问题' },
+          { v: 'medium', label: '每天用一会儿', desc: '半小时以内' },
+          { v: 'heavy', label: '每天离不开', desc: '几个小时,是主力工具' },
+          { v: 'extreme', label: '挂着让它自动干活', desc: '长任务代理,一跑几小时' }
+        ]
+      },
+      {
+        id: 'budget', title: '每月预算大概多少?', hint: '按人民币约 7 倍换算',
+        options: [
+          { v: 0, label: '尽量免费', desc: '$0' },
+          { v: 10, label: '$10 以内', desc: '约 ¥70' },
+          { v: 20, label: '$20 左右', desc: '约 ¥140,最主流的档位' },
+          { v: 100, label: '$50–100', desc: '专业用户档' },
+          { v: 9999, label: '不设上限', desc: '要最好的' }
+        ]
+      },
+      {
+        id: 'region', title: '你主要在哪用?', hint: '影响是否需要代理',
+        options: [
+          { v: 'cn', label: '国内网络为主', desc: '希望直连、不折腾' },
+          { v: 'global', label: '海外 / 有稳定代理', desc: '不受限制' },
+          { v: 'any', label: '都行', desc: '不作为筛选条件' }
+        ]
+      },
+      {
+        id: 'prefs', multi: true, optional: true, title: '有什么特别在意的?', hint: '可多选,也可以跳过',
+        options: [
+          { v: 'chinese', label: '中文表现要好' },
+          { v: 'openweight', label: '要能自己部署 / 数据不外传' },
+          { v: 'ide', label: '要有编辑器插件(写代码用)' },
+          { v: 'multimodal', label: '要能处理图片、视频' },
+          { v: 'longdoc', label: '要能读超长文档' }
+        ]
+      }
+    ];
+
+    // 用量档 → 月 token 量级
+    var USAGE_TOKENS = { light: 8000000, medium: 30000000, heavy: 120000000, extreme: 350000000 };
+    var USAGE_LABEL = { light: '轻度', medium: '中度', heavy: '重度', extreme: '极重度' };
+
+    var state = { step: 0, answers: {}, calcTokens: null };
+
+    var quizEl = document.getElementById('advQuiz');
+    var resultEl = document.getElementById('advResult');
+    var calcEl = document.getElementById('advCalc');
+    var barEl = document.getElementById('advProgressBar');
+    var textEl = document.getElementById('advProgressText');
+
+    // 恢复上次作答
+    try {
+      var saved = sessionStorage.getItem('bv-advisor');
+      if (saved) state.answers = JSON.parse(saved) || {};
+    } catch (e) {}
+
+    function save() {
+      try { sessionStorage.setItem('bv-advisor', JSON.stringify(state.answers)); } catch (e) {}
+    }
+
+    function updateProgress() {
+      var pct = Math.min(100, (state.step / QUESTIONS.length) * 100);
+      barEl.style.width = pct + '%';
+      textEl.textContent = state.step >= QUESTIONS.length
+        ? '完成'
+        : ('0' + (state.step + 1)).slice(-2) + ' / 0' + QUESTIONS.length;
+    }
+
+    function renderQuestion() {
+      updateProgress();
+      if (state.step >= QUESTIONS.length) {
+        quizEl.innerHTML = '';
+        calcEl.hidden = false;
+        renderResult();
+        return;
+      }
+      calcEl.hidden = true;
+      resultEl.hidden = true;
+
+      var q = QUESTIONS[state.step];
+      var cur = state.answers[q.id];
+      var html = '<div class="adv-q">' +
+        '<p class="adv-q-index">Q' + (state.step + 1) + '</p>' +
+        '<h2 class="adv-q-title">' + q.title + '</h2>' +
+        '<p class="adv-q-hint">' + q.hint + '</p>' +
+        '<div class="adv-opts">';
+
+      q.options.forEach(function (o) {
+        var active = q.multi
+          ? (cur || []).indexOf(o.v) !== -1
+          : cur === o.v;
+        html += '<button type="button" class="adv-opt' + (active ? ' is-on' : '') + '" data-v="' + o.v + '">' +
+          '<span class="adv-opt-label">' + o.label + '</span>' +
+          (o.desc ? '<span class="adv-opt-desc">' + o.desc + '</span>' : '') +
+          '</button>';
+      });
+
+      html += '</div><div class="adv-nav">' +
+        (state.step > 0 ? '<button type="button" class="adv-btn adv-back">← 上一题</button>' : '') +
+        (q.multi || q.optional ? '<button type="button" class="adv-btn adv-next">' + (q.optional ? '跳过 / 下一步 →' : '下一步 →') + '</button>' : '') +
+        '</div></div>';
+
+      quizEl.innerHTML = html;
+
+      quizEl.querySelectorAll('.adv-opt').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var raw = btn.dataset.v;
+          var val = /^\d+$/.test(raw) ? +raw : raw;
+          if (q.multi) {
+            var arr = state.answers[q.id] || [];
+            var i = arr.indexOf(val);
+            if (i === -1) { arr.push(val); } else { arr.splice(i, 1); }
+            state.answers[q.id] = arr;
+            btn.classList.toggle('is-on');
+            save();
+          } else {
+            state.answers[q.id] = val;
+            save();
+            state.step++;
+            renderQuestion();
+          }
+        });
+      });
+
+      var backBtn = quizEl.querySelector('.adv-back');
+      if (backBtn) backBtn.addEventListener('click', function () { state.step--; renderQuestion(); });
+      var nextBtn = quizEl.querySelector('.adv-next');
+      if (nextBtn) nextBtn.addEventListener('click', function () { state.step++; renderQuestion(); });
+    }
+
+    /* ---------- 推荐算法 ---------- */
+    function score(plan) {
+      var a = state.answers;
+      var reasons = [], why = [];
+
+      // 硬性过滤
+      var budget = a.budget != null ? a.budget : 9999;
+      if (plan.price > budget) return null;
+      if (a.region === 'cn' && plan.tags.indexOf('cn-direct') === -1) return null;
+      var prefs = a.prefs || [];
+      if (prefs.indexOf('openweight') !== -1 && plan.tags.indexOf('openweight') === -1) return null;
+
+      var need = state.calcTokens || USAGE_TOKENS[a.usage] || 30000000;
+
+      // 1) 用量匹配 40 分
+      var quotaScore, ratio = need / plan.tokens;
+      if (plan.payg) {
+        quotaScore = 34; // 按量付费不会撞墙,但要自己搭工具
+        why.push('按量付费,不受额度限制');
+      } else if (ratio > 1.15) {
+        quotaScore = Math.max(4, 40 - (ratio - 1) * 45);
+        reasons.push('额度可能不够用,月中容易撞墙');
+      } else if (ratio >= 0.55) {
+        quotaScore = 40;
+        why.push('额度与你的用量高度匹配,几乎不浪费');
+      } else if (ratio >= 0.25) {
+        quotaScore = 32;
+        why.push('额度充裕,还有余量');
+      } else {
+        quotaScore = Math.max(10, 26 - (0.25 - ratio) * 60);
+        reasons.push('额度远超你的需要,多付的钱用不上');
+      }
+
+      // 「不设上限,要最好的」→ 能力优先,性价比让位
+      var maxQuality = budget >= 9999;
+      var capWeight = maxQuality ? 45 : 30;
+      var costWeight = maxQuality ? 5 : 20;
+
+      // 2) 能力匹配(默认 30 分;追求最好时 45 分)
+      var uses = (a.use && a.use.length) ? a.use : ['daily'];
+      var capSum = 0;
+      uses.forEach(function (u) { capSum += (plan.caps[u] || 60); });
+      var capAvg = capSum / uses.length;
+      var capScore = (capAvg / 100) * capWeight;
+      if (capAvg >= 85) why.push('在你选的用途上是第一梯队水平');
+      else if (capAvg < 65) reasons.push('在你选的用途上只能算够用');
+
+      // 3) 性价比(默认 20 分;追求最好时降为 5 分)
+      var effPrice = plan.payg ? plan.priceIn + plan.priceOut : (plan.price / (plan.tokens / 1000000));
+      var costRatio;
+      if (plan.price === 0 && !plan.payg) { costRatio = 1; if (!maxQuality) why.push('完全免费'); }
+      else if (effPrice <= 0.2) { costRatio = 1; if (!maxQuality) why.push('单位成本极低,同价位里用量最大'); }
+      else if (effPrice <= 0.6) costRatio = 0.8;
+      else if (effPrice <= 1.5) costRatio = 0.55;
+      else costRatio = 0.3;
+      var costScore = costRatio * costWeight;
+
+      // 4) 偏好加成 10 分
+      var prefHit = 0;
+      prefs.forEach(function (p) { if (plan.tags.indexOf(p) !== -1) prefHit++; });
+      var prefScore = prefs.length ? (prefHit / prefs.length) * 10 : 7;
+      if (prefs.length && prefHit === prefs.length) why.push('满足你提出的全部特殊要求');
+
+      // 预算利用:预算充足时不必优先最便宜的,但也不鼓励爆预算
+      var total = quotaScore + capScore + costScore + prefScore;
+
+      return {
+        plan: plan,
+        total: Math.round(total),
+        why: why,
+        cons: reasons.concat([plan.cons]),
+        need: need,
+        effPrice: effPrice
+      };
+    }
+
+    function fmtTok(n) {
+      if (n >= 100000000) return (n / 100000000).toFixed(1) + ' 亿';
+      return Math.round(n / 10000) + ' 万';
+    }
+
+    function brandIco(b) { return '<span class="rk-ico b-' + b + '"></span>'; }
+
+    function renderResult() {
+      var ranked = PLANS.map(score).filter(Boolean).sort(function (x, y) { return y.total - x.total; });
+      resultEl.hidden = false;
+
+      if (!ranked.length) {
+        resultEl.innerHTML = '<div class="adv-empty">// 没有完全符合条件的方案——通常是「预算太低 + 要求太多」。试试放宽预算,或取消「必须自己部署」这类硬性要求。</div>';
+        return;
+      }
+
+      var top = ranked[0], alts = ranked.slice(1, 3);
+      var a = state.answers;
+
+      // 省钱提示:与走 API 按量付费对比(按 Sonnet 5 档 $2/$10 混合约 $4/M 估)
+      var apiCost = (top.need / 1000000) * 4;
+      var saveTip = '';
+      if (!top.plan.payg && top.plan.price > 0 && apiCost > top.plan.price * 1.3) {
+        saveTip = '你的用量下,买这个会员比按 API 付费省约 <strong>$' +
+          Math.round(apiCost - top.plan.price) + '/月</strong>(API 估算 $' + Math.round(apiCost) + ')';
+      } else if (top.plan.price === 0) {
+        saveTip = '你的用量完全在免费额度内,<strong>不必付费</strong>';
+      } else if (!top.plan.payg && apiCost < top.plan.price * 0.7) {
+        saveTip = '提示:你的用量偏小,直接按 API 付费可能只要 <strong>$' + Math.max(1, Math.round(apiCost)) +
+          '/月</strong>,比订阅更省';
+      }
+
+      var html = '<div class="adv-card adv-card-top">' +
+        '<div class="adv-card-badge">⭐ 为你推荐</div>' +
+        '<div class="adv-card-head">' + brandIco(top.plan.brand) +
+          '<div><a class="adv-card-name" href="' + top.plan.url + '" target="_blank" rel="noopener">' +
+          top.plan.platform + ' ' + top.plan.tier + '</a>' +
+          '<span class="adv-card-price">' + (top.plan.payg ? '按量付费' : (top.plan.price === 0 ? '免费' : '$' + top.plan.price + ' / 月')) + '</span></div>' +
+          '<div class="adv-match"><svg viewBox="0 0 36 36" class="adv-ring"><path class="adv-ring-bg" d="M18 2.5a15.5 15.5 0 1 1 0 31 15.5 15.5 0 0 1 0-31"/>' +
+          '<path class="adv-ring-fg" style="stroke-dasharray:' + top.total + ',100" d="M18 2.5a15.5 15.5 0 1 1 0 31 15.5 15.5 0 0 1 0-31"/></svg>' +
+          '<span class="adv-match-num">' + top.total + '</span><span class="adv-match-label">匹配</span></div>' +
+        '</div>' +
+        '<div class="adv-card-body">' +
+          '<div class="adv-block"><p class="adv-block-title">// 为什么是它</p><ul>' +
+            top.why.map(function (w) { return '<li>' + w + '</li>'; }).join('') +
+            '<li>额度:' + top.plan.quota + '</li>' +
+            '<li>可用模型:' + top.plan.models + '</li>' +
+          '</ul></div>' +
+          '<div class="adv-block adv-block-warn"><p class="adv-block-title">// 你可能牺牲了</p><ul>' +
+            top.cons.slice(0, 3).map(function (c) { return '<li>' + c + '</li>'; }).join('') +
+          '</ul></div>' +
+        '</div>' +
+        (saveTip ? '<p class="adv-save">💡 ' + saveTip + '</p>' : '') +
+        '<p class="adv-warn">⚠ Claude Sonnet 5 现为促销价($2/$10),2026-08-31 后涨至 $3/$15;各家价格随时可能变动,请以官网为准。</p>' +
+        '</div>';
+
+      if (alts.length) {
+        html += '<p class="adv-alts-title">// 备选方案</p><div class="adv-alts">';
+        alts.forEach(function (r, i) {
+          html += '<div class="adv-card adv-card-alt">' +
+            '<div class="adv-card-head">' + brandIco(r.plan.brand) +
+              '<div><a class="adv-card-name" href="' + r.plan.url + '" target="_blank" rel="noopener">' +
+              r.plan.platform + ' ' + r.plan.tier + '</a>' +
+              '<span class="adv-card-price">' + (r.plan.payg ? '按量付费' : (r.plan.price === 0 ? '免费' : '$' + r.plan.price + ' / 月')) + '</span></div>' +
+              '<span class="adv-alt-match">' + r.total + '</span>' +
+            '</div>' +
+            '<p class="adv-alt-note">' + (r.why[0] || r.plan.quota) + '</p>' +
+            '<p class="adv-alt-con">但:' + r.cons[0] + '</p>' +
+          '</div>';
+        });
+        html += '</div>';
+      }
+
+      // 用量 vs 额度对比图
+      html += '<div class="adv-chart"><p class="adv-chart-title">// 你的用量 vs 各方案额度</p>' +
+        '<p class="adv-chart-sub">你的预估用量:<strong>' + fmtTok(top.need) + ' token/月</strong>(' +
+        (state.calcTokens ? '按自测估算' : USAGE_LABEL[a.usage] + '档') + ')。柱子越长额度越大,黄线是你的用量位置——柱子没到线就会撞墙,远超线则是浪费。</p>';
+
+      var maxTok = 500000000;
+      var needPct = Math.min(100, (top.need / maxTok) * 100);
+      html += '<div class="adv-chart-body" style="--need:' + needPct + '%">';
+      ranked.slice(0, 8).forEach(function (r) {
+        var w = Math.min(100, (r.plan.tokens / maxTok) * 100);
+        var enough = r.plan.payg || r.plan.tokens >= r.need;
+        html += '<div class="adv-crow">' + brandIco(r.plan.brand) +
+          '<span class="adv-cname">' + r.plan.platform + ' ' + r.plan.tier + '</span>' +
+          '<div class="adv-cbar"><i class="' + (enough ? '' : 'is-short') + '" style="--w:' + w + '%"></i></div>' +
+          '<span class="adv-cprice">' + (r.plan.payg ? '按量' : (r.plan.price === 0 ? '免费' : '$' + r.plan.price)) + '</span>' +
+          '</div>';
+      });
+      html += '<div class="adv-needline"><span>你的用量</span></div></div></div>';
+
+      html += '<div class="adv-actions">' +
+        '<button type="button" class="adv-btn adv-restart">↺ 重新测一次</button>' +
+        '<a class="adv-btn adv-tolist" href="/rankings/">查看完整对照表 →</a>' +
+        '</div>';
+
+      resultEl.innerHTML = html;
+
+      var rs = resultEl.querySelector('.adv-restart');
+      if (rs) rs.addEventListener('click', function () {
+        state.step = 0; state.answers = {}; state.calcTokens = null;
+        try { sessionStorage.removeItem('bv-advisor'); } catch (e) {}
+        renderQuestion();
+        app.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    /* ---------- 用量自测(第二期) ---------- */
+    var CALC_ROWS = [
+      { id: 'chat', label: '每天问答/对话', unit: '条', per: 3000, def: 0, hint: '一问一答约 3 千 token' },
+      { id: 'code', label: '每周让 AI 改代码', unit: '次', per: 120000, def: 0, hint: '一次多文件修改约 12 万' },
+      { id: 'agent', label: '每周长任务(挂着自动干)', unit: '次', per: 900000, def: 0, hint: '一次长任务约 90 万' },
+      { id: 'doc', label: '每周读长文档/论文', unit: '篇', per: 60000, def: 0, hint: '一篇长文约 6 万' },
+      { id: 'write', label: '每周写长文/报告', unit: '篇', per: 25000, def: 0, hint: '一篇含多轮修改约 2.5 万' }
+    ];
+
+    var calcToggle = document.getElementById('advCalcToggle');
+    var calcBody = document.getElementById('advCalcBody');
+    var calcRows = document.getElementById('advCalcRows');
+    var calcResult = document.getElementById('advCalcResult');
+
+    if (calcToggle) {
+      calcToggle.addEventListener('click', function () {
+        var open = !calcBody.hidden;
+        calcBody.hidden = open;
+        calcToggle.textContent = open ? '展开' : '收起';
+        if (!open && !calcRows.innerHTML) buildCalc();
+      });
+    }
+
+    function buildCalc() {
+      calcRows.innerHTML = CALC_ROWS.map(function (r) {
+        return '<label class="adv-calc-row"><span class="adv-calc-label">' + r.label +
+          '<em>' + r.hint + '</em></span>' +
+          '<input type="number" min="0" step="1" value="' + r.def + '" data-calc="' + r.id + '">' +
+          '<span class="adv-calc-unit">' + r.unit + '</span></label>';
+      }).join('');
+
+      calcRows.addEventListener('input', recalc);
+      recalc();
+    }
+
+    function recalc() {
+      var total = 0;
+      CALC_ROWS.forEach(function (r) {
+        var el = calcRows.querySelector('[data-calc="' + r.id + '"]');
+        var n = Math.max(0, +(el && el.value) || 0);
+        // 每天的 ×30,每周的 ×4.3
+        var monthly = r.id === 'chat' ? n * 30 : n * 4.3;
+        total += monthly * r.per;
+      });
+      if (total <= 0) {
+        state.calcTokens = null;
+        calcResult.innerHTML = '<span class="adv-calc-empty">// 全部留空 → 使用问卷里的粗略档位</span>';
+      } else {
+        state.calcTokens = Math.round(total);
+        calcResult.innerHTML = '估算用量:<strong>' + fmtTok(total) + ' token / 月</strong>' +
+          '<button type="button" class="adv-btn adv-recalc">用这个数字重算推荐 →</button>';
+        var btn = calcResult.querySelector('.adv-recalc');
+        if (btn) btn.addEventListener('click', function () {
+          renderResult();
+          resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      }
+    }
+
+    renderQuestion();
   }
 
   /* ==========================================
