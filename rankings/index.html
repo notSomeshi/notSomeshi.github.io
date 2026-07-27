@@ -144,6 +144,7 @@
       <div class="rk-notes">
         <p class="rk-note"><strong>综合分算法</strong>:每项机构得分在当前 20 个模型内做 min-max 归一化(0–100),按左侧权重加权平均;某模型缺失某项评分时,该项不计入并按剩余权重重新归一。<span class="rk-miss-mark">—</span> 表示该机构暂未收录此模型。点击列头可按该机构得分排序,点击模型名跳转官网。</p>
         <p class="rk-note"><strong>近期动态(截至 2026-07-27)</strong>:Anthropic 于 7 月 24 日发布 <strong>Claude Opus 5</strong>——$5/$25 仅为 Opus 4.8 的三分之一,却提供接近 Fable 5 的能力,1M 上下文、五档推理强度(low/medium/high/xhigh/max),现为 Claude Max 默认模型;<strong>GPT-5.6 Sol 的 Ultra 模式</strong>浮出水面——它<strong>不是独立模型</strong>,而是把难题分派给并行子代理的编排模式,Terminal-Bench 2.1 拿到 91.9%(基础 Sol 为 88.8%),但没有单独定价、<strong>token 成倍消耗</strong>(详见新文《一个模型,N 个分数》);Google 于 7 月 21 日发布 <strong>Gemini 3.6 Flash</strong> 与 3.5 Flash Lite;<strong>Gemini 3.5 Pro</strong> 截至 7 月 21 日官方仅称"正在与合作伙伴测试",2M 上下文与定价均<strong>未经官宣</strong>,故暂不入榜;xAI 于 7 月 8 日发布 <strong>Grok 4.5</strong>;Moonshot 于 7 月 16 日发布 <strong>Kimi K3</strong>。<strong>价格警报</strong>:Claude Sonnet 5 当前 $2/$10 为促销价,<strong>2026-08-31 后涨至 $3/$15</strong>(还剩约 1 个月)。榜单顶部约 55 ELO 挤成一团,是有记录以来最窄的头部差距(详见《前沿收敛》)。</p>
+        <p class="rk-note"><strong>「金融分析」维度(代理指标,请谨慎解读)</strong>:目前<strong>没有覆盖全部 20 个模型的公开金融基准</strong>,因此本维度不使用杜撰分数,而是取两个已有真实数据作为<strong>代理指标</strong>:Artificial Analysis 智能指数(其 v4.1 题集含 <strong>τ³-Banking</strong> 银行业智能体任务)与 LiveBench 数学子项(反映数值严谨性——金融分析最不容出错的能力)。真正的领域基准可参考 <a href="https://arxiv.org/abs/2402.12659" target="_blank" rel="noopener">FinBen</a>(8 类金融任务/36 数据集)、<a href="https://arxiv.org/html/2505.19457v1" target="_blank" rel="noopener">BizFinBench</a>(6,781 条中文金融查询)、FinanceBench(基于 SEC 10-K/10-Q 的 10,231 题)。<strong>⚠ 高分不代表可以信任其财务输出</strong>——实测显示六个主流模型中有四个在源文档不完整时会<strong>捏造财务数据</strong>,详见《AI 做金融分析的三个致命陷阱》。</p>
         <p class="rk-note"><strong>「社区体感」维度</strong>:由 Arena 众测投票(百万级用户盲测偏好)与 OpenRouter 用量份额(真实付费流量占比,截至 2026-07-24)组成——前者是"觉得谁好用",后者是"钱包投给了谁"。注意用量受价格影响很大,开源低价模型天然占优,故该项不计入「综合」维度。</p>
         <p class="rk-note"><strong>数据来源(快照日 2026-07-27,以各机构官网实时数据为准)</strong>:
           <a href="https://arena.ai/leaderboard/text" target="_blank" rel="noopener">Arena(原 LMArena)</a> ·
@@ -371,6 +372,7 @@
         "reasoning": { "label": "推理",     "metrics": {                     "aa": "index", "livebench": "reasoning" } },
         "math":      { "label": "数学",     "metrics": { "arena": "math",                   "livebench": "math" } },
         "language":  { "label": "语言写作", "metrics": { "arena": "overall",                "livebench": "language" } },
+        "finance":   { "label": "金融分析", "metrics": {                     "aa": "index", "livebench": "math" } },
         "community": { "label": "社区体感", "metrics": { "arena": "overall", "openrouter": "share" } }
       },
       "models": [

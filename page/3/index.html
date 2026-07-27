@@ -34,6 +34,41 @@
 <meta name="generator" content="Hexo 7.3.0"></head>
 <body>
   
+  <div class="site-cover" id="siteCover" role="button" aria-label="点击进入">
+  <div class="cover-scan"></div>
+  <div class="cover-frame">
+    <i class="cover-corner cover-corner-tr"></i>
+    <i class="cover-corner cover-corner-bl"></i>
+  </div>
+  <div class="cover-top">BYTEVIBE TERMINAL // OS v2.1.0</div>
+  <div class="cover-inner">
+    <p class="cover-eyebrow">// CONNECTION ESTABLISHED</p>
+    <h1 class="cover-title">ByteVibe</h1>
+    <p class="cover-sub">VIBE CODING // AI ENGINEERING</p>
+    <div class="cover-boot">
+      <span style="animation-delay:.15s">&gt; SYSTEM CHECK ............ <em>OK</em></span>
+      <span style="animation-delay:.45s">&gt; LOADING ARTICLE DATABASE . <em>OK</em></span>
+      <span style="animation-delay:.75s">&gt; RENDER PIPELINE .......... <em>READY</em></span>
+    </div>
+    <p class="cover-press">PRESS ANY KEY / 点击进入</p>
+  </div>
+  <div class="cover-bottom">&copy; 2026 BYTEVIBE — ALL SYSTEMS NOMINAL</div>
+</div>
+<script>
+  // 预绘制阶段判断:本会话已进入过则直接隐藏封面,否则锁定滚动
+  (function () {
+    try {
+      if (sessionStorage.getItem('bv-entered')) {
+        document.getElementById('siteCover').style.display = 'none';
+      } else {
+        document.documentElement.classList.add('cover-lock');
+      }
+    } catch (e) {}
+  })();
+</script>
+<noscript><style>.site-cover { display: none !important; }</style></noscript>
+
+  
   <canvas class="rain-canvas" id="rainCanvas" aria-hidden="true"></canvas>
   <div class="reading-progress" id="readingProgress"></div>
   <header class="site-header" id="siteHeader">
@@ -54,7 +89,7 @@
       
         
         
-        <a class="nav-link is-active" href="/categories/">分类</a>
+        <a class="nav-link" href="/categories/">分类</a>
       
         
         
@@ -97,120 +132,72 @@
 </header>
 
   <main class="main-content">
-    <section class="category-section">
+    <div class="side-entries">
+  <a class="rankings-entry" href="/rankings/" aria-label="模型天梯:AI 模型综合排名">
+    <span class="rankings-entry-mark"></span>
+    <span class="rankings-entry-label">模型天梯</span>
+    <span class="rankings-entry-sub">RANKINGS</span>
+  </a>
+  <a class="rankings-entry advisor-entry" href="/advisor/" aria-label="选购助手:帮你挑最划算的 AI 方案">
+    <span class="rankings-entry-mark"></span>
+    <span class="rankings-entry-label">选购助手</span>
+    <span class="rankings-entry-sub">ADVISOR</span>
+  </a>
+</div>
+
+<section class="hero-section">
   <div class="container">
-    <div class="post-content-wrapper">
+    <p class="hero-eyebrow">Vibe Coding // AI Engineering</p>
+    <h1 class="hero-title">ByteVibe</h1>
+    <p class="hero-subtitle">探索 Vibe Coding 与 AI 编程的无限可能</p>
+  </div>
+</section>
+
+<section class="posts-section">
+  <div class="container">
+    <div class="posts-grid">
       
-        <header class="archive-header">
-          <h1 class="archive-title">行业观察</h1>
-          <p class="archive-desc">共 10 篇文章</p>
-        </header>
-        <div class="archive-list">
-          
-          
+      
+      <article class="post-card animate-on-scroll">
+        <a class="post-card-link" href="/2025/06/10/hello-world/" aria-label="欢迎来到 ByteVibe"></a>
+        <span class="post-card-index">21</span>
+        <div class="post-card-inner">
+          <div class="post-card-meta">
+            <time class="post-date">2025-06-10</time>
             
-            
-            
-          
-            
-            
-            
-          
-            
-            
-            
-          
-            
-            
-            
-          
-            
-            
-            
-          
-            
-            
-            
-          
-            
-            
-            
-          
-            
-            
-            
-          
-            
-            
-            
-          
-            
-            
-            
-          
-          
-          <div class="archive-year-group">
-            <h2 class="archive-year">2026</h2>
-            <div class="archive-items">
+            <span class="post-category">
               
-              <a class="archive-item animate-on-scroll" href="/2026/07/27/ai-finance-pitfalls/">
-                <span class="archive-date">07-27</span>
-                <span class="archive-item-title">AI 做金融分析的三个致命陷阱:在你把钱交给它之前</span>
-              </a>
+                <a href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a>
               
-              <a class="archive-item animate-on-scroll" href="/2026/07/27/opus5-price-war/">
-                <span class="archive-date">07-27</span>
-                <span class="archive-item-title">Opus 5 的降价三分之二:旗舰模型的价格战正式开打</span>
-              </a>
-              
-              <a class="archive-item animate-on-scroll" href="/2026/07/27/one-model-many-scores/">
-                <span class="archive-date">07-27</span>
-                <span class="archive-item-title">一个模型,N 个分数:当 effort 和编排模式让榜单失去唯一解</span>
-              </a>
-              
-              <a class="archive-item animate-on-scroll" href="/2026/07/20/grok45-ide-native-models/">
-                <span class="archive-date">07-20</span>
-                <span class="archive-item-title">Grok 4.5 与「IDE 原生」模型:当编辑器成为训练场</span>
-              </a>
-              
-              <a class="archive-item animate-on-scroll" href="/2026/07/20/frontier-convergence-2026/">
-                <span class="archive-date">07-20</span>
-                <span class="archive-item-title">前沿收敛:为什么 2026 年榜单顶部挤成了一团</span>
-              </a>
-              
-              <a class="archive-item animate-on-scroll" href="/2026/07/17/openrouter-power-shift/">
-                <span class="archive-date">07-17</span>
-                <span class="archive-item-title">OpenRouter 上的权力转移:中国开源模型如何吃下一半流量</span>
-              </a>
-              
-              <a class="archive-item animate-on-scroll" href="/2026/07/17/ai-frontier-briefing-2026-07/">
-                <span class="archive-date">07-17</span>
-                <span class="archive-item-title">2026 年中前沿速览:模型分层、Agent 落地与监管转折</span>
-              </a>
-              
-              <a class="archive-item animate-on-scroll" href="/2026/07/08/ai-prospects-and-strata/">
-                <span class="archive-date">07-08</span>
-                <span class="archive-item-title">前景、困难与阶层重排:AI 正在改写谁的命运?</span>
-              </a>
-              
-              <a class="archive-item animate-on-scroll" href="/2026/07/08/ai-dividend-paradox/">
-                <span class="archive-date">07-08</span>
-                <span class="archive-item-title">AI 红利悖论:我们为 AI 买单三年,红利为何还没普惠?</span>
-              </a>
-              
-              <a class="archive-item animate-on-scroll" href="/2026/07/08/ai-capital-markets-2026/">
-                <span class="archive-date">07-08</span>
-                <span class="archive-item-title">资本市场视角下的 AI 局势:7250 亿美元 Capex、循环交易与泡沫之辩</span>
-              </a>
-              
-            </div>
+            </span>
+            
+          </div>
+          <h2 class="post-card-title">
+            <a href="/2025/06/10/hello-world/">欢迎来到 ByteVibe</a>
+          </h2>
+          <div class="post-card-excerpt">
+            
+              欢迎来到 ByteVibe！这是一个关于 Vibe Coding 和 AI 编程的技术博客，在这里我们将一起探索 AI 时代的编程新范式。
+            
           </div>
           
+          <div class="post-card-tags">
+            
+              <a class="tag-pill" href="/tags/%E5%85%AC%E5%91%8A/">#公告</a>
+            
+          </div>
+          
+          <span class="read-more">阅读全文 →</span>
         </div>
-        
-
+      </article>
       
     </div>
+    
+<nav class="pagination">
+  <a class="extend prev" rel="prev" href="/page/2/">←</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+</nav>
+
+
   </div>
 </section>
 

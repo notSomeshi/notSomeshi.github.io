@@ -421,6 +421,7 @@ document.addEventListener('DOMContentLoaded', function () {
           { v: 'writing', label: '写文章、报告、邮件', desc: '内容创作与润色' },
           { v: 'research', label: '查资料、读论文或长文档', desc: '检索、总结、理解长文' },
           { v: 'data', label: '做表格、分析数据、画图表', desc: '数据处理与可视化' },
+          { v: 'finance', label: '金融分析 / 量化研究', desc: '读财报、写回测代码、风控建模(仅工具,非投资建议)' },
           { v: 'daily', label: '日常问答、学习、翻译', desc: '通用助手' }
         ]
       },
@@ -628,24 +629,31 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       }
 
-      // 2) 能力匹配 30 分
+      // 金融/量化场景:准确性远比省钱重要(一个错数字的代价 >> 订阅差价)
       var uses = (a.use && a.use.length) ? a.use : ['daily'];
+      var isFinance = uses.indexOf('finance') !== -1;
+      var capWeight = isFinance ? 42 : 30;
+      var costWeight = isFinance ? 12 : 20;
+
+      // 2) 能力匹配(默认 30 分;金融场景 42 分)
       var capSum = 0;
       uses.forEach(function (u) { capSum += (plan.caps[u] || 60); });
       var capAvg = capSum / uses.length;
-      var capScore = (capAvg / 100) * 30;
+      var capScore = (capAvg / 100) * capWeight;
       if (capAvg >= 85) why.push('在你选的用途上是第一梯队水平');
       else if (capAvg < 65) reasons.push('在你选的用途上只能算够用');
+      if (isFinance && capAvg < 75) reasons.push('金融数据分析要求高准确性,该方案在此项并非最强');
 
-      // 3) 花得值不值 20 分:实际月费 ÷ 你的用量
+      // 3) 花得值不值(默认 20 分;金融场景降为 12 分)
       var effPrice = cost > 0 ? cost / (need / 1000000) : 0;
-      var costScore;
-      if (cost === 0) { costScore = 20; why.push('完全免费'); }
-      else if (effPrice <= 0.2) { costScore = 20; why.push('单位成本极低,同等花费下用量最大'); }
-      else if (effPrice <= 0.6) costScore = 16;
-      else if (effPrice <= 1.5) costScore = 11;
-      else if (effPrice <= 4) costScore = 6;
-      else { costScore = 2; reasons.push('单位成本偏高,预算敏感的话要算清楚'); }
+      var costRatio;
+      if (cost === 0) { costRatio = 1; why.push('完全免费'); }
+      else if (effPrice <= 0.2) { costRatio = 1; why.push('单位成本极低,同等花费下用量最大'); }
+      else if (effPrice <= 0.6) costRatio = 0.8;
+      else if (effPrice <= 1.5) costRatio = 0.55;
+      else if (effPrice <= 4) costRatio = 0.3;
+      else { costRatio = 0.1; reasons.push('单位成本偏高,预算敏感的话要算清楚'); }
+      var costScore = costRatio * costWeight;
 
       // 4) 偏好加成 10 分
       var prefHit = 0;
@@ -690,7 +698,22 @@ document.addEventListener('DOMContentLoaded', function () {
         return '$' + r.plan.price + ' / 月';
       }
 
-      var html = '<div class="adv-card adv-card-top">' +
+      // 选了金融用途时,置顶合规提示
+      var html = '';
+      if ((a.use || []).indexOf('finance') !== -1) {
+        html += '<div class="adv-fin-notice">' +
+          '<p class="adv-fin-title">⚠ 关于金融用途的重要说明</p>' +
+          '<ul>' +
+            '<li>以下推荐的是<strong>做研究与分析的工具</strong>(读财报、写回测代码、处理数据),<strong>不是投资建议,也不推荐任何证券标的</strong>。</li>' +
+            '<li><strong>AI 会编造财务数据。</strong>实测显示,面对不完整的源文档时,六个主流模型中有四个会<strong>凭空生成看似合理的数字</strong>。任何 AI 给出的财务数据都必须回原始文件核对。</li>' +
+            '<li>在中国,未经证监会批准从事证券投资咨询业务属违法行为。<strong>本站不提供、也不评测任何"荐股"类服务</strong>。</li>' +
+            '<li>回测结果不代表未来收益;把 AI 输出直接接入实盘交易,风险由使用者自负。</li>' +
+          '</ul>' +
+          '<p class="adv-fin-more">详见:<a href="/2026/07/27/ai-finance-pitfalls/">《AI 做金融分析的三个致命陷阱》</a></p>' +
+        '</div>';
+      }
+
+      html += '<div class="adv-card adv-card-top">' +
         '<div class="adv-card-badge">⭐ 最推荐</div>' +
         '<div class="adv-card-head">' + brandIco(top.plan.brand) +
           '<div><a class="adv-card-name" href="' + top.plan.url + '" target="_blank" rel="noopener">' +

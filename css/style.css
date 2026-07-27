@@ -3403,6 +3403,47 @@ body::before {
   );
 }
 
+/* 金融用途合规提示 */
+.adv-fin-notice {
+  border: 1px solid #e5484d;
+  border-left: 3px solid #e5484d;
+  background: rgba(229, 72, 77, 0.06);
+  padding: 18px 22px;
+  margin-bottom: 20px;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+}
+
+.adv-fin-title {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #e5484d;
+  margin-bottom: 12px;
+}
+
+.adv-fin-notice ul {
+  margin: 0;
+  padding-left: 1.3em;
+}
+
+.adv-fin-notice li {
+  font-size: 0.8125rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 7px;
+}
+
+.adv-fin-notice strong { color: var(--text-primary); }
+
+.adv-fin-more {
+  margin: 12px 0 0;
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+}
+
+.adv-fin-more a { color: var(--accent-ink); }
+
 /* 花费一览表 */
 .adv-costs {
   border: 1px solid var(--border-color);
