@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>一个模型,N 个分数:当 effort 和编排模式让榜单失去唯一解 | ByteVibe</title>
+<meta name="description" content="一个关于 Vibe Coding、AI 辅助编程和现代开发实践的技术博客">
+<meta name="author" content="ByteVibe">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='0,0 100,0 100,78 78,100 0,100' fill='%23ffd802'/><text x='50' y='70' font-size='58' font-weight='800' font-family='ui-monospace,monospace' fill='%230d0d0f' text-anchor='middle'>B</text></svg>">
+<link rel="alternate" type="application/atom+xml" title="ByteVibe" href="/atom.xml">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script>
+  // 暗色优先:light 显式切亮色;rain 提前打上标记避免闪烁
+  (function() {
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else if (t === 'rain') {
+        document.documentElement.setAttribute('data-rain', '');
+        // 雨夜模式:页面加载的同时就开始预载雨声(与 main.js 的 RAIN_SRC 保持一致)
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.as = 'audio';
+        l.href = '/audio/rain.mp3?v=3';
+        document.head.appendChild(l);
+      }
+    } catch (e) {}
+  })();
+</script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+  
+  <canvas class="rain-canvas" id="rainCanvas" aria-hidden="true"></canvas>
+  <div class="reading-progress" id="readingProgress"></div>
+  <header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a class="site-logo" href="/">
+      ByteVibe
+    </a>
+    <nav class="site-nav" id="siteNav">
+      
+      
+        
+        
+        <a class="nav-link" href="/">首页</a>
+      
+        
+        
+        <a class="nav-link" href="/archives/">归档</a>
+      
+        
+        
+        <a class="nav-link" href="/categories/">分类</a>
+      
+        
+        
+        <a class="nav-link" href="/tags/">标签</a>
+      
+        
+        
+        <a class="nav-link" href="/about/">关于</a>
+      
+    </nav>
+    <div class="header-actions">
+      <button class="header-icon-btn" id="searchToggle" aria-label="搜索" title="搜索 (Ctrl+K)">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+      <button class="header-icon-btn theme-toggle" id="themeToggle" aria-label="切换显示模式(浅色 / 深色 / 雨夜)" title="显示模式:浅色 → 深色 → 雨夜">
+        <span class="icon-sun"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+        <span class="icon-moon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+        <span class="icon-umbrella"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 12a11.05 11.05 0 0 0-22 0Z"></path><path d="M12 12v7a2 2 0 0 0 4 0"></path></svg></span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打开菜单">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    
+      <a class="mobile-nav-link" href="/">首页</a>
+    
+      <a class="mobile-nav-link" href="/archives/">归档</a>
+    
+      <a class="mobile-nav-link" href="/categories/">分类</a>
+    
+      <a class="mobile-nav-link" href="/tags/">标签</a>
+    
+      <a class="mobile-nav-link" href="/about/">关于</a>
+    
+  </div>
+</header>
+
+  <main class="main-content">
+    <article class="post-detail">
+  <div class="container-docs">
+    <div class="post-layout-grid">
+      <!-- 1. Left Sidebar: Documentation Navigation -->
+      <aside class="post-sidebar-left">
+        <div class="sidebar-sticky">
+          <h3 class="sidebar-title">全部文章</h3>
+          <ul class="sidebar-list">
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/opus5-price-war/">Opus 5 的降价三分之二:旗舰模型的价格战正式开打</a>
+              </li>
+            
+              <li class="sidebar-item active">
+                <a href="/2026/07/27/one-model-many-scores/">一个模型,N 个分数:当 effort 和编排模式让榜单失去唯一解</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/20/grok45-ide-native-models/">Grok 4.5 与「IDE 原生」模型:当编辑器成为训练场</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/20/frontier-convergence-2026/">前沿收敛:为什么 2026 年榜单顶部挤成了一团</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/17/openrouter-power-shift/">OpenRouter 上的权力转移:中国开源模型如何吃下一半流量</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/17/ai-frontier-briefing-2026-07/">2026 年中前沿速览:模型分层、Agent 落地与监管转折</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-prospects-and-strata/">前景、困难与阶层重排:AI 正在改写谁的命运?</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-dividend-paradox/">AI 红利悖论:我们为 AI 买单三年,红利为何还没普惠?</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-capital-markets-2026/">资本市场视角下的 AI 局势:7250 亿美元 Capex、循环交易与泡沫之辩</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/no-code-mvp-to-solopreneur/">从 Vibe Coding 到超级个体：2026 年全栈独立开发的新叙事</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/yolo-mode-and-ai-safety-guardrails/">YOLO 模式下的安全边界：如何防止 AI 删库跑路</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/high-performance-ai-prompts-library/">如何撰写黄金级 AI Prompt：从“做个功能”到“系统级交付”</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/mcp-server-practical-recipes/">Model Context Protocol (MCP) 深度指南：连接你的 AI 与现实数据</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/advanced-vibe-coding-roo-clinic/">Cline 与 Roo Code 实战：下一代 Vibe Coding 的工程范式</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/04/01/claude-code-complete-guide/">Claude Code 从入门到精通：面向工程师与产品经理的 AI 编程完全指南</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/30/future-of-vibe-coding/">Vibe Coding 的未来：当编程不再需要编程</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/25/ai-coding-tools-2025/">2025 年最值得关注的 AI 编程工具全景</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/20/vibe-coding-best-practices/">Vibe Coding 最佳实践：如何高效地与 AI 结对编程</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/15/what-is-vibe-coding/">什么是 Vibe Coding？一文读懂 AI 时代的编程新范式</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/10/hello-world/">欢迎来到 ByteVibe</a>
+              </li>
+            
+          </ul>
+        </div>
+      </aside>
+
+      <!-- 2. Middle Column: Main Article Content -->
+      <div class="post-content-main">
+        <header class="post-header">
+          <div class="post-meta">
+            <time class="post-date">2026年07月27日</time>
+            
+            <span class="post-meta-sep">·</span>
+            <span class="post-category">
+              
+                <a href="/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察</a>
+              
+            </span>
+            
+            <span class="post-meta-sep">·</span>
+            <span class="reading-time">7 分钟阅读</span>
+          </div>
+          <h1 class="post-title">一个模型,N 个分数:当 effort 和编排模式让榜单失去唯一解</h1>
+          
+          <div class="post-tags">
+            
+              <a class="tag-pill" href="/tags/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/">#基准测试</a>
+            
+              <a class="tag-pill" href="/tags/%E6%8E%A8%E7%90%86%E5%BC%BA%E5%BA%A6/">#推理强度</a>
+            
+              <a class="tag-pill" href="/tags/%E6%88%90%E6%9C%AC%E4%BC%98%E5%8C%96/">#成本优化</a>
+            
+          </div>
+          
+        </header>
+        
+        
+        
+        <details class="mobile-toc">
+          <summary>目录 / Contents</summary>
+          <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E6%A6%9C%E5%8D%95%E4%B8%8A%E7%9A%84%E2%80%9D%E5%90%8C%E5%90%8D%E4%B8%8D%E5%90%8C%E5%88%86%E2%80%9D"><span class="toc-list-text">一、榜单上的”同名不同分”</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E4%B8%A4%E4%B8%AA%E7%8B%AC%E7%AB%8B%E7%9A%84%E2%80%9D%E5%A0%86%E7%AE%97%E5%8A%9B%E2%80%9D%E6%97%8B%E9%92%AE"><span class="toc-list-text">二、两个独立的”堆算力”旋钮</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E6%97%8B%E9%92%AE%E4%B8%80-%E6%8E%A8%E7%90%86%E5%BC%BA%E5%BA%A6-effort"><span class="toc-list-text">旋钮一:推理强度(effort)</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E6%97%8B%E9%92%AE%E4%BA%8C-%E5%B9%B6%E8%A1%8C%E7%BC%96%E6%8E%92-orchestration"><span class="toc-list-text">旋钮二:并行编排(orchestration)</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E6%9C%80%E5%8F%8D%E7%9B%B4%E8%A7%89%E7%9A%84%E5%8F%91%E7%8E%B0-%E6%9B%B4%E9%AB%98-%E2%89%A0-%E6%9B%B4%E5%A5%BD"><span class="toc-list-text">三、最反直觉的发现:更高 ≠ 更好</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E5%AF%B9%E4%BD%BF%E7%94%A8%E8%80%85%E7%9A%84%E4%B8%89%E6%9D%A1%E5%AE%9E%E8%B7%B5"><span class="toc-list-text">四、对使用者的三条实践</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E6%9B%B4%E5%A4%A7%E7%9A%84%E9%97%AE%E9%A2%98-%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E7%9A%84%E5%8F%AF%E6%AF%94%E6%80%A7%E6%AD%A3%E5%9C%A8%E7%93%A6%E8%A7%A3"><span class="toc-list-text">五、更大的问题:基准测试的可比性正在瓦解</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+        </details>
+        
+
+        <div class="post-body">
+          <p>“Claude Opus 5 拿了 61 分”——这句话在 2026 年已经不完整了。同一个模型,换一个推理强度设置,分数和账单都会变;换一种编排模式,甚至可能变成另一个量级。**”一个模型对应一个分数”的隐含假设,正在崩塌。**</p>
+<span id="more"></span>
+
+<div class="report-box">
+<div class="report-box-title">// 核心观点摘要</div>
+<ul>
+<li><strong>同一模型多个条目</strong>:Artificial Analysis 榜单上,GPT-5.6 Sol (max) 59 分与 Sol (xhigh) 58 分是<strong>两个独立条目</strong>。</li>
+<li><strong>effort 不改单价,改 token 消耗</strong>:Claude Opus 5 的 low→max 五档,同一任务成本差约 <strong>3 倍</strong>。</li>
+<li><strong>并行编排是第二个变量</strong>:GPT-5.6 Sol 的 Ultra 模式把任务分给多个子代理,Terminal-Bench 2.1 从 88.8% 升到 91.9%,但一次运行相当于数次调用。</li>
+<li><strong>更高不等于更好</strong>:FrontierCode 数据显示 Opus 5 在 <strong>medium effort 就达到编程峰值</strong>,再往上收益递减。</li>
+<li><strong>实践建议</strong>:先调 effort,再考虑换模型——多数任务用 medium 就够,账单可能直接减半。</li>
+</ul>
+</div>
+
+<h2 id="一、榜单上的”同名不同分”"><a href="#一、榜单上的”同名不同分”" class="headerlink" title="一、榜单上的”同名不同分”"></a>一、榜单上的”同名不同分”</h2><p>打开 Artificial Analysis 的智能指数榜,你会看到一些看似重复的条目:</p>
+<table>
+<thead>
+<tr>
+<th>条目</th>
+<th>分数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Claude Opus 5(Adaptive Reasoning, <strong>Max Effort</strong>)</td>
+<td>61</td>
+</tr>
+<tr>
+<td>Claude Fable 5(Adaptive Reasoning, Max Effort, Opus 4.8 Fallback)</td>
+<td>60</td>
+</tr>
+<tr>
+<td>GPT-5.6 Sol(<strong>max</strong>)</td>
+<td>59</td>
+</tr>
+<tr>
+<td>GPT-5.6 Sol(<strong>xhigh</strong>)</td>
+<td>58</td>
+</tr>
+</tbody></table>
+<p>最后两行是同一个模型。AA 把不同推理强度当作<strong>不同的被测对象</strong>分别列出——这是诚实的做法,因为它们确实是不同的东西:消耗的 token 不同、花的钱不同、答得也不一样好。</p>
+<p>而当媒体或社区引用”GPT-5.6 Sol 得了 59 分”时,几乎没人会附上”在 max effort 下”这个前提。<strong>分数被剥离了它的成本背景</strong>,这正是当下模型讨论最大的信息损耗。</p>
+<h2 id="二、两个独立的”堆算力”旋钮"><a href="#二、两个独立的”堆算力”旋钮" class="headerlink" title="二、两个独立的”堆算力”旋钮"></a>二、两个独立的”堆算力”旋钮</h2><p>要理解为什么会这样,得先分清 2026 年模型有<strong>两种加深思考的方式</strong>:</p>
+<h3 id="旋钮一-推理强度-effort"><a href="#旋钮一-推理强度-effort" class="headerlink" title="旋钮一:推理强度(effort)"></a>旋钮一:推理强度(effort)</h3><p>Claude Opus 5 提供五档:<code>low / medium / high / xhigh / max</code>。它<strong>不改变每 token 的单价</strong>——$5&#x2F;$25 对所有档位一样——改变的是<strong>模型愿意为一道题花多少 token 去规划、自检、返工</strong>。</p>
+<p>代价是实打实的:在 Frontier-Bench 上,<strong>low 到 max 的每次成本差约 3 倍</strong>;high 大约是 medium 的两倍。</p>
+<h3 id="旋钮二-并行编排-orchestration"><a href="#旋钮二-并行编排-orchestration" class="headerlink" title="旋钮二:并行编排(orchestration)"></a>旋钮二:并行编排(orchestration)</h3><p>GPT-5.6 Sol 的 <strong>Ultra 模式</strong>走的是另一条路:不是把一条思维链拉长,而是<strong>把难题分派给多个并行子代理</strong>,各自处理再汇总。</p>
+<p>效果显著——Terminal-Bench 2.1 从基础 Sol 的 88.8% 提升到 **91.9%**。但代价同样直接:Ultra 模式没有单独标价,<strong>每个子代理各自生成和消耗 token,一次 Ultra 运行相当于好几次普通 Sol 调用</strong>。</p>
+<p>这两个旋钮可以叠加。于是”一个模型”实际上是一个<strong>分数-成本的连续谱</strong>,而不是一个点。</p>
+<h2 id="三、最反直觉的发现-更高-≠-更好"><a href="#三、最反直觉的发现-更高-≠-更好" class="headerlink" title="三、最反直觉的发现:更高 ≠ 更好"></a>三、最反直觉的发现:更高 ≠ 更好</h2><p>如果”调到最高档”总是更强,那事情还简单。但数据不支持这个直觉。</p>
+<p>Anthropic 官方明确建议<strong>广泛使用 low 和 medium 档</strong>,称它们”以一小部分 token 消耗和延迟提供良好结果,且优于早期 Opus 模型的同档设置”。</p>
+<p>FrontierCode 基准的实测更直接:<strong>Claude Opus 5 在 medium effort 达到编程峰值</strong>(主集 53.4%、扩展集 63.6%),再往上是收益递减。</p>
+<p>为什么会这样?一个合理的解释是:<strong>过度思考会引入噪声</strong>。模型在简单任务上花更多 token 反复推翻自己的正确答案,反而可能偏离。这与人类做题时”想太多改错答案”的经验高度一致。</p>
+<h2 id="四、对使用者的三条实践"><a href="#四、对使用者的三条实践" class="headerlink" title="四、对使用者的三条实践"></a>四、对使用者的三条实践</h2><p><strong>1. 把 effort 当成第一个省钱旋钮,而不是最后一个。</strong><br>大多数人的优化顺序是”贵了就换便宜模型”,但<strong>换模型意味着换能力</strong>,而调低 effort 往往不损失质量。先试试把默认档从 high 降到 medium,观察输出质量——如果没退步,你的账单立刻减半。</p>
+<p><strong>2. 按任务分配 effort,而不是全局一个设置。</strong><br>补全、格式转换、常规改代码 → low&#x2F;medium 足够;架构设计、疑难 bug、长程重构 → 才值得上 high&#x2F;max。把 effort 当作<strong>按任务下注的筹码</strong>。</p>
+<p><strong>3. 读榜单时先问”哪一档”。</strong><br>看到某个惊人的分数,先确认它是在什么设置下跑的。本站<a href="/rankings/">模型天梯</a>的成本图已经加了红色 <code>MAX EFFORT</code> 标记——那些数字是<strong>成本上限</strong>,不是你的日常开销。</p>
+<h2 id="五、更大的问题-基准测试的可比性正在瓦解"><a href="#五、更大的问题-基准测试的可比性正在瓦解" class="headerlink" title="五、更大的问题:基准测试的可比性正在瓦解"></a>五、更大的问题:基准测试的可比性正在瓦解</h2><p>这件事的深层影响是:<strong>当同一个模型能产生一族分数时,跨模型比较变得更难了。</strong></p>
+<p>模型 A 的 max 档对上模型 B 的 medium 档,比的到底是什么?如果 A 用了三倍的钱换来 2 分优势,这算赢吗?</p>
+<p>这也是为什么本站的天梯坚持把”<a href="/rankings/">同卷不同价</a>“的成本图与能力榜并列——<strong>脱离成本的能力排名,在 2026 年已经是一种误导</strong>。当行业进入<a href="/2026/07/20/frontier-convergence-2026/">前沿收敛</a>阶段,能力差距被压缩到几个百分点,而成本差距却能到 27 倍时,后者才是真正需要看清的维度。</p>
+<div class="risk-box">
+<div class="risk-box-title">// 风险提示</div>
+<ul>
+<li>各家 effort 档位的命名与行为不统一(Anthropic 五档、OpenAI 的 xhigh/max/ultra 模式),跨厂商横向对比"同档位"没有严格意义。</li>
+<li>文中成本倍数关系来自公开基准与厂商说明,实际任务上的差异取决于任务类型,可能显著偏离。</li>
+<li>Ultra 类并行编排模式的实际账单波动很大,生产环境部署前建议先做小规模成本实测。</li>
+</ul>
+</div>
+
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li>Artificial Analysis,<a target="_blank" rel="noopener" href="https://artificialanalysis.ai/methodology/intelligence-benchmarking">Intelligence Benchmarking Methodology</a> · <a target="_blank" rel="noopener" href="https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-1">Intelligence Index v4.1</a></li>
+<li>Anthropic,<a target="_blank" rel="noopener" href="https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5">What’s new in Claude Opus 5</a></li>
+<li>SitePoint,<a target="_blank" rel="noopener" href="https://www.sitepoint.com/claude-opus-5-medium-effort-frontiercode-benchmark/">Claude Opus 5 Is Most Efficient at Medium Effort: FrontierCode Benchmark Data Explained</a></li>
+<li>andrew.ooo,<a target="_blank" rel="noopener" href="https://andrew.ooo/answers/gpt-5-6-sol-ultra-mode-subagents-terminal-bench-explained-july-2026/">What Is GPT-5.6 Sol Ultra Mode? Subagents, Terminal-Bench 2.1, and the 91.9% Score Explained</a></li>
+<li>eesel AI,<a target="_blank" rel="noopener" href="https://www.eesel.ai/blog/gpt-5-6-sol-ultra">GPT-5.6 Sol Ultra: OpenAI’s multi-agent mode explained</a></li>
+<li>Vellum,<a target="_blank" rel="noopener" href="https://www.vellum.ai/blog/gpt-5-6-benchmarks-explained">GPT-5.6 Sol vs Terra vs Luna: Which Tier Should You Actually Use?</a></li>
+</ol>
+<blockquote>
+<p>本文由 ByteVibe 撰写(AI 辅助研究整理)。文中观点的原始出处均已在正文与参考文献中标注,版权归原作者所有。数据快照 2026-07-27。</p>
+</blockquote>
+
+        </div>
+        
+        <footer class="post-footer">
+          <nav class="post-nav">
+            
+            <a class="post-nav-item post-nav-prev" href="/2026/07/27/opus5-price-war/">
+              <span class="post-nav-label">← 上一篇</span>
+              <span class="post-nav-title">Opus 5 的降价三分之二:旗舰模型的价格战正式开打</span>
+            </a>
+            
+            
+            <a class="post-nav-item post-nav-next" href="/2026/07/20/grok45-ide-native-models/">
+              <span class="post-nav-label">下一篇 →</span>
+              <span class="post-nav-title">Grok 4.5 与「IDE 原生」模型:当编辑器成为训练场</span>
+            </a>
+            
+          </nav>
+        </footer>
+      </div>
+
+      <!-- 3. Right Sidebar: Outline TOC Jump -->
+      <aside class="post-sidebar-right">
+        
+          <div class="toc-sticky">
+            <h3 class="toc-title">目录大纲</h3>
+            <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E6%A6%9C%E5%8D%95%E4%B8%8A%E7%9A%84%E2%80%9D%E5%90%8C%E5%90%8D%E4%B8%8D%E5%90%8C%E5%88%86%E2%80%9D"><span class="toc-list-text">一、榜单上的”同名不同分”</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E4%B8%A4%E4%B8%AA%E7%8B%AC%E7%AB%8B%E7%9A%84%E2%80%9D%E5%A0%86%E7%AE%97%E5%8A%9B%E2%80%9D%E6%97%8B%E9%92%AE"><span class="toc-list-text">二、两个独立的”堆算力”旋钮</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E6%97%8B%E9%92%AE%E4%B8%80-%E6%8E%A8%E7%90%86%E5%BC%BA%E5%BA%A6-effort"><span class="toc-list-text">旋钮一:推理强度(effort)</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E6%97%8B%E9%92%AE%E4%BA%8C-%E5%B9%B6%E8%A1%8C%E7%BC%96%E6%8E%92-orchestration"><span class="toc-list-text">旋钮二:并行编排(orchestration)</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E6%9C%80%E5%8F%8D%E7%9B%B4%E8%A7%89%E7%9A%84%E5%8F%91%E7%8E%B0-%E6%9B%B4%E9%AB%98-%E2%89%A0-%E6%9B%B4%E5%A5%BD"><span class="toc-list-text">三、最反直觉的发现:更高 ≠ 更好</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E5%AF%B9%E4%BD%BF%E7%94%A8%E8%80%85%E7%9A%84%E4%B8%89%E6%9D%A1%E5%AE%9E%E8%B7%B5"><span class="toc-list-text">四、对使用者的三条实践</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E6%9B%B4%E5%A4%A7%E7%9A%84%E9%97%AE%E9%A2%98-%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E7%9A%84%E5%8F%AF%E6%AF%94%E6%80%A7%E6%AD%A3%E5%9C%A8%E7%93%A6%E8%A7%A3"><span class="toc-list-text">五、更大的问题:基准测试的可比性正在瓦解</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+          </div>
+        
+      </aside>
+    </div>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <p class="copyright">&copy; 2026 ByteVibe. All rights reserved.</p>
+      <p class="powered-by">Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a></p>
+      
+      <div class="social-links">
+        
+          <a class="social-link" href="https://github.com/notSomeshi" target="_blank" rel="noopener noreferrer">GitHub</a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+
+  <div class="search-overlay" id="searchOverlay" hidden>
+  <div class="search-backdrop" id="searchBackdrop"></div>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="站内搜索">
+    <div class="search-input-wrap">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="searchInput" class="search-input" placeholder="搜索文章…" autocomplete="off" spellcheck="false">
+      <button class="search-close" id="searchClose" aria-label="关闭搜索">ESC</button>
+    </div>
+    <div class="search-results" id="searchResults">
+      <p class="search-hint">输入关键词搜索标题、标签与正文</p>
+    </div>
+  </div>
+</div>
+
+  <button class="scroll-to-top" id="scrollToTop" aria-label="回到顶部">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+  
+<script src="/js/main.js"></script>
+
+</body>
+</html>

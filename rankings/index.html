@@ -101,7 +101,7 @@
   <div class="container">
     <header class="archive-header">
       <h1 class="archive-title">模型天梯</h1>
-      <p class="archive-desc">TOP 20 AI MODELS · 多机构综合排名 · 数据快照 2026-07-25</p>
+      <p class="archive-desc">TOP 20 AI MODELS · 多机构综合排名 · 数据快照 2026-07-27</p>
     </header>
 
     <a class="rk-advisor-cta" href="/advisor/">
@@ -143,9 +143,9 @@
       <!-- 说明与来源 -->
       <div class="rk-notes">
         <p class="rk-note"><strong>综合分算法</strong>:每项机构得分在当前 20 个模型内做 min-max 归一化(0–100),按左侧权重加权平均;某模型缺失某项评分时,该项不计入并按剩余权重重新归一。<span class="rk-miss-mark">—</span> 表示该机构暂未收录此模型。点击列头可按该机构得分排序,点击模型名跳转官网。</p>
-        <p class="rk-note"><strong>近期动态(截至 2026-07-25)</strong>:Anthropic 于 <strong>7 月 24 日发布 Claude Opus 5</strong>——$5/$25 的定价仅为 Opus 4.8 的三分之一,却提供接近 Fable 5 的能力,1M 上下文、三档推理强度开关,现已是 Claude Max 的默认模型,本榜已收录;Google 于 7 月 21 日发布 <strong>Gemini 3.6 Flash</strong> 与 3.5 Flash Lite(已替换旧的 3 Flash 条目);xAI 于 7 月 8 日发布 <strong>Grok 4.5</strong>(Cursor 编程数据训练);<strong>GPT-5.6</strong> 于 7 月 9 日成为 ChatGPT 默认模型;Moonshot 于 7 月 16 日发布 <strong>Kimi K3</strong>。<strong>价格警报</strong>:Claude Sonnet 5 当前 $2/$10 为促销价,<strong>2026-08-31 后将涨至 $3/$15</strong>。榜单顶部约 55 ELO 挤成一团,是有记录以来最窄的头部差距(详见《前沿收敛》)。</p>
+        <p class="rk-note"><strong>近期动态(截至 2026-07-27)</strong>:Anthropic 于 7 月 24 日发布 <strong>Claude Opus 5</strong>——$5/$25 仅为 Opus 4.8 的三分之一,却提供接近 Fable 5 的能力,1M 上下文、五档推理强度(low/medium/high/xhigh/max),现为 Claude Max 默认模型;<strong>GPT-5.6 Sol 的 Ultra 模式</strong>浮出水面——它<strong>不是独立模型</strong>,而是把难题分派给并行子代理的编排模式,Terminal-Bench 2.1 拿到 91.9%(基础 Sol 为 88.8%),但没有单独定价、<strong>token 成倍消耗</strong>(详见新文《一个模型,N 个分数》);Google 于 7 月 21 日发布 <strong>Gemini 3.6 Flash</strong> 与 3.5 Flash Lite;<strong>Gemini 3.5 Pro</strong> 截至 7 月 21 日官方仅称"正在与合作伙伴测试",2M 上下文与定价均<strong>未经官宣</strong>,故暂不入榜;xAI 于 7 月 8 日发布 <strong>Grok 4.5</strong>;Moonshot 于 7 月 16 日发布 <strong>Kimi K3</strong>。<strong>价格警报</strong>:Claude Sonnet 5 当前 $2/$10 为促销价,<strong>2026-08-31 后涨至 $3/$15</strong>(还剩约 1 个月)。榜单顶部约 55 ELO 挤成一团,是有记录以来最窄的头部差距(详见《前沿收敛》)。</p>
         <p class="rk-note"><strong>「社区体感」维度</strong>:由 Arena 众测投票(百万级用户盲测偏好)与 OpenRouter 用量份额(真实付费流量占比,截至 2026-07-24)组成——前者是"觉得谁好用",后者是"钱包投给了谁"。注意用量受价格影响很大,开源低价模型天然占优,故该项不计入「综合」维度。</p>
-        <p class="rk-note"><strong>数据来源(快照日 2026-07-25,以各机构官网实时数据为准)</strong>:
+        <p class="rk-note"><strong>数据来源(快照日 2026-07-27,以各机构官网实时数据为准)</strong>:
           <a href="https://arena.ai/leaderboard/text" target="_blank" rel="noopener">Arena(原 LMArena)</a> ·
           <a href="https://artificialanalysis.ai/leaderboards/models" target="_blank" rel="noopener">Artificial Analysis</a> ·
           <a href="https://livebench.ai/" target="_blank" rel="noopener">LiveBench</a> ·
@@ -182,17 +182,17 @@
               <td>全档采用「5 小时滚动窗口 + 每周上限」双重限制,窗口内用完只能等重置:<br>· Free:每日少量消息,基础模型<br>· Pro ≈ 45 条消息 / 5 小时(网页、App、Claude Code 共用同一个池)<br>· Max 5x / 20x = Pro 的 5 倍 / 20 倍窗口额度<br>· 超限两条路:等窗口重置,或按 API 价加购(extra usage)</td>
               <td>按 Opus 档满负荷估算:<br>· Pro ≈ 2000–5000 万 token/月<br>· Max 5x ≈ 1–2 亿/月<br>· Max 20x ≈ 2–4 亿/月<br>· 换用 Sonnet 约 ×5,Haiku 更高</td>
               <td>· Pro ≈ $2–10 /M<br>· Max 5x ≈ $0.7–1.5 /M<br>· Max 20x ≈ $0.5–1 /M<br><em class="rk-pt-note">用得越少,实际单价越贵</em></td>
-              <td><strong>Opus 5 $5 / $25</strong>(新)<br>Fable 5 $10 / $50<br>Opus 4.8 $15 / $75<br>Sonnet 5 $2 / $10<br>Haiku 4.5 $1 / $5<br><em class="rk-pt-note">💡 Opus 5(2026-07-24 发布)以 Opus 4.8 三分之一的价格提供接近 Fable 5 的能力,1M 上下文,含 low/medium/high 三档推理强度开关;fast 模式约 2.5× 速度、2× 价格<br>⚠ Sonnet 5 现为促销价,<strong>2026-08-31 后涨至 $3 / $15</strong><br>规则:输出价约为输入 5 倍;提示缓存写入 1.25×、命中仅 0.1×;Batch 批处理五折;超 20 万 token 长上下文输入加价</em></td>
+              <td><strong>Opus 5 $5 / $25</strong>(新)<br>Fable 5 $10 / $50<br>Opus 4.8 $15 / $75<br>Sonnet 5 $2 / $10<br>Haiku 4.5 $1 / $5<br><em class="rk-pt-note">💡 Opus 5(2026-07-24 发布)以 Opus 4.8 三分之一的价格提供接近 Fable 5 的能力,1M 上下文,含 <strong>low/medium/high/xhigh/max 五档</strong>推理强度开关(low→max 成本差约 3 倍,官方建议日常用 low/medium);fast 模式约 2.5× 速度、2× 价格<br>⚠ Sonnet 5 现为促销价,<strong>2026-08-31 后涨至 $3 / $15</strong><br>规则:输出价约为输入 5 倍;提示缓存写入 1.25×、命中仅 0.1×;Batch 批处理五折;超 20 万 token 长上下文输入加价</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-openai">O</span><a href="https://openai.com/chatgpt" target="_blank" rel="noopener">ChatGPT + Codex</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// ChatGPT Plus / Pro</strong><b>适合谁:</b>"什么都要一点"的通才、产品经理、研究型用户;2026-07 新增的 $100 Pro 档就是冲着 Claude Max 用户来的。<br><b>技术栈:</b>生态插件与多模态最全;Codex 云端并行改代码适合多任务并行的团队节奏。<br><b>在用它做:</b>研究写作、数据分析、让 Codex 在云上并行修 bug。纯编程吞吐性价比略逊 Claude/Cursor 专档。</span></span></td>
               <td class="rk-pt-plans"><span class="rk-plan">Free $0</span><span class="rk-plan">Plus $20</span><span class="rk-plan rk-plan-x">Pro $100<em>(2026-07 新档)</em></span><span class="rk-plan">Team $25–30/席</span><span class="rk-plan">Enterprise 定制</span></td>
-              <td>GPT-5.6 Luna / Terra / Sol · o4-mini<br><em class="rk-pt-note">GPT-5.6 已于 2026-07-09 成为 ChatGPT 默认模型<br>Plus 及以上含 Codex(云端编程代理)</em></td>
+              <td>GPT-5.6 Luna(最快最省) / Terra(均衡) / Sol(旗舰) · <strong>Sol Ultra 模式</strong> · o4-mini<br><em class="rk-pt-note">GPT-5.6 已于 2026-07-09 成为 ChatGPT 默认模型<br>Sol Ultra = 并行子代理编排,非独立模型<br>Plus 及以上含 Codex(云端编程代理)</em></td>
               <td>· Free:基础模型限量对话<br>· Plus:日常对话高额度(默认 Terra 档);Sol 高强度推理限量;Codex 云任务约 30–150 个 / 5 小时<br>· Pro:对话近乎不限 + Sol 高强度 + Codex 高并发(可同时挂多个任务)<br>· o4-mini 各付费档近乎不限</td>
               <td>· Plus ≈ 3000 万–1 亿 token/月<br>· Pro ≈ 2–6 亿/月(含 Codex 并行任务折算)</td>
               <td>· Plus ≈ $0.5–2 /M<br>· Pro ≈ $0.3–0.8 /M</td>
-              <td>5.6 Luna $1 / $8<br>5.6 Terra $2.5 / $15<br>5.6 Sol $5 / $30<br>o4-mini $1.1 / $4.4<br><em class="rk-pt-note">规则:缓存命中的输入约 0.25×;Batch 批处理五折;推理过程产生的 token 按输出价计费</em></td>
+              <td>5.6 Luna $1 / $8<br>5.6 Terra $2.5 / $15<br>5.6 Sol $5 / $30<br>o4-mini $1.1 / $4.4<br><em class="rk-pt-note">⚠ <strong>Sol Ultra 模式无单独标价</strong>:它把任务分派给并行子代理,每个子代理各自消耗 token,一次运行相当于数次 Sol 调用<br>规则:缓存命中的输入约 0.25×;Batch 批处理五折;推理过程产生的 token 按输出价计费</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-cursor">C</span><a href="https://cursor.com/" target="_blank" rel="noopener">Cursor</a>
@@ -297,6 +297,7 @@
           <p class="rkc-effort-title">⚠ 重要前提:下表全部是「最高 effort」下的成绩与账单</p>
           <p>AA 对推理模型采用厂商披露的<strong>最高推理强度</strong>(榜单条目标注为 Adaptive Reasoning, <strong>Max Effort</strong>;同一模型的不同档位会被列为独立条目,例如 GPT-5.6 Sol (max) 59 分与 (xhigh) 58 分)。</p>
           <p><strong>effort 不改变每 token 单价,改变的是一道题烧掉多少 token</strong>:高 effort 让模型花更多 token 规划、自检、返工。以 Claude Opus 5 的五档(low / medium / high / xhigh / max)为例,<strong>low 到 max 的每次成本差约 3 倍</strong>,high 约为 medium 的 2 倍。</p>
+          <p><strong>还有第二种"堆算力"的方式:并行编排。</strong>GPT-5.6 Sol 的 <strong>Ultra 模式</strong>不是把一条思维链拉长,而是把难题<strong>分派给多个并行子代理</strong>——Terminal-Bench 2.1 从基础 Sol 的 88.8% 提升到 91.9%。它同样没有单独标价,但每个子代理各自消耗 token,<strong>一次 Ultra 运行相当于好几次普通调用</strong>。同一个模型名,跑法不同,账单可以差一个量级。</p>
           <p class="rkc-effort-key">💡 因此下表是<strong>成本上限</strong>,不是日常开销。Anthropic 官方反而建议广泛使用 low/medium——FrontierCode 基准显示 <strong>Opus 5 在 medium effort 就达到编程峰值</strong>(主集 53.4%、扩展集 63.6%),再往上收益递减。<strong>日常按 medium 用,账单可能只有表中的一半,编程质量还未必更差。</strong></p>
         </div>
         <div class="rkc-stats">
@@ -336,12 +337,12 @@
             <li><strong>省钱的第二个旋钮:调低 effort。</strong>换模型之外,还有一条被忽视的省钱路径——<strong>同一个模型降一档推理强度</strong>。表中数字是 max 档的上限,而 low→max 成本差约 3 倍。对多数日常任务(补全、常规改代码、问答),medium 甚至 low 就够;Anthropic 官方也是这么建议的。<strong>先调 effort,再考虑换更便宜的模型</strong>,往往能在不牺牲质量的前提下砍掉一半账单。</li>
           </ul>
         </div>
-        <p class="rkc-note">口径:<a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking" target="_blank" rel="noopener">Artificial Analysis「Cost to Run Intelligence Index」</a>(当前为 <a href="https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-1" target="_blank" rel="noopener">v4.1</a>,含 GDPval-AA v2、Terminal-Bench v2.1、SciCode、HLE、GPQA Diamond 等 9 项评测)——按各模型 API 的输入/缓存/推理/输出 token 实际计费汇总,<strong>推理模型均取厂商披露的最高 effort 设置</strong>。实测锚点:Kimi K3 全套 $2,709.75;Claude Opus 4.8 约 $1.78/题;「$/题」按全卷题量折算。其余为按各模型 API 定价与耗 token 量折算的估算值,数据快照 2026-07-25,以 <a href="https://artificialanalysis.ai/models" target="_blank" rel="noopener">AA 官网实时数据</a>为准。effort 档位说明参考 <a href="https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5" target="_blank" rel="noopener">Anthropic 官方文档</a>。</p>
+        <p class="rkc-note">口径:<a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking" target="_blank" rel="noopener">Artificial Analysis「Cost to Run Intelligence Index」</a>(当前为 <a href="https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-1" target="_blank" rel="noopener">v4.1</a>,含 GDPval-AA v2、Terminal-Bench v2.1、SciCode、HLE、GPQA Diamond 等 9 项评测)——按各模型 API 的输入/缓存/推理/输出 token 实际计费汇总,<strong>推理模型均取厂商披露的最高 effort 设置</strong>。实测锚点:Kimi K3 全套 $2,709.75;Claude Opus 4.8 约 $1.78/题;「$/题」按全卷题量折算。其余为按各模型 API 定价与耗 token 量折算的估算值,数据快照 2026-07-27,以 <a href="https://artificialanalysis.ai/models" target="_blank" rel="noopener">AA 官网实时数据</a>为准。effort 档位说明参考 <a href="https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5" target="_blank" rel="noopener">Anthropic 官方文档</a>。</p>
       </div>
 
       <div class="rk-notes">
         <p class="rk-note"><strong>※ 极限用量</strong>为按各家官方额度窗口满负荷折算的<em>数量级估算</em>,不同任务类型(补全/对话/Agent)折算差异极大,仅供比较参考,以官方说明为准。<strong>会员折算价</strong> = 订阅月费 ÷ 估算极限用量,即"把额度用满时每百万 token 的实际成本"——用得越少,实际单价越高;与右侧 API 标价对照,可以直观看出会员在什么用量下开始划算。国产平台的 API 价按当期汇率近似换算为美元。</p>
-        <p class="rk-note"><strong>价格快照 2026-07-25</strong>,来源:
+        <p class="rk-note"><strong>价格快照 2026-07-27</strong>,来源:
           <a href="https://www.aipricing.guru/subscriptions/" target="_blank" rel="noopener">AI Pricing Guru</a> ·
           <a href="https://spectrumailab.com/blog/ai-coding-tools-pricing-compared-2026" target="_blank" rel="noopener">SpectrumAI Lab(编程工具对比)</a> ·
           <a href="https://automationatlas.io/answers/github-copilot-pricing-explained-2026/" target="_blank" rel="noopener">Automation Atlas(Copilot Credits 制)</a> ·
@@ -355,7 +356,7 @@
 
     <script type="application/json" id="rankingsData">
     {
-      "snapshot": "2026-07-25",
+      "snapshot": "2026-07-27",
       "institutions": {
         "arena":      { "name": "Arena",               "short": "Arena",     "url": "https://arena.ai/leaderboard/text",                 "unit": "Elo" },
         "aa":         { "name": "Artificial Analysis", "short": "AA 指数",   "url": "https://artificialanalysis.ai/leaderboards/models", "unit": "指数" },

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Opus 5 的降价三分之二:旗舰模型的价格战正式开打 | ByteVibe</title>
+<meta name="description" content="一个关于 Vibe Coding、AI 辅助编程和现代开发实践的技术博客">
+<meta name="author" content="ByteVibe">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='0,0 100,0 100,78 78,100 0,100' fill='%23ffd802'/><text x='50' y='70' font-size='58' font-weight='800' font-family='ui-monospace,monospace' fill='%230d0d0f' text-anchor='middle'>B</text></svg>">
+<link rel="alternate" type="application/atom+xml" title="ByteVibe" href="/atom.xml">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script>
+  // 暗色优先:light 显式切亮色;rain 提前打上标记避免闪烁
+  (function() {
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else if (t === 'rain') {
+        document.documentElement.setAttribute('data-rain', '');
+        // 雨夜模式:页面加载的同时就开始预载雨声(与 main.js 的 RAIN_SRC 保持一致)
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.as = 'audio';
+        l.href = '/audio/rain.mp3?v=3';
+        document.head.appendChild(l);
+      }
+    } catch (e) {}
+  })();
+</script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+  
+  <canvas class="rain-canvas" id="rainCanvas" aria-hidden="true"></canvas>
+  <div class="reading-progress" id="readingProgress"></div>
+  <header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a class="site-logo" href="/">
+      ByteVibe
+    </a>
+    <nav class="site-nav" id="siteNav">
+      
+      
+        
+        
+        <a class="nav-link" href="/">首页</a>
+      
+        
+        
+        <a class="nav-link" href="/archives/">归档</a>
+      
+        
+        
+        <a class="nav-link" href="/categories/">分类</a>
+      
+        
+        
+        <a class="nav-link" href="/tags/">标签</a>
+      
+        
+        
+        <a class="nav-link" href="/about/">关于</a>
+      
+    </nav>
+    <div class="header-actions">
+      <button class="header-icon-btn" id="searchToggle" aria-label="搜索" title="搜索 (Ctrl+K)">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+      <button class="header-icon-btn theme-toggle" id="themeToggle" aria-label="切换显示模式(浅色 / 深色 / 雨夜)" title="显示模式:浅色 → 深色 → 雨夜">
+        <span class="icon-sun"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+        <span class="icon-moon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+        <span class="icon-umbrella"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 12a11.05 11.05 0 0 0-22 0Z"></path><path d="M12 12v7a2 2 0 0 0 4 0"></path></svg></span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打开菜单">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    
+      <a class="mobile-nav-link" href="/">首页</a>
+    
+      <a class="mobile-nav-link" href="/archives/">归档</a>
+    
+      <a class="mobile-nav-link" href="/categories/">分类</a>
+    
+      <a class="mobile-nav-link" href="/tags/">标签</a>
+    
+      <a class="mobile-nav-link" href="/about/">关于</a>
+    
+  </div>
+</header>
+
+  <main class="main-content">
+    <article class="post-detail">
+  <div class="container-docs">
+    <div class="post-layout-grid">
+      <!-- 1. Left Sidebar: Documentation Navigation -->
+      <aside class="post-sidebar-left">
+        <div class="sidebar-sticky">
+          <h3 class="sidebar-title">全部文章</h3>
+          <ul class="sidebar-list">
+            
+              <li class="sidebar-item active">
+                <a href="/2026/07/27/opus5-price-war/">Opus 5 的降价三分之二:旗舰模型的价格战正式开打</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/one-model-many-scores/">一个模型,N 个分数:当 effort 和编排模式让榜单失去唯一解</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/20/grok45-ide-native-models/">Grok 4.5 与「IDE 原生」模型:当编辑器成为训练场</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/20/frontier-convergence-2026/">前沿收敛:为什么 2026 年榜单顶部挤成了一团</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/17/openrouter-power-shift/">OpenRouter 上的权力转移:中国开源模型如何吃下一半流量</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/17/ai-frontier-briefing-2026-07/">2026 年中前沿速览:模型分层、Agent 落地与监管转折</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-prospects-and-strata/">前景、困难与阶层重排:AI 正在改写谁的命运?</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-dividend-paradox/">AI 红利悖论:我们为 AI 买单三年,红利为何还没普惠?</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-capital-markets-2026/">资本市场视角下的 AI 局势:7250 亿美元 Capex、循环交易与泡沫之辩</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/no-code-mvp-to-solopreneur/">从 Vibe Coding 到超级个体：2026 年全栈独立开发的新叙事</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/yolo-mode-and-ai-safety-guardrails/">YOLO 模式下的安全边界：如何防止 AI 删库跑路</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/high-performance-ai-prompts-library/">如何撰写黄金级 AI Prompt：从“做个功能”到“系统级交付”</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/mcp-server-practical-recipes/">Model Context Protocol (MCP) 深度指南：连接你的 AI 与现实数据</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/advanced-vibe-coding-roo-clinic/">Cline 与 Roo Code 实战：下一代 Vibe Coding 的工程范式</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/04/01/claude-code-complete-guide/">Claude Code 从入门到精通：面向工程师与产品经理的 AI 编程完全指南</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/30/future-of-vibe-coding/">Vibe Coding 的未来：当编程不再需要编程</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/25/ai-coding-tools-2025/">2025 年最值得关注的 AI 编程工具全景</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/20/vibe-coding-best-practices/">Vibe Coding 最佳实践：如何高效地与 AI 结对编程</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/15/what-is-vibe-coding/">什么是 Vibe Coding？一文读懂 AI 时代的编程新范式</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/10/hello-world/">欢迎来到 ByteVibe</a>
+              </li>
+            
+          </ul>
+        </div>
+      </aside>
+
+      <!-- 2. Middle Column: Main Article Content -->
+      <div class="post-content-main">
+        <header class="post-header">
+          <div class="post-meta">
+            <time class="post-date">2026年07月27日</time>
+            
+            <span class="post-meta-sep">·</span>
+            <span class="post-category">
+              
+                <a href="/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察</a>
+              
+            </span>
+            
+            <span class="post-meta-sep">·</span>
+            <span class="reading-time">7 分钟阅读</span>
+          </div>
+          <h1 class="post-title">Opus 5 的降价三分之二:旗舰模型的价格战正式开打</h1>
+          
+          <div class="post-tags">
+            
+              <a class="tag-pill" href="/tags/%E7%AB%9E%E4%BA%89%E6%A0%BC%E5%B1%80/">#竞争格局</a>
+            
+              <a class="tag-pill" href="/tags/Claude/">#Claude</a>
+            
+              <a class="tag-pill" href="/tags/%E5%AE%9A%E4%BB%B7%E7%AD%96%E7%95%A5/">#定价策略</a>
+            
+          </div>
+          
+        </header>
+        
+        
+        
+        <details class="mobile-toc">
+          <summary>目录 / Contents</summary>
+          <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E8%BF%99%E6%AC%A1%E9%99%8D%E4%BB%B7%E6%9C%89%E5%A4%9A%E5%8F%8D%E5%B8%B8"><span class="toc-list-text">一、这次降价有多反常</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%86%B2%E5%87%BB%E5%9C%A8%E2%80%9D%E5%8D%95%E4%BD%8D%E6%99%BA%E8%83%BD%E6%88%90%E6%9C%AC%E2%80%9D%E4%B8%8A"><span class="toc-list-text">二、真正的冲击在”单位智能成本”上</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E7%8E%B0%E5%9C%A8"><span class="toc-list-text">三、为什么是现在</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E5%AF%B9%E4%B8%8D%E5%90%8C%E4%BA%BA%E7%BE%A4%E6%84%8F%E5%91%B3%E7%9D%80%E4%BB%80%E4%B9%88"><span class="toc-list-text">四、对不同人群意味着什么</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E4%B8%80%E4%B8%AA%E5%BE%85%E8%A7%82%E5%AF%9F%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-list-text">五、一个待观察的问题</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+        </details>
+        
+
+        <div class="post-body">
+          <p>2026 年 7 月 24 日,Anthropic 发布 Claude Opus 5,定价 $5&#x2F;$25——<strong>只有它所替代的 Opus 4.8($15&#x2F;$75)的三分之一</strong>,能力却接近自家最强的 Fable 5。这不是一次常规迭代,而是旗舰档位第一次出现如此幅度的主动降价。上游的价格战,终于烧到了金字塔尖。</p>
+<span id="more"></span>
+
+<div class="report-box">
+<div class="report-box-title">// 核心观点摘要</div>
+<ul>
+<li><strong>降价幅度</strong>:Opus 5 $5/$25 vs Opus 4.8 $15/$75,输入输出均为三分之一。</li>
+<li><strong>能力位置</strong>:AA 智能指数 61 分登顶,接近 Fable 5(60 分),1M 上下文。</li>
+<li><strong>单位智能成本</strong>:约 $22.2/分,比 Fable 5($40.4)低 45%,比 Opus 4.8($62.7)低 65%——<strong>60 分档位唯一低于 $25/分的模型</strong>。</li>
+<li><strong>结构性意义</strong>:此前"旗舰贵、中端省"的分层被打破,旗舰档自己变成了性价比选项。</li>
+<li><strong>诱因</strong>:中国开源模型把中低端价格打穿后,压力沿着价格带向上传导。</li>
+</ul>
+</div>
+
+<h2 id="一、这次降价有多反常"><a href="#一、这次降价有多反常" class="headerlink" title="一、这次降价有多反常"></a>一、这次降价有多反常</h2><p>回顾 2026 年上半年的定价趋势,主旋律其实是<strong>涨价</strong>:GPT-5.5 的价格是 GPT-5.4 的两倍,Fable 5 定在 $10&#x2F;$50,Gemini 3.5 Flash 是前代的三倍。西方实验室在算力成本高企、需求旺盛的背景下,普遍选择向上定价。</p>
+<p>在这个背景下,Opus 5 的 $5&#x2F;$25 显得格外突兀:</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>输入 $&#x2F;M</th>
+<th>输出 $&#x2F;M</th>
+<th>AA 智能指数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Claude Opus 4.8</td>
+<td>$15</td>
+<td>$75</td>
+<td>61.4</td>
+</tr>
+<tr>
+<td>Claude Fable 5</td>
+<td>$10</td>
+<td>$50</td>
+<td>59.9</td>
+</tr>
+<tr>
+<td><strong>Claude Opus 5</strong></td>
+<td><strong>$5</strong></td>
+<td><strong>$25</strong></td>
+<td><strong>60.8</strong></td>
+</tr>
+<tr>
+<td>GPT-5.6 Sol</td>
+<td>$5</td>
+<td>$30</td>
+<td>58.9</td>
+</tr>
+</tbody></table>
+<p><strong>同一家公司,新旗舰比旧旗舰便宜三分之二,能力基本持平。</strong>这在传统硬件或软件行业几乎不可想象——通常新旗舰意味着新溢价。</p>
+<h2 id="二、真正的冲击在”单位智能成本”上"><a href="#二、真正的冲击在”单位智能成本”上" class="headerlink" title="二、真正的冲击在”单位智能成本”上"></a>二、真正的冲击在”单位智能成本”上</h2><p>绝对价格只是表象。用本站<a href="/rankings/">模型天梯</a>的”同卷不同价”口径看更清楚——跑完同一套评测,每拿到 1 分智能指数要花多少钱:</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>评测总成本</th>
+<th>智能指数</th>
+<th><strong>$&#x2F;分</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Claude Opus 4.8</td>
+<td>$3,850</td>
+<td>61.4</td>
+<td>$62.7</td>
+</tr>
+<tr>
+<td>GPT-5.6 Sol</td>
+<td>$2,980</td>
+<td>58.9</td>
+<td>$50.6</td>
+</tr>
+<tr>
+<td>Claude Fable 5</td>
+<td>$2,420</td>
+<td>59.9</td>
+<td>$40.4</td>
+</tr>
+<tr>
+<td><strong>Claude Opus 5</strong></td>
+<td><strong>$1,350</strong></td>
+<td><strong>60.8</strong></td>
+<td><strong>$22.2</strong></td>
+</tr>
+<tr>
+<td>Gemini 3.1 Pro</td>
+<td>$1,310</td>
+<td>56.2</td>
+<td>$23.3</td>
+</tr>
+</tbody></table>
+<p>Opus 5 的 $22.2&#x2F;分,让它成为<strong>60 分以上档位里唯一低于 $25&#x2F;分的模型</strong>——而在它出现之前,想要 60 分级能力,最便宜的选择也要 $40&#x2F;分。</p>
+<p>这条数据的意义在于:<strong>“顶级能力必然昂贵”这个前提,第一次被自家产品线证伪了。</strong></p>
+<p>(必要的注脚:这些数字是在 max effort 下跑出来的,属于成本上限;实际使用中调低 effort 还能进一步压缩,详见<a href="/2026/07/27/one-model-many-scores/">《一个模型,N 个分数》</a>。)</p>
+<h2 id="三、为什么是现在"><a href="#三、为什么是现在" class="headerlink" title="三、为什么是现在"></a>三、为什么是现在</h2><p>三条线索指向同一个答案:<strong>压力是从下往上传导的</strong>。</p>
+<p><strong>其一,中国开源模型打穿了中低端。</strong> 如本站<a href="/2026/07/17/openrouter-power-shift/">《OpenRouter 上的权力转移》</a>所述,美国模型在 OpenRouter 的 token 份额一年内从约 70% 跌到约 30%,DeepSeek 单家占 16.3%。GLM-5.2、Qwen3.7、Kimi K2.6 等开源权重模型以近乎成本价供应 80 分能力,把批量任务的价格锚定在极低水平。</p>
+<p><strong>其二,能力差距在收缩。</strong> <a href="/2026/07/20/frontier-convergence-2026/">前沿收敛</a>意味着顶部几家的差距被压到几十 ELO 内。当能力不再是护城河,价格就成了主战场。</p>
+<p><strong>其三,推理效率的工程红利。</strong> Anthropic 表示 Opus 5 在低档位设置上就优于早期 Opus 模型——这暗示模型本身的 token 效率有实质提升,使降价不必以毛利崩塌为代价。换句话说:<strong>这次降价有工程基础,不是纯粹的补贴换份额。</strong></p>
+<h2 id="四、对不同人群意味着什么"><a href="#四、对不同人群意味着什么" class="headerlink" title="四、对不同人群意味着什么"></a>四、对不同人群意味着什么</h2><p><strong>对个人开发者</strong>:此前”能力够用就行”的妥协,现在有了新解——旗舰档的门槛降到了原来中端档的水平。如果你之前因为价格选了 Sonnet 或开源模型做主力,值得重新评估一次。</p>
+<p><strong>对订阅用户</strong>:Opus 5 已是 Claude Max 的默认模型,这意味着同样的 $100&#x2F;$200 月费,现在能跑更多 Opus 级别的任务(因为同样的额度池下,单位任务的 token 成本降了)。用本站<a href="/advisor/">选购助手</a>可以按你的实际用量重新算一遍。</p>
+<p><strong>对做 AI 产品的团队</strong>:毛利模型需要重算。如果你的产品定价是基于”Opus 4.8 每次调用成本”设计的,现在有了三分之二的降本空间——是让利给用户抢份额,还是转化为利润,是个战略选择。</p>
+<p><strong>对其他实验室</strong>:压力给到了 OpenAI 和 Google。GPT-5.6 Sol 目前 $5&#x2F;$30 与 Opus 5 同价位但分数略低;Gemini 3.5 Pro 若按传闻的 $12–15&#x2F;$36–45 定价发布,将处在明显不利的位置。</p>
+<h2 id="五、一个待观察的问题"><a href="#五、一个待观察的问题" class="headerlink" title="五、一个待观察的问题"></a>五、一个待观察的问题</h2><p>降价能否持续,取决于一件尚不明朗的事:<strong>这是可持续的成本改善,还是一轮以份额为目标的补贴?</strong></p>
+<p>考虑到 AI 基础设施资本开支仍在陡峭爬坡(2026 年四巨头合计约 7,250 亿美元,详见<a href="/2026/07/08/ai-capital-markets-2026/">《资本市场视角下的 AI 局势》</a>),而 OpenAI 2026 年预计亏损约 140 亿美元,”用降价换份额”的动机是充分的。</p>
+<p>真正的检验点在明年:当第一批天量 GPU 集中折旧、投资人开始要求兑现回报时,今天的价格能不能守住。<strong>如果守得住,AI 红利的扩散会明显加速;如果守不住,今天的低价就是又一次消费者补贴的窗口期。</strong></p>
+<div class="risk-box">
+<div class="risk-box-title">// 风险提示</div>
+<ul>
+<li>本文数据快照为 2026-07-27,各家定价与促销变动频繁,以官网为准。</li>
+<li>成本对比基于 max effort 口径的估算值,实际使用成本受 effort 设置、缓存命中、批处理折扣影响。</li>
+<li>Claude Sonnet 5 现行 $2/$10 为促销价,<strong>2026-08-31 后恢复 $3/$15</strong>,做长期成本测算时需按恢复价计。</li>
+<li>本文不构成任何投资或采购建议。</li>
+</ul>
+</div>
+
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li>MarkTechPost,<a target="_blank" rel="noopener" href="https://www.marktechpost.com/2026/07/24/meet-the-new-claude-opus-5-frontier-class-agentic-coding-and-computer-use-at-unchanged-opus-pricing/">Meet the New Claude Opus 5: Frontier-Class Agentic Coding and Computer Use at Unchanged Opus Pricing</a></li>
+<li>The Decoder,<a target="_blank" rel="noopener" href="https://the-decoder.com/anthropic-claims-its-new-claude-opus-5-delivers-near-fable-5-performance-at-half-the-token-price/">Anthropic claims its new Claude Opus 5 delivers near-Fable 5 performance at half the token price</a></li>
+<li>Quartz,<a target="_blank" rel="noopener" href="https://qz.com/anthropic-claude-opus-5-fable-5-price-072426">Anthropic launched Claude Opus 5 at half the price of its most powerful AI model</a></li>
+<li>Anthropic,<a target="_blank" rel="noopener" href="https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5">What’s new in Claude Opus 5</a> · <a target="_blank" rel="noopener" href="https://platform.claude.com/docs/en/about-claude/pricing">Pricing</a></li>
+<li>Artificial Analysis,<a target="_blank" rel="noopener" href="https://artificialanalysis.ai/models">Comparison of AI Models across Intelligence, Performance, and Price</a></li>
+<li>OfficeChai,<a target="_blank" rel="noopener" href="https://officechai.com/ai/share-of-us-models-being-used-on-openrouter-has-collapsed-from-70-to-30-over-the-past-year/">Share Of US Models Being Used On OpenRouter Has Collapsed From 70% To 30% Over The Past Year</a></li>
+</ol>
+<blockquote>
+<p>本文由 ByteVibe 撰写(AI 辅助研究整理)。文中观点的原始出处均已在正文与参考文献中标注,版权归原作者所有。数据快照 2026-07-27。</p>
+</blockquote>
+
+        </div>
+        
+        <footer class="post-footer">
+          <nav class="post-nav">
+            
+            
+            <a class="post-nav-item post-nav-next" href="/2026/07/27/one-model-many-scores/">
+              <span class="post-nav-label">下一篇 →</span>
+              <span class="post-nav-title">一个模型,N 个分数:当 effort 和编排模式让榜单失去唯一解</span>
+            </a>
+            
+          </nav>
+        </footer>
+      </div>
+
+      <!-- 3. Right Sidebar: Outline TOC Jump -->
+      <aside class="post-sidebar-right">
+        
+          <div class="toc-sticky">
+            <h3 class="toc-title">目录大纲</h3>
+            <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E8%BF%99%E6%AC%A1%E9%99%8D%E4%BB%B7%E6%9C%89%E5%A4%9A%E5%8F%8D%E5%B8%B8"><span class="toc-list-text">一、这次降价有多反常</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%86%B2%E5%87%BB%E5%9C%A8%E2%80%9D%E5%8D%95%E4%BD%8D%E6%99%BA%E8%83%BD%E6%88%90%E6%9C%AC%E2%80%9D%E4%B8%8A"><span class="toc-list-text">二、真正的冲击在”单位智能成本”上</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E7%8E%B0%E5%9C%A8"><span class="toc-list-text">三、为什么是现在</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E5%AF%B9%E4%B8%8D%E5%90%8C%E4%BA%BA%E7%BE%A4%E6%84%8F%E5%91%B3%E7%9D%80%E4%BB%80%E4%B9%88"><span class="toc-list-text">四、对不同人群意味着什么</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E4%B8%80%E4%B8%AA%E5%BE%85%E8%A7%82%E5%AF%9F%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-list-text">五、一个待观察的问题</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+          </div>
+        
+      </aside>
+    </div>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <p class="copyright">&copy; 2026 ByteVibe. All rights reserved.</p>
+      <p class="powered-by">Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a></p>
+      
+      <div class="social-links">
+        
+          <a class="social-link" href="https://github.com/notSomeshi" target="_blank" rel="noopener noreferrer">GitHub</a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+
+  <div class="search-overlay" id="searchOverlay" hidden>
+  <div class="search-backdrop" id="searchBackdrop"></div>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="站内搜索">
+    <div class="search-input-wrap">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="searchInput" class="search-input" placeholder="搜索文章…" autocomplete="off" spellcheck="false">
+      <button class="search-close" id="searchClose" aria-label="关闭搜索">ESC</button>
+    </div>
+    <div class="search-results" id="searchResults">
+      <p class="search-hint">输入关键词搜索标题、标签与正文</p>
+    </div>
+  </div>
+</div>
+
+  <button class="scroll-to-top" id="scrollToTop" aria-label="回到顶部">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+  
+<script src="/js/main.js"></script>
+
+</body>
+</html>
