@@ -145,6 +145,17 @@ html, body {
   -webkit-overflow-scrolling: touch;
 }
 
+/* html 也必须有背景色:滚动过冲(iOS 橡皮筋)与内容不满屏时,
+   露出的是 html 的背景;只给 body 上色会在暗色主题下露出白底 */
+html {
+  background-color: var(--bg-primary);
+}
+
+/* 雨夜模式下 body 用的是渐变,html 取渐变末端的深色以免接缝处露色差 */
+[data-rain] {
+  background-color: #08090c;
+}
+
 /* iOS 横屏时字号不被自动放大 */
 html {
   -webkit-text-size-adjust: 100%;
