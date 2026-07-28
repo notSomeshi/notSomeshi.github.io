@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>订阅档位正在碎片化:当&#34;买哪个&#34;比&#34;用哪个&#34;更难 | ByteVibe</title>
+<meta name="description" content="一个关于 Vibe Coding、AI 辅助编程和现代开发实践的技术博客">
+<meta name="author" content="ByteVibe">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='0,0 100,0 100,78 78,100 0,100' fill='%23ffd802'/><text x='50' y='70' font-size='58' font-weight='800' font-family='ui-monospace,monospace' fill='%230d0d0f' text-anchor='middle'>B</text></svg>">
+<link rel="alternate" type="application/atom+xml" title="ByteVibe" href="/atom.xml">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script>
+  // 暗色优先:light 显式切亮色;rain 提前打上标记避免闪烁
+  (function() {
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else if (t === 'rain') {
+        document.documentElement.setAttribute('data-rain', '');
+        // 雨夜模式:页面加载的同时就开始预载雨声(与 main.js 的 RAIN_SRC 保持一致)
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.as = 'audio';
+        l.href = '/audio/rain.mp3?v=3';
+        document.head.appendChild(l);
+      }
+    } catch (e) {}
+  })();
+</script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+  
+  <canvas class="rain-canvas" id="rainCanvas" aria-hidden="true"></canvas>
+  <div class="reading-progress" id="readingProgress"></div>
+  <header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a class="site-logo" href="/">
+      ByteVibe
+    </a>
+    <nav class="site-nav" id="siteNav">
+      
+      
+        
+        
+        <a class="nav-link" href="/">首页</a>
+      
+        
+        
+        <a class="nav-link" href="/archives/">归档</a>
+      
+        
+        
+        <a class="nav-link" href="/categories/">分类</a>
+      
+        
+        
+        <a class="nav-link" href="/tags/">标签</a>
+      
+        
+        
+        <a class="nav-link" href="/about/">关于</a>
+      
+    </nav>
+    <div class="header-actions">
+      <button class="header-icon-btn" id="searchToggle" aria-label="搜索" title="搜索 (Ctrl+K)">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+      <button class="header-icon-btn theme-toggle" id="themeToggle" aria-label="切换显示模式(浅色 / 深色 / 雨夜)" title="显示模式:浅色 → 深色 → 雨夜">
+        <span class="icon-sun"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+        <span class="icon-moon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+        <span class="icon-umbrella"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 12a11.05 11.05 0 0 0-22 0Z"></path><path d="M12 12v7a2 2 0 0 0 4 0"></path></svg></span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打开菜单">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    
+      <a class="mobile-nav-link" href="/">首页</a>
+    
+      <a class="mobile-nav-link" href="/archives/">归档</a>
+    
+      <a class="mobile-nav-link" href="/categories/">分类</a>
+    
+      <a class="mobile-nav-link" href="/tags/">标签</a>
+    
+      <a class="mobile-nav-link" href="/about/">关于</a>
+    
+  </div>
+</header>
+
+  <main class="main-content">
+    <article class="post-detail">
+  <div class="container-docs">
+    <div class="post-layout-grid">
+      <!-- 1. Left Sidebar: Documentation Navigation -->
+      <aside class="post-sidebar-left">
+        <div class="sidebar-sticky">
+          <h3 class="sidebar-title">全部文章</h3>
+          <ul class="sidebar-list">
+            
+              <li class="sidebar-item active">
+                <a href="/2026/07/27/subscription-tier-fragmentation/">订阅档位正在碎片化:当&#34;买哪个&#34;比&#34;用哪个&#34;更难</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/ai-finance-pitfalls/">AI 做金融分析的三个致命陷阱:在你把钱交给它之前</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/opus5-price-war/">Opus 5 的降价三分之二:旗舰模型的价格战正式开打</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/one-model-many-scores/">一个模型,N 个分数:当 effort 和编排模式让榜单失去唯一解</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/20/grok45-ide-native-models/">Grok 4.5 与「IDE 原生」模型:当编辑器成为训练场</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/20/frontier-convergence-2026/">前沿收敛:为什么 2026 年榜单顶部挤成了一团</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/17/openrouter-power-shift/">OpenRouter 上的权力转移:中国开源模型如何吃下一半流量</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/17/ai-frontier-briefing-2026-07/">2026 年中前沿速览:模型分层、Agent 落地与监管转折</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-prospects-and-strata/">前景、困难与阶层重排:AI 正在改写谁的命运?</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-dividend-paradox/">AI 红利悖论:我们为 AI 买单三年,红利为何还没普惠?</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-capital-markets-2026/">资本市场视角下的 AI 局势:7250 亿美元 Capex、循环交易与泡沫之辩</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/no-code-mvp-to-solopreneur/">从 Vibe Coding 到超级个体：2026 年全栈独立开发的新叙事</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/yolo-mode-and-ai-safety-guardrails/">YOLO 模式下的安全边界：如何防止 AI 删库跑路</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/high-performance-ai-prompts-library/">如何撰写黄金级 AI Prompt：从“做个功能”到“系统级交付”</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/mcp-server-practical-recipes/">Model Context Protocol (MCP) 深度指南：连接你的 AI 与现实数据</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/advanced-vibe-coding-roo-clinic/">Cline 与 Roo Code 实战：下一代 Vibe Coding 的工程范式</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/04/01/claude-code-complete-guide/">Claude Code 从入门到精通：面向工程师与产品经理的 AI 编程完全指南</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/30/future-of-vibe-coding/">Vibe Coding 的未来：当编程不再需要编程</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/25/ai-coding-tools-2025/">2025 年最值得关注的 AI 编程工具全景</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/20/vibe-coding-best-practices/">Vibe Coding 最佳实践：如何高效地与 AI 结对编程</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/15/what-is-vibe-coding/">什么是 Vibe Coding？一文读懂 AI 时代的编程新范式</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/10/hello-world/">欢迎来到 ByteVibe</a>
+              </li>
+            
+          </ul>
+        </div>
+      </aside>
+
+      <!-- 2. Middle Column: Main Article Content -->
+      <div class="post-content-main">
+        <header class="post-header">
+          <div class="post-meta">
+            <time class="post-date">2026年07月27日</time>
+            
+            <span class="post-meta-sep">·</span>
+            <span class="post-category">
+              
+                <a href="/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察</a>
+              
+            </span>
+            
+            <span class="post-meta-sep">·</span>
+            <span class="reading-time">7 分钟阅读</span>
+          </div>
+          <h1 class="post-title">订阅档位正在碎片化:当&#34;买哪个&#34;比&#34;用哪个&#34;更难</h1>
+          
+          <div class="post-tags">
+            
+              <a class="tag-pill" href="/tags/%E5%AE%9A%E4%BB%B7%E7%AD%96%E7%95%A5/">#定价策略</a>
+            
+              <a class="tag-pill" href="/tags/%E8%AE%A2%E9%98%85%E5%88%B6/">#订阅制</a>
+            
+              <a class="tag-pill" href="/tags/%E6%B6%88%E8%B4%B9%E5%86%B3%E7%AD%96/">#消费决策</a>
+            
+          </div>
+          
+        </header>
+        
+        
+        
+        <details class="mobile-toc">
+          <summary>目录 / Contents</summary>
+          <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E4%B8%83%E4%B8%AA%E6%A1%A3%E4%BD%8D%E7%9A%84-ChatGPT"><span class="toc-list-text">一、七个档位的 ChatGPT</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E8%BF%99%E4%B8%8D%E6%98%AF-OpenAI-%E7%8B%AC%E6%9C%89"><span class="toc-list-text">二、这不是 OpenAI 独有</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E7%8E%B0%E5%9C%A8%E5%BC%80%E5%A7%8B%E7%A2%8E%E7%89%87%E5%8C%96"><span class="toc-list-text">三、为什么现在开始碎片化</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E4%BB%A3%E4%BB%B7-%E5%86%B3%E7%AD%96%E6%88%90%E6%9C%AC%E8%BD%AC%E5%AB%81%E7%BB%99%E4%BA%86%E7%94%A8%E6%88%B7"><span class="toc-list-text">四、代价:决策成本转嫁给了用户</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E5%8A%A1%E5%AE%9E%E5%AF%B9%E7%AD%96"><span class="toc-list-text">五、务实对策</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%AD%E3%80%81%E4%B8%80%E4%B8%AA%E9%A2%84%E6%B5%8B"><span class="toc-list-text">六、一个预测</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+        </details>
+        
+
+        <div class="post-body">
+          <p>2026 年 7 月,ChatGPT 的付费档位增加到了<strong>六个</strong>:Free、Go $8、Plus $20、Pro Codex $100、Pro Max $200、Business $20&#x2F;席,外加 Enterprise。而在两年前,这个数字是两个。这不是孤例——Claude、Cursor、Copilot、Kimi 都在做同样的事。<strong>模型能力在收敛,定价结构却在发散。</strong></p>
+<span id="more"></span>
+
+<div class="report-box">
+<div class="report-box-title">// 核心观点摘要</div>
+<ul>
+<li><strong>档位数量暴涨</strong>:ChatGPT 从 2 档增至 7 档;Kimi 有 5 档;Cursor、Copilot 各 5 档。</li>
+<li><strong>关键变化</strong>:原统一 $120 的 ChatGPT Pro 拆为 <strong>$100(5× Plus)</strong> 与 <strong>$200(20× + 1M 上下文)</strong>;新增 $8 的 Go 档但<strong>含广告</strong>。</li>
+<li><strong>碎片化的动因</strong>:能力趋同后,价格歧视成为主要的利润提取手段。</li>
+<li><strong>对用户的代价</strong>:决策成本转嫁给消费者——你需要先精确知道自己的用量,才能选对档位。</li>
+<li><strong>务实对策</strong>:先测用量,再选档;警惕"看起来只贵一点"的升级诱导。</li>
+</ul>
+</div>
+
+<h2 id="一、七个档位的-ChatGPT"><a href="#一、七个档位的-ChatGPT" class="headerlink" title="一、七个档位的 ChatGPT"></a>一、七个档位的 ChatGPT</h2><p>先看事实。2026 年 7 月的 ChatGPT 价目表:</p>
+<table>
+<thead>
+<tr>
+<th>档位</th>
+<th>价格</th>
+<th>关键限制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Free</td>
+<td>$0</td>
+<td>基础模型,限量</td>
+</tr>
+<tr>
+<td><strong>Go</strong></td>
+<td><strong>$8</strong></td>
+<td>消息量高于 Free,<strong>但含广告</strong>、无 Codex、无高强度推理</td>
+</tr>
+<tr>
+<td>Plus</td>
+<td>$20</td>
+<td>日常高额度 + Codex 云任务 30–150 个 &#x2F; 5h</td>
+</tr>
+<tr>
+<td><strong>Pro Codex</strong></td>
+<td><strong>$100</strong></td>
+<td>5× Plus 额度</td>
+</tr>
+<tr>
+<td><strong>Pro Max</strong></td>
+<td><strong>$200</strong></td>
+<td>20× 额度 + 1M 上下文</td>
+</tr>
+<tr>
+<td>Business</td>
+<td>$20&#x2F;席(年付)</td>
+<td>$25 月付,最少 2 人</td>
+</tr>
+<tr>
+<td>Enterprise</td>
+<td>定制</td>
+<td>—</td>
+</tr>
+</tbody></table>
+<p>其中三处是近期变化:Pro 自 2026 年 4 月 9 日起<strong>从统一 $120 拆成 $100 &#x2F; $200 两档</strong>;Go 档从 $6 涨到 $8;Business 改为年付 $20、月付 $25。</p>
+<p><strong>最值得注意的是 Go 档含广告</strong>——这是主流 AI 助手第一次把广告写进付费订阅。付了钱仍然看广告,这个定位在消费电子史上通常预示着市场进入了”用价格分层榨取剩余”的阶段。</p>
+<h2 id="二、这不是-OpenAI-独有"><a href="#二、这不是-OpenAI-独有" class="headerlink" title="二、这不是 OpenAI 独有"></a>二、这不是 OpenAI 独有</h2><p>横向看,整个行业在同步碎片化:</p>
+<ul>
+<li><strong>Claude</strong>:Free &#x2F; Pro $20 &#x2F; Max 5x $100 &#x2F; Max 20x $200 &#x2F; Team &#x2F; Enterprise</li>
+<li><strong>Cursor</strong>:Hobby &#x2F; Pro $20 &#x2F; Pro+ $60 &#x2F; Ultra $200 &#x2F; Teams $40</li>
+<li><strong>GitHub Copilot</strong>:Free &#x2F; Pro $10 &#x2F; Pro+ $39 &#x2F; Max $100 &#x2F; Business $19 &#x2F; Enterprise $39</li>
+<li><strong>Kimi</strong>:Free &#x2F; Moderato $19 &#x2F; Allegretto $39 &#x2F; Allegro $99 &#x2F; Vivace $199</li>
+<li><strong>Trae</strong>:Free &#x2F; Lite $3 &#x2F; Pro $10 &#x2F; Pro+ $30 &#x2F; Ultra $100</li>
+</ul>
+<p>一个规律浮现出来:<strong>几乎每家都在 $20 和 $200 之间塞进 2–3 个中间档</strong>。这个价格带的填充不是偶然——它对应着”愿意多付但不想付满额”的最大人群。</p>
+<h2 id="三、为什么现在开始碎片化"><a href="#三、为什么现在开始碎片化" class="headerlink" title="三、为什么现在开始碎片化"></a>三、为什么现在开始碎片化</h2><p><strong>其一,能力趋同逼出了价格竞争。</strong> 当<a href="/2026/07/20/frontier-convergence-2026/">前沿收敛</a>让顶部模型的差距压到几十 ELO,厂商无法再靠”我们更强”定价,只能靠”你用多少付多少”来提取剩余价值。多档位本质上是<strong>价格歧视</strong>(经济学中性词):让高用量用户付更多,同时不吓跑低用量用户。</p>
+<p><strong>其二,成本结构允许精细切分。</strong> 推理成本随用量线性变化,这与传统软件”边际成本近零”截然不同。既然成本是线性的,定价自然也倾向于线性分层。</p>
+<p><strong>其三,竞争对手的档位互相锚定。</strong> ChatGPT 的 $100 Pro Codex 档几乎是对 Claude Max 5x($100)的直接应答;Trae 的 $10 Pro 对标 Cursor 的 $20 Pro。<strong>档位在互相复制,格局趋于对称。</strong></p>
+<h2 id="四、代价-决策成本转嫁给了用户"><a href="#四、代价-决策成本转嫁给了用户" class="headerlink" title="四、代价:决策成本转嫁给了用户"></a>四、代价:决策成本转嫁给了用户</h2><p>碎片化对厂商是收入优化,对用户是<strong>认知负担</strong>。</p>
+<p>要选对档位,你必须先回答一个多数人答不上来的问题:**我每月到底用多少?**这不是”我每天用两小时”能回答的——同样两小时,写代码和聊天的 token 消耗能差十倍;同一个模型,<a href="/2026/07/27/one-model-many-scores/">effort 档位不同成本又差三倍</a>。</p>
+<p>于是出现一个尴尬局面:<strong>厂商用精确的分层收费,面对的是一群对自己用量毫无概念的用户。</strong>结果通常是两种错配:</p>
+<ul>
+<li><strong>买贵了</strong>:为了”保险”直接上顶配,额度长期用不满。以 Claude Max 20x 为例,轻度用户的实际单价可能是重度用户的十倍以上。</li>
+<li><strong>买亏了</strong>:选了便宜档,月中撞额度墙,工作被打断——而时间损失往往超过省下的几十美元。</li>
+</ul>
+<h2 id="五、务实对策"><a href="#五、务实对策" class="headerlink" title="五、务实对策"></a>五、务实对策</h2><p><strong>1. 先测用量,再选档。</strong><br>用一两周的实际使用估算 token 量级,再对照各档额度。本站<a href="/advisor/">选购助手</a>的「用量自测」就是为此设计的——填几个典型场景的频次,算出月用量,再看哪档刚好覆盖。实测中经常出现的结果是:<strong>按粗略档位该买 $15 的,精确算完发现 $3 的就够</strong>。</p>
+<p><strong>2. 优先选”刚好够用”而非”绰绰有余”。</strong><br>额度利用率决定实际单价。用满 60–100% 的档位,单位成本最低;用不到 25% 的档位,你在为空气付费。</p>
+<p><strong>3. 警惕”只贵一点”的升级诱导。</strong><br>$100 到 $200 看起来只是”翻倍”,但如果你的用量只需要 5× 而非 20×,多付的 $100 每月全是沉没成本。<strong>档位间的价格差不是能力差,是额度差</strong>——先确认你缺的是能力还是额度。</p>
+<p><strong>4. 别忽略按量付费。</strong><br>如果你的使用是<strong>阶段性爆发</strong>(几天猛用、之后闲置),订阅制的固定月费和 5 小时窗口对你都是不利结构。直接用 API 按量付费,闲置期一分钱不花。这条选项常被忽视,因为它不在任何厂商的”推荐档位”里。</p>
+<h2 id="六、一个预测"><a href="#六、一个预测" class="headerlink" title="六、一个预测"></a>六、一个预测</h2><p>档位碎片化大概率会继续,直到出现两种力量之一:</p>
+<ul>
+<li><strong>监管介入</strong>:订阅制的”限额不透明”已经在多个市场引起注意。当”5× 额度”无法被用户验证时,它接近于一种不可核实的承诺。</li>
+<li><strong>用量计价成为主流</strong>:如果按量付费的工具链足够好用(账单可预测、有硬性上限),订阅制的存在意义会被削弱。</li>
+</ul>
+<p>在那之前,<strong>看懂档位表本身就是一项省钱技能</strong>。这也是本站维护<a href="/rankings/">模型天梯性价比板块</a>的原因——把各家的档位、额度制度、折算单价放在同一张表里对比,是目前对抗信息不对称最直接的办法。</p>
+<div class="risk-box">
+<div class="risk-box-title">// 风险提示</div>
+<ul>
+<li>本文价格快照为 2026-07-27,各家调价与促销频繁,购买前请以官网为准。</li>
+<li>各档"额度"的官方口径多为相对倍数(如"5× Plus"),缺乏可独立验证的绝对值;本站的 token 量级为估算,仅供横向比较。</li>
+<li>本文不接受任何厂商赞助,不含返利链接,档位信息仅作信息整理。</li>
+</ul>
+</div>
+
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li>AI Pricing Guru,<a target="_blank" rel="noopener" href="https://www.aipricing.guru/chatgpt-subscription-pricing/">ChatGPT GPT-5.6 Pricing 2026: Plus $20, Pro $100, Pro $200</a></li>
+<li>Gradually.ai,<a target="_blank" rel="noopener" href="https://www.gradually.ai/en/chatgpt-pricing/">ChatGPT Plans: Free, Go, Plus, Pro, Business &amp; Enterprise</a></li>
+<li>CloudZero,<a target="_blank" rel="noopener" href="https://www.cloudzero.com/blog/how-much-does-chatgpt-cost/">How Much Does ChatGPT Cost In 2026? Every Plan And Pricing Tier Explained</a></li>
+<li>Fritz AI,<a target="_blank" rel="noopener" href="https://fritz.ai/chatgpt-pricing/">ChatGPT Pricing in 2026: Every Plan, Tier, and Hidden Cost Explained</a></li>
+<li>Toolchase,<a target="_blank" rel="noopener" href="https://toolchase.com/blog/ai-tools-news-2026/">AI Tools News 2026: Major Launches, Updates, Pricing Changes</a></li>
+<li>Anthropic,<a target="_blank" rel="noopener" href="https://platform.claude.com/docs/en/about-claude/pricing">Pricing</a></li>
+</ol>
+<blockquote>
+<p>本文由 ByteVibe 撰写(AI 辅助研究整理)。文中观点的原始出处均已在正文与参考文献中标注,版权归原作者所有。数据快照 2026-07-27。</p>
+</blockquote>
+
+        </div>
+        
+        <footer class="post-footer">
+          <nav class="post-nav">
+            
+            
+            <a class="post-nav-item post-nav-next" href="/2026/07/27/ai-finance-pitfalls/">
+              <span class="post-nav-label">下一篇 →</span>
+              <span class="post-nav-title">AI 做金融分析的三个致命陷阱:在你把钱交给它之前</span>
+            </a>
+            
+          </nav>
+        </footer>
+      </div>
+
+      <!-- 3. Right Sidebar: Outline TOC Jump -->
+      <aside class="post-sidebar-right">
+        
+          <div class="toc-sticky">
+            <h3 class="toc-title">目录大纲</h3>
+            <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E4%B8%83%E4%B8%AA%E6%A1%A3%E4%BD%8D%E7%9A%84-ChatGPT"><span class="toc-list-text">一、七个档位的 ChatGPT</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E8%BF%99%E4%B8%8D%E6%98%AF-OpenAI-%E7%8B%AC%E6%9C%89"><span class="toc-list-text">二、这不是 OpenAI 独有</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E7%8E%B0%E5%9C%A8%E5%BC%80%E5%A7%8B%E7%A2%8E%E7%89%87%E5%8C%96"><span class="toc-list-text">三、为什么现在开始碎片化</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E4%BB%A3%E4%BB%B7-%E5%86%B3%E7%AD%96%E6%88%90%E6%9C%AC%E8%BD%AC%E5%AB%81%E7%BB%99%E4%BA%86%E7%94%A8%E6%88%B7"><span class="toc-list-text">四、代价:决策成本转嫁给了用户</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E5%8A%A1%E5%AE%9E%E5%AF%B9%E7%AD%96"><span class="toc-list-text">五、务实对策</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%AD%E3%80%81%E4%B8%80%E4%B8%AA%E9%A2%84%E6%B5%8B"><span class="toc-list-text">六、一个预测</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+          </div>
+        
+      </aside>
+    </div>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <p class="copyright">&copy; 2026 ByteVibe. All rights reserved.</p>
+      <p class="powered-by">Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a></p>
+      
+      <div class="social-links">
+        
+          <a class="social-link" href="https://github.com/notSomeshi" target="_blank" rel="noopener noreferrer">GitHub</a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+
+  <div class="search-overlay" id="searchOverlay" hidden>
+  <div class="search-backdrop" id="searchBackdrop"></div>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="站内搜索">
+    <div class="search-input-wrap">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="searchInput" class="search-input" placeholder="搜索文章…" autocomplete="off" spellcheck="false">
+      <button class="search-close" id="searchClose" aria-label="关闭搜索">ESC</button>
+    </div>
+    <div class="search-results" id="searchResults">
+      <p class="search-hint">输入关键词搜索标题、标签与正文</p>
+    </div>
+  </div>
+</div>
+
+  <button class="scroll-to-top" id="scrollToTop" aria-label="回到顶部">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+  
+<script src="/js/main.js"></script>
+
+</body>
+</html>

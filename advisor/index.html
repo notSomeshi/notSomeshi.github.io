@@ -213,6 +213,15 @@
           "cons": "国内需代理;编程略逊 Claude 系"
         },
         {
+          "id": "chatgpt-go", "platform": "ChatGPT", "tier": "Go", "price": 8,
+          "url": "https://openai.com/chatgpt", "brand": "openai",
+          "quota": "消息量高于 Free,但含广告、无 Codex 与高级功能", "tokens": 20000000,
+          "models": "GPT-5.6 基础档(不含 Sol 高强度)",
+          "caps": { "coding": 55, "writing": 76, "research": 70, "data": 68, "daily": 82, "finance": 69 },
+          "tags": ["multimodal"],
+          "cons": "含广告;没有 Codex、无高强度推理,编程基本用不上"
+        },
+        {
           "id": "chatgpt-plus", "platform": "ChatGPT", "tier": "Plus", "price": 20,
           "url": "https://openai.com/chatgpt", "brand": "openai",
           "quota": "对话高额度 + Codex 云任务 30–150 个 / 5h", "tokens": 65000000,
@@ -276,13 +285,22 @@
           "cons": "价格门槛高;轻度用户严重浪费"
         },
         {
-          "id": "chatgpt-pro", "platform": "ChatGPT", "tier": "Pro", "price": 100,
+          "id": "chatgpt-pro", "platform": "ChatGPT", "tier": "Pro Codex", "price": 100,
           "url": "https://openai.com/chatgpt", "brand": "openai",
-          "quota": "对话近乎不限 + Sol 高强度 + Codex 高并发", "tokens": 400000000,
-          "models": "GPT-5.6 Luna / Terra / Sol · o4-mini",
+          "quota": "5× Plus 额度 + Sol 高强度 + Codex 高并发", "tokens": 300000000,
+          "models": "GPT-5.6 Luna / Terra / Sol · Sol Ultra · o4-mini",
           "caps": { "coding": 82, "writing": 86, "research": 86, "data": 86, "daily": 90, "finance": 91 },
           "tags": ["multimodal", "ide"],
           "cons": "国内需代理;价格高"
+        },
+        {
+          "id": "chatgpt-promax", "platform": "ChatGPT", "tier": "Pro Max", "price": 200,
+          "url": "https://openai.com/chatgpt", "brand": "openai",
+          "quota": "20× 额度 + 1M 上下文 + Sol Ultra 并行编排", "tokens": 900000000,
+          "models": "GPT-5.6 Luna / Terra / Sol · Sol Ultra · o4-mini",
+          "caps": { "coding": 84, "writing": 86, "research": 88, "data": 86, "daily": 90, "finance": 91 },
+          "tags": ["multimodal", "ide"],
+          "cons": "全场最贵档之一;非极重度用户用不满"
         },
         {
           "id": "copilot-max", "platform": "GitHub Copilot", "tier": "Max", "price": 100,
