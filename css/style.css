@@ -127,6 +127,39 @@ html {
   background: var(--text-tertiary);
 }
 
+/* ============================================
+   移动端适配基线(刘海屏 / 动态视口 / 触摸)
+   ============================================ */
+
+/* 安全区:刘海屏、灵动岛、底部手势条 */
+:root {
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-r: env(safe-area-inset-right, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-l: env(safe-area-inset-left, 0px);
+}
+
+/* 触屏惯性滚动 + 禁止横向溢出 */
+html, body {
+  overflow-x: clip;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* iOS 横屏时字号不被自动放大 */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+/* 可横向滚动的容器给出滚动惯性与触摸提示 */
+.rk-table-wrap,
+.rkc-chart-wrap,
+.adv-costs,
+.post-body pre,
+.post-body table {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
 /* --- Base Typography --- */
 body {
   font-family: var(--font-sans);
@@ -134,7 +167,7 @@ body {
   line-height: 1.75;
   color: var(--text-primary);
   background-color: var(--bg-primary);
-  padding-top: var(--header-height);
+  padding-top: calc(var(--header-height) + var(--safe-t));
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -180,6 +213,7 @@ img { max-width: 100%; height: auto; }
 
 .main-content {
   min-height: calc(100vh - var(--header-height) - 200px);
+  min-height: calc(100dvh - var(--header-height) - 200px);
 }
 
 /* --- PJAX 加载反馈 --- */
@@ -238,7 +272,8 @@ body.pjax-loading .main-content { opacity: 0.45; }
   top: 0;
   left: 0;
   right: 0;
-  height: var(--header-height);
+  height: calc(var(--header-height) + var(--safe-t));
+  padding-top: var(--safe-t);
   background: var(--header-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -253,8 +288,8 @@ body.pjax-loading .main-content { opacity: 0.45; }
 .header-inner {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 24px;
-  height: 100%;
+  padding: 0 max(24px, var(--safe-r)) 0 max(24px, var(--safe-l));
+  height: var(--header-height);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1450,8 +1485,11 @@ body.pjax-loading .main-content { opacity: 0.45; }
 
 .search-results {
   max-height: 52vh;
+  max-height: 52dvh;
   overflow-y: auto;
   padding: 8px;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 .search-hint {
@@ -1529,6 +1567,7 @@ body.pjax-loading .main-content { opacity: 0.45; }
   position: sticky;
   top: 80px;
   max-height: calc(100vh - 120px);
+  max-height: calc(100dvh - 120px);
   overflow-y: auto;
   padding-right: 16px;
   border-right: 1px solid var(--border-color);
@@ -1587,6 +1626,7 @@ body.pjax-loading .main-content { opacity: 0.45; }
   position: sticky;
   top: 80px;
   max-height: calc(100vh - 120px);
+  max-height: calc(100dvh - 120px);
   overflow-y: auto;
   padding-left: 16px;
   border-left: 1px solid var(--border-color);
@@ -1694,6 +1734,7 @@ body.pjax-loading .main-content { opacity: 0.45; }
 /* --- 404 页 --- */
 .error-section {
   min-height: calc(100vh - var(--header-height) - 240px);
+  min-height: calc(100dvh - var(--header-height) - 240px);
   display: flex;
   align-items: center;
   padding: 80px 0;
@@ -1834,6 +1875,44 @@ body.pjax-loading .main-content { opacity: 0.45; }
   .site-nav { display: none; }
 
   .mobile-menu-toggle { display: flex; }
+
+  /* --- 触摸目标放大到 ≥44px(WCAG / iOS HIG 建议) --- */
+  .header-icon-btn,
+  .mobile-menu-toggle {
+    width: 44px;
+    height: 44px;
+  }
+
+  .header-actions { gap: 2px; }
+
+  /* 底部固定元素避让手势条 */
+  .scroll-to-top {
+    bottom: calc(20px + var(--safe-b));
+    right: calc(20px + var(--safe-r));
+    width: 44px;
+    height: 44px;
+  }
+
+  /* iOS Safari 在聚焦 <16px 的输入框时会自动放大页面,统一提到 16px */
+  .rk-search,
+  .adv-calc-row input,
+  .search-input,
+  input[type='text'],
+  input[type='number'] {
+    font-size: 16px;
+  }
+
+  /* 移动端解析卡改为贴底大卡片,更易读 */
+  .rk-tipcard {
+    left: 12px !important;
+    right: 12px;
+    width: auto !important;
+    max-width: none;
+    bottom: calc(16px + var(--safe-b));
+    top: auto !important;
+    font-size: 0.875rem;
+    padding: 16px 18px;
+  }
 
   .hero-section {
     padding: 56px 0 44px;
@@ -2517,6 +2596,16 @@ body::before {
   background: var(--border-strong);
   opacity: 0;
   transition: opacity 0.15s ease;
+}
+
+/* 触屏:加宽拖拽触摸区,手指才点得中(需置于基础规则之后才能生效) */
+@media (max-width: 768px) {
+  .rk-resizer {
+    right: -12px;
+    width: 26px;
+  }
+
+  .rk-resizer::after { right: 11px; }
 }
 
 .rk-resizer:hover::after,
@@ -3795,6 +3884,8 @@ html.cover-lock { overflow: hidden; }
 .site-cover {
   position: fixed;
   inset: 0;
+  height: 100dvh;
+  padding: var(--safe-t) var(--safe-r) var(--safe-b) var(--safe-l);
   z-index: 3000;
   background: #060608;
   display: flex;
@@ -3965,7 +4056,8 @@ html.cover-lock { overflow: hidden; }
 
   .side-entries {
     top: auto;
-    bottom: 84px;
+    bottom: calc(84px + var(--safe-b));
+    left: var(--safe-l);
     transform: none;
     gap: 8px;
   }

@@ -1204,11 +1204,37 @@ document.addEventListener('DOMContentLoaded', function () {
       tipCard.hidden = true;
     }
 
+    // 触屏设备没有 hover,必须支持点击切换,否则手机用户完全看不到解析
+    var canHover = window.matchMedia('(hover: hover)').matches;
+    var openPlat = null;
+
     document.querySelectorAll('.rk-plat').forEach(function (plat) {
-      plat.addEventListener('mouseenter', function () { showTip(plat); });
-      plat.addEventListener('mouseleave', hideTip);
+      if (canHover) {
+        plat.addEventListener('mouseenter', function () { showTip(plat); });
+        plat.addEventListener('mouseleave', hideTip);
+      }
       plat.addEventListener('focus', function () { showTip(plat); });
-      plat.addEventListener('blur', hideTip);
+      plat.addEventListener('blur', function () { if (openPlat !== plat) hideTip(); });
+
+      // 点击切换(触屏主路径;桌面点击也能钉住)
+      plat.addEventListener('click', function (e) {
+        // 点平台链接本身时放行跳转
+        if (e.target.closest('a')) return;
+        e.preventDefault();
+        e.stopPropagation();
+        if (openPlat === plat) {
+          openPlat = null;
+          hideTip();
+        } else {
+          openPlat = plat;
+          showTip(plat);
+        }
+      });
+    });
+
+    // 点击其他地方关闭已钉住的解析卡
+    document.addEventListener('click', function () {
+      if (openPlat) { openPlat = null; hideTip(); }
     });
 
     /* --- Excel 式列宽拖拽(订阅性价比表) --- */
