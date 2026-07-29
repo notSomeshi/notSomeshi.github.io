@@ -1024,6 +1024,24 @@ document.addEventListener('DOMContentLoaded', function () {
       return '<span class="rk-ico b-' + meta[0] + '">' + meta[1] + '</span>';
     }
 
+    /* 模态徽章:t=文本 i=图像 a=音频 v=视频(能力矩阵,非评分) */
+    var MOD_META = {
+      t: ['文', '文本输入输出'],
+      i: ['图', '可读图片、截图、图表'],
+      a: ['音', '可直接处理音频'],
+      v: ['视', '可直接理解视频']
+    };
+
+    function modHtml(mod) {
+      if (!mod) return '';
+      var all = ['t', 'i', 'a', 'v'];
+      return '<span class="rk-mods">' + all.map(function (k) {
+        var on = mod.indexOf(k) !== -1;
+        return '<i class="rk-mod' + (on ? ' is-on' : '') + '" title="' +
+          MOD_META[k][1] + (on ? '' : '(不支持)') + '">' + MOD_META[k][0] + '</i>';
+      }).join('') + '</span>';
+    }
+
     function render(animate) {
       var res = compute();
       var act = res.act;
@@ -1058,6 +1076,7 @@ document.addEventListener('DOMContentLoaded', function () {
           '<td class="rk-col-model"><span class="rk-mwrap">' + icoHtml(m.vendor) + '<span>' +
             '<a class="rk-model-link" href="' + m.url + '" target="_blank" rel="noopener">' + m.name + '</a>' +
             '<span class="rk-vendor">' + m.vendor + (m.open ? ' · <em class="rk-open">开源权重</em>' : '') + '</span>' +
+            modHtml(m.mod) +
           '</span></span></td>' +
           cellsHtml +
           '<td class="rk-col-comp"><div class="rk-bar"><i style="width:' + (r.composite || 0) + '%"></i></div><span class="rk-comp-num">' + comp + '</span></td>' +

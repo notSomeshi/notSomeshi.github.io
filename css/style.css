@@ -139,9 +139,11 @@ html {
   --safe-l: env(safe-area-inset-left, 0px);
 }
 
-/* 触屏惯性滚动 + 禁止横向溢出 */
+/* 触屏惯性滚动。
+   ⚠ 不要在 html/body 上设 overflow-x:clip —— 按 CSS 规范,当一轴为 clip、
+   另一轴为 visible 时,visible 会被计算为 clip,整页将无法纵向滚动(踩过)。
+   横向溢出由各容器自身的 overflow-x:auto 处理。 */
 html, body {
-  overflow-x: clip;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -2454,6 +2456,98 @@ body::before {
 .rk-open {
   font-style: normal;
   color: var(--accent-ink);
+}
+
+/* --- 模态徽章(文/图/音/视):能力矩阵,非评分 --- */
+.rk-mods {
+  display: flex;
+  gap: 3px;
+  margin-top: 4px;
+}
+
+.rk-mod {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 17px;
+  height: 17px;
+  font-style: normal;
+  font-size: 0.5625rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text-tertiary);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  cursor: help;
+  user-select: none;
+}
+
+.rk-mod.is-on {
+  color: var(--accent-contrast);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* 说明文字里的内联示例徽章 */
+.rk-note .rk-mod {
+  vertical-align: -3px;
+  margin: 0 1px;
+}
+
+/* --- 术语提示:hover 看释义,点击进科普文 --- */
+.term-tip {
+  position: relative;
+  color: var(--accent-ink);
+  border-bottom: 1px dashed var(--accent-ink);
+  cursor: help;
+}
+
+.term-tip::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 8px);
+  z-index: 1200;
+  width: max-content;
+  max-width: min(340px, 80vw);
+  padding: 12px 14px;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  border-left: 3px solid var(--accent);
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+  pointer-events: none;
+  white-space: normal;
+}
+
+.term-tip:hover::after,
+.term-tip:focus-visible::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+[data-theme='light'] .term-tip::after {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* 触屏没有 hover:改为常驻可点击的样式提示 */
+@media (hover: none) {
+  .term-tip::after { display: none; }
+
+  .term-tip::before {
+    content: ' ⓘ';
+    font-size: 0.75em;
+  }
 }
 
 .rk-raw {
