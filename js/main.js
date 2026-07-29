@@ -1189,8 +1189,21 @@ document.addEventListener('DOMContentLoaded', function () {
         boards.forEach(function (b) {
           b.classList.toggle('is-active', b.dataset.board === tab.dataset.board);
         });
+        // 首次进入性价比板块时,让分隔线脉冲几下,提示列宽可调
+        if (tab.dataset.board === 'pricing') pulseResizers();
       });
     });
+
+    function pulseResizers() {
+      var t = document.querySelector('.rk-price-table');
+      if (!t) return;
+      var seen;
+      try { seen = localStorage.getItem('bv-resize-hint'); } catch (e) {}
+      if (seen) return;
+      t.classList.add('hint-pulse');
+      setTimeout(function () { t.classList.remove('hint-pulse'); }, 3000);
+      try { localStorage.setItem('bv-resize-hint', '1'); } catch (e) {}
+    }
 
     /* --- 平台悬停解析卡(共享浮层,fixed 定位避免被滚动容器裁剪) --- */
     var tipCard = document.getElementById('rkTipCard');

@@ -2699,8 +2699,24 @@ body::before {
   right: 4px;
   width: 2px;
   background: var(--border-strong);
-  opacity: 0;
+  opacity: 0.5;                     /* 常驻可见:让用户一眼看出这里能拖 */
+  transition: opacity 0.15s ease, background-color 0.15s ease, width 0.15s ease;
+}
+
+/* 分隔线上的抓握点,强化"可拖拽"暗示 */
+.rk-resizer::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 2px;
+  width: 6px;
+  height: 14px;
+  transform: translateY(-50%);
+  background-image: radial-gradient(circle, var(--border-strong) 1px, transparent 1px);
+  background-size: 3px 4px;
+  opacity: 0.75;
   transition: opacity 0.15s ease;
+  pointer-events: none;
 }
 
 /* 触屏:加宽拖拽触摸区,手指才点得中(需置于基础规则之后才能生效) */
@@ -2711,20 +2727,58 @@ body::before {
   }
 
   .rk-resizer::after { right: 11px; }
+  .rk-resizer::before { right: 9px; }
 }
 
 .rk-resizer:hover::after,
 .rk-resizer.is-dragging::after {
   opacity: 1;
+  width: 3px;
   background: var(--accent);
 }
 
+.rk-resizer:hover::before,
+.rk-resizer.is-dragging::before {
+  opacity: 1;
+  background-image: radial-gradient(circle, var(--accent) 1px, transparent 1px);
+}
+
+/* 首次进入该板块时分隔线脉冲三次,主动吸引注意 */
+.rk-price-table.hint-pulse .rk-resizer::after {
+  animation: resizerPulse 0.9s ease-in-out 3;
+}
+
+@keyframes resizerPulse {
+  0%, 100% { opacity: 0.5; width: 2px; background: var(--border-strong); }
+  50% { opacity: 1; width: 3px; background: var(--accent); }
+}
+
+/* 提示条:置于表格上方的醒目胶囊 */
 .rk-drag-hint {
-  margin: 10px 0 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 12px;
+  padding: 8px 15px;
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.06em;
-  color: var(--text-tertiary);
+  font-size: 0.71875rem;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  background: var(--accent-dim);
+  border: 1px solid var(--accent);
+  border-left: 3px solid var(--accent);
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+}
+
+.rk-drag-hint svg {
+  flex-shrink: 0;
+  color: var(--accent-ink);
+}
+
+.rk-drag-hint strong { color: var(--text-primary); }
+
+@media (max-width: 768px) {
+  .rk-drag-hint { font-size: 0.65625rem; padding: 7px 12px; }
 }
 
 .rk-plan em {
