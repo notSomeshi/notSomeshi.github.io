@@ -2788,11 +2788,33 @@ body::before {
   color: var(--text-tertiary);
 }
 
-/* --- 编程平台对比表 --- */
+/* --- Agent 平台对比表 --- */
 .rk-plat-table {
   table-layout: fixed;
-  width: 1310px;
+  width: 1425px;
 }
+
+/* 职能分组标题行 */
+.rk-plat-group td {
+  padding: 14px 14px 8px !important;
+  font-family: var(--font-mono);
+  font-size: 0.78125rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--accent-ink);
+  background: var(--accent-dim);
+  border-bottom: 2px solid var(--accent) !important;
+}
+
+.rk-plat-group td::before { content: '// '; }
+
+/* 适用职能列 */
+.rk-plat-role {
+  font-size: 0.78125rem !important;
+  line-height: 1.7 !important;
+}
+
+.rk-plat-role strong { color: var(--accent-ink); }
 
 .rk-plat-table th,
 .rk-plat-table td {
@@ -2810,8 +2832,9 @@ body::before {
 
 .rk-plat-table th { position: relative; }
 
-.rk-plat-table td:nth-child(4),
-.rk-plat-table td:nth-child(5) {
+/* 优势 / 短板两列(第 5、6 列) */
+.rk-plat-table td:nth-child(5),
+.rk-plat-table td:nth-child(6) {
   font-size: 0.78125rem;
   line-height: 1.85;
 }
@@ -2832,14 +2855,17 @@ body::before {
   margin-bottom: 16px;
 }
 
-/* 短板列用红色小标记强化 */
-.rk-plat-table td:nth-child(5) strong { color: #e5484d; }
+/* 短板列(第 6 列)用红色强化 */
+.rk-plat-table td:nth-child(6) strong { color: #e5484d; }
 
-/* 社区体感列:数字突出 */
-.rk-plat-table td:nth-child(7) strong {
+/* 社区体感列(第 8 列):数字突出 */
+.rk-plat-table td:nth-child(8) strong {
   color: var(--accent-ink);
   font-family: var(--font-mono);
 }
+
+/* 分组行不参与上述列着色 */
+.rk-plat-group td strong { color: inherit !important; }
 
 /* --- 厂商图标(品牌色字母徽章,零外部依赖) --- */
 .rk-ico {

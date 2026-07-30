@@ -116,7 +116,7 @@
     <div class="rk-boards" id="rkBoards">
       <button type="button" class="rk-board-tab is-active" data-board="ladder">能力天梯</button>
       <button type="button" class="rk-board-tab" data-board="pricing">订阅性价比</button>
-      <button type="button" class="rk-board-tab" data-board="platform">编程平台</button>
+      <button type="button" class="rk-board-tab" data-board="platform">Agent 平台</button>
     </div>
 
     <div class="rankings-app rk-board is-active" data-board="ladder" id="rankingsApp">
@@ -364,7 +364,8 @@
 
     <!-- ============ 编程平台对比板块 ============ -->
     <div class="rk-board" data-board="platform">
-      <p class="rk-note rk-plat-intro"><strong>模型是发动机,平台才是你每天摸的方向盘。</strong>同一个 Claude Opus 5,在 Claude Code 里跑和在 Cursor 里跑,计价方式、额度规则、可控程度完全不同。本表对比主流「媒介」——你实际用来调用模型的工具。<br>
+      <p class="rk-note rk-plat-intro"><strong>模型是发动机,平台才是你每天摸的方向盘。</strong>同一个 Claude Opus 5,在 Claude Code 里跑和在 Manus 里跑,计价方式、额度规则、能干的活完全不同。<br>
+      <strong>Agent 早已不只是写代码</strong>——办公文档、客服销售、数据分析、流程自动化都在用,所以本表按<strong>适用职能</strong>分组,技术与非技术团队都能对号入座。<br>
       <strong>「社区体感」列全部是可查证的第三方数据</strong>(NPS 净推荐值、"最爱"投票占比、满意度、市场规模),<strong>没有本站自估分</strong>;查不到数据的标 <span class="rk-miss-mark">—</span>,不用估值补位。</p>
 
       <p class="rk-drag-hint">
@@ -375,11 +376,12 @@
       <div class="rk-table-wrap">
         <table class="rk-table rk-plat-table">
           <colgroup>
-            <col width="145"><col width="120"><col width="230"><col width="215"><col width="215"><col width="185"><col width="200">
+            <col width="145"><col width="150"><col width="120"><col width="230"><col width="205"><col width="205"><col width="180"><col width="190">
           </colgroup>
           <thead>
             <tr>
               <th>平台<span class="rk-unit">形态</span></th>
+              <th>适用职能<span class="rk-unit">谁在用</span></th>
               <th>模型来源<span class="rk-unit">谁的模型</span></th>
               <th>计价方式<span class="rk-unit">怎么收钱</span></th>
               <th>优势</th>
@@ -389,10 +391,12 @@
             </tr>
           </thead>
           <tbody>
+            <tr class="rk-plat-group"><td colspan="8">研发 / 编程</td></tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-anthropic">A</span><a href="https://claude.com/claude-code" target="_blank" rel="noopener">Claude Code</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Claude Code(CLI / IDE 插件)</strong><b>形态:</b>终端优先的自主代理,也有 IDE 扩展与桌面端。<br><b>适合:</b>长程重构、整仓改动、"挂着让它自己干"的任务。<br><b>体感:</b>目前满意度与 NPS 双料第一,但额度按 5 小时窗口卡得紧,重度用户常撞墙。<br><b>组合建议:</b>社区最流行的搭法是 Cursor 编辑 + Claude Code 攻坚。</span></span>
                 <span class="rk-plat-form">CLI + 插件</span></td>
+              <td class="rk-plat-role">后端 / 全栈工程师<br>DevOps<br><em class="rk-pt-note">长程重构、整仓改动</em></td>
               <td>Anthropic 自家<br><em class="rk-pt-note">Opus 5 / Sonnet 5 / Haiku</em></td>
               <td><strong>订阅额度制</strong>:含在 Claude Pro $20 / Max 5x $100 / Max 20x $200 内,按 5 小时滚动窗口 + 周上限计<br><em class="rk-pt-note">也可用 API key 按量付费,无窗口限制</em></td>
               <td>· 长任务自主性目前最强<br>· 终端原生,易接入脚本与 CI<br>· 同一订阅池网页/IDE/CLI 通用<br>· 权限与工具调用可细粒度控制</td>
@@ -404,6 +408,7 @@
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-cursor">C</span><a href="https://cursor.com/" target="_blank" rel="noopener">Cursor</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Cursor(独立 IDE)</strong><b>形态:</b>VS Code 分支,AI 深度融入编辑器。<br><b>适合:</b>日常写代码、多文件重构、想在一个界面里切换各家模型。<br><b>体感:</b>收入规模最大($2B ARR、100 万+ 付费用户),Tab 补全流被公认最顺。<br><b>注意:</b>2026-06-25 起<strong>不再向新学生开放免费 Pro 年</strong>。</span></span>
                 <span class="rk-plat-form">独立 IDE</span></td>
+              <td class="rk-plat-role">前端 / 全栈工程师<br>日常编码<br><em class="rk-pt-note">多文件重构、补全流</em></td>
               <td>多家可选<br><em class="rk-pt-note">Claude / GPT / Gemini / DeepSeek</em></td>
               <td><strong>等值调用额度制</strong>:Pro $20 约含 $20 等值模型调用,Pro+ $60 / Ultra $200 按倍数放大<br><em class="rk-pt-note">Tab 补全付费档不限量;选贵模型烧得快;超额转按量</em></td>
               <td>· Tab 补全体验公认最流畅<br>· 一个界面横跨多家模型<br>· 多文件上下文理解强<br>· 生态与插件继承 VS Code</td>
@@ -415,6 +420,7 @@
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-github">GH</span><a href="https://github.com/features/copilot" target="_blank" rel="noopener">GitHub Copilot</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// GitHub Copilot(插件)</strong><b>形态:</b>各主流 IDE 的插件,与 GitHub 工作流深度集成。<br><b>适合:</b>企业采购、以补全为主的日常开发、PR/Issue 场景。<br><b>体感:</b>用户基数最大(470 万付费、同比 +75%),但 NPS 仅 +14——批评集中在"相比新工具改进停滞"。<br><b>注意:</b>2026-06 起改 AI Credits 计费。</span></span>
                 <span class="rk-plat-form">IDE 插件</span></td>
+              <td class="rk-plat-role">企业研发团队<br>各语言工程师<br><em class="rk-pt-note">补全为主 + PR 协作</em></td>
               <td>多家可选<br><em class="rk-pt-note">GPT-5.6 / Sonnet 5 / Gemini</em></td>
               <td><strong>补全免费 + 高级请求计数</strong>(2026-06 起 AI Credits 制):Pro $10 / Pro+ $39 / Max $100;Business $19、Enterprise $39 每席<br><em class="rk-pt-note">补全不限量,Agent 与高级模型按次扣</em></td>
               <td>· 企业采购与合规最成熟<br>· GitHub PR/Issue 集成最深<br>· 补全不限量,基础档最便宜<br>· 支持几乎所有 IDE 与语言</td>
@@ -426,6 +432,7 @@
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-openai">O</span><a href="https://openai.com/codex" target="_blank" rel="noopener">OpenAI Codex</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Codex(云端代理 + CLI)</strong><b>形态:</b>云端并行代理,附 CLI;含在 ChatGPT 订阅内。<br><b>适合:</b>多任务并行(同时挂多个改动)、已在 OpenAI 生态的团队。<br><b>体感:</b>被评为输出质量与自主性领先,但<strong>成本波动极大</strong>——同一档位可能月花 $40 也可能 $400,取决于模型、本地/云端、fast 模式与 token 量。</span></span>
                 <span class="rk-plat-form">云端代理 + CLI</span></td>
+              <td class="rk-plat-role">需并行多任务的团队<br>OpenAI 生态用户<br><em class="rk-pt-note">云端挂多个改动</em></td>
               <td>OpenAI 自家<br><em class="rk-pt-note">GPT-5.6 Sol / Terra / Luna</em></td>
               <td><strong>含在 ChatGPT 订阅内</strong>:Plus $20 起;Pro Codex $100(5× Plus)、Pro Max $200(20×)<br><em class="rk-pt-note">⚠ 官方估算每开发者 $100–200/月,但实际 $40–400 波动</em></td>
               <td>· 输出质量与自主性评价领先<br>· 云端并行,可同时挂多个任务<br>· 与 ChatGPT 订阅共用,不必另付<br>· Sol Ultra 模式可调多子代理攻坚</td>
@@ -437,6 +444,7 @@
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-google">G</span><a href="https://antigravity.google/" target="_blank" rel="noopener">Google Antigravity</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Antigravity(Google 的 AI IDE)</strong><b>形态:</b>Google 自家 AI IDE,2025-11 起公测。<br><b>适合:</b>Gemini 生态用户、想白嫖公测额度的人。<br><b>⚠ 重要提醒:</b>免费额度被反复削减——上线时 250 请求/天,到 2025-12 已砍到 <strong>20 请求/天(降幅 92%)</strong>;2026-03 引入 credits 制。Google <strong>未承诺永久免费层</strong>,不建议把它当长期主力。</span></span>
                 <span class="rk-plat-form">独立 IDE</span></td>
+              <td class="rk-plat-role">Gemini 生态开发者<br>预算敏感者<br><em class="rk-pt-note">⚠ 额度政策不稳</em></td>
               <td>Google 自家<br><em class="rk-pt-note">Gemini 3.1 Pro / 3.6 Flash</em></td>
               <td><strong>公测免费 + credits 兜底</strong>:Free $0、AI Pro $20、Ultra $100(≈5× Pro)、Ultra Max $200(≈20×)<br><em class="rk-pt-note">额度用尽后按 credits 计:$0.01/credit,20,000 credits 售 $199</em></td>
               <td>· 公测期基础功能免费<br>· Gemini 2M 级上下文与多模态<br>· 与 Google 云生态打通<br>· Ultra 档 Deep Think 配额行业最高</td>
@@ -448,6 +456,7 @@
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-bytedance">豆</span><a href="https://www.trae.ai/" target="_blank" rel="noopener">Trae(字节)</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Trae(字节的 AI IDE)</strong><b>形态:</b>独立 IDE,定位 Cursor 的国内平替。<br><b>适合:</b>国内网络环境、预算敏感、学生与副业开发者。<br><b>体感:</b>$10 的 Pro 档对标 Cursor $20,国内直连不折腾;缺点是生态与插件成熟度、以及高级模型按倍率扣额度。</span></span>
                 <span class="rk-plat-form">独立 IDE</span></td>
+              <td class="rk-plat-role">国内开发者<br>学生 / 副业<br><em class="rk-pt-note">直连不折腾</em></td>
               <td>多家可选<br><em class="rk-pt-note">Doubao / Claude / GPT 等</em></td>
               <td><strong>快速请求计数制</strong>:Free $0、Lite $3、Pro $10、Pro+ $30、Ultra $100<br><em class="rk-pt-note">Pro 约 600 次快速请求/月;选高级模型按倍率加速扣减;用尽进慢速队列(排队不额外收费)</em></td>
               <td>· <strong>国内直连,无需代理</strong><br>· 同档价格约为 Cursor 一半<br>· 中文交互与文档友好<br>· 慢速队列兜底,不会硬断</td>
@@ -459,6 +468,7 @@
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-tencent">腾</span><a href="https://copilot.tencent.com/" target="_blank" rel="noopener">CodeBuddy / WorkBuddy(腾讯)</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// 腾讯云 CodeBuddy / WorkBuddy</strong><b>形态:</b>CodeBuddy 面向编程,WorkBuddy 面向办公自动化(agentic workspace)。<br><b>适合:</b>已在腾讯云体系内的企业、需要私有化部署的团队。<br><b>⚠ 价格警报:</b>2026-05-15 起大幅调价,企业旗舰版 78→198 元/人/月(<strong>+154%</strong>)、私有云版 158→316 元(+100%),这是当年<strong>第三次涨价</strong>,官方口径指向算力紧张。</span></span>
                 <span class="rk-plat-form">插件 + 办公代理</span></td>
+              <td class="rk-plat-role">研发 + <strong>办公自动化</strong><br>腾讯云体系企业<br><em class="rk-pt-note">WorkBuddy 覆盖非编程办公</em></td>
               <td>腾讯混元 + 多家<br><em class="rk-pt-note">Hy3 系列等</em></td>
               <td><strong>订阅 + credits 池</strong>:WorkBuddy 有免费评估档、Pro $9.95/月(年付)、Team $40/席(含 1,000 credits/席,团队共享)<br><em class="rk-pt-note">⚠ 2026-05-15 起企业档大涨:78→198 元、158→316 元/人/月</em></td>
               <td>· 国内直连、私有化部署可选<br>· WorkBuddy 覆盖办公自动化(非仅编程)<br>· 与腾讯云/企微生态打通<br>· 团队 credits 池可共享调配</td>
@@ -470,12 +480,81 @@
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico">CL</span><a href="https://cline.bot/" target="_blank" rel="noopener">Cline / Roo Code</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Cline / Roo Code(开源插件)</strong><b>形态:</b>开源 VS Code 插件,自带 API key 使用。<br><b>适合:</b>想完全掌控成本与数据的人、要接本地模型(Ollama)的人。<br><b>体感:</b>没有订阅、没有额度墙,账单完全等于你的 API 消耗;重度使用 Claude Sonnet 约 $20–50/月。缺点是要自己配置,且成本无上限保护。</span></span>
                 <span class="rk-plat-form">开源插件</span></td>
+              <td class="rk-plat-role">要掌控成本与数据的人<br>需本地模型的团队<br><em class="rk-pt-note">私有化 / 合规场景</em></td>
               <td>任意(自带 key)<br><em class="rk-pt-note">含本地模型 via Ollama</em></td>
               <td><strong>纯 API 按量</strong>:插件本身免费开源,你付的是所选模型的 API 费<br><em class="rk-pt-note">用 Claude Sonnet 重度使用约 $20–50/月(随上下文与请求量浮动)</em></td>
               <td>· <strong>无订阅、无额度窗口</strong><br>· 成本完全透明(等于 API 账单)<br>· 可接本地模型,数据不出内网<br>· 开源可审计、可改</td>
               <td>· 需自行配置 key 与模型<br>· <strong>无消费上限保护</strong>,失控风险在自己<br>· 无官方支持<br>· 上下文管理需手动优化</td>
               <td><strong>插件永久免费开源</strong><br><em class="rk-pt-note">成本仅取决于所选 API;接本地模型可零成本</em></td>
               <td><span class="rk-miss-mark">—</span> 暂无第三方 NPS<br><em class="rk-pt-note">开源社区活跃度高;无可引用的量化满意度数据</em></td>
+            </tr>
+
+            <tr class="rk-plat-group"><td colspan="8">通用任务 Agent(不限于编程)</td></tr>
+            <tr>
+              <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico">M</span><a href="https://manus.im/" target="_blank" rel="noopener">Manus</a>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Manus(通用自主 Agent)</strong><b>形态:</b>云端自主 Agent,给一句话指令就自己拆解任务、调工具、交付成品。<br><b>适合:</b>市场调研、竞品分析、做表做图做 PPT、批量信息整理——<strong>非技术岗的主力选择</strong>。<br><b>⚠ 最大坑:</b>credits 制被用户集中吐槽——同样 $20 的套餐,"可能撑一个月,也可能一个周末就烧完",取决于任务复杂度。用前务必先小任务试水估算消耗。</span></span>
+                <span class="rk-plat-form">云端 Agent</span></td>
+              <td class="rk-plat-role"><strong>市场 / 运营 / 分析师</strong><br>产品经理、咨询顾问<br><em class="rk-pt-note">调研、报告、做表做图</em></td>
+              <td>多家(平台调度)<br><em class="rk-pt-note">对用户不暴露模型选择</em></td>
+              <td><strong>credits 制</strong>:Free $0、Standard $20(4,000 credits)、Customizable $40、Extended $200;年付约 8.3 折<br><em class="rk-pt-note">⚠ credits 消耗随任务复杂度剧烈波动,是用户投诉最集中的点</em></td>
+              <td>· <strong>一句话交付整件事</strong>,无需拆步骤<br>· 会自己开浏览器、写代码、做表格<br>· 非技术用户上手门槛最低<br>· 产出可直接交付(文档/表格/网页)</td>
+              <td>· <strong>credits 极难预估</strong>,可能周末烧光月度额度<br>· 不暴露模型选择,可控性弱<br>· 复杂任务仍需人工校验<br>· 长任务失败时 credits 照扣</td>
+              <td><strong>Free 档</strong>可试用<br><em class="rk-pt-note">年付约省 17%</em></td>
+              <td><span class="rk-miss-mark">—</span> 暂无第三方 NPS<br><em class="rk-pt-note">评测普遍称赞"自主完成度",同时集中批评 credits 不可预估;缺量化满意度数据</em></td>
+            </tr>
+
+            <tr class="rk-plat-group"><td colspan="8">办公 / 协作(文档、邮件、会议)</td></tr>
+            <tr>
+              <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico">MS</span><a href="https://www.microsoft.com/microsoft-365/copilot" target="_blank" rel="noopener">Microsoft 365 Copilot</a>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Microsoft 365 Copilot</strong><b>形态:</b>嵌入 Word / Excel / Outlook / Teams 的助手,另有 Copilot Studio 可搭自定义 Agent。<br><b>适合:</b>已用 M365 的企业——财务、HR、行政、销售的日常文档与邮件。<br><b>⚠ 真实成本提醒:</b>$30/席只是<strong>加购价</strong>,需要底层 M365 授权;新客户实际落地约 <strong>$59–83/席/月</strong>。要搭自定义 Agent 的话 Copilot Studio 另收 $200/月(含 25,000 条消息)。</span></span>
+                <span class="rk-plat-form">办公套件内嵌</span></td>
+              <td class="rk-plat-role"><strong>财务 / HR / 行政 / 销售</strong><br>全体办公人员<br><em class="rk-pt-note">文档、邮件、会议纪要、Excel</em></td>
+              <td>OpenAI + 微软自研<br><em class="rk-pt-note">对用户不暴露具体版本</em></td>
+              <td><strong>按席位订阅</strong>:$30/席/月<strong>加购</strong>(需底层 M365 授权)<br><em class="rk-pt-note">⚠ 新客户实际成本约 $59–83/席/月;Copilot Studio 自定义 Agent 另计 $200/月(25,000 消息)</em></td>
+              <td>· 直接长在 Office 里,零学习成本<br>· 能读通企业内部文档与邮件上下文<br>· 合规、审计、数据驻留最成熟<br>· Copilot Studio 可无代码搭 Agent</td>
+              <td>· <strong>真实成本远高于标价</strong>(需捆绑 M365)<br>· 单点能力不如专用工具<br>· 效果高度依赖企业数据治理质量<br>· 按席位收费,小团队不经济</td>
+              <td>通常提供企业试用<br><em class="rk-pt-note">无个人免费层;需通过销售或云市场采购</em></td>
+              <td><span class="rk-miss-mark">—</span> 暂无可比 NPS<br><em class="rk-pt-note">企业采购量大但公开满意度数据口径不一,不与开发者工具的 NPS 混用</em></td>
+            </tr>
+
+            <tr class="rk-plat-group"><td colspan="8">客服 / 销售(面向客户的自动化)</td></tr>
+            <tr>
+              <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico">SF</span><a href="https://www.salesforce.com/agentforce/" target="_blank" rel="noopener">Salesforce Agentforce</a>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Salesforce Agentforce</strong><b>形态:</b>CRM 原生的自主 Agent,直接面向客户跑服务与销售流程。<br><b>适合:</b>已在 Salesforce 体系内的客服中心与销售团队。<br><b>计价特别:</b>三种模式并存——<strong>按对话 $2/次</strong>、Flex Credits($500/10 万 credits)、或按席位 $125/用户/月,且需要 Service Cloud 作为前置。按对话计价对话务量大的客服中心可能非常贵,上线前务必按真实话务量试算。</span></span>
+                <span class="rk-plat-form">CRM 原生 Agent</span></td>
+              <td class="rk-plat-role"><strong>客服中心 / 销售团队</strong><br>客户成功、售后<br><em class="rk-pt-note">工单自动处理、销售跟进</em></td>
+              <td>Salesforce 自有 + 多家<br><em class="rk-pt-note">Atlas 推理引擎</em></td>
+              <td><strong>三种模式并存</strong>:① 按对话 <strong>$2/次</strong> ② Flex Credits <strong>$500/10 万</strong> ③ 按席位 <strong>$125/用户/月</strong><br><em class="rk-pt-note">⚠ 均需 Service Cloud 前置授权</em></td>
+              <td>· 与 CRM 数据天然打通<br>· 面向客户的自动化最成熟<br>· 可直接触发业务流程(下单、退款)<br>· 企业级权限与审计完备</td>
+              <td>· <strong>按对话计价对高话务量可能极贵</strong><br>· 强绑定 Salesforce 生态<br>· 需 Service Cloud 前置,总成本高<br>· 实施与调优需要专业人力</td>
+              <td>无公开免费层<br><em class="rk-pt-note">通常通过销售提供 PoC / 试点</em></td>
+              <td><span class="rk-miss-mark">—</span> 暂无可比 NPS<br><em class="rk-pt-note">企业级产品,公开满意度数据口径与开发者工具不可比</em></td>
+            </tr>
+
+            <tr class="rk-plat-group"><td colspan="8">流程自动化(把 Agent 接进现有系统)</td></tr>
+            <tr>
+              <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico">n8</span><a href="https://n8n.io/" target="_blank" rel="noopener">n8n</a>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// n8n(开源工作流自动化)</strong><b>形态:</b>可视化拖拽的工作流引擎,400+ 集成,可自托管。<br><b>适合:</b>有明确重复流程要自动化的团队——数据同步、通知分发、审批流、定时报表。<br><b>关键优势:</b>自托管后<strong>彻底消除按 credit 计费</strong>,成本只剩服务器与所选模型的 API 费。适合"可预测的重复流程",不适合开放式自主推理。</span></span>
+                <span class="rk-plat-form">工作流引擎</span></td>
+              <td class="rk-plat-role"><strong>运营 / IT / 数据团队</strong><br>业务流程负责人<br><em class="rk-pt-note">数据同步、审批、定时报表</em></td>
+              <td>任意(自带 key)<br><em class="rk-pt-note">可接本地模型</em></td>
+              <td><strong>开源自托管免费</strong> + 云托管按执行量订阅<br><em class="rk-pt-note">自托管后无 credit 概念,成本 = 服务器 + 所选模型 API 费</em></td>
+              <td>· <strong>自托管彻底摆脱 credits</strong><br>· 400+ 集成,接得进老系统<br>· 高频结构化流程单位成本极低<br>· 数据可完全不出内网</td>
+              <td>· 需要人搭建与维护<br>· <strong>不适合开放式自主推理</strong>(它是流程引擎,不是 Agent 大脑)<br>· 可视化编排学习曲线存在<br>· 自托管要自己管稳定性</td>
+              <td><strong>开源版永久免费</strong><br><em class="rk-pt-note">云托管有免费试用档</em></td>
+              <td><span class="rk-miss-mark">—</span> 暂无第三方 NPS<br><em class="rk-pt-note">开源社区活跃、GitHub 星数领先;缺可引用的量化满意度数据</em></td>
+            </tr>
+            <tr>
+              <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico">L</span><a href="https://www.lindy.ai/" target="_blank" rel="noopener">Lindy</a>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Lindy(无代码 Agent 搭建)</strong><b>形态:</b>无代码 Agent 构建平台,面向业务人员。<br><b>适合:</b>没有开发资源、但想让 Agent 处理邮件/日程/线索跟进的小团队。<br><b>定位:</b>比 n8n 更"傻瓜",比 Manus 更可控;$49/月起,对个人用户比 Manus 贵。</span></span>
+                <span class="rk-plat-form">无代码 Agent</span></td>
+              <td class="rk-plat-role"><strong>销售 / 招聘 / 客服</strong><br>无开发资源的小团队<br><em class="rk-pt-note">邮件跟进、线索筛选、日程</em></td>
+              <td>多家(平台调度)</td>
+              <td><strong>按订阅</strong>:$49/月起<br><em class="rk-pt-note">个人用户单价高于 Manus,换来的是更强的流程可控性</em></td>
+              <td>· 无代码,业务人员可自建<br>· 邮件/日程/CRM 场景开箱即用<br>· 触发条件与流程比通用 Agent 更可控</td>
+              <td>· 起步价 $49 对个人偏贵<br>· 灵活度不及 n8n 自托管<br>· 复杂逻辑仍需技术介入</td>
+              <td>有试用档<br><em class="rk-pt-note">以官网当期政策为准</em></td>
+              <td><span class="rk-miss-mark">—</span> 暂无第三方 NPS</td>
             </tr>
           </tbody>
         </table>
