@@ -1189,13 +1189,14 @@ document.addEventListener('DOMContentLoaded', function () {
         boards.forEach(function (b) {
           b.classList.toggle('is-active', b.dataset.board === tab.dataset.board);
         });
-        // 首次进入性价比板块时,让分隔线脉冲几下,提示列宽可调
-        if (tab.dataset.board === 'pricing') pulseResizers();
+        // 首次进入含可调表格的板块时,让分隔线脉冲几下,提示列宽可调
+        if (tab.dataset.board === 'pricing') pulseResizers('.rk-price-table');
+        if (tab.dataset.board === 'platform') pulseResizers('.rk-plat-table');
       });
     });
 
-    function pulseResizers() {
-      var t = document.querySelector('.rk-price-table');
+    function pulseResizers(sel) {
+      var t = document.querySelector(sel);
       if (!t) return;
       var seen;
       try { seen = localStorage.getItem('bv-resize-hint'); } catch (e) {}
@@ -1269,23 +1270,23 @@ document.addEventListener('DOMContentLoaded', function () {
       if (openPlat) { openPlat = null; hideTip(); }
     });
 
-    /* --- Excel 式列宽拖拽(订阅性价比表) --- */
-    var priceTable = document.querySelector('.rk-price-table');
-    if (priceTable) {
-      var priceCols = priceTable.querySelectorAll('colgroup col');
+    /* --- Excel 式列宽拖拽(性价比表 + 平台对比表) --- */
+    function makeResizable(table) {
+      if (!table) return;
+      var cols = table.querySelectorAll('colgroup col');
 
       function colW(col) {
         return parseInt(col.style.width || col.getAttribute('width'), 10) || 150;
       }
 
-      function syncTableWidth() {
+      function syncWidth() {
         var sum = 0;
-        priceCols.forEach(function (c) { sum += colW(c); });
-        priceTable.style.width = sum + 'px';
+        cols.forEach(function (c) { sum += colW(c); });
+        table.style.width = sum + 'px';
       }
 
-      priceTable.querySelectorAll('thead th').forEach(function (th, i) {
-        var col = priceCols[i];
+      table.querySelectorAll('thead th').forEach(function (th, i) {
+        var col = cols[i];
         if (!col) return;
         var grip = document.createElement('span');
         grip.className = 'rk-resizer';
@@ -1298,7 +1299,7 @@ document.addEventListener('DOMContentLoaded', function () {
           try { grip.setPointerCapture(e.pointerId); } catch (err) {}
           var move = function (ev) {
             col.style.width = Math.max(90, startW + (ev.clientX - startX)) + 'px';
-            syncTableWidth();
+            syncWidth();
           };
           var up = function () {
             grip.classList.remove('is-dragging');
@@ -1312,8 +1313,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       });
 
-      syncTableWidth();
+      syncWidth();
     }
+
+    makeResizable(document.querySelector('.rk-price-table'));
+    makeResizable(document.querySelector('.rk-plat-table'));
   }
 
   /* ==========================================

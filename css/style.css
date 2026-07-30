@@ -2744,7 +2744,8 @@ body::before {
 }
 
 /* 首次进入该板块时分隔线脉冲三次,主动吸引注意 */
-.rk-price-table.hint-pulse .rk-resizer::after {
+.rk-price-table.hint-pulse .rk-resizer::after,
+.rk-plat-table.hint-pulse .rk-resizer::after {
   animation: resizerPulse 0.9s ease-in-out 3;
 }
 
@@ -2787,6 +2788,59 @@ body::before {
   color: var(--text-tertiary);
 }
 
+/* --- 编程平台对比表 --- */
+.rk-plat-table {
+  table-layout: fixed;
+  width: 1310px;
+}
+
+.rk-plat-table th,
+.rk-plat-table td {
+  text-align: left;
+  white-space: normal;
+  vertical-align: top;
+  overflow-wrap: break-word;
+}
+
+.rk-plat-table td {
+  font-size: 0.8125rem;
+  line-height: 1.75;
+  padding: 14px;
+}
+
+.rk-plat-table th { position: relative; }
+
+.rk-plat-table td:nth-child(4),
+.rk-plat-table td:nth-child(5) {
+  font-size: 0.78125rem;
+  line-height: 1.85;
+}
+
+.rk-plat-form {
+  display: block;
+  margin-top: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+}
+
+.rk-plat-intro {
+  padding: 14px 18px;
+  background: var(--bg-secondary);
+  border-left: 3px solid var(--accent);
+  margin-bottom: 16px;
+}
+
+/* 短板列用红色小标记强化 */
+.rk-plat-table td:nth-child(5) strong { color: #e5484d; }
+
+/* 社区体感列:数字突出 */
+.rk-plat-table td:nth-child(7) strong {
+  color: var(--accent-ink);
+  font-family: var(--font-mono);
+}
+
 /* --- 厂商图标(品牌色字母徽章,零外部依赖) --- */
 .rk-ico {
   display: inline-flex;
@@ -2803,6 +2857,12 @@ body::before {
   margin-right: 8px;
   vertical-align: -4px;
   user-select: none;
+}
+
+/* 无官方 logo 的开源工具:用深灰字母徽章 */
+.rk-ico:not([class*='b-']) {
+  background-color: #4a4a52;
+  font-size: 8px;
 }
 
 /* 真实厂牌 logo(本地资源,白底芯片保证深浅色主题都清晰;字母作为加载失败的回退) */

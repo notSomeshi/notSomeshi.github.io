@@ -112,10 +112,11 @@
       <em>用选购助手 →</em>
     </a>
 
-    <!-- 板块切换:能力天梯 / 订阅性价比 -->
+    <!-- 板块切换:能力天梯 / 订阅性价比 / 编程平台 -->
     <div class="rk-boards" id="rkBoards">
       <button type="button" class="rk-board-tab is-active" data-board="ladder">能力天梯</button>
       <button type="button" class="rk-board-tab" data-board="pricing">订阅性价比</button>
+      <button type="button" class="rk-board-tab" data-board="platform">编程平台</button>
     </div>
 
     <div class="rankings-app rk-board is-active" data-board="ladder" id="rankingsApp">
@@ -162,7 +163,7 @@
     <div class="rk-board" data-board="pricing">
       <p class="rk-drag-hint">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 3 12 9 6"></polyline><polyline points="15 6 21 12 15 18"></polyline><line x1="12" y1="3" x2="12" y2="21"></line></svg>
-        <span><strong>列宽可调</strong> —— 像 Excel 一样,拖动表头之间的分隔线 ⣿ 即可加宽任意一列</span>
+        <span><strong>列宽可调</strong> —— 拖动分割线 ⣿ 即可调整宽度</span>
       </p>
       <div class="rk-table-wrap">
         <table class="rk-table rk-price-table">
@@ -358,6 +359,141 @@
           <a href="https://aiidelist.com/blog/trae-ai-ide-pricing-2026" target="_blank" rel="noopener">AI IDE List(Trae 定价)</a> ·
           <a href="https://pricepertoken.com/pricing-page/model/anthropic-claude-fable-5" target="_blank" rel="noopener">PricePerToken</a>。
           各平台促销与地区定价可能不同,购买前请以官网为准。</p>
+      </div>
+    </div>
+
+    <!-- ============ 编程平台对比板块 ============ -->
+    <div class="rk-board" data-board="platform">
+      <p class="rk-note rk-plat-intro"><strong>模型是发动机,平台才是你每天摸的方向盘。</strong>同一个 Claude Opus 5,在 Claude Code 里跑和在 Cursor 里跑,计价方式、额度规则、可控程度完全不同。本表对比主流「媒介」——你实际用来调用模型的工具。<br>
+      <strong>「社区体感」列全部是可查证的第三方数据</strong>(NPS 净推荐值、"最爱"投票占比、满意度、市场规模),<strong>没有本站自估分</strong>;查不到数据的标 <span class="rk-miss-mark">—</span>,不用估值补位。</p>
+
+      <p class="rk-drag-hint">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 3 12 9 6"></polyline><polyline points="15 6 21 12 15 18"></polyline><line x1="12" y1="3" x2="12" y2="21"></line></svg>
+        <span><strong>列宽可调</strong> —— 拖动分割线 ⣿ 即可调整宽度</span>
+      </p>
+
+      <div class="rk-table-wrap">
+        <table class="rk-table rk-plat-table">
+          <colgroup>
+            <col width="145"><col width="120"><col width="230"><col width="215"><col width="215"><col width="185"><col width="200">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>平台<span class="rk-unit">形态</span></th>
+              <th>模型来源<span class="rk-unit">谁的模型</span></th>
+              <th>计价方式<span class="rk-unit">怎么收钱</span></th>
+              <th>优势</th>
+              <th>短板</th>
+              <th>免费额度 / 活动<span class="rk-unit">2026-07 现状</span></th>
+              <th>社区体感<span class="rk-unit">第三方数据 ※</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-anthropic">A</span><a href="https://claude.com/claude-code" target="_blank" rel="noopener">Claude Code</a>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Claude Code(CLI / IDE 插件)</strong><b>形态:</b>终端优先的自主代理,也有 IDE 扩展与桌面端。<br><b>适合:</b>长程重构、整仓改动、"挂着让它自己干"的任务。<br><b>体感:</b>目前满意度与 NPS 双料第一,但额度按 5 小时窗口卡得紧,重度用户常撞墙。<br><b>组合建议:</b>社区最流行的搭法是 Cursor 编辑 + Claude Code 攻坚。</span></span>
+                <span class="rk-plat-form">CLI + 插件</span></td>
+              <td>Anthropic 自家<br><em class="rk-pt-note">Opus 5 / Sonnet 5 / Haiku</em></td>
+              <td><strong>订阅额度制</strong>:含在 Claude Pro $20 / Max 5x $100 / Max 20x $200 内,按 5 小时滚动窗口 + 周上限计<br><em class="rk-pt-note">也可用 API key 按量付费,无窗口限制</em></td>
+              <td>· 长任务自主性目前最强<br>· 终端原生,易接入脚本与 CI<br>· 同一订阅池网页/IDE/CLI 通用<br>· 权限与工具调用可细粒度控制</td>
+              <td>· 5 小时窗口对爆发式使用不友好<br>· 无内置编辑器,需配合 IDE<br>· 国内需代理<br>· 纯补全场景不如 IDE 系</td>
+              <td>Free 档可试用少量<br><strong>Claude Campus</strong>:校园 Builder Clubs 共享 <strong>$50 学生 API credits</strong><br><em class="rk-pt-note">无常规免费层</em></td>
+              <td><strong>NPS +58</strong>(工具类罕见高分)<br><strong>满意度 91%</strong>(同类最高)<br><strong>"最爱"投票 46%</strong><br><em class="rk-pt-note">三项均为同类第一</em></td>
+            </tr>
+            <tr>
+              <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-cursor">C</span><a href="https://cursor.com/" target="_blank" rel="noopener">Cursor</a>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Cursor(独立 IDE)</strong><b>形态:</b>VS Code 分支,AI 深度融入编辑器。<br><b>适合:</b>日常写代码、多文件重构、想在一个界面里切换各家模型。<br><b>体感:</b>收入规模最大($2B ARR、100 万+ 付费用户),Tab 补全流被公认最顺。<br><b>注意:</b>2026-06-25 起<strong>不再向新学生开放免费 Pro 年</strong>。</span></span>
+                <span class="rk-plat-form">独立 IDE</span></td>
+              <td>多家可选<br><em class="rk-pt-note">Claude / GPT / Gemini / DeepSeek</em></td>
+              <td><strong>等值调用额度制</strong>:Pro $20 约含 $20 等值模型调用,Pro+ $60 / Ultra $200 按倍数放大<br><em class="rk-pt-note">Tab 补全付费档不限量;选贵模型烧得快;超额转按量</em></td>
+              <td>· Tab 补全体验公认最流畅<br>· 一个界面横跨多家模型<br>· 多文件上下文理解强<br>· 生态与插件继承 VS Code</td>
+              <td>· 额度按模型贵贱消耗,难预估<br>· 官方承认重度 Agent 用户实际月花 $60–100<br>· 只服务编程场景<br>· 非编程任务完全浪费</td>
+              <td><strong>Hobby 免费档</strong>:约 2,000 次补全 + 50 次慢速高级请求/月<br><em class="rk-pt-note">⚠ 学生免费 Pro 年已于 2026-06-25 停止新注册</em></td>
+              <td><strong>NPS +51</strong>(较 2025Q4 基本持平)<br><strong>"最爱"投票 19%</strong><br><strong>$2B ARR / 100 万+ 付费用户</strong><br><em class="rk-pt-note">收入规模同类第一</em></td>
+            </tr>
+            <tr>
+              <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-github">GH</span><a href="https://github.com/features/copilot" target="_blank" rel="noopener">GitHub Copilot</a>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// GitHub Copilot(插件)</strong><b>形态:</b>各主流 IDE 的插件,与 GitHub 工作流深度集成。<br><b>适合:</b>企业采购、以补全为主的日常开发、PR/Issue 场景。<br><b>体感:</b>用户基数最大(470 万付费、同比 +75%),但 NPS 仅 +14——批评集中在"相比新工具改进停滞"。<br><b>注意:</b>2026-06 起改 AI Credits 计费。</span></span>
+                <span class="rk-plat-form">IDE 插件</span></td>
+              <td>多家可选<br><em class="rk-pt-note">GPT-5.6 / Sonnet 5 / Gemini</em></td>
+              <td><strong>补全免费 + 高级请求计数</strong>(2026-06 起 AI Credits 制):Pro $10 / Pro+ $39 / Max $100;Business $19、Enterprise $39 每席<br><em class="rk-pt-note">补全不限量,Agent 与高级模型按次扣</em></td>
+              <td>· 企业采购与合规最成熟<br>· GitHub PR/Issue 集成最深<br>· 补全不限量,基础档最便宜<br>· 支持几乎所有 IDE 与语言</td>
+              <td>· <strong>NPS +14 明显落后</strong>,被批改进停滞<br>· 高级请求次数有限,重代理易撞墙<br>· Agent 自主性不及 Claude Code / Codex<br>· Credits 制透明度受质疑</td>
+              <td><strong>Free 档</strong>:2,000 次补全 + 50 次 chat/月<br>学生与开源维护者可申请免费 Pro</td>
+              <td><strong>NPS +14</strong>(同类明显偏低)<br><strong>"最爱"投票 9%</strong><br><strong>470 万付费订阅、同比 +75%</strong><br><em class="rk-pt-note">用户基数同类第一</em></td>
+            </tr>
+            <tr>
+              <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-openai">O</span><a href="https://openai.com/codex" target="_blank" rel="noopener">OpenAI Codex</a>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Codex(云端代理 + CLI)</strong><b>形态:</b>云端并行代理,附 CLI;含在 ChatGPT 订阅内。<br><b>适合:</b>多任务并行(同时挂多个改动)、已在 OpenAI 生态的团队。<br><b>体感:</b>被评为输出质量与自主性领先,但<strong>成本波动极大</strong>——同一档位可能月花 $40 也可能 $400,取决于模型、本地/云端、fast 模式与 token 量。</span></span>
+                <span class="rk-plat-form">云端代理 + CLI</span></td>
+              <td>OpenAI 自家<br><em class="rk-pt-note">GPT-5.6 Sol / Terra / Luna</em></td>
+              <td><strong>含在 ChatGPT 订阅内</strong>:Plus $20 起;Pro Codex $100(5× Plus)、Pro Max $200(20×)<br><em class="rk-pt-note">⚠ 官方估算每开发者 $100–200/月,但实际 $40–400 波动</em></td>
+              <td>· 输出质量与自主性评价领先<br>· 云端并行,可同时挂多个任务<br>· 与 ChatGPT 订阅共用,不必另付<br>· Sol Ultra 模式可调多子代理攻坚</td>
+              <td>· <strong>成本极难预估</strong>(同档可差 10 倍)<br>· Ultra 模式 token 成倍消耗且无单独标价<br>· 云端任务对私有代码有合规顾虑<br>· 国内需代理</td>
+              <td>无独立免费层(随 ChatGPT Free 受限使用)<br><strong>API 侧</strong>:合作渠道免费额度 2026-07-08 起由 $300 提至 <strong>$1,000</strong></td>
+              <td><span class="rk-miss-mark">—</span> 暂无公开 NPS<br><em class="rk-pt-note">第三方评测称其"输出质量、自主性与可靠性领先";缺可查证的量化满意度数据</em></td>
+            </tr>
+            <tr>
+              <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-google">G</span><a href="https://antigravity.google/" target="_blank" rel="noopener">Google Antigravity</a>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Antigravity(Google 的 AI IDE)</strong><b>形态:</b>Google 自家 AI IDE,2025-11 起公测。<br><b>适合:</b>Gemini 生态用户、想白嫖公测额度的人。<br><b>⚠ 重要提醒:</b>免费额度被反复削减——上线时 250 请求/天,到 2025-12 已砍到 <strong>20 请求/天(降幅 92%)</strong>;2026-03 引入 credits 制。Google <strong>未承诺永久免费层</strong>,不建议把它当长期主力。</span></span>
+                <span class="rk-plat-form">独立 IDE</span></td>
+              <td>Google 自家<br><em class="rk-pt-note">Gemini 3.1 Pro / 3.6 Flash</em></td>
+              <td><strong>公测免费 + credits 兜底</strong>:Free $0、AI Pro $20、Ultra $100(≈5× Pro)、Ultra Max $200(≈20×)<br><em class="rk-pt-note">额度用尽后按 credits 计:$0.01/credit,20,000 credits 售 $199</em></td>
+              <td>· 公测期基础功能免费<br>· Gemini 2M 级上下文与多模态<br>· 与 Google 云生态打通<br>· Ultra 档 Deep Think 配额行业最高</td>
+              <td>· <strong>免费额度被砍 92%</strong>(250→20 请求/天)<br>· credits 计价不透明,信任受损<br>· 未承诺永久免费层<br>· 成熟度不及 Cursor/Copilot</td>
+              <td><strong>公测期 Free $0</strong>,但配额已多次收紧<br><em class="rk-pt-note">⚠ 额度政策不稳定,规划长期用途需谨慎</em></td>
+              <td><span class="rk-miss-mark">—</span> 暂无公开 NPS<br><em class="rk-pt-note">评论普遍指出"砍免费层 + credits 不透明"损害了信任;缺量化满意度数据</em></td>
+            </tr>
+            <tr>
+              <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-bytedance">豆</span><a href="https://www.trae.ai/" target="_blank" rel="noopener">Trae(字节)</a>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Trae(字节的 AI IDE)</strong><b>形态:</b>独立 IDE,定位 Cursor 的国内平替。<br><b>适合:</b>国内网络环境、预算敏感、学生与副业开发者。<br><b>体感:</b>$10 的 Pro 档对标 Cursor $20,国内直连不折腾;缺点是生态与插件成熟度、以及高级模型按倍率扣额度。</span></span>
+                <span class="rk-plat-form">独立 IDE</span></td>
+              <td>多家可选<br><em class="rk-pt-note">Doubao / Claude / GPT 等</em></td>
+              <td><strong>快速请求计数制</strong>:Free $0、Lite $3、Pro $10、Pro+ $30、Ultra $100<br><em class="rk-pt-note">Pro 约 600 次快速请求/月;选高级模型按倍率加速扣减;用尽进慢速队列(排队不额外收费)</em></td>
+              <td>· <strong>国内直连,无需代理</strong><br>· 同档价格约为 Cursor 一半<br>· 中文交互与文档友好<br>· 慢速队列兜底,不会硬断</td>
+              <td>· 插件生态与稳定性不及 Cursor<br>· 高级模型倍率扣减,额度不经用<br>· 英文/国际社区资料少<br>· Agent 自主性一般</td>
+              <td><strong>Free 档</strong>:少量快速请求,用尽进慢速队列<br><em class="rk-pt-note">Lite $3 常有首月促销</em></td>
+              <td><span class="rk-miss-mark">—</span> 暂无第三方 NPS<br><em class="rk-pt-note">国内社区口碑以"便宜好用、生态待补"为主;缺可引用的量化数据</em></td>
+            </tr>
+            <tr>
+              <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-tencent">腾</span><a href="https://copilot.tencent.com/" target="_blank" rel="noopener">CodeBuddy / WorkBuddy(腾讯)</a>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// 腾讯云 CodeBuddy / WorkBuddy</strong><b>形态:</b>CodeBuddy 面向编程,WorkBuddy 面向办公自动化(agentic workspace)。<br><b>适合:</b>已在腾讯云体系内的企业、需要私有化部署的团队。<br><b>⚠ 价格警报:</b>2026-05-15 起大幅调价,企业旗舰版 78→198 元/人/月(<strong>+154%</strong>)、私有云版 158→316 元(+100%),这是当年<strong>第三次涨价</strong>,官方口径指向算力紧张。</span></span>
+                <span class="rk-plat-form">插件 + 办公代理</span></td>
+              <td>腾讯混元 + 多家<br><em class="rk-pt-note">Hy3 系列等</em></td>
+              <td><strong>订阅 + credits 池</strong>:WorkBuddy 有免费评估档、Pro $9.95/月(年付)、Team $40/席(含 1,000 credits/席,团队共享)<br><em class="rk-pt-note">⚠ 2026-05-15 起企业档大涨:78→198 元、158→316 元/人/月</em></td>
+              <td>· 国内直连、私有化部署可选<br>· WorkBuddy 覆盖办公自动化(非仅编程)<br>· 与腾讯云/企微生态打通<br>· 团队 credits 池可共享调配</td>
+              <td>· <strong>一年内三次涨价</strong>,成本可预期性差<br>· 企业档涨幅高达 154%<br>· 国际社区与英文资料少<br>· 模型能力不及第一梯队</td>
+              <td>WorkBuddy 有免费评估层<br><em class="rk-pt-note">⚠ 涨价频繁,签长约前务必核对官网最新价</em></td>
+              <td><span class="rk-miss-mark">—</span> 暂无第三方 NPS<br><em class="rk-pt-note">媒体报道聚焦其连续涨价与算力紧张;缺满意度数据</em></td>
+            </tr>
+            <tr>
+              <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico">CL</span><a href="https://cline.bot/" target="_blank" rel="noopener">Cline / Roo Code</a>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Cline / Roo Code(开源插件)</strong><b>形态:</b>开源 VS Code 插件,自带 API key 使用。<br><b>适合:</b>想完全掌控成本与数据的人、要接本地模型(Ollama)的人。<br><b>体感:</b>没有订阅、没有额度墙,账单完全等于你的 API 消耗;重度使用 Claude Sonnet 约 $20–50/月。缺点是要自己配置,且成本无上限保护。</span></span>
+                <span class="rk-plat-form">开源插件</span></td>
+              <td>任意(自带 key)<br><em class="rk-pt-note">含本地模型 via Ollama</em></td>
+              <td><strong>纯 API 按量</strong>:插件本身免费开源,你付的是所选模型的 API 费<br><em class="rk-pt-note">用 Claude Sonnet 重度使用约 $20–50/月(随上下文与请求量浮动)</em></td>
+              <td>· <strong>无订阅、无额度窗口</strong><br>· 成本完全透明(等于 API 账单)<br>· 可接本地模型,数据不出内网<br>· 开源可审计、可改</td>
+              <td>· 需自行配置 key 与模型<br>· <strong>无消费上限保护</strong>,失控风险在自己<br>· 无官方支持<br>· 上下文管理需手动优化</td>
+              <td><strong>插件永久免费开源</strong><br><em class="rk-pt-note">成本仅取决于所选 API;接本地模型可零成本</em></td>
+              <td><span class="rk-miss-mark">—</span> 暂无第三方 NPS<br><em class="rk-pt-note">开源社区活跃度高;无可引用的量化满意度数据</em></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="rk-notes">
+        <p class="rk-note"><strong>※ 社区体感的口径</strong>:<strong>NPS</strong>(净推荐值,-100 至 +100,推荐者占比减批评者占比)、<strong>"最爱"投票</strong>(开发者调查中选为最喜爱工具的比例)、<strong>满意度</strong>(客户满意度调查得分)、<strong>市场规模</strong>(付费用户数或 ARR)。数据来自 2026 年开发者调查与厂商披露,时点为 2026 年初至 7 月。<strong>缺数据的一律标 <span class="rk-miss-mark">—</span> 并说明来源情况,不用估算值填空。</strong></p>
+        <p class="rk-note"><strong>一个值得注意的使用模式</strong>:调查显示 <strong>70% 的工程师同时使用 2–4 个 AI 编程工具</strong>,最主流的组合是 <strong>Cursor 负责编辑 + Claude Code 负责复杂任务</strong>。也就是说,"选一个"往往不是最优解——按任务分工用两个,通常比死磕单一平台更顺手,成本也更可控。</p>
+        <p class="rk-note"><strong>三个跨平台的计价陷阱</strong>:① <strong>「等值额度」不等于「固定用量」</strong>——Cursor 那类按模型贵贱扣额度的,选贵模型时额度蒸发极快;② <strong>credits 制普遍不透明</strong>(Antigravity、腾讯系、Copilot 均已转向),同样 1 credit 在不同操作上的价值差很多;③ <strong>「官方估算月花」参考价值有限</strong>——Codex 官方说 $100–200/开发者/月,但实测同档位可能 $40 也可能 $400,取决于模型选择、本地/云端、fast 模式与 token 量。</p>
+        <p class="rk-note"><strong>数据来源(快照 2026-07-30,以各平台官网为准)</strong>:
+          <a href="https://www.digitalapplied.com/blog/ai-coding-tool-adoption-2026-developer-survey" target="_blank" rel="noopener">2026 开发者调查(NPS / 满意度 / 最爱投票)</a> ·
+          <a href="https://www.ideaplan.io/blog/ai-coding-assistant-market-share-2026" target="_blank" rel="noopener">市场份额调查</a> ·
+          <a href="https://uibakery.io/blog/openai-codex-pricing" target="_blank" rel="noopener">Codex 定价与用量</a> ·
+          <a href="https://www.appstory.org/blog/google-antigravity-pricing-2026-free-tier-credits-the-lockout-problem-a-complete-developers-guide/" target="_blank" rel="noopener">Antigravity 免费层与 credits</a> ·
+          <a href="https://finance.biggo.com/news/vQ5Y050BtCxy99G5l4m1" target="_blank" rel="noopener">腾讯系调价报道</a> ·
+          <a href="https://github.com/codertesla/ai-coding-deals" target="_blank" rel="noopener">免费额度与优惠汇总</a> ·
+          <a href="https://aiidelist.com/blog/trae-ai-ide-pricing-2026" target="_blank" rel="noopener">Trae 定价</a>。
+          <strong>促销与额度政策变动极快</strong>(Antigravity 半年内砍了 92% 免费额度、Cursor 已停学生免费、腾讯系一年三涨),下单前请务必核对官网当日条款。</p>
       </div>
     </div>
 
