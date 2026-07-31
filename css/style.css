@@ -2617,7 +2617,108 @@ body::before {
 
 .rk-note a { color: var(--accent-ink); }
 
+/* --- 可折叠的口径说明:默认收起,保持页面干练 --- */
+.rk-fold {
+  margin: 10px 0 12px;
+  border: 1px solid var(--border-subtle, rgba(128, 128, 128, 0.22));
+  border-radius: 6px;
+  background: var(--bg-subtle, rgba(128, 128, 128, 0.05));
+}
+
+.rk-fold > summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 9px 12px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  user-select: none;
+}
+
+.rk-fold > summary::-webkit-details-marker { display: none; }
+
+.rk-fold > summary::before {
+  content: '+';
+  font-family: var(--font-mono);
+  color: var(--accent-ink);
+  font-weight: 700;
+  flex: none;
+}
+
+.rk-fold[open] > summary::before { content: '−'; }
+
+.rk-fold > summary:hover,
+.rk-fold > summary:focus-visible { color: var(--accent-ink); }
+
+.rk-fold-body {
+  padding: 0 12px 4px;
+  border-top: 1px solid var(--border-subtle, rgba(128, 128, 128, 0.16));
+}
+
+.rk-fold-body .rk-note:first-child { margin-top: 10px; }
+
 .rk-miss-mark { font-family: var(--font-mono); }
+
+/* --- 羊毛速查框:入门用户最关心成本,放在表格之前 --- */
+.rk-deals-box {
+  margin: 14px 0 18px;
+  padding: 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--accent-ink) 34%, transparent);
+  border-left: 3px solid var(--accent-ink);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--accent-ink) 6%, transparent);
+}
+
+.rk-deals-title {
+  margin: 0 0 10px;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--accent-ink);
+}
+
+.rk-deals-box ul {
+  margin: 0;
+  padding-left: 18px;
+  list-style: none;
+}
+
+.rk-deals-box li {
+  position: relative;
+  margin-bottom: 7px;
+  font-size: 0.8125rem;
+  line-height: 1.75;
+  color: var(--text-tertiary);
+}
+
+.rk-deals-box li::before {
+  content: '▸';
+  position: absolute;
+  left: -14px;
+  color: var(--accent-ink);
+}
+
+.rk-deals-box li strong { color: var(--text-secondary); }
+.rk-deals-box a { color: var(--accent-ink); }
+
+.rk-deals-foot {
+  margin: 10px 0 0;
+  padding-top: 9px;
+  border-top: 1px solid color-mix(in srgb, var(--accent-ink) 20%, transparent);
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: var(--text-tertiary);
+}
+
+/* --- 免费额度 / 羊毛列:入门用户最关心,给一点视觉重量 --- */
+.rk-plat-table td.rk-deal {
+  background: color-mix(in srgb, var(--accent-ink) 7%, transparent);
+  box-shadow: inset 2px 0 0 var(--accent-ink);
+}
 
 /* --- 板块切换(能力天梯 / 订阅性价比) --- */
 .rk-boards {

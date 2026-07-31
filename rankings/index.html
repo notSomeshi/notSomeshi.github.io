@@ -101,7 +101,7 @@
   <div class="container">
     <header class="archive-header">
       <h1 class="archive-title">模型天梯</h1>
-      <p class="archive-desc">TOP 20 AI MODELS · 多机构综合排名 · 数据快照 2026-07-30</p>
+      <p class="archive-desc">TOP 20 AI MODELS · 多机构综合排名 · 数据快照 2026-07-31</p>
     </header>
 
     <a class="rk-advisor-cta" href="/advisor/">
@@ -143,19 +143,24 @@
 
       <!-- 说明与来源 -->
       <div class="rk-notes">
-        <p class="rk-note"><strong>模型名下的<a class="term-tip" href="/2026/07/27/what-is-multimodal/" data-tip="多模态 = 模型能直接“看懂图片、听懂声音、看懂视频”,而不只是读文字。徽章依次为 文/图/音/视,亮起表示原生支持。点击阅读科普 →">模态徽章</a></strong>:<i class="rk-mod is-on">文</i><i class="rk-mod is-on">图</i><i class="rk-mod">音</i><i class="rk-mod">视</i> 表示该模型支持文本与图像、但不支持音频与视频。这是<strong>能力矩阵而非评分</strong>——支持与否是二元的,故不做成打分维度。目前只有 Gemini 与 GPT-5.5/5.6 系列为原生全模态;<strong>Claude 全系仅支持图像输入,API 层不接受音视频</strong>。以各家官方文档为准。</p>
-        <p class="rk-note"><strong>综合分算法</strong>:每项机构得分在当前 20 个模型内做 min-max 归一化(0–100),按左侧权重加权平均;某模型缺失某项评分时,该项不计入并按剩余权重重新归一。<span class="rk-miss-mark">—</span> 表示该机构暂未收录此模型。点击列头可按该机构得分排序,点击模型名跳转官网。</p>
-        <p class="rk-note"><strong>⚠ 本次更新:AA 智能指数全列按 v4.1 口径重校。</strong>Artificial Analysis 的指数已升级到 <strong>v4.1</strong>(转向智能体工作负载,题集换为 GDPval-AA v2、τ³-Banking、Terminal-Bench v2.1、SciCode、HLE、GPQA Diamond、CritPt、AA-Omniscience、AA-LCR),<strong>同一个模型在新口径下的分数与旧口径不可比</strong>。本页此前沿用的是改版前的旧值,现已逐个模型改为 v4.1 实测值,多处变动很大:Opus 4.8 由 61.4 降为 <strong>56</strong>、Gemini 3.1 Pro 由 56.2 降为 <strong>46</strong>、o4-mini 由 43.5 降为 <strong>26</strong>(官方已标记弃用)、Mistral Large 3 由 40.2 降为 <strong>16</strong>;反向上调的有 GLM-5.2(48.3→<strong>51</strong>)、Sonnet 5(51.2→<strong>53</strong>)。GPT-5.5 Pro 在 AA 尚无收录成绩,该项改记为 <span class="rk-miss-mark">—</span> 而非估值。<strong>其余机构(Arena / LiveBench / SWE-bench / OpenRouter)的分数未受此次口径变更影响。</strong></p>
-        <p class="rk-note"><strong>近期动态(截至 2026-07-30)</strong>:Anthropic 于 7 月 24 日发布 <strong>Claude Opus 5</strong>——需要说明的是它与 Opus 4.8 <strong>同为 $5/$25</strong>(Opus 档自 4.5 起未变价),优势在于 AA 指数 61 对 56、且 token 效率高得多(跑完同一套评测 $1,350 对 $3,850);1M 上下文、五档推理强度(low/medium/high/xhigh/max),现为 Claude Max 默认模型;<strong>Moonshot 于 7 月 27 日放出 Kimi K3 开源权重</strong>——2.8 万亿参数 MoE(激活约 1040 亿)、1M 上下文、原生视觉,<strong>史上最大的开源权重模型</strong>,但"开源权重 ≠ 开源":<strong>商用需另签授权协议</strong>;Anthropic 同期支持新的 <strong>MCP 2026-07-28 规范</strong>(无状态内核、更强的 OAuth/OIDC 授权、Apps 与 Tasks 版本化扩展);<strong>GPT-5.6 Sol 的 Ultra 模式</strong>浮出水面——它<strong>不是独立模型</strong>,而是把难题分派给并行子代理的编排模式,Terminal-Bench 2.1 拿到 91.9%(基础 Sol 为 88.8%),但没有单独定价、<strong>token 成倍消耗</strong>(详见新文《一个模型,N 个分数》);Google 于 7 月 21 日发布 <strong>Gemini 3.6 Flash</strong> 与 3.5 Flash Lite;<strong>Gemini 3.5 Pro</strong> 截至 7 月 21 日官方仅称"正在与合作伙伴测试",2M 上下文与定价均<strong>未经官宣</strong>,故暂不入榜;xAI 于 7 月 8 日发布 <strong>Grok 4.5</strong>($2/$6、500K 上下文);OpenAI 的 <strong>GPT-5.6 Terra</strong>(AA 55 分、$2.5/$15)与 <strong>Luna</strong>(AA 51 分)已在下方价格表列出,但 Arena / LiveBench / SWE-bench 尚无这两个型号的公开成绩,<strong>为避免用估值凑数,暂不入天梯</strong>。<strong>价格警报</strong>:① Claude Sonnet 5 当前 $2/$10 为促销价,<strong>2026-08-31 后涨至 $3/$15</strong>(还剩约 1 个月);② <strong>ChatGPT 定价结构已重组</strong>——原统一 $120 的 Pro 档拆为 <strong>Pro Codex $100(5× Plus)</strong> 与 <strong>Pro Max $200(20× + 1M 上下文)</strong>,新增 <strong>Go $8</strong> 档(含广告、无 Codex),Business 改为 $20/席年付($25 月付),本表已同步。榜单顶部约 55 ELO 挤成一团,是有记录以来最窄的头部差距(详见《前沿收敛》)。</p>
-        <p class="rk-note"><strong>「金融分析」维度(代理指标,请谨慎解读)</strong>:目前<strong>没有覆盖全部 20 个模型的公开金融基准</strong>,因此本维度不使用杜撰分数,而是取两个已有真实数据作为<strong>代理指标</strong>:Artificial Analysis 智能指数(其 v4.1 题集含 <strong>τ³-Banking</strong> 银行业智能体任务)与 LiveBench 数学子项(反映数值严谨性——金融分析最不容出错的能力)。真正的领域基准可参考 <a href="https://arxiv.org/abs/2402.12659" target="_blank" rel="noopener">FinBen</a>(8 类金融任务/36 数据集)、<a href="https://arxiv.org/html/2505.19457v1" target="_blank" rel="noopener">BizFinBench</a>(6,781 条中文金融查询)、FinanceBench(基于 SEC 10-K/10-Q 的 10,231 题)。<strong>⚠ 高分不代表可以信任其财务输出</strong>——实测显示六个主流模型中有四个在源文档不完整时会<strong>捏造财务数据</strong>,详见《AI 做金融分析的三个致命陷阱》。</p>
-        <p class="rk-note"><strong>「社区体感」维度</strong>:由 Arena 众测投票(百万级用户盲测偏好)与 OpenRouter 用量份额(真实付费流量占比,截至 2026-07-24)组成——前者是"觉得谁好用",后者是"钱包投给了谁"。注意用量受价格影响很大,开源低价模型天然占优,故该项不计入「综合」维度。</p>
-        <p class="rk-note"><strong>数据来源(快照日 2026-07-30,以各机构官网实时数据为准)</strong>:
-          <a href="https://arena.ai/leaderboard/text" target="_blank" rel="noopener">Arena(原 LMArena)</a> ·
+        <details class="rk-fold">
+          <summary>读懂这张表:徽章含义、综合分算法、各维度口径</summary>
+          <div class="rk-fold-body">
+            <p class="rk-note"><strong><a class="term-tip" href="/2026/07/27/what-is-multimodal/" data-tip="多模态 = 模型能直接“看懂图片、听懂声音、看懂视频”,而不只是读文字。徽章依次为 文/图/音/视,亮起表示原生支持。点击阅读科普 →">模态徽章</a></strong> <i class="rk-mod is-on">文</i><i class="rk-mod is-on">图</i><i class="rk-mod">音</i><i class="rk-mod">视</i>:亮起=原生支持,是能力矩阵不是评分。目前仅 Gemini 与 GPT-5.5/5.6 原生全模态,<strong>Claude 全系只收图像</strong>。</p>
+            <p class="rk-note"><strong>综合分</strong>:各机构分数在 20 个模型内 min-max 归一化后加权平均;缺失项不计权重、按剩余项重新归一,<span class="rk-miss-mark">—</span> 表示该机构未收录。点列头排序,点模型名跳官网。</p>
+            <p class="rk-note"><strong>社区体感</strong>:Arena 盲测投票(觉得谁好用)+ OpenRouter 用量份额(钱包投给了谁,截至 2026-07-24)。用量受价格影响大、开源低价模型天然占优,故<strong>不计入综合分</strong>。</p>
+            <p class="rk-note"><strong>金融分析维度的两个代理指标</strong>:AA 智能指数(v4.1 含 τ³-Banking 银行业智能体任务)与 LiveBench 数学子项(数值严谨性)。真正的领域基准可参考 <a href="https://arxiv.org/abs/2402.12659" target="_blank" rel="noopener">FinBen</a>、<a href="https://arxiv.org/html/2505.19457v1" target="_blank" rel="noopener">BizFinBench</a>、FinanceBench。</p>
+          </div>
+        </details>
+        <p class="rk-note"><strong>⚠ AA 指数已按 v4.1 重校,新旧分数不可比</strong>。本页已逐个模型换新值,变动最大的是 Opus 4.8 <span class="rk-miss-mark">61.4→56</span>、Gemini 3.1 Pro <span class="rk-miss-mark">56.2→46</span>、o4-mini <span class="rk-miss-mark">43.5→26</span>。其余机构不受影响,详见<a href="/2026/07/31/benchmark-version-trap/">《榜单换了把尺子》</a>。</p>
+        <p class="rk-note"><strong>近期动态(2026-07-31)</strong>:<strong>Opus 5</strong>(7-24)以 61 分登顶,与 Opus 4.8 <strong>同价 $5/$25</strong>——赢在 token 效率不是降价;<strong>Kimi K3 开源权重</strong>(7-27)2.8T MoE,史上最大。<strong>⚠ Sonnet 5 的 $2/$10 促销 8-31 到期</strong>,之后 $3/$15。</p>
+        <p class="rk-note"><strong>⚠ 金融维度是代理指标,不是金融基准</strong>——无覆盖全 20 模型的公开金融基准,本站<strong>不编造金融分</strong>。高分≠可信任其财务输出:实测六个主流模型中<strong>四个会在源文档不全时捏造财务数据</strong>,详见<a href="/2026/07/27/ai-finance-pitfalls/">《AI 做金融分析的三个致命陷阱》</a>。</p>
+        <p class="rk-note"><strong>数据来源(快照 2026-07-31,以各机构官网为准)</strong>:
+          <a href="https://arena.ai/leaderboard/text" target="_blank" rel="noopener">Arena</a> ·
           <a href="https://artificialanalysis.ai/leaderboards/models" target="_blank" rel="noopener">Artificial Analysis</a> ·
           <a href="https://livebench.ai/" target="_blank" rel="noopener">LiveBench</a> ·
           <a href="https://www.swebench.com/" target="_blank" rel="noopener">SWE-bench Verified</a> ·
-          <a href="https://openrouter.ai/rankings" target="_blank" rel="noopener">OpenRouter Rankings</a>。
-          「推理」维度中 Artificial Analysis 智能指数以 GPQA Diamond、HLE 等推理类基准为主,故计入该维度。各机构未开放跨域实时接口,本页为人工核对快照。</p>
+          <a href="https://openrouter.ai/rankings" target="_blank" rel="noopener">OpenRouter</a>。人工核对快照,非实时接口。</p>
       </div>
     </div>
 
@@ -184,7 +189,7 @@
           <tbody>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-anthropic">A</span><a href="https://claude.ai/" target="_blank" rel="noopener">Claude</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Claude Pro / Max</strong><b>适合谁:</b>重度 Agent 编程者、全栈独立开发者——想把"API 账单"包月封顶的人。<br><b>技术栈:</b>语言通吃,终端工作流(Claude Code)体验目前最强,长程重构与大型代码库尤佳。<br><b>在用它做:</b>跑数小时级代码代理、整仓重构、技术写作。x20 档是重度用户的最优解,轻用户买它纯浪费。</span></span></td>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Claude Pro / Max</strong><b>适合:</b>重度 Agent 编程者,想把 API 账单包月封顶。<br><b>强项:</b>终端工作流(Claude Code)体验最强,长程重构尤佳。<br><b>⚠</b> x20 档是重度用户最优解,<strong>轻用户买它纯浪费</strong>。</span></span></td>
               <td class="rk-pt-plans"><span class="rk-plan">Free $0</span><span class="rk-plan">Pro $20<em>(年付折 $17/月)</em></span><span class="rk-plan rk-plan-x">Max 5x $100</span><span class="rk-plan rk-plan-x">Max 20x $200</span><span class="rk-plan">Team $25–30/席</span><span class="rk-plan">Enterprise 定制</span></td>
               <td><strong>Opus 5(新,Max 默认)</strong> · Opus 4.8 · Fable 5 · Sonnet 5 · Haiku 4.5<br><em class="rk-pt-note">Pro 及以上全档含 Claude Code(终端编程代理)</em></td>
               <td>全档采用「5 小时滚动窗口 + 每周上限」双重限制,窗口内用完只能等重置:<br>· Free:每日少量消息,基础模型<br>· Pro ≈ 45 条消息 / 5 小时(网页、App、Claude Code 共用同一个池)<br>· Max 5x / 20x = Pro 的 5 倍 / 20 倍窗口额度<br>· 超限两条路:等窗口重置,或按 API 价加购(extra usage)</td>
@@ -194,7 +199,7 @@
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-openai">O</span><a href="https://openai.com/chatgpt" target="_blank" rel="noopener">ChatGPT + Codex</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// ChatGPT 六档</strong><b>适合谁:</b>"什么都要一点"的通才、产品经理、研究型用户;$100 的 Pro Codex 档正对标 Claude Max 5x。<br><b>技术栈:</b>生态插件与多模态最全;Codex 云端并行改代码适合多任务并行的团队节奏。<br><b>在用它做:</b>研究写作、数据分析、让 Codex 在云上并行修 bug。纯编程吞吐性价比略逊 Claude/Cursor 专档。<br><b>选档提示:</b>$8 的 Go 档含广告且无高级功能,只适合纯聊天;要用 Codex 或 Sol 高强度,至少 Plus 起步。</span></span></td>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// ChatGPT 六档</strong><b>适合:</b>"什么都要一点"的通才、产品经理、研究型用户。<br><b>强项:</b>生态插件与多模态最全,Codex 可云端并行改代码。<br><b>⚠ 选档:</b>$8 Go 档含广告、无 Codex,只适合纯聊天;<strong>要用 Codex 至少 Plus 起步</strong>。</span></span></td>
               <td class="rk-pt-plans"><span class="rk-plan">Free $0</span><span class="rk-plan">Go $8<em>(含广告)</em></span><span class="rk-plan">Plus $20</span><span class="rk-plan rk-plan-x">Pro Codex $100<em>(5× Plus)</em></span><span class="rk-plan rk-plan-x">Pro Max $200<em>(20×,1M 上下文)</em></span><span class="rk-plan">Business $20/席年付<em>($25 月付,最少 2 人)</em></span><span class="rk-plan">Enterprise 定制</span></td>
               <td>GPT-5.6 Luna(最快最省) / Terra(均衡) / Sol(旗舰) · <strong>Sol Ultra 模式</strong> · o4-mini<br><em class="rk-pt-note">GPT-5.6 已于 2026-07-09 成为 ChatGPT 默认模型<br>Sol Ultra = 并行子代理编排,非独立模型<br>Plus 及以上含 Codex(云端编程代理)</em></td>
               <td>⚠ <strong>Pro 自 2026-04-09 起拆为两档</strong>:<br>· Free:基础模型限量对话<br>· Go $8:消息量比 Free 多,<strong>但含广告</strong>、无高级功能<br>· Plus:日常对话高额度(默认 Terra);Sol 高强度限量;Codex 云任务约 30–150 个 / 5h<br>· <strong>Pro Codex $100 = 5× Plus 额度</strong><br>· <strong>Pro Max $200 = 20× 额度 + 1M 上下文</strong><br>· o4-mini 各付费档近乎不限</td>
@@ -204,7 +209,7 @@
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-cursor">C</span><a href="https://cursor.com/" target="_blank" rel="noopener">Cursor</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Cursor Pro / Ultra</strong><b>适合谁:</b>IDE 重度用户、想在一个编辑器里自由切换各家前沿模型的人。<br><b>技术栈:</b>TypeScript/前端与全栈生态体验最好,tab 补全流独一档。<br><b>在用它做:</b>多文件重构、补全流开发、跨模型对比。官方自己承认重度 Agent 用户实际月花落在 $60–100——预算按这个准备。</span></span></td>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Cursor Pro / Ultra</strong><b>适合:</b>IDE 重度用户,想在一个编辑器里切换各家模型。<br><b>强项:</b>前端/全栈体验最好,tab 补全流独一档。<br><b>⚠</b> 官方承认重度 Agent 用户<strong>实际月花 $60–100</strong>,预算按这个备。</span></span></td>
               <td class="rk-pt-plans"><span class="rk-plan">Hobby Free</span><span class="rk-plan">Pro $20</span><span class="rk-plan">Pro+ $60</span><span class="rk-plan rk-plan-x">Ultra $200</span><span class="rk-plan">Teams $40/席</span></td>
               <td>Claude / GPT / Gemini / DeepSeek 等前沿模型任选</td>
               <td>订阅额度按「等值模型调用量」计:Pro 约含 $20、Pro+ 约 $60、Ultra 约 $400+ 的等值调用:<br>· Tab 补全(打字时编辑器自动给出的灰色续写建议)付费档不限量<br>· Agent / 对话按所选模型的 API 价折算扣额度——选贵模型烧得快<br>· 额度耗尽:转按量付费(可设上限)或降为慢速</td>
@@ -214,7 +219,7 @@
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-github">GH</span><a href="https://github.com/features/copilot" target="_blank" rel="noopener">GitHub Copilot</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Copilot Pro / Pro+ / Max</strong><b>适合谁:</b>预算敏感的在职工程师、以补全为主的日常开发。<br><b>技术栈:</b>任何主流 IDE 与语言,GitHub 工作流(PR/Issue)集成最深。<br><b>在用它做:</b>无限补全 + 偶尔的 Agent 任务。$10 档仍是入门性价比之王;但 2026-06 改 AI Credits 后,重代理用户会很快撞上额度墙。</span></span></td>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Copilot Pro / Pro+ / Max</strong><b>适合:</b>预算敏感的在职工程师、以补全为主的开发。<br><b>🐑</b> <strong>学生/教师/开源维护者免费 Pro</strong>,$10 档是入门之王。<br><b>⚠</b> 2026-06 改 Credits 后,重代理用户很快撞墙。</span></span></td>
               <td class="rk-pt-plans"><span class="rk-plan">Free $0</span><span class="rk-plan">Pro $10</span><span class="rk-plan">Pro+ $39</span><span class="rk-plan rk-plan-x">Max $100</span><span class="rk-plan">Business $19/席</span><span class="rk-plan">Enterprise $39/席</span></td>
               <td>GPT-5.6 · Claude Sonnet 5 · Gemini 系列(可选档随订阅级别)</td>
               <td>两种用量分开计(2026-06 起 AI Credits 新规):<br>· <strong>代码补全</strong> = 打字时 IDE 自动弹出的灰色续写建议,按 Tab 接受——付费档一律<strong>不限量</strong>(Free 档 2000 次/月)<br>· <strong>高级请求</strong> = 让 Agent 自动改代码、或指定 Claude / Gemini 等高级模型对话——按 Credits 计数:Free 50 · Pro ≈ 300 · Pro+ ≈ 1500 · Max ≈ 4000+ 次/月<br>· 超出可按约 $0.04/次 加购</td>
@@ -224,7 +229,7 @@
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-google">G</span><a href="https://gemini.google/" target="_blank" rel="noopener">Gemini(Google AI)</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Google AI Pro / Ultra</strong><b>适合谁:</b>多模态与视频生成需求者、Google 全家桶深度用户。<br><b>技术栈:</b>安卓与 Workspace 集成最深,1M 上下文啃大文档一绝。<br><b>在用它做:</b>长文档/代码库分析、Veo 视频生成、NotebookLM 知识库。Ultra 贵但捆绑存储与全家桶,单为模型买不划算。</span></span></td>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Google AI Pro / Ultra</strong><b>适合:</b>多模态与视频生成需求者、Google 全家桶用户。<br><b>强项:</b>安卓与 Workspace 集成最深,1M 上下文啃大文档。<br><b>⚠</b> Ultra 捆绑存储与全家桶,<strong>单为模型买不划算</strong>。</span></span></td>
               <td class="rk-pt-plans"><span class="rk-plan">Free $0</span><span class="rk-plan">AI Pro $19.99</span><span class="rk-plan rk-plan-x">AI Ultra $249.99</span><span class="rk-plan">学生/新户促销价常有</span></td>
               <td>Gemini 3.1 Pro · <strong>3.6 Flash(新)</strong> · 3.5 Flash Lite · Deep Think(深度思考模式)</td>
               <td>· Pro:3.1 Pro 高额度对话 + Deep Think 每日限量 + Veo 视频生成月度 credits + 2TB 云盘<br>· Ultra:Deep Think 高配额 + Veo 更大额度 + Agent 功能优先体验 + 30TB 云盘<br>· 图像 / 视频按 credits 单独扣,与对话额度分开计</td>
@@ -234,17 +239,17 @@
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-zai">Z</span><a href="https://z.ai/" target="_blank" rel="noopener">GLM Coding Plan</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// GLM Coding Lite / Pro</strong><b>适合谁:</b>个人开发者、学生党、把预算压到极限的副业玩家。<br><b>技术栈:</b>兼容 Claude Code 的 CLI 接口,一行配置把后端换成 GLM;中文项目表现好。<br><b>在用它做:</b>批量脚本、中文应用、MVP 快速试错。80 分能力卖 3 美元——本板块存在的理由,也是价格战的风向标。</span></span></td>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// GLM Coding Lite / Pro</strong><b>适合:</b>个人开发者、学生党、把预算压到极限的人。<br><b>强项:</b>兼容 Claude Code 的 CLI,一行配置换后端;中文项目好。<br><b>🐑</b> GLM Flash 系列<strong>永久免费</strong>;$3 档是价格战风向标。</span></span></td>
               <td class="rk-pt-plans"><span class="rk-plan">Lite $3</span><span class="rk-plan">Pro $15</span><span class="rk-plan"><em>官方常有半价/首月促销</em></span></td>
               <td>GLM-5.2 · GLM-5</td>
               <td>5 小时滚动窗口,按 prompt(发送次数)计:<br>· Lite ≈ 120 条 / 5 小时(官方对标"Claude Pro 的 3 倍用量、约 1/10 价格")<br>· Pro ≈ 600 条 / 5 小时<br>· 兼容 Claude Code / Cline / Roo Code 等工具,改一行 API 地址即可接入</td>
               <td>· Lite ≈ 0.6–1.5 亿 token/月<br>· Pro ≈ 3–8 亿/月(自家模型)</td>
               <td>· Lite ≈ $0.02–0.05 /M<br>· Pro ≈ $0.03–0.1 /M<br><em class="rk-pt-note">全场最低档</em></td>
-              <td>GLM-5.2 ≈ $0.6 / $2.2<br>GLM-5 ≈ $0.4 / $1.6<br><em class="rk-pt-note">规则:缓存命中减免;并发上限随账户等级放宽</em></td>
+              <td>GLM-5.2 ≈ $0.6 / $2.2<br>GLM-5 ≈ $0.4 / $1.6<br><em class="rk-pt-note">规则:缓存命中减免;并发上限随账户等级放宽<br>🐑 <strong>GLM Flash 系列永久免费</strong>;新用户实名另赠约 2,000 万 token,官方常有半价/首月促销</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-deepseek">D</span><a href="https://www.deepseek.com/" target="_blank" rel="noopener">DeepSeek(API 直连)</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// DeepSeek API</strong><b>适合谁:</b>自建工具链的工程师、海量批处理任务的团队——没有订阅,充值即用。<br><b>技术栈:</b>OpenAI 兼容接口即插即用,任何框架无缝切换。<br><b>在用它做:</b>批量翻译/摘要、Agent 底座、蒸馏数据。OpenRouter 流量之王(单家 16.3%),见本站《OpenRouter 上的权力转移》。</span></span></td>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// DeepSeek API</strong><b>适合:</b>自建工具链、海量批处理——无订阅,充值即用。<br><b>强项:</b>OpenAI 兼容接口即插即用;错峰约五折。<br><b>体感:</b>OpenRouter 流量之王(单家 16.3%)。</span></span></td>
               <td class="rk-pt-plans"><span class="rk-plan">无订阅 · 充值即用</span><span class="rk-plan">无最低充值门槛</span></td>
               <td>V4 Flash · V4 Pro(均开源可自部署)</td>
               <td>无窗口、无条数限制,纯按 token 量计费:<br>· 错峰时段(约北京时间 00:30–08:30)约五折<br>· 提示缓存命中的输入约 0.1×<br>· OpenAI 兼容接口,任何框架即插即用</td>
@@ -254,7 +259,7 @@
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-moonshot">K</span><a href="https://www.kimi.com/membership/pricing" target="_blank" rel="noopener">Kimi(月之暗面)</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Kimi 会员(四档)</strong><b>适合谁:</b>中文长文重度用户 + Agent 编程双修的人;四档音乐速度命名(Moderato→Vivace)对应用量逐级放大。<br><b>技术栈:</b>Kimi Code 兼容主流 CLI 编程工作流,长上下文啃论文/合同是招牌。<br><b>在用它做:</b>长文档研读、K3 攻坚推理、K2.6 开源版自部署。$19 的 Moderato 是中文侧对标 $20 档的直接答案。</span></span></td>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Kimi 会员(四档)</strong><b>适合:</b>中文长文重度用户 + Agent 编程双修。<br><b>强项:</b>长上下文啃论文/合同是招牌;K3、K2.6 均开源可自部署。<br><b>选档:</b>$19 Moderato 是中文侧对标 $20 档的直接答案。</span></span></td>
               <td class="rk-pt-plans"><span class="rk-plan">Free $0</span><span class="rk-plan">Moderato $19</span><span class="rk-plan">Allegretto $39</span><span class="rk-plan rk-plan-x">Allegro $99</span><span class="rk-plan rk-plan-x">Vivace $199</span><span class="rk-plan"><em>年付分别省 $48/$96/$240/$480</em></span></td>
               <td><strong>K3(开源权重,新)</strong> · K2.7 Code · K2.6(开源)<br><em class="rk-pt-note">K3 权重已于 2026-07-27 在 HuggingFace 放出:2.8 万亿参数 MoE(每 token 激活 896 专家中的 16 个,约 1040 亿活跃参数)、1M 上下文、原生视觉,是<strong>史上最大的开源权重模型</strong>。⚠ 是"开源权重"不等于"开源":<strong>商用需另签授权协议</strong>,自部署前先读许可条款</em></td>
               <td>对话、Agent、Kimi Code 共用一个用量池,按档位倍增:<br>· Moderato 为基准档,Allegretto ≈ 2×,Allegro ≈ 5×,Vivace ≈ 10×+<br>· K3 深度推理单独限次,档位越高次数越多<br>· Kimi Code 面向 CLI 编程(类 Claude Code 工作流)</td>
@@ -264,33 +269,33 @@
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-tencent">腾</span><a href="https://yuanbao.tencent.com/" target="_blank" rel="noopener">腾讯元宝 · 混元</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// 元宝 App + 混元 API</strong><b>适合谁:</b>微信生态用户、想要免费主力助手的轻量用户。<br><b>技术栈:</b>微信/小程序集成最顺,中文创作与检索增强见长。<br><b>在用它做:</b>日常问答、公众号内容、小程序 AI 功能。App 免费为主没有付费墙焦虑;Hy3 Preview 位居 OpenRouter 用量榜第二,API 侧需求是真实的。</span></span></td>
-              <td class="rk-pt-plans"><span class="rk-plan">App 免费为主</span><span class="rk-plan">无公开付费墙</span></td>
-              <td>混元 Hy3 Preview · Hy3 Flash</td>
-              <td>· App 侧日常对话配额宽松<br>· 深度思考模式每日限次<br>· API 走腾讯云按量计费,新用户有免费赠量</td>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// 元宝 App + 混元 API</strong><b>🐑 本表最强免费档</b>:元宝接入 Hy3 后 <strong>Agent 全免费</strong>,一句话直出 PPT/Word/Excel;混元 Lite API <strong>永久免费</strong>。<br><b>适合:</b>微信生态用户、想零成本用上 Agent 的人。</span></span></td>
+              <td class="rk-pt-plans"><span class="rk-plan">App 全免费</span><span class="rk-plan">Agent 功能免费</span><span class="rk-plan">无公开付费墙</span></td>
+              <td><strong>混元 Hy3(正式版,开源)</strong> · Hy3 Flash · <strong>Hy3 Lite(永久免费)</strong><br><em class="rk-pt-note">Hy3 于 2026-07-06 发布正式版并开源:295B MoE / 激活 21B、256K 上下文</em></td>
+              <td>· <strong>元宝 App 与 Agent 功能全免费</strong>,可直接交付 PPT/Word/Excel/PDF/HTML<br>· 深度思考模式每日限次<br>· API 走腾讯云按量计费,新用户约 100 万 token 赠量(约 1 年有效)</td>
               <td>—(免费档无硬性承诺,以实际体验为准)</td>
               <td>免费档即 $0</td>
-              <td>Hy3 ≈ $0.6 / $2.4<br>Hy3 Flash ≈ $0.15 / $0.6<br><em class="rk-pt-note">规则:新户赠量;并发随云账号等级</em></td>
+              <td>Hy3 ≈ $0.14 / $0.56<br><em class="rk-pt-note">官方牌价 ¥1 / ¥4 每百万 token,缓存命中 ¥0.25<br>🐑 <strong>Hy3 Lite 永久免费</strong>;开源版可自部署 $0</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-bytedance">豆</span><a href="https://www.trae.ai/" target="_blank" rel="noopener">豆包 · Trae(字节)</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// 豆包 App + Trae IDE</strong><b>适合谁:</b>预算压到极限的学生党、国内网络环境的开发者。<br><b>技术栈:</b>Trae 是 Cursor 的字节平替($10 对 $20),内置多家模型可选,国内直连不折腾。<br><b>在用它做:</b>豆包做日常问答与语音陪伴,Trae 写课程项目、小工具与副业代码。Lite $3 档几乎是"零门槛试用 AI IDE"。</span></span></td>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// 豆包 App + Trae IDE</strong><b>适合:</b>预算压到极限的学生党、国内网络的开发者。<br><b>强项:</b>Trae 是 Cursor 的字节平替($10 对 $20),直连不折腾。<br><b>🐑</b> 豆包 App 免费且额度宽松;火山引擎赠量国内最大之一。</span></span></td>
               <td class="rk-pt-plans"><span class="rk-plan">豆包 App 免费</span><span class="rk-plan">Trae Free $0</span><span class="rk-plan">Trae Lite $3</span><span class="rk-plan">Trae Pro $10</span><span class="rk-plan">Pro+ $30</span><span class="rk-plan rk-plan-x">Ultra $100</span></td>
               <td>Doubao 2.x 系列;Trae 内可选 Claude / GPT 等前沿模型</td>
               <td>Trae 按「快速请求」条数分档:<br>· Free 少量快速请求,用完进慢速队列(排队但不收费)<br>· Pro ≈ 600 次/月,Pro+ / Ultra 按倍数放大<br>· 选 Claude / GPT 等高级模型时按倍率加速扣减<br>· 豆包 App 免费且额度宽松</td>
               <td>· Trae Pro ≈ 3000 万–1 亿混合 token/月<br>· Ultra ≈ 数亿/月</td>
               <td>· Trae Pro ≈ $0.1–0.3 /M(混合)</td>
-              <td>Doubao Pro ≈ $0.15 / $0.6<br>Doubao Lite ≈ $0.05 / $0.2<br><em class="rk-pt-note">走火山引擎,常伴大额免费赠量</em></td>
+              <td>Doubao Pro ≈ $0.15 / $0.6<br>Doubao Lite ≈ $0.05 / $0.2<br><em class="rk-pt-note">🐑 <strong>豆包 App 免费且额度宽松</strong>;火山引擎方舟每模型约 50 万 token 体验额度,协作奖励计划另有按天重置的大额赠量——国内白嫖额度最大的一家之一</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-qwen">Q</span><a href="https://qwen.ai/" target="_blank" rel="noopener">通义千问(Qwen)</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Qwen Chat + 开源全家桶</strong><b>适合谁:</b>要私有化部署开源权重的团队、阿里云生态用户。<br><b>技术栈:</b>HuggingFace 开源生态最全(从 0.5B 到 Max),微调与蒸馏底座首选之一。<br><b>在用它做:</b>私有化部署、领域微调、多语言应用。网页版免费即可日常使用,自部署后成本只剩算力。</span></span></td>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Qwen Chat + 开源全家桶</strong><b>适合:</b>要私有化部署的团队、阿里云生态用户。<br><b>强项:</b>开源生态最全(0.5B 到 Max),微调底座首选之一。<br><b>🐑</b> 网页版免费;自部署后成本只剩算力。</span></span></td>
               <td class="rk-pt-plans"><span class="rk-plan">Qwen Chat 免费为主</span></td>
               <td>Qwen3.7 Max · 开源全系(0.5B 到 Max,可自部署)</td>
               <td>· 网页 / App 宽松使用<br>· API 走阿里云百炼,按量计费,新户有赠额<br>· 开源版自部署后无任何额度概念</td>
               <td>—(自部署无上限,只受算力约束)</td>
               <td>免费档 $0;自部署仅算力成本</td>
-              <td>Qwen3.7 Max ≈ $0.8 / $3.2<br>开源版自部署 $0<br><em class="rk-pt-note">规则:百炼有 Batch/缓存折扣与新户免费额度</em></td>
+              <td>Qwen3.7 Max ≈ $0.8 / $3.2<br>开源版自部署 $0<br><em class="rk-pt-note">规则:百炼有 Batch/缓存折扣<br>🐑 <strong>Qwen Chat 网页版免费</strong>;阿里云百炼新用户每个模型约 100 万 token 免费额度(约 90 天有效),开源全系自部署后零 API 成本</em></td>
             </tr>
           </tbody>
         </table>
@@ -345,12 +350,18 @@
             <li><strong>省钱的第二个旋钮:调低 effort。</strong>换模型之外,还有一条被忽视的省钱路径——<strong>同一个模型降一档推理强度</strong>。表中数字是 max 档的上限,而 low→max 成本差约 3 倍。对多数日常任务(补全、常规改代码、问答),medium 甚至 low 就够;Anthropic 官方也是这么建议的。<strong>先调 effort,再考虑换更便宜的模型</strong>,往往能在不牺牲质量的前提下砍掉一半账单。</li>
           </ul>
         </div>
-        <p class="rkc-note">口径:<a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking" target="_blank" rel="noopener">Artificial Analysis「Cost to Run Intelligence Index」</a>(当前为 <a href="https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-1" target="_blank" rel="noopener">v4.1</a>,含 GDPval-AA v2、Terminal-Bench v2.1、SciCode、HLE、GPQA Diamond 等 9 项评测)——按各模型 API 的输入/缓存/推理/输出 token 实际计费汇总,<strong>推理模型均取厂商披露的最高 effort 设置</strong>。实测锚点:Kimi K3 全套 $2,709.75;Claude Opus 4.8 约 $1.78/题;「$/题」按全卷题量折算。其余为按各模型 API 定价与耗 token 量折算的估算值,数据快照 2026-07-30,以 <a href="https://artificialanalysis.ai/models" target="_blank" rel="noopener">AA 官网实时数据</a>为准。effort 档位说明参考 <a href="https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5" target="_blank" rel="noopener">Anthropic 官方文档</a>。</p>
+        <p class="rkc-note">口径:<a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking" target="_blank" rel="noopener">Artificial Analysis「Cost to Run Intelligence Index」</a>(当前为 <a href="https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-1" target="_blank" rel="noopener">v4.1</a>,含 GDPval-AA v2、Terminal-Bench v2.1、SciCode、HLE、GPQA Diamond 等 9 项评测)——按各模型 API 的输入/缓存/推理/输出 token 实际计费汇总,<strong>推理模型均取厂商披露的最高 effort 设置</strong>。实测锚点:Kimi K3 全套 $2,709.75;Claude Opus 4.8 约 $1.78/题;「$/题」按全卷题量折算。其余为按各模型 API 定价与耗 token 量折算的估算值,数据快照 2026-07-31,以 <a href="https://artificialanalysis.ai/models" target="_blank" rel="noopener">AA 官网实时数据</a>为准。effort 档位说明参考 <a href="https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5" target="_blank" rel="noopener">Anthropic 官方文档</a>。</p>
       </div>
 
       <div class="rk-notes">
-        <p class="rk-note"><strong>※ 极限用量</strong>为按各家官方额度窗口满负荷折算的<em>数量级估算</em>,不同任务类型(补全/对话/Agent)折算差异极大,仅供比较参考,以官方说明为准。<strong>会员折算价</strong> = 订阅月费 ÷ 估算极限用量,即"把额度用满时每百万 token 的实际成本"——用得越少,实际单价越高;与右侧 API 标价对照,可以直观看出会员在什么用量下开始划算。国产平台的 API 价按当期汇率近似换算为美元。</p>
-        <p class="rk-note"><strong>价格快照 2026-07-30</strong>,来源:
+        <details class="rk-fold">
+          <summary>「极限用量」与「会员折算价」怎么算的</summary>
+          <div class="rk-fold-body">
+            <p class="rk-note"><strong>※ 极限用量</strong> = 按各家官方额度窗口满负荷折算的<em>数量级估算</em>。不同任务类型(补全/对话/Agent)折算差异极大,仅供比较,以官方说明为准。</p>
+            <p class="rk-note"><strong>会员折算价</strong> = 月费 ÷ 极限用量,即"把额度用满时每百万 token 的成本"。用得越少单价越高;与右侧 API 标价对照,可看出会员在什么用量下开始划算。国产平台 API 价按当期汇率近似换算为美元。</p>
+          </div>
+        </details>
+        <p class="rk-note"><strong>价格快照 2026-07-31</strong>,来源:
           <a href="https://www.aipricing.guru/subscriptions/" target="_blank" rel="noopener">AI Pricing Guru</a> ·
           <a href="https://spectrumailab.com/blog/ai-coding-tools-pricing-compared-2026" target="_blank" rel="noopener">SpectrumAI Lab(编程工具对比)</a> ·
           <a href="https://automationatlas.io/answers/github-copilot-pricing-explained-2026/" target="_blank" rel="noopener">Automation Atlas(Copilot Credits 制)</a> ·
@@ -364,9 +375,18 @@
 
     <!-- ============ 编程平台对比板块 ============ -->
     <div class="rk-board" data-board="platform">
-      <p class="rk-note rk-plat-intro"><strong>模型是发动机,平台才是你每天摸的方向盘。</strong>同一个 Claude Opus 5,在 Claude Code 里跑和在 Manus 里跑,计价方式、额度规则、能干的活完全不同。<br>
-      <strong>Agent 早已不只是写代码</strong>——办公文档、客服销售、数据分析、流程自动化都在用,所以本表按<strong>适用职能</strong>分组,技术与非技术团队都能对号入座。<br>
-      <strong>「社区体感」列全部是可查证的第三方数据</strong>(NPS 净推荐值、"最爱"投票占比、满意度、市场规模),<strong>没有本站自估分</strong>;查不到数据的标 <span class="rk-miss-mark">—</span>,不用估值补位。</p>
+      <p class="rk-note rk-plat-intro"><strong>模型是发动机,平台才是你每天摸的方向盘。</strong>同一个 Opus 5,在 Claude Code 里跑和在 Manus 里跑,计价与能干的活完全不同。本表按<strong>适用职能</strong>分组,技术与非技术岗都能对号入座;「社区体感」列全是可查证的第三方数据,查不到就标 <span class="rk-miss-mark">—</span>。</p>
+
+      <div class="rk-deals-box">
+        <p class="rk-deals-title">🐑 先看羊毛:零成本起步的四条路</p>
+        <ul>
+          <li><strong>学生 / 教师 / 开源维护者</strong> → <a href="https://github.com/features/copilot" target="_blank" rel="noopener">GitHub Copilot</a> 认证后 <strong>Pro 全额免费</strong>,门槛最低。Anthropic 的 Claude Campus 另有 <strong>$50 学生 API credits</strong>。</li>
+          <li><strong>国内用户想零成本</strong> → <a href="https://yuanbao.tencent.com/" target="_blank" rel="noopener">腾讯元宝</a> 接入混元 Hy3 后 <strong>Agent 功能全免费</strong>,直接产出 PPT / Word / Excel / PDF;<a href="https://copilot.tencent.com/" target="_blank" rel="noopener">WorkBuddy</a> 体验版永久免费 500 积分/月,签到邀请还能叠。</li>
+          <li><strong>会配 API 的</strong> → 用免费开源的 <a href="https://cline.bot/" target="_blank" rel="noopener">Cline</a> 或 <a href="https://n8n.io/" target="_blank" rel="noopener">n8n</a> 自托管当外壳,后端接国产永久免费模型(混元 Lite、智谱 GLM Flash 等),<strong>长期成本可压到接近 0</strong>。</li>
+          <li><strong>只是想试试水</strong> → Cursor Hobby、Copilot Free、Trae Free 都是<strong>不限时</strong>的永久免费档;Antigravity 公测额度虽大但<strong>已被砍 92%</strong>,别当长期主力。</li>
+        </ul>
+        <p class="rk-deals-foot">⚠ 羊毛政策变动极快(Cursor 学生免费已于 2026-06-25 停发,Antigravity 从 250 砍到 20 请求/天)——<strong>领取前务必以官网当期页面为准</strong>,本表为 2026-07-31 快照。</p>
+      </div>
 
       <p class="rk-drag-hint">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 3 12 9 6"></polyline><polyline points="15 6 21 12 15 18"></polyline><line x1="12" y1="3" x2="12" y2="21"></line></svg>
@@ -386,7 +406,7 @@
               <th>计价方式<span class="rk-unit">怎么收钱</span></th>
               <th>优势</th>
               <th>短板</th>
-              <th>免费额度 / 活动<span class="rk-unit">2026-07 现状</span></th>
+              <th>免费额度 / 羊毛<span class="rk-unit">🐑 2026-07-31</span></th>
               <th>社区体感<span class="rk-unit">第三方数据 ※</span></th>
             </tr>
           </thead>
@@ -394,166 +414,166 @@
             <tr class="rk-plat-group"><td colspan="8">研发 / 编程</td></tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-anthropic">A</span><a href="https://claude.com/claude-code" target="_blank" rel="noopener">Claude Code</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Claude Code(CLI / IDE 插件)</strong><b>形态:</b>终端优先的自主代理,也有 IDE 扩展与桌面端。<br><b>适合:</b>长程重构、整仓改动、"挂着让它自己干"的任务。<br><b>体感:</b>目前满意度与 NPS 双料第一,但额度按 5 小时窗口卡得紧,重度用户常撞墙。<br><b>组合建议:</b>社区最流行的搭法是 Cursor 编辑 + Claude Code 攻坚。</span></span>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Claude Code(CLI / IDE 插件)</strong><b>适合:</b>长程重构、整仓改动、挂着让它自己干。<br><b>体感:</b>满意度与 NPS 双料第一,但 5 小时窗口卡得紧。<br><b>搭法:</b>社区最流行 Cursor 编辑 + Claude Code 攻坚。</span></span>
                 <span class="rk-plat-form">CLI + 插件</span></td>
               <td class="rk-plat-role">后端 / 全栈工程师<br>DevOps<br><em class="rk-pt-note">长程重构、整仓改动</em></td>
               <td>Anthropic 自家<br><em class="rk-pt-note">Opus 5 / Sonnet 5 / Haiku</em></td>
               <td><strong>订阅额度制</strong>:含在 Claude Pro $20 / Max 5x $100 / Max 20x $200 内,按 5 小时滚动窗口 + 周上限计<br><em class="rk-pt-note">也可用 API key 按量付费,无窗口限制</em></td>
               <td>· 长任务自主性目前最强<br>· 终端原生,易接入脚本与 CI<br>· 同一订阅池网页/IDE/CLI 通用<br>· 权限与工具调用可细粒度控制</td>
               <td>· 5 小时窗口对爆发式使用不友好<br>· 无内置编辑器,需配合 IDE<br>· 国内需代理<br>· 纯补全场景不如 IDE 系</td>
-              <td>Free 档可试用少量<br><strong>Claude Campus</strong>:校园 Builder Clubs 共享 <strong>$50 学生 API credits</strong><br><em class="rk-pt-note">无常规免费层</em></td>
+              <td class="rk-deal">Free 档仅少量试用<br>· <strong>Claude Campus</strong>:校园 Builder Clubs 共享 <strong>$50 学生 API credits</strong><br>· Pro 年付折 $17/月(省 15%)<br><em class="rk-pt-note">⚠ 无常规免费层,是本表最难薅的一家</em></td>
               <td><strong>NPS +58</strong>(工具类罕见高分)<br><strong>满意度 91%</strong>(同类最高)<br><strong>"最爱"投票 46%</strong><br><em class="rk-pt-note">三项均为同类第一</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-cursor">C</span><a href="https://cursor.com/" target="_blank" rel="noopener">Cursor</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Cursor(独立 IDE)</strong><b>形态:</b>VS Code 分支,AI 深度融入编辑器。<br><b>适合:</b>日常写代码、多文件重构、想在一个界面里切换各家模型。<br><b>体感:</b>收入规模最大($2B ARR、100 万+ 付费用户),Tab 补全流被公认最顺。<br><b>注意:</b>2026-06-25 起<strong>不再向新学生开放免费 Pro 年</strong>。</span></span>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Cursor(独立 IDE)</strong><b>适合:</b>日常写代码、多文件重构、一个界面切换各家模型。<br><b>体感:</b>$2B ARR、100 万+ 付费用户,Tab 补全流公认最顺。<br><b>⚠</b> 2026-06-25 起停发新学生免费 Pro 年。</span></span>
                 <span class="rk-plat-form">独立 IDE</span></td>
               <td class="rk-plat-role">前端 / 全栈工程师<br>日常编码<br><em class="rk-pt-note">多文件重构、补全流</em></td>
               <td>多家可选<br><em class="rk-pt-note">Claude / GPT / Gemini / DeepSeek</em></td>
               <td><strong>等值调用额度制</strong>:Pro $20 约含 $20 等值模型调用,Pro+ $60 / Ultra $200 按倍数放大<br><em class="rk-pt-note">Tab 补全付费档不限量;选贵模型烧得快;超额转按量</em></td>
               <td>· Tab 补全体验公认最流畅<br>· 一个界面横跨多家模型<br>· 多文件上下文理解强<br>· 生态与插件继承 VS Code</td>
               <td>· 额度按模型贵贱消耗,难预估<br>· 官方承认重度 Agent 用户实际月花 $60–100<br>· 只服务编程场景<br>· 非编程任务完全浪费</td>
-              <td><strong>Hobby 免费档</strong>:约 2,000 次补全 + 50 次慢速高级请求/月<br><em class="rk-pt-note">⚠ 学生免费 Pro 年已于 2026-06-25 停止新注册</em></td>
+              <td class="rk-deal"><strong>Hobby 永久免费</strong>:约 2,000 次补全 + 50 次慢速高级请求/月<br><em class="rk-pt-note">⚠ <strong>学生免费 Pro 年已于 2026-06-25 停止新注册</strong>,老用户不受影响</em></td>
               <td><strong>NPS +51</strong>(较 2025Q4 基本持平)<br><strong>"最爱"投票 19%</strong><br><strong>$2B ARR / 100 万+ 付费用户</strong><br><em class="rk-pt-note">收入规模同类第一</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-github">GH</span><a href="https://github.com/features/copilot" target="_blank" rel="noopener">GitHub Copilot</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// GitHub Copilot(插件)</strong><b>形态:</b>各主流 IDE 的插件,与 GitHub 工作流深度集成。<br><b>适合:</b>企业采购、以补全为主的日常开发、PR/Issue 场景。<br><b>体感:</b>用户基数最大(470 万付费、同比 +75%),但 NPS 仅 +14——批评集中在"相比新工具改进停滞"。<br><b>注意:</b>2026-06 起改 AI Credits 计费。</span></span>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// GitHub Copilot(插件)</strong>各主流 IDE 插件,与 GitHub 工作流深度集成。<br><b>🐑</b> <strong>学生/教师/开源维护者可申请免费 Pro</strong>,入门白嫖首选。<br><b>体感:</b>基数最大(470 万付费),但 NPS 仅 +14,被批改进停滞。</span></span>
                 <span class="rk-plat-form">IDE 插件</span></td>
               <td class="rk-plat-role">企业研发团队<br>各语言工程师<br><em class="rk-pt-note">补全为主 + PR 协作</em></td>
               <td>多家可选<br><em class="rk-pt-note">GPT-5.6 / Sonnet 5 / Gemini</em></td>
               <td><strong>补全免费 + 高级请求计数</strong>(2026-06 起 AI Credits 制):Pro $10 / Pro+ $39 / Max $100;Business $19、Enterprise $39 每席<br><em class="rk-pt-note">补全不限量,Agent 与高级模型按次扣</em></td>
               <td>· 企业采购与合规最成熟<br>· GitHub PR/Issue 集成最深<br>· 补全不限量,基础档最便宜<br>· 支持几乎所有 IDE 与语言</td>
               <td>· <strong>NPS +14 明显落后</strong>,被批改进停滞<br>· 高级请求次数有限,重代理易撞墙<br>· Agent 自主性不及 Claude Code / Codex<br>· Credits 制透明度受质疑</td>
-              <td><strong>Free 档</strong>:2,000 次补全 + 50 次 chat/月<br>学生与开源维护者可申请免费 Pro</td>
+              <td class="rk-deal"><strong>🐑 学生党首选</strong><br>· Free 档:2,000 次补全 + 50 次 chat/月<br>· <strong>学生、教师、开源维护者可申请全额免费 Pro</strong>(GitHub Education 认证)<br><em class="rk-pt-note">这是目前门槛最低的"白嫖前沿模型"路径</em></td>
               <td><strong>NPS +14</strong>(同类明显偏低)<br><strong>"最爱"投票 9%</strong><br><strong>470 万付费订阅、同比 +75%</strong><br><em class="rk-pt-note">用户基数同类第一</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-openai">O</span><a href="https://openai.com/codex" target="_blank" rel="noopener">OpenAI Codex</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Codex(云端代理 + CLI)</strong><b>形态:</b>云端并行代理,附 CLI;含在 ChatGPT 订阅内。<br><b>适合:</b>多任务并行(同时挂多个改动)、已在 OpenAI 生态的团队。<br><b>体感:</b>被评为输出质量与自主性领先,但<strong>成本波动极大</strong>——同一档位可能月花 $40 也可能 $400,取决于模型、本地/云端、fast 模式与 token 量。</span></span>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Codex(云端代理 + CLI)</strong>云端并行代理,含在 ChatGPT 订阅内。<br><b>适合:</b>同时挂多个改动、已在 OpenAI 生态的团队。<br><b>⚠ 成本波动极大:</b>同一档位可能月花 $40,也可能 $400。</span></span>
                 <span class="rk-plat-form">云端代理 + CLI</span></td>
               <td class="rk-plat-role">需并行多任务的团队<br>OpenAI 生态用户<br><em class="rk-pt-note">云端挂多个改动</em></td>
               <td>OpenAI 自家<br><em class="rk-pt-note">GPT-5.6 Sol / Terra / Luna</em></td>
               <td><strong>含在 ChatGPT 订阅内</strong>:Plus $20 起;Pro Codex $100(5× Plus)、Pro Max $200(20×)<br><em class="rk-pt-note">⚠ 官方估算每开发者 $100–200/月,但实际 $40–400 波动</em></td>
               <td>· 输出质量与自主性评价领先<br>· 云端并行,可同时挂多个任务<br>· 与 ChatGPT 订阅共用,不必另付<br>· Sol Ultra 模式可调多子代理攻坚</td>
               <td>· <strong>成本极难预估</strong>(同档可差 10 倍)<br>· Ultra 模式 token 成倍消耗且无单独标价<br>· 云端任务对私有代码有合规顾虑<br>· 国内需代理</td>
-              <td>无独立免费层(随 ChatGPT Free 受限使用)<br><strong>API 侧</strong>:合作渠道免费额度 2026-07-08 起由 $300 提至 <strong>$1,000</strong></td>
+              <td class="rk-deal">无独立免费层(随 ChatGPT Free 受限用)<br>· <strong>API 侧</strong>:合作渠道免费额度 2026-07-08 起 $300 → <strong>$1,000</strong><br>· <strong>学术研究者计划</strong>:入选者免费用前沿模型(首批 1 万人,2027 年扩至 10 万)</td>
               <td><span class="rk-miss-mark">—</span> 暂无公开 NPS<br><em class="rk-pt-note">第三方评测称其"输出质量、自主性与可靠性领先";缺可查证的量化满意度数据</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-google">G</span><a href="https://antigravity.google/" target="_blank" rel="noopener">Google Antigravity</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Antigravity(Google 的 AI IDE)</strong><b>形态:</b>Google 自家 AI IDE,2025-11 起公测。<br><b>适合:</b>Gemini 生态用户、想白嫖公测额度的人。<br><b>⚠ 重要提醒:</b>免费额度被反复削减——上线时 250 请求/天,到 2025-12 已砍到 <strong>20 请求/天(降幅 92%)</strong>;2026-03 引入 credits 制。Google <strong>未承诺永久免费层</strong>,不建议把它当长期主力。</span></span>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Antigravity(Google 的 AI IDE)</strong><b>适合:</b>Gemini 生态用户、想薅公测额度的人。<br><b>⚠ 免费额度反复缩水:</b>250 → <strong>20 请求/天(-92%)</strong>,未承诺永久免费层。可以薅,别当主力。</span></span>
                 <span class="rk-plat-form">独立 IDE</span></td>
               <td class="rk-plat-role">Gemini 生态开发者<br>预算敏感者<br><em class="rk-pt-note">⚠ 额度政策不稳</em></td>
               <td>Google 自家<br><em class="rk-pt-note">Gemini 3.1 Pro / 3.6 Flash</em></td>
               <td><strong>公测免费 + credits 兜底</strong>:Free $0、AI Pro $20、Ultra $100(≈5× Pro)、Ultra Max $200(≈20×)<br><em class="rk-pt-note">额度用尽后按 credits 计:$0.01/credit,20,000 credits 售 $199</em></td>
               <td>· 公测期基础功能免费<br>· Gemini 2M 级上下文与多模态<br>· 与 Google 云生态打通<br>· Ultra 档 Deep Think 配额行业最高</td>
               <td>· <strong>免费额度被砍 92%</strong>(250→20 请求/天)<br>· credits 计价不透明,信任受损<br>· 未承诺永久免费层<br>· 成熟度不及 Cursor/Copilot</td>
-              <td><strong>公测期 Free $0</strong>,但配额已多次收紧<br><em class="rk-pt-note">⚠ 额度政策不稳定,规划长期用途需谨慎</em></td>
+              <td class="rk-deal"><strong>公测期 Free $0</strong>,但配额多次收紧<br><em class="rk-pt-note">⚠ <strong>反面教材</strong>:上线 250 请求/天 → 2025-12 砍到 20 请求/天(-92%)。可以薅,但<strong>别当长期主力</strong></em></td>
               <td><span class="rk-miss-mark">—</span> 暂无公开 NPS<br><em class="rk-pt-note">评论普遍指出"砍免费层 + credits 不透明"损害了信任;缺量化满意度数据</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-bytedance">豆</span><a href="https://www.trae.ai/" target="_blank" rel="noopener">Trae(字节)</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Trae(字节的 AI IDE)</strong><b>形态:</b>独立 IDE,定位 Cursor 的国内平替。<br><b>适合:</b>国内网络环境、预算敏感、学生与副业开发者。<br><b>体感:</b>$10 的 Pro 档对标 Cursor $20,国内直连不折腾;缺点是生态与插件成熟度、以及高级模型按倍率扣额度。</span></span>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Trae(字节的 AI IDE)</strong>Cursor 的国内平替,独立 IDE。<br><b>适合:</b>国内网络、预算敏感、学生与副业开发者。<br><b>体感:</b>$10 对标 Cursor $20,直连不折腾;缺点是生态成熟度与高级模型倍率扣额度。</span></span>
                 <span class="rk-plat-form">独立 IDE</span></td>
               <td class="rk-plat-role">国内开发者<br>学生 / 副业<br><em class="rk-pt-note">直连不折腾</em></td>
               <td>多家可选<br><em class="rk-pt-note">Doubao / Claude / GPT 等</em></td>
               <td><strong>快速请求计数制</strong>:Free $0、Lite $3、Pro $10、Pro+ $30、Ultra $100<br><em class="rk-pt-note">Pro 约 600 次快速请求/月;选高级模型按倍率加速扣减;用尽进慢速队列(排队不额外收费)</em></td>
               <td>· <strong>国内直连,无需代理</strong><br>· 同档价格约为 Cursor 一半<br>· 中文交互与文档友好<br>· 慢速队列兜底,不会硬断</td>
               <td>· 插件生态与稳定性不及 Cursor<br>· 高级模型倍率扣减,额度不经用<br>· 英文/国际社区资料少<br>· Agent 自主性一般</td>
-              <td><strong>Free 档</strong>:少量快速请求,用尽进慢速队列<br><em class="rk-pt-note">Lite $3 常有首月促销</em></td>
+              <td class="rk-deal"><strong>Free 档不限时</strong>:少量快速请求,用尽转慢速队列(<strong>排队但不收费</strong>)<br><em class="rk-pt-note">Lite $3 常有首月半价;国内直连省一笔代理钱</em></td>
               <td><span class="rk-miss-mark">—</span> 暂无第三方 NPS<br><em class="rk-pt-note">国内社区口碑以"便宜好用、生态待补"为主;缺可引用的量化数据</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-tencent">腾</span><a href="https://copilot.tencent.com/" target="_blank" rel="noopener">CodeBuddy / WorkBuddy(腾讯)</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// 腾讯云 CodeBuddy / WorkBuddy</strong><b>形态:</b>CodeBuddy 面向编程,WorkBuddy 面向办公自动化(agentic workspace)。<br><b>适合:</b>已在腾讯云体系内的企业、需要私有化部署的团队。<br><b>⚠ 价格警报:</b>2026-05-15 起大幅调价,企业旗舰版 78→198 元/人/月(<strong>+154%</strong>)、私有云版 158→316 元(+100%),这是当年<strong>第三次涨价</strong>,官方口径指向算力紧张。</span></span>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// 腾讯云 CodeBuddy / WorkBuddy</strong><b>🐑 羊毛最多的一家</b>:体验版永久免费 500 积分/月,注册再送 3,000+,签到与邀请可叠加。<br><b>⚠</b> 企业档一年三次涨价(78→198 元/人/月),签约前核对官网。</span></span>
                 <span class="rk-plat-form">插件 + 办公代理</span></td>
               <td class="rk-plat-role">研发 + <strong>办公自动化</strong><br>腾讯云体系企业<br><em class="rk-pt-note">WorkBuddy 覆盖非编程办公</em></td>
               <td>腾讯混元 + 多家<br><em class="rk-pt-note">Hy3 系列等</em></td>
-              <td><strong>订阅 + credits 池</strong>:WorkBuddy 有免费评估档、Pro $9.95/月(年付)、Team $40/席(含 1,000 credits/席,团队共享)<br><em class="rk-pt-note">⚠ 2026-05-15 起企业档大涨:78→198 元、158→316 元/人/月</em></td>
-              <td>· 国内直连、私有化部署可选<br>· WorkBuddy 覆盖办公自动化(非仅编程)<br>· 与腾讯云/企微生态打通<br>· 团队 credits 池可共享调配</td>
-              <td>· <strong>一年内三次涨价</strong>,成本可预期性差<br>· 企业档涨幅高达 154%<br>· 国际社区与英文资料少<br>· 模型能力不及第一梯队</td>
-              <td>WorkBuddy 有免费评估层<br><em class="rk-pt-note">⚠ 涨价频繁,签长约前务必核对官网最新价</em></td>
+              <td><strong>积分制</strong>:体验版免费 500 积分/月;个人版 2026-07-01 起三档——标准 ¥99(4,000 积分)、高级 ¥199(9,000)、旗舰 ¥999(50,000)<br><em class="rk-pt-note">⚠ 企业档 2026-05-15 起 78→198 元/人/月</em></td>
+              <td>· 国内直连,私有化可选<br>· 覆盖办公自动化,不只编程<br>· <strong>免费积分渠道最多</strong></td>
+              <td>· <strong>一年三次涨价</strong>,成本难预期<br>· 模型能力不及第一梯队<br>· 英文资料少</td>
+              <td class="rk-deal"><strong>🐑 本表羊毛之王</strong><br>· <strong>体验版永久免费</strong>:500 积分/月 + 代码补全 5,000 次/月<br>· 注册赠 <strong>3,000+ 积分</strong>(90 天内用完)<br>· 签到:1–6 天各 100,<strong>第 7 天 1,000</strong><br>· 邀请好友 <strong>500/人</strong>,成长任务 700–900<br><em class="rk-pt-note">叠满后轻度用户基本不用付费</em></td>
               <td><span class="rk-miss-mark">—</span> 暂无第三方 NPS<br><em class="rk-pt-note">媒体报道聚焦其连续涨价与算力紧张;缺满意度数据</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico">CL</span><a href="https://cline.bot/" target="_blank" rel="noopener">Cline / Roo Code</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Cline / Roo Code(开源插件)</strong><b>形态:</b>开源 VS Code 插件,自带 API key 使用。<br><b>适合:</b>想完全掌控成本与数据的人、要接本地模型(Ollama)的人。<br><b>体感:</b>没有订阅、没有额度墙,账单完全等于你的 API 消耗;重度使用 Claude Sonnet 约 $20–50/月。缺点是要自己配置,且成本无上限保护。</span></span>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Cline / Roo Code(开源插件)</strong><b>🐑</b> 插件免费,配国产免费 API 近乎零成本;接 Ollama 则完全免费。<br><b>⚠</b> 账单等于 API 消耗且<strong>无上限保护</strong>,重度用 Sonnet 约 $20–50/月。</span></span>
                 <span class="rk-plat-form">开源插件</span></td>
               <td class="rk-plat-role">要掌控成本与数据的人<br>需本地模型的团队<br><em class="rk-pt-note">私有化 / 合规场景</em></td>
               <td>任意(自带 key)<br><em class="rk-pt-note">含本地模型 via Ollama</em></td>
               <td><strong>纯 API 按量</strong>:插件本身免费开源,你付的是所选模型的 API 费<br><em class="rk-pt-note">用 Claude Sonnet 重度使用约 $20–50/月(随上下文与请求量浮动)</em></td>
               <td>· <strong>无订阅、无额度窗口</strong><br>· 成本完全透明(等于 API 账单)<br>· 可接本地模型,数据不出内网<br>· 开源可审计、可改</td>
               <td>· 需自行配置 key 与模型<br>· <strong>无消费上限保护</strong>,失控风险在自己<br>· 无官方支持<br>· 上下文管理需手动优化</td>
-              <td><strong>插件永久免费开源</strong><br><em class="rk-pt-note">成本仅取决于所选 API;接本地模型可零成本</em></td>
+              <td class="rk-deal"><strong>🐑 插件永久免费开源</strong><br>· 配国产免费 API(混元 Lite、GLM Flash 等)可<strong>近乎零成本</strong><br>· 接 Ollama 本地模型则完全免费<br><em class="rk-pt-note">薅国产免费额度的最佳载体</em></td>
               <td><span class="rk-miss-mark">—</span> 暂无第三方 NPS<br><em class="rk-pt-note">开源社区活跃度高;无可引用的量化满意度数据</em></td>
             </tr>
 
             <tr class="rk-plat-group"><td colspan="8">通用任务 Agent(不限于编程)</td></tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico">M</span><a href="https://manus.im/" target="_blank" rel="noopener">Manus</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Manus(通用自主 Agent)</strong><b>形态:</b>云端自主 Agent,给一句话指令就自己拆解任务、调工具、交付成品。<br><b>适合:</b>市场调研、竞品分析、做表做图做 PPT、批量信息整理——<strong>非技术岗的主力选择</strong>。<br><b>⚠ 最大坑:</b>credits 制被用户集中吐槽——同样 $20 的套餐,"可能撑一个月,也可能一个周末就烧完",取决于任务复杂度。用前务必先小任务试水估算消耗。</span></span>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Manus(通用自主 Agent)</strong>一句话指令,自己拆任务、调工具、交付成品。<br><b>适合:</b>调研、竞品分析、做表做图做 PPT——<strong>非技术岗首选</strong>。<br><b>⚠ 最大坑:</b>同样 $20 的套餐"可能撑一个月,也可能一个周末烧完"。先拿免费额度跑真实任务试水。</span></span>
                 <span class="rk-plat-form">云端 Agent</span></td>
               <td class="rk-plat-role"><strong>市场 / 运营 / 分析师</strong><br>产品经理、咨询顾问<br><em class="rk-pt-note">调研、报告、做表做图</em></td>
               <td>多家(平台调度)<br><em class="rk-pt-note">对用户不暴露模型选择</em></td>
               <td><strong>credits 制</strong>:Free $0、Standard $20(4,000 credits)、Customizable $40、Extended $200;年付约 8.3 折<br><em class="rk-pt-note">⚠ credits 消耗随任务复杂度剧烈波动,是用户投诉最集中的点</em></td>
               <td>· <strong>一句话交付整件事</strong>,无需拆步骤<br>· 会自己开浏览器、写代码、做表格<br>· 非技术用户上手门槛最低<br>· 产出可直接交付(文档/表格/网页)</td>
               <td>· <strong>credits 极难预估</strong>,可能周末烧光月度额度<br>· 不暴露模型选择,可控性弱<br>· 复杂任务仍需人工校验<br>· 长任务失败时 credits 照扣</td>
-              <td><strong>Free 档</strong>可试用<br><em class="rk-pt-note">年付约省 17%</em></td>
+              <td class="rk-deal"><strong>Free 档</strong>可试用(credits 很少)<br><em class="rk-pt-note">年付约 8.3 折(省 17%)。⚠ 付费前<strong>务必先用免费额度跑一个真实任务</strong>估消耗——credits 波动极大</em></td>
               <td><span class="rk-miss-mark">—</span> 暂无第三方 NPS<br><em class="rk-pt-note">评测普遍称赞"自主完成度",同时集中批评 credits 不可预估;缺量化满意度数据</em></td>
             </tr>
 
             <tr class="rk-plat-group"><td colspan="8">办公 / 协作(文档、邮件、会议)</td></tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico">MS</span><a href="https://www.microsoft.com/microsoft-365/copilot" target="_blank" rel="noopener">Microsoft 365 Copilot</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Microsoft 365 Copilot</strong><b>形态:</b>嵌入 Word / Excel / Outlook / Teams 的助手,另有 Copilot Studio 可搭自定义 Agent。<br><b>适合:</b>已用 M365 的企业——财务、HR、行政、销售的日常文档与邮件。<br><b>⚠ 真实成本提醒:</b>$30/席只是<strong>加购价</strong>,需要底层 M365 授权;新客户实际落地约 <strong>$59–83/席/月</strong>。要搭自定义 Agent 的话 Copilot Studio 另收 $200/月(含 25,000 条消息)。</span></span>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Microsoft 365 Copilot</strong><b>适合:</b>已用 M365 的企业——财务、HR、行政、销售。<br><b>⚠ 真实成本:</b>$30/席只是<strong>加购价</strong>,需底层 M365 授权,新客实际约 <strong>$59–83/席/月</strong>。</span></span>
                 <span class="rk-plat-form">办公套件内嵌</span></td>
               <td class="rk-plat-role"><strong>财务 / HR / 行政 / 销售</strong><br>全体办公人员<br><em class="rk-pt-note">文档、邮件、会议纪要、Excel</em></td>
               <td>OpenAI + 微软自研<br><em class="rk-pt-note">对用户不暴露具体版本</em></td>
               <td><strong>按席位订阅</strong>:$30/席/月<strong>加购</strong>(需底层 M365 授权)<br><em class="rk-pt-note">⚠ 新客户实际成本约 $59–83/席/月;Copilot Studio 自定义 Agent 另计 $200/月(25,000 消息)</em></td>
               <td>· 直接长在 Office 里,零学习成本<br>· 能读通企业内部文档与邮件上下文<br>· 合规、审计、数据驻留最成熟<br>· Copilot Studio 可无代码搭 Agent</td>
               <td>· <strong>真实成本远高于标价</strong>(需捆绑 M365)<br>· 单点能力不如专用工具<br>· 效果高度依赖企业数据治理质量<br>· 按席位收费,小团队不经济</td>
-              <td>通常提供企业试用<br><em class="rk-pt-note">无个人免费层;需通过销售或云市场采购</em></td>
+              <td class="rk-deal">通常提供企业试用<br><em class="rk-pt-note">⚠ <strong>无个人免费层</strong>,需走销售或云市场。个人用户想要 Office 场景,元宝的免费 Agent 能直出 Word/Excel/PPT,是零成本替代路径</em></td>
               <td><span class="rk-miss-mark">—</span> 暂无可比 NPS<br><em class="rk-pt-note">企业采购量大但公开满意度数据口径不一,不与开发者工具的 NPS 混用</em></td>
             </tr>
 
             <tr class="rk-plat-group"><td colspan="8">客服 / 销售(面向客户的自动化)</td></tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico">SF</span><a href="https://www.salesforce.com/agentforce/" target="_blank" rel="noopener">Salesforce Agentforce</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Salesforce Agentforce</strong><b>形态:</b>CRM 原生的自主 Agent,直接面向客户跑服务与销售流程。<br><b>适合:</b>已在 Salesforce 体系内的客服中心与销售团队。<br><b>计价特别:</b>三种模式并存——<strong>按对话 $2/次</strong>、Flex Credits($500/10 万 credits)、或按席位 $125/用户/月,且需要 Service Cloud 作为前置。按对话计价对话务量大的客服中心可能非常贵,上线前务必按真实话务量试算。</span></span>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Salesforce Agentforce</strong><b>适合:</b>已在 Salesforce 体系内的客服与销售团队。<br><b>⚠ 三种计价并存:</b>按对话 $2/次、Flex Credits、或席位 $125/月,需 Service Cloud 前置。</span></span>
                 <span class="rk-plat-form">CRM 原生 Agent</span></td>
               <td class="rk-plat-role"><strong>客服中心 / 销售团队</strong><br>客户成功、售后<br><em class="rk-pt-note">工单自动处理、销售跟进</em></td>
               <td>Salesforce 自有 + 多家<br><em class="rk-pt-note">Atlas 推理引擎</em></td>
               <td><strong>三种模式并存</strong>:① 按对话 <strong>$2/次</strong> ② Flex Credits <strong>$500/10 万</strong> ③ 按席位 <strong>$125/用户/月</strong><br><em class="rk-pt-note">⚠ 均需 Service Cloud 前置授权</em></td>
               <td>· 与 CRM 数据天然打通<br>· 面向客户的自动化最成熟<br>· 可直接触发业务流程(下单、退款)<br>· 企业级权限与审计完备</td>
               <td>· <strong>按对话计价对高话务量可能极贵</strong><br>· 强绑定 Salesforce 生态<br>· 需 Service Cloud 前置,总成本高<br>· 实施与调优需要专业人力</td>
-              <td>无公开免费层<br><em class="rk-pt-note">通常通过销售提供 PoC / 试点</em></td>
+              <td class="rk-deal">无公开免费层<br><em class="rk-pt-note">仅通过销售做 PoC / 试点,个人无从薅起</em></td>
               <td><span class="rk-miss-mark">—</span> 暂无可比 NPS<br><em class="rk-pt-note">企业级产品,公开满意度数据口径与开发者工具不可比</em></td>
             </tr>
 
             <tr class="rk-plat-group"><td colspan="8">流程自动化(把 Agent 接进现有系统)</td></tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico">n8</span><a href="https://n8n.io/" target="_blank" rel="noopener">n8n</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// n8n(开源工作流自动化)</strong><b>形态:</b>可视化拖拽的工作流引擎,400+ 集成,可自托管。<br><b>适合:</b>有明确重复流程要自动化的团队——数据同步、通知分发、审批流、定时报表。<br><b>关键优势:</b>自托管后<strong>彻底消除按 credit 计费</strong>,成本只剩服务器与所选模型的 API 费。适合"可预测的重复流程",不适合开放式自主推理。</span></span>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// n8n(开源工作流自动化)</strong>可视化拖拽的工作流引擎,400+ 集成,可自托管。<br><b>适合:</b>明确的重复流程——数据同步、通知分发、审批流、定时报表。<br><b>关键:</b>自托管<strong>彻底摆脱 credits 计费</strong>。适合可预测的流程,不适合开放式自主推理。</span></span>
                 <span class="rk-plat-form">工作流引擎</span></td>
               <td class="rk-plat-role"><strong>运营 / IT / 数据团队</strong><br>业务流程负责人<br><em class="rk-pt-note">数据同步、审批、定时报表</em></td>
               <td>任意(自带 key)<br><em class="rk-pt-note">可接本地模型</em></td>
               <td><strong>开源自托管免费</strong> + 云托管按执行量订阅<br><em class="rk-pt-note">自托管后无 credit 概念,成本 = 服务器 + 所选模型 API 费</em></td>
               <td>· <strong>自托管彻底摆脱 credits</strong><br>· 400+ 集成,接得进老系统<br>· 高频结构化流程单位成本极低<br>· 数据可完全不出内网</td>
               <td>· 需要人搭建与维护<br>· <strong>不适合开放式自主推理</strong>(它是流程引擎,不是 Agent 大脑)<br>· 可视化编排学习曲线存在<br>· 自托管要自己管稳定性</td>
-              <td><strong>开源版永久免费</strong><br><em class="rk-pt-note">云托管有免费试用档</em></td>
+              <td class="rk-deal"><strong>🐑 开源版永久免费、无限量</strong><br>· 自托管后<strong>没有 credits 概念</strong>,成本 = 服务器 + 模型 API<br>· 配国产免费 API 可做到接近零成本<br><em class="rk-pt-note">云托管另有免费试用档</em></td>
               <td><span class="rk-miss-mark">—</span> 暂无第三方 NPS<br><em class="rk-pt-note">开源社区活跃、GitHub 星数领先;缺可引用的量化满意度数据</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico">L</span><a href="https://www.lindy.ai/" target="_blank" rel="noopener">Lindy</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Lindy(无代码 Agent 搭建)</strong><b>形态:</b>无代码 Agent 构建平台,面向业务人员。<br><b>适合:</b>没有开发资源、但想让 Agent 处理邮件/日程/线索跟进的小团队。<br><b>定位:</b>比 n8n 更"傻瓜",比 Manus 更可控;$49/月起,对个人用户比 Manus 贵。</span></span>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Lindy(无代码 Agent 搭建)</strong><b>适合:</b>没有开发资源、想让 Agent 处理邮件/日程/线索的小团队。<br><b>定位:</b>比 n8n 傻瓜,比 Manus 可控;$49/月起,个人用比 Manus 贵。</span></span>
                 <span class="rk-plat-form">无代码 Agent</span></td>
               <td class="rk-plat-role"><strong>销售 / 招聘 / 客服</strong><br>无开发资源的小团队<br><em class="rk-pt-note">邮件跟进、线索筛选、日程</em></td>
               <td>多家(平台调度)</td>
               <td><strong>按订阅</strong>:$49/月起<br><em class="rk-pt-note">个人用户单价高于 Manus,换来的是更强的流程可控性</em></td>
               <td>· 无代码,业务人员可自建<br>· 邮件/日程/CRM 场景开箱即用<br>· 触发条件与流程比通用 Agent 更可控</td>
               <td>· 起步价 $49 对个人偏贵<br>· 灵活度不及 n8n 自托管<br>· 复杂逻辑仍需技术介入</td>
-              <td>有试用档<br><em class="rk-pt-note">以官网当期政策为准</em></td>
+              <td class="rk-deal">有试用档<br><em class="rk-pt-note">$49/月起,个人用户比 Manus 贵;以官网当期政策为准</em></td>
               <td><span class="rk-miss-mark">—</span> 暂无第三方 NPS</td>
             </tr>
           </tbody>
@@ -561,10 +581,15 @@
       </div>
 
       <div class="rk-notes">
-        <p class="rk-note"><strong>※ 社区体感的口径</strong>:<strong>NPS</strong>(净推荐值,-100 至 +100,推荐者占比减批评者占比)、<strong>"最爱"投票</strong>(开发者调查中选为最喜爱工具的比例)、<strong>满意度</strong>(客户满意度调查得分)、<strong>市场规模</strong>(付费用户数或 ARR)。数据来自 2026 年开发者调查与厂商披露,时点为 2026 年初至 7 月。<strong>缺数据的一律标 <span class="rk-miss-mark">—</span> 并说明来源情况,不用估算值填空。</strong></p>
-        <p class="rk-note"><strong>一个值得注意的使用模式</strong>:调查显示 <strong>70% 的工程师同时使用 2–4 个 AI 编程工具</strong>,最主流的组合是 <strong>Cursor 负责编辑 + Claude Code 负责复杂任务</strong>。也就是说,"选一个"往往不是最优解——按任务分工用两个,通常比死磕单一平台更顺手,成本也更可控。</p>
-        <p class="rk-note"><strong>三个跨平台的计价陷阱</strong>:① <strong>「等值额度」不等于「固定用量」</strong>——Cursor 那类按模型贵贱扣额度的,选贵模型时额度蒸发极快;② <strong>credits 制普遍不透明</strong>(Antigravity、腾讯系、Copilot 均已转向),同样 1 credit 在不同操作上的价值差很多;③ <strong>「官方估算月花」参考价值有限</strong>——Codex 官方说 $100–200/开发者/月,但实测同档位可能 $40 也可能 $400,取决于模型选择、本地/云端、fast 模式与 token 量。</p>
-        <p class="rk-note"><strong>数据来源(快照 2026-07-30,以各平台官网为准)</strong>:
+        <p class="rk-note"><strong>💡 别只选一个</strong>:调查显示 <strong>70% 的工程师同时用 2–4 个工具</strong>,最主流的搭法是 <strong>Cursor 编辑 + Claude Code 攻坚</strong>。按任务分工通常比死磕单一平台更顺手、成本也更可控。</p>
+        <p class="rk-note"><strong>⚠ 三个计价陷阱</strong>:① <strong>「等值额度」≠ 固定用量</strong>,选贵模型时额度蒸发极快;② <strong>credits 制普遍不透明</strong>,同样 1 credit 在不同操作上价值差很多;③ <strong>官方估算月花参考价值有限</strong>——Codex 官方说 $100–200,实测 $40–400 都有。</p>
+        <details class="rk-fold">
+          <summary>「社区体感」列的数据口径</summary>
+          <div class="rk-fold-body">
+            <p class="rk-note"><strong>NPS</strong>(净推荐值,-100~+100)、<strong>"最爱"投票</strong>(开发者调查中选为最喜爱的比例)、<strong>满意度</strong>、<strong>市场规模</strong>(付费用户数或 ARR)。来自 2026 年开发者调查与厂商披露,时点 2026 年初至 7 月。<strong>缺数据一律标 <span class="rk-miss-mark">—</span>,不用估算值填空。</strong></p>
+          </div>
+        </details>
+        <p class="rk-note"><strong>数据来源(快照 2026-07-31,以各平台官网为准)</strong>:
           <a href="https://www.digitalapplied.com/blog/ai-coding-tool-adoption-2026-developer-survey" target="_blank" rel="noopener">2026 开发者调查(NPS / 满意度 / 最爱投票)</a> ·
           <a href="https://www.ideaplan.io/blog/ai-coding-assistant-market-share-2026" target="_blank" rel="noopener">市场份额调查</a> ·
           <a href="https://uibakery.io/blog/openai-codex-pricing" target="_blank" rel="noopener">Codex 定价与用量</a> ·
@@ -578,7 +603,7 @@
 
     <script type="application/json" id="rankingsData">
     {
-      "snapshot": "2026-07-30",
+      "snapshot": "2026-07-31",
       "institutions": {
         "arena":      { "name": "Arena",               "short": "Arena",     "url": "https://arena.ai/leaderboard/text",                 "unit": "Elo" },
         "aa":         { "name": "Artificial Analysis", "short": "AA 指数",   "url": "https://artificialanalysis.ai/leaderboards/models", "unit": "指数" },
