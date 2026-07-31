@@ -173,10 +173,38 @@ html {
   overscroll-behavior-x: contain;
 }
 
+/* --- 大字版:老花/低视力友好 ---
+   全站字号 99% 用 rem,所以只需放大根字号即可整体等比放大。
+   同时提高次级/三级文字的对比度——老花眼的困难一半来自对比度而非字号。
+   ⚠ body 必须用 rem 而不是 px,否则正文不会跟随根字号缩放。 */
+html { font-size: 100%; }
+
+[data-fontsize='large'] { font-size: 125%; }
+
+[data-fontsize='large'] {
+  --text-secondary: #c8c8d0;
+  --text-tertiary: #a2a2ac;
+  --border-color: #3a3a42;
+  --border-strong: #55555f;
+}
+
+[data-fontsize='large'][data-theme='light'] {
+  --text-secondary: #3a3a41;
+  --text-tertiary: #5f5f68;
+  --border-color: #b8b8c0;
+  --border-strong: #94949c;
+}
+
+/* 大字版下适当放宽行距与字距,长段落更易读 */
+[data-fontsize='large'] body {
+  line-height: 1.85;
+  letter-spacing: 0.01em;
+}
+
 /* --- Base Typography --- */
 body {
   font-family: var(--font-sans);
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.75;
   color: var(--text-primary);
   background-color: var(--bg-primary);
@@ -391,6 +419,25 @@ body.pjax-loading .main-content { opacity: 0.45; }
 [data-theme='light'] .icon-moon { display: flex; }
 :root:not([data-theme='light']):not([data-rain]) .icon-umbrella { display: flex; }
 [data-rain] .icon-sun { display: flex; }
+
+/* --- 大字版切换:同样显示"点了会变成什么" --- */
+/* 字号固定用 px:按钮本身不该随大字版一起放大,否则会撑破表头 */
+.fontsize-toggle {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.icon-fs-large, .icon-fs-small { display: none; }
+:root:not([data-fontsize='large']) .icon-fs-large { display: flex; }
+[data-fontsize='large'] .icon-fs-small { display: flex; }
+
+/* 已开启时给个明确的"在生效"信号 */
+[data-fontsize='large'] .fontsize-toggle {
+  border-color: var(--accent-ink);
+  color: var(--accent-ink);
+}
 
 /* --- Mobile Menu Toggle --- */
 .mobile-menu-toggle {
@@ -1912,7 +1959,8 @@ body.pjax-loading .main-content { opacity: 0.45; }
   .search-input,
   input[type='text'],
   input[type='number'] {
-    font-size: 16px;
+    /* 下限 16px 防 iOS 聚焦缩放,大字版下随根字号一起变大 */
+    font-size: max(16px, 1rem);
   }
 
   /* 移动端解析卡改为贴底大卡片,更易读 */
@@ -1983,7 +2031,7 @@ body.pjax-loading .main-content { opacity: 0.45; }
 }
 
 @media (max-width: 480px) {
-  body { font-size: 15px; }
+  body { font-size: 0.9375rem; }
 
   .hero-title { font-size: 2rem; }
 

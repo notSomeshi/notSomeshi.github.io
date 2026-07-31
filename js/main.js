@@ -107,6 +107,35 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* ==========================================
+     1b. 大字版:根字号 100% ↔ 125%,并提高弱化文字的对比度
+     初始态已由 head.ejs 的内联脚本打好(防止首屏闪烁),这里只管切换
+     ========================================== */
+  var fontsizeToggle = document.getElementById('fontsizeToggle');
+
+  function applyFontsize(large) {
+    var root = document.documentElement;
+    if (large) {
+      root.setAttribute('data-fontsize', 'large');
+    } else {
+      root.removeAttribute('data-fontsize');
+    }
+    if (fontsizeToggle) {
+      fontsizeToggle.setAttribute('aria-pressed', large ? 'true' : 'false');
+      fontsizeToggle.setAttribute('title', large ? '恢复常规字号' : '大字版:放大字号并提高对比度');
+    }
+    try { localStorage.setItem('fontsize', large ? 'large' : 'normal'); } catch (e) {}
+  }
+
+  if (fontsizeToggle) {
+    // 与内联脚本设好的初始态对齐(aria-pressed / title)
+    applyFontsize(document.documentElement.getAttribute('data-fontsize') === 'large');
+
+    fontsizeToggle.addEventListener('click', function () {
+      applyFontsize(document.documentElement.getAttribute('data-fontsize') !== 'large');
+    });
+  }
+
+  /* ==========================================
      2. 回到顶部 / 顶栏阴影 / 阅读进度条
      isPostPage 由 initPage() 按当前页内容刷新
      ========================================== */
