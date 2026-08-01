@@ -1347,6 +1347,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
     makeResizable(document.querySelector('.rk-price-table'));
     makeResizable(document.querySelector('.rk-plat-table'));
+
+    /* --- 显示密度开关:精简(默认)/ 详细 --- */
+    var densityBox = document.getElementById('rkDensity');
+    if (densityBox) {
+      var section = document.querySelector('.rankings-section');
+      var btns = densityBox.querySelectorAll('.rk-density-btn');
+
+      function applyDensity(mode) {
+        section.classList.toggle('rk-lite', mode === 'lite');
+        btns.forEach(function (b) {
+          b.classList.toggle('is-active', b.dataset.density === mode);
+        });
+        try { localStorage.setItem('bv-density', mode); } catch (e) {}
+      }
+
+      var saved = 'lite';
+      try { saved = localStorage.getItem('bv-density') || 'lite'; } catch (e) {}
+      applyDensity(saved);
+
+      btns.forEach(function (b) {
+        b.addEventListener('click', function () { applyDensity(b.dataset.density); });
+      });
+    }
   }
 
   /* ==========================================

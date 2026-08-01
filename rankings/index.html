@@ -125,6 +125,14 @@
       <em>用选购助手 →</em>
     </a>
 
+    <!-- 显示密度开关:一键在「只看关键数字」与「显示全部注释」之间切换 -->
+    <div class="rk-density" id="rkDensity">
+      <span class="rk-density-label">显示</span>
+      <button type="button" class="rk-density-btn is-active" data-density="lite">精简</button>
+      <button type="button" class="rk-density-btn" data-density="full">详细</button>
+      <span class="rk-density-hint">精简模式隐藏补充注释,只留关键数字</span>
+    </div>
+
     <!-- 板块切换:能力天梯 / 订阅性价比 / 编程平台 -->
     <div class="rk-boards" id="rkBoards">
       <button type="button" class="rk-board-tab is-active" data-board="ladder">能力天梯</button>
@@ -165,9 +173,7 @@
             <p class="rk-note"><strong>金融分析维度的两个代理指标</strong>:AA 智能指数(v4.1 含 τ³-Banking 银行业智能体任务)与 LiveBench 数学子项(数值严谨性)。真正的领域基准可参考 <a href="https://arxiv.org/abs/2402.12659" target="_blank" rel="noopener">FinBen</a>、<a href="https://arxiv.org/html/2505.19457v1" target="_blank" rel="noopener">BizFinBench</a>、FinanceBench。</p>
           </div>
         </details>
-        <p class="rk-note"><strong>⚠ AA 指数已按 v4.1 重校,新旧分数不可比</strong>。本页已逐个模型换新值,变动最大的是 Opus 4.8 <span class="rk-miss-mark">61.4→56</span>、Gemini 3.1 Pro <span class="rk-miss-mark">56.2→46</span>、o4-mini <span class="rk-miss-mark">43.5→26</span>。其余机构不受影响。</p>
-        <p class="rk-note"><strong>近期动态(2026-08-01)</strong>:<strong>Opus 5</strong> 61 分登顶,与 Opus 4.8 同价,赢在 token 效率;<strong>Kimi K3</strong> 放出 2.8T 开源权重;<strong>Qwen3.8-Max</strong> 预览版 2.4T。<strong>⚠ DeepSeek 旧模型名 7-24 停用、计费改峰谷制;Sonnet 5 促销 8-31 到期。</strong></p>
-        <p class="rk-note"><strong>⚠ 金融维度是代理指标,不是金融基准</strong>——无覆盖全 20 模型的公开金融基准,本站<strong>不编造金融分</strong>。高分≠可信任其财务输出:实测六个主流模型中<strong>四个会在源文档不全时捏造财务数据</strong>,详见<a href="/2026/07/27/ai-finance-pitfalls/">《AI 做金融分析的三个致命陷阱》</a>。</p>
+        <p class="rk-note rk-note-key"><strong>⚠ 两条务必知道的</strong>:① <a class="term-tip" href="https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-1" target="_blank" rel="noopener" data-tip="Artificial Analysis 在 v4.1 把评测重心转向智能体工作负载,题集与计分方式都变了。因此 v4.1 的分数与改版前的旧分数不能直接比较——本页已全部换用 v4.1 实测值。引用他处分数时务必核对是哪个版本。">AA 指数为 v4.1 口径</a>,与旧分数不可比;② <a class="term-tip" href="/2026/07/27/ai-finance-pitfalls/" data-tip="金融维度用的是代理指标(AA 指数 + LiveBench 数学),不是真正的金融基准——目前没有覆盖全部 20 个模型的公开金融基准,本站不编造金融分。更重要的是:实测显示六个主流模型中有四个会在源文档不完整时捏造财务数据。点击阅读详细分析 →">金融维度是代理指标</a>,且高分≠可信任其财务输出。</p>
         <p class="rk-note"><strong>数据来源(快照 2026-08-01,以各机构官网为准)</strong>:
           <a href="https://arena.ai/leaderboard/text" target="_blank" rel="noopener">Arena</a> ·
           <a href="https://artificialanalysis.ai/leaderboards/models" target="_blank" rel="noopener">Artificial Analysis</a> ·
