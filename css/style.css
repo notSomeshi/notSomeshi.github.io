@@ -3040,29 +3040,9 @@ body::before {
   font-size: 8px;
 }
 
-/* 真实厂牌 logo(本地资源,白底芯片保证深浅色主题都清晰;字母作为加载失败的回退) */
-.rk-ico[class*='b-'] {
-  background-color: #fff;
-  background-size: 72%;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: transparent;
-}
-
-.b-anthropic { background-image: url('/img/brands/anthropic.png'); }
-.b-openai { background-image: url('/img/brands/openai.png'); }
-.b-google { background-image: url('/img/brands/google.png'); }
-.b-moonshot { background-image: url('/img/brands/moonshot.png'); }
-.b-xai { background-image: url('/img/brands/xai.png'); }
-.b-deepseek { background-image: url('/img/brands/deepseek.png'); }
-.b-qwen { background-image: url('/img/brands/qwen.png'); }
-.b-minimax { background-image: url('/img/brands/minimax.png'); }
-.b-zai { background-image: url('/img/brands/zai.png'); }
-.b-mistral { background-image: url('/img/brands/mistral.png'); }
-.b-cursor { background-image: url('/img/brands/cursor.png'); }
-.b-github { background-image: url('/img/brands/github.png'); }
-.b-tencent { background-image: url('/img/brands/tencent.png'); }
-.b-bytedance { background-image: url('/img/brands/bytedance.png'); }
+/* 真实厂牌 logo 的样式与图片数据都在 brands.css(自动生成,logo 内联为 data URI)。
+   放在那里是为了省掉 14 次首屏晚期的图片请求;字母作为加载失败的回退。
+   换 logo 后重跑 .claude/skills/update-site-data/build-brands-css.js */
 
 .rk-mwrap {
   display: flex;

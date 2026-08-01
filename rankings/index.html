@@ -11,6 +11,11 @@
 
 <link rel="stylesheet" href="/css/style.css">
 
+
+<link rel="stylesheet" href="/css/brands.css">
+
+
+<script src="/js/main.js" defer></script>
 <script>
   // 暗色优先:light 显式切亮色;rain 提前打上标记避免闪烁
   (function() {
@@ -109,7 +114,7 @@
   <div class="container">
     <header class="archive-header">
       <h1 class="archive-title">模型天梯</h1>
-      <p class="archive-desc">TOP 20 AI MODELS · 多机构综合排名 · 数据快照 2026-07-31</p>
+      <p class="archive-desc">TOP 20 AI MODELS · 多机构综合排名 · 数据快照 2026-08-01</p>
     </header>
 
     <a class="rk-advisor-cta" href="/advisor/">
@@ -161,9 +166,9 @@
           </div>
         </details>
         <p class="rk-note"><strong>⚠ AA 指数已按 v4.1 重校,新旧分数不可比</strong>。本页已逐个模型换新值,变动最大的是 Opus 4.8 <span class="rk-miss-mark">61.4→56</span>、Gemini 3.1 Pro <span class="rk-miss-mark">56.2→46</span>、o4-mini <span class="rk-miss-mark">43.5→26</span>。其余机构不受影响。</p>
-        <p class="rk-note"><strong>近期动态(2026-07-31)</strong>:<strong>Opus 5</strong>(7-24)以 61 分登顶,与 Opus 4.8 <strong>同价 $5/$25</strong>——赢在 token 效率不是降价;<strong>Kimi K3 开源权重</strong>(7-27)2.8T MoE,史上最大。<strong>⚠ Sonnet 5 的 $2/$10 促销 8-31 到期</strong>,之后 $3/$15。</p>
+        <p class="rk-note"><strong>近期动态(2026-08-01)</strong>:<strong>Opus 5</strong> 61 分登顶,与 Opus 4.8 同价,赢在 token 效率;<strong>Kimi K3</strong> 放出 2.8T 开源权重;<strong>Qwen3.8-Max</strong> 预览版 2.4T。<strong>⚠ DeepSeek 旧模型名 7-24 停用、计费改峰谷制;Sonnet 5 促销 8-31 到期。</strong></p>
         <p class="rk-note"><strong>⚠ 金融维度是代理指标,不是金融基准</strong>——无覆盖全 20 模型的公开金融基准,本站<strong>不编造金融分</strong>。高分≠可信任其财务输出:实测六个主流模型中<strong>四个会在源文档不全时捏造财务数据</strong>,详见<a href="/2026/07/27/ai-finance-pitfalls/">《AI 做金融分析的三个致命陷阱》</a>。</p>
-        <p class="rk-note"><strong>数据来源(快照 2026-07-31,以各机构官网为准)</strong>:
+        <p class="rk-note"><strong>数据来源(快照 2026-08-01,以各机构官网为准)</strong>:
           <a href="https://arena.ai/leaderboard/text" target="_blank" rel="noopener">Arena</a> ·
           <a href="https://artificialanalysis.ai/leaderboards/models" target="_blank" rel="noopener">Artificial Analysis</a> ·
           <a href="https://livebench.ai/" target="_blank" rel="noopener">LiveBench</a> ·
@@ -257,13 +262,13 @@
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-deepseek">D</span><a href="https://www.deepseek.com/" target="_blank" rel="noopener">DeepSeek(API 直连)</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// DeepSeek API</strong><b>适合:</b>自建工具链、海量批处理——无订阅,充值即用。<br><b>强项:</b>OpenAI 兼容接口即插即用;错峰约五折。<br><b>体感:</b>OpenRouter 流量之王(单家 16.3%)。</span></span></td>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// DeepSeek API</strong><b>适合:</b>自建工具链、海量批处理——无订阅,充值即用。<br><b>⚠</b> 旧模型名 7-24 已停用,且计费将改「峰谷」制。<br><b>体感:</b>OpenRouter 流量之王(单家 16.3%)。</span></span></td>
               <td class="rk-pt-plans"><span class="rk-plan">无订阅 · 充值即用</span><span class="rk-plan">无最低充值门槛</span></td>
-              <td>V4 Flash · V4 Pro(均开源可自部署)</td>
-              <td>无窗口、无条数限制,纯按 token 量计费:<br>· 错峰时段(约北京时间 00:30–08:30)约五折<br>· 提示缓存命中的输入约 0.1×<br>· OpenAI 兼容接口,任何框架即插即用</td>
+              <td>V4 Flash · V4 Pro(均开源可自部署,MIT)<br><em class="rk-pt-note">两者均支持思考/非思考模式、1M 上下文。<strong>V4 仍为预览版</strong>,正式版(GA)据财新系报道已由 7 月中旬推迟至 <strong>8 月 10–20 日</strong>前后</em></td>
+              <td>无窗口、无条数限制,纯按 token 量计费:<br>· <strong>峰谷计费即将实施</strong>:峰时(9:00–12:00、14:00–18:00 北京时间)2× 计价<br>· 提示缓存命中的输入约 1/120,值得专门设计<br>· OpenAI 兼容接口,任何框架即插即用</td>
               <td>无人为上限,取决于预算</td>
-              <td>无会员概念,即 API 价<br>· 错峰 + 缓存叠加可低至 ≈ $0.1 /M 级</td>
-              <td>V4 Pro ≈ $0.3 / $1.2<br>V4 Flash ≈ $0.1 / $0.4<br><em class="rk-pt-note">规则:错峰约五折;缓存命中 0.1×;开源自部署 $0</em></td>
+              <td>无会员概念,即 API 价<br>· 缓存命中后可低至 ≈ $0.003 /M 级</td>
+              <td><strong>V4 Pro $0.435 / $0.87</strong><br><strong>V4 Flash $0.14 / $0.28</strong><br><em class="rk-pt-note">缓存命中的输入极便宜:Pro $0.003625、Flash $0.0028 /M(约 1/120)<br>⚠ <strong>计费规则将改为「峰谷」</strong>:官方公告峰时(北京时间 9:00–12:00、14:00–18:00)按 <strong>2×</strong> 计,平时为上表价格;官方措辞是"即将实施",尚未正式生效<br>⚠ <strong>旧模型名 <code>deepseek-chat</code> / <code>deepseek-reasoner</code> 已于 2026-07-24 停用</strong>,请求不再回退而是直接失败;换成 <code>deepseek-v4-flash</code> 时注意它<strong>默认开启思考模式</strong>,照搬会凭空多烧输出 token<br>开源自部署 $0</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-moonshot">K</span><a href="https://www.kimi.com/membership/pricing" target="_blank" rel="noopener">Kimi(月之暗面)</a>
@@ -299,7 +304,7 @@
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-qwen">Q</span><a href="https://qwen.ai/" target="_blank" rel="noopener">通义千问(Qwen)</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Qwen Chat + 开源全家桶</strong><b>适合:</b>要私有化部署的团队、阿里云生态用户。<br><b>强项:</b>开源生态最全(0.5B 到 Max),微调底座首选之一。<br><b>🐑</b> 网页版免费;自部署后成本只剩算力。</span></span></td>
               <td class="rk-pt-plans"><span class="rk-plan">Qwen Chat 免费为主</span></td>
-              <td>Qwen3.7 Max · 开源全系(0.5B 到 Max,可自部署)</td>
+              <td>Qwen3.7 Max · <strong>Qwen3.8-Max(预览版,新)</strong> · 开源全系(0.5B 到 Max,可自部署)<br><em class="rk-pt-note">3.8-Max 为 2.4 万亿参数原生多模态旗舰,阿里已宣布<strong>正式版与开放权重近期同步发布</strong>。预览版已可试用,但跨机构评测尚未覆盖,故暂不入天梯</em></td>
               <td>· 网页 / App 宽松使用<br>· API 走阿里云百炼,按量计费,新户有赠额<br>· 开源版自部署后无任何额度概念</td>
               <td>—(自部署无上限,只受算力约束)</td>
               <td>免费档 $0;自部署仅算力成本</td>
@@ -358,7 +363,7 @@
             <li><strong>省钱的第二个旋钮:调低 effort。</strong>换模型之外,还有一条被忽视的省钱路径——<strong>同一个模型降一档推理强度</strong>。表中数字是 max 档的上限,而 low→max 成本差约 3 倍。对多数日常任务(补全、常规改代码、问答),medium 甚至 low 就够;Anthropic 官方也是这么建议的。<strong>先调 effort,再考虑换更便宜的模型</strong>,往往能在不牺牲质量的前提下砍掉一半账单。</li>
           </ul>
         </div>
-        <p class="rkc-note">口径:<a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking" target="_blank" rel="noopener">Artificial Analysis「Cost to Run Intelligence Index」</a>(当前为 <a href="https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-1" target="_blank" rel="noopener">v4.1</a>,含 GDPval-AA v2、Terminal-Bench v2.1、SciCode、HLE、GPQA Diamond 等 9 项评测)——按各模型 API 的输入/缓存/推理/输出 token 实际计费汇总,<strong>推理模型均取厂商披露的最高 effort 设置</strong>。实测锚点:Kimi K3 全套 $2,709.75;Claude Opus 4.8 约 $1.78/题;「$/题」按全卷题量折算。其余为按各模型 API 定价与耗 token 量折算的估算值,数据快照 2026-07-31,以 <a href="https://artificialanalysis.ai/models" target="_blank" rel="noopener">AA 官网实时数据</a>为准。effort 档位说明参考 <a href="https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5" target="_blank" rel="noopener">Anthropic 官方文档</a>。</p>
+        <p class="rkc-note">口径:<a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking" target="_blank" rel="noopener">Artificial Analysis「Cost to Run Intelligence Index」</a>(当前为 <a href="https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-1" target="_blank" rel="noopener">v4.1</a>,含 GDPval-AA v2、Terminal-Bench v2.1、SciCode、HLE、GPQA Diamond 等 9 项评测)——按各模型 API 的输入/缓存/推理/输出 token 实际计费汇总,<strong>推理模型均取厂商披露的最高 effort 设置</strong>。实测锚点:Kimi K3 全套 $2,709.75;Claude Opus 4.8 约 $1.78/题;「$/题」按全卷题量折算。其余为按各模型 API 定价与耗 token 量折算的估算值,数据快照 2026-08-01,以 <a href="https://artificialanalysis.ai/models" target="_blank" rel="noopener">AA 官网实时数据</a>为准。effort 档位说明参考 <a href="https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5" target="_blank" rel="noopener">Anthropic 官方文档</a>。</p>
       </div>
 
       <div class="rk-notes">
@@ -369,7 +374,7 @@
             <p class="rk-note"><strong>会员折算价</strong> = 月费 ÷ 极限用量,即"把额度用满时每百万 token 的成本"。用得越少单价越高;与右侧 API 标价对照,可看出会员在什么用量下开始划算。国产平台 API 价按当期汇率近似换算为美元。</p>
           </div>
         </details>
-        <p class="rk-note"><strong>价格快照 2026-07-31</strong>,来源:
+        <p class="rk-note"><strong>价格快照 2026-08-01</strong>,来源:
           <a href="https://www.aipricing.guru/subscriptions/" target="_blank" rel="noopener">AI Pricing Guru</a> ·
           <a href="https://spectrumailab.com/blog/ai-coding-tools-pricing-compared-2026" target="_blank" rel="noopener">SpectrumAI Lab(编程工具对比)</a> ·
           <a href="https://automationatlas.io/answers/github-copilot-pricing-explained-2026/" target="_blank" rel="noopener">Automation Atlas(Copilot Credits 制)</a> ·
@@ -393,7 +398,7 @@
           <li><strong>会配 API 的</strong> → 用免费开源的 <a href="https://cline.bot/" target="_blank" rel="noopener">Cline</a> 或 <a href="https://n8n.io/" target="_blank" rel="noopener">n8n</a> 自托管当外壳,后端接国产永久免费模型(混元 Lite、智谱 GLM Flash 等),<strong>长期成本可压到接近 0</strong>。</li>
           <li><strong>只是想试试水</strong> → Cursor Hobby、Copilot Free、Trae Free 都是<strong>不限时</strong>的永久免费档;Antigravity 公测额度虽大但<strong>已被砍 92%</strong>,别当长期主力。</li>
         </ul>
-        <p class="rk-deals-foot">⚠ 羊毛政策变动极快(Cursor 学生免费已于 2026-06-25 停发,Antigravity 从 250 砍到 20 请求/天)——<strong>领取前务必以官网当期页面为准</strong>,本表为 2026-07-31 快照。</p>
+        <p class="rk-deals-foot">⚠ 羊毛政策变动极快(Cursor 学生免费已于 2026-06-25 停发,Antigravity 从 250 砍到 20 请求/天)——<strong>领取前务必以官网当期页面为准</strong>,本表为 2026-08-01 快照。</p>
       </div>
 
       <p class="rk-drag-hint">
@@ -414,7 +419,7 @@
               <th>计价方式<span class="rk-unit">怎么收钱</span></th>
               <th>优势</th>
               <th>短板</th>
-              <th>免费额度 / 羊毛<span class="rk-unit">🐑 2026-07-31</span></th>
+              <th>免费额度 / 羊毛<span class="rk-unit">🐑 2026-08-01</span></th>
               <th>社区体感<span class="rk-unit">第三方数据 ※</span></th>
             </tr>
           </thead>
@@ -597,7 +602,7 @@
             <p class="rk-note"><strong>NPS</strong>(净推荐值,-100~+100)、<strong>"最爱"投票</strong>(开发者调查中选为最喜爱的比例)、<strong>满意度</strong>、<strong>市场规模</strong>(付费用户数或 ARR)。来自 2026 年开发者调查与厂商披露,时点 2026 年初至 7 月。<strong>缺数据一律标 <span class="rk-miss-mark">—</span>,不用估算值填空。</strong></p>
           </div>
         </details>
-        <p class="rk-note"><strong>数据来源(快照 2026-07-31,以各平台官网为准)</strong>:
+        <p class="rk-note"><strong>数据来源(快照 2026-08-01,以各平台官网为准)</strong>:
           <a href="https://www.digitalapplied.com/blog/ai-coding-tool-adoption-2026-developer-survey" target="_blank" rel="noopener">2026 开发者调查(NPS / 满意度 / 最爱投票)</a> ·
           <a href="https://www.ideaplan.io/blog/ai-coding-assistant-market-share-2026" target="_blank" rel="noopener">市场份额调查</a> ·
           <a href="https://uibakery.io/blog/openai-codex-pricing" target="_blank" rel="noopener">Codex 定价与用量</a> ·
@@ -611,7 +616,7 @@
 
     <script type="application/json" id="rankingsData">
     {
-      "snapshot": "2026-07-31",
+      "snapshot": "2026-08-01",
       "institutions": {
         "arena":      { "name": "Arena",               "short": "Arena",     "url": "https://arena.ai/leaderboard/text",                 "unit": "Elo" },
         "aa":         { "name": "Artificial Analysis", "short": "AA 指数",   "url": "https://artificialanalysis.ai/leaderboards/models", "unit": "指数" },
@@ -692,8 +697,5 @@
       <polyline points="18 15 12 9 6 15"></polyline>
     </svg>
   </button>
-  
-<script src="/js/main.js"></script>
-
 </body>
 </html>
