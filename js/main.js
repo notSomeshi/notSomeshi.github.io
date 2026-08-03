@@ -391,6 +391,14 @@ document.addEventListener('DOMContentLoaded', function () {
         wrapper.insertBefore(bar, pre);
       });
 
+      // --- 移动端目录:点完链接自动收起,否则展开的目录会盖住刚跳到的标题 ---
+      var mobileToc = document.querySelector('.mobile-toc');
+      if (mobileToc) {
+        mobileToc.addEventListener('click', function (e) {
+          if (e.target.closest('.toc-list-link')) mobileToc.open = false;
+        });
+      }
+
       // --- 目录滚动高亮 (Scroll Spy) ---
       var tocLinks = document.querySelectorAll('.toc-list-link');
       if (tocLinks.length > 0 && 'IntersectionObserver' in window) {

@@ -14,6 +14,17 @@ html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  /* 顶栏是 position:fixed,不留出这段偏移的话,锚点跳转会把标题
+     正好送到顶栏底下遮住 —— 目录点击"跳了但看不到标题"就是这个原因。
+     与 main.js 里滚动高亮的 rootMargin(-64px)保持一致。 */
+  scroll-padding-top: calc(var(--header-height) + var(--safe-t) + 12px);
+}
+
+/* scroll-padding 由滚动容器生效;再给锚点目标本身加一层,
+   兼容 scrollIntoView() 等不走容器 padding 的路径 */
+.post-body :is(h1, h2, h3, h4, h5, h6)[id],
+.post-body [id] {
+  scroll-margin-top: calc(var(--header-height) + var(--safe-t) + 12px);
 }
 
 /* --- Design Tokens(默认暗色) --- */
