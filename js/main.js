@@ -1395,7 +1395,12 @@ document.addEventListener('DOMContentLoaded', function () {
     document.body.classList.toggle('pjax-loading', on);
   }
 
+  // 当前 PJAX 所在的"页面"(不含 hash)。用来在 popstate 时区分
+  // "换页" 和 "同页锚点跳转" —— 后者不能重载正文,否则会把页面拉回顶部。
+  var pjaxCurrent = location.pathname + location.search;
+
   function pjaxNavigate(url, push) {
+    pjaxCurrent = url;
     setPjaxLoading(true);
     fetch(url)
       .then(function (r) {
@@ -1451,7 +1456,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     window.addEventListener('popstate', function () {
-      pjaxNavigate(location.pathname + location.search, false);
+      var target = location.pathname + location.search;
+      // 点击目录锚点会改 hash,浏览器随之触发 popstate。此时 pathname 与 search
+      // 都没变,不是换页 —— 必须交给浏览器做原生锚点滚动。若照旧走 PJAX,
+      // 会重新拉取整页、替换正文并 scrollTo(0,0),表现为"点目录一律跳回顶部"。
+      if (target === pjaxCurrent) return;
+      pjaxNavigate(target, false);
     });
   }
 
