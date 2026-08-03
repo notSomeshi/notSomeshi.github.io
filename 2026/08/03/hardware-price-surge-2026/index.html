@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>一个模型,N 个分数:当 effort 和编排模式让榜单失去唯一解 | ByteVibe</title>
+<title>最贵装机季:AI 抢走了你的内存条 | ByteVibe</title>
 <meta name="description" content="一个关于 Vibe Coding、AI 辅助编程和现代开发实践的技术博客">
 <meta name="author" content="ByteVibe">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='0,0 100,0 100,78 78,100 0,100' fill='%23ffd802'/><text x='50' y='70' font-size='58' font-weight='800' font-family='ui-monospace,monospace' fill='%230d0d0f' text-anchor='middle'>B</text></svg>">
@@ -123,7 +123,7 @@
                 <a href="/2026/08/03/cloud-price-war-2026-08/">云端在降价,本地在涨价:2026 年夏天的两个反方向</a>
               </li>
             
-              <li class="sidebar-item ">
+              <li class="sidebar-item active">
                 <a href="/2026/08/03/hardware-price-surge-2026/">最贵装机季:AI 抢走了你的内存条</a>
               </li>
             
@@ -151,7 +151,7 @@
                 <a href="/2026/07/27/opus5-price-war/">Opus 5 一分钱没降价,但每分智能便宜了 68%:价格战转入 token 效率</a>
               </li>
             
-              <li class="sidebar-item active">
+              <li class="sidebar-item ">
                 <a href="/2026/07/27/one-model-many-scores/">一个模型,N 个分数:当 effort 和编排模式让榜单失去唯一解</a>
               </li>
             
@@ -235,7 +235,7 @@
       <div class="post-content-main">
         <header class="post-header">
           <div class="post-meta">
-            <time class="post-date">2026年07月27日</time>
+            <time class="post-date">2026年08月03日</time>
             
             <span class="post-meta-sep">·</span>
             <span class="post-category">
@@ -247,15 +247,17 @@
             <span class="post-meta-sep">·</span>
             <span class="reading-time">7 分钟阅读</span>
           </div>
-          <h1 class="post-title">一个模型,N 个分数:当 effort 和编排模式让榜单失去唯一解</h1>
+          <h1 class="post-title">最贵装机季:AI 抢走了你的内存条</h1>
           
           <div class="post-tags">
             
-              <a class="tag-pill" href="/tags/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/">#基准测试</a>
+              <a class="tag-pill" href="/tags/%E7%A1%AC%E4%BB%B6/">#硬件</a>
             
-              <a class="tag-pill" href="/tags/%E6%8E%A8%E7%90%86%E5%BC%BA%E5%BA%A6/">#推理强度</a>
+              <a class="tag-pill" href="/tags/%E5%86%85%E5%AD%98/">#内存</a>
             
-              <a class="tag-pill" href="/tags/%E6%88%90%E6%9C%AC%E4%BC%98%E5%8C%96/">#成本优化</a>
+              <a class="tag-pill" href="/tags/%E8%A3%85%E6%9C%BA/">#装机</a>
+            
+              <a class="tag-pill" href="/tags/%E6%88%90%E6%9C%AC/">#成本</a>
             
           </div>
           
@@ -265,87 +267,107 @@
         
         <details class="mobile-toc">
           <summary>目录 / Contents</summary>
-          <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E6%A6%9C%E5%8D%95%E4%B8%8A%E7%9A%84%E2%80%9D%E5%90%8C%E5%90%8D%E4%B8%8D%E5%90%8C%E5%88%86%E2%80%9D"><span class="toc-list-text">一、榜单上的”同名不同分”</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E4%B8%A4%E4%B8%AA%E7%8B%AC%E7%AB%8B%E7%9A%84%E2%80%9D%E5%A0%86%E7%AE%97%E5%8A%9B%E2%80%9D%E6%97%8B%E9%92%AE"><span class="toc-list-text">二、两个独立的”堆算力”旋钮</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E6%97%8B%E9%92%AE%E4%B8%80-%E6%8E%A8%E7%90%86%E5%BC%BA%E5%BA%A6-effort"><span class="toc-list-text">旋钮一:推理强度(effort)</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E6%97%8B%E9%92%AE%E4%BA%8C-%E5%B9%B6%E8%A1%8C%E7%BC%96%E6%8E%92-orchestration"><span class="toc-list-text">旋钮二:并行编排(orchestration)</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E6%9C%80%E5%8F%8D%E7%9B%B4%E8%A7%89%E7%9A%84%E5%8F%91%E7%8E%B0-%E6%9B%B4%E9%AB%98-%E2%89%A0-%E6%9B%B4%E5%A5%BD"><span class="toc-list-text">三、最反直觉的发现:更高 ≠ 更好</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E5%AF%B9%E4%BD%BF%E7%94%A8%E8%80%85%E7%9A%84%E4%B8%89%E6%9D%A1%E5%AE%9E%E8%B7%B5"><span class="toc-list-text">四、对使用者的三条实践</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E6%9B%B4%E5%A4%A7%E7%9A%84%E9%97%AE%E9%A2%98-%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E7%9A%84%E5%8F%AF%E6%AF%94%E6%80%A7%E6%AD%A3%E5%9C%A8%E7%93%A6%E8%A7%A3"><span class="toc-list-text">五、更大的问题:基准测试的可比性正在瓦解</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+          <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E6%B6%A8%E5%88%B0%E4%BB%80%E4%B9%88%E7%A8%8B%E5%BA%A6"><span class="toc-list-text">一、涨到什么程度</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF-AI-%E5%B9%B2%E7%9A%84"><span class="toc-list-text">二、为什么是 AI 干的</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E5%AF%B9%E6%99%AE%E9%80%9A%E4%BA%BA%E6%84%8F%E5%91%B3%E7%9D%80%E4%BB%80%E4%B9%88"><span class="toc-list-text">三、对普通人意味着什么</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E9%82%A3%E8%A6%81%E4%B8%8D%E8%A6%81%E7%8E%B0%E5%9C%A8%E4%B9%B0"><span class="toc-list-text">四、那要不要现在买</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E4%B8%80%E4%B8%AA%E6%9B%B4%E9%95%BF%E6%9C%9F%E7%9A%84%E8%A7%82%E5%AF%9F"><span class="toc-list-text">五、一个更长期的观察</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
         </details>
         
 
         <div class="post-body">
-          <p>“Claude Opus 5 拿了 61 分”——这句话在 2026 年已经不完整了。同一个模型,换一个推理强度设置,分数和账单都会变;换一种编排模式,甚至可能变成另一个量级。**”一个模型对应一个分数”的隐含假设,正在崩塌。**</p>
+          <p>今年暑假想配台电脑的人应该都有体感:<strong>一天一个价</strong>。深圳华强北的商户说,同一套配置一周内从 1.2 万涨到 1.4 万以上;此前批发价三四百的固态硬盘,现在要八百多。</p>
+<p>这不是渠道囤货的小把戏。<strong>AI 服务器把上游存储产能整个抽干了</strong>,而消费级 DIY 是这条链上最没有议价权的一环。</p>
 <span id="more"></span>
 
 <div class="report-box">
-<div class="report-box-title">// 核心观点摘要</div>
+<div class="report-box-title">// 一句话摘要</div>
 <ul>
-<li><strong>同一模型多个条目</strong>:Artificial Analysis 榜单上,GPT-5.6 Sol (max) 59 分与 Sol (xhigh) 58 分是<strong>两个独立条目</strong>。</li>
-<li><strong>effort 不改单价,改 token 消耗</strong>:Claude Opus 5 的 low→max 五档,同一任务成本差约 <strong>3 倍</strong>。</li>
-<li><strong>并行编排是第二个变量</strong>:GPT-5.6 Sol 的 Ultra 模式把任务分给多个子代理,Terminal-Bench 2.1 从 88.8% 升到 91.9%,但一次运行相当于数次调用。</li>
-<li><strong>更高不等于更好</strong>:FrontierCode 数据显示 Opus 5 在 <strong>medium effort 就达到编程峰值</strong>,再往上收益递减。</li>
-<li><strong>实践建议</strong>:先调 effort,再考虑换模型——多数任务用 medium 就够,账单可能直接减半。</li>
+<li><strong>涨幅</strong>:Gartner 预计 2026 年末 DRAM 与 SSD 整体价格同比 <strong>+130%</strong>;DDR4 8Gb 颗粒合约均价从 2025 年初的 $1.45 涨到 2026 年 2 月最高 <strong>$17</strong>。</li>
+<li><strong>大陆零售端</strong>:华强北一套配置一周从 1.2 万 → 1.4 万+;RTX 5080 一周 9,999 → 11,999;SSD 批发价翻倍。</li>
+<li><strong>根因</strong>:AI 服务器的 DRAM 用量是传统服务器的 <strong>8–10 倍</strong>,三大原厂把七成以上先进产能倾斜给 AI,消费级被挤出去。</li>
+<li><strong>后果</strong>:内存占 PC 物料成本从 2025 年的 16% 升到 <strong>23%</strong>;Gartner 预计 PC 出货量 -10.4%、均价 +17%。</li>
+<li><strong>别急着囤</strong>:今年 3–4 月刚上演过一轮"囤货商抛售、一周亏光半年利润"。</li>
 </ul>
 </div>
 
-<h2 id="一、榜单上的”同名不同分”"><a href="#一、榜单上的”同名不同分”" class="headerlink" title="一、榜单上的”同名不同分”"></a>一、榜单上的”同名不同分”</h2><p>打开 Artificial Analysis 的智能指数榜,你会看到一些看似重复的条目:</p>
+<h2 id="一、涨到什么程度"><a href="#一、涨到什么程度" class="headerlink" title="一、涨到什么程度"></a>一、涨到什么程度</h2><p>先看上游。主流 DDR4 8Gb 颗粒的合约均价,从 2025 年初的 <strong>1.45 美元</strong>一路飙到 2026 年 2 月的最高 <strong>17 美元</strong>。DRAM 与 NAND 闪存价格双双创下 2016 年有统计以来的历史最高。</p>
+<p>桌面 DDR5 内存相对 2025 年 7 月的基准线,平均溢价一度达到 **340%**——同样的内存要付 4.4 倍的钱。海外零售端,G.Skill 的 Trident Z5 Neo RGB DDR5-6000 32GB 套装标到了 <strong>599.99 美元</strong>。</p>
+<p>再看大陆零售端。据《大纪元》7 月 30 日对深圳华强北的走访:</p>
 <table>
 <thead>
 <tr>
-<th>条目</th>
-<th>分数</th>
+<th>品类</th>
+<th>价格变化</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>Claude Opus 5(Adaptive Reasoning, <strong>Max Effort</strong>)</td>
-<td>61</td>
+<td>整机配置</td>
+<td>一周内 1.2 万 → <strong>1.4 万以上</strong></td>
 </tr>
 <tr>
-<td>Claude Fable 5(Adaptive Reasoning, Max Effort, Opus 4.8 Fallback)</td>
-<td>60</td>
+<td>RTX 5080(部分型号)</td>
+<td>一周内 9,999 → <strong>11,999</strong>(+20%)</td>
 </tr>
 <tr>
-<td>GPT-5.6 Sol(<strong>max</strong>)</td>
-<td>59</td>
+<td>RTX 5070(部分型号)</td>
+<td>零售 <strong>6,000–6,500 元</strong></td>
 </tr>
 <tr>
-<td>GPT-5.6 Sol(<strong>xhigh</strong>)</td>
-<td>58</td>
+<td>部分显卡</td>
+<td>两天涨约 <strong>三成</strong></td>
+</tr>
+<tr>
+<td>固态硬盘</td>
+<td>批发 300–400 → <strong>800 多元</strong>(翻倍)</td>
 </tr>
 </tbody></table>
-<p>最后两行是同一个模型。AA 把不同推理强度当作<strong>不同的被测对象</strong>分别列出——这是诚实的做法,因为它们确实是不同的东西:消耗的 token 不同、花的钱不同、答得也不一样好。</p>
-<p>而当媒体或社区引用”GPT-5.6 Sol 得了 59 分”时,几乎没人会附上”在 max effort 下”这个前提。<strong>分数被剥离了它的成本背景</strong>,这正是当下模型讨论最大的信息损耗。</p>
-<h2 id="二、两个独立的”堆算力”旋钮"><a href="#二、两个独立的”堆算力”旋钮" class="headerlink" title="二、两个独立的”堆算力”旋钮"></a>二、两个独立的”堆算力”旋钮</h2><p>要理解为什么会这样,得先分清 2026 年模型有<strong>两种加深思考的方式</strong>:</p>
-<h3 id="旋钮一-推理强度-effort"><a href="#旋钮一-推理强度-effort" class="headerlink" title="旋钮一:推理强度(effort)"></a>旋钮一:推理强度(effort)</h3><p>Claude Opus 5 提供五档:<code>low / medium / high / xhigh / max</code>。它<strong>不改变每 token 的单价</strong>——$5&#x2F;$25 对所有档位一样——改变的是<strong>模型愿意为一道题花多少 token 去规划、自检、返工</strong>。</p>
-<p>代价是实打实的:在 Frontier-Bench 上,<strong>low 到 max 的每次成本差约 3 倍</strong>;high 大约是 medium 的两倍。</p>
-<h3 id="旋钮二-并行编排-orchestration"><a href="#旋钮二-并行编排-orchestration" class="headerlink" title="旋钮二:并行编排(orchestration)"></a>旋钮二:并行编排(orchestration)</h3><p>GPT-5.6 Sol 的 <strong>Ultra 模式</strong>走的是另一条路:不是把一条思维链拉长,而是<strong>把难题分派给多个并行子代理</strong>,各自处理再汇总。</p>
-<p>效果显著——Terminal-Bench 2.1 从基础 Sol 的 88.8% 提升到 **91.9%**。但代价同样直接:Ultra 模式没有单独标价,<strong>每个子代理各自生成和消耗 token,一次 Ultra 运行相当于好几次普通 Sol 调用</strong>。</p>
-<p>这两个旋钮可以叠加。于是”一个模型”实际上是一个<strong>分数-成本的连续谱</strong>,而不是一个点。</p>
-<h2 id="三、最反直觉的发现-更高-≠-更好"><a href="#三、最反直觉的发现-更高-≠-更好" class="headerlink" title="三、最反直觉的发现:更高 ≠ 更好"></a>三、最反直觉的发现:更高 ≠ 更好</h2><p>如果”调到最高档”总是更强,那事情还简单。但数据不支持这个直觉。</p>
-<p>Anthropic 官方明确建议<strong>广泛使用 low 和 medium 档</strong>,称它们”以一小部分 token 消耗和延迟提供良好结果,且优于早期 Opus 模型的同档设置”。</p>
-<p>FrontierCode 基准的实测更直接:<strong>Claude Opus 5 在 medium effort 达到编程峰值</strong>(主集 53.4%、扩展集 63.6%),再往上是收益递减。</p>
-<p>为什么会这样?一个合理的解释是:<strong>过度思考会引入噪声</strong>。模型在简单任务上花更多 token 反复推翻自己的正确答案,反而可能偏离。这与人类做题时”想太多改错答案”的经验高度一致。</p>
-<h2 id="四、对使用者的三条实践"><a href="#四、对使用者的三条实践" class="headerlink" title="四、对使用者的三条实践"></a>四、对使用者的三条实践</h2><p><strong>1. 把 effort 当成第一个省钱旋钮,而不是最后一个。</strong><br>大多数人的优化顺序是”贵了就换便宜模型”,但<strong>换模型意味着换能力</strong>,而调低 effort 往往不损失质量。先试试把默认档从 high 降到 medium,观察输出质量——如果没退步,你的账单立刻减半。</p>
-<p><strong>2. 按任务分配 effort,而不是全局一个设置。</strong><br>补全、格式转换、常规改代码 → low&#x2F;medium 足够;架构设计、疑难 bug、长程重构 → 才值得上 high&#x2F;max。把 effort 当作<strong>按任务下注的筹码</strong>。</p>
-<p><strong>3. 读榜单时先问”哪一档”。</strong><br>看到某个惊人的分数,先确认它是在什么设置下跑的。本站<a href="/rankings/">模型天梯</a>的成本图已经加了红色 <code>MAX EFFORT</code> 标记——那些数字是<strong>成本上限</strong>,不是你的日常开销。</p>
-<h2 id="五、更大的问题-基准测试的可比性正在瓦解"><a href="#五、更大的问题-基准测试的可比性正在瓦解" class="headerlink" title="五、更大的问题:基准测试的可比性正在瓦解"></a>五、更大的问题:基准测试的可比性正在瓦解</h2><p>这件事的深层影响是:<strong>当同一个模型能产生一族分数时,跨模型比较变得更难了。</strong></p>
-<p>模型 A 的 max 档对上模型 B 的 medium 档,比的到底是什么?如果 A 用了三倍的钱换来 2 分优势,这算赢吗?</p>
-<p>这也是为什么本站的天梯坚持把”<a href="/rankings/">同卷不同价</a>“的成本图与能力榜并列——<strong>脱离成本的能力排名,在 2026 年已经是一种误导</strong>。当行业进入<a href="/2026/07/20/frontier-convergence-2026/">前沿收敛</a>阶段,能力差距被压缩到几个百分点,而成本差距却能到 27 倍时,后者才是真正需要看清的维度。</p>
-<div class="risk-box">
-<div class="risk-box-title">// 风险提示</div>
+<p>商户给出的整体口径是:**DDR5 内存条三个月涨三倍,装机成本激增 35%–50%**。</p>
+<p>一个侧面印证:受访的电脑维修店老板蒋玉华说,维修业务比去年增加了约两成——<strong>买不起新的,只好修旧的</strong>。</p>
+<h2 id="二、为什么是-AI-干的"><a href="#二、为什么是-AI-干的" class="headerlink" title="二、为什么是 AI 干的"></a>二、为什么是 AI 干的</h2><p>存储涨价这轮的传导链条很直接:</p>
+<p><strong>一台 AI 服务器的 DRAM 用量是传统服务器的 8–10 倍。</strong> 当这个量级的需求砸进来,原厂的选择是显然的——三星、美光、SK 海力士把<strong>七成以上的先进晶圆产能</strong>倾斜给 AI 专用产品(HBM 等),消费级通用 DRAM 和 NAND 的产出被大幅压缩。</p>
+<p>SK 海力士 2026 年的 DRAM、NAND Flash 与 HBM 三条产品线<strong>产能已被预订一空</strong>。产能既然锁死,消费级就只能在剩下的份额里抢。</p>
+<p>TrendForce 集邦咨询的数据显示,2026 年第一季度各类应用的 DRAM 合约价普遍上涨 <strong>40% 以上</strong>,是本轮上升周期中涨幅最大的季度;第二季度后涨幅逐渐收敛,但涨势可能延续至下半年。</p>
+<p><strong>这件事的本质是:你在装机时多付的那几千块,是在和 AI 数据中心竞价同一批晶圆。</strong></p>
+<h2 id="三、对普通人意味着什么"><a href="#三、对普通人意味着什么" class="headerlink" title="三、对普通人意味着什么"></a>三、对普通人意味着什么</h2><p>Gartner 的预测把影响量化了:</p>
 <ul>
-<li>各家 effort 档位的命名与行为不统一(Anthropic 五档、OpenAI 的 xhigh/max/ultra 模式),跨厂商横向对比"同档位"没有严格意义。</li>
-<li>文中成本倍数关系来自公开基准与厂商说明,实际任务上的差异取决于任务类型,可能显著偏离。</li>
-<li>Ultra 类并行编排模式的实际账单波动很大,生产环境部署前建议先做小规模成本实测。</li>
+<li>2026 年末 DRAM 与 SSD 整体价格<strong>同比 +130%</strong></li>
+<li>PC 均价较 2025 年 <strong>+17%</strong>,智能手机 <strong>+13%</strong></li>
+<li>PC 出货量 <strong>-10.4%</strong>,智能手机 <strong>-8.4%</strong></li>
+<li>PC 内存成本在物料清单中的占比,从 2025 年的 <strong>16% 升至 23%</strong></li>
+</ul>
+<p>最后一条是关键——<strong>内存从”配件”变成了”主要成本项”</strong>,厂商没有多少空间自己消化。Gartner 因此判断:入门级笔记本正在失去商业可行性,预计到 2028 年,<strong>500 美元以下的入门 PC 将会消失</strong>。</p>
+<p>受访的 AI 专家郭涛的说法更直白:<strong>廉价 DIY 的时代或许正在远去。</strong></p>
+<h2 id="四、那要不要现在买"><a href="#四、那要不要现在买" class="headerlink" title="四、那要不要现在买"></a>四、那要不要现在买</h2><div class="risk-box">
+<div class="risk-box-title">// 先泼一盆冷水:这个市场刚崩过一次</div>
+<p>2026 年 3–4 月,DDR5 内存条单条一度跌去上千元,华强北的囤货商恐慌抛售,有报道称"一周亏光半年利润";同期内存价格指数从 440% 回落到 408%,当时不少人以为拐点到了。结果 7 月又是一轮暴涨。</p>
+<p><strong>结论是:这个市场波动极大,把"囤货保值"当投资的人两头都可能挨打。</strong>本站不提供任何投资建议。</p>
+</div>
+
+<p>几条相对稳妥的判断:</p>
+<p><strong>其一,刚需就买,别赌拐点。</strong> 业内对后市分歧很大:网传涨价延续到 2027–2028,也有从业者猜测 2026 下半年就会崩盘。TrendForce 的口径是涨幅收敛但涨势可能延续。<strong>没有人真的知道</strong>,而等待本身也有成本。</p>
+<p><strong>其二,按需求砍配置,别按习惯堆。</strong> 内存现在是单价涨得最凶的一项,而多数人的实际占用远低于自己配的容量。先看任务管理器里的真实峰值再决定上 32G 还是 64G,这一刀能省下的钱比在别处抠有效得多。</p>
+<p><strong>其三,二手与整机值得重新评估。</strong> 当新配件涨到离谱,品牌整机因为提前锁了物料价,有时反而比自己攒更便宜;维修业务增长两成也说明”修一修再用一年”重新变成了理性选择。</p>
+<p><strong>其四,如果你是冲着跑本地大模型去配机器的——先算清楚这笔账。</strong> 显存和内存正是涨得最狠的两项,而云端 API 的价格在同期反向下跌(GPT-5.6 Luna 7 月 30 日刚降价 80%,详见<a href="/2026/08/03/cloud-price-war-2026-08/">《云端在降价,本地在涨价》</a>)。**”自己部署更省钱”这个前提,在 2026 年的硬件价格下已经不一定成立了。**</p>
+<h2 id="五、一个更长期的观察"><a href="#五、一个更长期的观察" class="headerlink" title="五、一个更长期的观察"></a>五、一个更长期的观察</h2><p>这轮涨价暴露了一件此前不太被讨论的事:<strong>AI 的成本从来没有只发生在云端。</strong></p>
+<p>我们在<a href="/rankings/">模型天梯</a>里算过很多次 API 账单,但那只是显性成本。当数据中心的采购力开始挤压消费级供给,成本就以”内存条贵了三倍”的形式,转嫁给了每一个装机的人——<strong>哪怕他从来不用 AI</strong>。</p>
+<p>这也是为什么”AI 红利如何分配”不是一个纯技术问题。相关讨论可参考本站<a href="/2026/07/08/ai-dividend-paradox/">《AI 红利悖论》</a>与<a href="/2026/07/08/ai-capital-markets-2026/">《资本市场视角下的 AI 局势》</a>。</p>
+<div class="risk-box">
+<div class="risk-box-title">// 数据说明与风险提示</div>
+<ul>
+<li>本文为 <strong>2026-08-03</strong> 快照。存储市场价格波动极快(部分商户反映"一天三个价"),文中零售价格<strong>仅为特定时点、特定渠道的报价</strong>,不代表全国普遍水平。</li>
+<li>华强北零售数据来自媒体走访与商户口述,<strong>非官方统计</strong>;Gartner、TrendForce 数据为机构预测,存在修正可能。</li>
+<li>后市走向业内分歧明显,本文列出的分歧本身即是结论的一部分。<strong>本文不构成任何投资、囤货或采购建议。</strong></li>
 </ul>
 </div>
 
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
-<li>Artificial Analysis,<a target="_blank" rel="noopener" href="https://artificialanalysis.ai/methodology/intelligence-benchmarking">Intelligence Benchmarking Methodology</a> · <a target="_blank" rel="noopener" href="https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-1">Intelligence Index v4.1</a></li>
-<li>Anthropic,<a target="_blank" rel="noopener" href="https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5">What’s new in Claude Opus 5</a></li>
-<li>SitePoint,<a target="_blank" rel="noopener" href="https://www.sitepoint.com/claude-opus-5-medium-effort-frontiercode-benchmark/">Claude Opus 5 Is Most Efficient at Medium Effort: FrontierCode Benchmark Data Explained</a></li>
-<li>andrew.ooo,<a target="_blank" rel="noopener" href="https://andrew.ooo/answers/gpt-5-6-sol-ultra-mode-subagents-terminal-bench-explained-july-2026/">What Is GPT-5.6 Sol Ultra Mode? Subagents, Terminal-Bench 2.1, and the 91.9% Score Explained</a></li>
-<li>eesel AI,<a target="_blank" rel="noopener" href="https://www.eesel.ai/blog/gpt-5-6-sol-ultra">GPT-5.6 Sol Ultra: OpenAI’s multi-agent mode explained</a></li>
-<li>Vellum,<a target="_blank" rel="noopener" href="https://www.vellum.ai/blog/gpt-5-6-benchmarks-explained">GPT-5.6 Sol vs Terra vs Luna: Which Tier Should You Actually Use?</a></li>
+<li>大纪元,<a target="_blank" rel="noopener" href="https://www.epochtimes.com/gb/26/7/30/n14820618.htm">大陆暑期成”最贵装机季” 电脑配件一天一价</a>——华强北零售数据、郭涛与蒋玉华的说法</li>
+<li>虎嗅,<a target="_blank" rel="noopener" href="https://www.huxiu.com/article/4839867.html">内存价格飙升导致 2026 年 PC 与智能手机出货量预计下降 10% 以上</a>——Gartner 预测</li>
+<li>新浪财经,<a target="_blank" rel="noopener" href="https://finance.sina.com.cn/jjxw/2026-07-05/doc-inifszch2891988.shtml">PC 及内存硬盘价格持续高位:硬盘一天三个价,经销商喊出”非刚需别买”</a></li>
+<li>证券时报,<a target="_blank" rel="noopener" href="https://www.stcn.com/article/detail/3630474.html">内存价格罕见回调 “超级周期”什么时候走到拐点?</a></li>
+<li>OFweek,<a target="_blank" rel="noopener" href="https://ee.ofweek.com/2026-04/ART-8110-2812-30684366.html">一周亏光半年利润!DDR5 内存条价格单条跌去千元,华强北囤货商疯狂抛售</a></li>
+<li>电子工程专辑,<a target="_blank" rel="noopener" href="https://www.eet-china.com/mp/a468829.html">内存价格涨疯了!DDR5 狂飙至 4.4 倍</a></li>
+<li>财联社,<a target="_blank" rel="noopener" href="https://www.cls.cn/detail/2221942">存储持续”疯涨” 业内直呼”要买终端赶紧买”</a>——TrendForce 口径</li>
 </ol>
 <blockquote>
-<p>本文由 ByteVibe 撰写(AI 辅助研究整理)。文中观点的原始出处均已在正文与参考文献中标注,版权归原作者所有。数据快照 2026-07-27。</p>
+<p>本文由 ByteVibe 撰写(AI 辅助研究整理)。文中观点的原始出处均已在正文与参考文献中标注,版权归原作者所有。数据快照 2026-08-03。</p>
 </blockquote>
 
         </div>
@@ -353,15 +375,15 @@
         <footer class="post-footer">
           <nav class="post-nav">
             
-            <a class="post-nav-item post-nav-prev" href="/2026/07/27/opus5-price-war/">
+            <a class="post-nav-item post-nav-prev" href="/2026/08/03/cloud-price-war-2026-08/">
               <span class="post-nav-label">← 上一篇</span>
-              <span class="post-nav-title">Opus 5 一分钱没降价,但每分智能便宜了 68%:价格战转入 token 效率</span>
+              <span class="post-nav-title">云端在降价,本地在涨价:2026 年夏天的两个反方向</span>
             </a>
             
             
-            <a class="post-nav-item post-nav-next" href="/2026/07/20/grok45-ide-native-models/">
+            <a class="post-nav-item post-nav-next" href="/2026/07/31/ai-briefing-2026-07-late/">
               <span class="post-nav-label">下一篇 →</span>
-              <span class="post-nav-title">Grok 4.5 与「IDE 原生」模型:当编辑器成为训练场</span>
+              <span class="post-nav-title">七月下半月速览:开源权重贴身、Agent 越狱进生产环境、监管转向市场结构</span>
             </a>
             
           </nav>
@@ -373,7 +395,7 @@
         
           <div class="toc-sticky">
             <h3 class="toc-title">目录大纲</h3>
-            <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E6%A6%9C%E5%8D%95%E4%B8%8A%E7%9A%84%E2%80%9D%E5%90%8C%E5%90%8D%E4%B8%8D%E5%90%8C%E5%88%86%E2%80%9D"><span class="toc-list-text">一、榜单上的”同名不同分”</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E4%B8%A4%E4%B8%AA%E7%8B%AC%E7%AB%8B%E7%9A%84%E2%80%9D%E5%A0%86%E7%AE%97%E5%8A%9B%E2%80%9D%E6%97%8B%E9%92%AE"><span class="toc-list-text">二、两个独立的”堆算力”旋钮</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E6%97%8B%E9%92%AE%E4%B8%80-%E6%8E%A8%E7%90%86%E5%BC%BA%E5%BA%A6-effort"><span class="toc-list-text">旋钮一:推理强度(effort)</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E6%97%8B%E9%92%AE%E4%BA%8C-%E5%B9%B6%E8%A1%8C%E7%BC%96%E6%8E%92-orchestration"><span class="toc-list-text">旋钮二:并行编排(orchestration)</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E6%9C%80%E5%8F%8D%E7%9B%B4%E8%A7%89%E7%9A%84%E5%8F%91%E7%8E%B0-%E6%9B%B4%E9%AB%98-%E2%89%A0-%E6%9B%B4%E5%A5%BD"><span class="toc-list-text">三、最反直觉的发现:更高 ≠ 更好</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E5%AF%B9%E4%BD%BF%E7%94%A8%E8%80%85%E7%9A%84%E4%B8%89%E6%9D%A1%E5%AE%9E%E8%B7%B5"><span class="toc-list-text">四、对使用者的三条实践</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E6%9B%B4%E5%A4%A7%E7%9A%84%E9%97%AE%E9%A2%98-%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E7%9A%84%E5%8F%AF%E6%AF%94%E6%80%A7%E6%AD%A3%E5%9C%A8%E7%93%A6%E8%A7%A3"><span class="toc-list-text">五、更大的问题:基准测试的可比性正在瓦解</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+            <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E6%B6%A8%E5%88%B0%E4%BB%80%E4%B9%88%E7%A8%8B%E5%BA%A6"><span class="toc-list-text">一、涨到什么程度</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF-AI-%E5%B9%B2%E7%9A%84"><span class="toc-list-text">二、为什么是 AI 干的</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E5%AF%B9%E6%99%AE%E9%80%9A%E4%BA%BA%E6%84%8F%E5%91%B3%E7%9D%80%E4%BB%80%E4%B9%88"><span class="toc-list-text">三、对普通人意味着什么</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E9%82%A3%E8%A6%81%E4%B8%8D%E8%A6%81%E7%8E%B0%E5%9C%A8%E4%B9%B0"><span class="toc-list-text">四、那要不要现在买</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E4%B8%80%E4%B8%AA%E6%9B%B4%E9%95%BF%E6%9C%9F%E7%9A%84%E8%A7%82%E5%AF%9F"><span class="toc-list-text">五、一个更长期的观察</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
           </div>
         
       </aside>
