@@ -399,6 +399,43 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       }
 
+      // --- 目录点击跳转 ---
+      // hexo 的 toc() 生成的是 URL 编码的 href(#%E4%B8%80...),
+      // 而 marked 渲染的标题 id 是未编码中文,浏览器匹配不上导致完全不跳转。
+      // 这里手动解码后定位,并让开固定顶栏的高度。
+      function scrollToHeading(rawHash, push) {
+        var id;
+        try { id = decodeURIComponent(rawHash.replace(/^#/, '')); } catch (e) { id = rawHash.replace(/^#/, ''); }
+        var el = document.getElementById(id) || document.getElementById(rawHash.replace(/^#/, ''));
+        if (!el) return false;
+        var headerH = (siteHeader ? siteHeader.getBoundingClientRect().height : 52) + 16;
+        var top = el.getBoundingClientRect().top + window.scrollY - headerH;
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: Math.max(0, top), behavior: reduce ? 'auto' : 'smooth' });
+        if (push) history.replaceState(null, '', rawHash);
+        return true;
+      }
+
+      document.querySelectorAll('.toc-list-link, .mobile-toc a[href^="#"]').forEach(function (a) {
+        if (a.dataset.tocBound) return;
+        a.dataset.tocBound = '1';
+        a.addEventListener('click', function (e) {
+          var href = a.getAttribute('href') || '';
+          if (href.charAt(0) !== '#') return;
+          if (scrollToHeading(href, true)) {
+            e.preventDefault();
+            // 移动端点完目录自动收起,免得挡住内容
+            var det = a.closest('details.mobile-toc');
+            if (det) det.open = false;
+          }
+        });
+      });
+
+      // 带 hash 直接访问时,同样需要手动定位
+      if (location.hash) {
+        setTimeout(function () { scrollToHeading(location.hash, false); }, 60);
+      }
+
       // --- 目录滚动高亮 (Scroll Spy) ---
       var tocLinks = document.querySelectorAll('.toc-list-link');
       if (tocLinks.length > 0 && 'IntersectionObserver' in window) {

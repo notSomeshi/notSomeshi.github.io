@@ -1022,6 +1022,236 @@ body.pjax-loading .main-content { opacity: 0.45; }
 .hljs-emphasis { font-style: italic; }
 .hljs-strong { font-weight: 700; }
 
+/* ============================================
+   文章内图表组件(纯 CSS,零依赖)
+   所有图表必须带 .fig-src 来源脚注
+   ============================================ */
+
+.fig {
+  margin: 2em 0;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  padding: 20px 22px;
+  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%);
+}
+
+[data-rain] .fig {
+  background: rgba(20, 22, 28, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.fig-title {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.fig-title::before { content: '// '; color: var(--accent-ink); }
+
+.fig-sub {
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  color: var(--text-tertiary);
+  margin-bottom: 16px;
+}
+
+/* 来源脚注:每张图必须有,且链接可点 */
+.fig-src {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border-color);
+  font-size: 0.71875rem;
+  line-height: 1.7;
+  color: var(--text-tertiary);
+}
+
+.fig-src::before { content: '数据来源:'; }
+
+.fig-src a { color: var(--accent-ink); }
+
+/* --- 横向条形图 --- */
+.fig-bars { display: flex; flex-direction: column; gap: 9px; }
+
+.fig-bar-row {
+  display: grid;
+  grid-template-columns: minmax(88px, 150px) 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.fig-bar-label {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  text-align: right;
+  line-height: 1.35;
+}
+
+.fig-bar-label b {
+  display: block;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.fig-bar-track {
+  height: 22px;
+  background: var(--bg-tertiary);
+  position: relative;
+  overflow: hidden;
+}
+
+.fig-bar-fill {
+  display: block;
+  height: 100%;
+  width: var(--w);          /* 基础宽度必须始终生效 */
+  background: var(--accent);
+}
+
+/* 入场动画只在允许动效时叠加,且不用 fill-mode:both
+   —— 否则动画未播放(reduced-motion / 未合成帧)时 from{width:0} 会让柱子恒为 0 宽 */
+@media (prefers-reduced-motion: no-preference) {
+  .fig-bar-fill { animation: figGrow 0.9s cubic-bezier(0.22, 0.61, 0.36, 1); }
+}
+
+.fig-bar-fill.is-alt { background: var(--border-strong); }
+.fig-bar-fill.is-warn { background: #e5484d; }
+.fig-bar-fill.is-good { background: #3fb950; }
+
+@keyframes figGrow { from { width: 0; } }
+
+.fig-bar-val {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  min-width: 62px;
+  text-align: right;
+}
+
+.fig-bar-val em {
+  display: block;
+  font-style: normal;
+  font-size: 0.625rem;
+  font-weight: 400;
+  color: var(--text-tertiary);
+}
+
+/* --- 前后对比(降价/涨价) --- */
+.fig-delta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.fig-delta-item {
+  padding: 14px 16px;
+  background: var(--bg-secondary);
+  border-left: 3px solid var(--border-strong);
+}
+
+.fig-delta-item.is-down { border-left-color: #3fb950; }
+.fig-delta-item.is-up { border-left-color: #e5484d; }
+
+.fig-delta-k {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+  margin-bottom: 6px;
+}
+
+.fig-delta-v {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.fig-delta-v s {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--text-tertiary);
+  text-decoration: line-through;
+}
+
+.fig-delta-item.is-down .fig-delta-v strong { color: #3fb950; }
+.fig-delta-item.is-up .fig-delta-v strong { color: #e5484d; }
+
+.fig-delta-note {
+  margin-top: 6px;
+  font-size: 0.6875rem;
+  color: var(--text-tertiary);
+  line-height: 1.5;
+}
+
+/* --- 散点/象限图(能力 vs 成本) --- */
+.fig-scatter {
+  position: relative;
+  height: 300px;
+  margin: 10px 0 8px 44px;
+  border-left: 1px solid var(--border-strong);
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.fig-dot {
+  position: absolute;
+  left: var(--x);
+  bottom: var(--y);
+  width: 11px;
+  height: 11px;
+  background: var(--accent);
+  transform: translate(-50%, 50%);
+  clip-path: polygon(0 0, 100% 0, 100% 65%, 65% 100%, 0 100%);
+}
+
+.fig-dot.is-alt { background: var(--border-strong); }
+.fig-dot.is-warn { background: #e5484d; }
+
+.fig-dot span {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.6875rem;
+  white-space: nowrap;
+  color: var(--text-secondary);
+}
+
+.fig-dot.flip span { left: auto; right: 15px; }
+
+.fig-axis-x, .fig-axis-y {
+  font-family: var(--font-mono);
+  font-size: 0.65625rem;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+}
+
+.fig-axis-x { text-align: center; margin-top: 6px; }
+
+.fig-axis-y {
+  position: absolute;
+  left: -40px;
+  top: 50%;
+  transform: rotate(-90deg) translateX(50%);
+  transform-origin: right center;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .fig { padding: 14px; }
+  .fig-bar-row { grid-template-columns: minmax(70px, 100px) 1fr auto; gap: 8px; }
+  .fig-bar-label { font-size: 0.71875rem; }
+  .fig-bar-val { font-size: 0.71875rem; min-width: 52px; }
+  .fig-scatter { height: 240px; margin-left: 38px; }
+  .fig-dot span { font-size: 0.5625rem; }
+}
+
 /* --- 研报组件:核心观点 / 风险提示 --- */
 .report-box,
 .risk-box {
@@ -3301,9 +3531,11 @@ body::before {
   width: var(--w);
 }
 
-/* 板块切入时柱条从 0 生长 */
-.rk-board.is-active .rkc-bar i {
-  animation: rkcGrow 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+/* 板块切入时柱条从 0 生长(不用 fill-mode:both,否则动画不播时柱子恒为 0 宽) */
+@media (prefers-reduced-motion: no-preference) {
+  .rk-board.is-active .rkc-bar i {
+    animation: rkcGrow 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
 }
 
 @keyframes rkcGrow {
@@ -3923,7 +4155,10 @@ body::before {
   height: 100%;
   width: var(--w);
   background: var(--accent);
-  animation: rkcGrow 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .adv-cbar i { animation: rkcGrow 0.7s cubic-bezier(0.22, 0.61, 0.36, 1); }
 }
 
 .adv-cbar i.is-short { background: #e5484d; }

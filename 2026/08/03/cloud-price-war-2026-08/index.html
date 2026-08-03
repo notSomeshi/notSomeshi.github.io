@@ -245,7 +245,7 @@
             </span>
             
             <span class="post-meta-sep">·</span>
-            <span class="reading-time">8 分钟阅读</span>
+            <span class="reading-time">10 分钟阅读</span>
           </div>
           <h1 class="post-title">云端在降价,本地在涨价:2026 年夏天的两个反方向</h1>
           
@@ -290,6 +290,39 @@
 
 <h2 id="一、三周就降价-80-这不正常"><a href="#一、三周就降价-80-这不正常" class="headerlink" title="一、三周就降价 80%,这不正常"></a>一、三周就降价 80%,这不正常</h2><p>GPT-5.6 家族 7 月 9 日发布,Luna 定价 $1&#x2F;$6、Terra $2.5&#x2F;$15、Sol $5&#x2F;$30。<strong>7 月 30 日,OpenAI 把 Luna 砍到 $0.20&#x2F;$1.20,Terra 砍到 $2&#x2F;$12。</strong></p>
 <p>新品上市三周就降价八成,这在任何行业都属于反常动作。上半年的主旋律其实还是涨价——GPT-5.5 的价格是 5.4 的两倍,Fable 5 定在 $10&#x2F;$50。</p>
+<div class="fig">
+<div class="fig-title">GPT-5.6 三周内的调价幅度</div>
+<div class="fig-sub">2026-07-09 发布 → 2026-07-30 调价。输入价 / 输出价,单位 $ 每百万 token。</div>
+<div class="fig-delta">
+  <div class="fig-delta-item is-down">
+    <div class="fig-delta-k">LUNA 输入</div>
+    <div class="fig-delta-v"><s>$1.00</s><strong>$0.20</strong></div>
+    <div class="fig-delta-note">−80%</div>
+  </div>
+  <div class="fig-delta-item is-down">
+    <div class="fig-delta-k">LUNA 输出</div>
+    <div class="fig-delta-v"><s>$6.00</s><strong>$1.20</strong></div>
+    <div class="fig-delta-note">−80%</div>
+  </div>
+  <div class="fig-delta-item is-down">
+    <div class="fig-delta-k">TERRA 输入</div>
+    <div class="fig-delta-v"><s>$2.50</s><strong>$2.00</strong></div>
+    <div class="fig-delta-note">−20%</div>
+  </div>
+  <div class="fig-delta-item is-down">
+    <div class="fig-delta-k">TERRA 输出</div>
+    <div class="fig-delta-v"><s>$15.00</s><strong>$12.00</strong></div>
+    <div class="fig-delta-note">−20%</div>
+  </div>
+  <div class="fig-delta-item">
+    <div class="fig-delta-k">SOL(未调)</div>
+    <div class="fig-delta-v">$5 / $30</div>
+    <div class="fig-delta-note">旗舰档维持原价</div>
+  </div>
+</div>
+<p class="fig-src">OpenAI 官方定价页(<a href="https://openai.com/api/pricing/" target="_blank" rel="noopener">openai.com/api/pricing</a>);调价时间与幅度见 <a href="https://venturebeat.com/ai/ai-price-war-model-competition-shifts-to-cost/" target="_blank" rel="noopener">VentureBeat 报道</a>。快照 2026-08-03。</p>
+</div>
+
 <p>OpenAI 官方的解释是把效率提升让利给用户,并提到模型参与重写和优化了自家生产推理代码,从而降低了服务成本。</p>
 <p>外界的解释更直接。VentureBeat 的标题是「AI 价格战:模型竞争正转向成本」;而 CNBC 7 月 7 日的调查给出了压力的量化——<strong>中国模型已经拿下 OpenRouter 上美国企业 token 用量的 46%,一度超过美国本土模型</strong>。</p>
 <h2 id="二、降到了什么位置"><a href="#二、降到了什么位置" class="headerlink" title="二、降到了什么位置"></a>二、降到了什么位置</h2><p>放到本站<a href="/rankings/">模型天梯</a>的口径里看更清楚:</p>
@@ -342,6 +375,30 @@
 <p>两个值得停下来看的点:</p>
 <p><strong>其一,Luna 的输入价已经低于 DeepSeek V4 Pro。</strong> $0.20 对 $0.435。这是美国前沿实验室第一次在入门档把价格压到中国开源模型之下——虽然输出端仍然更贵($1.20 对 $0.87)。</p>
 <p><strong>其二,每任务 $0.05 是断崖式的便宜。</strong> 同榜 Sol (max) 要 $2.34,是它的 <strong>47 倍</strong>,而指数只差 8 分(59 对 51)。对批量、可重试、容错度高的任务,这个价差足以改变架构选型。</p>
+<div class="fig">
+<div class="fig-title">同一套评测,每道题烧多少钱</div>
+<div class="fig-sub">Artificial Analysis 让所有模型跑同一套智能指数题集(v4.1 口径,max effort),按各家 API 实际计费折算到每题成本。柱长按 Sol 的 $2.34 归一。</div>
+<div class="fig-bars">
+  <div class="fig-bar-row">
+    <span class="fig-bar-label"><b>GPT-5.6 Sol</b>指数 59</span>
+    <span class="fig-bar-track"><i class="fig-bar-fill is-warn" style="--w:100%"></i></span>
+    <span class="fig-bar-val">$2.34<em>每题</em></span>
+  </div>
+  <div class="fig-bar-row">
+    <span class="fig-bar-label"><b>GPT-5.6 Terra</b>指数 55</span>
+    <span class="fig-bar-track"><i class="fig-bar-fill is-alt" style="--w:21.8%"></i></span>
+    <span class="fig-bar-val">$0.51<em>每题</em></span>
+  </div>
+  <div class="fig-bar-row">
+    <span class="fig-bar-label"><b>GPT-5.6 Luna</b>指数 51</span>
+    <span class="fig-bar-track"><i class="fig-bar-fill is-good" style="--w:2.1%"></i></span>
+    <span class="fig-bar-val">$0.05<em>每题</em></span>
+  </div>
+</div>
+<p class="fig-sub" style="margin:14px 0 0">Sol 的成本是 Luna 的 <strong>47 倍</strong>,而智能指数只高 8 分(59 对 51)。<strong>这 8 分值不值 47 倍的钱,取决于你的任务能不能容错重试。</strong></p>
+<p class="fig-src"><a href="https://artificialanalysis.ai/models" target="_blank" rel="noopener">Artificial Analysis 模型对比</a>(Intelligence Index v4.1);定价见 <a href="https://openai.com/api/pricing/" target="_blank" rel="noopener">OpenAI 官方定价页</a>。快照 2026-08-03。</p>
+</div>
+
 <h2 id="三、另一条线-小模型正在反超大模型"><a href="#三、另一条线-小模型正在反超大模型" class="headerlink" title="三、另一条线:小模型正在反超大模型"></a>三、另一条线:小模型正在反超大模型</h2><p>7 月 31 日,DeepSeek 上线 <strong>V4-Flash-0731</strong> 正式版 API。</p>
 <p>它最值得注意的地方不是发布本身,而是<strong>架构和体量一点没变</strong>——仍是 284B 的 MoE、每 token 激活 13B。所有提升都来自重新做的后训练:</p>
 <ul>
@@ -350,6 +407,37 @@
 <li><strong>多项 Agent 评测反超自家的 V4-Pro 预览版</strong></li>
 </ul>
 <p>Artificial Analysis 随后收录了它:<strong>V4-Flash-0731 拿到 50 分,而 V4-Pro 只有 44 分。</strong></p>
+<div class="fig">
+<div class="fig-title">同门对决:激活 13B 反超旗舰</div>
+<div class="fig-sub">DeepSeek V4-Flash-0731(284B MoE,每 token 激活 13B)与 V4-Pro 预览版的对比。架构与体量未变,提升全部来自重新后训练。</div>
+<div class="fig-bars">
+  <div class="fig-bar-row">
+    <span class="fig-bar-label"><b>V4-Flash-0731</b>激活 13B</span>
+    <span class="fig-bar-track"><i class="fig-bar-fill is-good" style="--w:100%"></i></span>
+    <span class="fig-bar-val">50<em>AA 指数</em></span>
+  </div>
+  <div class="fig-bar-row">
+    <span class="fig-bar-label"><b>V4-Pro</b>体量更大</span>
+    <span class="fig-bar-track"><i class="fig-bar-fill is-alt" style="--w:88%"></i></span>
+    <span class="fig-bar-val">44<em>AA 指数</em></span>
+  </div>
+</div>
+<div class="fig-sub" style="margin:16px 0 8px"><strong>同一个模型,后训练前后的 Terminal-Bench 2.1</strong></div>
+<div class="fig-bars">
+  <div class="fig-bar-row">
+    <span class="fig-bar-label"><b>0731 正式版</b></span>
+    <span class="fig-bar-track"><i class="fig-bar-fill" style="--w:100%"></i></span>
+    <span class="fig-bar-val">82.7<em>+25.8</em></span>
+  </div>
+  <div class="fig-bar-row">
+    <span class="fig-bar-label"><b>预览版</b></span>
+    <span class="fig-bar-track"><i class="fig-bar-fill is-alt" style="--w:68.8%"></i></span>
+    <span class="fig-bar-val">56.9</span>
+  </div>
+</div>
+<p class="fig-src"><a href="https://artificialanalysis.ai/models" target="_blank" rel="noopener">Artificial Analysis</a>(AA 指数,v4.1);Terminal-Bench 2.1 分数来自 <a href="https://api-docs.deepseek.com/news/" target="_blank" rel="noopener">DeepSeek 官方发布说明</a>与第三方报道,本站未做独立复现。快照 2026-08-03。</p>
+</div>
+
 <p>一个激活 13B 的模型,打赢了同门那个体量大得多的旗舰。这条线和 Luna 降价指向同一个判断:</p>
 <blockquote>
 <p><strong>2026 年下半年,”参数量”和”价格档位”都不再可靠地预测能力。</strong></p>
