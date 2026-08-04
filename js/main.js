@@ -1530,8 +1530,10 @@ var Rain = (function () {
      解码失败时回退到合成雨幕。 */
   var RAIN_SRC = '/audio/rain.mp3?v=3'; // 换音源时递增 v,绕过浏览器缓存(head.ejs 的预载链接需同步)
   var usingRecording = false;
-  var rainEl = null; // 流式播放的 <audio> 元素
-  var audioCtx = null, masterGain = null, bedGain = null, bedLowpass = null, bedModDepth = null, noiseBuffer = null;
+  var rainEl = null;        // 流式播放的 <audio> 元素(仅用于"先出声")
+  var rainLoopSrc = null;   // 解码后的无缝循环源,就绪后接管
+  var loopUpgrading = false;
+  var audioCtx = null, masterGain = null, bedGain = null, bedLowpass = null, bedModDepth = null, noiseBuffer = null, mediaGain = null;
   var plinkCarry = 0, activePlinks = 0, lastDingAt = 0, nextThunderAt = 0, flashAlpha = 0;
   var gestureBound = false;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1779,7 +1781,7 @@ var Rain = (function () {
     comp.attack.value = 0.02;
     comp.release.value = 0.3;
     var makeup = audioCtx.createGain();
-    makeup.gain.value = 1.8;
+    makeup.gain.value = 1.5;
     bedGain.connect(comp);
     comp.connect(makeup);
     makeup.connect(masterGain);
@@ -1798,13 +1800,73 @@ var Rain = (function () {
           synthBed();
         }
       });
+      mediaGain = audioCtx.createGain();
+      mediaGain.gain.value = 1;
       var mediaSrc = audioCtx.createMediaElementSource(rainEl);
-      mediaSrc.connect(bedGain);
+      mediaSrc.connect(mediaGain);
+      mediaGain.connect(bedGain);
       usingRecording = true;
       rainEl.play().catch(function () {}); // 无手势时静默失败,交给 resumeAudio
+      // 网络卡顿时 <audio> 会 stall,补一层自愈(切到无缝源后即不再需要)
+      ['stalled', 'waiting', 'suspend'].forEach(function (ev) {
+        rainEl.addEventListener(ev, function () {
+          if (running && rainEl && rainEl.paused) rainEl.play().catch(function () {});
+        });
+      });
+      // 延后再取:让 <audio> 先把整个文件灌进 HTTP 缓存,
+      // 这样后面的 fetch 基本命中缓存,不会真的再下载一遍 7MB。
+      setTimeout(upgradeToGaplessLoop, 8000);
     } catch (e) {
       synthBed();
     }
+  }
+
+  /* 无缝循环:<audio loop> 播 MP3 每圈都会因编码器补白留下可闻空隙,
+     而流式播放还会被网络卡顿打断——这两点就是"雨声有时会断"的来源。
+     对策:后台把整段解码成 PCM,换成 AudioBufferSourceNode 循环(采样级精确、
+     不依赖网络),再交叉淡入替换掉 <audio>。 */
+  function upgradeToGaplessLoop() {
+    if (loopUpgrading || !audioCtx) return;
+    // 代价:解码后的 PCM 常驻内存约 125MB(326 秒 × 48kHz × 双声道 × 4 字节)。
+    // 低内存设备上不划算,宁可继续用 <audio>(有循环缝,但内存占用极小)。
+    var dm = navigator.deviceMemory;
+    if (dm && dm < 4) return;
+    loopUpgrading = true;
+    fetch(RAIN_SRC)
+      .then(function (r) { return r.ok ? r.arrayBuffer() : Promise.reject(); })
+      .then(function (buf) {
+        return new Promise(function (res, rej) { audioCtx.decodeAudioData(buf, res, rej); });
+      })
+      .then(function (audioBuf) {
+        if (!audioCtx || rainLoopSrc) return;
+        var g = audioCtx.createGain();
+        g.gain.value = 0;
+        var src = audioCtx.createBufferSource();
+        src.buffer = audioBuf;
+        src.loop = true;
+        // 掐掉首尾各 50ms:MP3 解码后两端常残留编码器补白的静音,
+        // 对连续雨声而言这点裁剪听不出来,却能保证循环点完全无缝。
+        var trim = Math.min(0.05, audioBuf.duration / 20);
+        src.loopStart = trim;
+        src.loopEnd = Math.max(trim + 0.5, audioBuf.duration - trim);
+        src.connect(g);
+        g.connect(bedGain);
+        src.start(0, trim);
+        rainLoopSrc = src;
+
+        // 2 秒等功率交叉淡化,避免切换瞬间的音量塌陷或爆音
+        var t = audioCtx.currentTime, XF = 2;
+        g.gain.setValueAtTime(0, t);
+        g.gain.linearRampToValueAtTime(1, t + XF);
+        if (mediaGain) {
+          mediaGain.gain.setValueAtTime(1, t);
+          mediaGain.gain.linearRampToValueAtTime(0, t + XF);
+        }
+        setTimeout(function () {
+          if (rainEl) { try { rainEl.pause(); rainEl.src = ''; } catch (e) {} rainEl = null; }
+        }, (XF + 0.5) * 1000);
+      })
+      .catch(function () { loopUpgrading = false; }); // 失败就继续用 <audio>,不影响听感
   }
 
   /* 降级方案:浏览器无法解码录音时,用粉红噪声合成雨幕 */
@@ -1844,7 +1906,7 @@ var Rain = (function () {
     var t = audioCtx.currentTime;
     // 雨越大音量越大;录音与合成雨幕的响度基准不同
     var base = running
-      ? (usingRecording ? 0.4 + 0.2 * intensity : 0.035 + 0.075 * intensity)
+      ? (usingRecording ? 0.26 + 0.13 * intensity : 0.035 + 0.075 * intensity)
       : 0;
     bedGain.gain.setTargetAtTime(base, t, 0.45);
     if (bedLowpass) bedLowpass.frequency.setTargetAtTime(3000 + 2200 * intensity, t, 0.45);

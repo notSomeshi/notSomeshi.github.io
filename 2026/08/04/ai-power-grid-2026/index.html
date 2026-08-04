@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>同一个模型,四种价格:2026 年的账单正在变复杂 | ByteVibe</title>
+<title>电网成为 AI 的硬约束:一场从机房烧到居民电费的挤占 | ByteVibe</title>
 <meta name="description" content="一个关于 Vibe Coding、AI 辅助编程和现代开发实践的技术博客">
 <meta name="author" content="ByteVibe">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='0,0 100,0 100,78 78,100 0,100' fill='%23ffd802'/><text x='50' y='70' font-size='58' font-weight='800' font-family='ui-monospace,monospace' fill='%230d0d0f' text-anchor='middle'>B</text></svg>">
@@ -119,12 +119,12 @@
           <h3 class="sidebar-title">全部文章</h3>
           <ul class="sidebar-list">
             
-              <li class="sidebar-item active">
-                <a href="/2026/08/04/billing-modes-2026-08/">同一个模型,四种价格:2026 年的账单正在变复杂</a>
+              <li class="sidebar-item ">
+                <a href="/2026/08/04/agent-liability-2026/">Agent 闯了祸算谁的:自主系统的责任正在被法律钉死</a>
               </li>
             
-              <li class="sidebar-item ">
-                <a href="/2026/08/04/real-bill-15-models/">把 15 个模型的真实账单拉齐之后:贵 ≠ 强</a>
+              <li class="sidebar-item active">
+                <a href="/2026/08/04/ai-power-grid-2026/">电网成为 AI 的硬约束:一场从机房烧到居民电费的挤占</a>
               </li>
             
               <li class="sidebar-item ">
@@ -248,22 +248,22 @@
             <span class="post-meta-sep">·</span>
             <span class="post-category">
               
-                <a href="/categories/%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97/">实用指南</a>
+                <a href="/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察</a>
               
             </span>
             
             <span class="post-meta-sep">·</span>
             <span class="reading-time">7 分钟阅读</span>
           </div>
-          <h1 class="post-title">同一个模型,四种价格:2026 年的账单正在变复杂</h1>
+          <h1 class="post-title">电网成为 AI 的硬约束:一场从机房烧到居民电费的挤占</h1>
           
           <div class="post-tags">
             
-              <a class="tag-pill" href="/tags/%E6%88%90%E6%9C%AC%E4%BC%98%E5%8C%96/">#成本优化</a>
+              <a class="tag-pill" href="/tags/%E7%AE%97%E5%8A%9B%E5%9F%BA%E5%BB%BA/">#算力基建</a>
             
-              <a class="tag-pill" href="/tags/%E5%AE%9A%E4%BB%B7%E7%AD%96%E7%95%A5/">#定价策略</a>
+              <a class="tag-pill" href="/tags/%E8%83%BD%E6%BA%90/">#能源</a>
             
-              <a class="tag-pill" href="/tags/%E5%85%A5%E9%97%A8/">#入门</a>
+              <a class="tag-pill" href="/tags/%E6%88%90%E6%9C%AC/">#成本</a>
             
           </div>
           
@@ -273,180 +273,95 @@
         
         <details class="mobile-toc">
           <summary>目录 / Contents</summary>
-          <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81OpenAI-%E5%9B%9B%E6%A1%A3-%E6%9E%81%E5%B7%AE-4-%E5%80%8D"><span class="toc-list-text">一、OpenAI:四档,极差 4 倍</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81Anthropic-%E6%9D%A0%E6%9D%86%E5%9C%A8%E7%BC%93%E5%AD%98"><span class="toc-list-text">二、Anthropic:杠杆在缓存</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81DeepSeek-%E7%BC%93%E5%AD%98%E6%8A%98%E6%89%A3%E6%9C%80%E6%BF%80%E8%BF%9B-%E5%B3%B0%E8%B0%B7%E4%BB%8D%E6%9C%AA%E8%90%BD%E5%9C%B0"><span class="toc-list-text">三、DeepSeek:缓存折扣最激进,峰谷仍未落地</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E7%9C%81%E9%92%B1%E7%9A%84%E6%AD%A3%E7%A1%AE%E9%A1%BA%E5%BA%8F"><span class="toc-list-text">四、省钱的正确顺序</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E4%B8%80%E4%B8%AA%E6%8F%90%E9%86%92"><span class="toc-list-text">五、一个提醒</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+          <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E9%9C%80%E6%B1%82%E4%BE%A7-%E4%B8%89%E5%B9%B4%E5%A4%9A%E5%87%BA%E4%B8%80%E4%B8%AA%E8%A5%BF%E7%8F%AD%E7%89%99"><span class="toc-list-text">一、需求侧:三年多出一个西班牙</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E7%94%B5%E7%BD%91%E4%BE%A7-%E9%97%AE%E9%A2%98%E4%B8%8D%E5%8F%AA%E6%98%AF%E2%80%9D%E4%B8%8D%E5%A4%9F%E7%94%A8%E2%80%9D"><span class="toc-list-text">二、电网侧:问题不只是”不够用”</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E6%88%90%E6%9C%AC%E4%BE%A7-%E8%B0%81%E5%9C%A8%E4%B8%BA%E8%BF%99%E4%BA%9B%E7%94%B5%E4%BB%98%E9%92%B1"><span class="toc-list-text">三、成本侧:谁在为这些电付钱</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E8%BF%99%E5%AF%B9%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%BA%E6%84%8F%E5%91%B3%E7%9D%80%E4%BB%80%E4%B9%88"><span class="toc-list-text">四、这对不同的人意味着什么</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
         </details>
         
 
         <div class="post-body">
-          <p>三个月前,选模型只需要看一个数字:每百万 token 多少钱。</p>
-<p>现在同一个 GPT-5.6 Sol,你可能付 <strong>$2.50</strong>、**$5.00** 或 <strong>$10.00</strong> 的输入价——取决于你走的是 Batch、标准还是 Fast。DeepSeek 还准备按<strong>你调用的时间点</strong>收不同的钱。</p>
-<p>这篇把 2026 年 8 月还在生效的几种计费模式拉平了讲清楚,以及什么时候该用哪个。</p>
+          <p>过去两年,讨论 AI 的瓶颈时人们说的是芯片。2026 年,答案换成了<strong>电</strong>。</p>
+<p>美国数据中心 2023 年用掉 176 TWh 电,占全国用电量的 4.4%;到 2028 年这个数字可能变成 325–580 TWh,占比 **6.7%–12.0%**。而同期居民电价在 2025 年涨了 7.1%——是通胀率的两倍多,个别州涨幅超过 20%。</p>
+<p>这两条曲线不是巧合。<strong>AI 的账单第一次以”电费”的形式,寄到了从不使用 AI 的人手上。</strong></p>
 <span id="more"></span>
 
 <div class="report-box">
-<div class="report-box-title">// 一句话摘要</div>
+<div class="report-box-title">// 核心观点摘要</div>
 <ul>
-<li><strong>OpenAI 现在有四档</strong>:Batch / Flex(五折)、标准、Fast(2 倍)。Fast 是 7 月 30 日由 Priority processing 改名而来。</li>
-<li><strong>Anthropic 的杠杆是缓存</strong>:命中只要 <strong>0.1×</strong>;Batch 五折;Opus 的 Fast 模式 2 倍。</li>
-<li><strong>DeepSeek 缓存命中约 1/120</strong>($0.435 → $0.003625),是全场最激进的缓存折扣。</li>
-<li><strong>峰谷计费仍未生效</strong>:DeepSeek 官方口径是"即将实施、生效日待公告",峰时将按 2 倍计。</li>
-<li><strong>省钱顺序</strong>:缓存 > 批处理 > 降 effort > 换模型。多数人跳过前两步直接换模型,顺序反了。</li>
+<li><strong>规模</strong>:美国数据中心总用电需求预计 2025→2028 年从 80 GW 增至 <strong>150 GW</strong>——三年里相当于凭空多出一个西班牙的用电量。</li>
+<li><strong>单体量级</strong>:一座大型 AI 训练设施需要 100–1,000 MW 专属电力,相当于 <strong>8 万到 80 万户家庭</strong>的用电。</li>
+<li><strong>电网稳定性</strong>:数据中心负荷可在数秒内整体掉线。2024 年 7 月弗吉尼亚一次电压波动导致 <strong>60 座数据中心同时脱网</strong>,瞬间产生 1,500 MW 功率过剩。</li>
+<li><strong>成本传导</strong>:弗吉尼亚 Dominion Energy 提出 <strong>1992 年以来首次基础电价上调</strong>,典型家庭 2026 年每月多付约 $8.51。</li>
+<li><strong>不确定性</strong>:这轮建设的规模已达数万亿美元级,但<strong>需求并未被合同锁定</strong>——如果 AI 需求不及预期,搁浅成本仍会进入电价。</li>
 </ul>
 </div>
 
-<h2 id="一、OpenAI-四档-极差-4-倍"><a href="#一、OpenAI-四档-极差-4-倍" class="headerlink" title="一、OpenAI:四档,极差 4 倍"></a>一、OpenAI:四档,极差 4 倍</h2><div class="fig">
-<div class="fig-title">GPT-5.6 Sol 的四种价格</div>
-<div class="fig-sub">每百万 token 输入价。柱长按 Fast 模式($10)归一。同一个模型,同样的输出质量。</div>
+<h2 id="一、需求侧-三年多出一个西班牙"><a href="#一、需求侧-三年多出一个西班牙" class="headerlink" title="一、需求侧:三年多出一个西班牙"></a>一、需求侧:三年多出一个西班牙</h2><p>先把量级摆清楚。</p>
+<p>美国数据中心 2023 年消耗 176 TWh 电力,占全国用电的 **4.4%**。哈佛肯尼迪学院贝尔弗中心的测算显示,到 2028 年这一数字将升至 <strong>325–580 TWh</strong>,即全国用电的 **6.7%–12.0%**。</p>
+<p>按装机口径看更直观:总需求预计在 2025 至 2028 年间从 <strong>80 GW 增长到 150 GW</strong>。三年增加 70 GW,大致等于在美国的电力系统里凭空插入一个西班牙。</p>
+<p><strong>单体设施的量级同样反常。</strong> 一座大型 AI 训练设施需要 <strong>100 MW 到 1,000 MW</strong> 的专属电力——相当于 8 万到 80 万户家庭的全部用电。这不是传统数据中心的量级,而是接近一座中型城市。</p>
+<p>区域层面的压力更具体。德州电网 ERCOT 预计夏季峰值需求将从 2024 年的 85 GW 升至 2031 年的约 <strong>145 GW</strong>,其中数据中心与加密矿场合计约 <strong>32 GW</strong>——<strong>占了新增需求的一半以上</strong>。</p>
+<div class="fig">
+<div class="fig-title">美国数据中心用电:占比与量级</div>
+<div class="fig-sub">左为占全国用电比重(2028 年为区间预测的中值),右为 ERCOT 德州峰值需求。柱长各自按最大值归一。</div>
 <div class="fig-bars">
   <div class="fig-bar-row">
-    <span class="fig-bar-label"><b>Fast</b>优先处理</span>
+    <span class="fig-bar-label"><b>2028 预测</b>占全国用电</span>
     <span class="fig-bar-track"><i class="fig-bar-fill is-warn" style="--w:100%"></i></span>
-    <span class="fig-bar-val">$10.00<em>2× 标准</em></span>
+    <span class="fig-bar-val">6.7–12.0%<em>325–580 TWh</em></span>
   </div>
   <div class="fig-bar-row">
-    <span class="fig-bar-label"><b>标准</b>默认</span>
-    <span class="fig-bar-track"><i class="fig-bar-fill" style="--w:50%"></i></span>
-    <span class="fig-bar-val">$5.00<em>基准</em></span>
-  </div>
-  <div class="fig-bar-row">
-    <span class="fig-bar-label"><b>Flex</b>弹性排队</span>
-    <span class="fig-bar-track"><i class="fig-bar-fill is-good" style="--w:25%"></i></span>
-    <span class="fig-bar-val">$2.50<em>五折</em></span>
-  </div>
-  <div class="fig-bar-row">
-    <span class="fig-bar-label"><b>Batch</b>异步批处理</span>
-    <span class="fig-bar-track"><i class="fig-bar-fill is-good" style="--w:25%"></i></span>
-    <span class="fig-bar-val">$2.50<em>五折</em></span>
+    <span class="fig-bar-label"><b>2023 实际</b>占全国用电</span>
+    <span class="fig-bar-track"><i class="fig-bar-fill is-alt" style="--w:47%"></i></span>
+    <span class="fig-bar-val">4.4%<em>176 TWh</em></span>
   </div>
 </div>
-<p class="fig-sub" style="margin:14px 0 0">输出价同比例:Fast $60 / 标准 $30 / Batch 与 Flex $15。<strong>Luna 与 Terra 是同样的四档结构。</strong></p>
-<p class="fig-src"><a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener">OpenAI 官方定价页</a>。「Priority processing 于 2026-07-30 更名为 Fast mode」。快照 2026-08-04。</p>
+<div class="fig-sub" style="margin:16px 0 8px"><strong>德州 ERCOT 夏季峰值需求(GW)</strong></div>
+<div class="fig-bars">
+  <div class="fig-bar-row">
+    <span class="fig-bar-label"><b>2031 预测</b></span>
+    <span class="fig-bar-track"><i class="fig-bar-fill is-warn" style="--w:100%"></i></span>
+    <span class="fig-bar-val">≈145 GW</span>
+  </div>
+  <div class="fig-bar-row">
+    <span class="fig-bar-label"><b>2024 实际</b></span>
+    <span class="fig-bar-track"><i class="fig-bar-fill is-alt" style="--w:58.6%"></i></span>
+    <span class="fig-bar-val">85 GW</span>
+  </div>
+</div>
+<p class="fig-sub" style="margin:14px 0 0">新增的约 60 GW 里,数据中心与加密矿场占 <strong>32 GW</strong>——超过一半。</p>
+<p class="fig-src">数据见哈佛肯尼迪学院<a href="https://www.belfercenter.org/research-analysis/ai-data-centers-us-electric-grid" target="_blank" rel="noopener">贝尔弗中心《AI, Data Centers, and the U.S. Electric Grid》</a>。2028 年为区间预测,非既成事实。快照 2026-08-04。</p>
 </div>
 
-<p><strong>什么时候用哪档:</strong></p>
-<ul>
-<li><strong>Batch</strong> —— 不赶时间的批量任务(翻译、摘要、打标、离线评测)。异步提交,五折。<strong>这是最容易被忽略的省钱手段</strong>,很多人明明在跑离线任务却用标准档。</li>
-<li><strong>Flex</strong> —— 同样五折,但走弹性排队,适合能容忍延迟波动的在线任务。</li>
-<li><strong>标准</strong> —— 交互式场景的默认选择。</li>
-<li><strong>Fast</strong> —— 只有当延迟直接影响体验或收入时才值得。<strong>2 倍价格买的是排队优先级,不是更好的答案。</strong></li>
-</ul>
-<h2 id="二、Anthropic-杠杆在缓存"><a href="#二、Anthropic-杠杆在缓存" class="headerlink" title="二、Anthropic:杠杆在缓存"></a>二、Anthropic:杠杆在缓存</h2><p>Anthropic 没有 Flex,但把缓存做得很细:</p>
-<table>
-<thead>
-<tr>
-<th>操作</th>
-<th>倍率</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>缓存命中</td>
-<td><strong>0.1×</strong></td>
-<td>只要标准输入价的十分之一</td>
-</tr>
-<tr>
-<td>5 分钟缓存写入</td>
-<td>1.25×</td>
-<td>缓存有效 5 分钟</td>
-</tr>
-<tr>
-<td>1 小时缓存写入</td>
-<td>2×</td>
-<td>缓存有效 1 小时</td>
-</tr>
-<tr>
-<td>Batch 批处理</td>
-<td>0.5×</td>
-<td>输入输出都五折</td>
-</tr>
-<tr>
-<td>Fast 模式(仅 Opus 5 &#x2F; 4.8)</td>
-<td>2×</td>
-<td>$10&#x2F;$50</td>
-</tr>
-</tbody></table>
-<p><strong>关键在于回本次数</strong>:5 分钟缓存写入 1.25×、命中 0.1×,所以<strong>一次命中就回本</strong>;1 小时缓存写入 2×,<strong>两次命中回本</strong>。系统提示词、长文档、多轮对话历史这类反复出现的内容,不做缓存等于白扔钱。</p>
-<p>另外两条容易漏的:</p>
-<ul>
-<li><strong>1M 上下文按标准价计,不加价</strong>(4.6 及以后机型)。90 万 token 的请求与 9 千 token 单价相同。</li>
-<li><strong>4.7 及以后机型换了新分词器,同样的文字约多出 30% token</strong>。跨代比价时只看单价会低估实际账单。</li>
-</ul>
-<h2 id="三、DeepSeek-缓存折扣最激进-峰谷仍未落地"><a href="#三、DeepSeek-缓存折扣最激进-峰谷仍未落地" class="headerlink" title="三、DeepSeek:缓存折扣最激进,峰谷仍未落地"></a>三、DeepSeek:缓存折扣最激进,峰谷仍未落地</h2><table>
-<thead>
-<tr>
-<th>模型</th>
-<th>缓存未命中</th>
-<th><strong>缓存命中</strong></th>
-<th>输出</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>deepseek-v4-pro</td>
-<td>$0.435</td>
-<td><strong>$0.003625</strong></td>
-<td>$0.87</td>
-</tr>
-<tr>
-<td>deepseek-v4-flash</td>
-<td>$0.14</td>
-<td><strong>$0.0028</strong></td>
-<td>$0.28</td>
-</tr>
-</tbody></table>
-<p><strong>缓存命中价约为未命中的 1&#x2F;120。</strong> 这个折扣力度远超其他家(Anthropic 是 1&#x2F;10,OpenAI 是 1&#x2F;10),意味着在 DeepSeek 上<strong>把提示词结构设计好的收益极大</strong>。</p>
-<p><strong>峰谷计费:目前仍未生效。</strong> 官方文档的措辞是”即将实施,生效日期以官方公告为准”,峰时(北京时间 9:00–12:00、14:00–18:00)将按 <strong>2 倍</strong>计。Semafor 8 月 3 日报道称 DeepSeek 在竞争压力下<strong>暂停了</strong>这套动态定价的落地。</p>
-<blockquote>
-<p>⚠ 网上有不少文章称”峰谷计费已于 7 月实行”,与官方文档不符。<strong>以官方定价页为准。</strong></p>
-</blockquote>
-<h2 id="四、省钱的正确顺序"><a href="#四、省钱的正确顺序" class="headerlink" title="四、省钱的正确顺序"></a>四、省钱的正确顺序</h2><p>多数人的第一反应是”换个便宜模型”,但那通常是最后一步:</p>
-<div class="fig">
-<div class="fig-title">四个省钱杠杆,按性价比排序</div>
-<div class="fig-sub">典型可省比例。前两步不改变输出质量,后两步会。</div>
-<div class="fig-delta">
-  <div class="fig-delta-item is-down">
-    <div class="fig-delta-k">① 用好缓存</div>
-    <div class="fig-delta-v"><strong>−90%</strong></div>
-    <div class="fig-delta-note">命中部分的输入价,质量不变</div>
-  </div>
-  <div class="fig-delta-item is-down">
-    <div class="fig-delta-k">② 能异步就 Batch</div>
-    <div class="fig-delta-v"><strong>−50%</strong></div>
-    <div class="fig-delta-note">输入输出都五折,质量不变</div>
-  </div>
-  <div class="fig-delta-item is-down">
-    <div class="fig-delta-k">③ 降一档 effort</div>
-    <div class="fig-delta-v"><strong>约 −60%</strong></div>
-    <div class="fig-delta-note">low→max 成本差约 3 倍,质量略降</div>
-  </div>
-  <div class="fig-delta-item is-down">
-    <div class="fig-delta-k">④ 换更便宜的模型</div>
-    <div class="fig-delta-v"><strong>可达 −95%</strong></div>
-    <div class="fig-delta-note">幅度最大,但要重新验证质量</div>
-  </div>
-</div>
-<p class="fig-src">缓存与 Batch 倍率见各家官方定价页(<a href="https://platform.claude.com/docs/en/about-claude/pricing" target="_blank" rel="noopener">Anthropic</a> · <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener">OpenAI</a> · <a href="https://api-docs.deepseek.com/quick_start/pricing" target="_blank" rel="noopener">DeepSeek</a>);effort 成本差见 Anthropic 官方说明。快照 2026-08-04。</p>
-</div>
-
-<p><strong>前两步不改变输出质量,应该先做。</strong> 缓存和 Batch 是纯粹的工程配置问题,省下来的钱没有任何代价。</p>
-<p><strong>第三步降 effort 有代价但通常很小</strong>——Anthropic 官方也建议日常用 low&#x2F;medium。</p>
-<p><strong>第四步换模型幅度最大</strong>(从 $93.8&#x2F;分 换到 $3.4&#x2F;分 是 96%),但需要重新验证质量。要换的话,先看<a href="/2026/08/04/real-bill-15-models/">《把 15 个模型的真实账单拉齐之后》</a>确认目标档位。</p>
-<h2 id="五、一个提醒"><a href="#五、一个提醒" class="headerlink" title="五、一个提醒"></a>五、一个提醒</h2><p>计费模式变复杂本身是个信号:<strong>厂商开始用价格歧视来切分需求</strong>——愿意等的人少付钱,赶时间的人多付钱。这在成熟行业(航空、电力、云计算)是常态,说明 AI 推理正在从”稀缺品”变成”公用事业”。</p>
-<p>对用户来说,这意味着<strong>账单越来越取决于你怎么调用,而不只是调用了谁</strong>。同一个模型、同样的任务,配置得当和随手调用之间可以差好几倍。</p>
+<h2 id="二、电网侧-问题不只是”不够用”"><a href="#二、电网侧-问题不只是”不够用”" class="headerlink" title="二、电网侧:问题不只是”不够用”"></a>二、电网侧:问题不只是”不够用”</h2><p>电力不足是显性问题,<strong>负荷特性</strong>才是被低估的那个。</p>
+<p>传统工业负荷相对平缓,而 AI 训练集群的功率曲线极其陡峭——同步开始、同步结束,数万张加速卡的功率可以在秒级之间整体起落。对于按”缓慢变化”设计了一百年的电网,这是一种全新的扰动源。</p>
+<p><strong>2024 年 7 月,弗吉尼亚北部一次电压波动导致 60 座数据中心同时脱网</strong>,瞬间造成 <strong>1,500 MW 的功率过剩</strong>,电网运营方不得不紧急干预以避免连锁停电。注意方向:不是数据中心缺电,而是它们<strong>集体消失</strong>导致发出去的电没人要了。</p>
+<p>到 2026 年 5 月,美国联邦监管机构在吉瓦级数据中心负荷于数秒内掉线后,发布了<strong>最高级别的警报</strong>——这类冲击正是可能级联成大停电的那种。</p>
+<p>这解释了为什么电力公司在给数据中心供电时,要求的不只是发电容量,还有输电能力与调频备用。<strong>而这些成本最终要摊到所有用电者身上。</strong></p>
+<h2 id="三、成本侧-谁在为这些电付钱"><a href="#三、成本侧-谁在为这些电付钱" class="headerlink" title="三、成本侧:谁在为这些电付钱"></a>三、成本侧:谁在为这些电付钱</h2><p>这是本文最关心的一环:<strong>新增的电网投资,账单落在谁头上。</strong></p>
+<p>弗吉尼亚的 Dominion Energy 在 2025 年 2 月提出了<strong>自 1992 年以来的首次基础电价上调</strong>,典型家庭 2026 年每月约多付 <strong>$8.51</strong>,2027 年再加 $2.00。该公司将其直接归因于数据中心扩张带来的压力。</p>
+<p>宏观数据同向:<strong>2025 年美国居民电价上涨 7.1%,是通胀率的两倍多</strong>;部分州涨幅超过 20%。</p>
+<p>机制并不复杂:电网是共享基础设施,为接入超大负荷所做的输电升级、备用容量与调频服务,通常通过费率结构由全体用户分担。<strong>当一个新增负荷占了新增需求的一半以上,它引发的基建成本很难只由它自己承担。</strong></p>
+<p>值得说明的是,这里存在一个反向论点:数据中心作为高负荷因子的大客户,理论上能摊薄固定成本,历史上确实一度<strong>拉低</strong>了电价。《财富》2026 年 7 月的报道指出,问题出在这一轮建设的规模——<strong>数万亿美元级的投入,而 AI 需求并未被长期合同锁定</strong>。如果需求不及预期,已经建成的输电与发电资产就成了搁浅成本,而搁浅成本同样会进入电价。</p>
+<p><strong>换句话说:需求兑现,电价可能被摊薄;需求落空,电价一定要背锅。</strong></p>
+<h2 id="四、这对不同的人意味着什么"><a href="#四、这对不同的人意味着什么" class="headerlink" title="四、这对不同的人意味着什么"></a>四、这对不同的人意味着什么</h2><p><strong>对普通用电者:</strong> 这是一笔你没有选择权的支出。电力是自然垄断行业,费率由监管审批而非市场竞价,你无法”不买”。值得关注的是本地电力公司的费率听证——数据中心密集的地区,这类提案会越来越频繁。</p>
+<p><strong>对做 AI 产品的人:</strong> 推理成本的下降趋势有一个物理下限。当前云端 API 价格战打得很凶,但<strong>电力是所有算力的最终成本项</strong>,并且它正在上涨而非下降。把长期成本模型建立在”推理会一直变便宜”上,是有风险的假设。</p>
+<p><strong>对考虑自建算力的团队:</strong> 本地部署省的是 API 费,付的是电费与散热。在电价上涨 7% 以上的地区,这笔账需要按当地实际电价重算——而不是套用两年前的经验值。</p>
+<p><strong>对关注产业的人:</strong> 这轮建设与历史上的铁路、光纤热潮有相似结构——基础设施先行、需求后验证。区别在于电力资产的生命周期长达数十年,<strong>如果这一轮判断错了,纠错周期会比光纤泡沫长得多</strong>。这个视角在<a href="/2026/07/08/ai-capital-markets-2026/">《资本市场视角下的 AI 局势》</a>里有更完整的展开。</p>
 <div class="risk-box">
-<div class="risk-box-title">// 风险提示</div>
+<div class="risk-box-title">// 数据说明与风险提示</div>
 <ul>
-<li>本文为 <strong>2026-08-04</strong> 快照,倍率与价格均取自各家官方定价页。<strong>计费规则变动频繁</strong>(Fast mode 刚在 7-30 更名、峰谷计费状态反复),以官网当期页面为准。</li>
-<li>"典型可省比例"为按官方倍率推算的<strong>上限</strong>:缓存 −90% 只作用于命中部分,实际节省取决于命中率;effort 的 3 倍差是 Anthropic 对 Opus 5 的口径,其他模型不同。</li>
-<li>Batch 与 Flex 有延迟代价,不适合交互式场景;缓存有有效期,低频调用可能写入成本大于收益。</li>
-<li>本文不构成任何投资或采购建议。</li>
+<li>本文为 <strong>2026-08-04</strong> 快照。文中 2028、2031 年数字均为<strong>机构预测</strong>(贝尔弗中心、ERCOT),存在大幅修正的可能,不应当作既成事实。</li>
+<li>电价上涨的归因是<strong>复杂的</strong>:燃料价格、电网老化改造、极端天气、政策成本都在其中,数据中心只是其中一个因素。本文引用的 Dominion Energy 案例是该公司自身的归因说明。</li>
+<li>"数据中心拉低电价"与"数据中心推高电价"两种论点在业内并存,本文列出了双方依据,<strong>结论取决于 AI 需求最终是否兑现</strong>。</li>
+<li>各国电力市场结构差异极大,美国的费率分摊机制不能直接套用到其他市场。</li>
+<li>本文不构成任何投资建议。</li>
 </ul>
 </div>
 
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
-<li>OpenAI,<a target="_blank" rel="noopener" href="https://developers.openai.com/api/docs/pricing">API 定价</a>——四档结构与 Fast mode 更名说明</li>
-<li>Anthropic,<a target="_blank" rel="noopener" href="https://platform.claude.com/docs/en/about-claude/pricing">Pricing</a>——缓存倍率、Batch、Fast 模式、长上下文与分词器说明</li>
-<li>DeepSeek,<a target="_blank" rel="noopener" href="https://api-docs.deepseek.com/quick_start/pricing">API 定价</a>——缓存命中价与峰谷计费状态</li>
-<li>Semafor,<a target="_blank" rel="noopener" href="https://www.semafor.com/article/08/03/2026/deepseek-releases-cut-price-new-ai-model-as-chinas-price-war-intensifies">DeepSeek releases cheaper new AI model as China’s price war intensifies</a>——峰谷计费暂停</li>
+<li>哈佛肯尼迪学院贝尔弗中心,<a target="_blank" rel="noopener" href="https://www.belfercenter.org/research-analysis/ai-data-centers-us-electric-grid">AI, Data Centers, and the U.S. Electric Grid: A Watershed Moment</a>——用电占比、ERCOT 预测、弗吉尼亚脱网事件、Dominion 费率案</li>
+<li>Consumer Reports,<a target="_blank" rel="noopener" href="https://www.consumerreports.org/data-centers/ai-data-centers-impact-on-electric-bills-water-and-more-a1040338678/">AI Data Centers: Big Tech’s Impact on Electric Bills, Water, and More</a></li>
+<li>Fortune,<a target="_blank" rel="noopener" href="https://fortune.com/2026/07/26/data-centers-electricity-costs-cheaper-7billion-buildout-ai-demand/">Data centers were actually making electricity costs cheaper, but the buildout with no guaranteed AI demand is threatening the trend</a></li>
+<li>Newsweek,<a target="_blank" rel="noopener" href="https://www.newsweek.com/map-shows-electricity-costs-in-every-state-as-ai-data-centers-surge-prices-12279072">Map Shows Electricity Costs in Every State as AI Data Centers Surge Prices</a></li>
 </ol>
 <blockquote>
 <p>本文由 ByteVibe 撰写(AI 辅助研究整理)。文中观点的原始出处均已在正文与参考文献中标注,版权归原作者所有。数据快照 2026-08-04。</p>
@@ -457,10 +372,15 @@
         <footer class="post-footer">
           <nav class="post-nav">
             
+            <a class="post-nav-item post-nav-prev" href="/2026/08/04/agent-liability-2026/">
+              <span class="post-nav-label">← 上一篇</span>
+              <span class="post-nav-title">Agent 闯了祸算谁的:自主系统的责任正在被法律钉死</span>
+            </a>
             
-            <a class="post-nav-item post-nav-next" href="/2026/08/04/real-bill-15-models/">
+            
+            <a class="post-nav-item post-nav-next" href="/2026/08/03/cloud-price-war-2026-08/">
               <span class="post-nav-label">下一篇 →</span>
-              <span class="post-nav-title">把 15 个模型的真实账单拉齐之后:贵 ≠ 强</span>
+              <span class="post-nav-title">云端在降价,本地在涨价:2026 年夏天的两个反方向</span>
             </a>
             
           </nav>
@@ -472,7 +392,7 @@
         
           <div class="toc-sticky">
             <h3 class="toc-title">目录大纲</h3>
-            <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81OpenAI-%E5%9B%9B%E6%A1%A3-%E6%9E%81%E5%B7%AE-4-%E5%80%8D"><span class="toc-list-text">一、OpenAI:四档,极差 4 倍</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81Anthropic-%E6%9D%A0%E6%9D%86%E5%9C%A8%E7%BC%93%E5%AD%98"><span class="toc-list-text">二、Anthropic:杠杆在缓存</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81DeepSeek-%E7%BC%93%E5%AD%98%E6%8A%98%E6%89%A3%E6%9C%80%E6%BF%80%E8%BF%9B-%E5%B3%B0%E8%B0%B7%E4%BB%8D%E6%9C%AA%E8%90%BD%E5%9C%B0"><span class="toc-list-text">三、DeepSeek:缓存折扣最激进,峰谷仍未落地</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E7%9C%81%E9%92%B1%E7%9A%84%E6%AD%A3%E7%A1%AE%E9%A1%BA%E5%BA%8F"><span class="toc-list-text">四、省钱的正确顺序</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E4%B8%80%E4%B8%AA%E6%8F%90%E9%86%92"><span class="toc-list-text">五、一个提醒</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+            <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E9%9C%80%E6%B1%82%E4%BE%A7-%E4%B8%89%E5%B9%B4%E5%A4%9A%E5%87%BA%E4%B8%80%E4%B8%AA%E8%A5%BF%E7%8F%AD%E7%89%99"><span class="toc-list-text">一、需求侧:三年多出一个西班牙</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E7%94%B5%E7%BD%91%E4%BE%A7-%E9%97%AE%E9%A2%98%E4%B8%8D%E5%8F%AA%E6%98%AF%E2%80%9D%E4%B8%8D%E5%A4%9F%E7%94%A8%E2%80%9D"><span class="toc-list-text">二、电网侧:问题不只是”不够用”</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E6%88%90%E6%9C%AC%E4%BE%A7-%E8%B0%81%E5%9C%A8%E4%B8%BA%E8%BF%99%E4%BA%9B%E7%94%B5%E4%BB%98%E9%92%B1"><span class="toc-list-text">三、成本侧:谁在为这些电付钱</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E8%BF%99%E5%AF%B9%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%BA%E6%84%8F%E5%91%B3%E7%9D%80%E4%BB%80%E4%B9%88"><span class="toc-list-text">四、这对不同的人意味着什么</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
           </div>
         
       </aside>
