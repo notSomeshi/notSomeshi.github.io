@@ -43,6 +43,41 @@
 <meta name="generator" content="Hexo 7.3.0"></head>
 <body>
   
+  <div class="site-cover" id="siteCover" role="button" aria-label="点击进入">
+  <div class="cover-scan"></div>
+  <div class="cover-frame">
+    <i class="cover-corner cover-corner-tr"></i>
+    <i class="cover-corner cover-corner-bl"></i>
+  </div>
+  <div class="cover-top">BYTEVIBE TERMINAL // OS v2.1.0</div>
+  <div class="cover-inner">
+    <p class="cover-eyebrow">// CONNECTION ESTABLISHED</p>
+    <h1 class="cover-title">ByteVibe</h1>
+    <p class="cover-sub">VIBE CODING // AI ENGINEERING</p>
+    <div class="cover-boot">
+      <span style="animation-delay:.15s">&gt; SYSTEM CHECK ............ <em>OK</em></span>
+      <span style="animation-delay:.45s">&gt; LOADING ARTICLE DATABASE . <em>OK</em></span>
+      <span style="animation-delay:.75s">&gt; RENDER PIPELINE .......... <em>READY</em></span>
+    </div>
+    <p class="cover-press">PRESS ANY KEY / 点击进入</p>
+  </div>
+  <div class="cover-bottom">&copy; 2026 BYTEVIBE — ALL SYSTEMS NOMINAL</div>
+</div>
+<script>
+  // 预绘制阶段判断:本会话已进入过则直接隐藏封面,否则锁定滚动
+  (function () {
+    try {
+      if (sessionStorage.getItem('bv-entered')) {
+        document.getElementById('siteCover').style.display = 'none';
+      } else {
+        document.documentElement.classList.add('cover-lock');
+      }
+    } catch (e) {}
+  })();
+</script>
+<noscript><style>.site-cover { display: none !important; }</style></noscript>
+
+  
   <canvas class="rain-canvas" id="rainCanvas" aria-hidden="true"></canvas>
   <div class="reading-progress" id="readingProgress"></div>
   <header class="site-header" id="siteHeader">
@@ -63,7 +98,7 @@
       
         
         
-        <a class="nav-link is-active" href="/categories/">分类</a>
+        <a class="nav-link" href="/categories/">分类</a>
       
         
         
@@ -110,124 +145,72 @@
 </header>
 
   <main class="main-content">
-    <section class="category-section">
+    <div class="side-entries">
+  <a class="rankings-entry" href="/rankings/" aria-label="模型天梯:AI 模型综合排名">
+    <span class="rankings-entry-mark"></span>
+    <span class="rankings-entry-label">模型天梯</span>
+    <span class="rankings-entry-sub">RANKINGS</span>
+  </a>
+  <a class="rankings-entry advisor-entry" href="/advisor/" aria-label="选购助手:帮你挑最划算的 AI 方案">
+    <span class="rankings-entry-mark"></span>
+    <span class="rankings-entry-label">选购助手</span>
+    <span class="rankings-entry-sub">ADVISOR</span>
+  </a>
+</div>
+
+<section class="hero-section">
   <div class="container">
-    <div class="post-content-wrapper">
+    <p class="hero-eyebrow">Vibe Coding // AI Engineering</p>
+    <h1 class="hero-title">ByteVibe</h1>
+    <p class="hero-subtitle">探索 Vibe Coding 与 AI 编程的无限可能</p>
+  </div>
+</section>
+
+<section class="posts-section">
+  <div class="container">
+    <div class="posts-grid">
       
-        <header class="archive-header">
-          <h1 class="archive-title">行业观察</h1>
-          <p class="archive-desc">共 10 篇文章</p>
-        </header>
-        <div class="archive-list">
-          
-          
+      
+      <article class="post-card animate-on-scroll">
+        <a class="post-card-link" href="/2025/06/10/hello-world/" aria-label="欢迎来到 ByteVibe"></a>
+        <span class="post-card-index">31</span>
+        <div class="post-card-inner">
+          <div class="post-card-meta">
+            <time class="post-date">2025-06-10</time>
             
-            
-            
-          
-            
-            
-            
-          
-            
-            
-            
-          
-            
-            
-            
-          
-            
-            
-            
-          
-            
-            
-            
-          
-            
-            
-            
-          
-            
-            
-            
-          
-            
-            
-            
-          
-            
-            
-            
-          
-          
-          <div class="archive-year-group">
-            <h2 class="archive-year">2026</h2>
-            <div class="archive-items">
+            <span class="post-category">
               
-              <a class="archive-item animate-on-scroll" href="/2026/08/05/benchmark-trust-crisis/">
-                <span class="archive-date">08-05</span>
-                <span class="archive-item-title">当考卷泄题成为常态:AI 评测的信任危机</span>
-              </a>
+                <a href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a>
               
-              <a class="archive-item animate-on-scroll" href="/2026/08/05/pilot-to-production-gap/">
-                <span class="archive-date">08-05</span>
-                <span class="archive-item-title">88% 的 AI 试点走不到生产,而输的不是模型</span>
-              </a>
-              
-              <a class="archive-item animate-on-scroll" href="/2026/08/04/agent-liability-2026/">
-                <span class="archive-date">08-04</span>
-                <span class="archive-item-title">Agent 闯了祸算谁的:自主系统的责任正在被法律钉死</span>
-              </a>
-              
-              <a class="archive-item animate-on-scroll" href="/2026/08/04/ai-power-grid-2026/">
-                <span class="archive-date">08-04</span>
-                <span class="archive-item-title">电网成为 AI 的硬约束:一场从机房烧到居民电费的挤占</span>
-              </a>
-              
-              <a class="archive-item animate-on-scroll" href="/2026/08/03/cloud-price-war-2026-08/">
-                <span class="archive-date">08-03</span>
-                <span class="archive-item-title">云端在降价,本地在涨价:2026 年夏天的两个反方向</span>
-              </a>
-              
-              <a class="archive-item animate-on-scroll" href="/2026/08/03/hardware-price-surge-2026/">
-                <span class="archive-date">08-03</span>
-                <span class="archive-item-title">最贵装机季:AI 抢走了你的内存条</span>
-              </a>
-              
-              <a class="archive-item animate-on-scroll" href="/2026/07/31/ai-briefing-2026-07-late/">
-                <span class="archive-date">07-31</span>
-                <span class="archive-item-title">七月下半月速览:开源权重贴身、Agent 越狱进生产环境、监管转向市场结构</span>
-              </a>
-              
-              <a class="archive-item animate-on-scroll" href="/2026/07/27/subscription-tier-fragmentation/">
-                <span class="archive-date">07-27</span>
-                <span class="archive-item-title">订阅档位正在碎片化:当&#34;买哪个&#34;比&#34;用哪个&#34;更难</span>
-              </a>
-              
-              <a class="archive-item animate-on-scroll" href="/2026/07/27/ai-finance-pitfalls/">
-                <span class="archive-date">07-27</span>
-                <span class="archive-item-title">AI 做金融分析的三个致命陷阱:在你把钱交给它之前</span>
-              </a>
-              
-              <a class="archive-item animate-on-scroll" href="/2026/07/27/opus5-price-war/">
-                <span class="archive-date">07-27</span>
-                <span class="archive-item-title">「半价」的参照物是谁:一句宣传语引发的集体误读</span>
-              </a>
-              
-            </div>
+            </span>
+            
+          </div>
+          <h2 class="post-card-title">
+            <a href="/2025/06/10/hello-world/">欢迎来到 ByteVibe</a>
+          </h2>
+          <div class="post-card-excerpt">
+            
+              欢迎来到 ByteVibe！这是一个关于 Vibe Coding 和 AI 编程的技术博客，在这里我们将一起探索 AI 时代的编程新范式。
+            
           </div>
           
+          <div class="post-card-tags">
+            
+              <a class="tag-pill" href="/tags/%E5%85%AC%E5%91%8A/">#公告</a>
+            
+          </div>
+          
+          <span class="read-more">阅读全文 →</span>
         </div>
-        
+      </article>
+      
+    </div>
+    
 <nav class="pagination">
-  <span class="page-number current">1</span><a class="page-number" href="/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/page/2/">2</a><a class="extend next" rel="next" href="/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/page/2/">→</a>
+  <a class="extend prev" rel="prev" href="/page/3/">←</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
 </nav>
 
 
-      
-    </div>
   </div>
 </section>
 

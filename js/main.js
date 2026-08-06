@@ -1535,6 +1535,7 @@ var Rain = (function () {
   var loopUpgrading = false;
   var audioCtx = null, masterGain = null, bedGain = null, bedLowpass = null, bedModDepth = null, noiseBuffer = null, mediaGain = null;
   var plinkCarry = 0, activePlinks = 0, lastDingAt = 0, nextThunderAt = 0, flashAlpha = 0;
+  var thunderSrc = null; // 进行中的雷声,关闭/隐藏时要掐掉,否则恢复后会接着放完尾巴
   var gestureBound = false;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var MAX_DROPS = 240;
@@ -1946,28 +1947,51 @@ var Rain = (function () {
   /* 远雷:低通噪声,慢起音 + 长衰减,滤波频率缓慢下扫出"滚雷"感 */
   function playThunder(intensity) {
     if (!audioCtx || audioCtx.state !== 'running' || !noiseBuffer) return;
+    stopThunder(); // 同一时刻只允许一声,避免尾音叠加成持续轰鸣
+
     var t = audioCtx.currentTime;
-    var dur = 3 + Math.random() * 3;
+    // 原先 3–6 秒 + 纯指数衰减,听感上"拖很久":指数曲线大部分时间耗在
+    // 低电平区,配合扫到 55Hz 的低通就是一段又闷又长的隆隆声。改短并分两段衰减。
+    var dur = 1.8 + Math.random() * 1.4;   // 1.8–3.2 秒
+    var attack = 0.18 + Math.random() * 0.22;
+
     var src = audioCtx.createBufferSource();
     src.buffer = noiseBuffer;
     src.loop = true;
     var lp = audioCtx.createBiquadFilter();
     lp.type = 'lowpass';
-    lp.frequency.setValueAtTime(150 + Math.random() * 60, t);
-    lp.frequency.exponentialRampToValueAtTime(55, t + dur);
+    lp.frequency.setValueAtTime(170 + Math.random() * 60, t);
+    lp.frequency.exponentialRampToValueAtTime(70, t + dur); // 不再扫到 55Hz,少一点闷
     lp.Q.value = 0.5;
+
     var g = audioCtx.createGain();
-    var peak = 0.02 + 0.02 * intensity; // 刻意压低,不喧宾夺主
+    var peak = 0.014 + 0.014 * intensity; // 雨声整体调低后,雷声同比例压低
     g.gain.setValueAtTime(0, t);
-    g.gain.linearRampToValueAtTime(peak, t + 0.35 + Math.random() * 0.45);
+    g.gain.linearRampToValueAtTime(peak, t + attack);
+    // 前 35% 就掉到峰值的 12%,剩下的尾巴快速收干净
+    g.gain.exponentialRampToValueAtTime(peak * 0.12, t + attack + dur * 0.35);
     g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    g.gain.linearRampToValueAtTime(0, t + dur + 0.08); // 硬收尾,不留 0.0001 的余音
+
     src.connect(lp);
     lp.connect(g);
     g.connect(masterGain);
     src.start(t);
-    src.stop(t + dur + 0.1);
+    src.stop(t + dur + 0.12);
+    thunderSrc = src;
+    src.onended = function () { if (thunderSrc === src) thunderSrc = null; };
+
     // 极淡的一帧画面闪光,与雷声呼应
     flashAlpha = 0.04;
+  }
+
+  /* 立即掐掉进行中的雷声。
+     必须有:audioCtx.suspend() 会冻结音频时钟,若此时正打雷,
+     下次恢复播放时它会接着把剩下的尾巴放完——表现为"雷声拖得非常长"。 */
+  function stopThunder() {
+    if (!thunderSrc) return;
+    try { thunderSrc.onended = null; thunderSrc.stop(); } catch (e) {}
+    thunderSrc = null;
   }
 
   function resumeAudio() {
@@ -2028,6 +2052,7 @@ var Rain = (function () {
       rafId = null;
       drops = []; ripples = []; splashes = [];
       plinkCarry = 0; nextThunderAt = 0; flashAlpha = 0;
+      stopThunder();
       if (ctx) ctx.clearRect(0, 0, W, H);
       if (audioCtx && masterGain) {
         masterGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.2);
@@ -2047,6 +2072,7 @@ var Rain = (function () {
     if (document.hidden) {
       if (rafId) cancelAnimationFrame(rafId);
       rafId = null;
+      stopThunder(); // 不掐掉的话,切回页签时会先补完上次没放完的雷
       if (rainEl) rainEl.pause();
       if (audioCtx && audioCtx.state === 'running') audioCtx.suspend();
     } else {
