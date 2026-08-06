@@ -114,7 +114,7 @@
   <div class="container">
     <header class="archive-header">
       <h1 class="archive-title">模型天梯</h1>
-      <p class="archive-desc">TOP 20 AI MODELS · 多机构综合排名 · 数据快照 2026-08-04</p>
+      <p class="archive-desc">TOP 20 AI MODELS · 多机构综合排名 · 数据快照 2026-08-06</p>
     </header>
 
     <a class="rk-advisor-cta" href="/advisor/">
@@ -174,7 +174,24 @@
           </div>
         </details>
         <p class="rk-note rk-note-key"><strong>⚠ 两条务必知道的</strong>:① <a class="term-tip" href="https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-1" target="_blank" rel="noopener" data-tip="Artificial Analysis 在 v4.1 把评测重心转向智能体工作负载,题集与计分方式都变了。因此 v4.1 的分数与改版前的旧分数不能直接比较——本页已全部换用 v4.1 实测值。引用他处分数时务必核对是哪个版本。">AA 指数为 v4.1 口径</a>,与旧分数不可比;② <a class="term-tip" href="/2026/07/27/ai-finance-pitfalls/" data-tip="金融维度用的是代理指标(AA 指数 + LiveBench 数学),不是真正的金融基准——目前没有覆盖全部 20 个模型的公开金融基准,本站不编造金融分。更重要的是:实测显示六个主流模型中有四个会在源文档不完整时捏造财务数据。点击阅读详细分析 →">金融维度是代理指标</a>,且高分≠可信任其财务输出。</p>
-        <p class="rk-note"><strong>数据来源(快照 2026-08-04,以各机构官网为准)</strong>:
+        <details class="rk-fold">
+          <summary>已发布但暂未入榜的模型(及原因)</summary>
+          <div class="rk-fold-body">
+            <p class="rk-note">天梯是<strong>多机构归一化</strong>排名。只有一家收录时,归一化会失真,因此本站的规则是<strong>缺跨机构数据就不入榜,也绝不用估算值补位</strong>。下列模型确实已发布、能力也不弱,只是评测覆盖还不够:</p>
+            <table class="rk-pending">
+              <thead><tr><th>模型</th><th>AA 指数</th><th>缺什么</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Qwen3.8-Max</strong>(阿里,08-03 正式版)</td><td>56</td><td>Arena / LiveBench / SWE-V 均无独立成绩</td></tr>
+                <tr><td>GPT-5.6 Terra(OpenAI)</td><td>55</td><td>同上</td></tr>
+                <tr><td>Muse Spark 1.2(Meta)</td><td>54</td><td>同上</td></tr>
+                <tr><td>GPT-5.6 Luna(OpenAI)</td><td>51</td><td>同上</td></tr>
+                <tr><td>DeepSeek-V4-Flash-0731</td><td>50</td><td>同上</td></tr>
+              </tbody>
+            </table>
+            <p class="rk-note">⚠ 厂商自测成绩不能替代第三方评测,<strong>基准名也要对齐</strong>——例如阿里公布的是 SWE-bench <strong>Pro</strong>,与本表使用的 SWE-bench <strong>Verified</strong> 不是同一套题,不可混用。等任一模型补齐跨机构数据即会入榜。</p>
+          </div>
+        </details>
+        <p class="rk-note"><strong>数据来源(快照 2026-08-06,以各机构官网为准)</strong>:
           <a href="https://arena.ai/leaderboard/text" target="_blank" rel="noopener">Arena</a> ·
           <a href="https://artificialanalysis.ai/leaderboards/models" target="_blank" rel="noopener">Artificial Analysis</a> ·
           <a href="https://livebench.ai/" target="_blank" rel="noopener">LiveBench</a> ·
@@ -310,7 +327,7 @@
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-qwen">Q</span><a href="https://qwen.ai/" target="_blank" rel="noopener">通义千问(Qwen)</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Qwen Chat + 开源全家桶</strong><b>适合:</b>要私有化部署的团队、阿里云生态用户。<br><b>强项:</b>开源生态最全(0.5B 到 Max),微调底座首选之一。<br><b>🐑</b> 网页版免费;自部署后成本只剩算力。</span></span></td>
               <td class="rk-pt-plans"><span class="rk-plan">Qwen Chat 免费为主</span></td>
-              <td>Qwen3.7 Max · <strong>Qwen3.8-Max(预览版,新)</strong> · 开源全系(0.5B 到 Max,可自部署)<br><em class="rk-pt-note">3.8-Max 为 2.4 万亿参数原生多模态旗舰,阿里已宣布<strong>正式版与开放权重近期同步发布</strong>。预览版已可试用,但跨机构评测尚未覆盖,故暂不入天梯</em></td>
+              <td><strong>Qwen3.8-Max(正式版,新)</strong> · Qwen3.7 Max · 开源全系(0.5B 到 Max,可自部署)<br><em class="rk-pt-note">3.8-Max 于 <strong>2026-08-03 正式发布</strong>:2.4 万亿参数 MoE(激活约 950 亿)、1M 上下文、原生视觉。<strong>AA 智能指数 56</strong>,较 3.7 Max 的 46 提升 10 分。官方称权重即将开源,<strong>为 Max 级首次开放权重</strong><br>⚠ 目前仅 AA 一家收录,Arena / LiveBench / SWE-bench Verified 尚无独立成绩,故暂不入天梯(见天梯页「已发布但暂未入榜」)</em></td>
               <td>· 网页 / App 宽松使用<br>· API 走阿里云百炼,按量计费,新户有赠额<br>· 开源版自部署后无任何额度概念</td>
               <td>—(自部署无上限,只受算力约束)</td>
               <td>免费档 $0;自部署仅算力成本</td>
@@ -380,7 +397,7 @@
             <p class="rk-note"><strong>会员折算价</strong> = 月费 ÷ 极限用量,即"把额度用满时每百万 token 的成本"。用得越少单价越高;与右侧 API 标价对照,可看出会员在什么用量下开始划算。国产平台 API 价按当期汇率近似换算为美元。</p>
           </div>
         </details>
-        <p class="rk-note"><strong>价格快照 2026-08-04</strong>,来源:
+        <p class="rk-note"><strong>价格快照 2026-08-06</strong>,来源:
           <a href="https://www.aipricing.guru/subscriptions/" target="_blank" rel="noopener">AI Pricing Guru</a> ·
           <a href="https://spectrumailab.com/blog/ai-coding-tools-pricing-compared-2026" target="_blank" rel="noopener">SpectrumAI Lab(编程工具对比)</a> ·
           <a href="https://automationatlas.io/answers/github-copilot-pricing-explained-2026/" target="_blank" rel="noopener">Automation Atlas(Copilot Credits 制)</a> ·
@@ -608,7 +625,7 @@
             <p class="rk-note"><strong>NPS</strong>(净推荐值,-100~+100)、<strong>"最爱"投票</strong>(开发者调查中选为最喜爱的比例)、<strong>满意度</strong>、<strong>市场规模</strong>(付费用户数或 ARR)。来自 2026 年开发者调查与厂商披露,时点 2026 年初至 7 月。<strong>缺数据一律标 <span class="rk-miss-mark">—</span>,不用估算值填空。</strong></p>
           </div>
         </details>
-        <p class="rk-note"><strong>数据来源(快照 2026-08-04,以各平台官网为准)</strong>:
+        <p class="rk-note"><strong>数据来源(快照 2026-08-06,以各平台官网为准)</strong>:
           <a href="https://www.digitalapplied.com/blog/ai-coding-tool-adoption-2026-developer-survey" target="_blank" rel="noopener">2026 开发者调查(NPS / 满意度 / 最爱投票)</a> ·
           <a href="https://www.ideaplan.io/blog/ai-coding-assistant-market-share-2026" target="_blank" rel="noopener">市场份额调查</a> ·
           <a href="https://uibakery.io/blog/openai-codex-pricing" target="_blank" rel="noopener">Codex 定价与用量</a> ·
@@ -622,7 +639,7 @@
 
     <script type="application/json" id="rankingsData">
     {
-      "snapshot": "2026-08-04",
+      "snapshot": "2026-08-06",
       "institutions": {
         "arena":      { "name": "Arena",               "short": "Arena",     "url": "https://arena.ai/leaderboard/text",                 "unit": "Elo" },
         "aa":         { "name": "Artificial Analysis", "short": "AA 指数",   "url": "https://artificialanalysis.ai/leaderboards/models", "unit": "指数" },
