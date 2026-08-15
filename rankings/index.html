@@ -139,10 +139,11 @@
       <button type="button" class="rk-density-btn rk-cur-btn is-active" data-cur="cny">¥ 人民币</button>
       <button type="button" class="rk-density-btn rk-cur-btn" data-cur="usd">$ 美元</button>
       <span class="rk-density-hint rk-cur-note">
-        <strong>≈</strong> 表示按 <strong>1 USD = 6.7419 CNY</strong>(2026-08-15 中间价)折算,非官方定价;
+        <strong>≈</strong> 表示按 <strong id="rkFxRate">1 USD = 6.7419 CNY</strong><span id="rkFxSrc">(内置估算值,2026-08-15)</span> 折算,非官方定价;
         国产平台表内另标了官方人民币牌价,以那个为准。
         <a class="term-tip" tabindex="0" data-tip="国内平台(智谱 bigmodel、DeepSeek、阿里百炼、火山引擎、腾讯云等)的公开牌价一般为含税价,企业可索取增值税发票,信息技术服务适用税率 6%;具体开票口径以各平台合同为准。
-海外平台(Claude、ChatGPT、Gemini、Cursor、Copilot 等)以美元计价,不含中国增值税;个人信用卡跨境支付通常另有 1–2% 货币转换费,企业购汇还有汇兑成本——真实到手成本会高于此处折算值。">含税与手续费口径 →</a>
+海外平台(Claude、ChatGPT、Gemini、Cursor、Copilot 等)以美元计价,不含中国增值税;个人信用卡跨境支付通常另有 1–2% 货币转换费,企业购汇还有汇兑成本——真实到手成本会高于此处折算值。
+汇率来源:由你的浏览器直接向公开汇率源(jsDelivr / open.er-api)请求当期值,结果在本地缓存 12 小时;若请求超时或被拦截,则回落到内置估算值,上方标注会写明用的是哪一种。">含税与手续费口径 →</a>
       </span>
     </div>
 

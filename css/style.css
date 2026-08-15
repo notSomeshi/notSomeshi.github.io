@@ -4841,3 +4841,7 @@ html.cover-lock { overflow: hidden; }
   .rk-currency .rk-density-btn { min-width: 96px; justify-content: center; }
   .rk-cur-note a { display: inline-block; padding: 8px 0; }
 }
+
+/* 汇率来源标注:回落到内置估算值时弱化并加提示色,让读者知道这不是当期实时汇率 */
+#rkFxSrc { color: var(--text-tertiary); }
+#rkFxSrc.is-fallback { color: #d29922; }

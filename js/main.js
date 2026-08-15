@@ -8,6 +8,75 @@
 document.addEventListener('DOMContentLoaded', function () {
 
   /* ==========================================
+     0. 汇率:由用户浏览器实时获取,失败则回落到内置值
+     站点面向中文读者,价格要折算人民币;而写死汇率必然过期。
+     策略:localStorage 缓存(12h)→ 公开汇率源(2.5s 超时,双源)→ 内置估算值。
+     任何一步失败都不影响页面可用,只是标注里会写明用的是估算值。
+     注意:这会让访客浏览器向第三方发一次请求,标注中已如实说明。
+     ========================================== */
+  var FX = {
+    rate: 6.7419,              // 兜底值(2026-08-15 中间价)。取不到实时汇率时用它
+    asof: '2026-08-15',
+    source: 'fallback',
+    live: false
+  };
+  var FX_KEY = 'bv-fx';
+  var FX_TTL = 12 * 3600 * 1000;
+  var fxSubs = [];
+  function onFxUpdate(fn) { fxSubs.push(fn); }
+  function emitFx() { fxSubs.forEach(function (f) { try { f(); } catch (e) {} }); }
+
+  // 明显离谱的值不采信——防止上游返回脏数据把全站价格写错
+  function fxApply(rate, asof, source) {
+    if (!(rate > 1) || rate > 100) return false;
+    FX.rate = Math.round(rate * 10000) / 10000;
+    FX.asof = asof || FX.asof;
+    FX.source = source;
+    FX.live = true;
+    return true;
+  }
+
+  function fxFetch(url, parse) {
+    return new Promise(function (resolve, reject) {
+      var ctl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+      var timer = setTimeout(function () { if (ctl) ctl.abort(); reject(new Error('timeout')); }, 2500);
+      fetch(url, ctl ? { signal: ctl.signal } : undefined)
+        .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('http ' + r.status)); })
+        .then(function (j) { clearTimeout(timer); var v = parse(j); if (v) resolve(v); else reject(new Error('parse')); })
+        .catch(function (e) { clearTimeout(timer); reject(e); });
+    });
+  }
+
+  function initFx() {
+    try {
+      var c = JSON.parse(localStorage.getItem(FX_KEY) || 'null');
+      if (c && c.rate && Date.now() - c.ts < FX_TTL) fxApply(c.rate, c.asof, c.source);
+    } catch (e) {}
+    if (FX.live) { emitFx(); return; }               // 缓存还新鲜就不再打网络
+    if (typeof fetch !== 'function') return;         // 老浏览器直接用兜底值
+
+    var sources = [
+      { name: 'jsDelivr', url: 'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json',
+        parse: function (j) { return (j && j.usd && j.usd.cny) ? { rate: j.usd.cny, asof: j.date } : null; } },
+      { name: 'er-api', url: 'https://open.er-api.com/v6/latest/USD',
+        parse: function (j) { return (j && j.rates && j.rates.CNY) ? { rate: j.rates.CNY, asof: (j.time_last_update_utc || '').slice(5, 16) } : null; } }
+    ];
+
+    (function tryNext(i) {
+      if (i >= sources.length) return;               // 全部失败:静默保留内置值
+      fxFetch(sources[i].url, sources[i].parse).then(function (v) {
+        if (fxApply(v.rate, v.asof, sources[i].name)) {
+          try {
+            localStorage.setItem(FX_KEY, JSON.stringify({ rate: FX.rate, asof: FX.asof, source: FX.source, ts: Date.now() }));
+          } catch (e) {}
+          emitFx();
+        }
+      }).catch(function () { tryNext(i + 1); });
+    })(0);
+  }
+  initFx();
+
+  /* ==========================================
      1. 显示模式循环:light → dark → rain(圆形扩散动画)
      暗色为默认态(无 data-theme 属性);rain = 暗色 + data-rain
      ========================================== */
@@ -638,11 +707,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /* 站点面向中文读者,费用一律「美元 + 人民币折算」双显。
-       折算值带 ≈,避免被当成官方定价;汇率与天梯页 USD_CNY 必须保持一致。 */
-    var ADV_USD_CNY = 6.7419;              // 2026-08-15 中间价
+       折算值带 ≈,避免被当成官方定价;汇率取共享的 FX(实时优先,失败回落内置值)。 */
     function cnyTail(usd) {
       if (!usd || usd <= 0) return '';
-      var v = usd * ADV_USD_CNY;
+      var v = usd * FX.rate;
       return ' ≈¥' + (v >= 1000 ? Math.round(v).toLocaleString('en-US')
                     : v >= 10   ? v.toFixed(0)
                                 : v.toFixed(1));
@@ -1433,14 +1501,13 @@ document.addEventListener('DOMContentLoaded', function () {
        因此折算值统一带 ≈ 前缀,避免读者把derived值当成官方定价。 */
     var curBox = document.getElementById('rkCurrency');
     if (curBox) {
-      var USD_CNY = 6.7419;               // 2026-08-15 中间价,改汇率时同步改页面说明里的数字
       var curBtns = curBox.querySelectorAll('.rk-cur-btn');
       // 只在确定含价格的容器里替换,避免误伤正文里的其它 $ 字样
       var PRICE_SEL = '.rk-pt-plans, .rk-price-table td, .rkc-cost, .rkc-eff, .rkc-task, .rk-deal, .rk-plat-table td';
 
       // 只返回数字部分,前缀由调用方拼——区间价 "$25–30" 要拼成 "≈¥169–202" 而不是两个 ≈
       function cnyNum(usd) {
-        var v = usd * USD_CNY;
+        var v = usd * FX.rate;
         if (v >= 1000) return Math.round(v).toLocaleString('en-US');
         if (v >= 10)   return v.toFixed(0);
         if (v >= 1)    return v.toFixed(1);
@@ -1479,7 +1546,22 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       }
 
+      // 汇率来源要如实写出来:实时值标日期与来源,兜底值明确写"内置估算"
+      function renderFxLabel() {
+        var rateEl = document.getElementById('rkFxRate');
+        var srcEl = document.getElementById('rkFxSrc');
+        if (rateEl) rateEl.textContent = '1 USD = ' + FX.rate + ' CNY';
+        if (srcEl) {
+          srcEl.textContent = FX.live
+            ? '(' + FX.asof + ' 实时汇率,来源 ' + FX.source + ')'
+            : '(内置估算值,' + FX.asof + ';未能获取实时汇率)';
+          srcEl.classList.toggle('is-fallback', !FX.live);
+        }
+      }
+
+      var curMode = 'cny';
       function applyCurrency(mode) {
+        curMode = mode;
         var sec = document.querySelector('.rankings-section');
         if (sec) walk(sec, mode === 'cny');
         curBtns.forEach(function (b) {
@@ -1488,12 +1570,16 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.rk-cur-note').forEach(function (n) {
           n.hidden = mode !== 'cny';
         });
+        renderFxLabel();
         try { localStorage.setItem('bv-currency', mode); } catch (e) {}
       }
 
       var savedCur = 'cny';
       try { savedCur = localStorage.getItem('bv-currency') || 'cny'; } catch (e) {}
       applyCurrency(savedCur);
+
+      // 实时汇率通常在首屏后一秒内到达,到了就按新汇率重算一遍
+      onFxUpdate(function () { applyCurrency(curMode); });
 
       curBtns.forEach(function (b) {
         b.addEventListener('click', function () { applyCurrency(b.dataset.cur); });
