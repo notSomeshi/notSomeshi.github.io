@@ -4845,3 +4845,25 @@ html.cover-lock { overflow: hidden; }
 /* 汇率来源标注:回落到内置估算值时弱化并加提示色,让读者知道这不是当期实时汇率 */
 #rkFxSrc { color: var(--text-tertiary); }
 #rkFxSrc.is-fallback { color: #d29922; }
+
+/* 次要板块按需加载时的占位提示 */
+.rk-boards-msg {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  padding: 40px 0;
+  text-align: center;
+}
+.rk-boards-msg.is-error { color: #d29922; }
+.rk-boards-retry {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  padding: 6px 14px;
+  margin-left: 8px;
+  min-height: 36px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+  cursor: pointer;
+}
+.rk-boards-retry:hover { border-color: var(--accent); color: var(--accent); }
