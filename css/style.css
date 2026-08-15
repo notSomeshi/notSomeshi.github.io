@@ -3084,6 +3084,18 @@ body::before {
   color: var(--text-tertiary);
 }
 
+/* 币种开关:紧跟密度开关,负 margin 收掉两行之间的空隙 */
+.rk-currency { margin-top: -6px; }
+
+/* 折算口径说明只在人民币模式出现,由 JS 切 hidden。
+   基础规则用 [hidden] 兜底,避免 .rk-density-hint 的 display 把它顶出来。 */
+.rk-cur-note { line-height: 1.7; }
+.rk-cur-note[hidden] { display: none; }
+.rk-cur-note strong { color: var(--text-secondary); }
+
+/* 折算值与官方牌价视觉上要能分开:≈ 打头的是折算,弱化处理 */
+.rk-currency .rk-density-btn { min-width: 82px; }
+
 /* 精简模式:隐藏补充注释,只留关键信息 */
 .rk-lite .rk-pt-note,
 .rk-lite .rkc-effort,
@@ -4814,4 +4826,18 @@ html.cover-lock { overflow: hidden; }
     color: #000;
     text-decoration: underline;
   }
+}
+
+/* ── 移动端:开关按钮的触摸目标 ──
+   放在文件末尾,确保不被前面任何基础规则覆盖(媒体查询必须在基础规则之后)。
+   桌面端 26px 高足够点,触屏下低于 44px 容易误触——这里只在窄屏放大,不影响桌面排版。 */
+@media (max-width: 767px) {
+  .rk-density-btn {
+    min-height: 44px;
+    padding: 10px 18px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .rk-currency .rk-density-btn { min-width: 96px; justify-content: center; }
+  .rk-cur-note a { display: inline-block; padding: 8px 0; }
 }

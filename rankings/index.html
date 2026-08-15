@@ -133,6 +133,19 @@
       <span class="rk-density-hint">精简模式隐藏补充注释,只留关键数字</span>
     </div>
 
+    <!-- 币种开关:默认人民币(站点面向中文读者) -->
+    <div class="rk-density rk-currency" id="rkCurrency">
+      <span class="rk-density-label">币种</span>
+      <button type="button" class="rk-density-btn rk-cur-btn is-active" data-cur="cny">¥ 人民币</button>
+      <button type="button" class="rk-density-btn rk-cur-btn" data-cur="usd">$ 美元</button>
+      <span class="rk-density-hint rk-cur-note">
+        <strong>≈</strong> 表示按 <strong>1 USD = 6.7419 CNY</strong>(2026-08-15 中间价)折算,非官方定价;
+        国产平台表内另标了官方人民币牌价,以那个为准。
+        <a class="term-tip" tabindex="0" data-tip="国内平台(智谱 bigmodel、DeepSeek、阿里百炼、火山引擎、腾讯云等)的公开牌价一般为含税价,企业可索取增值税发票,信息技术服务适用税率 6%;具体开票口径以各平台合同为准。
+海外平台(Claude、ChatGPT、Gemini、Cursor、Copilot 等)以美元计价,不含中国增值税;个人信用卡跨境支付通常另有 1–2% 货币转换费,企业购汇还有汇兑成本——真实到手成本会高于此处折算值。">含税与手续费口径 →</a>
+      </span>
+    </div>
+
     <!-- 板块切换:能力天梯 / 订阅性价比 / 编程平台 -->
     <div class="rk-boards" id="rkBoards">
       <button type="button" class="rk-board-tab is-active" data-board="ladder">能力天梯</button>
@@ -277,11 +290,11 @@
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-zai">Z</span><a href="https://z.ai/" target="_blank" rel="noopener">GLM Coding Plan</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// GLM Coding Lite / Pro</strong><b>适合:</b>个人开发者、学生党、把预算压到极限的人。<br><b>强项:</b>兼容 Claude Code 的 CLI,一行配置换后端;中文项目好。<br><b>🐑</b> GLM Flash 系列<strong>永久免费</strong>;$3 档是价格战风向标。</span></span></td>
               <td class="rk-pt-plans"><span class="rk-plan">Lite $3</span><span class="rk-plan">Pro $15</span><span class="rk-plan"><em>官方常有半价/首月促销</em></span></td>
-              <td>GLM-5.2 · GLM-5</td>
+              <td><strong>GLM-5.3(新)</strong> · GLM-5.2 · GLM-5<br><em class="rk-pt-note">5.3 于 <strong>2026-08-14 发布</strong>,已向 Coding Plan <strong>全量开放</strong>(可在 ZCode / Claude Code / OpenCode 里调用)。与 5.2 <strong>同基座,增益全部来自后训练</strong>:Terminal-Bench 3.0 从 4.6 → <strong>28.3</strong>,DeepSWE v1.1 从 46.2 → <strong>66.9</strong><br>⚠ <strong>按量 API 价尚未公布</strong>——<a href="https://docs.z.ai/guides/overview/pricing" target="_blank" rel="noopener">z.ai 定价页</a>与 <a href="https://bigmodel.cn/pricing" target="_blank" rel="noopener">bigmodel 定价页</a>当前最新条目仍是 5.2;权重官方称约两周后(8 月底)开放<br>⚠ 尚无任何第三方机构评测(AA 未收录),故<strong>不入天梯</strong>,上述分数均为厂商自测</em></td>
               <td>5 小时滚动窗口,按 prompt(发送次数)计:<br>· Lite ≈ 120 条 / 5 小时(官方对标"Claude Pro 的 3 倍用量、约 1/10 价格")<br>· Pro ≈ 600 条 / 5 小时<br>· 兼容 Claude Code / Cline / Roo Code 等工具,改一行 API 地址即可接入</td>
               <td>· Lite ≈ 0.6–1.5 亿 token/月<br>· Pro ≈ 3–8 亿/月(自家模型)</td>
               <td>· Lite ≈ $0.02–0.05 /M<br>· Pro ≈ $0.03–0.1 /M<br><em class="rk-pt-note">全场最低档</em></td>
-              <td>GLM-5.2 ≈ $0.6 / $2.2<br>GLM-5 ≈ $0.4 / $1.6<br><em class="rk-pt-note">规则:缓存命中减免;并发上限随账户等级放宽<br>🐑 <strong>GLM Flash 系列永久免费</strong>;新用户实名另赠约 2,000 万 token,官方常有半价/首月促销</em></td>
+              <td><strong>GLM-5.2 $1.4 / $4.4</strong><br>GLM-5 $1 / $3.2<br>GLM-5-Turbo $1.2 / $4<br><em class="rk-pt-note">📍 <strong>国内 bigmodel 平台另有一套人民币牌价</strong>:GLM-5.2 <strong>¥8 / ¥28</strong>、缓存命中 ¥2(1M 上下文)。国内直连走这套,比国际站折算价略低,<strong>且为官方原始牌价而非折算值</strong><br>缓存输入 $0.26(约输入价的 1/5);缓存存储限时免费;并发上限随账户等级放宽<br>🐑 <strong>GLM-4.7-Flash / 4.5-Flash 永久免费</strong>(输入输出缓存全免);新用户实名另赠约 2,000 万 token,官方常有半价/首月促销<br>来源:<a href="https://docs.z.ai/guides/overview/pricing" target="_blank" rel="noopener">z.ai 官方定价</a> · <a href="https://bigmodel.cn/pricing" target="_blank" rel="noopener">bigmodel 官方定价</a></em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-deepseek">D</span><a href="https://www.deepseek.com/" target="_blank" rel="noopener">DeepSeek(API 直连)</a>

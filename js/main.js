@@ -637,10 +637,21 @@ document.addEventListener('DOMContentLoaded', function () {
       return mTok * (plan.priceIn * 0.7 + plan.priceOut * 0.3);
     }
 
+    /* 站点面向中文读者,费用一律「美元 + 人民币折算」双显。
+       折算值带 ≈,避免被当成官方定价;汇率与天梯页 USD_CNY 必须保持一致。 */
+    var ADV_USD_CNY = 6.7419;              // 2026-08-15 中间价
+    function cnyTail(usd) {
+      if (!usd || usd <= 0) return '';
+      var v = usd * ADV_USD_CNY;
+      return ' ≈¥' + (v >= 1000 ? Math.round(v).toLocaleString('en-US')
+                    : v >= 10   ? v.toFixed(0)
+                                : v.toFixed(1));
+    }
+
     function fmtCost(c) {
       if (c === 0) return '免费';
       if (c < 1) return '< $1';
-      return '$' + (c < 10 ? c.toFixed(1) : Math.round(c));
+      return '$' + (c < 10 ? c.toFixed(1) : Math.round(c)) + cnyTail(c);
     }
 
     /* ---------- 推荐算法 ---------- */
@@ -769,7 +780,7 @@ document.addEventListener('DOMContentLoaded', function () {
       function priceTag(r) {
         if (r.plan.payg) return '按量付费 · 预估 ' + fmtCost(r.cost) + '/月';
         if (r.plan.price === 0) return '免费';
-        return '$' + r.plan.price + ' / 月';
+        return '$' + r.plan.price + cnyTail(r.plan.price) + ' / 月';
       }
 
       // 选了金融用途时,置顶合规提示
@@ -870,10 +881,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if (cheapPayg.cost < cheapSub.cost * 0.75) {
           html += '<p class="adv-save">💡 你的用量下,<strong>' + cheapPayg.plan.platform +
             ' 按量付费(约 ' + fmtCost(cheapPayg.cost) + ')比最便宜的订阅(' + cheapSub.plan.platform + ' ' +
-            fmtCost(cheapSub.cost) + ')还省约 $' + Math.round(diff) + '/月</strong>——用量不大或不规律时,不必买会员。</p>';
+            fmtCost(cheapSub.cost) + ')还省约 $' + Math.round(diff) + cnyTail(diff) + '/月</strong>——用量不大或不规律时,不必买会员。</p>';
         } else if (cheapSub.cost < cheapPayg.cost * 0.75) {
           html += '<p class="adv-save">💡 你的用量下,<strong>' + cheapSub.plan.platform + ' ' + cheapSub.plan.tier +
-            '(' + fmtCost(cheapSub.cost) + '/月)比按量付费省约 $' + Math.round(diff) +
+            '(' + fmtCost(cheapSub.cost) + '/月)比按量付费省约 $' + Math.round(diff) + cnyTail(diff) +
             '/月</strong>——用量够大时,包月把成本封顶更划算。</p>';
         }
       } else if (top.cost === 0) {
@@ -1413,6 +1424,79 @@ document.addEventListener('DOMContentLoaded', function () {
 
       btns.forEach(function (b) {
         b.addEventListener('click', function () { applyDensity(b.dataset.density); });
+      });
+    }
+
+    /* --- 币种开关:人民币(默认)/ 美元 ---
+       站点面向中文读者,默认显示人民币。
+       口径:国产平台的 ¥ 是官方原始牌价(见表内标注);海外平台的 ¥ 由美元按快照汇率折算,
+       因此折算值统一带 ≈ 前缀,避免读者把derived值当成官方定价。 */
+    var curBox = document.getElementById('rkCurrency');
+    if (curBox) {
+      var USD_CNY = 6.7419;               // 2026-08-15 中间价,改汇率时同步改页面说明里的数字
+      var curBtns = curBox.querySelectorAll('.rk-cur-btn');
+      // 只在确定含价格的容器里替换,避免误伤正文里的其它 $ 字样
+      var PRICE_SEL = '.rk-pt-plans, .rk-price-table td, .rkc-cost, .rkc-eff, .rkc-task, .rk-deal, .rk-plat-table td';
+
+      // 只返回数字部分,前缀由调用方拼——区间价 "$25–30" 要拼成 "≈¥169–202" 而不是两个 ≈
+      function cnyNum(usd) {
+        var v = usd * USD_CNY;
+        if (v >= 1000) return Math.round(v).toLocaleString('en-US');
+        if (v >= 10)   return v.toFixed(0);
+        if (v >= 1)    return v.toFixed(1);
+        return v.toFixed(2);
+      }
+      function cny(usd) {
+        if (usd === 0) return '¥0';          // 免费档不写 ≈¥0.00
+        return '≈¥' + cnyNum(usd);
+      }
+      var num = function (s) { return parseFloat(String(s).replace(/,/g, '')); };
+
+      // 首次运行时把原文缓存到 dataset,之后来回切换都基于原文重算
+      function walk(root, toCNY) {
+        var nodes = root.querySelectorAll(PRICE_SEL);
+        Array.prototype.forEach.call(nodes, function (el) {
+          if (el.dataset.usdOrig === undefined) {
+            if (el.innerHTML.indexOf('$') < 0) { el.dataset.usdOrig = ''; return; }
+            el.dataset.usdOrig = el.innerHTML;
+          }
+          if (!el.dataset.usdOrig) return;
+          if (!toCNY) { el.innerHTML = el.dataset.usdOrig; return; }
+          // 先处理区间价 "$25–30 / 席":两端都要换算,否则会变成 "≈¥169–30" 这种错值
+          var html = el.dataset.usdOrig.replace(
+            /\$([\d,]+(?:\.\d+)?)\s*([–—~-])\s*([\d,]+(?:\.\d+)?)/g,
+            function (m, a, dash, b) {
+              var x = num(a), y = num(b);
+              if (isNaN(x) || isNaN(y)) return m;
+              return '≈¥' + cnyNum(x) + dash + cnyNum(y);
+            });
+          // 再处理单值。$ 后必须紧跟数字——"$/分""$/M" 这类单位写法不会被命中
+          html = html.replace(/\$([\d,]+(?:\.\d+)?)/g, function (m, n) {
+            var v = num(n);
+            return isNaN(v) ? m : cny(v);
+          });
+          el.innerHTML = html;
+        });
+      }
+
+      function applyCurrency(mode) {
+        var sec = document.querySelector('.rankings-section');
+        if (sec) walk(sec, mode === 'cny');
+        curBtns.forEach(function (b) {
+          b.classList.toggle('is-active', b.dataset.cur === mode);
+        });
+        document.querySelectorAll('.rk-cur-note').forEach(function (n) {
+          n.hidden = mode !== 'cny';
+        });
+        try { localStorage.setItem('bv-currency', mode); } catch (e) {}
+      }
+
+      var savedCur = 'cny';
+      try { savedCur = localStorage.getItem('bv-currency') || 'cny'; } catch (e) {}
+      applyCurrency(savedCur);
+
+      curBtns.forEach(function (b) {
+        b.addEventListener('click', function () { applyCurrency(b.dataset.cur); });
       });
     }
   }
