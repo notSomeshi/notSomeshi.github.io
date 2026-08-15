@@ -382,9 +382,6 @@ document.addEventListener('DOMContentLoaded', function () {
     pageObservers.forEach(function (o) { o.disconnect(); });
     pageObservers = [];
 
-    // 本页若含厂牌图标而样式表尚未加载(PJAX 跳过来的情况),补上
-    ensureBrandsCss();
-
     // --- 滚动入场动画 ---
     var animatedElements = document.querySelectorAll('.animate-on-scroll:not(.is-visible)');
     if ('IntersectionObserver' in window && animatedElements.length > 0) {
@@ -1337,70 +1334,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     /* --- 板块切换(能力天梯 / 订阅性价比) --- */
     var boardTabs = document.querySelectorAll('.rk-board-tab');
-    var reapplyCurrency = null;          // 由币种开关那段赋值,注入新板块后要重跑一次折算
-
-    /* 次要板块按需加载:它们占天梯页约四分之三的体积,且默认不可见。
-       首次点击对应 tab 时才 fetch /rankings/boards/ 片段并注入。 */
-    var boardSlot = document.getElementById('rkBoardsSlot');
-    var boardsState = 'idle';            // idle | loading | ready | error
-
-    function activateBoard(name) {
-      boardTabs.forEach(function (t) { t.classList.toggle('is-active', t.dataset.board === name); });
-      // 注入后 DOM 变了,每次重新查询,不能复用初始化时的 NodeList
-      document.querySelectorAll('.rk-board').forEach(function (b) {
-        b.classList.toggle('is-active', b.dataset.board === name);
-      });
-      if (name === 'pricing') pulseResizers('.rk-price-table');
-      if (name === 'platform') pulseResizers('.rk-plat-table');
-    }
-
-    function initInjectedBoards(root) {
-      makeResizable(root.querySelector('.rk-price-table'));
-      makeResizable(root.querySelector('.rk-plat-table'));
-      bindPlatTips(root);
-      if (reapplyCurrency) reapplyCurrency();   // 注入的价格还是美元原文,要按当前币种重算
-    }
-
-    function ensureBoards(then) {
-      if (boardsState === 'ready') { then(); return; }
-      if (boardsState === 'loading' || !boardSlot) return;
-      boardsState = 'loading';
-      boardSlot.hidden = false;
-      boardSlot.innerHTML = '<p class="rk-boards-msg">// 正在载入板块…</p>';
-
-      var ctl = typeof AbortController !== 'undefined' ? new AbortController() : null;
-      var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 12000);
-
-      fetch(boardSlot.dataset.src, ctl ? { signal: ctl.signal } : undefined)
-        .then(function (r) { return r.ok ? r.text() : Promise.reject(new Error('http ' + r.status)); })
-        .then(function (html) {
-          clearTimeout(timer);
-          boardSlot.innerHTML = html;
-          boardsState = 'ready';
-          initInjectedBoards(boardSlot);
-          then();
-        })
-        .catch(function () {
-          clearTimeout(timer);
-          boardsState = 'idle';           // 允许重试
-          boardSlot.innerHTML = '<p class="rk-boards-msg is-error">// 板块载入失败,<button type="button" class="rk-boards-retry">重试</button></p>';
-          var btn = boardSlot.querySelector('.rk-boards-retry');
-          if (btn) btn.addEventListener('click', function () {
-            var active = document.querySelector('.rk-board-tab.is-active');
-            ensureBoards(function () { activateBoard(active ? active.dataset.board : 'pricing'); });
-          });
-        });
-    }
-
+    var boards = document.querySelectorAll('.rk-board');
     boardTabs.forEach(function (tab) {
       tab.addEventListener('click', function () {
         if (tab.classList.contains('is-active')) return;
-        var name = tab.dataset.board;
-        if (name === 'ladder') { activateBoard(name); return; }
-        // 先把 tab 高亮切过去,让点击有即时反馈,再等片段到位
         boardTabs.forEach(function (t) { t.classList.toggle('is-active', t === tab); });
-        document.querySelectorAll('.rk-board').forEach(function (b) { b.classList.remove('is-active'); });
-        ensureBoards(function () { activateBoard(name); });
+        boards.forEach(function (b) {
+          b.classList.toggle('is-active', b.dataset.board === tab.dataset.board);
+        });
+        // 首次进入含可调表格的板块时,让分隔线脉冲几下,提示列宽可调
+        if (tab.dataset.board === 'pricing') pulseResizers('.rk-price-table');
+        if (tab.dataset.board === 'platform') pulseResizers('.rk-plat-table');
       });
     });
 
@@ -1640,9 +1584,6 @@ document.addEventListener('DOMContentLoaded', function () {
       try { savedCur = localStorage.getItem('bv-currency') || 'cny'; } catch (e) {}
       applyCurrency(savedCur);
 
-      // 供按需注入的板块调用:新 DOM 里的价格仍是美元原文,要按当前币种重算
-      reapplyCurrency = function () { applyCurrency(curMode); };
-
       // 实时汇率通常在首屏后一秒内到达,到了就按新汇率重算一遍
       onFxUpdate(function () { applyCurrency(curMode); });
 
@@ -1670,21 +1611,6 @@ document.addEventListener('DOMContentLoaded', function () {
   // 当前 PJAX 所在的"页面"(不含 hash)。用来在 popstate 时区分
   // "换页" 和 "同页锚点跳转" —— 后者不能重载正文,否则会把页面拉回顶部。
   var pjaxCurrent = location.pathname + location.search;
-
-  /* 厂牌 logo 样式表只在天梯/助手页由服务端写进 head(见 head.ejs)。
-     PJAX 不重解析 head,所以跳到这些页面时要按需补一个 link。
-     只注入一次;浏览器随后走缓存。 */
-  function ensureBrandsCss() {
-    if (document.getElementById('brandsCss')) return;
-    // 必须按「页面容器」判断,不能按 .rk-ico 是否存在——天梯表格是 JS 渲染的,
-    // initPage() 跑的时候一个图标都还没有,那样判断会永远不注入(踩过)。
-    if (!document.querySelector('.rankings-section, .advisor-section')) return;
-    var link = document.createElement('link');
-    link.id = 'brandsCss';
-    link.rel = 'stylesheet';
-    link.href = '/css/brands.css';
-    document.head.appendChild(link);
-  }
 
   function pjaxNavigate(url, push) {
     pjaxCurrent = url;
