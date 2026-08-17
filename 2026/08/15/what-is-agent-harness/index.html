@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>订阅档位正在碎片化:当&#34;买哪个&#34;比&#34;用哪个&#34;更难 | ByteVibe</title>
+<title>同一个模型,换个壳分数差 24 分:harness 入门 | ByteVibe</title>
 <meta name="description" content="一个关于 Vibe Coding、AI 辅助编程和现代开发实践的技术博客">
 <meta name="author" content="ByteVibe">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='0,0 100,0 100,78 78,100 0,100' fill='%23ffd802'/><text x='50' y='70' font-size='58' font-weight='800' font-family='ui-monospace,monospace' fill='%230d0d0f' text-anchor='middle'>B</text></svg>">
@@ -119,7 +119,7 @@
           <h3 class="sidebar-title">全部文章</h3>
           <ul class="sidebar-list">
             
-              <li class="sidebar-item ">
+              <li class="sidebar-item active">
                 <a href="/2026/08/15/what-is-agent-harness/">同一个模型,换个壳分数差 24 分:harness 入门</a>
               </li>
             
@@ -175,7 +175,7 @@
                 <a href="/2026/07/27/what-is-multimodal/">什么是多模态?——一篇给非技术读者的说明</a>
               </li>
             
-              <li class="sidebar-item active">
+              <li class="sidebar-item ">
                 <a href="/2026/07/27/subscription-tier-fragmentation/">订阅档位正在碎片化:当&#34;买哪个&#34;比&#34;用哪个&#34;更难</a>
               </li>
             
@@ -271,27 +271,27 @@
       <div class="post-content-main">
         <header class="post-header">
           <div class="post-meta">
-            <time class="post-date">2026年07月27日</time>
+            <time class="post-date">2026年08月15日</time>
             
             <span class="post-meta-sep">·</span>
             <span class="post-category">
               
-                <a href="/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察</a>
+                <a href="/categories/%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/">技术解析</a>
               
             </span>
             
             <span class="post-meta-sep">·</span>
-            <span class="reading-time">7 分钟阅读</span>
+            <span class="reading-time">6 分钟阅读</span>
           </div>
-          <h1 class="post-title">订阅档位正在碎片化:当&#34;买哪个&#34;比&#34;用哪个&#34;更难</h1>
+          <h1 class="post-title">同一个模型,换个壳分数差 24 分:harness 入门</h1>
           
           <div class="post-tags">
             
-              <a class="tag-pill" href="/tags/%E5%AE%9A%E4%BB%B7%E7%AD%96%E7%95%A5/">#定价策略</a>
+              <a class="tag-pill" href="/tags/Agent/">#Agent</a>
             
-              <a class="tag-pill" href="/tags/%E8%AE%A2%E9%98%85%E5%88%B6/">#订阅制</a>
+              <a class="tag-pill" href="/tags/%E8%AF%84%E6%B5%8B%E6%96%B9%E6%B3%95/">#评测方法</a>
             
-              <a class="tag-pill" href="/tags/%E6%B6%88%E8%B4%B9%E5%86%B3%E7%AD%96/">#消费决策</a>
+              <a class="tag-pill" href="/tags/harness/">#harness</a>
             
           </div>
           
@@ -301,120 +301,81 @@
         
         <details class="mobile-toc">
           <summary>目录 / Contents</summary>
-          <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E4%B8%83%E4%B8%AA%E6%A1%A3%E4%BD%8D%E7%9A%84-ChatGPT"><span class="toc-list-text">一、七个档位的 ChatGPT</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E8%BF%99%E4%B8%8D%E6%98%AF-OpenAI-%E7%8B%AC%E6%9C%89"><span class="toc-list-text">二、这不是 OpenAI 独有</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E7%8E%B0%E5%9C%A8%E5%BC%80%E5%A7%8B%E7%A2%8E%E7%89%87%E5%8C%96"><span class="toc-list-text">三、为什么现在开始碎片化</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E4%BB%A3%E4%BB%B7-%E5%86%B3%E7%AD%96%E6%88%90%E6%9C%AC%E8%BD%AC%E5%AB%81%E7%BB%99%E4%BA%86%E7%94%A8%E6%88%B7"><span class="toc-list-text">四、代价:决策成本转嫁给了用户</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E5%8A%A1%E5%AE%9E%E5%AF%B9%E7%AD%96"><span class="toc-list-text">五、务实对策</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%AD%E3%80%81%E4%B8%80%E4%B8%AA%E9%A2%84%E6%B5%8B"><span class="toc-list-text">六、一个预测</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+          <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%82%A3%E5%B1%82%E4%B8%9C%E8%A5%BF%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-list-text">那层东西是什么</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E4%B8%AA%E5%8F%8D%E7%9B%B4%E8%A7%89%E7%9A%84%E5%8F%91%E7%8E%B0"><span class="toc-list-text">一个反直觉的发现</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BD%86%E8%A6%81%E5%B0%8F%E5%BF%83%E8%B0%81%E5%9C%A8%E7%BB%99%E4%BD%A0%E7%9C%8B%E6%95%B0%E5%AD%97"><span class="toc-list-text">但要小心谁在给你看数字</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E8%BF%99%E5%AF%B9%E4%BD%A0%E9%80%89%E5%B7%A5%E5%85%B7%E6%84%8F%E5%91%B3%E7%9D%80%E4%BB%80%E4%B9%88"><span class="toc-list-text">这对你选工具意味着什么</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
         </details>
         
 
         <div class="post-body">
-          <p>2026 年 7 月,ChatGPT 的付费档位增加到了<strong>六个</strong>:Free、Go $8、Plus $20、Pro Codex $100、Pro Max $200、Business $20&#x2F;席,外加 Enterprise。而在两年前,这个数字是两个。这不是孤例——Claude、Cursor、Copilot、Kimi 都在做同样的事。<strong>模型能力在收敛,定价结构却在发散。</strong></p>
-<span id="more"></span>
-
-<div class="report-box">
-<div class="report-box-title">// 核心观点摘要</div>
-<ul>
-<li><strong>档位数量暴涨</strong>:ChatGPT 从 2 档增至 7 档;Kimi 有 5 档;Cursor、Copilot 各 5 档。</li>
-<li><strong>关键变化</strong>:原统一 $120 的 ChatGPT Pro 拆为 <strong>$100(5× Plus)</strong> 与 <strong>$200(20× + 1M 上下文)</strong>;新增 $8 的 Go 档但<strong>含广告</strong>。</li>
-<li><strong>碎片化的动因</strong>:能力趋同后,价格歧视成为主要的利润提取手段。</li>
-<li><strong>对用户的代价</strong>:决策成本转嫁给消费者——你需要先精确知道自己的用量,才能选对档位。</li>
-<li><strong>务实对策</strong>:先测用量,再选档;警惕"看起来只贵一点"的升级诱导。</li>
-</ul>
+          <p>你花时间挑了半天模型,最后选了榜单第一。然后发现别人用着更差的模型,干活比你顺。</p>
+<p>这事有个具体的解释,而且能量化。</p>
+<p>北京大学与奇元科技在 2026 年做了一项叫 <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2605.27922">Harness-Bench</a> 的研究:<strong>固定任务、固定模型</strong>,只换外面那层执行框架,跑了 5,194 条执行轨迹。结果是——</p>
+<div class="fig">
+  <div class="fig-title">同样的模型、同样的 106 个任务,只换 harness</div>
+  <div class="fig-sub">柱长按最高分(NanoBot 76.2%)归一为 100%。8 个模型后端 × 6 个 harness,共 5,194 条执行轨迹的聚合分。</div>
+  <div class="fig-bars">
+    <div class="fig-bar-row">
+      <span class="fig-bar-label"><b>NanoBot</b>最高</span>
+      <span class="fig-bar-track"><i class="fig-bar-fill is-good" style="--w:100%"></i></span>
+      <span class="fig-bar-val">76.2<em>%</em></span>
+    </div>
+    <div class="fig-bar-row">
+      <span class="fig-bar-label"><b>OpenClaw</b>最低</span>
+      <span class="fig-bar-track"><i class="fig-bar-fill is-warn" style="--w:68.8%"></i></span>
+      <span class="fig-bar-val">52.4<em>%</em></span>
+    </div>
+  </div>
+  <p class="fig-src">来源:<a href="https://arxiv.org/pdf/2605.27922" target="_blank" rel="noopener">Harness-Bench: Measuring Harness Effects across Models in Realistic Agent Workflows</a>(Yilun Yao 等,北京大学 / 奇元科技)。快照 2026-08-15。</p>
 </div>
 
-<h2 id="一、七个档位的-ChatGPT"><a href="#一、七个档位的-ChatGPT" class="headerlink" title="一、七个档位的 ChatGPT"></a>一、七个档位的 ChatGPT</h2><p>先看事实。2026 年 7 月的 ChatGPT 价目表:</p>
-<table>
-<thead>
-<tr>
-<th>档位</th>
-<th>价格</th>
-<th>关键限制</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Free</td>
-<td>$0</td>
-<td>基础模型,限量</td>
-</tr>
-<tr>
-<td><strong>Go</strong></td>
-<td><strong>$8</strong></td>
-<td>消息量高于 Free,<strong>但含广告</strong>、无 Codex、无高强度推理</td>
-</tr>
-<tr>
-<td>Plus</td>
-<td>$20</td>
-<td>日常高额度 + Codex 云任务 30–150 个 &#x2F; 5h</td>
-</tr>
-<tr>
-<td><strong>Pro Codex</strong></td>
-<td><strong>$100</strong></td>
-<td>5× Plus 额度</td>
-</tr>
-<tr>
-<td><strong>Pro Max</strong></td>
-<td><strong>$200</strong></td>
-<td>20× 额度 + 1M 上下文</td>
-</tr>
-<tr>
-<td>Business</td>
-<td>$20&#x2F;席(年付)</td>
-<td>$25 月付,最少 2 人</td>
-</tr>
-<tr>
-<td>Enterprise</td>
-<td>定制</td>
-<td>—</td>
-</tr>
-</tbody></table>
-<p>其中三处是近期变化:Pro 自 2026 年 4 月 9 日起<strong>从统一 $120 拆成 $100 &#x2F; $200 两档</strong>;Go 档从 $6 涨到 $8;Business 改为年付 $20、月付 $25。</p>
-<p><strong>最值得注意的是 Go 档含广告</strong>——这是主流 AI 助手第一次把广告写进付费订阅。付了钱仍然看广告,这个定位在消费电子史上通常预示着市场进入了”用价格分层榨取剩余”的阶段。</p>
-<h2 id="二、这不是-OpenAI-独有"><a href="#二、这不是-OpenAI-独有" class="headerlink" title="二、这不是 OpenAI 独有"></a>二、这不是 OpenAI 独有</h2><p>横向看,整个行业在同步碎片化:</p>
-<ul>
-<li><strong>Claude</strong>:Free &#x2F; Pro $20 &#x2F; Max 5x $100 &#x2F; Max 20x $200 &#x2F; Team &#x2F; Enterprise</li>
-<li><strong>Cursor</strong>:Hobby &#x2F; Pro $20 &#x2F; Pro+ $60 &#x2F; Ultra $200 &#x2F; Teams $40</li>
-<li><strong>GitHub Copilot</strong>:Free &#x2F; Pro $10 &#x2F; Pro+ $39 &#x2F; Max $100 &#x2F; Business $19 &#x2F; Enterprise $39</li>
-<li><strong>Kimi</strong>:Free &#x2F; Moderato $19 &#x2F; Allegretto $39 &#x2F; Allegro $99 &#x2F; Vivace $199</li>
-<li><strong>Trae</strong>:Free &#x2F; Lite $3 &#x2F; Pro $10 &#x2F; Pro+ $30 &#x2F; Ultra $100</li>
-</ul>
-<p>一个规律浮现出来:<strong>几乎每家都在 $20 和 $200 之间塞进 2–3 个中间档</strong>。这个价格带的填充不是偶然——它对应着”愿意多付但不想付满额”的最大人群。</p>
-<h2 id="三、为什么现在开始碎片化"><a href="#三、为什么现在开始碎片化" class="headerlink" title="三、为什么现在开始碎片化"></a>三、为什么现在开始碎片化</h2><p><strong>其一,能力趋同逼出了价格竞争。</strong> 当<a href="/2026/07/20/frontier-convergence-2026/">前沿收敛</a>让顶部模型的差距压到几十 ELO,厂商无法再靠”我们更强”定价,只能靠”你用多少付多少”来提取剩余价值。多档位本质上是<strong>价格歧视</strong>(经济学中性词):让高用量用户付更多,同时不吓跑低用量用户。</p>
-<p><strong>其二,成本结构允许精细切分。</strong> 推理成本随用量线性变化,这与传统软件”边际成本近零”截然不同。既然成本是线性的,定价自然也倾向于线性分层。</p>
-<p><strong>其三,竞争对手的档位互相锚定。</strong> ChatGPT 的 $100 Pro Codex 档几乎是对 Claude Max 5x($100)的直接应答;Trae 的 $10 Pro 对标 Cursor 的 $20 Pro。<strong>档位在互相复制,格局趋于对称。</strong></p>
-<h2 id="四、代价-决策成本转嫁给了用户"><a href="#四、代价-决策成本转嫁给了用户" class="headerlink" title="四、代价:决策成本转嫁给了用户"></a>四、代价:决策成本转嫁给了用户</h2><p>碎片化对厂商是收入优化,对用户是<strong>认知负担</strong>。</p>
-<p>要选对档位,你必须先回答一个多数人答不上来的问题:**我每月到底用多少?**这不是”我每天用两小时”能回答的——同样两小时,写代码和聊天的 token 消耗能差十倍;同一个模型,<a href="/2026/07/27/one-model-many-scores/">effort 档位不同成本又差三倍</a>。</p>
-<p>于是出现一个尴尬局面:<strong>厂商用精确的分层收费,面对的是一群对自己用量毫无概念的用户。</strong>结果通常是两种错配:</p>
-<ul>
-<li><strong>买贵了</strong>:为了”保险”直接上顶配,额度长期用不满。以 Claude Max 20x 为例,轻度用户的实际单价可能是重度用户的十倍以上。</li>
-<li><strong>买亏了</strong>:选了便宜档,月中撞额度墙,工作被打断——而时间损失往往超过省下的几十美元。</li>
-</ul>
-<h2 id="五、务实对策"><a href="#五、务实对策" class="headerlink" title="五、务实对策"></a>五、务实对策</h2><p><strong>1. 先测用量,再选档。</strong><br>用一两周的实际使用估算 token 量级,再对照各档额度。本站<a href="/advisor/">选购助手</a>的「用量自测」就是为此设计的——填几个典型场景的频次,算出月用量,再看哪档刚好覆盖。实测中经常出现的结果是:<strong>按粗略档位该买 $15 的,精确算完发现 $3 的就够</strong>。</p>
-<p><strong>2. 优先选”刚好够用”而非”绰绰有余”。</strong><br>额度利用率决定实际单价。用满 60–100% 的档位,单位成本最低;用不到 25% 的档位,你在为空气付费。</p>
-<p><strong>3. 警惕”只贵一点”的升级诱导。</strong><br>$100 到 $200 看起来只是”翻倍”,但如果你的用量只需要 5× 而非 20×,多付的 $100 每月全是沉没成本。<strong>档位间的价格差不是能力差,是额度差</strong>——先确认你缺的是能力还是额度。</p>
-<p><strong>4. 别忽略按量付费。</strong><br>如果你的使用是<strong>阶段性爆发</strong>(几天猛用、之后闲置),订阅制的固定月费和 5 小时窗口对你都是不利结构。直接用 API 按量付费,闲置期一分钱不花。这条选项常被忽视,因为它不在任何厂商的”推荐档位”里。</p>
-<h2 id="六、一个预测"><a href="#六、一个预测" class="headerlink" title="六、一个预测"></a>六、一个预测</h2><p>档位碎片化大概率会继续,直到出现两种力量之一:</p>
-<ul>
-<li><strong>监管介入</strong>:订阅制的”限额不透明”已经在多个市场引起注意。当”5× 额度”无法被用户验证时,它接近于一种不可核实的承诺。</li>
-<li><strong>用量计价成为主流</strong>:如果按量付费的工具链足够好用(账单可预测、有硬性上限),订阅制的存在意义会被削弱。</li>
-</ul>
-<p>在那之前,<strong>看懂档位表本身就是一项省钱技能</strong>。这也是本站维护<a href="/rankings/">模型天梯性价比板块</a>的原因——把各家的档位、额度制度、折算单价放在同一张表里对比,是目前对抗信息不对称最直接的办法。</p>
-<div class="risk-box">
-<div class="risk-box-title">// 风险提示</div>
-<ul>
-<li>本文价格快照为 2026-07-27,各家调价与促销频繁,购买前请以官网为准。</li>
-<li>各档"额度"的官方口径多为相对倍数(如"5× Plus"),缺乏可独立验证的绝对值;本站的 token 量级为估算,仅供横向比较。</li>
-<li>本文不接受任何厂商赞助,不含返利链接,档位信息仅作信息整理。</li>
-</ul>
-</div>
-
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
-<li>AI Pricing Guru,<a target="_blank" rel="noopener" href="https://www.aipricing.guru/chatgpt-subscription-pricing/">ChatGPT GPT-5.6 Pricing 2026: Plus $20, Pro $100, Pro $200</a></li>
-<li>Gradually.ai,<a target="_blank" rel="noopener" href="https://www.gradually.ai/en/chatgpt-pricing/">ChatGPT Plans: Free, Go, Plus, Pro, Business &amp; Enterprise</a></li>
-<li>CloudZero,<a target="_blank" rel="noopener" href="https://www.cloudzero.com/blog/how-much-does-chatgpt-cost/">How Much Does ChatGPT Cost In 2026? Every Plan And Pricing Tier Explained</a></li>
-<li>Fritz AI,<a target="_blank" rel="noopener" href="https://fritz.ai/chatgpt-pricing/">ChatGPT Pricing in 2026: Every Plan, Tier, and Hidden Cost Explained</a></li>
-<li>Toolchase,<a target="_blank" rel="noopener" href="https://toolchase.com/blog/ai-tools-news-2026/">AI Tools News 2026: Major Launches, Updates, Pricing Changes</a></li>
-<li>Anthropic,<a target="_blank" rel="noopener" href="https://platform.claude.com/docs/en/about-claude/pricing">Pricing</a></li>
-</ol>
+<p><strong>23.8 个百分点。</strong> 模型没换,题没换,换的只是”外面那层东西”。</p>
+<h2 id="那层东西是什么"><a href="#那层东西是什么" class="headerlink" title="那层东西是什么"></a>那层东西是什么</h2><p>论文给了一个挺完整的定义:harness 是<strong>管理上下文、工具、状态、约束、权限、追踪与恢复的系统层</strong>,负责把模型的输出变成真正能执行的动作。</p>
+<p>一个公式概括:</p>
 <blockquote>
-<p>本文由 ByteVibe 撰写(AI 辅助研究整理)。文中观点的原始出处均已在正文与参考文献中标注,版权归原作者所有。数据快照 2026-07-27。</p>
+<p><strong>Agent &#x3D; Model + Harness</strong></p>
+</blockquote>
+<p>模型负责”想”,harness 负责把想法变成事。具体到日常,harness 在替你做这些决定:</p>
+<ul>
+<li><strong>给模型看什么</strong> —— 上下文里塞哪些文件、塞多少、什么时候截断</li>
+<li><strong>给模型什么工具</strong> —— 能不能读文件、能不能跑命令、工具描述怎么写</li>
+<li><strong>出错了怎么办</strong> —— 是重试、换路子,还是直接把报错甩给你</li>
+<li><strong>什么时候停</strong> —— 循环几轮算够、什么情况判定失败</li>
+<li><strong>哪些事要问你</strong> —— 删文件要不要确认、能不能自己 git push</li>
+</ul>
+<p>你平时用的 Claude Code、Cursor、Codex、Trae,<strong>本质上都是 harness</strong>。它们背后往往可以接同一批模型——所以”用哪个工具”这个选择,和”用哪个模型”是两个独立的维度。</p>
+<h2 id="一个反直觉的发现"><a href="#一个反直觉的发现" class="headerlink" title="一个反直觉的发现"></a>一个反直觉的发现</h2><p>如果只记一条,记这个:</p>
+<blockquote>
+<p><strong>模型越弱,换 harness 时的分数波动越大;模型越强,对 harness 差异越不敏感。</strong></p>
+</blockquote>
+<p>这是 Harness-Bench 的结论之一:强模型后端的跨 harness 方差更低,弱模型则”对周围的执行基质更敏感”。</p>
+<p>意味着什么?</p>
+<p><strong>如果你在用旗舰模型</strong>,harness 选择的收益相对有限——强模型自己就能扛过糟糕的上下文管理和粗糙的工具描述。</p>
+<p><strong>如果你在用便宜模型</strong>(开源自部署、国产平价 API、免费额度),<strong>harness 才是你最该优化的地方</strong>。同样一个中等模型,配好 harness 和配差 harness,差距可能比你升级到下一档模型还大。</p>
+<p>这个结论对预算敏感的人尤其重要:<strong>换工具通常比换模型便宜</strong>,而且在你这个档位上收益更大。</p>
+<div class="report-box">
+<strong>一句话版本</strong>:预算充足的人挑模型,预算有限的人挑 harness。后者的性价比曲线更陡。
+</div>
+
+<h2 id="但要小心谁在给你看数字"><a href="#但要小心谁在给你看数字" class="headerlink" title="但要小心谁在给你看数字"></a>但要小心谁在给你看数字</h2><p>这里有个陷阱。</p>
+<p>Harness 的对比数据,<strong>很多是 harness 厂商自己发的</strong>。而 <a target="_blank" rel="noopener" href="https://futureagi.com/blog/coding-agent-harness-benchmark/">FutureAGI 的一篇分析</a>注意到一个规律:同一个模型在 SWE-bench Pro 上,独立标准化评测(Scale AI 的 SEAL 实验室)跑出的分数,<strong>低于三家厂商对比表里的全部数字</strong>。</p>
+<p>这不难理解——厂商用自家 harness 时会调到最优,对照组则往往是默认配置。<strong>你看到的”我们比他们高 5 分”里,有多少是 harness 真实差距,有多少是调参投入差距,外人无从分辨。</strong></p>
+<p>另外,Epoch AI 的一项研究发现同一模型在 SWE-bench Verified 上,**仅因脚手架不同,分数就能从 62.3% 变到 70.2%**。这也提示了另一件事:当你看到某个模型”刷新 SOTA”时,<strong>那个数字里有一部分不属于模型</strong>。</p>
+<p>关于评测数字为什么越来越不能直接信,<a href="/2026/08/05/benchmark-trust-crisis/">之前那篇文章</a>讲得更细。</p>
+<h2 id="这对你选工具意味着什么"><a href="#这对你选工具意味着什么" class="headerlink" title="这对你选工具意味着什么"></a>这对你选工具意味着什么</h2><p><strong>第一,别把模型排名当工具排名。</strong> 本站<a href="/rankings/">天梯页</a>排的是模型能力,<a href="/rankings/">Agent 平台板块</a>比的是 harness——<strong>这是两张表,不能互相替代</strong>。榜单第一的模型装进糟糕的 harness 里,可能不如第五名装进好 harness。</p>
+<p><strong>第二,评估工具时,试你自己的真实任务。</strong> harness 的差距体现在长任务、多轮工具调用、出错恢复这些地方,而不是”写个快排”。跑十个玩具题看不出区别,跑一个真实重构立刻见分晓。</p>
+<p><strong>第三,注意 harness 也在变。</strong> 它是软件,会更新。你半年前对某个工具的判断,可能已经过期了——LangChain 曾在 Terminal-Bench 上只改系统提示、工具和中间件,分数就涨了 13.7 分,模型一行没动。</p>
+<p><strong>第四,论文给业界的建议同样适用于你</strong>:能力应该按**”模型–harness 配置”**这个组合来报告,而不是记在模型头上。所以下次有人跟你说”某某模型很强”,值得追问一句:<strong>你在什么 harness 里用的?</strong></p>
+<hr>
+<p>2026 年上半年,行业的注意力几乎全在模型参数和榜单名次上。到了下半年,”harness”这个词突然到处都是——因为大家发现,把同一个模型的能力真正兑现出来的那部分工程,<strong>长期被算进了模型的功劳簿</strong>。</p>
+<p>模型决定了天花板,harness 决定你能摸到多高。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li>Yilun Yao、Xinyu Tan、Chao-Hsuan Liu 等(北京大学 &#x2F; 奇元科技),<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2605.27922">Harness-Bench: Measuring Harness Effects across Models in Realistic Agent Workflows</a>——harness 定义、5,194 条轨迹的跨 harness 方差、强弱模型敏感度差异</li>
+<li>FutureAGI,<a target="_blank" rel="noopener" href="https://futureagi.com/blog/coding-agent-harness-benchmark/">Coding Agent Harness Benchmarks: Why the Harness Changes the Score</a>——独立评测与厂商对比表的系统性差异</li>
+<li>arXiv,<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2606.12882">HarnessBridge: Learnable Bidirectional Controller for LLM Agent Harness</a>——harness 层的可学习控制</li>
+<li>arXiv,<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2606.05009">DAR: Deontic Reasoning with Agentic Harnesses</a>——harness 中的权限与义务推理</li>
+</ol>
+<p>本站相关:<a href="/rankings/">模型天梯与 Agent 平台对照</a> · <a href="/2026/08/05/benchmark-trust-crisis/">当考卷泄题成为常态:AI 评测的信任危机</a> · <a href="/2026/08/08/reasoning-effort-hidden-dimension/">你买的不是模型,是”让它想多久”</a></p>
+<blockquote>
+<p>本文由 ByteVibe 撰写(AI 辅助研究整理)。文中观点的原始出处均已在正文与参考文献中标注,版权归原作者所有。数据快照 2026-08-15。</p>
 </blockquote>
 
         </div>
@@ -422,15 +383,10 @@
         <footer class="post-footer">
           <nav class="post-nav">
             
-            <a class="post-nav-item post-nav-prev" href="/2026/07/27/what-is-multimodal/">
-              <span class="post-nav-label">← 上一篇</span>
-              <span class="post-nav-title">什么是多模态?——一篇给非技术读者的说明</span>
-            </a>
             
-            
-            <a class="post-nav-item post-nav-next" href="/2026/07/27/ai-finance-pitfalls/">
+            <a class="post-nav-item post-nav-next" href="/2026/08/15/what-august-deleted/">
               <span class="post-nav-label">下一篇 →</span>
-              <span class="post-nav-title">AI 做金融分析的三个致命陷阱:在你把钱交给它之前</span>
+              <span class="post-nav-title">这个月,AI 圈删掉了什么</span>
             </a>
             
           </nav>
@@ -442,7 +398,7 @@
         
           <div class="toc-sticky">
             <h3 class="toc-title">目录大纲</h3>
-            <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E4%B8%83%E4%B8%AA%E6%A1%A3%E4%BD%8D%E7%9A%84-ChatGPT"><span class="toc-list-text">一、七个档位的 ChatGPT</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E8%BF%99%E4%B8%8D%E6%98%AF-OpenAI-%E7%8B%AC%E6%9C%89"><span class="toc-list-text">二、这不是 OpenAI 独有</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E7%8E%B0%E5%9C%A8%E5%BC%80%E5%A7%8B%E7%A2%8E%E7%89%87%E5%8C%96"><span class="toc-list-text">三、为什么现在开始碎片化</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E4%BB%A3%E4%BB%B7-%E5%86%B3%E7%AD%96%E6%88%90%E6%9C%AC%E8%BD%AC%E5%AB%81%E7%BB%99%E4%BA%86%E7%94%A8%E6%88%B7"><span class="toc-list-text">四、代价:决策成本转嫁给了用户</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E5%8A%A1%E5%AE%9E%E5%AF%B9%E7%AD%96"><span class="toc-list-text">五、务实对策</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%AD%E3%80%81%E4%B8%80%E4%B8%AA%E9%A2%84%E6%B5%8B"><span class="toc-list-text">六、一个预测</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+            <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%82%A3%E5%B1%82%E4%B8%9C%E8%A5%BF%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-list-text">那层东西是什么</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E4%B8%AA%E5%8F%8D%E7%9B%B4%E8%A7%89%E7%9A%84%E5%8F%91%E7%8E%B0"><span class="toc-list-text">一个反直觉的发现</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BD%86%E8%A6%81%E5%B0%8F%E5%BF%83%E8%B0%81%E5%9C%A8%E7%BB%99%E4%BD%A0%E7%9C%8B%E6%95%B0%E5%AD%97"><span class="toc-list-text">但要小心谁在给你看数字</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E8%BF%99%E5%AF%B9%E4%BD%A0%E9%80%89%E5%B7%A5%E5%85%B7%E6%84%8F%E5%91%B3%E7%9D%80%E4%BB%80%E4%B9%88"><span class="toc-list-text">这对你选工具意味着什么</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
           </div>
         
       </aside>

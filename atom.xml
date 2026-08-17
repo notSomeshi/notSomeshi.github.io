@@ -10,7 +10,29 @@
   <rights>All rights reserved 2026, ByteVibe</rights>
   <subtitle>探索 Vibe Coding 与 AI 编程的无限可能</subtitle>
   <title>ByteVibe</title>
-  <updated>2026-08-15T13:23:30.718Z</updated>
+  <updated>2026-08-17T05:17:35.220Z</updated>
+  <entry>
+    <author>
+      <name>ByteVibe</name>
+    </author>
+    <category term="技术解析" scheme="https://notsomeshi.github.io/categories/%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/"/>
+    <category term="Agent" scheme="https://notsomeshi.github.io/tags/Agent/"/>
+    <category term="评测方法" scheme="https://notsomeshi.github.io/tags/%E8%AF%84%E6%B5%8B%E6%96%B9%E6%B3%95/"/>
+    <category term="harness" scheme="https://notsomeshi.github.io/tags/harness/"/>
+    <content>
+      <![CDATA[<p>你花时间挑了半天模型,最后选了榜单第一。然后发现别人用着更差的模型,干活比你顺。</p><p>这事有个具体的解释,而且能量化。</p><p>北京大学与奇元科技在 2026 年做了一项叫 <a href="https://arxiv.org/pdf/2605.27922">Harness-Bench</a> 的研究:<strong>固定任务、固定模型</strong>,只换外面那层执行框架,跑了 5,194 条执行轨迹。结果是——</p><div class="fig">  <div class="fig-title">同样的模型、同样的 106 个任务,只换 harness</div>  <div class="fig-sub">柱长按最高分(NanoBot 76.2%)归一为 100%。8 个模型后端 × 6 个 harness,共 5,194 条执行轨迹的聚合分。</div>  <div class="fig-bars">    <div class="fig-bar-row">      <span class="fig-bar-label"><b>NanoBot</b>最高</span>      <span class="fig-bar-track"><i class="fig-bar-fill is-good" style="--w:100%"></i></span>      <span class="fig-bar-val">76.2<em>%</em></span>    </div>    <div class="fig-bar-row">      <span class="fig-bar-label"><b>OpenClaw</b>最低</span>      <span class="fig-bar-track"><i class="fig-bar-fill is-warn" style="--w:68.8%"></i></span>      <span class="fig-bar-val">52.4<em>%</em></span>    </div>  </div>  <p class="fig-src">来源:<a href="https://arxiv.org/pdf/2605.27922" target="_blank" rel="noopener">Harness-Bench: Measuring Harness Effects across Models in Realistic Agent Workflows</a>(Yilun Yao 等,北京大学 / 奇元科技)。快照 2026-08-15。</p></div><p><strong>23.8 个百分点。</strong> 模型没换,题没换,换的只是”外面那层东西”。</p><h2 id="那层东西是什么"><a href="#那层东西是什么" class="headerlink" title="那层东西是什么"></a>那层东西是什么</h2><p>论文给了一个挺完整的定义:harness 是<strong>管理上下文、工具、状态、约束、权限、追踪与恢复的系统层</strong>,负责把模型的输出变成真正能执行的动作。</p><p>一个公式概括:</p><blockquote><p><strong>Agent &#x3D; Model + Harness</strong></p></blockquote><p>模型负责”想”,harness 负责把想法变成事。具体到日常,harness 在替你做这些决定:</p><ul><li><strong>给模型看什么</strong> —— 上下文里塞哪些文件、塞多少、什么时候截断</li><li><strong>给模型什么工具</strong> —— 能不能读文件、能不能跑命令、工具描述怎么写</li><li><strong>出错了怎么办</strong> —— 是重试、换路子,还是直接把报错甩给你</li><li><strong>什么时候停</strong> —— 循环几轮算够、什么情况判定失败</li><li><strong>哪些事要问你</strong> —— 删文件要不要确认、能不能自己 git push</li></ul><p>你平时用的 Claude Code、Cursor、Codex、Trae,<strong>本质上都是 harness</strong>。它们背后往往可以接同一批模型——所以”用哪个工具”这个选择,和”用哪个模型”是两个独立的维度。</p><h2 id="一个反直觉的发现"><a href="#一个反直觉的发现" class="headerlink" title="一个反直觉的发现"></a>一个反直觉的发现</h2><p>如果只记一条,记这个:</p><blockquote><p><strong>模型越弱,换 harness 时的分数波动越大;模型越强,对 harness 差异越不敏感。</strong></p></blockquote><p>这是 Harness-Bench 的结论之一:强模型后端的跨 harness 方差更低,弱模型则”对周围的执行基质更敏感”。</p><p>意味着什么?</p><p><strong>如果你在用旗舰模型</strong>,harness 选择的收益相对有限——强模型自己就能扛过糟糕的上下文管理和粗糙的工具描述。</p><p><strong>如果你在用便宜模型</strong>(开源自部署、国产平价 API、免费额度),<strong>harness 才是你最该优化的地方</strong>。同样一个中等模型,配好 harness 和配差 harness,差距可能比你升级到下一档模型还大。</p><p>这个结论对预算敏感的人尤其重要:<strong>换工具通常比换模型便宜</strong>,而且在你这个档位上收益更大。</p><div class="report-box"><strong>一句话版本</strong>:预算充足的人挑模型,预算有限的人挑 harness。后者的性价比曲线更陡。</div><h2 id="但要小心谁在给你看数字"><a href="#但要小心谁在给你看数字" class="headerlink" title="但要小心谁在给你看数字"></a>但要小心谁在给你看数字</h2><p>这里有个陷阱。</p><p>Harness 的对比数据,<strong>很多是 harness 厂商自己发的</strong>。而 <a href="https://futureagi.com/blog/coding-agent-harness-benchmark/">FutureAGI 的一篇分析</a>注意到一个规律:同一个模型在 SWE-bench Pro 上,独立标准化评测(Scale AI 的 SEAL 实验室)跑出的分数,<strong>低于三家厂商对比表里的全部数字</strong>。</p><p>这不难理解——厂商用自家 harness 时会调到最优,对照组则往往是默认配置。<strong>你看到的”我们比他们高 5 分”里,有多少是 harness 真实差距,有多少是调参投入差距,外人无从分辨。</strong></p><p>另外,Epoch AI 的一项研究发现同一模型在 SWE-bench Verified 上,**仅因脚手架不同,分数就能从 62.3% 变到 70.2%**。这也提示了另一件事:当你看到某个模型”刷新 SOTA”时,<strong>那个数字里有一部分不属于模型</strong>。</p><p>关于评测数字为什么越来越不能直接信,<a href="/2026/08/05/benchmark-trust-crisis/">之前那篇文章</a>讲得更细。</p><h2 id="这对你选工具意味着什么"><a href="#这对你选工具意味着什么" class="headerlink" title="这对你选工具意味着什么"></a>这对你选工具意味着什么</h2><p><strong>第一,别把模型排名当工具排名。</strong> 本站<a href="/rankings/">天梯页</a>排的是模型能力,<a href="/rankings/">Agent 平台板块</a>比的是 harness——<strong>这是两张表,不能互相替代</strong>。榜单第一的模型装进糟糕的 harness 里,可能不如第五名装进好 harness。</p><p><strong>第二,评估工具时,试你自己的真实任务。</strong> harness 的差距体现在长任务、多轮工具调用、出错恢复这些地方,而不是”写个快排”。跑十个玩具题看不出区别,跑一个真实重构立刻见分晓。</p><p><strong>第三,注意 harness 也在变。</strong> 它是软件,会更新。你半年前对某个工具的判断,可能已经过期了——LangChain 曾在 Terminal-Bench 上只改系统提示、工具和中间件,分数就涨了 13.7 分,模型一行没动。</p><p><strong>第四,论文给业界的建议同样适用于你</strong>:能力应该按**”模型–harness 配置”**这个组合来报告,而不是记在模型头上。所以下次有人跟你说”某某模型很强”,值得追问一句:<strong>你在什么 harness 里用的?</strong></p><hr><p>2026 年上半年,行业的注意力几乎全在模型参数和榜单名次上。到了下半年,”harness”这个词突然到处都是——因为大家发现,把同一个模型的能力真正兑现出来的那部分工程,<strong>长期被算进了模型的功劳簿</strong>。</p><p>模型决定了天花板,harness 决定你能摸到多高。</p><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol><li>Yilun Yao、Xinyu Tan、Chao-Hsuan Liu 等(北京大学 &#x2F; 奇元科技),<a href="https://arxiv.org/pdf/2605.27922">Harness-Bench: Measuring Harness Effects across Models in Realistic Agent Workflows</a>——harness 定义、5,194 条轨迹的跨 harness 方差、强弱模型敏感度差异</li><li>FutureAGI,<a href="https://futureagi.com/blog/coding-agent-harness-benchmark/">Coding Agent Harness Benchmarks: Why the Harness Changes the Score</a>——独立评测与厂商对比表的系统性差异</li><li>arXiv,<a href="https://arxiv.org/pdf/2606.12882">HarnessBridge: Learnable Bidirectional Controller for LLM Agent Harness</a>——harness 层的可学习控制</li><li>arXiv,<a href="https://arxiv.org/pdf/2606.05009">DAR: Deontic Reasoning with Agentic Harnesses</a>——harness 中的权限与义务推理</li></ol><p>本站相关:<a href="/rankings/">模型天梯与 Agent 平台对照</a> · <a href="/2026/08/05/benchmark-trust-crisis/">当考卷泄题成为常态:AI 评测的信任危机</a> · <a href="/2026/08/08/reasoning-effort-hidden-dimension/">你买的不是模型,是”让它想多久”</a></p><blockquote><p>本文由 ByteVibe 撰写(AI 辅助研究整理)。文中观点的原始出处均已在正文与参考文献中标注,版权归原作者所有。数据快照 2026-08-15。</p></blockquote>]]>
+    </content>
+    <id>https://notsomeshi.github.io/2026/08/15/what-is-agent-harness/</id>
+    <link href="https://notsomeshi.github.io/2026/08/15/what-is-agent-harness/"/>
+    <published>2026-08-15T12:00:00.000Z</published>
+    <summary>
+      <![CDATA[<p>你花时间挑了半天模型,最后选了榜单第一。然后发现别人用着更差的模型,干活比你顺。</p>
+<p>这事有个具体的解释,而且能量化。</p>
+<p>北京大学与奇元科技在 2026 年做了一项叫 <a href="https://arxiv.org/pdf/2605.27922"]]>
+    </summary>
+    <title>同一个模型,换个壳分数差 24 分:harness 入门</title>
+    <updated>2026-08-17T05:17:35.220Z</updated>
+  </entry>
   <entry>
     <author>
       <name>ByteVibe</name>
@@ -421,25 +443,5 @@
     </summary>
     <title>前沿收敛:为什么 2026 年榜单顶部挤成了一团</title>
     <updated>2026-07-21T01:19:24.426Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>ByteVibe</name>
-    </author>
-    <category term="行业观察" scheme="https://notsomeshi.github.io/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/"/>
-    <category term="开源模型" scheme="https://notsomeshi.github.io/tags/%E5%BC%80%E6%BA%90%E6%A8%A1%E5%9E%8B/"/>
-    <category term="OpenRouter" scheme="https://notsomeshi.github.io/tags/OpenRouter/"/>
-    <category term="市场份额" scheme="https://notsomeshi.github.io/tags/%E5%B8%82%E5%9C%BA%E4%BB%BD%E9%A2%9D/"/>
-    <content>
-      <![CDATA[<p>如果说各家基准测试榜单衡量的是”模型有多聪明”,那 OpenRouter 的用量榜衡量的是一件更残酷的事:<strong>开发者真正把钱花给了谁</strong>。而 2026 年年中的这份账单,记录了一场悄无声息的权力转移。</p><span id="more"></span><h2 id="一、一年之间-70-→-30"><a href="#一、一年之间-70-→-30" class="headerlink" title="一、一年之间:70% → 30%"></a>一、一年之间:70% → 30%</h2><p>OpenRouter 是目前最大的多模型 API 聚合网关,它的 token 流量分布被广泛当作”AI 应用层真实需求”的代理指标。2025 年 6 月,Google、OpenAI、Anthropic 三家美国厂商合计占其约 70% 的 token 份额;到 2026 年 6 月,**这个数字跌到了约 30%**。Anthropic 的份额从峰值腰斩至 13.3%,即便如此仍是最大的单一闭源阵营。</p><p>填补真空的是中国开源权重模型:DeepSeek 单家占全平台 token 量的 <strong>16.3%</strong>,超过 Google、Anthropic、OpenAI 任何一家;按模型算,DeepSeek V4 Flash 高居用量榜第一,腾讯 Hy3 Preview 第二,<strong>用量前十里中国开源模型占六席</strong>;DeepSeek、小米、腾讯、MiniMax、Qwen 合计约占前十流量的 44%。智谱的 GLM-5.2 则被评论者称为”迷你 DeepSeek 时刻”——发布后流量单月暴涨近十倍。</p><h2 id="二、流量与收入-两个平行的榜单"><a href="#二、流量与收入-两个平行的榜单" class="headerlink" title="二、流量与收入:两个平行的榜单"></a>二、流量与收入:两个平行的榜单</h2><p>但在为”开源已胜”下结论之前,要看第二份账单。OpenRouter 的数据同时显示:<strong>Anthropic 以约 12.3% 的 token 量,拿走了远超比例的收入</strong>——因为高端闭源模型的单 token 价格是开源模型的许多倍。用量最高的 Claude 模型 Opus 4.7 仍稳居全平台第三,是排名最高的闭源模型。</p><p>换句话说,市场正在清晰地分层:</p><ul><li><strong>批量层</strong>:翻译、摘要、分类、常规代码补全——对智能上限不敏感、对价格极度敏感,被便宜到近乎免费的中国开源模型整体接管;</li><li><strong>攻坚层</strong>:复杂 Agent 任务、生产级代码交付、高风险决策——买家愿意为每个 token 多付十倍,闭源旗舰(参见本站<a href="/rankings/">模型天梯</a>的能力榜)守住了这一层的定价权。</li></ul><p>这正是经典的”性能过剩”市场结构:当第二梯队的能力越过”够用线”,第一梯队就只能退守利润最厚、也最窄的顶端。</p><h2 id="三、对开发者与独立开发者意味着什么"><a href="#三、对开发者与独立开发者意味着什么" class="headerlink" title="三、对开发者与独立开发者意味着什么"></a>三、对开发者与独立开发者意味着什么</h2><ol><li><strong>默认技术栈正在改写</strong>。一年前”默认 GPT&#x2F;Claude、特殊需求再找便宜替代”的习惯,正在反转为”默认开源便宜模型、攻坚任务再上旗舰”。混合路由(model routing)从优化技巧变成了标配架构。</li><li><strong>价格地板还在下沉</strong>。GLM-5.2、DeepSeek V4 系列用接近成本的价格供应 80 分能力,任何依赖”转售模型能力”的产品,毛利都在被重新定价。</li><li><strong>能力榜与用量榜要一起看</strong>。这也是本站模型天梯新增「社区体感」维度(Arena 众测投票 + OpenRouter 用量份额)的原因:基准分数告诉你模型能做什么,真实流量告诉你市场认为它值多少钱——两者的落差里,藏着这个行业的全部商业故事。</li></ol><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol><li>OfficeChai,<a href="https://officechai.com/ai/share-of-us-models-being-used-on-openrouter-has-collapsed-from-70-to-30-over-the-past-year/">Share Of US Models Being Used On OpenRouter Has Collapsed From 70% To 30% Over The Past Year</a></li><li>Tech-Insider,<a href="https://tech-insider.org/au/chinese-ai-models-openrouter-2026/">Chinese AI Models Top OpenRouter; Claude at 13.3%</a></li><li>OpenRouter,<a href="https://openrouter.ai/rankings">LLM Rankings</a> · <a href="https://openrouter.ai/state-of-ai">State of AI: 100T Token LLM Usage Study</a></li><li>Tokenmaxxing,<a href="https://tokenmaxxing.com/openrouter-rankings">OpenRouter Rankings: Most-Used AI Models (July 2026)</a></li></ol><blockquote><p>本文由 ByteVibe 撰写(AI 辅助研究整理)。文中观点的原始出处均已在正文与参考文献中标注,版权归原作者所有。数据截至 2026-07-14,以 OpenRouter 官网实时数据为准。</p></blockquote>]]>
-    </content>
-    <id>https://notsomeshi.github.io/2026/07/17/openrouter-power-shift/</id>
-    <link href="https://notsomeshi.github.io/2026/07/17/openrouter-power-shift/"/>
-    <published>2026-07-17T02:00:00.000Z</published>
-    <summary>
-      <![CDATA[<p>如果说各家基准测试榜单衡量的是”模型有多聪明”,那 OpenRouter 的用量榜衡量的是一件更残酷的事:<strong>开发者真正把钱花给了谁</strong>。而 2026 年年中的这份账单,记录了一场悄无声息的权力转移。</p>]]>
-    </summary>
-    <title>OpenRouter 上的权力转移:中国开源模型如何吃下一半流量</title>
-    <updated>2026-07-17T09:05:58.497Z</updated>
   </entry>
 </feed>
