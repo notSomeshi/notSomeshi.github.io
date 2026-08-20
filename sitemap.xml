@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://notsomeshi.github.io/2026/08/20/relay-api-verification/</loc>
+    
+    <lastmod>2026-08-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://notsomeshi.github.io/2026/08/15/what-is-agent-harness/</loc>
     
     <lastmod>2026-08-17</lastmod>
@@ -1011,6 +1020,27 @@
   
   <url>
     <loc>https://notsomeshi.github.io/tags/harness/</loc>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://notsomeshi.github.io/tags/API-%E4%B8%AD%E8%BD%AC/</loc>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://notsomeshi.github.io/tags/%E6%A8%A1%E5%9E%8B%E9%AA%8C%E8%AF%81/</loc>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://notsomeshi.github.io/tags/%E5%AE%89%E5%85%A8/</loc>
     <lastmod>2026-08-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

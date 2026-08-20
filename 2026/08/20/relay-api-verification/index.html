@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>中转站选购与验货:怎么测出模型被&#34;降智&#34;或货不对板 | ByteVibe</title>
+<meta name="description" content="一个关于 Vibe Coding、AI 辅助编程和现代开发实践的技术博客">
+<meta name="author" content="ByteVibe">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='0,0 100,0 100,78 78,100 0,100' fill='%23ffd802'/><text x='50' y='70' font-size='58' font-weight='800' font-family='ui-monospace,monospace' fill='%230d0d0f' text-anchor='middle'>B</text></svg>">
+<link rel="alternate" type="application/atom+xml" title="ByteVibe" href="/atom.xml">
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<link rel="stylesheet" href="/css/brands.css">
+
+
+<script src="/js/main.js" defer></script>
+<script>
+  // 暗色优先:light 显式切亮色;rain 提前打上标记避免闪烁
+  (function() {
+    try {
+      // 大字版:必须在首次绘制前打上,否则会先渲染小字再跳大
+      if (localStorage.getItem('fontsize') === 'large') {
+        document.documentElement.setAttribute('data-fontsize', 'large');
+      }
+      var t = localStorage.getItem('theme');
+      if (t === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else if (t === 'rain') {
+        document.documentElement.setAttribute('data-rain', '');
+        // 雨夜模式:页面加载的同时就开始预载雨声(与 main.js 的 RAIN_SRC 保持一致)
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.as = 'audio';
+        l.href = '/audio/rain.mp3?v=3';
+        document.head.appendChild(l);
+      }
+    } catch (e) {}
+  })();
+</script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+  
+  <canvas class="rain-canvas" id="rainCanvas" aria-hidden="true"></canvas>
+  <div class="reading-progress" id="readingProgress"></div>
+  <header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a class="site-logo" href="/">
+      ByteVibe
+    </a>
+    <nav class="site-nav" id="siteNav">
+      
+      
+        
+        
+        <a class="nav-link" href="/">首页</a>
+      
+        
+        
+        <a class="nav-link" href="/archives/">归档</a>
+      
+        
+        
+        <a class="nav-link" href="/categories/">分类</a>
+      
+        
+        
+        <a class="nav-link" href="/tags/">标签</a>
+      
+        
+        
+        <a class="nav-link" href="/about/">关于</a>
+      
+    </nav>
+    <div class="header-actions">
+      <button class="header-icon-btn" id="searchToggle" aria-label="搜索" title="搜索 (Ctrl+K)">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+      <button class="header-icon-btn theme-toggle" id="themeToggle" aria-label="切换显示模式(浅色 / 深色 / 雨夜)" title="显示模式:浅色 → 深色 → 雨夜">
+        <span class="icon-sun"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+        <span class="icon-moon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+        <span class="icon-umbrella"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 12a11.05 11.05 0 0 0-22 0Z"></path><path d="M12 12v7a2 2 0 0 0 4 0"></path></svg></span>
+      </button>
+      <button class="header-icon-btn fontsize-toggle" id="fontsizeToggle" aria-label="切换大字版" aria-pressed="false" title="大字版:放大字号并提高对比度">
+        <span class="icon-fs-large" aria-hidden="true">大</span>
+        <span class="icon-fs-small" aria-hidden="true">小</span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打开菜单">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    
+      <a class="mobile-nav-link" href="/">首页</a>
+    
+      <a class="mobile-nav-link" href="/archives/">归档</a>
+    
+      <a class="mobile-nav-link" href="/categories/">分类</a>
+    
+      <a class="mobile-nav-link" href="/tags/">标签</a>
+    
+      <a class="mobile-nav-link" href="/about/">关于</a>
+    
+  </div>
+</header>
+
+  <main class="main-content">
+    <article class="post-detail">
+  <div class="container-docs">
+    <div class="post-layout-grid">
+      <!-- 1. Left Sidebar: Documentation Navigation -->
+      <aside class="post-sidebar-left">
+        <div class="sidebar-sticky">
+          <h3 class="sidebar-title">全部文章</h3>
+          <ul class="sidebar-list">
+            
+              <li class="sidebar-item active">
+                <a href="/2026/08/20/relay-api-verification/">中转站选购与验货:怎么测出模型被&#34;降智&#34;或货不对板</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/15/what-is-agent-harness/">同一个模型,换个壳分数差 24 分:harness 入门</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/15/what-august-deleted/">这个月,AI 圈删掉了什么</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/15/ai-becomes-utility/">峰谷电价来了:AI 正在变成一门电力生意</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/08/reasoning-effort-hidden-dimension/">你买的不是模型,是&#34;让它想多久&#34;</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/08/seat-pricing-sunset/">席位制的黄昏:当软件的边际成本不再是零</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/05/benchmark-trust-crisis/">当考卷泄题成为常态:AI 评测的信任危机</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/05/pilot-to-production-gap/">88% 的 AI 试点走不到生产,而输的不是模型</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/04/agent-liability-2026/">Agent 闯了祸算谁的:自主系统的责任正在被法律钉死</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/04/ai-power-grid-2026/">电网成为 AI 的硬约束:一场从机房烧到居民电费的挤占</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/03/cloud-price-war-2026-08/">云端在降价,本地在涨价:2026 年夏天的两个反方向</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/03/hardware-price-surge-2026/">最贵装机季:AI 抢走了你的内存条</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/31/ai-briefing-2026-07-late/">七月下半月速览:开源权重贴身、Agent 越狱进生产环境、监管转向市场结构</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/31/zero-cost-ai-2026/">零成本用上 AI:2026 年 7 月的羊毛地图</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/what-is-multimodal/">什么是多模态?——一篇给非技术读者的说明</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/subscription-tier-fragmentation/">订阅档位正在碎片化:当&#34;买哪个&#34;比&#34;用哪个&#34;更难</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/ai-finance-pitfalls/">AI 做金融分析的三个致命陷阱:在你把钱交给它之前</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/opus5-price-war/">「半价」的参照物是谁:一句宣传语引发的集体误读</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/one-model-many-scores/">一个模型,N 个分数:当 effort 和编排模式让榜单失去唯一解</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/20/grok45-ide-native-models/">Grok 4.5 与「IDE 原生」模型:当编辑器成为训练场</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/20/frontier-convergence-2026/">前沿收敛:为什么 2026 年榜单顶部挤成了一团</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/17/openrouter-power-shift/">OpenRouter 上的权力转移:中国开源模型如何吃下一半流量</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/17/ai-frontier-briefing-2026-07/">2026 年中前沿速览:模型分层、Agent 落地与监管转折</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-prospects-and-strata/">前景、困难与阶层重排:AI 正在改写谁的命运?</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-dividend-paradox/">AI 红利悖论:我们为 AI 买单三年,红利为何还没普惠?</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-capital-markets-2026/">资本市场视角下的 AI 局势:7250 亿美元 Capex、循环交易与泡沫之辩</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/no-code-mvp-to-solopreneur/">从 Vibe Coding 到超级个体：2026 年全栈独立开发的新叙事</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/yolo-mode-and-ai-safety-guardrails/">YOLO 模式下的安全边界：如何防止 AI 删库跑路</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/high-performance-ai-prompts-library/">如何撰写黄金级 AI Prompt：从“做个功能”到“系统级交付”</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/mcp-server-practical-recipes/">Model Context Protocol (MCP) 深度指南：连接你的 AI 与现实数据</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/advanced-vibe-coding-roo-clinic/">Cline 与 Roo Code 实战：下一代 Vibe Coding 的工程范式</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/04/01/claude-code-complete-guide/">Claude Code 从入门到精通：面向工程师与产品经理的 AI 编程完全指南</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/30/future-of-vibe-coding/">Vibe Coding 的未来：当编程不再需要编程</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/25/ai-coding-tools-2025/">2025 年最值得关注的 AI 编程工具全景</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/20/vibe-coding-best-practices/">Vibe Coding 最佳实践：如何高效地与 AI 结对编程</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/15/what-is-vibe-coding/">什么是 Vibe Coding？一文读懂 AI 时代的编程新范式</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/10/hello-world/">欢迎来到 ByteVibe</a>
+              </li>
+            
+          </ul>
+        </div>
+      </aside>
+
+      <!-- 2. Middle Column: Main Article Content -->
+      <div class="post-content-main">
+        <header class="post-header">
+          <div class="post-meta">
+            <time class="post-date">2026年08月20日</time>
+            
+            <span class="post-meta-sep">·</span>
+            <span class="post-category">
+              
+                <a href="/categories/%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/">技术解析</a>
+              
+            </span>
+            
+            <span class="post-meta-sep">·</span>
+            <span class="reading-time">8 分钟阅读</span>
+          </div>
+          <h1 class="post-title">中转站选购与验货:怎么测出模型被&#34;降智&#34;或货不对板</h1>
+          
+          <div class="post-tags">
+            
+              <a class="tag-pill" href="/tags/API-%E4%B8%AD%E8%BD%AC/">#API 中转</a>
+            
+              <a class="tag-pill" href="/tags/%E6%A8%A1%E5%9E%8B%E9%AA%8C%E8%AF%81/">#模型验证</a>
+            
+              <a class="tag-pill" href="/tags/%E5%AE%89%E5%85%A8/">#安全</a>
+            
+          </div>
+          
+        </header>
+        
+        
+        
+        <details class="mobile-toc">
+          <summary>目录 / Contents</summary>
+          <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E5%85%88%E5%88%86%E6%B8%85%E4%B8%A4%E7%A7%8D%E5%9D%91%E6%B3%95"><span class="toc-list-text">一、先分清两种坑法</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E7%AE%80%E5%8D%95%E6%B5%8B%E8%AF%95-%E8%AE%A9%E5%AE%83%E2%80%9D%E9%9A%8F%E6%9C%BA%E2%80%9D%E4%B8%80%E4%B8%8B"><span class="toc-list-text">二、简单测试:让它”随机”一下</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E6%80%8E%E4%B9%88%E5%81%9A"><span class="toc-list-text">怎么做</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E6%80%8E%E4%B9%88%E5%88%A4%E8%AF%BB"><span class="toc-list-text">怎么判读</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E9%A1%BA%E6%89%8B%E8%83%BD%E7%9C%8B%E7%9A%84%E5%87%A0%E4%B8%AA%E8%BE%85%E5%8A%A9%E4%BF%A1%E5%8F%B7"><span class="toc-list-text">顺手能看的几个辅助信号</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E4%B8%80%E4%B8%AA%E5%BF%85%E9%A1%BB%E7%9F%A5%E9%81%93%E7%9A%84%E9%99%90%E5%88%B6"><span class="toc-list-text">三、一个必须知道的限制</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E4%B9%B0%E4%B9%8B%E5%89%8D%E7%9C%8B%E4%BB%80%E4%B9%88"><span class="toc-list-text">四、买之前看什么</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E6%AF%94%E2%80%9D%E9%99%8D%E6%99%BA%E2%80%9D%E4%B8%A5%E9%87%8D%E5%BE%97%E5%A4%9A%E7%9A%84%E4%B8%89%E4%BB%B6%E4%BA%8B"><span class="toc-list-text">比”降智”严重得多的三件事</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E5%8A%A1%E5%AE%9E%E7%9A%84%E5%87%A0%E6%9D%A1"><span class="toc-list-text">务实的几条</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E8%AF%B4%E5%88%B0%E5%BA%95"><span class="toc-list-text">五、说到底</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+        </details>
+        
+
+        <div class="post-body">
+          <p>一个不太舒服的数字:2026 年 3 月,CISPA 对”影子 API”端点做了一轮审计,<strong>45.83% 未通过模型身份验证</strong>——你付钱买的是旗舰模型,拿到的不是。基准分差最高达 <strong>47 分</strong>。</p>
+<p>而这件事最难受的地方在于:<strong>它不会报错。</strong> 返回格式一样,<code>model</code> 字段照样写着旗舰名,响应也像模像样。你唯一能感觉到的,只是”最近好像笨了点”。</p>
+<p>这篇讲两件事:怎么用两百次请求把它验出来,以及买之前该看什么。</p>
+<h2 id="一、先分清两种坑法"><a href="#一、先分清两种坑法" class="headerlink" title="一、先分清两种坑法"></a>一、先分清两种坑法</h2><p><strong>整体替换(model substitution)</strong>:每一个请求都换成便宜模型。这种最好抓——测一次就现形。</p>
+<p><strong>路由稀释(routing dilution)</strong>:只把其中一部分请求偷偷路由给便宜模型,其余照常。</p>
+<p>第二种才是主流,也是<strong>为什么”我试了几次感觉没问题”完全不可靠</strong>。假设 30% 的请求被稀释,你随手问三五个问题,大概率全落在正常的那 70% 里。</p>
+<p>这两个概念来自新加坡与清华团队的 <a target="_blank" rel="noopener" href="https://arxiv.org/html/2607.20860v1">IRIS 论文</a>(2026 年 7 月),它专门研究怎么在只能看到返回文本的前提下审计网关。</p>
+<h2 id="二、简单测试-让它”随机”一下"><a href="#二、简单测试-让它”随机”一下" class="headerlink" title="二、简单测试:让它”随机”一下"></a>二、简单测试:让它”随机”一下</h2><p>核心原理一句话:<strong>大模型没法真随机,而每个模型不随机的方式各不相同。</strong></p>
+<p>这就是指纹。让模型反复回答”从 1 到 100 里随便挑个数”,它会形成一个高度偏斜且<strong>稳定</strong>的分布:</p>
+<ul>
+<li><strong>42 被严重超额选中</strong>(《银河系漫游指南》的锅)</li>
+<li><strong>两位质数扎堆</strong>——37、47、73 出现率远高于均匀分布,因为它们”对人类而言显得随机”</li>
+<li>整体上,中位答案分布只携带约 <strong>1.0 bit 熵</strong>,而真正均匀分布是 <strong>6.64 bit</strong></li>
+</ul>
+<p>这个偏斜是模型权重的产物,换个模型就变。</p>
+<h3 id="怎么做"><a href="#怎么做" class="headerlink" title="怎么做"></a>怎么做</h3><p>用一组固定探针(比如”1–100 随机数””随便说个颜色””抛硬币”),<strong>在参考端点与待测端点上各跑一遍</strong>,比较两边的答案分布。</p>
+<p>轻量版配置足够用了:</p>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>探针</td>
+<td>8 组</td>
+</tr>
+<tr>
+<td>每组采样</td>
+<td>25 次</td>
+</tr>
+<tr>
+<td>请求总数</td>
+<td>≈ 200</td>
+</tr>
+<tr>
+<td>temperature</td>
+<td>1.0(必须,否则没有分布)</td>
+</tr>
+<tr>
+<td>max_tokens</td>
+<td>16</td>
+</tr>
+<tr>
+<td>成本</td>
+<td>约 $0.005</td>
+</tr>
+</tbody></table>
+<h3 id="怎么判读"><a href="#怎么判读" class="headerlink" title="怎么判读"></a>怎么判读</h3><p>用 Jensen-Shannon 散度衡量两个分布的距离,参考刻度:</p>
+<div class="fig">
+  <div class="fig-title">答案分布的 JS 散度:三个参考点</div>
+  <div class="fig-sub">柱长按最大值(0.46)归一为 100%。散度越大,越可能不是同一个模型。</div>
+  <div class="fig-bars">
+    <div class="fig-bar-row">
+      <span class="fig-bar-label"><b>同模型自比</b>基线噪声</span>
+      <span class="fig-bar-track"><i class="fig-bar-fill is-good" style="--w:30.4%"></i></span>
+      <span class="fig-bar-val">0.14</span>
+    </div>
+    <div class="fig-bar-row">
+      <span class="fig-bar-label"><b>同模型跨供应商</b>量化/kernel 差异</span>
+      <span class="fig-bar-track"><i class="fig-bar-fill" style="--w:50.0%"></i></span>
+      <span class="fig-bar-val">0.23</span>
+    </div>
+    <div class="fig-bar-row">
+      <span class="fig-bar-label"><b>确实是两个模型</b></span>
+      <span class="fig-bar-track"><i class="fig-bar-fill is-warn" style="--w:100%"></i></span>
+      <span class="fig-bar-val">0.46</span>
+    </div>
+  </div>
+  <p class="fig-src">来源:<a href="https://tosea.ai/blog/verify-llm-api-model-fingerprint" target="_blank" rel="noopener">Tosea.ai,Fingerprinting Models with Random Numbers</a>。快照 2026-08-20。</p>
+</div>
+
+<p>判定门槛:<strong>≤0.25 视为匹配,0.25–0.35 存疑,&gt;0.35 判为不匹配</strong>。</p>
+<p>注意中间那根柱子——<strong>同一个模型在不同正规供应商之间也有 0.23 的距离</strong>。IRIS 的实测同样发现,15 对供应商里有 14 对可区分,来源是量化精度与推理 kernel 的差异。所以别把”有差异”直接等同于”被骗了”,要看差异有多大。</p>
+<h3 id="顺手能看的几个辅助信号"><a href="#顺手能看的几个辅助信号" class="headerlink" title="顺手能看的几个辅助信号"></a>顺手能看的几个辅助信号</h3><p>跑这轮测试时,顺便记下这些:</p>
+<ul>
+<li><strong>prompt token 数异常膨胀</strong> → 中转站往你的请求里插了隐藏系统提示</li>
+<li><strong>completion token 填充</strong> → 输出被凑长度(可能在按 token 计费上做手脚)</li>
+<li><strong>split-half 不稳定</strong>(前一半与后一半样本的分布明显不同) → 多后端路由,正是稀释的迹象</li>
+<li><strong>响应快得不合理且完全一致</strong> → 在偷偷做缓存</li>
+</ul>
+<h2 id="三、一个必须知道的限制"><a href="#三、一个必须知道的限制" class="headerlink" title="三、一个必须知道的限制"></a>三、一个必须知道的限制</h2><p><strong>指纹可以被伪造。</strong> 有研究(<a target="_blank" rel="noopener" href="https://arxiv.org/html/2606.16100v1">arXiv 2606.16100</a>)专门指出这种攻击:供应商可以拿便宜模型微调,让它模仿贵模型的行为特征,从而骗过用户侧的指纹检测。</p>
+<p>所以这套方法的定位要摆正:<strong>它能高效抓住懒惰的骗子,抓不住认真的骗子。</strong> 对绝大多数以省成本为目的的中转站,它够用;但它不是密码学证明。</p>
+<p>补充一点尺度感:IRIS 在 32 次查询后对 17 个商业模型的归属判定准确率能到 <strong>0.98</strong>,并能把路由比例估到 <strong>±0.04</strong> 以内——所以样本量比单次测试重要得多。</p>
+<h2 id="四、买之前看什么"><a href="#四、买之前看什么" class="headerlink" title="四、买之前看什么"></a>四、买之前看什么</h2><div class="risk-box">
+<strong>价格是最强的信号。</strong>安全研究把这个市场称作"暗 token 经济":未授权代理以**低于官方定价最多 90%** 转售 Claude、GPT、Gemini 的访问权。这个折扣不可能来自运营效率——它来自欺诈账号、池化账号,或者根本就没打算给你真模型。<strong>便宜三成可以谈,便宜九成一定有问题。</strong>
+</div>
+
+<h3 id="比”降智”严重得多的三件事"><a href="#比”降智”严重得多的三件事" class="headerlink" title="比”降智”严重得多的三件事"></a>比”降智”严重得多的三件事</h3><p>质量缩水只是最轻的后果。中转站在你和模型之间,能做的事远不止换个模型:</p>
+<p><strong>一、你的所有 prompt 和响应都会经过它,而且可能被完整记录。</strong> 这些日志的下游用途包括欺诈和模型蒸馏。你贴进去的代码、客户数据、内部文档,都在里面。</p>
+<p><strong>二、密钥可以被被动窃取。</strong> 明文流量里的 API key 与凭据会被顺手收走,而且<strong>下游应用行为完全正常</strong>,极难察觉。</p>
+<p><strong>三、工具调用载荷可以被改写。</strong> 这条对用编程 Agent 的人最致命——比如把一个正常的包安装 URL 换成攻击者控制的脚本,你的 Agent 就替攻击者执行了任意命令。<strong>你以为你在用 AI 写代码,实际上是在给它开后门。</strong></p>
+<h3 id="务实的几条"><a href="#务实的几条" class="headerlink" title="务实的几条"></a>务实的几条</h3><ol>
+<li><strong>别用中转站跑生产,也别喂敏感数据。</strong> 省下的钱和一次数据泄露不在一个量级。</li>
+<li><strong>先小额充值 + 跑一轮指纹测试</strong>,别一上来就买年付。不退款的中转站遍地都是。</li>
+<li><strong>给它单独的账号与密钥</strong>,和你的正式凭据完全隔离,并定期轮换。</li>
+<li><strong>周期性复测,而不是只测一次。</strong> 路由稀释是可以随时调的——今天干净不代表下个月干净。</li>
+<li><strong>优先考虑有官方定价页的正规平台。</strong> 本站<a href="/rankings/">性价比表</a>里的 SCNet、硅基流动这类,价格、计费规则、限制条款都写在官方文档上,可核对、可追责——这和一个只有 Telegram 客服的中转站是两回事。</li>
+</ol>
+<h2 id="五、说到底"><a href="#五、说到底" class="headerlink" title="五、说到底"></a>五、说到底</h2><p>中转站这个生意存在,是因为官方渠道对国内用户确实有摩擦——支付、网络、账号,都是真实痛点。这篇不是劝你完全不用。</p>
+<p>但要清楚自己在交换什么:<strong>你用可验证性换了价格。</strong> 那就至少把验证这一步补上——两百次请求、半分钱、十分钟,能把”我感觉最近变笨了”变成一个有数字的判断。</p>
+<p>在一个近半数端点通不过身份验证的市场里,<strong>“感觉还行”不是一种质量保证。</strong></p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li>Yuewei Zhang、Zhi-Hai Zhang、Hanzhang Qin,<a target="_blank" rel="noopener" href="https://arxiv.org/html/2607.20860v1">Which Model Is Actually Serving You? IRIS: Budgeted Black-Box Auditing of Model Substitution and Routing Dilution in LLM Gateways</a>——模型替换与路由稀释的定义、审计方法、检测率与路由比例估计</li>
+<li>Tosea.ai,<a target="_blank" rel="noopener" href="https://tosea.ai/blog/verify-llm-api-model-fingerprint">How to Verify an LLM API Is Real: Fingerprinting Models with Random Numbers</a>——随机数指纹的探针设计、熵坍缩数据与 JS 散度判定门槛</li>
+<li>arXiv,<a target="_blank" rel="noopener" href="https://arxiv.org/html/2606.16100v1">Your “Pro” LLM Subscription May Actually Be “Free”: Exposing Fingerprint Spoofing Risks in LLM Inference Services</a>——指纹伪造攻击</li>
+<li>arXiv,<a target="_blank" rel="noopener" href="https://arxiv.org/html/2605.29524v2">KBF: Knowledge Boundary as Fingerprint for Language Model and Black-Box API Auditing</a>——以知识边界作为另一种指纹</li>
+<li>SOCRadar,<a target="_blank" rel="noopener" href="https://socradar.io/blog/dark-token-llm-api-proxies-harvest-fraud/">Dark Token Economy: Unauthorized LLM API Proxies Harvest Prompts for Fraud and Distillation</a>——暗 token 经济、prompt 收割与下游滥用</li>
+<li>Cloud Security Alliance,<a target="_blank" rel="noopener" href="https://labs.cloudsecurityalliance.org/research/csa-research-note-llm-proxy-router-risk-20260416-csa-styled/">Malicious LLM Proxy Routers: Hidden AI Supply Chain Risk</a>——工具调用载荷改写与密钥被动窃取</li>
+<li>开源工具:<a target="_blank" rel="noopener" href="https://github.com/Mohamed7415/fpverify">fpverify</a> · <a target="_blank" rel="noopener" href="https://github.com/mintesnot-teshome/llm-verify">llm-verify</a>——行为指纹验证的现成实现</li>
+</ol>
+<p>本站相关:<a href="/rankings/">模型天梯与平台对照</a> · <a href="/2026/08/15/what-is-agent-harness/">同一个模型,换个壳分数差 24 分:harness 入门</a> · <a href="/2026/08/05/benchmark-trust-crisis/">当考卷泄题成为常态:AI 评测的信任危机</a></p>
+<blockquote>
+<p>本文由 ByteVibe 撰写(AI 辅助研究整理)。文中观点的原始出处均已在正文与参考文献中标注,版权归原作者所有。数据快照 2026-08-20。</p>
+</blockquote>
+
+        </div>
+        
+        <footer class="post-footer">
+          <nav class="post-nav">
+            
+            
+            <a class="post-nav-item post-nav-next" href="/2026/08/15/what-is-agent-harness/">
+              <span class="post-nav-label">下一篇 →</span>
+              <span class="post-nav-title">同一个模型,换个壳分数差 24 分:harness 入门</span>
+            </a>
+            
+          </nav>
+        </footer>
+      </div>
+
+      <!-- 3. Right Sidebar: Outline TOC Jump -->
+      <aside class="post-sidebar-right">
+        
+          <div class="toc-sticky">
+            <h3 class="toc-title">目录大纲</h3>
+            <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E5%85%88%E5%88%86%E6%B8%85%E4%B8%A4%E7%A7%8D%E5%9D%91%E6%B3%95"><span class="toc-list-text">一、先分清两种坑法</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E7%AE%80%E5%8D%95%E6%B5%8B%E8%AF%95-%E8%AE%A9%E5%AE%83%E2%80%9D%E9%9A%8F%E6%9C%BA%E2%80%9D%E4%B8%80%E4%B8%8B"><span class="toc-list-text">二、简单测试:让它”随机”一下</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E6%80%8E%E4%B9%88%E5%81%9A"><span class="toc-list-text">怎么做</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E6%80%8E%E4%B9%88%E5%88%A4%E8%AF%BB"><span class="toc-list-text">怎么判读</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E9%A1%BA%E6%89%8B%E8%83%BD%E7%9C%8B%E7%9A%84%E5%87%A0%E4%B8%AA%E8%BE%85%E5%8A%A9%E4%BF%A1%E5%8F%B7"><span class="toc-list-text">顺手能看的几个辅助信号</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E4%B8%80%E4%B8%AA%E5%BF%85%E9%A1%BB%E7%9F%A5%E9%81%93%E7%9A%84%E9%99%90%E5%88%B6"><span class="toc-list-text">三、一个必须知道的限制</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E4%B9%B0%E4%B9%8B%E5%89%8D%E7%9C%8B%E4%BB%80%E4%B9%88"><span class="toc-list-text">四、买之前看什么</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E6%AF%94%E2%80%9D%E9%99%8D%E6%99%BA%E2%80%9D%E4%B8%A5%E9%87%8D%E5%BE%97%E5%A4%9A%E7%9A%84%E4%B8%89%E4%BB%B6%E4%BA%8B"><span class="toc-list-text">比”降智”严重得多的三件事</span></a></li><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E5%8A%A1%E5%AE%9E%E7%9A%84%E5%87%A0%E6%9D%A1"><span class="toc-list-text">务实的几条</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E8%AF%B4%E5%88%B0%E5%BA%95"><span class="toc-list-text">五、说到底</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+          </div>
+        
+      </aside>
+    </div>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <p class="copyright">&copy; 2026 ByteVibe. All rights reserved.</p>
+      <p class="powered-by">Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a></p>
+      
+      <div class="social-links">
+        
+          <a class="social-link" href="https://github.com/notSomeshi" target="_blank" rel="noopener noreferrer">GitHub</a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+
+  <div class="search-overlay" id="searchOverlay" hidden>
+  <div class="search-backdrop" id="searchBackdrop"></div>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="站内搜索">
+    <div class="search-input-wrap">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="searchInput" class="search-input" placeholder="搜索文章…" autocomplete="off" spellcheck="false">
+      <button class="search-close" id="searchClose" aria-label="关闭搜索">ESC</button>
+    </div>
+    <div class="search-results" id="searchResults">
+      <p class="search-hint">输入关键词搜索标题、标签与正文</p>
+    </div>
+  </div>
+</div>
+
+  <button class="scroll-to-top" id="scrollToTop" aria-label="回到顶部">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+</body>
+</html>
