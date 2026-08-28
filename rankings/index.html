@@ -114,7 +114,7 @@
   <div class="container">
     <header class="archive-header">
       <h1 class="archive-title">模型天梯</h1>
-      <p class="archive-desc">TOP 20 AI MODELS · 多机构综合排名 · 数据快照 2026-08-25</p>
+      <p class="archive-desc">TOP 20 AI MODELS · 多机构综合排名 · 数据快照 2026-08-28</p>
     </header>
 
     <a class="rk-advisor-cta" href="/advisor/">
@@ -196,7 +196,8 @@
               <thead><tr><th>模型</th><th>AA 指数</th><th>缺什么</th></tr></thead>
               <tbody>
                 <tr><td><strong>Grok 4.6</strong>（xAI，08-12）</td><td>61</td><td>LiveBench 仅早期分项；Arena / SWE-V 无</td></tr>
-                <tr><td><strong>GLM-5.3</strong>（智谱，08-14）</td><td>60</td><td>Arena / LiveBench / SWE-V 均无独立成绩</td></tr>
+                
+                <tr><td><strong>GLM-5.3 Flash</strong>（智谱，08-26，<strong>开源</strong>）</td><td>57</td><td>Arena / LiveBench / SWE-V 均无独立成绩</td></tr>
                 <tr><td><strong>Qwen3.8-Max</strong>（阿里，08-03）</td><td>58</td><td>同上</td></tr>
                 <tr><td><strong>Gemini 3.7 Flash</strong>（Google，08-13）</td><td>56</td><td>同上</td></tr>
                 <tr><td>GPT-5.6 Terra(OpenAI)</td><td>57</td><td>同上</td></tr>
@@ -208,7 +209,7 @@
             <p class="rk-note">⚠ 厂商自测成绩不能替代第三方评测,<strong>基准名也要对齐</strong>——例如阿里公布的是 SWE-bench <strong>Pro</strong>,与本表使用的 SWE-bench <strong>Verified</strong> 不是同一套题,不可混用。等任一模型补齐跨机构数据即会入榜。</p>
           </div>
         </details>
-        <p class="rk-note"><strong>数据来源(快照 2026-08-25,以各机构官网为准)</strong>:
+        <p class="rk-note"><strong>数据来源(快照 2026-08-28,以各机构官网为准)</strong>:
           <a href="https://arena.ai/leaderboard/text" target="_blank" rel="noopener">Arena</a> ·
           <a href="https://artificialanalysis.ai/leaderboards/models" target="_blank" rel="noopener">Artificial Analysis</a> ·
           <a href="https://livebench.ai/" target="_blank" rel="noopener">LiveBench</a> ·
@@ -294,11 +295,11 @@
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-zai">Z</span><a href="https://z.ai/" target="_blank" rel="noopener">GLM Coding Plan</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// GLM Coding Lite / Pro</strong><b>适合:</b>个人开发者、学生党、把预算压到极限的人。<br><b>强项:</b>兼容 Claude Code 的 CLI,一行配置换后端;中文项目好。<br><b>🐑</b> GLM Flash 系列<strong>永久免费</strong>;$3 档是价格战风向标。</span></span></td>
               <td class="rk-pt-plans"><span class="rk-plan">Lite $3</span><span class="rk-plan">Pro $15</span><span class="rk-plan"><em>官方常有半价/首月促销</em></span></td>
-              <td><strong>GLM-5.3(新)</strong> · GLM-5.2 · GLM-5<br><em class="rk-pt-note">5.3 于 <strong>2026-08-14 发布</strong>,已向 Coding Plan <strong>全量开放</strong>(可在 ZCode / Claude Code / OpenCode 里调用)。与 5.2 <strong>同基座,增益全部来自后训练</strong>:Terminal-Bench 3.0 从 4.6 → <strong>28.3</strong>,DeepSWE v1.1 从 46.2 → <strong>66.9</strong><br>✅ <strong>AA 已收录：智能指数 60</strong>（v4.1.1，评测成本 $1,238.50）；按量 API 价 <strong>$1.4 / $4.4</strong>（与 5.2 同价，指数却高 7 分，<strong>旧版已无必要继续用</strong>）<br>⚠ <strong>权重仍未开放</strong>：官方称 8 月底，截至 2026-08-25 仍未上 HuggingFace（最新仍为 GLM-5.2），<a href="https://artificialanalysis.ai/models/glm-5-3" target="_blank" rel="noopener">AA 仍标 proprietary</a><br>⚠ 仅 AA 一家收录，Arena / LiveBench / SWE-V 均无独立成绩，故<strong>暂不入天梯</strong>；Terminal-Bench 等为厂商自测</em></td>
+              <td><strong>GLM-5.3 Flash(新，开源)</strong> · <strong>GLM-5.3</strong> · GLM-5.2 · GLM-5<br><em class="rk-pt-note">5.3 于 <strong>2026-08-14 发布</strong>,已向 Coding Plan <strong>全量开放</strong>(可在 ZCode / Claude Code / OpenCode 里调用)。与 5.2 <strong>同基座,增益全部来自后训练</strong>:Terminal-Bench 3.0 从 4.6 → <strong>28.3</strong>,DeepSWE v1.1 从 46.2 → <strong>66.9</strong><br>✅ <strong>AA 已收录：智能指数 60</strong>（v4.1.1，评测成本 $1,238.50）；按量 API 价 <strong>$1.4 / $4.4</strong>（与 5.2 同价，指数却高 7 分，<strong>旧版已无必要继续用</strong>）<br>⚠ <strong>开源承诺只兑现了一半</strong>：08-26 放出的是 <a href="https://huggingface.co/zai-org/GLM-5.3-Flash" target="_blank" rel="noopener">GLM-5.3-Flash</a>（321B，BF16 与量化版均有），<strong>GLM-5.3 本体至今未开源</strong>（截至 2026-08-28），<a href="https://artificialanalysis.ai/models/glm-5-3" target="_blank" rel="noopener">AA 仍标 proprietary</a><br>⚠ 仅 AA 一家收录，Arena / LiveBench / SWE-V 均无独立成绩，故<strong>暂不入天梯</strong>；Terminal-Bench 等为厂商自测</em></td>
               <td>5 小时滚动窗口,按 prompt(发送次数)计:<br>· Lite ≈ 120 条 / 5 小时(官方对标"Claude Pro 的 3 倍用量、约 1/10 价格")<br>· Pro ≈ 600 条 / 5 小时<br>· 兼容 Claude Code / Cline / Roo Code 等工具,改一行 API 地址即可接入</td>
               <td>· Lite ≈ 0.6–1.5 亿 token/月<br>· Pro ≈ 3–8 亿/月(自家模型)</td>
               <td>· Lite ≈ $0.02–0.05 /M<br>· Pro ≈ $0.03–0.1 /M<br><em class="rk-pt-note">全场最低档</em></td>
-              <td><strong>GLM-5.2 $1.4 / $4.4</strong><br>GLM-5 $1 / $3.2<br>GLM-5-Turbo $1.2 / $4<br><em class="rk-pt-note">📍 <strong>国内 bigmodel 平台另有一套人民币牌价</strong>:GLM-5.2 <strong>¥8 / ¥28</strong>、缓存命中 ¥2(1M 上下文)。国内直连走这套,比国际站折算价略低,<strong>且为官方原始牌价而非折算值</strong><br>缓存输入 $0.26(约输入价的 1/5);缓存存储限时免费;并发上限随账户等级放宽<br>🐑 <strong>GLM-4.7-Flash / 4.5-Flash 永久免费</strong>(输入输出缓存全免);新用户实名另赠约 2,000 万 token,官方常有半价/首月促销<br>来源:<a href="https://docs.z.ai/guides/overview/pricing" target="_blank" rel="noopener">z.ai 官方定价</a> · <a href="https://bigmodel.cn/pricing" target="_blank" rel="noopener">bigmodel 官方定价</a></em></td>
+              <td><strong>GLM-5.3 Flash $0.075 / $0.25</strong>（五折促销，<strong>2026-09-09 到期</strong>，原价 $0.15 / $0.50）<br>GLM-5.3 $1.4 / $4.4<br><strong>GLM-5.2 $1.4 / $4.4</strong><br>GLM-5 $1 / $3.2<br>GLM-5-Turbo $1.2 / $4<br><em class="rk-pt-note">📍 <strong>国内 bigmodel 平台另有一套人民币牌价</strong>:GLM-5.2 <strong>¥8 / ¥28</strong>、缓存命中 ¥2(1M 上下文)。国内直连走这套,比国际站折算价略低,<strong>且为官方原始牌价而非折算值</strong><br>缓存输入 $0.26(约输入价的 1/5);缓存存储限时免费;并发上限随账户等级放宽<br>🐑 <strong>GLM-4.7-Flash / 4.5-Flash 永久免费</strong>(输入输出缓存全免);新用户实名另赠约 2,000 万 token,官方常有半价/首月促销<br>来源:<a href="https://docs.z.ai/guides/overview/pricing" target="_blank" rel="noopener">z.ai 官方定价</a> · <a href="https://bigmodel.cn/pricing" target="_blank" rel="noopener">bigmodel 官方定价</a></em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-deepseek">D</span><a href="https://www.deepseek.com/" target="_blank" rel="noopener">DeepSeek(API 直连)</a>
@@ -386,16 +387,17 @@
           <p class="rkc-effort-key">💡 因此下表是<strong>成本上限</strong>,不是日常开销。Anthropic 官方反而建议广泛使用 low/medium——FrontierCode 基准显示 <strong>Opus 5 在 medium effort 就达到编程峰值</strong>(主集 53.4%、扩展集 63.6%),再往上收益递减。<strong>日常按 medium 用,账单可能只有表中的一半,编程质量还未必更差。</strong></p>
         </div>
         <div class="rkc-stats">
-          <div class="rkc-stat"><b>33×</b><span>评测总成本极差<br>$172 → $5,631</span></div>
+          <div class="rkc-stat"><b>41×</b><span>评测总成本极差<br>$138 → $5,631</span></div>
           <div class="rkc-stat"><b>18 分</b><span>智能指数跨度<br>45 → 63</span></div>
-          <div class="rkc-stat"><b>27×</b><span>每分智能成本极差<br>$3.3 → $90.8 /分</span></div>
-          <div class="rkc-stat"><b>-62%</b><span>Grok 4.6 相对 GPT-5.6 Sol<br>同为 61 分,评测成本 $2,823 → $1,068</span></div>
+          <div class="rkc-stat"><b>38×</b><span>每分智能成本极差<br>$2.4 → $90.8 /分</span></div>
+          <div class="rkc-stat"><b>-90%</b><span>同为 57 分，成本差十倍<br>GPT-5.6 Terra $1,390 → GLM-5.3 Flash $138</span></div>
         </div>
         <div class="rkc-chart-wrap">
         <div class="rkc-chart">
           <div class="rkc-row rkc-head"><span></span><span class="rkc-name">模型</span><span class="rkc-axis">评测总成本(柱长)→</span><span class="rkc-cost">总成本</span><span class="rkc-task">$/任务</span><span class="rkc-eff">$/分</span><span class="rkc-score">指数</span></div>
+          <div class="rkc-row is-star"><span class="rk-ico b-zai">Z</span><span class="rkc-name">GLM-5.3 Flash</span><div class="rkc-bar"><i style="--w:2.5%"></i></div><span class="rkc-cost">$138</span><span class="rkc-task"><span class="rk-miss-mark">—</span></span><span class="rkc-eff good">$2.4</span><span class="rkc-score">57</span></div>
           <div class="rkc-row is-star"><span class="rk-ico b-openai">O</span><span class="rkc-name">GPT-5.6 Luna</span><div class="rkc-bar"><i style="--w:3.1%"></i></div><span class="rkc-cost">$172</span><span class="rkc-task">$0.05</span><span class="rkc-eff good">$3.3</span><span class="rkc-score">52</span></div>
-          <div class="rkc-row is-star"><span class="rk-ico b-deepseek">D</span><span class="rkc-name">V4 Flash Vision</span><div class="rkc-bar"><i style="--w:4.2%"></i></div><span class="rkc-cost">$236</span><span class="rkc-task"><span class="rk-miss-mark">—</span></span><span class="rkc-eff good">$4.6</span><span class="rkc-score">51</span></div>
+          <div class="rkc-row"><span class="rk-ico b-deepseek">D</span><span class="rkc-name">V4 Flash Vision</span><div class="rkc-bar"><i style="--w:4.2%"></i></div><span class="rkc-cost">$236</span><span class="rkc-task"><span class="rk-miss-mark">—</span></span><span class="rkc-eff good">$4.6</span><span class="rkc-score">51</span></div>
           <div class="rkc-row"><span class="rk-ico b-google">G</span><span class="rkc-name">Gemini 3.6 Flash</span><div class="rkc-bar"><i style="--w:7.3%"></i></div><span class="rkc-cost">$412</span><span class="rkc-task">$0.56</span><span class="rkc-eff good">$7.9</span><span class="rkc-score">52</span></div>
           <div class="rkc-row"><span class="rk-ico b-google">G</span><span class="rkc-name">Gemini 3.7 Flash</span><div class="rkc-bar"><i style="--w:8.6%"></i></div><span class="rkc-cost">$485</span><span class="rkc-task"><span class="rk-miss-mark">—</span></span><span class="rkc-eff good">$8.7</span><span class="rkc-score">56</span></div>
           <div class="rkc-row"><span class="rk-ico b-deepseek">D</span><span class="rkc-name">DeepSeek-V4 Pro</span><div class="rkc-bar"><i style="--w:10.8%"></i></div><span class="rkc-cost">$607</span><span class="rkc-task"><span class="rk-miss-mark">—</span></span><span class="rkc-eff">$11.5</span><span class="rkc-score">53</span></div>
@@ -428,7 +430,7 @@
             <li><strong>省钱的第二个旋钮:调低 effort。</strong>换模型之外,还有一条被忽视的省钱路径——<strong>同一个模型降一档推理强度</strong>。表中数字是 max 档的上限,而 low→max 成本差约 3 倍。对多数日常任务(补全、常规改代码、问答),medium 甚至 low 就够;Anthropic 官方也是这么建议的。<strong>先调 effort,再考虑换更便宜的模型</strong>,往往能在不牺牲质量的前提下砍掉一半账单。</li>
           </ul>
         </div>
-        <p class="rkc-note">口径:<a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking" target="_blank" rel="noopener">Artificial Analysis「Cost to Run Intelligence Index」</a>(当前为 <a href="https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-1-1" target="_blank" rel="noopener">v4.1.1</a>,含 GDPval-AA v2、Terminal-Bench v2.1、SciCode、HLE、GPQA Diamond 等 9 项评测)——按各模型 API 的输入/缓存/推理/输出 token 实际计费汇总,<strong>推理模型均取厂商披露的最高 effort 设置</strong>。<strong>本表 20 行的总成本与指数全部逐个模型取自 AA 官方页面的实测值</strong>（2026-08-25 核验),不再含折算估算;「$/任务」为 AA 自己公布的加权每任务成本,AA 未公布的标 <span class="rk-miss-mark">—</span>,不用推算值填空。⚠ <strong>GPT-5.6 Sol 于 2026-08-21 降价（$5/$30 → $4/$20），而 AA 尚未重跑</strong>——本表里 Sol 的 $2,823 是按旧价测的，按新价重跑应降至约 <strong>$1,900</strong>（本站推算，非 AA 官方值，故表中仍列官方实测）。AA 会随重跑更新数值,以 <a href="https://artificialanalysis.ai/models" target="_blank" rel="noopener">AA 官网实时数据</a>为准。effort 档位说明参考 <a href="https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5" target="_blank" rel="noopener">Anthropic 官方文档</a>。</p>
+        <p class="rkc-note">口径:<a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking" target="_blank" rel="noopener">Artificial Analysis「Cost to Run Intelligence Index」</a>(当前为 <a href="https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-1-1" target="_blank" rel="noopener">v4.1.1</a>,含 GDPval-AA v2、Terminal-Bench v2.1、SciCode、HLE、GPQA Diamond 等 9 项评测)——按各模型 API 的输入/缓存/推理/输出 token 实际计费汇总,<strong>推理模型均取厂商披露的最高 effort 设置</strong>。<strong>本表 21 行的总成本与指数全部逐个模型取自 AA 官方页面的实测值</strong>（2026-08-28 核验),不再含折算估算;「$/任务」为 AA 自己公布的加权每任务成本,AA 未公布的标 <span class="rk-miss-mark">—</span>,不用推算值填空。⚠ <strong>GPT-5.6 Sol 于 2026-08-21 降价（$5/$30 → $4/$20），而 AA 尚未重跑</strong>——本表里 Sol 的 $2,823 是按旧价测的，按新价重跑应降至约 <strong>$1,900</strong>（本站推算，非 AA 官方值，故表中仍列官方实测）。AA 会随重跑更新数值,以 <a href="https://artificialanalysis.ai/models" target="_blank" rel="noopener">AA 官网实时数据</a>为准。effort 档位说明参考 <a href="https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5" target="_blank" rel="noopener">Anthropic 官方文档</a>。</p>
       </div>
 
       <div class="rk-notes">
@@ -448,7 +450,7 @@
             <p class="rk-note">⚠ 以上为公开政策要点的<strong>提示性摘要,不构成法律意见</strong>,以主管部门当期公告与正式文本为准。来源:<a href="https://www.cac.gov.cn/2026-05/13/c_1780413225190669.htm" target="_blank" rel="noopener">网信办备案公告</a> · <a href="https://www.cac.gov.cn/2026-04/10/c_1777558395078289.htm" target="_blank" rel="noopener">拟人化互动服务办法</a></p>
           </div>
         </details>
-        <p class="rk-note"><strong>价格快照 2026-08-25</strong>,来源:
+        <p class="rk-note"><strong>价格快照 2026-08-28</strong>,来源:
           <a href="https://www.aipricing.guru/subscriptions/" target="_blank" rel="noopener">AI Pricing Guru</a> ·
           <a href="https://spectrumailab.com/blog/ai-coding-tools-pricing-compared-2026" target="_blank" rel="noopener">SpectrumAI Lab(编程工具对比)</a> ·
           <a href="https://automationatlas.io/answers/github-copilot-pricing-explained-2026/" target="_blank" rel="noopener">Automation Atlas(Copilot Credits 制)</a> ·
@@ -473,7 +475,7 @@
           <li><strong>会配 API 的</strong> → 用免费开源的 <a href="https://cline.bot/" target="_blank" rel="noopener">Cline</a> 或 <a href="https://n8n.io/" target="_blank" rel="noopener">n8n</a> 自托管当外壳,后端接国产永久免费模型(混元 Lite、智谱 GLM Flash 等),<strong>长期成本可压到接近 0</strong>。</li>
           <li><strong>只是想试试水</strong> → Cursor Hobby、Copilot Free、Trae Free 都是<strong>不限时</strong>的永久免费档;Antigravity 公测额度虽大但<strong>已被砍 92%</strong>,别当长期主力。</li>
         </ul>
-        <p class="rk-deals-foot">⚠ 羊毛政策变动极快,本表每次更新逐条复核。<strong>已确认失效的:</strong>WorkBuddy 每日签到(2026-05-10 下线)、Cursor 学生免费 Pro(2026-06-25 停发)、Cursor 不再公布固定免费额度、Antigravity 从 250 砍到 20 请求/天。<strong>领取前请以官网当期页面为准</strong>,本表为 2026-08-25 快照。</p>
+        <p class="rk-deals-foot">⚠ 羊毛政策变动极快,本表每次更新逐条复核。<strong>已确认失效的:</strong>WorkBuddy 每日签到(2026-05-10 下线)、Cursor 学生免费 Pro(2026-06-25 停发)、Cursor 不再公布固定免费额度、Antigravity 从 250 砍到 20 请求/天。<strong>领取前请以官网当期页面为准</strong>,本表为 2026-08-28 快照。</p>
       </div>
 
       <p class="rk-drag-hint">
@@ -533,7 +535,7 @@
               <td><strong>补全免费 + 高级请求计数</strong>(2026-06 起 AI Credits 制):Pro $10 / Pro+ $39 / Max $100;Business $19、Enterprise $39 每席<br><em class="rk-pt-note">补全不限量,Agent 与高级模型按次扣</em></td>
               <td>· 企业采购与合规最成熟<br>· GitHub PR/Issue 集成最深<br>· 补全不限量,基础档最便宜<br>· 支持几乎所有 IDE 与语言</td>
               <td>· <strong>NPS +14 明显落后</strong>,被批改进停滞<br>· 高级请求次数有限,重代理易撞墙<br>· Agent 自主性不及 Claude Code / Codex<br>· Credits 制透明度受质疑</td>
-              <td class="rk-deal"><strong>🐑 学生党首选</strong><br>· Free 档:2,000 次补全 + 50 次 chat/月<br>· <strong>学生、教师、开源维护者可申请全额免费 Pro</strong>(GitHub Education 认证)<br><em class="rk-pt-note">2026-08-25 复核仍有效。资格<strong>按月重新评估</strong>,在读期间可持续续期——门槛最低的"白嫖前沿模型"路径<br>🔥 <strong>限时</strong>:Business 档 2026 年 6–8 月加赠 $30 AI Credits(常规为 $19/席),<strong>促销 8 月底结束</strong>,团队采购可卡这个窗口<br>⚠ 网上流传的"Cursor Free 2,000 补全 + 50 次慢速请求"是历史值,Cursor 官方已不再公布固定数字,别照抄</em></td>
+              <td class="rk-deal"><strong>🐑 学生党首选</strong><br>· Free 档:2,000 次补全 + 50 次 chat/月<br>· <strong>学生、教师、开源维护者可申请全额免费 Pro</strong>(GitHub Education 认证)<br><em class="rk-pt-note">2026-08-28 复核仍有效。资格<strong>按月重新评估</strong>,在读期间可持续续期——门槛最低的"白嫖前沿模型"路径<br>🔥 <strong>限时</strong>:Business 档 <span style="color:#d29922"><strong>促销 9 月 1 日回落</strong></span>：Business 每席含量 3,000 → <strong>1,900 credits</strong>（$30 → $19），Enterprise 7,000 → <strong>3,900</strong>（$70 → $39）。<strong>月费不变、含量少 37–44%</strong>；超出按 $0.01/credit。<strong>促销期做的容量测算 9 月起全部作废</strong><br>⚠ 网上流传的"Cursor Free 2,000 补全 + 50 次慢速请求"是历史值,Cursor 官方已不再公布固定数字,别照抄</em></td>
               <td><strong>NPS +14</strong>(同类明显偏低)<br><strong>"最爱"投票 9%</strong><br><strong>470 万付费订阅、同比 +75%</strong><br><em class="rk-pt-note">用户基数同类第一</em></td>
             </tr>
             <tr>
@@ -677,7 +679,7 @@
             <p class="rk-note"><strong>NPS</strong>(净推荐值,-100~+100)、<strong>"最爱"投票</strong>(开发者调查中选为最喜爱的比例)、<strong>满意度</strong>、<strong>市场规模</strong>(付费用户数或 ARR)。来自 2026 年开发者调查与厂商披露,时点 2026 年初至 7 月。<strong>缺数据一律标 <span class="rk-miss-mark">—</span>,不用估算值填空。</strong></p>
           </div>
         </details>
-        <p class="rk-note"><strong>数据来源(快照 2026-08-25,以各平台官网为准)</strong>:
+        <p class="rk-note"><strong>数据来源(快照 2026-08-28,以各平台官网为准)</strong>:
           <a href="https://www.digitalapplied.com/blog/ai-coding-tool-adoption-2026-developer-survey" target="_blank" rel="noopener">2026 开发者调查(NPS / 满意度 / 最爱投票)</a> ·
           <a href="https://www.ideaplan.io/blog/ai-coding-assistant-market-share-2026" target="_blank" rel="noopener">市场份额调查</a> ·
           <a href="https://uibakery.io/blog/openai-codex-pricing" target="_blank" rel="noopener">Codex 定价与用量</a> ·
@@ -691,7 +693,7 @@
 
     <script type="application/json" id="rankingsData">
     {
-      "snapshot": "2026-08-25",
+      "snapshot": "2026-08-28",
       "institutions": {
         "arena":      { "name": "Arena",               "short": "Arena",     "url": "https://arena.ai/leaderboard/text",                 "unit": "Elo" },
         "aa":         { "name": "Artificial Analysis", "short": "AA 指数",   "url": "https://artificialanalysis.ai/leaderboards/models", "unit": "指数" },
