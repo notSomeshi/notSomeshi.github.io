@@ -120,6 +120,10 @@
           <ul class="sidebar-list">
             
               <li class="sidebar-item ">
+                <a href="/2026/09/03/captcha-stops-humans/">机器人和你,过验证码的次数一样多</a>
+              </li>
+            
+              <li class="sidebar-item ">
                 <a href="/2026/08/29/model-supply-as-leverage/">当模型访问权变成筹码:一周三件事,和中国开源的意外位置</a>
               </li>
             
@@ -432,9 +436,9 @@
 <p>如果能正确输出版本号（如 <code>v2.1.88</code>），说明安装成功。</p>
 <h3 id="2-3-账号与费用配置"><a href="#2-3-账号与费用配置" class="headerlink" title="2.3 账号与费用配置"></a>2.3 账号与费用配置</h3><p>首次启动时会弹出浏览器，提示你登录 Anthropic 账号进行 OAuth 绑定。目前服务提供以下档位订阅：</p>
 <ul>
-<li>**Pro 方案 ($20&#x2F;月)**：基础用量，日常开发够用，适合个人开发者和学习者。</li>
-<li>**Max 5x 方案 ($100&#x2F;月)**：5倍于 Pro 的用量，适合全职 AI 编程的重度用户。</li>
-<li>**Max 20x 方案 ($200&#x2F;月)**：20倍于 Pro 的用量，适合团队用户或大型商业项目。</li>
+<li><strong>Pro 方案 ($20&#x2F;月)</strong>：基础用量，日常开发够用，适合个人开发者和学习者。</li>
+<li><strong>Max 5x 方案 ($100&#x2F;月)</strong>：5倍于 Pro 的用量，适合全职 AI 编程的重度用户。</li>
+<li><strong>Max 20x 方案 ($200&#x2F;月)</strong>：20倍于 Pro 的用量，适合团队用户或大型商业项目。</li>
 </ul>
 <blockquote>
 <p>[!NOTE]<br><strong>连不上、登录不了怎么办？</strong><br>Claude Code 需要稳定连接 Anthropic 的 API 服务器。如果在局域网下连接困难，可以配置代理环境变量（以 Clash 等本地端口为例）：</p>
@@ -506,7 +510,7 @@ claude --permission-mode auto</code></pre>
 </li>
 </ol>
 <hr>
-<h2 id="§05-CLAUDE-md：项目「宪法」"><a href="#§05-CLAUDE-md：项目「宪法」" class="headerlink" title="§05 CLAUDE.md：项目「宪法」"></a>§05 CLAUDE.md：项目「宪法」</h2><p>Shrivu Shankar 认为：**在有效使用 Claude Code 时，代码库中最重要的文件就是根目录下的 <code>CLAUDE.md</code>**。</p>
+<h2 id="§05-CLAUDE-md：项目「宪法」"><a href="#§05-CLAUDE-md：项目「宪法」" class="headerlink" title="§05 CLAUDE.md：项目「宪法」"></a>§05 CLAUDE.md：项目「宪法」</h2><p>Shrivu Shankar 认为：<strong>在有效使用 Claude Code 时，代码库中最重要的文件就是根目录下的 <code>CLAUDE.md</code></strong>。</p>
 <p>没有它，每次启动新会话，AI 就像空降到陌生项目的新人，需要重新摸索命令与风格；有了它，它一进来就知道规矩。</p>
 <h3 id="5-1-CLAUDE-md-应包含什么？"><a href="#5-1-CLAUDE-md-应包含什么？" class="headerlink" title="5.1 CLAUDE.md 应包含什么？"></a>5.1 CLAUDE.md 应包含什么？</h3><ul>
 <li><strong>基本原则</strong>：保持精简，不要写成百科全书。Shrivu 指出，优秀的 <code>CLAUDE.md</code> 通常只有 100 行左右（约 2500 词）。</li>
@@ -558,7 +562,7 @@ claude --permission-mode auto</code></pre>
 <h2 id="§06-进阶对话与上下文工程-Context-Engineering"><a href="#§06-进阶对话与上下文工程-Context-Engineering" class="headerlink" title="§06 进阶对话与上下文工程 (Context Engineering)"></a>§06 进阶对话与上下文工程 (Context Engineering)</h2><p>在 LLM 应用中，<strong>上下文不是越多越好，而是越精准越好</strong>。过多的无用信息会让模型产生迷失，做出混乱的决策。</p>
 <h3 id="6-1-精准控制上下文的四种方式"><a href="#6-1-精准控制上下文的四种方式" class="headerlink" title="6.1 精准控制上下文的四种方式"></a>6.1 精准控制上下文的四种方式</h3><ol>
 <li><strong>@ 文件引用</strong>：通过 <code>Read @src/auth/service.ts</code> 精确让模型只读这一个文件，避免把整个目录加载进来吃掉大量 Token。</li>
-<li><strong>&#x2F;clear 及时清空</strong>：修完 API 的 Bug 后，如果你要开始写前端 UI，**立刻输入 <code>/clear</code>**。否则前一个任务残留的垃圾上下文会严重污染新任务的注意力。</li>
+<li><strong>&#x2F;clear 及时清空</strong>：修完 API 的 Bug 后，如果你要开始写前端 UI，<strong>立刻输入 <code>/clear</code></strong>。否则前一个任务残留的垃圾上下文会严重污染新任务的注意力。</li>
 <li><strong>&#x2F;btw 侧链提问</strong>：如果你写到一半想问一个题外话（例如：“TypeScript 的 <code>Record</code> 怎么用？”），使用 <code>/btw</code>。问完后主对话的上下文不会受到任何污染。</li>
 <li><strong>拒绝 &#x2F;compact</strong>：Shrivu 提醒，尽量不要依赖系统的自动压缩 (<code>/compact</code>)，因为它是有损压缩，容易丢失微妙的边界限制约束。宁可直接使用 <code>/clear</code> 重新开始。</li>
 </ol>
@@ -623,10 +627,10 @@ claude -worktree</code></pre>
 <p>这会让 Claude 自动克隆一份代码到一个隔离目录中，创建新分支工作，完全不影响你的主分支开发。</p>
 <h3 id="8-2-Agent-Teams：分工合作"><a href="#8-2-Agent-Teams：分工合作" class="headerlink" title="8.2 Agent Teams：分工合作"></a>8.2 Agent Teams：分工合作</h3><p>2026年2月推出的 <strong>Agent Teams</strong> 是目前最先进的模式。复杂的开发任务会自动拆解为以下四个阶段协同：</p>
 <ol>
-<li>**Research 阶段 (调研)**：派生多个 Read-Only 的子 Agent 并行检索代码库。</li>
-<li>**Synthesis 阶段 (设计)**：主协调 Agent (Coordinator) 汇总情报，产出 Spec 规格书。</li>
-<li>**Implementation 阶段 (实现)**：多个 Writer Agent 针对各自的模块进行精准编码。</li>
-<li>**Verification 阶段 (验证)**：测试 Agent 执行沙箱测试，遇到报错自动提交给 Writer 修复。</li>
+<li><strong>Research 阶段 (调研)</strong>：派生多个 Read-Only 的子 Agent 并行检索代码库。</li>
+<li><strong>Synthesis 阶段 (设计)</strong>：主协调 Agent (Coordinator) 汇总情报，产出 Spec 规格书。</li>
+<li><strong>Implementation 阶段 (实现)</strong>：多个 Writer Agent 针对各自的模块进行精准编码。</li>
+<li><strong>Verification 阶段 (验证)</strong>：测试 Agent 执行沙箱测试，遇到报错自动提交给 Writer 修复。</li>
 </ol>
 <hr>
 <h2 id="§09-从零构建完整产品：AI-周报助手"><a href="#§09-从零构建完整产品：AI-周报助手" class="headerlink" title="§09 从零构建完整产品：AI 周报助手"></a>§09 从零构建完整产品：AI 周报助手</h2><p>本章将演示如何运用以上所有知识，在半天内搭建出一个能够读取 GitHub Commits 并自动生成周报的 Web 应用。</p>
@@ -699,13 +703,13 @@ claude -worktree</code></pre>
 </tbody></table>
 <h3 id="A-2-藏在-Feature-Flags-功能开关-里的未来"><a href="#A-2-藏在-Feature-Flags-功能开关-里的未来" class="headerlink" title="A.2 藏在 Feature Flags (功能开关) 里的未来"></a>A.2 藏在 Feature Flags (功能开关) 里的未来</h3><p>在泄露的代码中，发现了几个处于开发中、尚未正式上线的颠覆性功能标志：</p>
 <ol>
-<li>**KAIROS (后台常驻助手)**：一个始终在线的后台 Agent，它不需要用户从终端手动启动，而是监听项目的 GitHub Webhooks。当发现新 PR、新 Issue 或 CI 构建失败时，它会自动在后台拉起实例进行修复并提交 PR，从“被动响应”转为“主动威胁检测与自愈”。</li>
-<li>**ULTRAPLAN (超大规划器)**：本地终端 Agent 响应时间有限。ULTRAPLAN 允许将复杂的宏观规划任务一键上传到云端的超大 Opus 4.6 模型，模型会分配长达 30 分钟的纯思考计算时间，喝杯咖啡回来，它已经生成了最优重构 spec。</li>
-<li>**BUDDY (Tamagotchi AI 宠物)**：源码中包含一个设计极其完整的电子宠物系统，包含 18 个不同物种和稀有度，带抽卡机制。这被认为是 Anthropic 内部为了让枯燥的命令行交互更具人情味而设计的情感连接尝试。</li>
+<li><strong>KAIROS (后台常驻助手)</strong>：一个始终在线的后台 Agent，它不需要用户从终端手动启动，而是监听项目的 GitHub Webhooks。当发现新 PR、新 Issue 或 CI 构建失败时，它会自动在后台拉起实例进行修复并提交 PR，从“被动响应”转为“主动威胁检测与自愈”。</li>
+<li><strong>ULTRAPLAN (超大规划器)</strong>：本地终端 Agent 响应时间有限。ULTRAPLAN 允许将复杂的宏观规划任务一键上传到云端的超大 Opus 4.6 模型，模型会分配长达 30 分钟的纯思考计算时间，喝杯咖啡回来，它已经生成了最优重构 spec。</li>
+<li><strong>BUDDY (Tamagotchi AI 宠物)</strong>：源码中包含一个设计极其完整的电子宠物系统，包含 18 个不同物种和稀有度，带抽卡机制。这被认为是 Anthropic 内部为了让枯燥的命令行交互更具人情味而设计的情感连接尝试。</li>
 </ol>
 <h3 id="A-3-备受争议的隐藏设计"><a href="#A-3-备受争议的隐藏设计" class="headerlink" title="A.3 备受争议的隐藏设计"></a>A.3 备受争议的隐藏设计</h3><ul>
-<li>**Undercover Mode (潜行模式)**：当检测到当前仓库是公共开源仓库，且提交者是 Anthropic 内部员工时，系统会自动将 commit 历史中所有带有“AI-created”的标注抹除。这在开源社区引发了关于“AI 共创真实性”的激烈辩论。</li>
-<li>**Anti-distillation (反蒸馏投毒)**：为了防止竞争对手使用 Claude Code 的生成数据来训练（蒸馏）他们自己的模型，客户端在执行特定代码段时，会故意注入一些极其隐蔽、看似正确但有细微逻辑缺陷的真实运行工具定义，用来“污染”潜在的数据爬虫。</li>
+<li><strong>Undercover Mode (潜行模式)</strong>：当检测到当前仓库是公共开源仓库，且提交者是 Anthropic 内部员工时，系统会自动将 commit 历史中所有带有“AI-created”的标注抹除。这在开源社区引发了关于“AI 共创真实性”的激烈辩论。</li>
+<li><strong>Anti-distillation (反蒸馏投毒)</strong>：为了防止竞争对手使用 Claude Code 的生成数据来训练（蒸馏）他们自己的模型，客户端在执行特定代码段时，会故意注入一些极其隐蔽、看似正确但有细微逻辑缺陷的真实运行工具定义，用来“污染”潜在的数据爬虫。</li>
 <li><strong>基于正则的高速情绪检测</strong>：系统在将用户的 prompt 发给云端前，会使用本地高效的正则匹配用户字里行间是否透露出“愤怒”、“沮丧”等负面情绪。检测到后会指令模型采用更温和、耐心的语气。使用正则而不是 LLM 的原因是为了提效 10000 倍。</li>
 </ul>
 

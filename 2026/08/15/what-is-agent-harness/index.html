@@ -120,6 +120,10 @@
           <ul class="sidebar-list">
             
               <li class="sidebar-item ">
+                <a href="/2026/09/03/captcha-stops-humans/">机器人和你,过验证码的次数一样多</a>
+              </li>
+            
+              <li class="sidebar-item ">
                 <a href="/2026/08/29/model-supply-as-leverage/">当模型访问权变成筹码:一周三件事,和中国开源的意外位置</a>
               </li>
             
@@ -366,12 +370,12 @@
 <h2 id="但要小心谁在给你看数字"><a href="#但要小心谁在给你看数字" class="headerlink" title="但要小心谁在给你看数字"></a>但要小心谁在给你看数字</h2><p>这里有个陷阱。</p>
 <p>Harness 的对比数据,<strong>很多是 harness 厂商自己发的</strong>。而 <a target="_blank" rel="noopener" href="https://futureagi.com/blog/coding-agent-harness-benchmark/">FutureAGI 的一篇分析</a>注意到一个规律:同一个模型在 SWE-bench Pro 上,独立标准化评测(Scale AI 的 SEAL 实验室)跑出的分数,<strong>低于三家厂商对比表里的全部数字</strong>。</p>
 <p>这不难理解——厂商用自家 harness 时会调到最优,对照组则往往是默认配置。<strong>你看到的”我们比他们高 5 分”里,有多少是 harness 真实差距,有多少是调参投入差距,外人无从分辨。</strong></p>
-<p>另外,Epoch AI 的一项研究发现同一模型在 SWE-bench Verified 上,**仅因脚手架不同,分数就能从 62.3% 变到 70.2%**。这也提示了另一件事:当你看到某个模型”刷新 SOTA”时,<strong>那个数字里有一部分不属于模型</strong>。</p>
+<p>另外,Epoch AI 的一项研究发现同一模型在 SWE-bench Verified 上,<strong>仅因脚手架不同,分数就能从 62.3% 变到 70.2%</strong>。这也提示了另一件事:当你看到某个模型”刷新 SOTA”时,<strong>那个数字里有一部分不属于模型</strong>。</p>
 <p>关于评测数字为什么越来越不能直接信,<a href="/2026/08/05/benchmark-trust-crisis/">之前那篇文章</a>讲得更细。</p>
 <h2 id="这对你选工具意味着什么"><a href="#这对你选工具意味着什么" class="headerlink" title="这对你选工具意味着什么"></a>这对你选工具意味着什么</h2><p><strong>第一,别把模型排名当工具排名。</strong> 本站<a href="/rankings/">天梯页</a>排的是模型能力,<a href="/rankings/">Agent 平台板块</a>比的是 harness——<strong>这是两张表,不能互相替代</strong>。榜单第一的模型装进糟糕的 harness 里,可能不如第五名装进好 harness。</p>
 <p><strong>第二,评估工具时,试你自己的真实任务。</strong> harness 的差距体现在长任务、多轮工具调用、出错恢复这些地方,而不是”写个快排”。跑十个玩具题看不出区别,跑一个真实重构立刻见分晓。</p>
 <p><strong>第三,注意 harness 也在变。</strong> 它是软件,会更新。你半年前对某个工具的判断,可能已经过期了——LangChain 曾在 Terminal-Bench 上只改系统提示、工具和中间件,分数就涨了 13.7 分,模型一行没动。</p>
-<p><strong>第四,论文给业界的建议同样适用于你</strong>:能力应该按**”模型–harness 配置”**这个组合来报告,而不是记在模型头上。所以下次有人跟你说”某某模型很强”,值得追问一句:<strong>你在什么 harness 里用的?</strong></p>
+<p><strong>第四,论文给业界的建议同样适用于你</strong>:能力应该按<strong>“模型–harness 配置”</strong>这个组合来报告,而不是记在模型头上。所以下次有人跟你说”某某模型很强”,值得追问一句:<strong>你在什么 harness 里用的?</strong></p>
 <hr>
 <p>2026 年上半年,行业的注意力几乎全在模型参数和榜单名次上。到了下半年,”harness”这个词突然到处都是——因为大家发现,把同一个模型的能力真正兑现出来的那部分工程,<strong>长期被算进了模型的功劳簿</strong>。</p>
 <p>模型决定了天花板,harness 决定你能摸到多高。</p>

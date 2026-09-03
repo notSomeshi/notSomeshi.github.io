@@ -120,6 +120,10 @@
           <ul class="sidebar-list">
             
               <li class="sidebar-item ">
+                <a href="/2026/09/03/captcha-stops-humans/">机器人和你,过验证码的次数一样多</a>
+              </li>
+            
+              <li class="sidebar-item ">
                 <a href="/2026/08/29/model-supply-as-leverage/">当模型访问权变成筹码:一周三件事,和中国开源的意外位置</a>
               </li>
             
@@ -326,13 +330,13 @@
 <li><strong>四个经典基准已实质退役</strong>:MMLU、HumanEval、HellaSwag、原版 GSM8K 顶部分数全在 90 分区,失去区分度。</li>
 <li><strong>主动博弈已被记录</strong>:Meta 曾向 Arena 提交一个<strong>面向盲测投票优化的非公开变体</strong>,其公开版排名跌至 32–35 位。</li>
 <li><strong>选择性披露扭曲对比</strong>:研究显示商业模型结果的选择性上报已影响 Arena 榜单的可比性。</li>
-<li><strong>解法方向</strong>:用**知识截止之后**才生成的题目(如 LiveBench 按月取材于新论文、新赛题、新新闻),让污染在时间上不可能发生。</li>
+<li><strong>解法方向</strong>:用<strong>知识截止之后</strong>才生成的题目(如 LiveBench 按月取材于新论文、新赛题、新新闻),让污染在时间上不可能发生。</li>
 </ul>
 </div>
 
 <h2 id="一、污染是怎么发生的"><a href="#一、污染是怎么发生的" class="headerlink" title="一、污染是怎么发生的"></a>一、污染是怎么发生的</h2><p>机制并不复杂,甚至有点无奈。</p>
 <p>基准要有影响力,就必须公开;一旦公开,题目和答案就会散布到网页、GitHub、论坛、教程里。而下一代模型的训练语料是从互联网大规模抓取的——<strong>于是考卷自然而然地进了课本</strong>。</p>
-<p>结果是,模型在这些题上的高分**无法区分”会推理”和”背过答案”**。</p>
+<p>结果是,模型在这些题上的高分<strong>无法区分”会推理”和”背过答案”</strong>。</p>
 <p>这不是猜测。llm-stats 的技术综述把训练数据污染称为”基准生态最严重的结构性问题”,并指出其<strong>普遍存在</strong>。学术界的应对是提出”抗污染基准”(contamination-resistant benchmarks)这一整个研究方向——如果污染只是零星现象,不会需要一个专门的研究议程。</p>
 <p><strong>一个直观的对照:MMLU 在短短几年里从”非常难”变成了”trivial”。</strong> 模型确实在进步,但这条曲线里有多少是能力、多少是记忆,已经无法拆开。</p>
 <h2 id="二、从被动污染到主动博弈"><a href="#二、从被动污染到主动博弈" class="headerlink" title="二、从被动污染到主动博弈"></a>二、从被动污染到主动博弈</h2><p>如果只是被动污染,还可以靠技术手段缓解。真正动摇信任的是<strong>主动优化榜单</strong>。</p>

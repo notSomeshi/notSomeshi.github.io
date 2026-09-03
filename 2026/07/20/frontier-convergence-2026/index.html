@@ -120,6 +120,10 @@
           <ul class="sidebar-list">
             
               <li class="sidebar-item ">
+                <a href="/2026/09/03/captcha-stops-humans/">机器人和你,过验证码的次数一样多</a>
+              </li>
+            
+              <li class="sidebar-item ">
                 <a href="/2026/08/29/model-supply-as-leverage/">当模型访问权变成筹码:一周三件事,和中国开源的意外位置</a>
               </li>
             
@@ -319,7 +323,7 @@
 
 <h2 id="一、数字有多挤"><a href="#一、数字有多挤" class="headerlink" title="一、数字有多挤"></a>一、数字有多挤</h2><p>看 Arena(原 LMArena)2026 年年中的头部:Claude Opus 4.8、GPT-5.5 Pro、Gemini 3.1 Pro、Claude Opus 4.7、GPT-5.5 依次排开,第一到第五的 ELO 差距被压在约 55 分内——换算成胜率,大约是 57% 对 43% 的水平,盲测里普通用户几乎分辨不出。</p>
 <p>能力维度也一样。在本站<a href="/rankings/">模型天梯</a>的”综合”维度里,前六名的归一化综合分咬得极紧;到了细分维度,格局甚至会重排——编程看 Claude Fable 5(SWE-bench 95%)、视觉与 WebDev 是 Gemini 的地盘、纯对话体感又是另一番排序。<strong>没有哪个模型在所有维度通吃</strong>,这本身就是收敛的表现。</p>
-<h2 id="二、为什么会收敛-三条力量"><a href="#二、为什么会收敛-三条力量" class="headerlink" title="二、为什么会收敛:三条力量"></a>二、为什么会收敛:三条力量</h2><p><strong>其一,方法趋同。</strong> 前沿实验室在架构(稀疏 MoE)、训练配方(大规模 RLHF + 可验证奖励的强化学习)、数据策略(合成数据 + 高质量精选)上高度同构。当大家用相似的配方煮相似的汤,味道自然接近。Grok 4.5 用 Cursor 的编程数据专门训练、一举把编程分拉到第一梯队,恰恰说明:**差距更多来自”训练了什么数据”,而非”谁的模型更聪明”**——而数据配方是可以互相学习、快速追平的。</p>
+<h2 id="二、为什么会收敛-三条力量"><a href="#二、为什么会收敛-三条力量" class="headerlink" title="二、为什么会收敛:三条力量"></a>二、为什么会收敛:三条力量</h2><p><strong>其一,方法趋同。</strong> 前沿实验室在架构(稀疏 MoE)、训练配方(大规模 RLHF + 可验证奖励的强化学习)、数据策略(合成数据 + 高质量精选)上高度同构。当大家用相似的配方煮相似的汤,味道自然接近。Grok 4.5 用 Cursor 的编程数据专门训练、一举把编程分拉到第一梯队,恰恰说明:<strong>差距更多来自”训练了什么数据”,而非”谁的模型更聪明”</strong>——而数据配方是可以互相学习、快速追平的。</p>
 <p><strong>其二,基准饱和。</strong> 许多经典基准(MMLU、HumanEval)顶部已经挤到 90% 以上,天花板效应让强者之间的差异无从体现。这也是 Artificial Analysis 在 v4.1 把评测重心转向智能体(agentic)工作负载的原因——旧尺子量不出新差距了。</p>
 <p><strong>其三,开源紧咬。</strong> 上半年中国开源模型(DeepSeek、Qwen、GLM、Kimi)把实用分逼到与闭源旗舰只差几个点(详见本站<a href="/2026/07/17/openrouter-power-shift/">《OpenRouter 上的权力转移》</a>)。当第二梯队都摸到了”够用线”,第一梯队的领先就显得更薄。</p>
 <h2 id="三、收敛之后-竞争去了哪里"><a href="#三、收敛之后-竞争去了哪里" class="headerlink" title="三、收敛之后,竞争去了哪里"></a>三、收敛之后,竞争去了哪里</h2><p>能力趋同不代表竞争停止,而是<strong>战场转移</strong>。当模型本身难分高下,胜负手挪到了别处:</p>

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>机器人和你,过验证码的次数一样多 | ByteVibe</title>
+<meta name="description" content="一个关于 Vibe Coding、AI 辅助编程和现代开发实践的技术博客">
+<meta name="author" content="ByteVibe">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='0,0 100,0 100,78 78,100 0,100' fill='%23ffd802'/><text x='50' y='70' font-size='58' font-weight='800' font-family='ui-monospace,monospace' fill='%230d0d0f' text-anchor='middle'>B</text></svg>">
+<link rel="alternate" type="application/atom+xml" title="ByteVibe" href="/atom.xml">
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<link rel="stylesheet" href="/css/brands.css">
+
+
+<script src="/js/main.js" defer></script>
+<script>
+  // 暗色优先:light 显式切亮色;rain 提前打上标记避免闪烁
+  (function() {
+    try {
+      // 大字版:必须在首次绘制前打上,否则会先渲染小字再跳大
+      if (localStorage.getItem('fontsize') === 'large') {
+        document.documentElement.setAttribute('data-fontsize', 'large');
+      }
+      var t = localStorage.getItem('theme');
+      if (t === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else if (t === 'rain') {
+        document.documentElement.setAttribute('data-rain', '');
+        // 雨夜模式:页面加载的同时就开始预载雨声(与 main.js 的 RAIN_SRC 保持一致)
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.as = 'audio';
+        l.href = '/audio/rain.mp3?v=3';
+        document.head.appendChild(l);
+      }
+    } catch (e) {}
+  })();
+</script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+  
+  <canvas class="rain-canvas" id="rainCanvas" aria-hidden="true"></canvas>
+  <div class="reading-progress" id="readingProgress"></div>
+  <header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a class="site-logo" href="/">
+      ByteVibe
+    </a>
+    <nav class="site-nav" id="siteNav">
+      
+      
+        
+        
+        <a class="nav-link" href="/">首页</a>
+      
+        
+        
+        <a class="nav-link" href="/archives/">归档</a>
+      
+        
+        
+        <a class="nav-link" href="/categories/">分类</a>
+      
+        
+        
+        <a class="nav-link" href="/tags/">标签</a>
+      
+        
+        
+        <a class="nav-link" href="/about/">关于</a>
+      
+    </nav>
+    <div class="header-actions">
+      <button class="header-icon-btn" id="searchToggle" aria-label="搜索" title="搜索 (Ctrl+K)">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+      <button class="header-icon-btn theme-toggle" id="themeToggle" aria-label="切换显示模式(浅色 / 深色 / 雨夜)" title="显示模式:浅色 → 深色 → 雨夜">
+        <span class="icon-sun"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+        <span class="icon-moon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+        <span class="icon-umbrella"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 12a11.05 11.05 0 0 0-22 0Z"></path><path d="M12 12v7a2 2 0 0 0 4 0"></path></svg></span>
+      </button>
+      <button class="header-icon-btn fontsize-toggle" id="fontsizeToggle" aria-label="切换大字版" aria-pressed="false" title="大字版:放大字号并提高对比度">
+        <span class="icon-fs-large" aria-hidden="true">大</span>
+        <span class="icon-fs-small" aria-hidden="true">小</span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打开菜单">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    
+      <a class="mobile-nav-link" href="/">首页</a>
+    
+      <a class="mobile-nav-link" href="/archives/">归档</a>
+    
+      <a class="mobile-nav-link" href="/categories/">分类</a>
+    
+      <a class="mobile-nav-link" href="/tags/">标签</a>
+    
+      <a class="mobile-nav-link" href="/about/">关于</a>
+    
+  </div>
+</header>
+
+  <main class="main-content">
+    <article class="post-detail">
+  <div class="container-docs">
+    <div class="post-layout-grid">
+      <!-- 1. Left Sidebar: Documentation Navigation -->
+      <aside class="post-sidebar-left">
+        <div class="sidebar-sticky">
+          <h3 class="sidebar-title">全部文章</h3>
+          <ul class="sidebar-list">
+            
+              <li class="sidebar-item active">
+                <a href="/2026/09/03/captcha-stops-humans/">机器人和你,过验证码的次数一样多</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/29/model-supply-as-leverage/">当模型访问权变成筹码:一周三件事,和中国开源的意外位置</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/20/relay-api-verification/">中转站选购与验货:怎么测出模型被&#34;降智&#34;或货不对板</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/15/what-is-agent-harness/">同一个模型,换个壳分数差 24 分:harness 入门</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/15/what-august-deleted/">这个月,AI 圈删掉了什么</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/15/ai-becomes-utility/">峰谷电价来了:AI 正在变成一门电力生意</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/08/reasoning-effort-hidden-dimension/">你买的不是模型,是&#34;让它想多久&#34;</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/08/seat-pricing-sunset/">席位制的黄昏:当软件的边际成本不再是零</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/05/benchmark-trust-crisis/">当考卷泄题成为常态:AI 评测的信任危机</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/05/pilot-to-production-gap/">88% 的 AI 试点走不到生产,而输的不是模型</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/04/agent-liability-2026/">Agent 闯了祸算谁的:自主系统的责任正在被法律钉死</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/04/ai-power-grid-2026/">电网成为 AI 的硬约束:一场从机房烧到居民电费的挤占</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/03/cloud-price-war-2026-08/">云端在降价,本地在涨价:2026 年夏天的两个反方向</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/03/hardware-price-surge-2026/">最贵装机季:AI 抢走了你的内存条</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/31/ai-briefing-2026-07-late/">七月下半月速览:开源权重贴身、Agent 越狱进生产环境、监管转向市场结构</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/31/zero-cost-ai-2026/">零成本用上 AI:2026 年 7 月的羊毛地图</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/what-is-multimodal/">什么是多模态?——一篇给非技术读者的说明</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/subscription-tier-fragmentation/">订阅档位正在碎片化:当&#34;买哪个&#34;比&#34;用哪个&#34;更难</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/ai-finance-pitfalls/">AI 做金融分析的三个致命陷阱:在你把钱交给它之前</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/opus5-price-war/">「半价」的参照物是谁:一句宣传语引发的集体误读</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/one-model-many-scores/">一个模型,N 个分数:当 effort 和编排模式让榜单失去唯一解</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/20/grok45-ide-native-models/">Grok 4.5 与「IDE 原生」模型:当编辑器成为训练场</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/20/frontier-convergence-2026/">前沿收敛:为什么 2026 年榜单顶部挤成了一团</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/17/openrouter-power-shift/">OpenRouter 上的权力转移:中国开源模型如何吃下一半流量</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/17/ai-frontier-briefing-2026-07/">2026 年中前沿速览:模型分层、Agent 落地与监管转折</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-prospects-and-strata/">前景、困难与阶层重排:AI 正在改写谁的命运?</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-dividend-paradox/">AI 红利悖论:我们为 AI 买单三年,红利为何还没普惠?</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-capital-markets-2026/">资本市场视角下的 AI 局势:7250 亿美元 Capex、循环交易与泡沫之辩</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/no-code-mvp-to-solopreneur/">从 Vibe Coding 到超级个体：2026 年全栈独立开发的新叙事</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/yolo-mode-and-ai-safety-guardrails/">YOLO 模式下的安全边界：如何防止 AI 删库跑路</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/high-performance-ai-prompts-library/">如何撰写黄金级 AI Prompt：从“做个功能”到“系统级交付”</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/mcp-server-practical-recipes/">Model Context Protocol (MCP) 深度指南：连接你的 AI 与现实数据</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/advanced-vibe-coding-roo-clinic/">Cline 与 Roo Code 实战：下一代 Vibe Coding 的工程范式</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/04/01/claude-code-complete-guide/">Claude Code 从入门到精通：面向工程师与产品经理的 AI 编程完全指南</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/30/future-of-vibe-coding/">Vibe Coding 的未来：当编程不再需要编程</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/25/ai-coding-tools-2025/">2025 年最值得关注的 AI 编程工具全景</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/20/vibe-coding-best-practices/">Vibe Coding 最佳实践：如何高效地与 AI 结对编程</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/15/what-is-vibe-coding/">什么是 Vibe Coding？一文读懂 AI 时代的编程新范式</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/10/hello-world/">欢迎来到 ByteVibe</a>
+              </li>
+            
+          </ul>
+        </div>
+      </aside>
+
+      <!-- 2. Middle Column: Main Article Content -->
+      <div class="post-content-main">
+        <header class="post-header">
+          <div class="post-meta">
+            <time class="post-date">2026年09月03日</time>
+            
+            <span class="post-meta-sep">·</span>
+            <span class="post-category">
+              
+                <a href="/categories/%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/">技术解析</a>
+              
+            </span>
+            
+            <span class="post-meta-sep">·</span>
+            <span class="reading-time">13 分钟阅读</span>
+          </div>
+          <h1 class="post-title">机器人和你,过验证码的次数一样多</h1>
+          
+          <div class="post-tags">
+            
+              <a class="tag-pill" href="/tags/Agent/">#Agent</a>
+            
+              <a class="tag-pill" href="/tags/%E5%AE%89%E5%85%A8/">#安全</a>
+            
+              <a class="tag-pill" href="/tags/%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81/">#身份验证</a>
+            
+              <a class="tag-pill" href="/tags/%E5%8F%8D%E7%88%AC/">#反爬</a>
+            
+          </div>
+          
+        </header>
+        
+        
+        
+        <details class="mobile-toc">
+          <summary>目录 / Contents</summary>
+          <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E7%9C%9F%E6%AD%A3%E5%86%B3%E5%AE%9A%E4%BD%A0%E8%83%BD%E4%B8%8D%E8%83%BD%E8%BF%87%E7%9A%84-%E4%B8%8D%E6%98%AF%E9%82%A3%E5%BC%A0%E5%9B%BE"><span class="toc-list-text">真正决定你能不能过的,不是那张图</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%BE%E8%BF%99%E4%B8%80%E5%B1%82-%E7%A1%AE%E5%AE%9E%E6%97%A9%E5%B0%B1%E5%A4%B1%E5%AE%88%E4%BA%86"><span class="toc-list-text">图这一层,确实早就失守了</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BD%86%E2%80%9D%E9%AA%8C%E8%AF%81%E6%98%AF%E4%B8%8D%E6%98%AF%E6%9C%BA%E5%99%A8%E4%BA%BA%E2%80%9D%E8%BF%99%E4%BB%B6%E4%BA%8B%E6%B2%A1%E6%9C%89%E5%A4%B1%E6%95%88"><span class="toc-list-text">但”验证是不是机器人”这件事没有失效</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E7%BB%B4%E5%9F%BA%E7%99%BE%E7%A7%91%E7%9A%84%E5%AE%9E%E6%B5%8B-%E4%BB%8E%E4%BA%BA%E4%BA%BA%E5%81%9A%E9%A2%98-%E5%88%B0-2-%E7%9A%84%E4%BA%BA%E5%81%9A%E9%A2%98"><span class="toc-list-text">维基百科的实测:从人人做题,到 2% 的人做题</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%8D%E8%BD%AC-%E5%AE%83%E6%8B%A6%E4%B8%8D%E4%BD%8F%E6%9C%BA%E5%99%A8%E4%BA%BA-%E6%8B%A6%E4%BA%BA%E5%80%92%E6%98%AF%E5%BE%88%E5%9C%A8%E8%A1%8C"><span class="toc-list-text">反转:它拦不住机器人,拦人倒是很在行</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E6%9B%B4%E6%A0%B9%E6%9C%AC%E7%9A%84%E9%97%AE%E9%A2%98-%E9%A2%98%E7%9B%AE%E6%9C%AC%E8%BA%AB%E5%8F%AF%E8%83%BD%E9%97%AE%E9%94%99%E4%BA%86"><span class="toc-list-text">更根本的问题:题目本身可能问错了</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8E%E6%98%AF%E8%A1%8C%E4%B8%9A%E5%9C%A8%E6%8D%A2%E4%B8%80%E5%A5%97%E4%B8%9C%E8%A5%BF-%E8%AF%81%E6%98%8E%E6%8E%88%E6%9D%83-%E8%80%8C%E4%B8%8D%E6%98%AF%E8%AF%81%E6%98%8E%E4%BA%BA%E6%80%A7"><span class="toc-list-text">于是行业在换一套东西:证明授权,而不是证明人性</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%98%B2%E5%AE%88%E6%96%B9%E6%80%8E%E4%B9%88%E8%AF%B4"><span class="toc-list-text">防守方怎么说</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E6%89%80%E4%BB%A5-%E5%AF%B9%E4%BD%A0%E6%84%8F%E5%91%B3%E7%9D%80%E4%BB%80%E4%B9%88"><span class="toc-list-text">所以,对你意味着什么</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+        </details>
+        
+
+        <div class="post-body">
+          <p>有一组对照实验的结果,大概是这两年安全领域里最尴尬的数字。</p>
+<p>苏黎世联邦理工的 Andreas Plesner 等人做了一件很朴素的事:让一个机器人和一群真人分别去过 reCAPTCHA v2,数各自需要几轮挑战才能通过。</p>
+<p><strong>机器人的中位数是 2 轮。人的中位数也是 2 轮。</strong></p>
+<p>均值上机器人 2.71、人 3.50,做 t 检验,<strong>p 值 0.11——没有统计学显著差异</strong>。作者在论文里的措辞很克制,但意思不含糊:这个结果”对图像验证码能准确区分人类与非人类用户这一传统认知提出了质疑”。</p>
+<p>你可能会想,那是不是他们的机器人特别强。是挺强的——用微调过的 YOLOv8 做分割和分类,<strong>在 reCAPTCHA v2 的图像挑战上求解率 100%</strong>。但这不是重点。重点是下面这个数字。</p>
+<h2 id="真正决定你能不能过的-不是那张图"><a href="#真正决定你能不能过的-不是那张图" class="headerlink" title="真正决定你能不能过的,不是那张图"></a>真正决定你能不能过的,不是那张图</h2><p>同一篇论文里还有一组对照:<strong>带上 cookie 和浏览历史去做题,通过所需的挑战中位数从 5 轮降到 2 轮</strong>,p 值 0.00,显著得毫无争议。</p>
+<div class="fig">
+  <div class="fig-title">同一套题,带不带浏览历史,难度差一倍</div>
+  <div class="fig-sub">通过 reCAPTCHA v2 所需挑战轮次的中位数。左为无 cookie/无历史的全新会话,右为携带正常浏览历史的会话。差异的 p 值为 0.00。</div>
+  <div class="fig-delta">
+    <div class="fig-delta-item is-down">
+      <div class="fig-delta-k">通过所需挑战轮次(中位数)</div>
+      <div class="fig-delta-v"><s>5 轮</s><strong>2 轮</strong></div>
+      <div class="fig-delta-note">仅因为"带了浏览历史"</div>
+    </div>
+  </div>
+  <p class="fig-src">来源:Andreas Plesner、Tobias Vontobel、Roger Wattenhofer,<a href="https://arxiv.org/html/2409.08831v1" target="_blank" rel="noopener">Breaking reCAPTCHAv2</a>(ETH Zürich)。快照 2026-09-03。</p>
+</div>
+
+<p>论文的解释是,”存在浏览历史或 cookie 时 reCAPTCHAv2 似乎更容易完成,大概是因为安全系统识别出了一个已有的可信用户”。</p>
+<p>把这两组数据放一起,结论就出来了:</p>
+<div class="report-box">
+<strong>那张图不是考题,是申诉。</strong>系统在你看到图片之前就已经给你打过分了。图片出现,意味着分数不够高;点对了,只是把分数补回及格线。分数够高的人,压根看不到图。
+</div>
+
+<p>这解释了一个很多人有过的困惑:为什么有时候点一下勾就过了,有时候要连点三轮红绿灯还被判错。<strong>不是题变难了,是你那次的分低了</strong>——换了网络、开了隐私模式、清了 cookie、或者用了个不常用的浏览器。</p>
+<h2 id="图这一层-确实早就失守了"><a href="#图这一层-确实早就失守了" class="headerlink" title="图这一层,确实早就失守了"></a>图这一层,确实早就失守了</h2><p>顺着时间线看会更清楚这层防线是怎么一点点没的:</p>
+<div class="fig">
+  <div class="fig-title">视觉验证码求解率:从"能解一部分"到"不用适配也能解"</div>
+  <div class="fig-sub">柱长按 100% 归一。⚠ 前两项与后两项<strong>不可直接比大小</strong>:前两项是针对 reCAPTCHA v2 专门训练的求解器,后两项是<strong>不做任何适配</strong>就去解各种验证码的通用求解器——60.7% 的含金量高于 100%。</div>
+  <div class="fig-bars">
+    <div class="fig-bar-row">
+      <span class="fig-bar-label"><b>深度 CNN</b>专用 · 2016</span>
+      <span class="fig-bar-track"><i class="fig-bar-fill is-alt" style="--w:70.8%"></i></span>
+      <span class="fig-bar-val">70.78<em>%</em></span>
+    </div>
+    <div class="fig-bar-row">
+      <span class="fig-bar-label"><b>YOLOv8</b>专用 · 2024</span>
+      <span class="fig-bar-track"><i class="fig-bar-fill is-warn" style="--w:100%"></i></span>
+      <span class="fig-bar-val">100<em>%</em></span>
+    </div>
+    <div class="fig-bar-row">
+      <span class="fig-bar-label"><b>Halligan</b>通用 · 26 种基准</span>
+      <span class="fig-bar-track"><i class="fig-bar-fill" style="--w:60.7%"></i></span>
+      <span class="fig-bar-val">60.7<em>%</em></span>
+    </div>
+    <div class="fig-bar-row">
+      <span class="fig-bar-label"><b>Halligan</b>通用 · 野外未见过的</span>
+      <span class="fig-bar-track"><i class="fig-bar-fill" style="--w:70.6%"></i></span>
+      <span class="fig-bar-val">70.6<em>%</em></span>
+    </div>
+  </div>
+  <p class="fig-src">来源:Suphannee Sivakorn 等(<a href="https://www.cs.columbia.edu/~angelos/Papers/2016/recaptcha.pdf" target="_blank" rel="noopener">哥伦比亚大学,2016</a>)· <a href="https://arxiv.org/html/2409.08831v1" target="_blank" rel="noopener">Breaking reCAPTCHAv2</a>(ETH Zürich)· Xiwen Teoh、林云 等,<a href="https://www.usenix.org/conference/usenixsecurity25/presentation/teoh" target="_blank" rel="noopener">Are CAPTCHAs Still Bot-hard?</a>(USENIX Security '25,上海交大 / 新加坡国立 / 特拉维夫大学)。快照 2026-09-03。</p>
+</div>
+
+<p>第三、四行才是这两年真正的变化。上海交大林云团队做的 <strong>Halligan</strong>,把”解验证码”这件事归约成了一个<strong>搜索问题</strong>:一套统一的提示词、一套描述验证码结构的元模型,然后交给视觉语言模型去搜。</p>
+<p>它在 26 种视觉验证码、2,600 道题的基准上拿到 60.7%,和那些<strong>专门为某一种验证码训练</strong>的求解器打平;更关键的是,拿去野外跑 30 天,面对<strong>训练时从没见过的</strong>验证码,拿到 70.6%。覆盖的方案包括 reCAPTCHA v2、hCaptcha、GeeTest、Yandex、腾讯、Arkose、Amazon、百度。</p>
+<p><strong>过去破解一种验证码要单独立项,现在换一种验证码不用改代码。</strong> 防守方”换个新花样再撑一年”这条路,成本结构变了。</p>
+<h2 id="但”验证是不是机器人”这件事没有失效"><a href="#但”验证是不是机器人”这件事没有失效" class="headerlink" title="但”验证是不是机器人”这件事没有失效"></a>但”验证是不是机器人”这件事没有失效</h2><p>这是最容易被误读的地方。图像谜题失守 ≠ 检测失效,因为判定的重心早就搬走了。你没看见的地方至少有这么几层:</p>
+<p><strong>网络层指纹。</strong> IP 与 ASN 的声誉、TLS 握手指纹(JA3&#x2F;JA4)、HTTP&#x2F;2 的 SETTINGS 帧与 header 顺序。这些在 TCP 连接建立到第一个字节返回之间就完成了,<strong>和你的模型多聪明毫无关系</strong>——你还没机会展示智能,分就打完了。</p>
+<p><strong>浏览器指纹。</strong> 渲染栈、字体列表、时区与语言是否自洽、有没有自动化框架留下的痕迹。</p>
+<p><strong>行为方差。</strong> 这一层最反直觉:<strong>它看的不是”你做得对不对”,而是”你做得有多不稳定”</strong>。真人的鼠标轨迹是抖的,阅读时长是波动的,点击落点是不准的,偶尔还会犹豫和回退。机器人追求效率,于是表现为不自然的精确和过快的提交。</p>
+<div class="report-box">
+<strong>换句话说:人类的签名是"不精确"。</strong>一个把每个动作都做对、做快、做准的客户端,恰恰是最可疑的。这也是为什么"解题解得又快又对"本身就是一个可检测信号——大模型把延迟压到接近人类反应时间,消掉的正是这个破绽。
+</div>
+
+<p><strong>工作量证明。</strong> 干脆不判断你是谁,而是让你的设备算一会儿。它把成本从”人的注意力”转移到”设备的算力”,用计算而不是个人数据来换通行。</p>
+<p><strong>密码学与硬件证明。</strong> Cloudflare Turnstile 这类方案直接绕开了”出题”这个动作本身。</p>
+<h2 id="维基百科的实测-从人人做题-到-2-的人做题"><a href="#维基百科的实测-从人人做题-到-2-的人做题" class="headerlink" title="维基百科的实测:从人人做题,到 2% 的人做题"></a>维基百科的实测:从人人做题,到 2% 的人做题</h2><p>抽象的层级不如一个真实迁移有说服力。</p>
+<p>维基媒体基金会 2025 年 9 月启动试验,用 hCaptcha 替换自 2000 年代沿用至今的扭曲字母验证码。当时 Eric Mill、Kosta Harlan 与 Szymon Grabarczuk 在官方博客里给出的预期是,<strong>约 99.9% 的访客将完全不会看到谜题</strong>。</p>
+<p>2026 年 5 月的第二篇复盘给出了实测口径:</p>
+<blockquote>
+<p>我们的旧验证码系统的工作方式是<strong>挑战所有用户</strong>,寄希望于这个挑战对人类可做、对机器人困难。在 hCaptcha 的新方案里,系统<strong>只挑战可疑活动</strong>,因此极少有真人用户(我们估计约 2%)会真的收到视觉挑战。</p>
+</blockquote>
+<p>两个数字都值得记:<strong>预期 0.1%,实测 2%</strong>——差了二十倍。这个落差本身说明”可疑”的判定线比设计者以为的更宽松。但即便如此,<strong>98% 的人再也不用做题了</strong>,而试验期内涉及 hCaptcha 的账号封禁率下降了 31%。</p>
+<p>从”所有人做题”到”2% 的人做题”,这就是整个行业这几年发生的事,只不过多数网站没有写博客告诉你。</p>
+<h2 id="反转-它拦不住机器人-拦人倒是很在行"><a href="#反转-它拦不住机器人-拦人倒是很在行" class="headerlink" title="反转:它拦不住机器人,拦人倒是很在行"></a>反转:它拦不住机器人,拦人倒是很在行</h2><p>联合国大学校园计算中心那篇分析里有一句很扎眼的话:</p>
+<blockquote>
+<p>验证码在阻止成熟机器人这件事上力不从心,却<strong>在阻止人类方面出奇地有效</strong>。</p>
+</blockquote>
+<p>这不是俏皮话,是可测量的:</p>
+<ul>
+<li>文字验证码<strong>首次尝试失败率 8.66%</strong>;若区分大小写,接近 <strong>30%</strong></li>
+<li>音频验证码的<strong>放弃率高达 50%</strong></li>
+<li>估计有 <strong>15% 的网站用户</strong>因验证码的无障碍设计问题而失败</li>
+<li>全球约 <strong>13 亿人</strong>存在显著程度的残障</li>
+<li>一个注册表单把验证码换成隐形垃圾检测后,<strong>转化率从 48% 升到 64%</strong>(相对提升 33%)</li>
+</ul>
+<p>把这几条并排看:一个安全措施,对攻击者的边际成本约等于零,对合法用户的流失率是两位数。<strong>这已经不是”防护力下降”的问题,是收益与代价倒挂了。</strong></p>
+<h2 id="更根本的问题-题目本身可能问错了"><a href="#更根本的问题-题目本身可能问错了" class="headerlink" title="更根本的问题:题目本身可能问错了"></a>更根本的问题:题目本身可能问错了</h2><p>即使把上面所有技术细节都解决,还有一个更麻烦的事实。</p>
+<p>Cloudflare Radar 的数据显示,<strong>自动化请求已占 HTML 网页流量的 57.5%,人类只剩 42.5%</strong>。2026 年 6 月 3 日,Cloudflare CEO 宣布机器人流量首次超过人类——<strong>比他自己预计的 2027 年底提前了一年半</strong>。AI agent 请求同比增长超过 <strong>1,700%</strong>;在已验证的机器人请求里,<code>Claude-User</code> 以 <strong>11.3%</strong> 排第二,仅次于 GoogleBot 的 14.2%,是 GPTBot(5.8%)的近两倍。</p>
+<p>注意 <code>Claude-User</code> 这个身份的性质:<strong>它不是爬虫,是用户让它去看的</strong>。</p>
+<p>于是”人还是机器”这个二分开始失灵了。当我让一个 agent 替我去查资料、比价、填表,它到底算不算”我”?按旧口径,它是机器人,该拦;按实际意图,它是我授权的代理,拦了就是拦我。</p>
+<p><strong>这时候要问的已经不是”你是不是人”,而是”你是谁派来的、有没有被授权、行为受不受约束”。</strong></p>
+<h2 id="于是行业在换一套东西-证明授权-而不是证明人性"><a href="#于是行业在换一套东西-证明授权-而不是证明人性" class="headerlink" title="于是行业在换一套东西:证明授权,而不是证明人性"></a>于是行业在换一套东西:证明授权,而不是证明人性</h2><p>这件事已经不是设想了,在落地。</p>
+<p>由 Cloudflare 牵头的 <strong>Web Bot Auth</strong> 走的是这条路:基于 <strong>RFC 9421(HTTP 消息签名)</strong>,每个 agent 持有一把 Ed25519 私钥,给<strong>每一个 HTTP 请求</strong>签名,通过 <code>Signature-Agent</code> 头带上身份,公钥放在可查的目录里。站点验签,就知道来的到底是不是它自称的那个 agent——<strong>User-Agent 伪造这条路直接被封死</strong>。</p>
+<p>有意思的是它的推进节奏:IETF 已经成立了 WebBotAuth 工作组,但<strong>截至 2026 年 8 月 12 日,工作组还没有任何已采纳的文档,只有个人草案</strong>;而 Cloudflare、AWS WAF、Akamai、HUMAN、Vercel <strong>已经在生产环境验签</strong>,拿它决定哪些 agent 能进站。Visa TAP 与 Mastercard Agent Pay 也把它作为身份基础。</p>
+<p><strong>标准还没定,产品先上了。</strong> 这通常意味着需求真实且紧迫。</p>
+<p>对站点来说,这是第一次可以<strong>有选择地放行 agent</strong>,而不是”要么全放要么全拦”。对 agent 来说,这意味着以后能不能上网,取决于你有没有一个可追溯、可撤销的身份——而不是你的视觉模型有多强。</p>
+<p>这和<a href="/2026/08/29/model-supply-as-leverage/">之前那篇里写的供应权问题</a>是同一件事的两面:<strong>当访问权可以被精确地授予和撤销时,它就成了一种筹码。</strong></p>
+<h2 id="防守方怎么说"><a href="#防守方怎么说" class="headerlink" title="防守方怎么说"></a>防守方怎么说</h2><p>公平起见,把另一边的说法也放上。</p>
+<p>hCaptcha 在 2026 年 2 月的一篇博客里主张自己依然有效,理由有三条:视觉语言模型与人类之间仍存在”细微或明显的性能差距”,这些差距”在未来数年内仍将对检测有用”;它的挑战是”持续移动的靶子”,一旦某类挑战的自动化通过率上升就<strong>迅速弃用或更新</strong>;以及部署其企业版的站点在 2026 年录得”<strong>攻击总量下降 70–90%</strong>“。</p>
+<div class="risk-box">
+<strong>但这篇博客有两处明显的空白:</strong>它<strong>没有给出任何针对视觉语言模型或浏览器 agent 的求解率数字</strong>;而那条 70–90% 的核心主张,<strong>既没有方法论说明,也没有独立验证</strong>。防守方公布"攻击量下降"而不公布"求解率",本身是一种选择——攻击量下降也可能只是攻击者转向了成本更低的目标。
+</div>
+
+<p>值得注意的是,hCaptcha 的三条理由里,<strong>最硬的那条恰恰不是关于图的</strong>:”迅速弃用被攻破的挑战”说的是运营节奏,不是题目难度。这其实印证了本文开头那个判断——<strong>图片是可替换的耗材,判定在别处。</strong></p>
+<h2 id="所以-对你意味着什么"><a href="#所以-对你意味着什么" class="headerlink" title="所以,对你意味着什么"></a>所以,对你意味着什么</h2><p><strong>如果你是普通用户</strong>:你过不了验证码,多半不是因为你眼神不好,而是因为你的<strong>会话看起来太干净</strong>——新设备、隐私模式、VPN、清过 cookie。想少做题,保持浏览环境的一致性比认真找红绿灯有用得多。这也解释了为什么隐私保护得越好的人,验证码做得越多——<strong>这是个真实存在、且没被认真对待的代价。</strong></p>
+<p><strong>如果你在做产品</strong>:如果你还在用”所有人做一道题”当反垃圾方案,那你大概率是在<strong>用两位数的转化率损失,换一个对攻击者约等于零成本的门槛</strong>。维基百科的路径值得抄:先做无感判定,只对可疑会话出题。</p>
+<p><strong>如果你在做 agent</strong>:把宝押在”我的视觉模型能解题”上,是在赌一条正在关闭的路。真正的方向是<strong>可验证身份</strong>——签名、密钥、可追溯的调用来源。顺带一提,这也是<a href="/2026/08/15/what-is-agent-harness/">评估 agent 工具</a>时一个容易被忽略的维度:它能不能合规地上网,和它有多聪明是两件事。</p>
+<hr>
+<p>十几年前,人工打码平台就已经把图像识别这层击穿了,千次成本压到几美分。所以验证码从来就不是靠”机器做不到”在防守,<strong>它靠的是抬高单次尝试的边际成本</strong>。</p>
+<p>大模型做的事,是把这个成本再降一个数量级,顺便把延迟压到和人类反应时间相当——<strong>连”解得慢”这个信号也一并抹掉了</strong>。</p>
+<p>图灵测试式的验证正在退场。接手的不是更难的图,是签名、凭证和信誉。而这套新体系带来的问题也已经能看见了:当上网需要一个可追溯的身份,<strong>谁来发这个身份、谁能撤销它</strong>,就成了下一轮要吵的事。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li>Andreas Plesner、Tobias Vontobel、Roger Wattenhofer(ETH Zürich),<a target="_blank" rel="noopener" href="https://arxiv.org/html/2409.08831v1">Breaking reCAPTCHAv2</a>——YOLOv8 求解率 100%;人机通过轮次中位数均为 2(p&#x3D;0.11);cookie&#x2F;历史使中位轮次由 5 降至 2(p&#x3D;0.00)</li>
+<li>Xiwen Teoh、林云、Siqi Li、Ruofan Liu、Avi Sollomoni、Yaniv Harel、Jin Song Dong(上海交通大学 &#x2F; 新加坡国立大学 &#x2F; 特拉维夫大学),<a target="_blank" rel="noopener" href="https://www.usenix.org/conference/usenixsecurity25/presentation/teoh">Are CAPTCHAs Still Bot-hard? Generalized Visual CAPTCHA Solving with Agentic Vision Language Model</a>,USENIX Security ‘25——通用求解器 Halligan,基准 60.7%、野外未见样本 70.6%</li>
+<li>Suphannee Sivakorn、Iasonas Polakis、Angelos D. Keromytis(哥伦比亚大学),<a target="_blank" rel="noopener" href="https://www.cs.columbia.edu/~angelos/Papers/2016/recaptcha.pdf">I’m not a human: Breaking the Google reCAPTCHA</a>——深度 CNN 图像 reCAPTCHA 求解率 70.78%</li>
+<li>Eric Mill、Kosta Harlan、Szymon Grabarczuk(维基媒体基金会),<a target="_blank" rel="noopener" href="https://diff.wikimedia.org/2025/09/02/better-detecting-bots-and-replacing-our-captcha/">Better detecting bots and replacing our CAPTCHA</a> 与 <a target="_blank" rel="noopener" href="https://diff.wikimedia.org/2026/05/04/better-detecting-bots-and-replacing-our-captcha-part-2/">Part 2</a>——预期 99.9% 无谜题、实测约 2% 收到视觉挑战、封禁率降 31%</li>
+<li>联合国大学校园计算中心,<a target="_blank" rel="noopener" href="https://c3.unu.edu/blog/captchas-losing-ground-to-ai">Why CAPTCHAs Are Losing Ground to AI</a>——失败率、放弃率、无障碍影响与转化率 48%→64%</li>
+<li><a target="_blank" rel="noopener" href="https://radar.cloudflare.com/bots">Cloudflare Radar — Bot Traffic Worldwide</a>——自动化请求占 HTML 流量 57.5%;<code>Claude-User</code> 占已验证机器人请求 11.3%</li>
+<li>Cloudflare,<a target="_blank" rel="noopener" href="https://blog.cloudflare.com/signed-agents/">The age of agents: cryptographically recognizing agent traffic</a>——Web Bot Auth 与 RFC 9421 签名 agent</li>
+<li>hCaptcha,<a target="_blank" rel="noopener" href="https://www.hcaptcha.com/blog/hcaptcha-captchas-are-highly-effective-against-bots-and-agents-in-2026">hCaptcha CAPTCHAs are Highly Effective Against Bots and Agents in 2026</a>——防守方立场</li>
+</ol>
+<p>本站相关:<a href="/2026/08/29/model-supply-as-leverage/">当模型访问权变成筹码</a> · <a href="/2026/08/15/what-is-agent-harness/">同一个模型,换个壳分数差 24 分:harness 入门</a> · <a href="/2026/08/05/benchmark-trust-crisis/">当考卷泄题成为常态:AI 评测的信任危机</a></p>
+<blockquote>
+<p>本文由 ByteVibe 撰写(AI 辅助研究整理)。文中观点的原始出处均已在正文与参考文献中标注,版权归原作者所有。数据快照 2026-09-03。</p>
+</blockquote>
+
+        </div>
+        
+        <footer class="post-footer">
+          <nav class="post-nav">
+            
+            
+            <a class="post-nav-item post-nav-next" href="/2026/08/29/model-supply-as-leverage/">
+              <span class="post-nav-label">下一篇 →</span>
+              <span class="post-nav-title">当模型访问权变成筹码:一周三件事,和中国开源的意外位置</span>
+            </a>
+            
+          </nav>
+        </footer>
+      </div>
+
+      <!-- 3. Right Sidebar: Outline TOC Jump -->
+      <aside class="post-sidebar-right">
+        
+          <div class="toc-sticky">
+            <h3 class="toc-title">目录大纲</h3>
+            <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E7%9C%9F%E6%AD%A3%E5%86%B3%E5%AE%9A%E4%BD%A0%E8%83%BD%E4%B8%8D%E8%83%BD%E8%BF%87%E7%9A%84-%E4%B8%8D%E6%98%AF%E9%82%A3%E5%BC%A0%E5%9B%BE"><span class="toc-list-text">真正决定你能不能过的,不是那张图</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%BE%E8%BF%99%E4%B8%80%E5%B1%82-%E7%A1%AE%E5%AE%9E%E6%97%A9%E5%B0%B1%E5%A4%B1%E5%AE%88%E4%BA%86"><span class="toc-list-text">图这一层,确实早就失守了</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BD%86%E2%80%9D%E9%AA%8C%E8%AF%81%E6%98%AF%E4%B8%8D%E6%98%AF%E6%9C%BA%E5%99%A8%E4%BA%BA%E2%80%9D%E8%BF%99%E4%BB%B6%E4%BA%8B%E6%B2%A1%E6%9C%89%E5%A4%B1%E6%95%88"><span class="toc-list-text">但”验证是不是机器人”这件事没有失效</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E7%BB%B4%E5%9F%BA%E7%99%BE%E7%A7%91%E7%9A%84%E5%AE%9E%E6%B5%8B-%E4%BB%8E%E4%BA%BA%E4%BA%BA%E5%81%9A%E9%A2%98-%E5%88%B0-2-%E7%9A%84%E4%BA%BA%E5%81%9A%E9%A2%98"><span class="toc-list-text">维基百科的实测:从人人做题,到 2% 的人做题</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%8D%E8%BD%AC-%E5%AE%83%E6%8B%A6%E4%B8%8D%E4%BD%8F%E6%9C%BA%E5%99%A8%E4%BA%BA-%E6%8B%A6%E4%BA%BA%E5%80%92%E6%98%AF%E5%BE%88%E5%9C%A8%E8%A1%8C"><span class="toc-list-text">反转:它拦不住机器人,拦人倒是很在行</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E6%9B%B4%E6%A0%B9%E6%9C%AC%E7%9A%84%E9%97%AE%E9%A2%98-%E9%A2%98%E7%9B%AE%E6%9C%AC%E8%BA%AB%E5%8F%AF%E8%83%BD%E9%97%AE%E9%94%99%E4%BA%86"><span class="toc-list-text">更根本的问题:题目本身可能问错了</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8E%E6%98%AF%E8%A1%8C%E4%B8%9A%E5%9C%A8%E6%8D%A2%E4%B8%80%E5%A5%97%E4%B8%9C%E8%A5%BF-%E8%AF%81%E6%98%8E%E6%8E%88%E6%9D%83-%E8%80%8C%E4%B8%8D%E6%98%AF%E8%AF%81%E6%98%8E%E4%BA%BA%E6%80%A7"><span class="toc-list-text">于是行业在换一套东西:证明授权,而不是证明人性</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%98%B2%E5%AE%88%E6%96%B9%E6%80%8E%E4%B9%88%E8%AF%B4"><span class="toc-list-text">防守方怎么说</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E6%89%80%E4%BB%A5-%E5%AF%B9%E4%BD%A0%E6%84%8F%E5%91%B3%E7%9D%80%E4%BB%80%E4%B9%88"><span class="toc-list-text">所以,对你意味着什么</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+          </div>
+        
+      </aside>
+    </div>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <p class="copyright">&copy; 2026 ByteVibe. All rights reserved.</p>
+      <p class="powered-by">Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a></p>
+      
+      <div class="social-links">
+        
+          <a class="social-link" href="https://github.com/notSomeshi" target="_blank" rel="noopener noreferrer">GitHub</a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+
+  <div class="search-overlay" id="searchOverlay" hidden>
+  <div class="search-backdrop" id="searchBackdrop"></div>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="站内搜索">
+    <div class="search-input-wrap">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="searchInput" class="search-input" placeholder="搜索文章…" autocomplete="off" spellcheck="false">
+      <button class="search-close" id="searchClose" aria-label="关闭搜索">ESC</button>
+    </div>
+    <div class="search-results" id="searchResults">
+      <p class="search-hint">输入关键词搜索标题、标签与正文</p>
+    </div>
+  </div>
+</div>
+
+  <button class="scroll-to-top" id="scrollToTop" aria-label="回到顶部">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+</body>
+</html>

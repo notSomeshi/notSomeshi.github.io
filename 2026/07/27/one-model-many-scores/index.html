@@ -120,6 +120,10 @@
           <ul class="sidebar-list">
             
               <li class="sidebar-item ">
+                <a href="/2026/09/03/captcha-stops-humans/">机器人和你,过验证码的次数一样多</a>
+              </li>
+            
+              <li class="sidebar-item ">
                 <a href="/2026/08/29/model-supply-as-leverage/">当模型访问权变成筹码:一周三件事,和中国开源的意外位置</a>
               </li>
             
@@ -314,7 +318,7 @@
         
 
         <div class="post-body">
-          <p>“Claude Opus 5 拿了 61 分”——这句话在 2026 年已经不完整了。同一个模型,换一个推理强度设置,分数和账单都会变;换一种编排模式,甚至可能变成另一个量级。**”一个模型对应一个分数”的隐含假设,正在崩塌。**</p>
+          <p>“Claude Opus 5 拿了 61 分”——这句话在 2026 年已经不完整了。同一个模型,换一个推理强度设置,分数和账单都会变;换一种编排模式,甚至可能变成另一个量级。<strong>“一个模型对应一个分数”的隐含假设,正在崩塌。</strong></p>
 <span id="more"></span>
 
 <div class="report-box">
@@ -359,7 +363,7 @@
 <h3 id="旋钮一-推理强度-effort"><a href="#旋钮一-推理强度-effort" class="headerlink" title="旋钮一:推理强度(effort)"></a>旋钮一:推理强度(effort)</h3><p>Claude Opus 5 提供五档:<code>low / medium / high / xhigh / max</code>。它<strong>不改变每 token 的单价</strong>——$5&#x2F;$25 对所有档位一样——改变的是<strong>模型愿意为一道题花多少 token 去规划、自检、返工</strong>。</p>
 <p>代价是实打实的:在 Frontier-Bench 上,<strong>low 到 max 的每次成本差约 3 倍</strong>;high 大约是 medium 的两倍。</p>
 <h3 id="旋钮二-并行编排-orchestration"><a href="#旋钮二-并行编排-orchestration" class="headerlink" title="旋钮二:并行编排(orchestration)"></a>旋钮二:并行编排(orchestration)</h3><p>GPT-5.6 Sol 的 <strong>Ultra 模式</strong>走的是另一条路:不是把一条思维链拉长,而是<strong>把难题分派给多个并行子代理</strong>,各自处理再汇总。</p>
-<p>效果显著——Terminal-Bench 2.1 从基础 Sol 的 88.8% 提升到 **91.9%**。但代价同样直接:Ultra 模式没有单独标价,<strong>每个子代理各自生成和消耗 token,一次 Ultra 运行相当于好几次普通 Sol 调用</strong>。</p>
+<p>效果显著——Terminal-Bench 2.1 从基础 Sol 的 88.8% 提升到 <strong>91.9%</strong>。但代价同样直接:Ultra 模式没有单独标价,<strong>每个子代理各自生成和消耗 token,一次 Ultra 运行相当于好几次普通 Sol 调用</strong>。</p>
 <p>这两个旋钮可以叠加。于是”一个模型”实际上是一个<strong>分数-成本的连续谱</strong>,而不是一个点。</p>
 <h2 id="三、最反直觉的发现-更高-≠-更好"><a href="#三、最反直觉的发现-更高-≠-更好" class="headerlink" title="三、最反直觉的发现:更高 ≠ 更好"></a>三、最反直觉的发现:更高 ≠ 更好</h2><p>如果”调到最高档”总是更强,那事情还简单。但数据不支持这个直觉。</p>
 <p>Anthropic 官方明确建议<strong>广泛使用 low 和 medium 档</strong>,称它们”以一小部分 token 消耗和延迟提供良好结果,且优于早期 Opus 模型的同档设置”。</p>
