@@ -151,7 +151,7 @@
 
     <script type="application/json" id="advisorData">
     {
-      "snapshot": "2026-08-29",
+      "snapshot": "2026-09-03",
       "plans": [
         {
           "id": "free-stack", "platform": "免费组合", "tier": "豆包 + 元宝 + Qwen Chat", "price": 0,
@@ -183,11 +183,11 @@
         {
           "id": "copilot-pro", "platform": "GitHub Copilot", "tier": "Pro", "price": 10,
           "url": "https://github.com/features/copilot", "brand": "github",
-          "quota": "补全不限量 + 约 300 次高级请求/月", "tokens": 30000000,
+          "quota": "补全不限量 + 1,500 credits/月（1,000 基础 + 500 flex）", "tokens": 30000000,
           "models": "GPT-5.6 · Claude Sonnet 5 · Gemini",
           "caps": { "coding": 80, "writing": 58, "research": 52, "data": 55, "daily": 55, "finance": 54 },
           "tags": ["ide"],
-          "cons": "只在编辑器里好用;Agent 次数有限"
+          "cons": "只在编辑器里好用;flex 额度到期后降至 1,000 credits"
         },
         {
           "id": "trae-pro", "platform": "Trae", "tier": "Pro", "price": 10,
@@ -256,7 +256,7 @@
           "id": "cursor-pro", "platform": "Cursor", "tier": "Pro", "price": 20,
           "url": "https://cursor.com/", "brand": "cursor",
           "quota": "约含 $20 等值模型调用 + Tab 补全不限", "tokens": 60000000,
-          "models": "Claude / Gemini / DeepSeek 任选（GPT 系 2026-11-12 断供）",
+          "models": "Claude / Gemini / DeepSeek / Grok 4.6 / Composer 2.5（GPT 系 2026-11-12 断供，可自备 Key）",
           "caps": { "coding": 90, "writing": 60, "research": 58, "data": 62, "daily": 55, "finance": 58 },
           "tags": ["ide"],
           "cons": "只为编程;选贵模型额度烧得极快;GPT 系 11-12 断供"
@@ -273,7 +273,7 @@
         {
           "id": "copilot-proplus", "platform": "GitHub Copilot", "tier": "Pro+", "price": 39,
           "url": "https://github.com/features/copilot", "brand": "github",
-          "quota": "补全不限 + 约 1500 次高级请求/月", "tokens": 90000000,
+          "quota": "补全不限 + 7,000 credits/月（3,900 基础 + 3,100 flex）", "tokens": 90000000,
           "models": "GPT-5.6 · Claude Sonnet 5 · Gemini",
           "caps": { "coding": 82, "writing": 58, "research": 52, "data": 55, "daily": 55, "finance": 54 },
           "tags": ["ide"],
@@ -282,8 +282,8 @@
         {
           "id": "cursor-proplus", "platform": "Cursor", "tier": "Pro+", "price": 60,
           "url": "https://cursor.com/", "brand": "cursor",
-          "quota": "约含 $60 等值模型调用", "tokens": 180000000,
-          "models": "Claude / Gemini / DeepSeek 任选（GPT 系 2026-11-12 断供）",
+          "quota": "约含 $70 等值模型调用", "tokens": 210000000,
+          "models": "Claude / Gemini / DeepSeek / Grok 4.6 / Composer 2.5（GPT 系 2026-11-12 断供，可自备 Key）",
           "caps": { "coding": 90, "writing": 60, "research": 58, "data": 62, "daily": 55, "finance": 58 },
           "tags": ["ide"],
           "cons": "只为编程;非编程场景浪费;GPT 系 11-12 断供"
@@ -318,7 +318,7 @@
         {
           "id": "copilot-max", "platform": "GitHub Copilot", "tier": "Max", "price": 100,
           "url": "https://github.com/features/copilot", "brand": "github",
-          "quota": "补全不限 + 约 4000+ 次高级请求/月", "tokens": 200000000,
+          "quota": "补全不限 + 20,000 credits/月（10,000 基础 + 10,000 flex）", "tokens": 200000000,
           "models": "GPT-5.6 · Claude Sonnet 5 · Gemini",
           "caps": { "coding": 82, "writing": 58, "research": 52, "data": 55, "daily": 55, "finance": 54 },
           "tags": ["ide"],
@@ -337,7 +337,7 @@
           "id": "cursor-ultra", "platform": "Cursor", "tier": "Ultra", "price": 200,
           "url": "https://cursor.com/", "brand": "cursor",
           "quota": "约含 $400+ 等值模型调用", "tokens": 450000000,
-          "models": "Claude / Gemini / DeepSeek 任选（GPT 系 2026-11-12 断供）",
+          "models": "Claude / Gemini / DeepSeek / Grok 4.6 / Composer 2.5（GPT 系 2026-11-12 断供，可自备 Key）",
           "caps": { "coding": 90, "writing": 60, "research": 58, "data": 62, "daily": 55, "finance": 58 },
           "tags": ["ide"],
           "cons": "只为编程;非编程场景严重浪费;GPT 系 11-12 断供"
