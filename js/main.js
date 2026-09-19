@@ -548,17 +548,32 @@ document.addEventListener('DOMContentLoaded', function () {
      ========================================== */
   var TIP_MAX_W = 340;
 
-  function placeTermTips() {
-    var tips = document.querySelectorAll('.term-tip');
-    if (!tips.length) return;
+  function placeTip(el) {
     var vw = document.documentElement.clientWidth;
-    var tipW = Math.min(TIP_MAX_W, vw * 0.8); // 跟 CSS 的 max-width: min(340px, 80vw) 保持一致
-    tips.forEach(function (el) {
-      el.classList.remove('tip-flip');
-      var left = el.getBoundingClientRect().left;
-      if (left + tipW > vw - 12) el.classList.add('tip-flip');
-    });
+    var r = el.getBoundingClientRect();
+    // 面板隐藏、还没布局的元素量出来全是 0，拿它判方向只会判反
+    if (!r.width && !r.height) return;
+    var tipW = Math.min(TIP_MAX_W, vw * 0.8); // 跟 CSS 的 max-width: min(340px, 80vw) 同一口径
+    var fitsLeft = r.left + tipW <= vw - 12;  // 维持 left:0，气泡向右展开
+    var fitsRight = r.right - tipW >= 12;     // 改 right:0，气泡向左展开
+    // 两边都放不下就不翻：翻了反而会被左边缘裁掉，比向右溢出更难读
+    el.classList.toggle('tip-flip', !fitsLeft && fitsRight);
   }
+
+  function placeTermTips() {
+    document.querySelectorAll('.term-tip').forEach(placeTip);
+  }
+
+  // 初始那一遍只是为了按掉幽灵滚动条。字体加载、栏宽变化、PJAX 换页都会让
+  // 当时的测量过期，所以气泡真要弹出来之前再量一次，才能保证方向是对的。
+  document.addEventListener('pointerover', function (e) {
+    var t = e.target && e.target.closest ? e.target.closest('.term-tip') : null;
+    if (t) placeTip(t);
+  });
+  document.addEventListener('focusin', function (e) {
+    var t = e.target && e.target.closest ? e.target.closest('.term-tip') : null;
+    if (t) placeTip(t);
+  });
 
   var tipResizeTimer = null;
   window.addEventListener('resize', function () {
