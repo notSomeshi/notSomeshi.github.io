@@ -536,8 +536,35 @@ document.addEventListener('DOMContentLoaded', function () {
 
     initRankings();
     initAdvisor();
+    placeTermTips();
     onScroll();
   }
+
+  /* ==========================================
+     6.55 术语气泡对齐
+     气泡是 ::after，absolute + left:0，宽 340px。锚点靠右时它会顶出视口右缘：
+     弹出时文字被截，而且它虽然 hidden 却照样计入 scrollWidth，
+     整页因此常驻一条多余的横向滚动条。按锚点实际位置翻到 right:0，两个问题一起解决。
+     ========================================== */
+  var TIP_MAX_W = 340;
+
+  function placeTermTips() {
+    var tips = document.querySelectorAll('.term-tip');
+    if (!tips.length) return;
+    var vw = document.documentElement.clientWidth;
+    var tipW = Math.min(TIP_MAX_W, vw * 0.8); // 跟 CSS 的 max-width: min(340px, 80vw) 保持一致
+    tips.forEach(function (el) {
+      el.classList.remove('tip-flip');
+      var left = el.getBoundingClientRect().left;
+      if (left + tipW > vw - 12) el.classList.add('tip-flip');
+    });
+  }
+
+  var tipResizeTimer = null;
+  window.addEventListener('resize', function () {
+    if (tipResizeTimer) clearTimeout(tipResizeTimer);
+    tipResizeTimer = setTimeout(placeTermTips, 150);
+  });
 
   /* ==========================================
      6.6 选购助手(/advisor/)

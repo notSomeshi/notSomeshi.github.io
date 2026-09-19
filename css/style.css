@@ -2818,6 +2818,11 @@ body::before {
   white-space: normal;
 }
 
+/* 靠近视口右缘的锚点：气泡改为右对齐。不翻的话 340px 宽会顶出右缘，
+   它即便处于 hidden 也照样计入 scrollWidth，整页会多出一条横向滚动条。
+   .tip-flip 由 main.js 按锚点实际位置添加。 */
+.term-tip.tip-flip::after { left: auto; right: 0; }
+
 .term-tip:hover::after,
 .term-tip:focus-visible::after {
   opacity: 1;
