@@ -2989,6 +2989,11 @@ body::before {
 
 .rk-pending td strong { color: var(--text-secondary); }
 
+/* 候补表有 6 列,窄屏放不下 —— 与其他宽表一样在容器内横向滚动,不能把整页撑宽 */
+.rk-pending-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.rk-pending-wrap .rk-pending { min-width: 420px; }
+.rk-pending td:nth-child(n+3) { font-family: var(--font-mono); white-space: nowrap; }
+
 /* --- 羊毛速查框:入门用户最关心成本,放在表格之前 --- */
 .rk-deals-box {
   margin: 14px 0 18px;
