@@ -1252,13 +1252,18 @@ document.addEventListener('DOMContentLoaded', function () {
        用大号首字母代替。查不到厂商就不画 —— 以前 Muse Spark 就是因为这里漏了 Meta 而没有图标 */
     var GHOST_SVG = ['anthropic', 'openai', 'google', 'deepseek', 'qwen', 'moonshot', 'minimax', 'mistral', 'meta'];
 
+    function ghostSpan(brand, letter) {
+      if (brand && GHOST_SVG.indexOf(brand) !== -1) {
+        return '<span class="rk-ghost g-' + brand + '" aria-hidden="true"></span>';
+      }
+      if (!letter) return '';
+      return '<span class="rk-ghost is-letter' + (letter.length > 1 ? ' is-wide' : '') +
+             '" aria-hidden="true">' + escapeHtml(letter) + '</span>';
+    }
+
     function ghostHtml(vendor) {
       var meta = VENDOR_META[vendor];
-      if (!meta) return '';
-      var b = meta[0];
-      return GHOST_SVG.indexOf(b) !== -1
-        ? '<span class="rk-ghost g-' + b + '" aria-hidden="true"></span>'
-        : '<span class="rk-ghost is-letter" aria-hidden="true">' + meta[1] + '</span>';
+      return meta ? ghostSpan(meta[0], meta[1]) : '';
     }
 
     /* 模态徽章:t=文本 i=图像 a=音频 v=视频(能力矩阵,非评分) */
@@ -1562,29 +1567,54 @@ document.addEventListener('DOMContentLoaded', function () {
     makeResizable(document.querySelector('.rk-price-table'));
     makeResizable(document.querySelector('.rk-plat-table'));
 
+    /* --- 两张平台表:品牌水印 ---
+       与天梯同一套「背后灵」:平台名在左上,品牌 logo 放大调淡压在单元格右下;
+       有水印的行把名字前那枚小徽章藏掉(.has-ghost),两者不同时出现。
+       必须赶在币种开关之前注入:币种切换会把单元格 innerHTML 重写回首次缓存的版本,
+       晚于缓存插进去的节点,第一次切换就会消失 */
+    document.querySelectorAll('.rk-price-table td.rk-pt-plat, .rk-plat-table td.rk-pt-plat').forEach(function (td) {
+      var ico = td.querySelector('.rk-ico');
+      if (!ico || td.querySelector('.rk-ghost')) return;
+      var m = ico.className.match(/\bb-([a-z0-9]+)/);
+      var html = ghostSpan(m && m[1], ico.textContent.trim());
+      if (!html) return;
+      td.insertAdjacentHTML('afterbegin', html);
+      td.classList.add('has-ghost');
+    });
+
     /* --- 性价比表:逐行展开说明 ---
        平台只会越来越多,每行又带着几条补充说明,全摊开表格会长得没法看。
-       精简模式下这些说明默认收起,读者按需逐行展开;「详细」模式仍然全部展开。
-       按钮由 JS 注入,不写进那 13 行 HTML —— 以后新增平台自动就有,不用记得补。 */
+       精简模式下这些说明(.rk-pt-note)与次要条目(.rk-minor、档位括注)默认收起,读者按需逐行展开;
+       「详细」模式仍然全部展开。按钮由 JS 注入,以后新增平台自动就有,不用记得补。 */
+    function syncMore(tr) {
+      var btn = tr && tr.querySelector('.rk-pt-more');
+      if (!btn) return;
+      var open = tr.classList.contains('is-open');
+      var n = tr.querySelectorAll('.rk-pt-note').length;
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.textContent = open ? '收起' : (n ? '展开 ' + n + ' 条说明' : '展开详情');
+    }
+
     (function setupRowExpand() {
       var table = document.querySelector('.rk-price-table');
       if (!table) return;
       table.querySelectorAll('tbody tr').forEach(function (tr) {
-        var n = tr.querySelectorAll('.rk-pt-note').length;
         var cell = tr.querySelector('.rk-pt-plat');
-        if (!n || !cell) return;
+        if (!cell || !tr.querySelector('.rk-pt-note, .rk-minor, .rk-plan em')) return;
         var btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'rk-pt-more';
-        btn.setAttribute('aria-expanded', 'false');
-        var label = function (open) { return open ? '收起说明' : '展开 ' + n + ' 条说明'; };
-        btn.textContent = label(false);
-        btn.addEventListener('click', function () {
-          var open = tr.classList.toggle('is-open');
-          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-          btn.textContent = label(open);
-        });
         cell.appendChild(btn);
+        syncMore(tr);
+      });
+      // 用委托,不把监听挂在按钮上:币种切换会重写单元格 innerHTML,按钮随之换成没有监听的新节点
+      // (踩过:凡是平台悬停卡里写了 $ 的行,切一次币种按钮就失灵,线上 6 行点了没反应)
+      table.addEventListener('click', function (e) {
+        var btn = e.target.closest('.rk-pt-more');
+        if (!btn) return;
+        var tr = btn.closest('tr');
+        tr.classList.toggle('is-open');
+        syncMore(tr);
       });
     })();
 
@@ -1646,19 +1676,21 @@ document.addEventListener('DOMContentLoaded', function () {
           if (!el.dataset.usdOrig) return;
           if (!toCNY) { el.innerHTML = el.dataset.usdOrig; return; }
           // 先处理区间价 "$25–30 / 席":两端都要换算,否则会变成 "≈¥169–30" 这种错值
+          // 原文自带的 "≈ $3" 一并吞掉:折算值本身就带 ≈,不吞会渲染成 "≈ ≈¥20"
           var html = el.dataset.usdOrig.replace(
-            /\$([\d,]+(?:\.\d+)?)\s*([–—~-])\s*([\d,]+(?:\.\d+)?)/g,
+            /(?:≈\s*)?\$([\d,]+(?:\.\d+)?)\s*([–—~-])\s*([\d,]+(?:\.\d+)?)/g,
             function (m, a, dash, b) {
               var x = num(a), y = num(b);
               if (isNaN(x) || isNaN(y)) return m;
               return '≈¥' + cnyNum(x) + dash + cnyNum(y);
             });
           // 再处理单值。$ 后必须紧跟数字——"$/分""$/M" 这类单位写法不会被命中
-          html = html.replace(/\$([\d,]+(?:\.\d+)?)/g, function (m, n) {
+          html = html.replace(/(?:≈\s*)?\$([\d,]+(?:\.\d+)?)/g, function (m, n) {
             var v = num(n);
             return isNaN(v) ? m : cny(v);
           });
           el.innerHTML = html;
+          if (el.querySelector('.rk-pt-more')) syncMore(el.closest('tr'));
         });
       }
 

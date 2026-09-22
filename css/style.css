@@ -3129,6 +3129,27 @@ body::before {
    这条要比上面那条 .rk-lite .rk-pt-note 的隐藏更具体,才能把展开的那一行放出来 */
 .rk-lite .rk-price-table tr.is-open .rk-pt-note { display: inline; }
 
+/* 次要条目(旧版同价模型、Enterprise 定制、促销小字……)与档位括注:精简模式下同样收起,随行展开 */
+.rk-lite .rk-price-table .rk-minor,
+.rk-lite .rk-price-table .rk-plan em { display: none; }
+.rk-lite .rk-price-table tr.is-open .rk-minor { display: inline; }
+.rk-lite .rk-price-table tr.is-open .rk-plan.rk-minor { display: inline-block; }
+.rk-lite .rk-price-table tr.is-open .rk-plan em { display: inline; }
+
+/* 带括注的长标签(如 Business「$20/席年付($25 月付,最少 2 人)」)不换行会压到相邻列,限宽并允许折行 */
+.rk-price-table .rk-plan {
+  max-width: 100%;
+  white-space: normal;
+}
+
+/* 档位标签是行高的大头(6 个标签在 205px 列里各占一行),精简模式下收紧一档 */
+.rk-lite .rk-price-table .rk-plan {
+  padding: 1px 6px;
+  margin: 0 4px 4px 0;
+  font-size: 0.625rem;
+  letter-spacing: 0.01em;
+}
+
 .rk-pt-more { display: none; }
 
 .rk-lite .rk-pt-more {
@@ -3449,7 +3470,8 @@ body::before {
 .rk-mwrap .rk-ico { margin: 2px 0 0; }
 
 /* --- 厂商水印:模型行的「背后灵」 ---
-   品牌 logo 放大、调淡,压在模型名下面;左侧和上下被单元格裁掉一截,像 F1 积分榜里的车队标。
+   品牌 logo 放大、调淡,贴单元格右下角压在最底层;右侧和下沿被单元格裁掉一截,像 F1 积分榜里的车队标。
+   贴右而不贴左:模型名与模态徽章都在左侧,水印放左边会被文字盖住,认不出是哪家(用户 2026-09-23 反馈)。
    单元格必须 position:relative + overflow:hidden,否则水印会溢出到相邻的分数列。
    logo 数据在 css/brands.css 的 .g-*(生成器:.claude/skills/update-site-data/build-brands-css.js)。
    尺寸一律 rem:大字版把根字号调到 125% 时,水印要跟着名字一起变大 */
@@ -3466,22 +3488,22 @@ body::before {
 .rk-ghost {
   position: absolute;
   z-index: 0;
-  left: 0.5rem;
+  right: -0.75rem;
   bottom: -2.75rem;
   width: 7.5rem;
   height: 7.5rem;
-  background-position: center bottom;
+  background-position: right bottom;
   background-size: contain;
   background-repeat: no-repeat;
   opacity: 0.16;
   pointer-events: none;
 }
 
-/* 没有矢量 logo 的厂商(Z.ai / xAI):大号首字母,颜色跟随主题 */
+/* 没有矢量 logo 的厂商:大号首字母,颜色跟随主题。两个字的(GH、MS、n8)缩小一档,免得撑出单元格 */
 .rk-ghost.is-letter {
   display: flex;
   align-items: flex-end;
-  justify-content: center;
+  justify-content: flex-end;
   font-size: 6.5rem;
   font-weight: 900;
   line-height: 0.82;
@@ -3490,12 +3512,42 @@ body::before {
   opacity: 0.1;
 }
 
+.rk-ghost.is-letter.is-wide { font-size: 4.5rem; }
+
 [data-theme='light'] .rk-ghost { opacity: 0.14; }
 [data-theme='light'] .rk-ghost.is-letter { opacity: 0.08; }
 
+/* 性价比表与 Agent 平台表的平台列:同一套水印,尺寸小一号(列比天梯的模型列窄) */
+.rk-table td.rk-pt-plat.has-ghost {
+  position: relative;
+  overflow: hidden;
+}
+
+.rk-pt-plat.has-ghost .rk-plat,
+.rk-pt-plat.has-ghost .rk-pt-more {
+  position: relative;
+  z-index: 1;
+}
+
+.rk-pt-plat.has-ghost .rk-plat > .rk-ico { display: none; }
+
+.rk-pt-plat .rk-ghost {
+  right: -0.5rem;
+  bottom: -1.75rem;
+  width: 6rem;
+  height: 6rem;
+}
+
+.rk-pt-plat .rk-ghost.is-letter { font-size: 5rem; }
+.rk-pt-plat .rk-ghost.is-letter.is-wide { font-size: 3.5rem; }
+
 @media (max-width: 768px) {
-  .rk-ghost { width: 5.5rem; height: 5.5rem; left: 0.25rem; bottom: -2rem; }
+  .rk-ghost { width: 5.5rem; height: 5.5rem; right: -0.5rem; bottom: -2rem; }
   .rk-ghost.is-letter { font-size: 4.75rem; }
+  .rk-ghost.is-letter.is-wide { font-size: 3.25rem; }
+  .rk-pt-plat .rk-ghost { width: 4.5rem; height: 4.5rem; bottom: -1.25rem; }
+  .rk-pt-plat .rk-ghost.is-letter { font-size: 3.75rem; }
+  .rk-pt-plat .rk-ghost.is-letter.is-wide { font-size: 2.75rem; }
 }
 
 /* --- 成本对比图(同卷不同价) --- */
