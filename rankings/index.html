@@ -114,7 +114,7 @@
   <div class="container">
     <header class="archive-header">
       <h1 class="archive-title">模型天梯</h1>
-      <p class="archive-desc">TOP 20 AI MODELS · 多机构综合排名 · 数据快照 2026-09-20</p>
+      <p class="archive-desc">TOP 20 AI MODELS · 多机构综合排名 · 数据快照 2026-09-22</p>
     </header>
 
     <a class="rk-advisor-cta" href="/advisor/">
@@ -124,6 +124,44 @@
       </span>
       <em>用选购助手 →</em>
     </a>
+
+    
+    
+    <section class="rk-expiry" id="rkExpiry" aria-labelledby="rkExpiryTitle">
+      <h2 class="rk-expiry-title" id="rkExpiryTitle">你现在看到的价,什么时候会变</h2>
+      <ul class="rk-expiry-list">
+        
+        <li class="rk-expiry-item is-cutoff" data-date="2026-11-12">
+          <span class="rk-expiry-days">11-12</span>
+          <span class="rk-expiry-body">
+            <strong>Cursor 失去 GPT 系模型(拟定日期)<span class="rk-expiry-stale"> · 已到期,待本站复核</span></strong>
+            <span class="rk-expiry-detail">OpenAI 提议的截止日,双方尚未最终议定,可能提前;届时可在 Cursor 里填自备 OpenAI Key,改为你自己按量付费 · <a href="https://openai.com/index/our-decision-on-cursor-following-its-acquisition-by-spacex/" target="_blank" rel="noopener">OpenAI 声明</a></span>
+          </span>
+          <time class="rk-expiry-date" datetime="2026-11-12">2026-11-12</time>
+        </li>
+        
+        <li class="rk-expiry-item is-promo" data-date="2026-11-21">
+          <span class="rk-expiry-days">11-21</span>
+          <span class="rk-expiry-body">
+            <strong>GPT-5.6 Sol 促销价最早可能结束<span class="rk-expiry-stale"> · 已到期,待本站复核</span></strong>
+            <span class="rk-expiry-detail">现价 $4 / $20 是促销价,官方只写「至少延续到」这一天,没给恢复价 · <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener">OpenAI 定价页</a></span>
+          </span>
+          <time class="rk-expiry-date" datetime="2026-11-21">2026-11-21 起</time>
+        </li>
+        
+        <li class="rk-expiry-item is-rise" data-date="2027-01-01">
+          <span class="rk-expiry-days">01-01</span>
+          <span class="rk-expiry-body">
+            <strong>Gemini Flash 全系价格翻倍<span class="rk-expiry-stale"> · 已到期,待本站复核</span></strong>
+            <span class="rk-expiry-detail">3.8 / 3.7 / 3.6 Flash 同步:$0.75 / $3.75 → $1.50 / $7.50,12-31 是最后一天 · <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener">Google 定价页</a></span>
+          </span>
+          <time class="rk-expiry-date" datetime="2027-01-01">2027-01-01</time>
+        </li>
+        
+      </ul>
+      <p class="rk-expiry-foot">剩余天数按你打开页面的当天实时计算 · 各条目核对于 2026-09-22</p>
+    </section>
+    
 
     <!-- 显示密度开关:一键在「只看关键数字」与「显示全部注释」之间切换 -->
     <div class="rk-density" id="rkDensity">
@@ -191,27 +229,122 @@
         <details class="rk-fold">
           <summary>已发布但暂未入榜的模型(及原因)</summary>
           <div class="rk-fold-body">
-            <p class="rk-note">天梯是<strong>多机构归一化</strong>排名。只有一家收录时,归一化会失真,因此本站的规则是<strong>缺跨机构数据就不入榜,也绝不用估算值补位</strong>。下列模型确实已发布、能力也不弱,只是评测覆盖还不够:</p>
+            <p class="rk-note">天梯是<strong>多机构归一化</strong>排名。只有一家收录时,归一化会失真,因此本站的规则是<strong>缺跨机构数据就不入榜,也绝不用估算值补位</strong>。下列模型已有 AA 实测分但暂不在天梯里。<strong>⚠ 09-22 复核发现其中多数已补齐 Arena 与 LiveBench 成绩、满足入榜条件</strong>——天梯限 20 席,本轮席位调整待定,期间如实列出:</p>
+            
             <table class="rk-pending">
-              <thead><tr><th>模型</th><th>AA 指数<br><em>v4.3.2</em></th><th>缺什么</th></tr></thead>
+              <thead><tr><th>模型</th><th>AA<br><em>v4.3.2</em></th><th>Arena</th><th>LiveBench</th><th>状态</th></tr></thead>
               <tbody>
-                <tr><td><strong>Claude Fable 5.1</strong>（Anthropic，09-01）</td><td><strong>53</strong></td><td>与 GPT-6 Astra <strong>并列 AA 第一</strong>；Arena / LiveBench / SWE-V 均无</td></tr>
-                <tr><td><strong>GPT-6 Astra</strong>（OpenAI，09-03，<strong>新旗舰</strong>）</td><td><strong>53</strong></td><td>同上；与 Fable 5.1 <strong>同分同价而整卷成本仅 4 成</strong>（输出 token 少 2/3）</td></tr>
-                <tr><td><strong>Muse Spark 1.3</strong>（Meta，09-02）</td><td><strong>48</strong></td><td>同上；45 分以上里单位智能最便宜</td></tr>
-                <tr><td><strong>GPT-5.6 Sol</strong>（OpenAI）</td><td>47</td><td>Arena 有分但 LiveBench 缺；已在成本图内</td></tr>
-                <tr><td><strong>GLM-5.3</strong>（智谱，08-14，<strong>08-29 开源 753B</strong>）</td><td>45</td><td>Arena / LiveBench / SWE-V 均无独立成绩</td></tr>
-                <tr><td><strong>Grok 4.6</strong>（xAI，08-12）</td><td>44</td><td>LiveBench 仅早期分项；Arena / SWE-V 无</td></tr>
-                <tr><td><strong>GLM-5.3 Flash</strong>（智谱，08-26，<strong>开源 321B</strong>）</td><td>42</td><td>同上</td></tr>
-                <tr><td>GPT-5.6 Terra（OpenAI）</td><td>42</td><td>同上</td></tr>
-                <tr><td><strong>Gemini 3.8 Flash</strong>（Google，09-02）</td><td>41</td><td>同上</td></tr>
-                <tr><td><strong>Qwen3.8-Max</strong>（阿里，08-03）</td><td>40</td><td>同上</td></tr>
-                <tr><td>Gemini 3.7 Flash（Google，08-13）</td><td>39</td><td>同上</td></tr>
+                
+                <tr>
+                  <td><strong>Claude Fable 5.1</strong>（Anthropic，09-01）</td>
+                  <td><strong>53</strong></td>
+                  <td>1498</td>
+                  <td>83.4</td>
+                  <td>已满足条件(3 家)</td>
+                </tr>
+                
+                <tr>
+                  <td><strong>GPT-6 Astra</strong>（OpenAI，09-03，新旗舰）</td>
+                  <td><strong>53</strong></td>
+                  <td>1480</td>
+                  <td>82.2</td>
+                  <td>已满足条件(3 家)</td>
+                </tr>
+                
+                <tr>
+                  <td><strong>Muse Spark 1.3</strong>（Meta，09-02）</td>
+                  <td><strong>48</strong></td>
+                  <td>1493</td>
+                  <td>81.6</td>
+                  <td>已满足条件(3 家)</td>
+                </tr>
+                
+                <tr>
+                  <td><strong>Grok 4.7</strong>（xAI，09-21）</td>
+                  <td><strong>46</strong></td>
+                  <td>—</td>
+                  <td>77.4</td>
+                  <td>已满足条件(2 家)</td>
+                </tr>
+                
+                <tr>
+                  <td><strong>GLM-5.3</strong>（智谱，08-14，08-29 开源 753B）</td>
+                  <td><strong>45</strong></td>
+                  <td>1483</td>
+                  <td>76.1</td>
+                  <td>已满足条件(3 家)</td>
+                </tr>
+                
+                <tr>
+                  <td><strong>Qwen3.8 Max</strong>（阿里，08-03）</td>
+                  <td><strong>45</strong></td>
+                  <td>1481</td>
+                  <td>78.5</td>
+                  <td>已满足条件(3 家)</td>
+                </tr>
+                
+                <tr>
+                  <td><strong>Grok 4.6</strong>（xAI，08-12）</td>
+                  <td><strong>44</strong></td>
+                  <td>1456</td>
+                  <td>78</td>
+                  <td>已满足条件(3 家)</td>
+                </tr>
+                
+                <tr>
+                  <td><strong>GLM-5.3 Flash</strong>（智谱，08-26，开源 321B）</td>
+                  <td><strong>42</strong></td>
+                  <td>1475</td>
+                  <td>71.6</td>
+                  <td>已满足条件(3 家)</td>
+                </tr>
+                
+                <tr>
+                  <td><strong>GPT-5.6 Terra</strong>（OpenAI）</td>
+                  <td><strong>42</strong></td>
+                  <td>1466</td>
+                  <td>77.9</td>
+                  <td>已满足条件(3 家)</td>
+                </tr>
+                
+                <tr>
+                  <td><strong>Gemini 3.8 Flash</strong>（Google，09-02）</td>
+                  <td><strong>41</strong></td>
+                  <td>1493</td>
+                  <td>75.8</td>
+                  <td>已满足条件(3 家)</td>
+                </tr>
+                
+                <tr>
+                  <td><strong>DeepSeek V4.1 Flash</strong>（DeepSeek，09-10）</td>
+                  <td><strong>39</strong></td>
+                  <td>—</td>
+                  <td>81.1</td>
+                  <td>已满足条件(2 家)</td>
+                </tr>
+                
+                <tr>
+                  <td><strong>Gemini 3.7 Flash</strong>（Google，08-13）</td>
+                  <td><strong>39</strong></td>
+                  <td>1490</td>
+                  <td>78.8</td>
+                  <td>已满足条件(3 家)</td>
+                </tr>
+                
+                <tr>
+                  <td><strong>GPT-5.6 Luna</strong>（OpenAI）</td>
+                  <td><strong>37</strong></td>
+                  <td>1452</td>
+                  <td>73.6</td>
+                  <td>已满足条件(3 家)</td>
+                </tr>
+                
               </tbody>
             </table>
             <p class="rk-note">✅ <strong>Haiku 4.5 的 AA 列已恢复数值</strong>：v4.3.2 下 AA 已给出<strong>实测</strong>分 17（此前是「估算」，本站只收实测值故长期标 —）。<br>⚠ 厂商自测成绩不能替代第三方评测,<strong>基准名也要对齐</strong>——例如阿里公布的是 SWE-bench <strong>Pro</strong>,与本表使用的 SWE-bench <strong>Verified</strong> 不是同一套题,不可混用。等任一模型补齐跨机构数据即会入榜。</p>
           </div>
         </details>
-        <p class="rk-note"><strong>数据来源(快照 2026-09-20,以各机构官网为准)</strong>:
+        <p class="rk-note"><strong>数据来源(快照 2026-09-22,以各机构官网为准)</strong>:
           <a href="https://arena.ai/leaderboard/text" target="_blank" rel="noopener">Arena</a> ·
           <a href="https://artificialanalysis.ai/leaderboards/models" target="_blank" rel="noopener">Artificial Analysis</a> ·
           <a href="https://livebench.ai/" target="_blank" rel="noopener">LiveBench</a> ·
@@ -221,6 +354,7 @@
     </div>
 
         <!-- ============ 订阅性价比板块 ============ -->
+
     <div class="rk-board" data-board="pricing">
       <p class="rk-drag-hint">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 3 12 9 6"></polyline><polyline points="15 6 21 12 15 18"></polyline><line x1="12" y1="3" x2="12" y2="21"></line></svg>
@@ -251,7 +385,7 @@
               <td>全档采用「5 小时滚动窗口 + 每周上限」双重限制,窗口内用完只能等重置:<br>· Free:每日少量消息,基础模型<br>· Pro ≈ 45 条消息 / 5 小时(网页、App、Claude Code 共用同一个池)<br>· Max 5x / 20x = Pro 的 5 倍 / 20 倍窗口额度<br>· 超限两条路:等窗口重置,或按 API 价加购(extra usage)</td>
               <td>按 Opus 档满负荷估算:<br>· Pro ≈ 2000–5000 万 token/月<br>· Max 5x ≈ 1–2 亿/月<br>· Max 20x ≈ 2–4 亿/月<br>· 换用 Sonnet 约 ×5,Haiku 更高</td>
               <td>· Pro ≈ $2–10 /M<br>· Max 5x ≈ $0.7–1.5 /M<br>· Max 20x ≈ $0.5–1 /M<br><em class="rk-pt-note">用得越少,实际单价越贵</em></td>
-              <td><strong>Fable 5.1 $10 / $50（新）</strong><br>Opus 5 $5 / $25<br>Fable 5 $10 / $50<br>Opus 4.8 $5 / $25<br>Sonnet 5 $2 / $10<br>Haiku 4.5 $1 / $5<br><em class="rk-pt-note">💡 Opus 5(2026-07-24 发布)与 Opus 4.8 <strong>同为 $5/$25</strong>(Opus 档自 4.5 起未变),而 <strong>AA 已在 v4.3.2 下把 4.8 补测出来了:Opus 5 得 51 分、4.8 得 42 分</strong>——<strong>同一个价签,九分的差距</strong>。更值得看的是账单:跑完整卷 Opus 5 花 $7,275、4.8 花 $6,874,<strong>只多付 6% 换来 9 分</strong>。省的是 token 而不是单价。1M 上下文,含<strong>low/medium/high/xhigh/max 五档</strong>推理强度开关(low→max 成本差约 3 倍,官方建议日常用 low/medium);fast 模式约 2.5× 速度、2× 价格<br>✅ <strong>Sonnet 5 的涨价计划已取消</strong>：$2 / $10 原为入市促销价（原定 2026-08-31 到期），<a href="https://platform.claude.com/docs/en/about-claude/pricing" target="_blank" rel="noopener">官方定价页已明确将其转为标准价</a>，原定 09-01 涨到 $3 / $15 <strong>不会发生</strong>——长期成本测算可直接按 $2 / $10<br>🆕 <strong>Fable 5.1 于 2026-09-01 发布</strong>，与 Fable 5 <strong>同为 $10 / $50</strong>，但<strong>缓存命中价从 $1 砍到 $0.25</strong>（倍率由全系通用的 0.1× 改为 <strong>0.025×</strong>，目前仅 5.1 系享此价）——官方宣称的 25–45% 省钱几乎全部来自这一处，<strong>不开提示缓存就一分钱也省不到</strong>。AA 智能指数 <strong>66，全榜第一</strong>，但跑完整卷要 <strong>$8,523</strong>（Opus 5 的 2.2 倍，见下方成本图）<br>⚠ <strong>Mythos 5.1</strong> 与 Fable 5.1 <strong>同价同基座</strong>，只是解除了部分安全限制，<strong>仅对少数经审核的网络安全 / 生命科学机构开放</strong>（需接受 30 天数据留存用于安全监控），<a href="https://anthropic.com/glasswing" target="_blank" rel="noopener">申请制</a>，普通开发者拿不到<br>规则:输出价约为输入 5 倍;提示缓存 5 分钟写入 1.25×、1 小时写入 2×、<strong>命中 0.1×（Fable/Mythos 5.1 为 0.025×）</strong>;Batch 批处理五折<br>💡 <strong>1M 上下文按标准价计,不再加价</strong>(4.6 及以后机型)——90 万 token 的请求与 9 千 token 单价相同<br>⚠ <strong>4.7 及以后机型换了新分词器,同样的文字约多出 30% token</strong>:跨代比价时光看单价会低估实际账单</em></td>
+              <td><strong>Fable 5.1 $10 / $50（新）</strong><br>Opus 5 $5 / $25<br>Fable 5 $10 / $50<br>Opus 4.8 $5 / $25<br>Sonnet 5 $2 / $10<br>Haiku 4.5 $1 / $5<br><em class="rk-pt-note">💡 Opus 5(2026-07-24 发布)与 Opus 4.8 <strong>同为 $5/$25</strong>(Opus 档自 4.5 起未变),而 <strong>AA 已在 v4.3.2 下把 4.8 补测出来了:Opus 5 得 51 分、4.8 得 42 分</strong>——<strong>同一个价签,九分的差距</strong>。更值得看的是账单:跑完整卷 Opus 5 花 $7,275、4.8 花 $6,874,<strong>只多付 6% 换来 9 分</strong>。省的是 token 而不是单价。1M 上下文,含<strong>low/medium/high/xhigh/max 五档</strong>推理强度开关(low→max 成本差约 3 倍,官方建议日常用 low/medium);fast 模式约 2.5× 速度、2× 价格<br>✅ <strong>Sonnet 5 的涨价计划已取消</strong>：$2 / $10 原为入市促销价（原定 2026-08-31 到期），<a href="https://platform.claude.com/docs/en/about-claude/pricing" target="_blank" rel="noopener">官方定价页已明确将其转为标准价</a>，原定 09-01 涨到 $3 / $15 <strong>不会发生</strong>——长期成本测算可直接按 $2 / $10<br>🆕 <strong>Fable 5.1 于 2026-09-01 发布</strong>，与 Fable 5 <strong>同为 $10 / $50</strong>，但<strong>缓存命中价从 $1 砍到 $0.25</strong>（倍率由全系通用的 0.1× 改为 <strong>0.025×</strong>，目前仅 5.1 系享此价）——官方宣称的 25–45% 省钱几乎全部来自这一处，<strong>不开提示缓存就一分钱也省不到</strong>。AA 智能指数 <strong>53</strong>（GPT-6 Astra 为 53），但跑完整卷要 <strong>$13,129</strong>（Opus 5 的 1.8 倍，见下方成本图）<br>⚠ <strong>Mythos 5.1</strong> 与 Fable 5.1 <strong>同价同基座</strong>，只是解除了部分安全限制，<strong>仅对少数经审核的网络安全 / 生命科学机构开放</strong>（需接受 30 天数据留存用于安全监控），<a href="https://anthropic.com/glasswing" target="_blank" rel="noopener">申请制</a>，普通开发者拿不到<br>规则:输出价约为输入 5 倍;提示缓存 5 分钟写入 1.25×、1 小时写入 2×、<strong>命中 0.1×（Fable/Mythos 5.1 为 0.025×）</strong>;Batch 批处理五折<br>💡 <strong>1M 上下文按标准价计,不再加价</strong>(4.6 及以后机型)——90 万 token 的请求与 9 千 token 单价相同<br>⚠ <strong>4.7 及以后机型换了新分词器,同样的文字约多出 30% token</strong>:跨代比价时光看单价会低估实际账单</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-openai">O</span><a href="https://openai.com/chatgpt" target="_blank" rel="noopener">ChatGPT + Codex</a>
@@ -261,13 +395,13 @@
               <td>⚠ <strong>Pro 自 2026-04-09 起拆为两档</strong>:<br>· Free:基础模型限量对话<br>· Go $8:消息量比 Free 多,<strong>但含广告</strong>、无高级功能<br>· Plus:日常对话高额度(默认 Terra);Sol 高强度限量;Codex 云任务约 30–150 个 / 5h<br>· <strong>Pro Codex $100 = 5× Plus 额度</strong><br>· <strong>Pro Max $200 = 20× 额度 + 1M 上下文</strong><br>· o4-mini 各付费档近乎不限</td>
               <td>· Plus ≈ 3000 万–1 亿 token/月<br>· Pro Codex ≈ 1.5–5 亿/月<br>· Pro Max ≈ 6–20 亿/月(20× 档)</td>
               <td>· Plus ≈ $0.5–2 /M<br>· Pro Codex ≈ $0.3–0.7 /M<br>· Pro Max ≈ $0.3–0.5 /M</td>
-              <td><strong>GPT-6 Astra $10 / $50（新旗舰）</strong><br>5.6 Sol $4 / $20<br>5.6 Terra $2 / $12<br>5.6 Luna $0.20 / $1.20<br>GPT-5.5 $5 / $30 · 5.5 Pro $30 / $180<br>o4-mini $1.1 / $4.4<br>5.6 Cyber $12.5 / $75（申请制）<br><em class="rk-pt-note">🆕 <strong>GPT-6 Astra 于 2026-09-03 发布</strong>：1M 上下文、面向长程智能体任务，<strong>AA v4.3.2 指数 53，与 Claude Fable 5.1 并列第一</strong>。⚠ 它是 OpenAI <strong>首个被自评为网络风险「Critical」</strong>的模型，初期仅对 Daybreak 名单开放<br>⚔️ <strong>Astra 与 Fable 5.1 是一组正面对位，值得单独看</strong>：<strong>标价一模一样（$10 / $50）</strong>，发布只隔两天（09-01 对 09-03），AA 指数也同为 53。<strong>但实付差 2.5 倍</strong>——跑完同一套评测 Astra 花 <strong>$5,324</strong>、Fable 5.1 花 <strong>$13,129</strong>，因为 Astra <strong>只吐 6,000 万输出 token，Fable 5.1 吐了 1.9 亿</strong>（同类中位数 9,000 万）。<strong>同分同价，账单差在"话多不多"上。</strong><br>🔄 <strong>但有一处反过来</strong>：Fable 5.1 的<strong>缓存命中价 $0.25</strong>（0.025× 输入价），Astra 是 <strong>$1.00</strong>（标准 0.1×）——<strong>Fable 5.1 的缓存便宜 4 倍</strong>。所以选型取决于你的形态:<strong>一次性长任务看 Astra，反复复用同一段长上下文（长系统提示、固定知识库）看 Fable 5.1</strong>，两者可能得出相反结论<br>⏳ <strong>Sol 的 $4 / $20 是促销价</strong>，<a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener">官方注明「至少延续到 2026-11-21」</a>——做长期预算别当成标准价<br>💰 <strong>OpenAI 现在分长短上下文两档计价</strong>（站上第七列为短上下文价）：超长请求单价更高——Astra $20 / $75、Sol $8 / $30、Terra $4 / $18、Luna $0.40 / $1.80、GPT-5.5 $10 / $45。<strong>做长文档任务时按这一档算,不然会低估一倍</strong><br>🔥 <strong>2026-07-30 降价:Luna 砍 80%</strong>($1/$6 → $0.20/$1.20)、<strong>Terra 砍 20%</strong>($2.5/$15 → $2/$12),距 7-09 发布仅三周。OpenAI 口径是把推理效率提升让利给用户;外界普遍归因于中国模型的价格压力——CNBC 称中国模型已占 OpenRouter 上美国企业 token 用量的 46%<br>💡 <strong>Luna 现在按输入价已低于 DeepSeek V4 Pro</strong>($0.20 对 $0.435),但输出仍贵($1.20 对 $0.87)。AA 实测跑完整套评测<strong>每题仅 $0.05,是榜上最便宜的一档</strong>(Sol max 要 $2.34),而指数 51 对 59——批量任务先试 Luna 再考虑升级<br>⚠ <strong>Sol Ultra 模式无单独标价</strong>:它把任务分派给并行子代理,每个各自烧 token,一次运行相当于数次 Sol 调用<br>🆕 <strong>gpt-5.6-cyber / gpt-5.5-cyber</strong>（$12.5 / $75）是面向漏洞挖掘的受限变体，<strong>不对普通账号开放</strong>。同期 Anthropic 出 Mythos 5.1、Google 出 Gemini 3.8 Flash Cyber，<strong>三家在 09-01 至 09-02 三天内各自开了一条"审核准入"的口子</strong><br>⚠ <strong>GPT-5.4 短上下文仍是 $2.50 / $15</strong>——第三方聚合站反复出现"已涨到 $5 / $22.5"的说法，<strong>那其实是它的长上下文档价</strong>，被当成了涨价。<a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener">官方定价页</a>两档并列，本站以官方页为准<br>规则:缓存命中的输入 <strong>0.1×</strong>(Sol $0.40、Terra $0.20、Luna $0.02);Batch 五折;推理过程 token 按输出价计费</em></td>
+              <td><strong>GPT-6 Astra $10 / $50（新旗舰）</strong><br>5.6 Sol $4 / $20<br>5.6 Terra $2 / $12<br>5.6 Luna $0.20 / $1.20<br>GPT-5.5 $5 / $30 · 5.5 Pro $30 / $180<br>o4-mini $1.1 / $4.4<br>5.6 Cyber $12.5 / $75（申请制）<br><em class="rk-pt-note">🆕 <strong>GPT-6 Astra 于 2026-09-03 发布</strong>：1M 上下文、面向长程智能体任务，<strong>AA v4.3.2 指数 53，与 Claude Fable 5.1 并列第一</strong>。⚠ 它是 OpenAI <strong>首个被自评为网络风险「Critical」</strong>的模型，初期仅对 Daybreak 名单开放<br>⚔️ <strong>Astra 与 Fable 5.1 是一组正面对位，值得单独看</strong>：<strong>标价一模一样（$10 / $50）</strong>，发布只隔两天（09-01 对 09-03），AA 指数也同为 53。<strong>但实付差 2.5 倍</strong>——跑完同一套评测 Astra 花 <strong>$5,324</strong>、Fable 5.1 花 <strong>$13,129</strong>，因为 Astra <strong>只吐 6,000 万输出 token，Fable 5.1 吐了 1.9 亿</strong>（同类中位数 9,000 万）。<strong>同分同价，账单差在"话多不多"上。</strong><br>🔄 <strong>但有一处反过来</strong>：Fable 5.1 的<strong>缓存命中价 $0.25</strong>（0.025× 输入价），Astra 是 <strong>$1.00</strong>（标准 0.1×）——<strong>Fable 5.1 的缓存便宜 4 倍</strong>。所以选型取决于你的形态:<strong>一次性长任务看 Astra，反复复用同一段长上下文（长系统提示、固定知识库）看 Fable 5.1</strong>，两者可能得出相反结论<br>⏳ <strong>Sol 的 $4 / $20 是促销价</strong>，<a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener">官方注明「至少延续到 2026-11-21」</a>——做长期预算别当成标准价<br>💰 <strong>OpenAI 现在分长短上下文两档计价</strong>（站上第七列为短上下文价）：超长请求单价更高——Astra $20 / $75、Sol $8 / $30、Terra $4 / $18、Luna $0.40 / $1.80、GPT-5.5 $10 / $45。<strong>做长文档任务时按这一档算,不然会低估一倍</strong><br>🔥 <strong>2026-07-30 降价:Luna 砍 80%</strong>($1/$6 → $0.20/$1.20)、<strong>Terra 砍 20%</strong>($2.5/$15 → $2/$12),距 7-09 发布仅三周。OpenAI 口径是把推理效率提升让利给用户;外界普遍归因于中国模型的价格压力——CNBC 称中国模型已占 OpenRouter 上美国企业 token 用量的 46%<br>💡 <strong>Luna 夹在 DeepSeek 两档之间</strong>:它的 $0.20 / $1.20 比 V4 Pro 谷时价 $0.66 / $1.98 便宜,但比 V4.1 Flash 谷时价 $0.15 / $0.60 贵。AA 实测<strong>每任务仅 $0.18</strong>(Sol 为 $1.99),指数 37 对 47——批量任务先试 Luna 再考虑升级<br>⚠ <strong>Sol Ultra 模式无单独标价</strong>:它把任务分派给并行子代理,每个各自烧 token,一次运行相当于数次 Sol 调用<br>🆕 <strong>gpt-5.6-cyber / gpt-5.5-cyber</strong>（$12.5 / $75）是面向漏洞挖掘的受限变体，<strong>不对普通账号开放</strong>。同期 Anthropic 出 Mythos 5.1、Google 出 Gemini 3.8 Flash Cyber，<strong>三家在 09-01 至 09-02 三天内各自开了一条"审核准入"的口子</strong><br>⚠ <strong>GPT-5.4 短上下文仍是 $2.50 / $15</strong>——第三方聚合站反复出现"已涨到 $5 / $22.5"的说法，<strong>那其实是它的长上下文档价</strong>，被当成了涨价。<a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener">官方定价页</a>两档并列，本站以官方页为准<br>规则:缓存命中的输入 <strong>0.1×</strong>(Sol $0.40、Terra $0.20、Luna $0.02);Batch 五折;推理过程 token 按输出价计费</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-cursor">C</span><a href="https://cursor.com/" target="_blank" rel="noopener">Cursor</a>
-                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Cursor Pro / Ultra</strong><b>适合:</b>IDE 重度用户，前端/全栈体验最好。<br><b>⚠</b> 官方承认重度 Agent 用户实际月花 <strong>$60–100</strong>。<br><b>🚨</b> <strong>OpenAI 将于 11-12 断供 GPT 系</strong>；可填自备 Key 继续用。</span></span></td>
+                <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Cursor Pro / Ultra</strong><b>适合:</b>IDE 重度用户，前端/全栈体验最好。<br><b>⚠</b> 官方承认重度 Agent 用户实际月花 <strong>$60–100</strong>。<br><b>🚨</b> <strong>OpenAI 拟于 11-12 断供 GPT 系(提议日期,可能提前)</strong>；可填自备 Key 继续用。</span></span></td>
               <td class="rk-pt-plans"><span class="rk-plan">Hobby Free</span><span class="rk-plan">Pro $20</span><span class="rk-plan">Pro+ $60</span><span class="rk-plan rk-plan-x">Ultra $200</span><span class="rk-plan">Teams 标准 $40/席</span><span class="rk-plan">Teams Premium $120/席（新）</span><em class="rk-pt-note">Teams 年付下降为 $32 / $96 每席</em></td>
-              <td>Claude / Gemini / DeepSeek 等前沿模型任选；自家 Composer 2.5；<strong>Grok 4.6 / 4.5</strong>；<strong>GPT 系 2026-11-12 后不再可用</strong><br><em class="rk-pt-note">🚨 <strong>OpenAI 将于 2026-11-12 断供</strong>：SpaceX 以 $600 亿全股票收购 Anysphere（Cursor 母公司，08-14 完成）后，OpenAI 援引<strong>控制权变更条款</strong>终止合作，理由是“不确信 SpaceX 会在服务条款内使用其技术”。Cursor CEO 称 OpenAI 模型约占 <strong>5% 流量</strong>。<strong>依赖 GPT 系的工作流请提前做迁移预案</strong><br>✅ <strong>有一条退路</strong>：OpenAI 同时说明，用户<strong>可在 Cursor 里填自己的 OpenAI API Key</strong>，让 Chat / Agent 请求直走 OpenAI——断供断的是 Cursor 的转售合约，不是你的自备密钥（但费用变成你自己按量付）<br>🔄 <strong>供应端已在换血</strong>：自 2026-08 起 <strong>Ultra 与 Teams Premium 含 Grok Bot</strong>（xAI 与 Cursor 合建的常驻 Agent），Grok 4.5 本就是用 Cursor 真实编码数据训的——<strong>GPT 腾出的位置，基本由 Grok 接了</strong></em></td>
+              <td>Claude / Gemini / DeepSeek 等前沿模型任选；自家 Composer 2.5；<strong>Grok 4.7（新）/ 4.6</strong>；<strong>GPT 系 2026-11-12 后不再可用</strong><br><em class="rk-pt-note">🚨 <strong>OpenAI 拟于 2026-11-12 断供(提议日期,双方尚未最终议定,可能提前)</strong>：SpaceX 以 $600 亿全股票收购 Anysphere（Cursor 母公司，08-14 完成）后，OpenAI 援引<strong>控制权变更条款</strong>终止合作，理由是“不确信 SpaceX 会在服务条款内使用其技术”。Cursor CEO 称 OpenAI 模型约占 <strong>5% 流量</strong>。<strong>依赖 GPT 系的工作流请提前做迁移预案</strong><br>✅ <strong>有一条退路</strong>：OpenAI 同时说明，用户<strong>可在 Cursor 里填自己的 OpenAI API Key</strong>，让 Chat / Agent 请求直走 OpenAI——断供断的是 Cursor 的转售合约，不是你的自备密钥（但费用变成你自己按量付）<br>🔄 <strong>供应端已在换血</strong>：自 2026-08 起 <strong>Ultra 与 Teams Premium 含 Grok Bot</strong>（xAI 与 Cursor 合建的常驻 Agent），Grok 4.5 本就是用 Cursor 真实编码数据训的——<strong>GPT 腾出的位置，基本由 Grok 接了</strong></em></td>
               <td>订阅额度按「等值模型调用量」计:Pro 含 $20、<strong>Pro+ 含 $70</strong>、Ultra 含 $400 的等值调用；Teams Premium 为标准席的 <strong>5 倍</strong>:<br>· Tab 补全(打字时编辑器自动给出的灰色续写建议)付费档不限量<br>· Agent / 对话按所选模型的 API 价折算扣额度——选贵模型烧得快<br>· 额度耗尽:转按量付费(可设上限)或降为慢速</td>
               <td>· Pro ≈ 3000 万–1 亿混合 token/月<br>· Ultra ≈ 3–6 亿/月(约合 $400+ 模型成本)</td>
               <td>· Pro ≈ $0.3–0.7 /M<br>· Ultra ≈ $0.4–0.7 /M<br><em class="rk-pt-note">取决于所选模型贵贱</em></td>
@@ -278,7 +412,7 @@
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Copilot Pro / Pro+ / Max</strong><b>适合:</b>预算敏感的在职工程师、以补全为主的开发。<br><b>🐑</b> <strong>学生/教师/开源维护者免费 Pro</strong>,$10 档是入门之王。<br><b>⚠</b> 2026-06 改 Credits 后,重代理用户很快撞墙。</span></span></td>
               <td class="rk-pt-plans"><span class="rk-plan">Free $0</span><span class="rk-plan">Pro $10</span><span class="rk-plan">Pro+ $39</span><span class="rk-plan rk-plan-x">Max $100</span><span class="rk-plan">Business $19/席</span><span class="rk-plan">Enterprise $39/席</span></td>
               <td>GPT-5.6 · Claude Sonnet 5 · Gemini 系列(可选档随订阅级别)</td>
-              <td>两种用量分开计(2026-06 起 AI Credits 新规):<br>· <strong>代码补全</strong> = 打字时 IDE 自动弹出的灰色续写建议,按 Tab 接受——付费档一律<strong>不限量</strong>(Free 档 2000 次/月)<br>· <strong>高级请求</strong> = 让 Agent 自动改代码、或指定 Claude / Gemini 等高级模型对话——按 <strong>AI Credits</strong> 计数（2026-09-20 核自官方 plans 页）:<strong>Pro 1,500</strong>（1,000 基础 + 500 flex）· <strong>Pro+ 7,000</strong>（3,900 + 3,100 flex）· <strong>Max 20,000</strong>（10,000 + 10,000 flex）· Business <strong>1,900</strong>/席 · Enterprise <strong>3,900</strong>/席<br>· ⚠ <strong>别和「高级请求次数」混为一谈</strong>：Pro 300 次 / Pro+ 1,500 次那套是<strong>按请求计费的 legacy 年付档</strong>，与 Credits 不是同一个单位，也不能直接换算<br>· 超出按约 $0.04/次 加购</td>
+              <td>两种用量分开计(2026-06 起 AI Credits 新规):<br>· <strong>代码补全</strong> = 打字时 IDE 自动弹出的灰色续写建议,按 Tab 接受——付费档一律<strong>不限量</strong>(Free 档 2000 次/月)<br>· <strong>高级请求</strong> = 让 Agent 自动改代码、或指定 Claude / Gemini 等高级模型对话——按 <strong>AI Credits</strong> 计数（2026-09-22 核自官方 plans 页）:<strong>Pro 1,500</strong>（1,000 基础 + 500 flex）· <strong>Pro+ 7,000</strong>（3,900 + 3,100 flex）· <strong>Max 20,000</strong>（10,000 + 10,000 flex）· Business <strong>1,900</strong>/席 · Enterprise <strong>3,900</strong>/席<br>· ⚠ <strong>别和「高级请求次数」混为一谈</strong>：Pro 300 次 / Pro+ 1,500 次那套是<strong>按请求计费的 legacy 年付档</strong>，与 Credits 不是同一个单位，也不能直接换算<br>· 超出按约 $0.04/次 加购</td>
               <td>· 补全:不限量<br>· 高级请求:见左侧 Credits 上限</td>
               <td>· 纯补全用户 ≈ $0(全含在月费里)<br>· 代理用户 ≈ $0.026–0.04 /次请求</td>
               <td>无(纯订阅制,不单卖 token)</td>
@@ -287,11 +421,11 @@
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-google">G</span><a href="https://gemini.google/" target="_blank" rel="noopener">Gemini(Google AI)</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Google AI Pro / Ultra</strong><b>适合:</b>多模态与视频生成需求者、Google 全家桶用户。<br><b>强项:</b>安卓与 Workspace 集成最深,1M 上下文啃大文档。<br><b>⚠</b> Ultra 捆绑存储与全家桶,<strong>单为模型买不划算</strong>。</span></span></td>
               <td class="rk-pt-plans"><span class="rk-plan">Free $0</span><span class="rk-plan">AI Pro $19.99</span><span class="rk-plan rk-plan-x">AI Ultra $249.99</span><span class="rk-plan">学生/新户促销价常有</span></td>
-              <td>Gemini 3.1 Pro · <strong>3.6 Flash(新)</strong> · 3.5 Flash Lite · Deep Think(深度思考模式)</td>
+              <td>Gemini 3.1 Pro · 3.6 Flash · 3.5 Flash Lite · Deep Think(深度思考模式)</td>
               <td>· Pro:3.1 Pro 高额度对话 + Deep Think 每日限量 + Veo 视频生成月度 credits + 2TB 云盘<br>· Ultra:Deep Think 高配额 + Veo 更大额度 + Agent 功能优先体验 + 30TB 云盘<br>· 图像 / 视频按 credits 单独扣,与对话额度分开计</td>
               <td>对话侧宽松、官方无明确 token 承诺;创作类(视频/图像)以 credits 为准<br>· Ultra 的 Deep Think 配额为行业最高一档</td>
               <td>捆绑云盘/视频等权益,难按 token 单独折算<br>· 纯 Deep Think 重度 ≈ $0.8–2 /M</td>
-              <td><strong>3.8 Flash $0.75 / $3.75（新）</strong><br>3.7 Flash $0.75 / $3.75<br>3.6 Flash $0.75 / $3.75<br>3.1 Pro $2 / $12（≤ 20 万上下文）<br>3.1 Pro $4 / $18（> 20 万）<br>🆕 <strong>3.8 Flash 于 2026-09-02 发布</strong>——四个月内第四款 Flash。AA 智能指数 <strong>59</strong>（3.7 Flash 为 56），与 GPT-5.6 Sol、Grok 4.6 同档，而整卷成本仅 $826<br>⚠ <strong>同价不等于同账单</strong>：3.8 与 3.7 Flash <strong>每 token 完全同价</strong>，但 AA 实测每任务成本从 $0.40 涨到 <strong>$0.58（+40%）</strong>——它基于 3.7 Flash 而非新基座，靠"多想"换分数，输出 token 多约 30%。<strong>升版本时只比单价会漏掉这笔</strong><br>⚠ <strong>3.8 / 3.7 / 3.6 Flash 均为入市促销价</strong>，<strong>2026-12-31 到期</strong>，2027-01-01 起恢复 $1.50 / $7.50（翻倍）；做长期成本测算请按恢复价计<br>🐑 三款 Flash 均有<strong>免费档</strong>（速率限制内不计费），以 <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener">官方定价页</a>当期条款为准<br>规则:缓存命中约 0.25×;Batch 批处理五折</em></td>
+              <td><strong>3.8 Flash $0.75 / $3.75（新）</strong><br>3.7 Flash $0.75 / $3.75<br>3.6 Flash $0.75 / $3.75<br>3.1 Pro $2 / $12（≤ 20 万上下文）<br>3.1 Pro $4 / $18（> 20 万）<br>🆕 <strong>3.8 Flash 于 2026-09-02 发布</strong>——四个月内第四款 Flash。AA 智能指数 <strong>41</strong>（3.7 Flash 为 39），整卷成本 $1,623<br>⚠ <strong>同价不等于同账单</strong>：3.8 与 3.7 Flash <strong>每 token 完全同价</strong>，但 AA 实测每任务成本从 $0.93 涨到 <strong>$1.24（+33%）</strong>——它基于 3.7 Flash 而非新基座，靠"多想"换分数：AA 统计 3.8 Flash 整卷输出约 1.7 亿 token，3.7 Flash 约 1 亿。<strong>升版本时只比单价会漏掉这笔</strong><br>⚠ <strong>3.8 / 3.7 / 3.6 Flash 均为入市促销价</strong>，<strong>2026-12-31 到期</strong>，2027-01-01 起恢复 $1.50 / $7.50（翻倍）；做长期成本测算请按恢复价计<br>🐑 三款 Flash 均有<strong>免费档</strong>（速率限制内不计费），以 <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener">官方定价页</a>当期条款为准<br>规则:缓存命中约 0.25×;Batch 批处理五折</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-zai">Z</span><a href="https://z.ai/" target="_blank" rel="noopener">GLM Coding Plan</a>
@@ -301,7 +435,7 @@
               <td>5 小时滚动窗口,按 prompt(发送次数)计:<br>· Lite ≈ 120 条 / 5 小时(官方对标"Claude Pro 的 3 倍用量、约 1/10 价格")<br>· Pro ≈ 600 条 / 5 小时<br>· 兼容 Claude Code / Cline / Roo Code 等工具,改一行 API 地址即可接入</td>
               <td>· Lite ≈ 0.6–1.5 亿 token/月<br>· Pro ≈ 3–8 亿/月(自家模型)</td>
               <td>· Lite ≈ $0.02–0.05 /M<br>· Pro ≈ $0.03–0.1 /M<br><em class="rk-pt-note">全场最低档</em></td>
-              <td><strong>GLM-5.3 Flash $0.15 / $0.50</strong>（<strong>五折促销已于 2026-09-09 24:00 结束</strong>，09-10 回官方页复核确认为现行标价；缓存输入 $0.03）<br>GLM-5.3 $1.4 / $4.4<br><strong>GLM-5.2 $1.4 / $4.4</strong><br>GLM-5 $1 / $3.2<br>GLM-4.7-FlashX $0.07 / $0.4<br><em class="rk-pt-note">📍 <strong>国内 bigmodel 平台另有一套人民币牌价</strong>:GLM-5.2 <strong>¥8 / ¥28</strong>、缓存命中 ¥2(1M 上下文)。国内直连走这套,比国际站折算价略低,<strong>且为官方原始牌价而非折算值</strong><br>缓存输入 $0.26(约输入价的 1/5);缓存存储限时免费;并发上限随账户等级放宽<br>⚠ <strong>GLM-5-Turbo 已不在官方定价页上</strong>（2026-09-20 复核），新项目别再按它做预算<br>🐑 <strong>GLM-4.7-Flash / 4.5-Flash 永久免费</strong>(输入输出缓存全免);新用户实名另赠约 2,000 万 token,官方常有半价/首月促销<br>来源:<a href="https://docs.z.ai/guides/overview/pricing" target="_blank" rel="noopener">z.ai 官方定价</a> · <a href="https://bigmodel.cn/pricing" target="_blank" rel="noopener">bigmodel 官方定价</a></em></td>
+              <td><strong>GLM-5.3 Flash $0.15 / $0.50</strong>（<strong>五折促销已于 2026-09-09 24:00 结束</strong>，09-10 回官方页复核确认为现行标价；缓存输入 $0.03）<br>GLM-5.3 $1.4 / $4.4<br><strong>GLM-5.2 $1.4 / $4.4</strong><br>GLM-5 $1 / $3.2<br>GLM-4.7-FlashX $0.07 / $0.4<br><em class="rk-pt-note">📍 <strong>国内 bigmodel 平台另有一套人民币牌价</strong>:GLM-5.2 <strong>¥8 / ¥28</strong>、缓存命中 ¥2(1M 上下文)。国内直连走这套,比国际站折算价略低,<strong>且为官方原始牌价而非折算值</strong><br>缓存输入 $0.26(约输入价的 1/5);缓存存储限时免费;并发上限随账户等级放宽<br>⚠ <strong>GLM-5-Turbo 已不在官方定价页上</strong>（2026-09-22 复核），新项目别再按它做预算<br>🐑 <strong>GLM-4.7-Flash / 4.5-Flash 永久免费</strong>(输入输出缓存全免);新用户实名另赠约 2,000 万 token,官方常有半价/首月促销<br>来源:<a href="https://docs.z.ai/guides/overview/pricing" target="_blank" rel="noopener">z.ai 官方定价</a> · <a href="https://bigmodel.cn/pricing" target="_blank" rel="noopener">bigmodel 官方定价</a></em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-deepseek">D</span><a href="https://www.deepseek.com/" target="_blank" rel="noopener">DeepSeek(API 直连)</a>
@@ -361,7 +495,7 @@
               <td><strong>Token Plan = Credits 制</strong>:输入 / 缓存命中 / 输出统一折算为 Credits 扣减<br><strong>Coding Plan = 请求次数制</strong>:Lite 约 1,200 次 / 5 小时,Pro 约 6,000 次 / 5 小时<br><em class="rk-pt-note">⚠ 一次提问通常触发多次调用:简单任务 5–15 次,复杂任务 15–30 次以上——Coding Plan 的"次数"要按这个折算<br>⚠ 额度用尽<strong>直接报错,不转按量</strong>;剩余 Credits <strong>不结转</strong></em></td>
               <td>按<strong>综合扣减倍率</strong>消耗 credits，同一笔套餐能买到的 token 量完全取决于选哪个模型：<br>· DeepSeek-V4-Flash <strong>0.13×</strong>（最便宜）<br>· GLM-5.3-Flash 0.15× · MiniMax-M2.5 0.30×<br>· GLM-5.2 0.85× · DeepSeek-V4-Pro 1.06×<br>· Qwen3.8-Max 2.10× · GLM-5.3 2.29×<br>· Kimi-K3 <strong>4.12×</strong>（最贵）<br><em class="rk-pt-note">首尾相差 <strong>32 倍</strong>——同样的钱买 Kimi-K3 与买 V4-Flash，量差一个量级<br>⚠ <strong>GLM-5.3 的倍率是 5.2 的 2.7 倍</strong>，而它俩在智谱官方 API 上是<strong>同一个价</strong>（$1.4/$4.4）</em></td>
               <td><span class="rk-miss-mark">&mdash;</span>（官方不再公布可折算的单价）<br><em class="rk-pt-note">🚨 <strong>2026-09-01 换了计费口径</strong>：从"每模型各自的积分/百万 token"改为<strong>单一的综合扣减倍率</strong>（输入/缓存/输出共用一个倍率）。官方文档<strong>未公布基准 token 换算率</strong>，因此本站上一版的 ¥/百万 token 折算（V4-Flash ¥0.53 等）<strong>已失效，已撤下</strong>——算不出来就不填，不用估值补位<br>⚠ <strong>倍率现在按周调整</strong>（官方原文："根据平台业务数据与市场模型定价按周综合调整"）——上一次是 08-11 整体下调。<strong>长期预算别按当前倍率做</strong>，买前回 <a href="https://www1.scnet.cn/ac/openapi/doc/2.0/moduleapi/plans/token-plan.html" target="_blank" rel="noopener">官方文档</a>看当周值</em></td>
-              <td><strong>无套餐外独立标价</strong>——套餐制,另有通用 API Key 按量计费(单价见官方模型价格页)<br><em class="rk-pt-note">🐑 Coding Plan 两档均<strong>赠 OpenClaw 2核4G 实例</strong><br>⚠ <strong>决定性限制:严禁 API 调用</strong>——仅限 Claude Code / Cursor / Cline 这类<strong>交互式工具</strong>内使用;<strong>自动化脚本、应用后端、批量任务、工作流编排一律禁止</strong>,违规会限流或封 Key。要做产品集成的别买这个<br>⚠ 不退款、<strong>不支持升降档</strong>、每账号限 1 个套餐、禁止账号共享<br>⚠ <strong>四档价均为促销价</strong>（原价见上方小字），且<strong>扣减倍率官方写明按周调整</strong>（2026-09-01 换了整套口径）——2026-09-20 复核时倍率仍与 09-01 一致，但两者都可能随时变<br>🐑 新增的 <strong>Token 旗舰版 ¥764 / 180 万 credits</strong> 同样赠 OpenClaw 实例</em></td>
+              <td><strong>无套餐外独立标价</strong>——套餐制,另有通用 API Key 按量计费(单价见官方模型价格页)<br><em class="rk-pt-note">🐑 Coding Plan 两档均<strong>赠 OpenClaw 2核4G 实例</strong><br>⚠ <strong>决定性限制:严禁 API 调用</strong>——仅限 Claude Code / Cursor / Cline 这类<strong>交互式工具</strong>内使用;<strong>自动化脚本、应用后端、批量任务、工作流编排一律禁止</strong>,违规会限流或封 Key。要做产品集成的别买这个<br>⚠ 不退款、<strong>不支持升降档</strong>、每账号限 1 个套餐、禁止账号共享<br>⚠ <strong>四档价均为促销价</strong>（原价见上方小字），且<strong>扣减倍率官方写明按周调整</strong>（2026-09-01 换了整套口径）——2026-09-22 复核时倍率仍与 09-01 一致，但两者都可能随时变<br>🐑 新增的 <strong>Token 旗舰版 ¥764 / 180 万 credits</strong> 同样赠 OpenClaw 实例</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico">硅</span><a href="https://siliconflow.cn/" target="_blank" rel="noopener">硅基流动(SiliconFlow)</a>
@@ -415,6 +549,7 @@
 <div class="rkc-row"><span class="rk-ico b-openai">O</span><span class="rkc-name">GPT-5.6 Sol</span><div class="rkc-bar"><i style="--w:26.4%"></i></div><span class="rkc-cost">$3,465</span><span class="rkc-task">$1.99</span><span class="rkc-eff">$73.7</span><span class="rkc-score">47</span></div>
 <div class="rkc-row"><span class="rk-ico b-moonshot">K</span><span class="rkc-name">Kimi K3</span><div class="rkc-bar"><i style="--w:27.9%"></i></div><span class="rkc-cost">$3,658</span><span class="rkc-task">$2.00</span><span class="rkc-eff">$83.1</span><span class="rkc-score">44</span></div>
 <div class="rkc-row"><span class="rk-ico b-qwen">Q</span><span class="rkc-name">Qwen3.8 Max</span><div class="rkc-bar"><i style="--w:37.6%"></i></div><span class="rkc-cost">$4,935</span><span class="rkc-task">$5.41</span><span class="rkc-eff">$109.7</span><span class="rkc-score">45</span></div>
+<div class="rkc-row"><span class="rk-ico b-xai">X</span><span class="rkc-name">Grok 4.7</span><div class="rkc-bar"><i style="--w:37.8%"></i></div><span class="rkc-cost">$4,967</span><span class="rkc-task">$3.74</span><span class="rkc-eff">$108</span><span class="rkc-score">46</span></div>
 <div class="rkc-row"><span class="rk-ico b-openai">O</span><span class="rkc-name">GPT-5.5</span><div class="rkc-bar"><i style="--w:40.3%"></i></div><span class="rkc-cost">$5,294</span><span class="rkc-task">$2.63</span><span class="rkc-eff">$139.3</span><span class="rkc-score">38</span></div>
 <div class="rkc-row is-star"><span class="rk-ico b-openai">O</span><span class="rkc-name">GPT-6 Astra</span><div class="rkc-bar"><i style="--w:40.6%"></i></div><span class="rkc-cost">$5,324</span><span class="rkc-task">$3.26</span><span class="rkc-eff">$100.5</span><span class="rkc-score">53</span></div>
 <div class="rkc-row"><span class="rk-ico b-anthropic">A</span><span class="rkc-name">Claude Opus 4.8</span><div class="rkc-bar"><i style="--w:52.4%"></i></div><span class="rkc-cost">$6,874</span><span class="rkc-task">$4.08</span><span class="rkc-eff">$163.7</span><span class="rkc-score">42</span></div>
@@ -440,7 +575,7 @@
             <li><strong>省钱的第二个旋钮:调低 effort。</strong>表中是 max 档上限,low→max 成本差约 3 倍。AA 把不同 effort 列为独立条目,<strong>从 max 降一两档往往只掉 2–3 分,账单却能砍掉一大截</strong>。<strong>先调 effort,再考虑换模型。</strong></li>
           </ul>
         </div>
-        <p class="rkc-note">口径:<a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking" target="_blank" rel="noopener">Artificial Analysis「Cost to Run Intelligence Index」</a>(当前为 <a href="https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-3" target="_blank" rel="noopener">v4.3</a>,2026-09-07 起,含 AA-Briefcase、GDPval-AA v2、<strong>AutomationBench-AA</strong>、<strong>Terminal-Bench v4.0</strong>、SciCode、HLE、GDP.pdf 等 <strong>10 项评测</strong>;类别权重为智能体 30%、编程 20%、通用 30%、科学推理 20%)——按各模型 API 的输入/缓存/推理/输出 token 实际计费汇总,<strong>推理模型均取厂商披露的最高 effort 设置</strong>。表中 DeepSeek-V4 Pro 为 AA 对 V4 Pro 0813 的实测;<strong>该模型原定 09-14 弃用,已撤回,仍可正常调用</strong>。<strong>更便宜的 V4.1 Flash 本轮已补进表内</strong>(39 分 / $476.89 / $0.27 每任务)——AA 在 v4.3.2 里把它选作 GDPval-AA 的 Elo 锚点模型(锚定 1600),顺带给出了完整成绩。<br><strong>本表 23 行的总成本与指数全部逐个模型取自 AA 官方页面的 v4.3.2 实测值</strong>（2026-09-20 复核；AA 已于 <strong>09-19 升到 v4.3.2</strong>，本表按新版逐行重取),指数与成本同版本,不含折算估算;<strong>凡 AA 尚未在 v4.3.2 下重跑的模型一律不列</strong>,不与旧版数字混排;「$/任务」为 AA 自己公布的加权每任务成本,AA 未公布的标 <span class="rk-miss-mark">—</span>,不用推算值填空。⚠ <strong>四天内两次换版(v4.2 于 09-04、v4.3 于 09-07),本表已第二次整体重取</strong>：v4.1.1 与 v4.2 时期的数字<strong>全部作废</strong>,不要拿来与本表对照。AA 会随重跑更新数值,以 <a href="https://artificialanalysis.ai/models" target="_blank" rel="noopener">AA 官网实时数据</a>为准。effort 档位说明参考 <a href="https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5" target="_blank" rel="noopener">Anthropic 官方文档</a>。</p>
+        <p class="rkc-note">口径:<a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking" target="_blank" rel="noopener">Artificial Analysis「Cost to Run Intelligence Index」</a>(当前为 <a href="https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-3" target="_blank" rel="noopener">v4.3</a>,2026-09-07 起,含 AA-Briefcase、GDPval-AA v2、<strong>AutomationBench-AA</strong>、<strong>Terminal-Bench v4.0</strong>、SciCode、HLE、GDP.pdf 等 <strong>10 项评测</strong>;类别权重为智能体 30%、编程 20%、通用 30%、科学推理 20%)——按各模型 API 的输入/缓存/推理/输出 token 实际计费汇总,<strong>推理模型均取厂商披露的最高 effort 设置</strong>。表中 DeepSeek-V4 Pro 为 AA 对 V4 Pro 0813 的实测;<strong>该模型原定 09-14 弃用,已撤回,仍可正常调用</strong>。<strong>更便宜的 V4.1 Flash 本轮已补进表内</strong>(39 分 / $476.89 / $0.27 每任务)——AA 在 v4.3.2 里把它选作 GDPval-AA 的 Elo 锚点模型(锚定 1600),顺带给出了完整成绩。<br><strong>本表 23 行的总成本与指数全部逐个模型取自 AA 官方页面的 v4.3.2 实测值</strong>（2026-09-22 复核；AA 已于 <strong>09-19 升到 v4.3.2</strong>，本表按新版逐行重取),指数与成本同版本,不含折算估算;<strong>凡 AA 尚未在 v4.3.2 下重跑的模型一律不列</strong>,不与旧版数字混排;「$/任务」为 AA 自己公布的加权每任务成本,AA 未公布的标 <span class="rk-miss-mark">—</span>,不用推算值填空。⚠ <strong>四天内两次换版(v4.2 于 09-04、v4.3 于 09-07),本表已第二次整体重取</strong>：v4.1.1 与 v4.2 时期的数字<strong>全部作废</strong>,不要拿来与本表对照。AA 会随重跑更新数值,以 <a href="https://artificialanalysis.ai/models" target="_blank" rel="noopener">AA 官网实时数据</a>为准。effort 档位说明参考 <a href="https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5" target="_blank" rel="noopener">Anthropic 官方文档</a>。</p>
       </div>
 
       <div class="rk-notes">
@@ -460,7 +595,7 @@
             <p class="rk-note">⚠ 以上为公开政策要点的<strong>提示性摘要,不构成法律意见</strong>,以主管部门当期公告与正式文本为准。来源:<a href="https://www.cac.gov.cn/2026-05/13/c_1780413225190669.htm" target="_blank" rel="noopener">网信办备案公告</a> · <a href="https://www.cac.gov.cn/2026-04/10/c_1777558395078289.htm" target="_blank" rel="noopener">拟人化互动服务办法</a></p>
           </div>
         </details>
-        <p class="rk-note"><strong>价格快照 2026-09-20</strong>,来源:
+        <p class="rk-note"><strong>价格快照 2026-09-22</strong>,来源:
           <a href="https://www.aipricing.guru/subscriptions/" target="_blank" rel="noopener">AI Pricing Guru</a> ·
           <a href="https://spectrumailab.com/blog/ai-coding-tools-pricing-compared-2026" target="_blank" rel="noopener">SpectrumAI Lab(编程工具对比)</a> ·
           <a href="https://automationatlas.io/answers/github-copilot-pricing-explained-2026/" target="_blank" rel="noopener">Automation Atlas(Copilot Credits 制)</a> ·
@@ -486,7 +621,7 @@
           <li><strong>会配 API 的</strong> → 用免费开源的 <a href="https://cline.bot/" target="_blank" rel="noopener">Cline</a> 或 <a href="https://n8n.io/" target="_blank" rel="noopener">n8n</a> 自托管当外壳,后端接国产永久免费模型(混元 Lite、智谱 GLM Flash 等),<strong>长期成本可压到接近 0</strong>。</li>
           <li><strong>只是想试试水</strong> → Cursor Hobby、Copilot Free、Trae Free 都是<strong>不限时</strong>的永久免费档;Antigravity 免费档仍在（现为每周速率限制），但<strong>一年三改口径</strong>，别当长期主力。</li>
         </ul>
-        <p class="rk-deals-foot">⚠ 羊毛政策变动极快,本表每次更新逐条复核。<strong>本轮新确认的变动：</strong>GitHub Copilot 企业档促销额度已于 <strong>09-01 正式回落</strong>（Business 3,000→1,900、Enterprise 7,000→3,900）；Antigravity 免费档改挂 Google AI 订阅周限额；SCNet <strong>09-01 换成按周调的扣减倍率制</strong>。<strong>已确认失效的:</strong>WorkBuddy 每日签到(2026-05-10 下线)、Cursor 学生免费 Pro(2026-06-25 停发)、Cursor 不再公布固定免费额度、Antigravity 从 250 砍到 20 请求/天。<strong>领取前请以官网当期页面为准</strong>,本表为 2026-09-20 快照。</p>
+        <p class="rk-deals-foot">⚠ 羊毛政策变动极快,本表每次更新逐条复核。<strong>本轮新确认的变动：</strong>GitHub Copilot 企业档促销额度已于 <strong>09-01 正式回落</strong>（Business 3,000→1,900、Enterprise 7,000→3,900）；Antigravity 免费档改挂 Google AI 订阅周限额；SCNet <strong>09-01 换成按周调的扣减倍率制</strong>。<strong>已确认失效的:</strong>WorkBuddy 每日签到(2026-05-10 下线)、Cursor 学生免费 Pro(2026-06-25 停发)、Cursor 不再公布固定免费额度、Antigravity 从 250 砍到 20 请求/天。<strong>领取前请以官网当期页面为准</strong>,本表为 2026-09-22 快照。</p>
       </div>
 
       <p class="rk-drag-hint">
@@ -546,7 +681,7 @@
               <td><strong>补全免费 + 高级请求计数</strong>(2026-06 起 AI Credits 制):Pro $10 / Pro+ $39 / Max $100;Business $19、Enterprise $39 每席<br><em class="rk-pt-note">补全不限量,Agent 与高级模型按次扣</em></td>
               <td>· 企业采购与合规最成熟<br>· GitHub PR/Issue 集成最深<br>· 补全不限量,基础档最便宜<br>· 支持几乎所有 IDE 与语言</td>
               <td>· <strong>NPS +14 明显落后</strong>,被批改进停滞<br>· 高级请求次数有限,重代理易撞墙<br>· Agent 自主性不及 Claude Code / Codex<br>· Credits 制透明度受质疑</td>
-              <td class="rk-deal"><strong>🐑 学生党首选</strong><br>· Free 档:2,000 次补全 + 50 次 chat/月<br>· <strong>学生、教师、开源维护者可申请全额免费 Pro</strong>(GitHub Education 认证)<br><em class="rk-pt-note">2026-09-20 复核仍有效。资格<strong>按月重新评估</strong>,在读期间可持续续期——门槛最低的"白嫖前沿模型"路径<br>✅ <strong>促销回落已于 2026-09-01 实际发生</strong>（本站上一版的预告已兑现，09-03 回官方文档复核）：Business 每席 3,000 → <strong>1,900 credits</strong>、Enterprise 7,000 → <strong>3,900</strong>。<strong>月费不变（$19 / $39）、含量少 37–44%</strong>；超出按 $0.01/credit。<strong>促销期做的容量测算现已全部作废，请重算</strong><br>⚠ <strong>个人档还有一次。</strong>官方档位现为 Pro $10 = 1,500 credits（<strong>1,000 基础 + 500 flex</strong>）、Pro+ $39 = 7,000（<strong>3,900 + 3,100 flex</strong>）。<strong>flex 部分是过渡额度，到期后 Pro 降至 1,000、Pro+ 降至 3,900</strong>——坐实的只有括号内的基础值。<strong>⚠ 官方文档至今未公布 flex 的到期日</strong>（2026-09-20 复核），做长期容量规划请按基础值算<br>🆕 新增 <strong>Copilot Max $100 / 月</strong>：20,000 credits（10,000 基础 + 10,000 flex），面向持续高强度用户<br>⚠ 网上流传的"Cursor Free 2,000 补全 + 50 次慢速请求"是历史值,Cursor 官方已不再公布固定数字,别照抄</em></td>
+              <td class="rk-deal"><strong>🐑 学生党首选</strong><br>· Free 档:2,000 次补全 + 50 次 chat/月<br>· <strong>学生、教师、开源维护者可申请全额免费 Pro</strong>(GitHub Education 认证)<br><em class="rk-pt-note">2026-09-22 复核仍有效。资格<strong>按月重新评估</strong>,在读期间可持续续期——门槛最低的"白嫖前沿模型"路径<br>✅ <strong>促销回落已于 2026-09-01 实际发生</strong>（本站上一版的预告已兑现，09-03 回官方文档复核）：Business 每席 3,000 → <strong>1,900 credits</strong>、Enterprise 7,000 → <strong>3,900</strong>。<strong>月费不变（$19 / $39）、含量少 37–44%</strong>；超出按 $0.01/credit。<strong>促销期做的容量测算现已全部作废，请重算</strong><br>⚠ <strong>个人档还有一次。</strong>官方档位现为 Pro $10 = 1,500 credits（<strong>1,000 基础 + 500 flex</strong>）、Pro+ $39 = 7,000（<strong>3,900 + 3,100 flex</strong>）。<strong>flex 部分是过渡额度，到期后 Pro 降至 1,000、Pro+ 降至 3,900</strong>——坐实的只有括号内的基础值。<strong>⚠ 官方文档至今未公布 flex 的到期日</strong>（2026-09-22 复核），做长期容量规划请按基础值算<br>🆕 新增 <strong>Copilot Max $100 / 月</strong>：20,000 credits（10,000 基础 + 10,000 flex），面向持续高强度用户<br>⚠ 网上流传的"Cursor Free 2,000 补全 + 50 次慢速请求"是历史值,Cursor 官方已不再公布固定数字,别照抄</em></td>
               <td><strong>NPS +14</strong>(同类明显偏低)<br><strong>"最爱"投票 9%</strong><br><strong>470 万付费订阅、同比 +75%</strong><br><em class="rk-pt-note">用户基数同类第一</em></td>
             </tr>
             <tr>
@@ -690,7 +825,7 @@
             <p class="rk-note"><strong>NPS</strong>(净推荐值,-100~+100)、<strong>"最爱"投票</strong>(开发者调查中选为最喜爱的比例)、<strong>满意度</strong>、<strong>市场规模</strong>(付费用户数或 ARR)。来自 2026 年开发者调查与厂商披露,时点 2026 年初至 7 月。<strong>缺数据一律标 <span class="rk-miss-mark">—</span>,不用估算值填空。</strong></p>
           </div>
         </details>
-        <p class="rk-note"><strong>数据来源(快照 2026-09-20,以各平台官网为准)</strong>:
+        <p class="rk-note"><strong>数据来源(快照 2026-09-22,以各平台官网为准)</strong>:
           <a href="https://www.digitalapplied.com/blog/ai-coding-tool-adoption-2026-developer-survey" target="_blank" rel="noopener">2026 开发者调查(NPS / 满意度 / 最爱投票)</a> ·
           <a href="https://www.ideaplan.io/blog/ai-coding-assistant-market-share-2026" target="_blank" rel="noopener">市场份额调查</a> ·
           <a href="https://uibakery.io/blog/openai-codex-pricing" target="_blank" rel="noopener">Codex 定价与用量</a> ·
@@ -703,7 +838,7 @@
     </div>
 
 
-    <script type="application/json" id="rankingsData">{"snapshot":"2026-09-20","institutions":{"arena":{"name":"Arena","short":"Arena","url":"https://arena.ai/leaderboard/text","unit":"Elo"},"aa":{"name":"Artificial Analysis","short":"AA 指数","url":"https://artificialanalysis.ai/leaderboards/models","unit":"指数"},"livebench":{"name":"LiveBench","short":"LiveBench","url":"https://livebench.ai/","unit":"分"},"swe":{"name":"SWE-bench Verified","short":"SWE-V","url":"https://www.swebench.com/","unit":"%"},"openrouter":{"name":"OpenRouter 用量","short":"OR 份额","url":"https://openrouter.ai/rankings","unit":"% 流量"}},"defaultWeights":{"arena":30,"aa":25,"livebench":25,"swe":20,"openrouter":20},"dimensions":{"overall":{"label":"综合","metrics":{"arena":"overall","aa":"index","livebench":"avg","swe":"verified"}},"coding":{"label":"编程","metrics":{"arena":"coding","livebench":"coding","swe":"verified"}},"reasoning":{"label":"推理","metrics":{"aa":"index","livebench":"reasoning"}},"math":{"label":"数学","metrics":{"arena":"math","livebench":"math"}},"language":{"label":"语言写作","metrics":{"arena":"overall","livebench":"language"}},"finance":{"label":"金融分析","metrics":{"aa":"index","livebench":"math"}},"community":{"label":"社区体感","metrics":{"arena":"overall","openrouter":"share"}}},"models":[{"id":"opus5","mod":"ti","name":"Claude Opus 5","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1512,"coding":1552,"math":1519},"aa":{"index":51},"livebench":{"avg":85.8,"reasoning":88.4,"coding":88.7,"math":84.6,"language":85.1},"swe":{"verified":93.6},"openrouter":{"share":1.1}}},{"id":"opus48","mod":"ti","name":"Claude Opus 4.8","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1510,"coding":1538,"math":1516},"aa":{"index":42},"livebench":{"avg":85.3,"reasoning":88.1,"coding":86.9,"math":84.2,"language":84.7},"swe":{"verified":91.2},"openrouter":{"share":2.6}}},{"id":"fable5","mod":"ti","name":"Claude Fable 5","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1486,"coding":1563,"math":1505},"aa":{"index":50},"livebench":{"avg":84.6,"reasoning":86.3,"coding":89.4,"math":82.1,"language":85.9},"swe":{"verified":95},"openrouter":{"share":1.9}}},{"id":"gpt56sol","mod":"tiav","name":"GPT-5.6 Sol","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":{"overall":1495,"coding":1516,"math":1512},"aa":{"index":47},"livebench":null,"swe":{"verified":88.4},"openrouter":{"share":1.2}}},{"id":"gpt55pro","mod":"tiav","name":"GPT-5.5 Pro","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":{"overall":1503,"coding":1521,"math":1508},"aa":{"index":null},"livebench":{"avg":83.1,"reasoning":86.7,"coding":84,"math":85.6,"language":81.9},"swe":{"verified":87.6},"openrouter":{"share":0.8}}},{"id":"gemini31","mod":"tiav","name":"Gemini 3.1 Pro","vendor":"Google","url":"https://deepmind.google/technologies/gemini/","open":false,"scores":{"arena":{"overall":1497,"coding":1502,"math":1499},"aa":{"index":30},"livebench":{"avg":82.4,"reasoning":84.9,"coding":82.7,"math":83.8,"language":82},"swe":{"verified":80.7},"openrouter":{"share":4.6}}},{"id":"gpt55","mod":"tiav","name":"GPT-5.5","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":{"overall":1488,"coding":1494,"math":1490},"aa":{"index":38},"livebench":{"avg":81.2,"reasoning":83.5,"coding":82.1,"math":82.9,"language":80.4},"swe":{"verified":85.3},"openrouter":{"share":3.4}}},{"id":"opus47","mod":"ti","name":"Claude Opus 4.7","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1492,"coding":1498,"math":1487},"aa":{"index":null},"livebench":{"avg":80.7,"reasoning":82.8,"coding":83.5,"math":79.6,"language":80.1},"swe":{"verified":84.1},"openrouter":{"share":5.8}}},{"id":"kimik3","mod":"ti","name":"Kimi K3","vendor":"Moonshot","url":"https://www.kimi.com/","open":true,"scores":{"arena":{"overall":1471,"coding":1458,"math":1478},"aa":{"index":44},"livebench":{"avg":79.4,"reasoning":82.6,"coding":78.8,"math":81.5,"language":78.9},"swe":{"verified":79.6},"openrouter":{"share":2.2}}},{"id":"sonnet5","mod":"ti","name":"Claude Sonnet 5","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1462,"coding":1479,"math":1455},"aa":{"index":38},"livebench":{"avg":76.8,"reasoning":78.2,"coding":80.6,"math":74.9,"language":77.4},"swe":{"verified":82.6},"openrouter":{"share":3.8}}},{"id":"grok45","mod":"ti","name":"Grok 4.5","vendor":"xAI","url":"https://x.ai/grok","open":false,"scores":{"arena":{"overall":1481,"coding":1490,"math":1469},"aa":{"index":39},"livebench":{"avg":78.6,"reasoning":80.1,"coding":82.4,"math":79,"language":75.9},"swe":{"verified":82.1},"openrouter":{"share":2.3}}},{"id":"dsv4","mod":"ti","name":"DeepSeek-V4 Pro","vendor":"DeepSeek","url":"https://www.deepseek.com/","open":true,"scores":{"arena":{"overall":1452,"coding":1466,"math":1470},"aa":{"index":36},"livebench":{"avg":77.9,"reasoning":80.4,"coding":79.2,"math":80.8,"language":75.3},"swe":{"verified":80.6},"openrouter":{"share":4.1}}},{"id":"qwen37","mod":"ti","name":"Qwen3.7 Max","vendor":"Alibaba","url":"https://qwen.ai/","open":true,"scores":{"arena":{"overall":1447,"coding":1462,"math":1465},"aa":{"index":29},"livebench":{"avg":77.1,"reasoning":79,"coding":78.6,"math":79.9,"language":74.8},"swe":{"verified":80.4},"openrouter":{"share":3.9}}},{"id":"m3","mod":"ti","name":"MiniMax M3","vendor":"MiniMax","url":"https://www.minimax.io/","open":true,"scores":{"arena":{"overall":1441,"coding":1455,"math":1450},"aa":{"index":29},"livebench":{"avg":75.2,"reasoning":76.8,"coding":77.5,"math":76,"language":73},"swe":{"verified":80.5},"openrouter":{"share":3.1}}},{"id":"k26","mod":"ti","name":"Kimi K2.6","vendor":"Moonshot","url":"https://www.kimi.com/","open":true,"scores":{"arena":{"overall":1438,"coding":1451,"math":1446},"aa":{"index":27},"livebench":{"avg":74.8,"reasoning":76.1,"coding":77,"math":75.3,"language":72.6},"swe":{"verified":80.2},"openrouter":{"share":3.6}}},{"id":"glm52","mod":"ti","name":"GLM-5.2","vendor":"Z.ai","url":"https://z.ai/","open":true,"scores":{"arena":{"overall":1433,"coding":1447,"math":1440},"aa":{"index":34},"livebench":{"avg":73.9,"reasoning":74.9,"coding":76.4,"math":74.1,"language":71.8},"swe":{"verified":78.9},"openrouter":{"share":5.2}}},{"id":"g36flash","mod":"tiav","name":"Gemini 3.6 Flash","vendor":"Google","url":"https://deepmind.google/technologies/gemini/","open":false,"scores":{"arena":{"overall":1442,"coding":1436,"math":1430},"aa":{"index":34},"livebench":{"avg":74.6,"reasoning":76,"coding":74.2,"math":75.1,"language":72.8},"swe":{"verified":71.4},"openrouter":{"share":5.9}}},{"id":"o4mini","mod":"ti","name":"o4-mini","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":{"overall":1409,"coding":1415,"math":1428},"aa":{"index":null},"livebench":{"avg":72.2,"reasoning":75.8,"coding":71.3,"math":76.5,"language":68.9},"swe":{"verified":68.2},"openrouter":{"share":2}}},{"id":"mistral3","mod":"ti","name":"Mistral Large 3","vendor":"Mistral","url":"https://mistral.ai/","open":true,"scores":{"arena":{"overall":1398,"coding":1396,"math":1400},"aa":{"index":9},"livebench":{"avg":67.4,"reasoning":68.8,"coding":68.1,"math":67.9,"language":66.8},"swe":null,"openrouter":{"share":1.1}}},{"id":"haiku45","mod":"ti","name":"Claude Haiku 4.5","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1391,"coding":1389,"math":null},"aa":{"index":17},"livebench":{"avg":66.1,"reasoning":67,"coding":68.3,"math":64.7,"language":65.2},"swe":{"verified":55.9},"openrouter":{"share":2.4}}}]}</script>
+    <script type="application/json" id="rankingsData">{"snapshot":"2026-09-22","institutions":{"arena":{"name":"Arena","short":"Arena","url":"https://arena.ai/leaderboard/text","unit":"Elo"},"aa":{"name":"Artificial Analysis","short":"AA 指数","url":"https://artificialanalysis.ai/leaderboards/models","unit":"指数"},"livebench":{"name":"LiveBench","short":"LiveBench","url":"https://livebench.ai/","unit":"分"},"swe":{"name":"SWE-bench Verified","short":"SWE-V","url":"https://www.swebench.com/","unit":"%"},"openrouter":{"name":"OpenRouter 用量","short":"OR 份额","url":"https://openrouter.ai/rankings","unit":"% 流量"}},"defaultWeights":{"arena":30,"aa":25,"livebench":25,"swe":20,"openrouter":20},"dimensions":{"overall":{"label":"综合","metrics":{"arena":"overall","aa":"index","livebench":"avg","swe":"verified"}},"coding":{"label":"编程","metrics":{"arena":"coding","livebench":"coding","swe":"verified"}},"reasoning":{"label":"推理","metrics":{"aa":"index","livebench":"reasoning"}},"math":{"label":"数学","metrics":{"arena":"math","livebench":"math"}},"language":{"label":"语言写作","metrics":{"arena":"overall","livebench":"language"}},"finance":{"label":"金融分析","metrics":{"aa":"index","livebench":"math"}},"community":{"label":"社区体感","metrics":{"arena":"overall","openrouter":"share"}}},"models":[{"id":"opus5","mod":"ti","name":"Claude Opus 5","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1493,"coding":1533,"math":1525},"aa":{"index":51},"livebench":{"avg":80.1,"reasoning":91.2,"coding":81.4,"math":95.7,"language":88.7},"swe":{"verified":93.6},"openrouter":{"share":1.1}}},{"id":"opus48","mod":"ti","name":"Claude Opus 4.8","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1481,"coding":1533,"math":1494},"aa":{"index":42},"livebench":{"avg":76.2,"reasoning":89.2,"coding":81.8,"math":94.3,"language":79.7},"swe":{"verified":91.2},"openrouter":{"share":2.6}}},{"id":"fable5","mod":"ti","name":"Claude Fable 5","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1506,"coding":1552,"math":1526},"aa":{"index":50},"livebench":{"avg":83,"reasoning":89.7,"coding":86,"math":96,"language":90.7},"swe":{"verified":95},"openrouter":{"share":1.9}}},{"id":"gpt56sol","mod":"tiav","name":"GPT-5.6 Sol","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":{"overall":1483,"coding":1528,"math":1488},"aa":{"index":47},"livebench":{"avg":81,"reasoning":91.7,"coding":83.9,"math":96.2,"language":87.7},"swe":{"verified":88.4},"openrouter":{"share":1.2}}},{"id":"gpt55pro","mod":"tiav","name":"GPT-5.5 Pro","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":null,"aa":{"index":null},"livebench":null,"swe":{"verified":87.6},"openrouter":{"share":0.8}}},{"id":"gemini31","mod":"tiav","name":"Gemini 3.1 Pro","vendor":"Google","url":"https://deepmind.google/technologies/gemini/","open":false,"scores":{"arena":{"overall":1487,"coding":1520,"math":1489},"aa":{"index":30},"livebench":{"avg":77,"reasoning":84,"coding":76.5,"math":91,"language":85.4},"swe":{"verified":80.7},"openrouter":{"share":4.6}}},{"id":"gpt55","mod":"tiav","name":"GPT-5.5","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":{"overall":1482,"coding":1520,"math":1491},"aa":{"index":38},"livebench":{"avg":80.2,"reasoning":89.7,"coding":82.1,"math":95.9,"language":87.4},"swe":{"verified":85.3},"openrouter":{"share":3.4}}},{"id":"opus47","mod":"ti","name":"Claude Opus 4.7","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1502,"coding":1552,"math":1503},"aa":{"index":null},"livebench":{"avg":76.5,"reasoning":87.2,"coding":82.1,"math":92.9,"language":77.9},"swe":{"verified":84.1},"openrouter":{"share":5.8}}},{"id":"kimik3","mod":"ti","name":"Kimi K3","vendor":"Moonshot","url":"https://www.kimi.com/","open":true,"scores":{"arena":{"overall":1485,"coding":1538,"math":1501},"aa":{"index":44},"livebench":{"avg":79.2,"reasoning":90.7,"coding":81.4,"math":84.4,"language":85.5},"swe":{"verified":79.6},"openrouter":{"share":2.2}}},{"id":"sonnet5","mod":"ti","name":"Claude Sonnet 5","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1461,"coding":1520,"math":1476},"aa":{"index":38},"livebench":{"avg":76,"reasoning":88.7,"coding":80.7,"math":92.9,"language":75},"swe":{"verified":82.6},"openrouter":{"share":3.8}}},{"id":"grok45","mod":"ti","name":"Grok 4.5","vendor":"xAI","url":"https://x.ai/grok","open":false,"scores":{"arena":{"overall":1468,"coding":1518,"math":1477},"aa":{"index":39},"livebench":{"avg":75.8,"reasoning":87.2,"coding":68.6,"math":90.8,"language":82.8},"swe":{"verified":82.1},"openrouter":{"share":2.3}}},{"id":"dsv4","mod":"ti","name":"DeepSeek-V4 Pro","vendor":"DeepSeek","url":"https://www.deepseek.com/","open":true,"scores":{"arena":{"overall":1463,"coding":1503,"math":1463},"aa":{"index":36},"livebench":{"avg":77.4,"reasoning":85.8,"coding":77.2,"math":95.1,"language":82.1},"swe":{"verified":80.6},"openrouter":{"share":4.1}}},{"id":"qwen37","mod":"ti","name":"Qwen3.7 Max","vendor":"Alibaba","url":"https://qwen.ai/","open":true,"scores":{"arena":{"overall":1473,"coding":1525,"math":1489},"aa":{"index":29},"livebench":{"avg":73.1,"reasoning":83.3,"coding":74.2,"math":85.2,"language":79.7},"swe":{"verified":80.4},"openrouter":{"share":3.9}}},{"id":"m3","mod":"ti","name":"MiniMax M3","vendor":"MiniMax","url":"https://www.minimax.io/","open":true,"scores":{"arena":{"overall":1441,"coding":1496,"math":1434},"aa":{"index":29},"livebench":{"avg":67.3,"reasoning":74.5,"coding":68.2,"math":76.9,"language":76.8},"swe":{"verified":80.5},"openrouter":{"share":3.1}}},{"id":"k26","mod":"ti","name":"Kimi K2.6","vendor":"Moonshot","url":"https://www.kimi.com/","open":true,"scores":{"arena":{"overall":1460,"coding":1514,"math":1478},"aa":{"index":27},"livebench":{"avg":70.5,"reasoning":79.4,"coding":78.6,"math":84.3,"language":75.1},"swe":{"verified":80.2},"openrouter":{"share":3.6}}},{"id":"glm52","mod":"ti","name":"GLM-5.2","vendor":"Z.ai","url":"https://z.ai/","open":true,"scores":{"arena":{"overall":1472,"coding":1510,"math":1479},"aa":{"index":34},"livebench":{"avg":73.2,"reasoning":78.6,"coding":79.7,"math":89.8,"language":76.2},"swe":{"verified":78.9},"openrouter":{"share":5.2}}},{"id":"g36flash","mod":"tiav","name":"Gemini 3.6 Flash","vendor":"Google","url":"https://deepmind.google/technologies/gemini/","open":false,"scores":{"arena":{"overall":1480,"coding":1517,"math":1504},"aa":{"index":34},"livebench":{"avg":73.6,"reasoning":85.1,"coding":77.9,"math":86.4,"language":83.9},"swe":{"verified":71.4},"openrouter":{"share":5.9}}},{"id":"o4mini","mod":"ti","name":"o4-mini","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":{"overall":1391,"coding":1433,"math":1417},"aa":{"index":null},"livebench":null,"swe":{"verified":68.2},"openrouter":{"share":2}}},{"id":"mistral3","mod":"ti","name":"Mistral Large 3","vendor":"Mistral","url":"https://mistral.ai/","open":true,"scores":{"arena":{"overall":1413,"coding":1469,"math":1402},"aa":{"index":9},"livebench":null,"swe":null,"openrouter":{"share":1.1}}},{"id":"haiku45","mod":"ti","name":"Claude Haiku 4.5","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1415,"coding":1482,"math":1399},"aa":{"index":17},"livebench":null,"swe":{"verified":55.9},"openrouter":{"share":2.4}}}]}</script>
   </div>
 </section>
 

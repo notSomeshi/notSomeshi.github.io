@@ -4596,6 +4596,94 @@ body::before {
   white-space: nowrap;
 }
 
+/* ============ 即将变价面板 ============
+   和选购助手入口同一套切角框,左边线换成琥珀色表示"提醒"而非"行动"。
+   天数颜色由 main.js 的 initExpiry() 按真实日期加 is-soon / is-near / is-far / is-past */
+.rk-expiry {
+  margin-bottom: 22px;
+  padding: 14px 20px 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-left: 3px solid #d29922;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+}
+
+.rk-expiry-title {
+  margin: 0 0 4px;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.rk-expiry-list { list-style: none; margin: 0; padding: 0; }
+
+.rk-expiry-item {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr) auto;
+  align-items: baseline;
+  column-gap: 14px;
+  padding: 10px 0;
+  border-top: 1px solid var(--border-color);
+}
+
+.rk-expiry-days {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+
+.rk-expiry-item.is-soon .rk-expiry-days { color: #e5484d; }
+.rk-expiry-item.is-near .rk-expiry-days { color: #d29922; }
+.rk-expiry-item.is-far  .rk-expiry-days { color: var(--text-secondary); }
+
+.rk-expiry-body strong {
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.rk-expiry-detail {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.78125rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.rk-expiry-detail a { color: var(--accent-ink); }
+
+.rk-expiry-date {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+
+/* 过了日期还挂在页面上 = 本站还没复核。如实标出来,不假装没发生 */
+.rk-expiry-stale { display: none; color: #d29922; font-weight: 400; }
+.rk-expiry-item.is-past .rk-expiry-stale { display: inline; }
+.rk-expiry-item.is-past .rk-expiry-body strong { color: var(--text-secondary); }
+
+.rk-expiry-foot {
+  margin: 4px 0 0;
+  font-size: 0.6875rem;
+  color: var(--text-tertiary);
+}
+
+@media (max-width: 600px) {
+  .rk-expiry { padding: 12px 14px 8px; }
+  /* 窄屏把日期挪到天数下面,正文独占右侧两行 */
+  .rk-expiry-item { grid-template-columns: 70px minmax(0, 1fr); column-gap: 10px; }
+  .rk-expiry-days { grid-column: 1; grid-row: 1; font-size: 0.75rem; }
+  /* 允许换行:「2026-11-21 起」在 70px 栏里放不下,不换行会压到右侧正文 */
+  .rk-expiry-date { grid-column: 1; grid-row: 2; font-size: 0.6875rem; white-space: normal; }
+  .rk-expiry-body { grid-column: 2; grid-row: 1 / span 2; }
+}
+
 @media (max-width: 768px) {
   .adv-card-body,
   .adv-alts { grid-template-columns: 1fr; }

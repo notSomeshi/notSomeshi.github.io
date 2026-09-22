@@ -543,7 +543,7 @@ node -e <span class="hljs-string">&quot;const f=&#x27;source/_data/cost-chart.js
 <span class="hljs-string">d.rows.find(r=&gt;r.name===&#x27;Claude Fable 5.1&#x27;).eff=200;</span>
 <span class="hljs-string">require(&#x27;fs&#x27;).writeFileSync(f,JSON.stringify(d,null,2))&quot;</span>
 
-node scripts/check.js; <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;退出码 $?&quot;</span></code></pre>
+node tools/check.js; <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;退出码 $?&quot;</span></code></pre>
 
 <pre><code class="hljs plaintext">FAIL Claude Fable 5.1 的 $/分 对不上:写的 200,按 cost/score 应为 247.7
 退出码 1</code></pre>
@@ -560,7 +560,7 @@ node scripts/check.js; <span class="hljs-built_in">echo</span> <span class="hljs
 唯一差异: 一行 is-costly → 普通   ← 就是那个预期的红柱修正</code></pre>
 
 <p><strong>“总行数 1736 &#x3D; 1736,唯一差异是预期内的那一处”</strong> 比任何”已完成”的承诺都有说服力。没有这个,你不知道重构悄悄改坏了什么。</p>
-<p><strong>4. 让检查脚本长在仓库里,别长在对话里。</strong> 这条我踩过很多次:每次更新都临时写一个一次性脚本,用完就扔,下次重写一遍。现在规则都进了 <code>scripts/check.js</code>,<code>npm run build</code> 自动跑。</p>
+<p><strong>4. 让检查脚本长在仓库里,别长在对话里。</strong> 这条我踩过很多次:每次更新都临时写一个一次性脚本,用完就扔,下次重写一遍。现在规则都进了 <code>tools/check.js</code>,<code>npm run build</code> 自动跑。</p>
 <p><strong>发现一条新的一致性规则,就加一条进去,下次白拿。</strong></p>
 <hr>
 <p>回到开头那个 bug。</p>

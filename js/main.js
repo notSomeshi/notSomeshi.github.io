@@ -537,7 +537,40 @@ document.addEventListener('DOMContentLoaded', function () {
     initRankings();
     initAdvisor();
     placeTermTips();
+    initExpiry();
     onScroll();
+  }
+
+  /* ==========================================
+     6.56 即将变价面板
+     剩余天数必须在访客的浏览器里算:页面是静态构建的,
+     若在构建时写死"还有 53 天",一周后再打开就错了一周。
+     已过期的条目不隐藏,而是标成「已过 N 天 · 待复核」——
+     悄悄消失会让人以为那件事没发生过。
+     ========================================== */
+  function initExpiry() {
+    var box = document.getElementById('rkExpiry');
+    if (!box) return;
+    var now = new Date();
+    // 两边都用「本地年月日」换成 UTC 零点,相减得到的就是纯天数,不受时区和夏令时影响
+    var today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+    box.querySelectorAll('.rk-expiry-item').forEach(function (li) {
+      var p = (li.getAttribute('data-date') || '').split('-').map(Number);
+      if (p.length !== 3) return;
+      var d = Math.round((Date.UTC(p[0], p[1] - 1, p[2]) - today) / 864e5);
+      var el = li.querySelector('.rk-expiry-days');
+      li.classList.remove('is-soon', 'is-near', 'is-far', 'is-past');
+      if (d < 0) {
+        el.textContent = '已过 ' + (-d) + ' 天';
+        li.classList.add('is-past');
+      } else if (d === 0) {
+        el.textContent = '今天';
+        li.classList.add('is-soon');
+      } else {
+        el.textContent = '还有 ' + d + ' 天';
+        li.classList.add(d <= 30 ? 'is-soon' : (d <= 90 ? 'is-near' : 'is-far'));
+      }
+    });
   }
 
   /* ==========================================
@@ -1551,7 +1584,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (curBox) {
       var curBtns = curBox.querySelectorAll('.rk-cur-btn');
       // 只在确定含价格的容器里替换,避免误伤正文里的其它 $ 字样
-      var PRICE_SEL = '.rk-pt-plans, .rk-price-table td, .rkc-cost, .rkc-eff, .rkc-task, .rk-deal, .rk-plat-table td';
+      var PRICE_SEL = '.rk-pt-plans, .rk-price-table td, .rkc-cost, .rkc-eff, .rkc-task, .rk-deal, .rk-plat-table td, .rk-expiry-detail';
 
       // 只返回数字部分,前缀由调用方拼——区间价 "$25–30" 要拼成 "≈¥169–202" 而不是两个 ≈
       function cnyNum(usd) {
