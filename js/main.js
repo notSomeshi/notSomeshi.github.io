@@ -1243,13 +1243,22 @@ document.addEventListener('DOMContentLoaded', function () {
       'Alibaba': ['qwen', 'Q'],
       'MiniMax': ['minimax', 'MX'],
       'Z.ai': ['zai', 'Z'],
-      'Mistral': ['mistral', 'M']
+      'Mistral': ['mistral', 'M'],
+      'Meta': ['meta', 'M']
     };
 
-    function icoHtml(vendor) {
+    /* 厂商水印:品牌 logo 放大、调淡,压在模型名下面当背景(css/brands.css 的 .g-*)。
+       Z.ai 和 xAI 没有可用的矢量 logo(Simple Icons 里的 x 是 X/推特的标,不能冒用),
+       用大号首字母代替。查不到厂商就不画 —— 以前 Muse Spark 就是因为这里漏了 Meta 而没有图标 */
+    var GHOST_SVG = ['anthropic', 'openai', 'google', 'deepseek', 'qwen', 'moonshot', 'minimax', 'mistral', 'meta'];
+
+    function ghostHtml(vendor) {
       var meta = VENDOR_META[vendor];
       if (!meta) return '';
-      return '<span class="rk-ico b-' + meta[0] + '">' + meta[1] + '</span>';
+      var b = meta[0];
+      return GHOST_SVG.indexOf(b) !== -1
+        ? '<span class="rk-ghost g-' + b + '" aria-hidden="true"></span>'
+        : '<span class="rk-ghost is-letter" aria-hidden="true">' + meta[1] + '</span>';
     }
 
     /* 模态徽章:t=文本 i=图像 a=音频 v=视频(能力矩阵,非评分) */
@@ -1301,7 +1310,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var comp = r.composite == null ? '—' : r.composite.toFixed(1);
         return '<tr data-id="' + m.id + '">' +
           '<td class="rk-col-rank">' + (i + 1 < 10 ? '0' + (i + 1) : i + 1) + '</td>' +
-          '<td class="rk-col-model"><span class="rk-mwrap">' + icoHtml(m.vendor) + '<span>' +
+          '<td class="rk-col-model">' + ghostHtml(m.vendor) + '<span class="rk-mwrap"><span>' +
             '<a class="rk-model-link" href="' + m.url + '" target="_blank" rel="noopener">' + m.name + '</a>' +
             '<span class="rk-vendor">' + m.vendor + (m.open ? ' · <em class="rk-open">开源权重</em>' : '') + '</span>' +
             modHtml(m.mod) +
@@ -1552,6 +1561,32 @@ document.addEventListener('DOMContentLoaded', function () {
 
     makeResizable(document.querySelector('.rk-price-table'));
     makeResizable(document.querySelector('.rk-plat-table'));
+
+    /* --- 性价比表:逐行展开说明 ---
+       平台只会越来越多,每行又带着几条补充说明,全摊开表格会长得没法看。
+       精简模式下这些说明默认收起,读者按需逐行展开;「详细」模式仍然全部展开。
+       按钮由 JS 注入,不写进那 13 行 HTML —— 以后新增平台自动就有,不用记得补。 */
+    (function setupRowExpand() {
+      var table = document.querySelector('.rk-price-table');
+      if (!table) return;
+      table.querySelectorAll('tbody tr').forEach(function (tr) {
+        var n = tr.querySelectorAll('.rk-pt-note').length;
+        var cell = tr.querySelector('.rk-pt-plat');
+        if (!n || !cell) return;
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'rk-pt-more';
+        btn.setAttribute('aria-expanded', 'false');
+        var label = function (open) { return open ? '收起说明' : '展开 ' + n + ' 条说明'; };
+        btn.textContent = label(false);
+        btn.addEventListener('click', function () {
+          var open = tr.classList.toggle('is-open');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+          btn.textContent = label(open);
+        });
+        cell.appendChild(btn);
+      });
+    })();
 
     /* --- 显示密度开关:精简(默认)/ 详细 --- */
     var densityBox = document.getElementById('rkDensity');

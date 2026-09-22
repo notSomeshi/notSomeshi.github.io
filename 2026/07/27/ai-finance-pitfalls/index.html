@@ -120,6 +120,10 @@
           <ul class="sidebar-list">
             
               <li class="sidebar-item ">
+                <a href="/2026/09/23/meta-muse-spark-13-price-tags/">Meta 给同一个模型开了四种价,其中一种用数据付</a>
+              </li>
+            
+              <li class="sidebar-item ">
                 <a href="/2026/09/20/code-that-maintains-itself/">能算出来的数,就别写死</a>
               </li>
             
@@ -411,7 +415,10 @@
 <td>错误直接变成亏损,且难以归因</td>
 </tr>
 </tbody></table>
-<h2 id="选型建议-工具层面"><a href="#选型建议-工具层面" class="headerlink" title="选型建议(工具层面)"></a>选型建议(工具层面)</h2><p>如果你的用途是金融研究,本站<a href="/rankings/">模型天梯</a>新增了<strong>「金融分析」维度</strong>可供参考,但请务必注意它的口径限制:目前<strong>没有覆盖全部主流模型的公开金融基准</strong>,该维度用的是代理指标(AA 智能指数含 τ³-Banking 银行业智能体任务 + LiveBench 数学子项)。真正的领域基准可参考 FinBen、BizFinBench、FinanceBench——但它们的覆盖模型有限、更新滞后。</p>
+<h2 id="选型建议-工具层面"><a href="#选型建议-工具层面" class="headerlink" title="选型建议(工具层面)"></a>选型建议(工具层面)</h2><p>如果你的用途是金融研究,本站<a href="/rankings/">模型天梯</a>新增了<strong>「金融分析」维度</strong>可供参考,但请务必注意它的口径限制:目前<strong>没有覆盖全部主流模型的公开金融基准</strong>,该维度用的是代理指标。</p>
+<blockquote>
+<p><strong>⚠ 2026-09-23 更正:这条口径已经比本文发表时更弱了。</strong> 本文原文写的代理指标是「AA 智能指数含 τ³-Banking 银行业智能体任务 + LiveBench 数学子项」。但 <strong>AA 在 2026-09-07 的 v4.3 里移除了 τ³-Banking</strong>,换成了 Zapier 的 AutomationBench-AA(通用业务流程自动化)——也就是说,<strong>AA 指数里现在已不含任何银行 &#x2F; 金融专项评测</strong>,该维度只剩下「通用智能 + 数学严谨性」两个更远的代理。请务必按代理指标看待,不要当成金融能力评分。<br>真正的领域基准可参考 FinBen、BizFinBench、FinanceBench——但它们的覆盖模型有限、更新滞后。</p>
+</blockquote>
 <p><strong>一个比看榜单更实际的建议</strong>:拿你自己真实的三份财报、五个典型问题,把候选模型各跑一遍,<strong>重点看它在信息缺失时会不会硬答</strong>。这个测试花不了一小时,比任何榜单都更能反映它在你场景下的可靠性。</p>
 <p>至于该买哪个方案,可以用本站<a href="/advisor/">选购助手</a>——选择”金融分析 &#x2F; 量化研究”用途后,会先显示合规与幻觉风险提示,再给出工具推荐。</p>
 <h2 id="最后-一条不该越过的线"><a href="#最后-一条不该越过的线" class="headerlink" title="最后:一条不该越过的线"></a>最后:一条不该越过的线</h2><p>技术讨论到此为止,剩下的是法律问题,必须说清楚。</p>
@@ -423,7 +430,7 @@
 <li><a target="_blank" rel="noopener" href="https://arxiv.org/html/2505.19457v1">BizFinBench: A Business-Driven Real-World Financial Benchmark for Evaluating LLMs</a>(6,781 条中文金融查询)</li>
 <li>JurisTech,<a target="_blank" rel="noopener" href="https://juristech.net/best-llm-tools-for-financial-analysis-2026/">Best LLM Tools for Financial Analysis 2026: Hallucination Benchmark Report</a>(六模型幻觉实测)</li>
 <li>Islam et al.,FinanceBench: A New Benchmark for Financial Question Answering(基于 SEC 文件的 10,231 题)</li>
-<li>Artificial Analysis,<a target="_blank" rel="noopener" href="https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-1">Intelligence Index v4.1</a>(含 τ³-Banking、AA-Omniscience)</li>
+<li>Artificial Analysis,<a target="_blank" rel="noopener" href="https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-1">Intelligence Index v4.1(发表时的版本)</a>(含 τ³-Banking、AA-Omniscience) · <a target="_blank" rel="noopener" href="https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-3">Intelligence Index v4.3</a>(τ³-Banking 在此版被移除)</li>
 <li>中国证券业协会,<a target="_blank" rel="noopener" href="https://www.sac.net.cn/sjb/fwdt/tzzfw/ffzqhd/ffdxal/202512/t20251231_74664.html">非法证券投资咨询的表现形式及典型案例</a></li>
 <li>中国证监会,<a target="_blank" rel="noopener" href="http://www.csrc.gov.cn/csrc/c101862/c1022467/content.shtml">投资咨询机构从事证券服务业审批</a></li>
 </ol>

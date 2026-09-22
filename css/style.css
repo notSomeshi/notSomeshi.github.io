@@ -3125,6 +3125,45 @@ body::before {
 
 .rk-lite .rk-note { font-size: 0.75rem; }
 
+/* 性价比表:精简模式下说明按行展开(按钮由 main.js 注入)。
+   这条要比上面那条 .rk-lite .rk-pt-note 的隐藏更具体,才能把展开的那一行放出来 */
+.rk-lite .rk-price-table tr.is-open .rk-pt-note { display: inline; }
+
+.rk-pt-more { display: none; }
+
+.rk-lite .rk-pt-more {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 3px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--text-tertiary);
+  background: transparent;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: color var(--transition-base), border-color var(--transition-base);
+}
+
+.rk-lite .rk-pt-more:hover {
+  color: var(--accent-ink);
+  border-color: var(--accent);
+}
+
+.rk-lite .rk-price-table tr.is-open .rk-pt-more {
+  color: var(--accent-ink);
+  border-color: var(--border-strong);
+}
+
+/* 触屏上这个按钮要够大:桌面端 20px 高够点,手指不够 */
+@media (hover: none), (max-width: 768px) {
+  .rk-lite .rk-pt-more {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 12px;
+  }
+}
+
 /* --- 板块切换(能力天梯 / 订阅性价比) --- */
 .rk-boards {
   display: flex;
@@ -3408,6 +3447,56 @@ body::before {
 }
 
 .rk-mwrap .rk-ico { margin: 2px 0 0; }
+
+/* --- 厂商水印:模型行的「背后灵」 ---
+   品牌 logo 放大、调淡,压在模型名下面;左侧和上下被单元格裁掉一截,像 F1 积分榜里的车队标。
+   单元格必须 position:relative + overflow:hidden,否则水印会溢出到相邻的分数列。
+   logo 数据在 css/brands.css 的 .g-*(生成器:.claude/skills/update-site-data/build-brands-css.js)。
+   尺寸一律 rem:大字版把根字号调到 125% 时,水印要跟着名字一起变大 */
+.rk-table td.rk-col-model {
+  position: relative;
+  overflow: hidden;
+}
+
+.rk-col-model .rk-mwrap {
+  position: relative;
+  z-index: 1;
+}
+
+.rk-ghost {
+  position: absolute;
+  z-index: 0;
+  left: 0.5rem;
+  bottom: -2.75rem;
+  width: 7.5rem;
+  height: 7.5rem;
+  background-position: center bottom;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+/* 没有矢量 logo 的厂商(Z.ai / xAI):大号首字母,颜色跟随主题 */
+.rk-ghost.is-letter {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 6.5rem;
+  font-weight: 900;
+  line-height: 0.82;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  opacity: 0.1;
+}
+
+[data-theme='light'] .rk-ghost { opacity: 0.14; }
+[data-theme='light'] .rk-ghost.is-letter { opacity: 0.08; }
+
+@media (max-width: 768px) {
+  .rk-ghost { width: 5.5rem; height: 5.5rem; left: 0.25rem; bottom: -2rem; }
+  .rk-ghost.is-letter { font-size: 4.75rem; }
+}
 
 /* --- 成本对比图(同卷不同价) --- */
 .rkc { margin-top: 36px; }

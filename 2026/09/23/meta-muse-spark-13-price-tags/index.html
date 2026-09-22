@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Meta 给同一个模型开了四种价,其中一种用数据付 | ByteVibe</title>
+<meta name="description" content="AI 模型的价格、评测口径与选购判断。模型天梯、订阅性价比、评测成本对比，数据只认厂商官网、均标注快照日期。">
+<meta name="author" content="ByteVibe">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='0,0 100,0 100,78 78,100 0,100' fill='%23ffd802'/><text x='50' y='70' font-size='58' font-weight='800' font-family='ui-monospace,monospace' fill='%230d0d0f' text-anchor='middle'>B</text></svg>">
+<link rel="alternate" type="application/atom+xml" title="ByteVibe" href="/atom.xml">
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<link rel="stylesheet" href="/css/brands.css">
+
+
+<script src="/js/main.js" defer></script>
+<script>
+  // 暗色优先:light 显式切亮色;rain 提前打上标记避免闪烁
+  (function() {
+    try {
+      // 大字版:必须在首次绘制前打上,否则会先渲染小字再跳大
+      if (localStorage.getItem('fontsize') === 'large') {
+        document.documentElement.setAttribute('data-fontsize', 'large');
+      }
+      var t = localStorage.getItem('theme');
+      if (t === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else if (t === 'rain') {
+        document.documentElement.setAttribute('data-rain', '');
+        // 雨夜模式:页面加载的同时就开始预载雨声(与 main.js 的 RAIN_SRC 保持一致)
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.as = 'audio';
+        l.href = '/audio/rain.mp3?v=3';
+        document.head.appendChild(l);
+      }
+    } catch (e) {}
+  })();
+</script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+  
+  <canvas class="rain-canvas" id="rainCanvas" aria-hidden="true"></canvas>
+  <div class="reading-progress" id="readingProgress"></div>
+  <header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a class="site-logo" href="/">
+      ByteVibe
+    </a>
+    <nav class="site-nav" id="siteNav">
+      
+      
+        
+        
+        <a class="nav-link" href="/">首页</a>
+      
+        
+        
+        <a class="nav-link" href="/archives/">归档</a>
+      
+        
+        
+        <a class="nav-link" href="/categories/">分类</a>
+      
+        
+        
+        <a class="nav-link" href="/tags/">标签</a>
+      
+        
+        
+        <a class="nav-link" href="/about/">关于</a>
+      
+    </nav>
+    <div class="header-actions">
+      <button class="header-icon-btn" id="searchToggle" aria-label="搜索" title="搜索 (Ctrl+K)">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+      <button class="header-icon-btn theme-toggle" id="themeToggle" aria-label="切换显示模式(浅色 / 深色 / 雨夜)" title="显示模式:浅色 → 深色 → 雨夜">
+        <span class="icon-sun"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+        <span class="icon-moon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+        <span class="icon-umbrella"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 12a11.05 11.05 0 0 0-22 0Z"></path><path d="M12 12v7a2 2 0 0 0 4 0"></path></svg></span>
+      </button>
+      <button class="header-icon-btn fontsize-toggle" id="fontsizeToggle" aria-label="切换大字版" aria-pressed="false" title="大字版:放大字号并提高对比度">
+        <span class="icon-fs-large" aria-hidden="true">大</span>
+        <span class="icon-fs-small" aria-hidden="true">小</span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打开菜单">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    
+      <a class="mobile-nav-link" href="/">首页</a>
+    
+      <a class="mobile-nav-link" href="/archives/">归档</a>
+    
+      <a class="mobile-nav-link" href="/categories/">分类</a>
+    
+      <a class="mobile-nav-link" href="/tags/">标签</a>
+    
+      <a class="mobile-nav-link" href="/about/">关于</a>
+    
+  </div>
+</header>
+
+  <main class="main-content">
+    <article class="post-detail">
+  <div class="container-docs">
+    <div class="post-layout-grid">
+      <!-- 1. Left Sidebar: Documentation Navigation -->
+      <aside class="post-sidebar-left">
+        <div class="sidebar-sticky">
+          <h3 class="sidebar-title">全部文章</h3>
+          <ul class="sidebar-list">
+            
+              <li class="sidebar-item active">
+                <a href="/2026/09/23/meta-muse-spark-13-price-tags/">Meta 给同一个模型开了四种价,其中一种用数据付</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/09/20/code-that-maintains-itself/">能算出来的数,就别写死</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/09/20/elo-anchor-shift/">把尺子的零点挪到谁身上</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/09/17/anthropic-brake-paradox/">先摘掉自己的刹车,再请人装一个所有人都得踩的</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/09/05/benchmark-shelf-life/">换了套卷子,全榜掉了 9 到 12 分</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/09/03/captcha-stops-humans/">机器人和你,过验证码的次数一样多</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/29/model-supply-as-leverage/">当模型访问权变成筹码:一周三件事,和中国开源的意外位置</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/20/relay-api-verification/">中转站选购与验货:怎么测出模型被&#34;降智&#34;或货不对板</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/15/what-is-agent-harness/">同一个模型,换个壳分数差 24 分:harness 入门</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/15/what-august-deleted/">这个月,AI 圈删掉了什么</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/15/ai-becomes-utility/">峰谷电价来了:AI 正在变成一门电力生意</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/08/reasoning-effort-hidden-dimension/">你买的不是模型,是&#34;让它想多久&#34;</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/08/seat-pricing-sunset/">席位制的黄昏:当软件的边际成本不再是零</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/05/benchmark-trust-crisis/">当考卷泄题成为常态:AI 评测的信任危机</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/05/pilot-to-production-gap/">88% 的 AI 试点走不到生产,而输的不是模型</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/04/agent-liability-2026/">Agent 闯了祸算谁的:自主系统的责任正在被法律钉死</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/04/ai-power-grid-2026/">电网成为 AI 的硬约束:一场从机房烧到居民电费的挤占</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/03/cloud-price-war-2026-08/">云端在降价,本地在涨价:2026 年夏天的两个反方向</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/03/hardware-price-surge-2026/">最贵装机季:AI 抢走了你的内存条</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/31/ai-briefing-2026-07-late/">七月下半月速览:开源权重贴身、Agent 越狱进生产环境、监管转向市场结构</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/31/zero-cost-ai-2026/">零成本用上 AI:2026 年 7 月的羊毛地图</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/what-is-multimodal/">什么是多模态?——一篇给非技术读者的说明</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/subscription-tier-fragmentation/">订阅档位正在碎片化:当&#34;买哪个&#34;比&#34;用哪个&#34;更难</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/ai-finance-pitfalls/">AI 做金融分析的三个致命陷阱:在你把钱交给它之前</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/opus5-price-war/">「半价」的参照物是谁:一句宣传语引发的集体误读</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/one-model-many-scores/">一个模型,N 个分数:当 effort 和编排模式让榜单失去唯一解</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/20/grok45-ide-native-models/">Grok 4.5 与「IDE 原生」模型:当编辑器成为训练场</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/20/frontier-convergence-2026/">前沿收敛:为什么 2026 年榜单顶部挤成了一团</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/17/openrouter-power-shift/">OpenRouter 上的权力转移:中国开源模型如何吃下一半流量</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/17/ai-frontier-briefing-2026-07/">2026 年中前沿速览:模型分层、Agent 落地与监管转折</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-prospects-and-strata/">前景、困难与阶层重排:AI 正在改写谁的命运?</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-dividend-paradox/">AI 红利悖论:我们为 AI 买单三年,红利为何还没普惠?</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-capital-markets-2026/">资本市场视角下的 AI 局势:7250 亿美元 Capex、循环交易与泡沫之辩</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/no-code-mvp-to-solopreneur/">从 Vibe Coding 到超级个体：2026 年全栈独立开发的新叙事</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/yolo-mode-and-ai-safety-guardrails/">YOLO 模式下的安全边界：如何防止 AI 删库跑路</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/high-performance-ai-prompts-library/">如何撰写黄金级 AI Prompt：从“做个功能”到“系统级交付”</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/mcp-server-practical-recipes/">Model Context Protocol (MCP) 深度指南：连接你的 AI 与现实数据</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/advanced-vibe-coding-roo-clinic/">Cline 与 Roo Code 实战：下一代 Vibe Coding 的工程范式</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/04/01/claude-code-complete-guide/">Claude Code 从入门到精通：面向工程师与产品经理的 AI 编程完全指南</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/30/future-of-vibe-coding/">Vibe Coding 的未来：当编程不再需要编程</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/25/ai-coding-tools-2025/">2025 年最值得关注的 AI 编程工具全景</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/20/vibe-coding-best-practices/">Vibe Coding 最佳实践：如何高效地与 AI 结对编程</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/15/what-is-vibe-coding/">什么是 Vibe Coding？一文读懂 AI 时代的编程新范式</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/10/hello-world/">欢迎来到 ByteVibe</a>
+              </li>
+            
+          </ul>
+        </div>
+      </aside>
+
+      <!-- 2. Middle Column: Main Article Content -->
+      <div class="post-content-main">
+        <header class="post-header">
+          <div class="post-meta">
+            <time class="post-date">2026年09月23日</time>
+            
+            <span class="post-meta-sep">·</span>
+            <span class="post-category">
+              
+                <a href="/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察</a>
+              
+            </span>
+            
+            <span class="post-meta-sep">·</span>
+            <span class="reading-time">7 分钟阅读</span>
+          </div>
+          <h1 class="post-title">Meta 给同一个模型开了四种价,其中一种用数据付</h1>
+          
+          <div class="post-tags">
+            
+              <a class="tag-pill" href="/tags/%E5%AE%9A%E4%BB%B7%E7%AD%96%E7%95%A5/">#定价策略</a>
+            
+              <a class="tag-pill" href="/tags/%E5%BC%80%E6%BA%90%E6%A8%A1%E5%9E%8B/">#开源模型</a>
+            
+              <a class="tag-pill" href="/tags/Meta/">#Meta</a>
+            
+              <a class="tag-pill" href="/tags/%E6%95%B0%E6%8D%AE/">#数据</a>
+            
+          </div>
+          
+        </header>
+
+        
+
+        
+        
+        <details class="mobile-toc">
+          <summary>目录 / Contents</summary>
+          <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%88%E8%AF%B4%E5%AE%83%E5%9C%A8%E6%A6%9C%E4%B8%8A%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="toc-list-text">先说它在榜上的位置</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E4%B8%AA%E5%85%A5%E5%8F%A3-%E5%9B%9B%E7%A7%8D%E8%AE%A1%E4%BB%B7%E5%8D%95%E4%BD%8D"><span class="toc-list-text">四个入口,四种计价单位</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%82%A3%E4%B8%AA%E4%BE%BF%E5%AE%9C%E5%8D%81%E4%BA%8C%E5%80%8D%E7%9A%84%E6%A1%A3%E4%BD%8D"><span class="toc-list-text">那个便宜十二倍的档位</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%80%BC%E5%BE%97%E5%81%9C%E4%B8%8B%E6%9D%A5%E6%83%B3%E4%B8%80%E7%A7%92%E7%9A%84%E5%9C%B0%E6%96%B9"><span class="toc-list-text">值得停下来想一秒的地方</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%AF%B9%E4%B8%AD%E5%9B%BD%E5%A4%A7%E9%99%86%E8%AF%BB%E8%80%85%E7%9A%84%E7%8E%B0%E5%AE%9E"><span class="toc-list-text">对中国大陆读者的现实</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E6%80%8E%E4%B9%88%E7%9C%8B"><span class="toc-list-text">怎么看</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+        </details>
+        
+
+        <div class="post-body">
+          <p>Meta 在 2026-09-02 发布了 Muse Spark 1.3。</p>
+<p>官方的说法很克制:更能扛长任务、更愿意在提示含糊时反问、编程场景下比 1.2 少用约 20% 的工具调用和 25% 的 token。没有”史上最强”之类的措辞。</p>
+<p>真正值得看的不是模型本身,是它的价目表。</p>
+<div class="report-box">
+<strong>同一个 Muse Spark 1.3,Meta 开了四个入口,每个入口用不同的单位收钱。</strong><br>
+按 token 卖、按"Muse token"周额度卖、按"每 5 小时多少条提示"卖、按社交 App 的增值功能卖。<strong>你得先决定用哪种货币买它。</strong>
+</div>
+
+<h2 id="先说它在榜上的位置"><a href="#先说它在榜上的位置" class="headerlink" title="先说它在榜上的位置"></a>先说它在榜上的位置</h2><p>这是能查证的部分。</p>
+<p>Artificial Analysis 的智能指数(v4.3.2)给它 <strong>48 分</strong>;跑完整套评测花 <strong>$2,000</strong>,折合 <strong>$41.7 &#x2F; 分</strong>。</p>
+<div class="fig">
+  <div class="fig-title">45 分以上的模型,每 1 分智能要花多少钱</div>
+  <div class="fig-sub">柱长按最贵的 Claude Fable 5.1($247.7/分)归一。口径:跑完同一套 AA 智能指数题集的总成本 ÷ 智能指数,推理模型均取厂商披露的最高 effort 档。</div>
+
+  <div class="fig-bars">
+    <div class="fig-bar-row">
+      <span class="fig-bar-label"><b>Muse Spark 1.3</b>48 分</span>
+      <span class="fig-bar-track"><i class="fig-bar-fill is-good" style="--w:16.8%"></i></span>
+      <span class="fig-bar-val">$41.7<em>/分</em></span>
+    </div>
+    <div class="fig-bar-row">
+      <span class="fig-bar-label"><b>GLM-5.3</b>45 分</span>
+      <span class="fig-bar-track"><i class="fig-bar-fill" style="--w:22.4%"></i></span>
+      <span class="fig-bar-val">$55.6<em>/分</em></span>
+    </div>
+    <div class="fig-bar-row">
+      <span class="fig-bar-label"><b>GPT-5.6 Sol</b>47 分</span>
+      <span class="fig-bar-track"><i class="fig-bar-fill" style="--w:29.8%"></i></span>
+      <span class="fig-bar-val">$73.7<em>/分</em></span>
+    </div>
+    <div class="fig-bar-row">
+      <span class="fig-bar-label"><b>GPT-6 Astra</b>53 分</span>
+      <span class="fig-bar-track"><i class="fig-bar-fill is-alt" style="--w:40.6%"></i></span>
+      <span class="fig-bar-val">$100.5<em>/分</em></span>
+    </div>
+    <div class="fig-bar-row">
+      <span class="fig-bar-label"><b>Claude Opus 5</b>51 分</span>
+      <span class="fig-bar-track"><i class="fig-bar-fill is-alt" style="--w:57.6%"></i></span>
+      <span class="fig-bar-val">$142.6<em>/分</em></span>
+    </div>
+    <div class="fig-bar-row">
+      <span class="fig-bar-label"><b>Claude Fable 5.1</b>53 分</span>
+      <span class="fig-bar-track"><i class="fig-bar-fill is-warn" style="--w:100%"></i></span>
+      <span class="fig-bar-val">$247.7<em>/分</em></span>
+    </div>
+  </div>
+
+  <p class="fig-src">分数与成本逐个取自 <a href="https://artificialanalysis.ai/models" target="_blank" rel="noopener">Artificial Analysis 各模型页</a>(v4.3.2)。快照 2026-09-22。</p>
+</div>
+
+<p><strong>在 45 分以上这一档里,它是每分智能最便宜的一个。</strong> 不是最强,但把”分数除以账单”这件事做得最好看。</p>
+<p>LiveBench 当前版本给它 81.6,Arena 1493。三家都有数,所以它进了<a href="/rankings/">模型天梯</a>。</p>
+<h2 id="四个入口-四种计价单位"><a href="#四个入口-四种计价单位" class="headerlink" title="四个入口,四种计价单位"></a>四个入口,四种计价单位</h2><table>
+<thead>
+<tr>
+<th>入口</th>
+<th>价格</th>
+<th>计价单位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Meta Model API</td>
+<td>$1.25 &#x2F; $4.25(缓存命中 $0.15)</td>
+<td>每百万 token</td>
+</tr>
+<tr>
+<td>Meta Model API 贡献者档</td>
+<td>$0.10 &#x2F; $0.20(缓存 $0.002)</td>
+<td>每百万 token</td>
+</tr>
+<tr>
+<td>Muse(个人助手)</td>
+<td>免费档 &#x2F; Power $20 &#x2F; Maximum $100</td>
+<td>每周多少个「Muse token」</td>
+</tr>
+<tr>
+<td>Muse Code(终端编程)</td>
+<td>$5 &#x2F; $15 &#x2F; $50</td>
+<td>每 5 小时多少条提示</td>
+</tr>
+<tr>
+<td>Meta One</td>
+<td>Core $7.99 &#x2F; Premium $19.99</td>
+<td>社交 App 功能 + 图片视频生成额度</td>
+</tr>
+</tbody></table>
+<p>这五行里有三个坑,挨个说。</p>
+<p><strong>第一,Meta One 不是聊天套餐。</strong> 它 09-15 上线,看起来像”Meta 版 ChatGPT Plus”,实际买的是 Instagram、WhatsApp、Facebook 的增值功能,以及用 Muse 模型生成图片和视频的额度。官方的措辞是”更多媒体生成”,<strong>通篇没提 Muse Spark 的对话额度</strong>。</p>
+<p><strong>第二,Muse 的”Muse token”是 Meta 自定的单位。</strong> Power 档每周 5 亿、Maximum 档每周 30 亿,听着很多,但官方没公布它和模型 token 的换算关系。<strong>没有换算关系,就没法和 $20 的 ChatGPT Plus 做比较</strong>——这也是本站的性价比表里把它的”折算价”一栏留空的原因:算不出来就不填。</p>
+<p><strong>第三,Muse Code 的价格和额度口径对不上。</strong> $5 &#x2F; $15 &#x2F; $50 这组价格出自 1.2 时代的发布博客,当时写的是 High 档 3 倍、Power 档 10 倍额度;而<a target="_blank" rel="noopener" href="https://dev.meta.ai/docs/muse-code/subscriptions">现在的官方文档</a>已经改成 5 倍和 20 倍,<strong>并且不再标价格</strong>。额度翻倍了,价格有没有跟着动,官方没说。</p>
+<h2 id="那个便宜十二倍的档位"><a href="#那个便宜十二倍的档位" class="headerlink" title="那个便宜十二倍的档位"></a>那个便宜十二倍的档位</h2><p>真正有意思的是 API 的两档。</p>
+<p>标准档 $1.25 &#x2F; $4.25。贡献者档 $0.10 &#x2F; $0.20。</p>
+<p><strong>输入便宜 12.5 倍,输出便宜 21 倍,缓存命中便宜 75 倍。</strong></p>
+<p>差别只有一条,官方写得很直白:贡献者档的提示词和输出<strong>会被用于改进 Meta 的产品</strong>,标准档不会。</p>
+<div class="risk-box">
+<strong>⚠ 这不是"免费额度",是一笔明码标价的交易。</strong><br>
+你省下的每一块钱,对价是你送进去的内容。做商业项目、处理客户数据、或者签过保密条款的场景,先把这一条读完再决定。
+</div>
+
+<h2 id="值得停下来想一秒的地方"><a href="#值得停下来想一秒的地方" class="headerlink" title="值得停下来想一秒的地方"></a>值得停下来想一秒的地方</h2><p>Meta 过去在这件事上是另一种打法。</p>
+<p>Llama 系列靠<strong>放出权重</strong>换生态:你随便下载、随便自部署,Meta 拿到的是事实标准的地位和整个开源社区的改进。</p>
+<p>Muse Spark 不是这样。Artificial Analysis 的模型页写得清楚:<strong>它是闭源的,权重不公开</strong>。</p>
+<p>于是同一家公司,在两代产品上用了两种完全不同的方式换同一样东西:</p>
+<ul>
+<li><strong>Llama 时代</strong>:给你权重,换生态位</li>
+<li><strong>Muse Spark 时代</strong>:给你折扣,换你的数据</li>
+</ul>
+<p><strong>从”送东西换影响力”变成了”打折换数据”。</strong> 对用户来说,后者的账更好算——便宜多少是明码标价的;但也更直接:你交出去的是自己的内容,而不只是安装一个开源模型。</p>
+<p>这个转向不是 Meta 独有的。但把”用数据换低价”做成 API 定价表上一个可以勾选的档位,做得这么干脆的,目前还不多见。</p>
+<h2 id="对中国大陆读者的现实"><a href="#对中国大陆读者的现实" class="headerlink" title="对中国大陆读者的现实"></a>对中国大陆读者的现实</h2><p>得说清楚:<strong>这四条线目前都不对中国大陆开放。</strong></p>
+<p>Meta Model API、Meta One 都不在可用地区;Muse 个人助手更窄,<strong>目前只在美国</strong>(iOS、Android、muse.ai),而且订阅本身还在小范围测试阶段。</p>
+<p>所以如果你在国内,这篇的实际价值是参照系而不是选项:它给出了”48 分的模型可以卖到多便宜”的一个基准,拿去对照<a href="/advisor/">选购助手</a>里那些能直连的方案。</p>
+<h2 id="怎么看"><a href="#怎么看" class="headerlink" title="怎么看"></a>怎么看</h2><ul>
+<li><strong>想要便宜的 48 分</strong>:如果你人在可用地区、且用途不涉及敏感内容,贡献者档确实是这个分数段里罕见的价格。<strong>先读数据条款,再算账。</strong></li>
+<li><strong>想要稳定的编程工作流</strong>:Muse Code 的价格口径当前是模糊的,别按 $5&#x2F;$15&#x2F;$50 做长期预算,以订阅页当期显示为准。</li>
+<li><strong>看到”Meta One 含 AI”就以为能聊天</strong>:不是。那是图片视频生成和社交功能。</li>
+</ul>
+<hr>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li>Meta AI Research,<a target="_blank" rel="noopener" href="https://research.meta.ai/blog/introducing-muse-spark-1-3">Introducing Muse Spark 1.3</a>(2026-09-02)</li>
+<li>Meta,<a target="_blank" rel="noopener" href="https://dev.meta.ai/models/muse-spark">Muse Spark 模型页与 API 定价</a>(标准档与贡献者档、数据条款)</li>
+<li>Meta,<a target="_blank" rel="noopener" href="https://dev.meta.ai/docs/muse-code/subscriptions">Muse Code 订阅文档</a>(档位与额度倍数)</li>
+<li>Meta,<a target="_blank" rel="noopener" href="https://www.meta.com/help/subscriptions/1021145227643680/">About Muse subscriptions</a>(Power &#x2F; Maximum 价格与周额度)</li>
+<li>Meta Newsroom,<a target="_blank" rel="noopener" href="https://about.fb.com/news/2026/09/introducing-meta-one-subscription-service-more-features-ai/">Introducing Meta One</a>(2026-09-15)</li>
+<li>Meta Newsroom,<a target="_blank" rel="noopener" href="https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/">Introducing Muse: The World’s First Personal AI Agent Built for Everyone</a>(2026-09-08)</li>
+<li>Artificial Analysis,<a target="_blank" rel="noopener" href="https://artificialanalysis.ai/models/muse-spark-1-3">Muse Spark 1.3 模型页</a>(智能指数、评测成本、开闭源与输入模态)</li>
+</ul>
+<blockquote>
+<p>本文由 ByteVibe 撰写(AI 辅助研究整理)。文中观点的原始出处均已在正文与参考文献中标注,版权归原作者所有。</p>
+</blockquote>
+
+        </div>
+        
+        <footer class="post-footer">
+          <nav class="post-nav">
+            
+            
+            <a class="post-nav-item post-nav-next" href="/2026/09/20/code-that-maintains-itself/">
+              <span class="post-nav-label">下一篇 →</span>
+              <span class="post-nav-title">能算出来的数,就别写死</span>
+            </a>
+            
+          </nav>
+        </footer>
+      </div>
+
+      <!-- 3. Right Sidebar: Outline TOC Jump -->
+      <aside class="post-sidebar-right">
+        
+          <div class="toc-sticky">
+            <h3 class="toc-title">目录大纲</h3>
+            <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%88%E8%AF%B4%E5%AE%83%E5%9C%A8%E6%A6%9C%E4%B8%8A%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="toc-list-text">先说它在榜上的位置</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E4%B8%AA%E5%85%A5%E5%8F%A3-%E5%9B%9B%E7%A7%8D%E8%AE%A1%E4%BB%B7%E5%8D%95%E4%BD%8D"><span class="toc-list-text">四个入口,四种计价单位</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%82%A3%E4%B8%AA%E4%BE%BF%E5%AE%9C%E5%8D%81%E4%BA%8C%E5%80%8D%E7%9A%84%E6%A1%A3%E4%BD%8D"><span class="toc-list-text">那个便宜十二倍的档位</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%80%BC%E5%BE%97%E5%81%9C%E4%B8%8B%E6%9D%A5%E6%83%B3%E4%B8%80%E7%A7%92%E7%9A%84%E5%9C%B0%E6%96%B9"><span class="toc-list-text">值得停下来想一秒的地方</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%AF%B9%E4%B8%AD%E5%9B%BD%E5%A4%A7%E9%99%86%E8%AF%BB%E8%80%85%E7%9A%84%E7%8E%B0%E5%AE%9E"><span class="toc-list-text">对中国大陆读者的现实</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E6%80%8E%E4%B9%88%E7%9C%8B"><span class="toc-list-text">怎么看</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+          </div>
+        
+      </aside>
+    </div>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <p class="copyright">&copy; 2026 ByteVibe. All rights reserved.</p>
+      <p class="powered-by">Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a></p>
+      
+      <div class="social-links">
+        
+          <a class="social-link" href="https://github.com/notSomeshi" target="_blank" rel="noopener noreferrer">GitHub</a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+
+  <div class="search-overlay" id="searchOverlay" hidden>
+  <div class="search-backdrop" id="searchBackdrop"></div>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="站内搜索">
+    <div class="search-input-wrap">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="searchInput" class="search-input" placeholder="搜索文章…" autocomplete="off" spellcheck="false">
+      <button class="search-close" id="searchClose" aria-label="关闭搜索">ESC</button>
+    </div>
+    <div class="search-results" id="searchResults">
+      <p class="search-hint">输入关键词搜索标题、标签与正文</p>
+    </div>
+  </div>
+</div>
+
+  <button class="scroll-to-top" id="scrollToTop" aria-label="回到顶部">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+</body>
+</html>
