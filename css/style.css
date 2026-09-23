@@ -3153,7 +3153,9 @@ body::before {
 .rk-pt-more { display: none; }
 
 .rk-lite .rk-pt-more {
-  display: inline-block;
+  /* 独占一行,放在名字正下方:跟在名字后面会挤进右侧的品牌水印区 */
+  display: block;
+  width: max-content;
   margin-top: 6px;
   padding: 3px 8px;
   font-family: var(--font-mono);
@@ -3178,7 +3180,8 @@ body::before {
 /* 触屏上这个按钮要够大:桌面端 20px 高够点,手指不够 */
 @media (hover: none), (max-width: 768px) {
   .rk-lite .rk-pt-more {
-    display: inline-flex;
+    display: flex;
+    width: max-content;
     align-items: center;
     min-height: 44px;
     padding: 0 12px;
@@ -3517,13 +3520,17 @@ body::before {
 [data-theme='light'] .rk-ghost { opacity: 0.14; }
 [data-theme='light'] .rk-ghost.is-letter { opacity: 0.08; }
 
-/* 性价比表与 Agent 平台表的平台列:同一套水印,尺寸小一号(列比天梯的模型列窄) */
+/* 性价比表与 Agent 平台表的平台列:同一套水印。
+   以天梯行为准(用户认可的样子):logo 在名字右侧、上沿略低于名字,矮行里下半截被行底切掉。
+   这两张表的行高不一(70–200px),所以锚在格子顶部而不是底部 —— 锚底部时高行里 logo 掉到按钮下面,
+   只剩被切掉一半的残影(09-23 用户反馈"没有模型排行那么好看") */
 .rk-table td.rk-pt-plat.has-ghost {
   position: relative;
   overflow: hidden;
 }
 
 .rk-pt-plat.has-ghost .rk-plat,
+.rk-pt-plat.has-ghost .rk-plat-form,
 .rk-pt-plat.has-ghost .rk-pt-more {
   position: relative;
   z-index: 1;
@@ -3532,22 +3539,31 @@ body::before {
 .rk-pt-plat.has-ghost .rk-plat > .rk-ico { display: none; }
 
 .rk-pt-plat .rk-ghost {
-  right: -0.5rem;
-  bottom: -1.75rem;
+  top: 0.75rem;
+  bottom: auto;
+  right: -0.625rem;
   width: 6rem;
   height: 6rem;
+  background-position: right top;
 }
 
-.rk-pt-plat .rk-ghost.is-letter { font-size: 5rem; }
-.rk-pt-plat .rk-ghost.is-letter.is-wide { font-size: 3.5rem; }
+/* 没有矢量 logo 的只剩 Agentforce、Lindy、SCNet 三家。字母是实心笔画,同样透明度下比镂空的 logo 显得重,
+   所以字号收一档、再调淡,让它和旁边的 logo 在视觉分量上持平 */
+.rk-pt-plat .rk-ghost.is-letter {
+  align-items: flex-start;
+  font-size: 4.5rem;
+  opacity: 0.07;
+}
+.rk-pt-plat .rk-ghost.is-letter.is-wide { font-size: 3.25rem; }
+[data-theme='light'] .rk-pt-plat .rk-ghost.is-letter { opacity: 0.06; }
 
 @media (max-width: 768px) {
   .rk-ghost { width: 5.5rem; height: 5.5rem; right: -0.5rem; bottom: -2rem; }
   .rk-ghost.is-letter { font-size: 4.75rem; }
   .rk-ghost.is-letter.is-wide { font-size: 3.25rem; }
-  .rk-pt-plat .rk-ghost { width: 4.5rem; height: 4.5rem; bottom: -1.25rem; }
-  .rk-pt-plat .rk-ghost.is-letter { font-size: 3.75rem; }
-  .rk-pt-plat .rk-ghost.is-letter.is-wide { font-size: 2.75rem; }
+  .rk-pt-plat .rk-ghost { width: 4.5rem; height: 4.5rem; top: 0.625rem; bottom: auto; right: -0.5rem; }
+  .rk-pt-plat .rk-ghost.is-letter { font-size: 4rem; }
+  .rk-pt-plat .rk-ghost.is-letter.is-wide { font-size: 2.875rem; }
 }
 
 /* --- 成本对比图(同卷不同价) --- */

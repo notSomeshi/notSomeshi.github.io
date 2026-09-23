@@ -1251,7 +1251,8 @@ document.addEventListener('DOMContentLoaded', function () {
        GHOST_SVG 之外的厂商用大号首字母代替(Z.ai / xAI 用的是 LobeHub 的智谱、Grok 标,
        不是 Simple Icons 里 X/推特的那个 x —— 那不能冒用)。查不到厂商就不画 —— 以前 Muse Spark 就是因为这里漏了 Meta 而没有图标 */
     var GHOST_SVG = ['anthropic', 'openai', 'google', 'deepseek', 'qwen', 'moonshot', 'minimax', 'mistral', 'meta',
-                     'zai', 'xai', 'yuanbao', 'doubao'];
+                     'zai', 'xai', 'yuanbao', 'doubao',
+                     'cursor', 'github', 'trae', 'codebuddy', 'cline', 'manus', 'm365copilot', 'n8n', 'siliconcloud'];
 
     function ghostSpan(brand, letter) {
       if (brand && GHOST_SVG.indexOf(brand) !== -1) {
