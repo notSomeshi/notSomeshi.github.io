@@ -166,16 +166,20 @@
     <!-- 显示密度开关:一键在「只看关键数字」与「显示全部注释」之间切换 -->
     <div class="rk-density" id="rkDensity">
       <span class="rk-density-label">显示</span>
-      <button type="button" class="rk-density-btn is-active" data-density="lite">精简</button>
-      <button type="button" class="rk-density-btn" data-density="full">详细</button>
+      <div class="rk-seg" data-lg-seg>
+        <button type="button" class="rk-density-btn is-active" data-density="lite">精简</button>
+        <button type="button" class="rk-density-btn" data-density="full">详细</button>
+      </div>
       <span class="rk-density-hint">精简模式隐藏补充注释,只留关键数字</span>
     </div>
 
     <!-- 币种开关:默认人民币(站点面向中文读者) -->
     <div class="rk-density rk-currency" id="rkCurrency">
       <span class="rk-density-label">币种</span>
-      <button type="button" class="rk-density-btn rk-cur-btn is-active" data-cur="cny">¥ 人民币</button>
-      <button type="button" class="rk-density-btn rk-cur-btn" data-cur="usd">$ 美元</button>
+      <div class="rk-seg" data-lg-seg>
+        <button type="button" class="rk-density-btn rk-cur-btn is-active" data-cur="cny">¥ 人民币</button>
+        <button type="button" class="rk-density-btn rk-cur-btn" data-cur="usd">$ 美元</button>
+      </div>
       <span class="rk-density-hint rk-cur-note">
         <strong>≈</strong> 表示按 <strong id="rkFxRate">1 USD = 6.7419 CNY</strong><span id="rkFxSrc">(内置估算值,2026-08-15)</span> 折算,非官方定价;
         国产平台表内另标了官方人民币牌价,以那个为准。
@@ -186,7 +190,7 @@
     </div>
 
     <!-- 板块切换:能力天梯 / 订阅性价比 / 编程平台 -->
-    <div class="rk-boards" id="rkBoards">
+    <div class="rk-boards" id="rkBoards" data-lg-seg>
       <button type="button" class="rk-board-tab is-active" data-board="ladder">能力天梯</button>
       <button type="button" class="rk-board-tab" data-board="pricing">订阅性价比</button>
       <button type="button" class="rk-board-tab" data-board="platform">Agent 平台</button>
@@ -194,7 +198,7 @@
 
     <div class="rankings-app rk-board is-active" data-board="ladder" id="rankingsApp">
       <!-- 维度切换 -->
-      <div class="rk-dims" id="rkDims"></div>
+      <div class="rk-dims" id="rkDims" data-lg-seg></div>
 
       <!-- 搜索 + 机构开关/权重 -->
       <div class="rk-controls">
@@ -221,7 +225,7 @@
           <div class="rk-fold-body">
             <p class="rk-note"><strong><a class="term-tip" href="/2026/07/27/what-is-multimodal/" data-tip="多模态 = 模型能直接“看懂图片、听懂声音、看懂视频”,而不只是读文字。徽章依次为 文/图/音/视,亮起表示原生支持。点击阅读科普 →">模态徽章</a></strong> <i class="rk-mod is-on">文</i><i class="rk-mod is-on">图</i><i class="rk-mod">音</i><i class="rk-mod">视</i>:亮起=原生支持,是能力矩阵不是评分。目前只有 Gemini 四种输入全收;Muse Spark、Kimi K2.6、MiniMax M3 另收视频;<strong>Claude 与 GPT 全系只收图像</strong>,GLM-5.3、GLM-5.2、Qwen3.7 Max 与 DeepSeek V4 Pro 只收文字。</p>
             <p class="rk-note"><strong>综合分</strong>:各机构分数在 20 个模型内 min-max 归一化后加权平均;缺失项不计权重、按剩余项重新归一,<span class="rk-miss-mark">—</span> 表示该机构未收录。点列头排序,点模型名跳官网。</p>
-            <p class="rk-note"><strong>社区体感</strong>:Arena 盲测投票(觉得谁好用)+ OpenRouter 用量份额(钱包投给了谁,<strong>份额列为 2026-07-24 快照</strong>)。用量受价格影响大、开源低价模型天然占优,故<strong>不计入综合分</strong>。<br>⚠ <strong>OpenRouter 已改为只公布绝对 token 量,不再给出份额百分比</strong>,故上表份额列暂维持 07-24 快照,本站不按旧口径推算新值。截至 <strong>2026-09-02</strong> 的周榜前十很能说明问题:<strong>没有一个是旗舰</strong>——第一是 GPT-5.6 Luna(11.6T),其后 GLM-5.3 Flash、DeepSeek V4 Flash 紧咬,且<strong>十席中有七席是中国模型</strong>(智谱、DeepSeek×2、腾讯混元×2、小米 MiMo、MiniMax)。<strong>真金白银流向的是便宜的小杯,不是榜首。</strong>(<a href="https://openrouter.ai/rankings" target="_blank" rel="noopener">数据来源</a>,CC BY 4.0)</p>
+            <p class="rk-note"><strong>省心度</strong>:用起来放不放心 —— 交给它的活能不能做完、会不会乱编。由两家独立机构组成:<a href="https://artificialanalysis.ai/evaluations" target="_blank" rel="noopener">Artificial Analysis</a> 的三项(AutomationBench-AA 业务流程自动化、Terminal-Bench 4.0 自主多步执行、AA-Omniscience 不幻觉率 = 1 − 幻觉率)取平均,加上 LiveBench 的「智能体编程」。<br>原来的「社区体感」(Arena 投票 + OpenRouter 用量份额)已撤下:投票样本集中在单一网站的用户,份额数据自 2026-07-24 起停更、且只覆盖 8 个模型 —— 都不足以代表"好不好用"。</p>
             <p class="rk-note"><strong>金融分析维度的两个代理指标</strong>:AA 智能指数与 LiveBench 数学子项(数值严谨性)。<strong>⚠ 2026-09-07 起这条口径更弱了</strong>:AA 在 v4.3(09-07)把<strong>唯一的金融向评测 τ³-Banking 移除</strong>,换成了 Zapier 的 AutomationBench-AA(通用业务流程自动化)。也就是说<strong>AA 指数里现在已不含任何银行/金融专项</strong>,本维度的代理性比之前更远——请务必按代理指标看待,不要当金融能力评分。真正的领域基准可参考 <a href="https://arxiv.org/abs/2402.12659" target="_blank" rel="noopener">FinBen</a>、<a href="https://arxiv.org/html/2505.19457v1" target="_blank" rel="noopener">BizFinBench</a>、FinanceBench。</p>
           </div>
         </details>
@@ -237,8 +241,17 @@
               <tbody>
                 
                 <tr>
+                  <td><strong>Gemini 3.8 Flash</strong>（Google）</td>
+                  <td>#21 / 34</td>
+                  <td>1493</td>
+                  <td>41</td>
+                  <td>75.8</td>
+                  <td>80</td>
+                </tr>
+                
+                <tr>
                   <td><strong>GLM-5.3 Flash</strong>（Z.ai）</td>
-                  <td>#21 / 32</td>
+                  <td>#22 / 34</td>
                   <td>1475</td>
                   <td>42</td>
                   <td>71.6</td>
@@ -247,7 +260,7 @@
                 
                 <tr>
                   <td><strong>Grok 4.5</strong>（xAI）</td>
-                  <td>#22 / 32</td>
+                  <td>#23 / 34</td>
                   <td>1468</td>
                   <td>39</td>
                   <td>75.8</td>
@@ -256,7 +269,7 @@
                 
                 <tr>
                   <td><strong>Gemini 3.1 Pro</strong>（Google）</td>
-                  <td>#23 / 32</td>
+                  <td>#24 / 34</td>
                   <td>1487</td>
                   <td>30</td>
                   <td>77</td>
@@ -265,7 +278,7 @@
                 
                 <tr>
                   <td><strong>GPT-5.6 Luna</strong>（OpenAI）</td>
-                  <td>#24 / 32</td>
+                  <td>#25 / 34</td>
                   <td>1452</td>
                   <td>37</td>
                   <td>73.6</td>
@@ -274,7 +287,7 @@
                 
                 <tr>
                   <td><strong>Gemini 3.6 Flash</strong>（Google）</td>
-                  <td>#25 / 32</td>
+                  <td>#26 / 34</td>
                   <td>1480</td>
                   <td>34</td>
                   <td>73.6</td>
@@ -283,7 +296,7 @@
                 
                 <tr>
                   <td><strong>Claude Sonnet 5</strong>（Anthropic）</td>
-                  <td>#26 / 32</td>
+                  <td>#27 / 34</td>
                   <td>1461</td>
                   <td>38</td>
                   <td>76</td>
@@ -292,7 +305,7 @@
                 
                 <tr>
                   <td><strong>GLM-5.2</strong>（Z.ai）</td>
-                  <td>#27 / 32</td>
+                  <td>#28 / 34</td>
                   <td>1472</td>
                   <td>34</td>
                   <td>73.2</td>
@@ -300,8 +313,17 @@
                 </tr>
                 
                 <tr>
+                  <td><strong>GPT-6 Luna</strong>（OpenAI）</td>
+                  <td>#29 / 34</td>
+                  <td>—</td>
+                  <td>37</td>
+                  <td>72</td>
+                  <td>—</td>
+                </tr>
+                
+                <tr>
                   <td><strong>Qwen3.7 Max</strong>（Alibaba）</td>
-                  <td>#28 / 32</td>
+                  <td>#30 / 34</td>
                   <td>1473</td>
                   <td>29</td>
                   <td>73.1</td>
@@ -310,7 +332,7 @@
                 
                 <tr>
                   <td><strong>Kimi K2.6</strong>（Moonshot）</td>
-                  <td>#29 / 32</td>
+                  <td>#31 / 34</td>
                   <td>1460</td>
                   <td>27</td>
                   <td>70.5</td>
@@ -319,7 +341,7 @@
                 
                 <tr>
                   <td><strong>MiniMax M3</strong>（MiniMax）</td>
-                  <td>#30 / 32</td>
+                  <td>#32 / 34</td>
                   <td>1441</td>
                   <td>29</td>
                   <td>67.3</td>
@@ -328,7 +350,7 @@
                 
                 <tr>
                   <td><strong>Claude Haiku 4.5</strong>（Anthropic）</td>
-                  <td>#31 / 32</td>
+                  <td>#33 / 34</td>
                   <td>1415</td>
                   <td>17</td>
                   <td>—</td>
@@ -337,7 +359,7 @@
                 
                 <tr>
                   <td><strong>Mistral Large 3</strong>（Mistral）</td>
-                  <td>#32 / 32</td>
+                  <td>#34 / 34</td>
                   <td>1413</td>
                   <td>9</td>
                   <td>—</td>
@@ -354,8 +376,8 @@
           <a href="https://arena.ai/leaderboard/text" target="_blank" rel="noopener">Arena</a> ·
           <a href="https://artificialanalysis.ai/leaderboards/models" target="_blank" rel="noopener">Artificial Analysis</a> ·
           <a href="https://livebench.ai/" target="_blank" rel="noopener">LiveBench</a> ·
-          <a href="https://www.vals.ai/benchmarks/swebench" target="_blank" rel="noopener">SWE-bench Verified(Vals.ai 独立实测,统一 Mini-SWE-agent)</a> ·
-          <a href="https://openrouter.ai/rankings" target="_blank" rel="noopener">OpenRouter</a>。人工核对快照,非实时接口。</p>
+          <a href="https://www.vals.ai/benchmarks/swebench" target="_blank" rel="noopener">SWE-bench Verified(Vals.ai 独立实测,统一 Mini-SWE-agent)</a>。
+          人工核对快照,非实时接口。</p>
       </div>
     </div>
 
@@ -637,7 +659,7 @@
 
         <!-- ============ 编程平台对比板块 ============ -->
     <div class="rk-board" data-board="platform">
-      <p class="rk-note rk-plat-intro"><strong>模型是发动机,平台才是你每天摸的方向盘。</strong>本表比的是 <a class="term-tip" href="/2026/08/15/what-is-agent-harness/" data-tip="harness = 包在模型外面的执行层:管上下文、工具、权限、出错恢复与何时停。业界公式是「Agent = 模型 + harness」。北大 Harness-Bench 实测:同样的模型与任务,只换 harness,聚合分从 52.4% 到 76.2%,相差 23.8 分。点击阅读入门 →">harness(执行层)</a> 而非模型本身——<strong>同一个模型换个平台,分数可差 20 分以上</strong>。按<strong>适用职能</strong>分组;「社区体感」列全是可查证的第三方数据,查不到就标 <span class="rk-miss-mark">—</span>。</p>
+      <p class="rk-note rk-plat-intro"><strong>模型是发动机,平台才是你每天摸的方向盘。</strong>本表比的是 <a class="term-tip" href="/2026/08/15/what-is-agent-harness/" data-tip="harness = 包在模型外面的执行层:管上下文、工具、权限、出错恢复与何时停。业界公式是「Agent = 模型 + harness」。北大 Harness-Bench 实测:同样的模型与任务,只换 harness,聚合分从 52.4% 到 76.2%,相差 23.8 分。点击阅读入门 →">harness(执行层)</a> 而非模型本身——<strong>同一个模型换个平台,分数可差 20 分以上</strong>。按<strong>适用职能</strong>分组。</p>
       <p class="rk-note rk-pt-note">💡 <strong>越便宜的模型越吃 harness</strong>:实测显示强模型对 harness 差异不敏感,弱模型波动极大。用平价/开源模型时,<strong>换个好平台的收益可能大过升级模型</strong>。⚠ 各家自己发布的 harness 对比数据普遍高于独立评测,看时打个折。</p>
 
       <div class="rk-deals-box">
@@ -659,7 +681,7 @@
       <div class="rk-table-wrap">
         <table class="rk-table rk-plat-table">
           <colgroup>
-            <col width="195"><col width="150"><col width="120"><col width="230"><col width="205"><col width="205"><col width="180"><col width="190">
+            <col width="195"><col width="150"><col width="120"><col width="230"><col width="205"><col width="205"><col width="180">
           </colgroup>
           <thead>
             <tr>
@@ -670,11 +692,10 @@
               <th>优势</th>
               <th>短板</th>
               <th>免费额度 / 羊毛<span class="rk-unit">🐑 2026-08-04</span></th>
-              <th>社区体感<span class="rk-unit">第三方数据 ※</span></th>
             </tr>
           </thead>
           <tbody>
-            <tr class="rk-plat-group"><td colspan="8">研发 / 编程</td></tr>
+            <tr class="rk-plat-group"><td colspan="7">研发 / 编程</td></tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-anthropic">A</span><a href="https://claude.com/claude-code" target="_blank" rel="noopener">Claude Code</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Claude Code(CLI / IDE 插件)</strong><b>适合:</b>长程重构、整仓改动、挂着让它自己干。<br><b>体感:</b>满意度与 NPS 双料第一,但 5 小时窗口卡得紧。<br><b>搭法:</b>社区最流行 Cursor 编辑 + Claude Code 攻坚。</span></span>
@@ -685,7 +706,6 @@
               <td>· 长任务自主性目前最强<br>· 终端原生,易接入脚本与 CI<br>· 同一订阅池网页/IDE/CLI 通用<br>· 权限与工具调用可细粒度控制</td>
               <td>· 5 小时窗口对爆发式使用不友好<br>· 无内置编辑器,需配合 IDE<br>· 国内需代理<br>· 纯补全场景不如 IDE 系</td>
               <td class="rk-deal">Free 档仅少量试用<br>· <strong>Claude Campus</strong>:校园 Builder Clubs 共享 <strong>$50 学生 API credits</strong><br>· Pro 年付折 $17/月(省 15%)<br><em class="rk-pt-note">⚠ 无常规免费层,是本表最难薅的一家</em></td>
-              <td><strong>NPS +58</strong>(工具类罕见高分)<br><strong>满意度 91%</strong>(同类最高)<br><strong>"最爱"投票 46%</strong><br><em class="rk-pt-note">三项均为同类第一</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-cursor">C</span><a href="https://cursor.com/" target="_blank" rel="noopener">Cursor</a>
@@ -697,7 +717,6 @@
               <td>· Tab 补全体验公认最流畅<br>· 一个界面横跨多家模型<br>· 多文件上下文理解强<br>· 生态与插件继承 VS Code</td>
               <td>· 额度按模型贵贱消耗,难预估<br>· 官方承认重度 Agent 用户实际月花 $60–100<br>· 只服务编程场景<br>· 非编程任务完全浪费</td>
               <td class="rk-deal"><strong>Hobby 永久免费</strong>(无需信用卡)<br><em class="rk-pt-note">⚠ <strong>官方已不再公布固定的免费额度数字</strong>——流传的"2,000 补全 + 50 次慢速请求"属历史值,实际配额与重置日<strong>以账户面板为准</strong><br>⚠ 学生免费 Pro 年已于 2026-06-25 停止新注册,老用户不受影响</em></td>
-              <td><strong>NPS +51</strong>(较 2025Q4 基本持平)<br><strong>"最爱"投票 19%</strong><br><strong>$2B ARR / 100 万+ 付费用户</strong><br><em class="rk-pt-note">收入规模同类第一</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-github">GH</span><a href="https://github.com/features/copilot" target="_blank" rel="noopener">GitHub Copilot</a>
@@ -709,7 +728,6 @@
               <td>· 企业采购与合规最成熟<br>· GitHub PR/Issue 集成最深<br>· 补全不限量,基础档最便宜<br>· 支持几乎所有 IDE 与语言</td>
               <td>· <strong>NPS +14 明显落后</strong>,被批改进停滞<br>· 高级请求次数有限,重代理易撞墙<br>· Agent 自主性不及 Claude Code / Codex<br>· Credits 制透明度受质疑</td>
               <td class="rk-deal"><strong>🐑 学生党首选</strong><br>· Free 档:2,000 次补全 + 50 次 chat/月<br>· <strong>学生、教师、开源维护者可申请全额免费 Pro</strong>(GitHub Education 认证)<br><em class="rk-pt-note">2026-09-23 复核仍有效。资格<strong>按月重新评估</strong>,在读期间可持续续期——门槛最低的"白嫖前沿模型"路径<br>✅ <strong>促销回落已于 2026-09-01 实际发生</strong>（本站上一版的预告已兑现，09-03 回官方文档复核）：Business 每席 3,000 → <strong>1,900 credits</strong>、Enterprise 7,000 → <strong>3,900</strong>。<strong>月费不变（$19 / $39）、含量少 37–44%</strong>；超出按 $0.01/credit。<strong>促销期做的容量测算现已全部作废，请重算</strong><br>⚠ <strong>个人档还有一次。</strong>官方档位现为 Pro $10 = 1,500 credits（<strong>1,000 基础 + 500 flex</strong>）、Pro+ $39 = 7,000（<strong>3,900 + 3,100 flex</strong>）。<strong>flex 部分是过渡额度，到期后 Pro 降至 1,000、Pro+ 降至 3,900</strong>——坐实的只有括号内的基础值。<strong>⚠ 官方文档至今未公布 flex 的到期日</strong>（2026-09-23 复核），做长期容量规划请按基础值算<br>🆕 新增 <strong>Copilot Max $100 / 月</strong>：20,000 credits（10,000 基础 + 10,000 flex），面向持续高强度用户<br>⚠ 网上流传的"Cursor Free 2,000 补全 + 50 次慢速请求"是历史值,Cursor 官方已不再公布固定数字,别照抄</em></td>
-              <td><strong>NPS +14</strong>(同类明显偏低)<br><strong>"最爱"投票 9%</strong><br><strong>470 万付费订阅、同比 +75%</strong><br><em class="rk-pt-note">用户基数同类第一</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-openai">O</span><a href="https://openai.com/codex" target="_blank" rel="noopener">OpenAI Codex</a>
@@ -721,7 +739,6 @@
               <td>· 输出质量与自主性评价领先<br>· 云端并行,可同时挂多个任务<br>· 与 ChatGPT 订阅共用,不必另付<br>· Sol Ultra 模式可调多子代理攻坚</td>
               <td>· <strong>成本极难预估</strong>(同档可差 10 倍)<br>· Ultra 模式 token 成倍消耗且无单独标价<br>· 云端任务对私有代码有合规顾虑<br>· 国内需代理</td>
               <td class="rk-deal">无独立免费层(随 ChatGPT Free 受限用)<br>· <strong>API 侧</strong>:合作渠道免费额度 2026-07-08 起 $300 → <strong>$1,000</strong><br>· <strong>学术研究者计划</strong>:入选者免费用前沿模型(首批 1 万人,2027 年扩至 10 万)</td>
-              <td><span class="rk-miss-mark">—</span> 暂无公开 NPS<br><em class="rk-pt-note">第三方评测称其"输出质量、自主性与可靠性领先";缺可查证的量化满意度数据</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-google">G</span><a href="https://antigravity.google/" target="_blank" rel="noopener">Google Antigravity</a>
@@ -733,7 +750,6 @@
               <td>· 公测期基础功能免费<br>· Gemini 2M 级上下文与多模态<br>· 与 Google 云生态打通<br>· Ultra 档 Deep Think 配额行业最高</td>
               <td>· <strong>免费额度被砍 92%</strong>(250→20 请求/天)<br>· credits 计价不透明,信任受损<br>· 未承诺永久免费层<br>· 成熟度不及 Cursor/Copilot</td>
               <td class="rk-deal"><strong>免费档仍在</strong>，但口径一年三变<br><em class="rk-pt-note">⚠ <strong>反面教材</strong>:上线 250 请求/天 → 砍到 20 请求/天（-92%）→ <strong>2026-08 改挂 Google AI 档位的每周速率限制</strong>（前沿模型、补全与命令不计次）。可以薅,但<strong>别当长期主力</strong></em></td>
-              <td><span class="rk-miss-mark">—</span> 暂无公开 NPS<br><em class="rk-pt-note">评论普遍指出"砍免费层 + credits 不透明"损害了信任;缺量化满意度数据</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-trae">T</span><a href="https://www.trae.ai/" target="_blank" rel="noopener">Trae(字节)</a>
@@ -745,7 +761,6 @@
               <td>· <strong>国内直连,无需代理</strong><br>· 同档价格约为 Cursor 一半<br>· 中文交互与文档友好<br>· 会员档 GLM / DeepSeek-V4 五折</td>
               <td>· 插件生态与稳定性不及 Cursor<br>· 高级模型倍率扣减,额度不经用<br>· 英文/国际社区资料少<br>· Agent 自主性一般</td>
               <td class="rk-deal"><strong>国内版 Free 每月 500 积分</strong><br>· 会员签到每月多得 <strong>1,550</strong><br>· 邀请好友双方各 500,最多 3,500<br><em class="rk-pt-note">会员首月与连续包月有优惠;海外版已取消免费档,只有 Pro 试用。以 <a href="https://www.trae.cn/pricing" target="_blank" rel="noopener">trae.cn 定价页</a>当期为准</em></td>
-              <td><span class="rk-miss-mark">—</span> 暂无第三方 NPS<br><em class="rk-pt-note">国内社区口碑以"便宜好用、生态待补"为主;缺可引用的量化数据</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-codebuddy">腾</span><a href="https://copilot.tencent.com/" target="_blank" rel="noopener">CodeBuddy / WorkBuddy(腾讯)</a>
@@ -757,7 +772,6 @@
               <td>· 国内直连,私有化可选<br>· 覆盖办公自动化,不只编程<br>· <strong>免费积分渠道最多</strong></td>
               <td>· <strong>一年三次涨价</strong>,成本难预期<br>· 模型能力不及第一梯队<br>· 英文资料少</td>
               <td class="rk-deal"><strong>🐑 本表羊毛之王</strong><br>· <strong>体验版永久免费</strong>:500 积分/月 + 代码补全 5,000 次/月<br>· 注册赠约 <strong>3,000 积分</strong>(90 天有效)<br>· 成长任务:建个任务发一次对话即得 <strong>300 分</strong>(2 分钟)<br>· <strong>社区发文 500–3,000 分</strong>:使用心得 500、教程 1,000、被评精选再加 2,000<br>· 邀请好友双方各 <strong>500 分,无上限</strong><br><em class="rk-pt-note">⚠ <strong>每日签到已于 2026-05-10 下线</strong>,别再找签到入口(网传"注册送 5000"亦为假消息)<br>⚠ 月度额度<strong>当月有效、不结转</strong>,且系统只提前 3 天提醒过期</em></td>
-              <td><span class="rk-miss-mark">—</span> 暂无第三方 NPS<br><em class="rk-pt-note">媒体报道聚焦其连续涨价与算力紧张;缺满意度数据</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-cline">CL</span><a href="https://cline.bot/" target="_blank" rel="noopener">Cline / Roo Code</a>
@@ -769,10 +783,9 @@
               <td>· <strong>无订阅、无额度窗口</strong><br>· 成本完全透明(等于 API 账单)<br>· 可接本地模型,数据不出内网<br>· 开源可审计、可改</td>
               <td>· 需自行配置 key 与模型<br>· <strong>无消费上限保护</strong>,失控风险在自己<br>· 无官方支持<br>· 上下文管理需手动优化</td>
               <td class="rk-deal"><strong>🐑 插件永久免费开源</strong><br>· 配国产免费 API(混元 Lite、GLM Flash 等)可<strong>近乎零成本</strong><br>· 接 Ollama 本地模型则完全免费<br><em class="rk-pt-note">薅国产免费额度的最佳载体</em></td>
-              <td><span class="rk-miss-mark">—</span> 暂无第三方 NPS<br><em class="rk-pt-note">开源社区活跃度高;无可引用的量化满意度数据</em></td>
             </tr>
 
-            <tr class="rk-plat-group"><td colspan="8">通用任务 Agent(不限于编程)</td></tr>
+            <tr class="rk-plat-group"><td colspan="7">通用任务 Agent(不限于编程)</td></tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-manus">M</span><a href="https://manus.im/" target="_blank" rel="noopener">Manus</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Manus(通用自主 Agent)</strong>一句话指令,自己拆任务、调工具、交付成品。<br><b>适合:</b>调研、竞品分析、做表做图做 PPT——<strong>非技术岗首选</strong>。<br><b>⚠ 最大坑:</b>同样 $20 的套餐"可能撑一个月,也可能一个周末烧完"。先拿免费额度跑真实任务试水。</span></span>
@@ -783,10 +796,9 @@
               <td>· <strong>一句话交付整件事</strong>,无需拆步骤<br>· 会自己开浏览器、写代码、做表格<br>· 非技术用户上手门槛最低<br>· 产出可直接交付(文档/表格/网页)</td>
               <td>· <strong>credits 极难预估</strong>,可能周末烧光月度额度<br>· 不暴露模型选择,可控性弱<br>· 复杂任务仍需人工校验<br>· 长任务失败时 credits 照扣</td>
               <td class="rk-deal"><strong>Free 档</strong>可试用(credits 很少)<br><em class="rk-pt-note">年付约 8.3 折(省 17%)。⚠ 付费前<strong>务必先用免费额度跑一个真实任务</strong>估消耗——credits 波动极大</em></td>
-              <td><span class="rk-miss-mark">—</span> 暂无第三方 NPS<br><em class="rk-pt-note">评测普遍称赞"自主完成度",同时集中批评 credits 不可预估;缺量化满意度数据</em></td>
             </tr>
 
-            <tr class="rk-plat-group"><td colspan="8">办公 / 协作(文档、邮件、会议)</td></tr>
+            <tr class="rk-plat-group"><td colspan="7">办公 / 协作(文档、邮件、会议)</td></tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-m365copilot">MS</span><a href="https://www.microsoft.com/microsoft-365/copilot" target="_blank" rel="noopener">Microsoft 365 Copilot</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Microsoft 365 Copilot</strong><b>适合:</b>已用 M365 的企业——财务、HR、行政、销售。<br><b>⚠ 真实成本:</b>$30/席只是<strong>加购价</strong>,需底层 M365 授权,新客实际约 <strong>$59–83/席/月</strong>。</span></span>
@@ -797,10 +809,9 @@
               <td>· 直接长在 Office 里,零学习成本<br>· 能读通企业内部文档与邮件上下文<br>· 合规、审计、数据驻留最成熟<br>· Copilot Studio 可无代码搭 Agent</td>
               <td>· <strong>真实成本远高于标价</strong>(需捆绑 M365)<br>· 单点能力不如专用工具<br>· 效果高度依赖企业数据治理质量<br>· 按席位收费,小团队不经济</td>
               <td class="rk-deal">通常提供企业试用<br><em class="rk-pt-note">⚠ <strong>无个人免费层</strong>,需走销售或云市场。个人用户想要 Office 场景,元宝的免费 Agent 能直出 Word/Excel/PPT,是零成本替代路径</em></td>
-              <td><span class="rk-miss-mark">—</span> 暂无可比 NPS<br><em class="rk-pt-note">企业采购量大但公开满意度数据口径不一,不与开发者工具的 NPS 混用</em></td>
             </tr>
 
-            <tr class="rk-plat-group"><td colspan="8">客服 / 销售(面向客户的自动化)</td></tr>
+            <tr class="rk-plat-group"><td colspan="7">客服 / 销售(面向客户的自动化)</td></tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico">SF</span><a href="https://www.salesforce.com/agentforce/" target="_blank" rel="noopener">Salesforce Agentforce</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// Salesforce Agentforce</strong><b>适合:</b>已在 Salesforce 体系内的客服与销售团队。<br><b>⚠ 三种计价并存:</b>按对话 $2/次、Flex Credits、或席位 $125/月,需 Service Cloud 前置。</span></span>
@@ -811,10 +822,9 @@
               <td>· 与 CRM 数据天然打通<br>· 面向客户的自动化最成熟<br>· 可直接触发业务流程(下单、退款)<br>· 企业级权限与审计完备</td>
               <td>· <strong>按对话计价对高话务量可能极贵</strong><br>· 强绑定 Salesforce 生态<br>· 需 Service Cloud 前置,总成本高<br>· 实施与调优需要专业人力</td>
               <td class="rk-deal">无公开免费层<br><em class="rk-pt-note">仅通过销售做 PoC / 试点,个人无从薅起</em></td>
-              <td><span class="rk-miss-mark">—</span> 暂无可比 NPS<br><em class="rk-pt-note">企业级产品,公开满意度数据口径与开发者工具不可比</em></td>
             </tr>
 
-            <tr class="rk-plat-group"><td colspan="8">流程自动化(把 Agent 接进现有系统)</td></tr>
+            <tr class="rk-plat-group"><td colspan="7">流程自动化(把 Agent 接进现有系统)</td></tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico b-n8n">n8</span><a href="https://n8n.io/" target="_blank" rel="noopener">n8n</a>
                 <span class="rk-tip-html" hidden><strong class="rk-tip-title">// n8n(开源工作流自动化)</strong>可视化拖拽的工作流引擎,400+ 集成,可自托管。<br><b>适合:</b>明确的重复流程——数据同步、通知分发、审批流、定时报表。<br><b>关键:</b>自托管<strong>彻底摆脱 credits 计费</strong>。适合可预测的流程,不适合开放式自主推理。</span></span>
@@ -825,7 +835,6 @@
               <td>· <strong>自托管彻底摆脱 credits</strong><br>· 400+ 集成,接得进老系统<br>· 高频结构化流程单位成本极低<br>· 数据可完全不出内网</td>
               <td>· 需要人搭建与维护<br>· <strong>不适合开放式自主推理</strong>(它是流程引擎,不是 Agent 大脑)<br>· 可视化编排学习曲线存在<br>· 自托管要自己管稳定性</td>
               <td class="rk-deal"><strong>🐑 开源版永久免费、无限量</strong><br>· 自托管后<strong>没有 credits 概念</strong>,成本 = 服务器 + 模型 API<br>· 配国产免费 API 可做到接近零成本<br><em class="rk-pt-note">云托管另有免费试用档</em></td>
-              <td><span class="rk-miss-mark">—</span> 暂无第三方 NPS<br><em class="rk-pt-note">开源社区活跃、GitHub 星数领先;缺可引用的量化满意度数据</em></td>
             </tr>
             <tr>
               <td class="rk-pt-plat"><span class="rk-plat" tabindex="0"><span class="rk-ico">L</span><a href="https://www.lindy.ai/" target="_blank" rel="noopener">Lindy</a>
@@ -837,7 +846,6 @@
               <td>· 无代码,业务人员可自建<br>· 邮件/日程/CRM 场景开箱即用<br>· 触发条件与流程比通用 Agent 更可控</td>
               <td>· 起步价 $49 对个人偏贵<br>· 灵活度不及 n8n 自托管<br>· 复杂逻辑仍需技术介入</td>
               <td class="rk-deal">有试用档<br><em class="rk-pt-note">$49/月起,个人用户比 Manus 贵;以官网当期政策为准</em></td>
-              <td><span class="rk-miss-mark">—</span> 暂无第三方 NPS</td>
             </tr>
           </tbody>
         </table>
@@ -846,12 +854,6 @@
       <div class="rk-notes">
         <p class="rk-note"><strong>💡 别只选一个</strong>:调查显示 <strong>70% 的工程师同时用 2–4 个工具</strong>,最主流的搭法是 <strong>Cursor 编辑 + Claude Code 攻坚</strong>。按任务分工通常比死磕单一平台更顺手、成本也更可控。</p>
         <p class="rk-note"><strong>⚠ 三个计价陷阱</strong>:① <strong>「等值额度」≠ 固定用量</strong>,选贵模型时额度蒸发极快;② <strong>credits 制普遍不透明</strong>,同样 1 credit 在不同操作上价值差很多;③ <strong>官方估算月花参考价值有限</strong>——Codex 官方说 $100–200,实测 $40–400 都有。</p>
-        <details class="rk-fold">
-          <summary>「社区体感」列的数据口径</summary>
-          <div class="rk-fold-body">
-            <p class="rk-note"><strong>NPS</strong>(净推荐值,-100~+100)、<strong>"最爱"投票</strong>(开发者调查中选为最喜爱的比例)、<strong>满意度</strong>、<strong>市场规模</strong>(付费用户数或 ARR)。来自 2026 年开发者调查与厂商披露,时点 2026 年初至 7 月。<strong>缺数据一律标 <span class="rk-miss-mark">—</span>,不用估算值填空。</strong></p>
-          </div>
-        </details>
         <p class="rk-note"><strong>数据来源(快照 2026-09-23,以各平台官网为准)</strong>:
           <a href="https://www.digitalapplied.com/blog/ai-coding-tool-adoption-2026-developer-survey" target="_blank" rel="noopener">2026 开发者调查(NPS / 满意度 / 最爱投票)</a> ·
           <a href="https://www.ideaplan.io/blog/ai-coding-assistant-market-share-2026" target="_blank" rel="noopener">市场份额调查</a> ·
@@ -865,7 +867,7 @@
     </div>
 
 
-    <script type="application/json" id="rankingsData">{"snapshot":"2026-09-23","institutions":{"arena":{"name":"Arena","short":"Arena","url":"https://arena.ai/leaderboard/text","unit":"Elo"},"aa":{"name":"Artificial Analysis","short":"AA 指数","url":"https://artificialanalysis.ai/leaderboards/models","unit":"指数"},"livebench":{"name":"LiveBench","short":"LiveBench","url":"https://livebench.ai/","unit":"分"},"swe":{"name":"SWE-bench Verified(Vals.ai)","short":"SWE-V","url":"https://www.vals.ai/benchmarks/swebench","unit":"%"},"openrouter":{"name":"OpenRouter 用量","short":"OR 份额","url":"https://openrouter.ai/rankings","unit":"% 流量"}},"defaultWeights":{"arena":30,"aa":25,"livebench":25,"swe":20,"openrouter":20},"dimensions":{"overall":{"label":"综合","metrics":{"arena":"overall","aa":"index","livebench":"avg","swe":"verified"}},"coding":{"label":"编程","metrics":{"arena":"coding","livebench":"coding","swe":"verified"}},"reasoning":{"label":"推理","metrics":{"aa":"index","livebench":"reasoning"}},"math":{"label":"数学","metrics":{"arena":"math","livebench":"math"}},"language":{"label":"语言写作","metrics":{"arena":"overall","livebench":"language"}},"finance":{"label":"金融分析","metrics":{"aa":"index","livebench":"math"}},"community":{"label":"社区体感","metrics":{"arena":"overall","openrouter":"share"}}},"models":[{"id":"fable51","mod":"ti","name":"Claude Fable 5.1","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1498,"coding":1519,"math":1522},"aa":{"index":53},"livebench":{"avg":83.4,"reasoning":91.7,"coding":86.4,"math":97,"language":89.5},"swe":null,"openrouter":null}},{"id":"fable5","mod":"ti","name":"Claude Fable 5","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1506,"coding":1552,"math":1526},"aa":{"index":50},"livebench":{"avg":83,"reasoning":89.7,"coding":86,"math":96,"language":90.7},"swe":{"verified":95},"openrouter":{"share":1.9}}},{"id":"opus5","mod":"ti","name":"Claude Opus 5","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1493,"coding":1533,"math":1525},"aa":{"index":51},"livebench":{"avg":80.1,"reasoning":91.2,"coding":81.4,"math":95.7,"language":88.7},"swe":{"verified":97},"openrouter":{"share":1.1}}},{"id":"muse13","mod":"tiv","name":"Muse Spark 1.3","vendor":"Meta","url":"https://ai.meta.com/","open":false,"scores":{"arena":{"overall":1493,"coding":1537,"math":1496},"aa":{"index":48},"livebench":{"avg":81.6,"reasoning":89.7,"coding":81.1,"math":95.9,"language":82.8},"swe":null,"openrouter":null}},{"id":"astra","mod":"ti","name":"GPT-6 Astra","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":{"overall":1480,"coding":1543,"math":null},"aa":{"index":53},"livebench":{"avg":82.2,"reasoning":92.7,"coding":80.4,"math":96.8,"language":89.4},"swe":null,"openrouter":null}},{"id":"gpt56sol","mod":"ti","name":"GPT-5.6 Sol","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":{"overall":1483,"coding":1528,"math":1488},"aa":{"index":47},"livebench":{"avg":81,"reasoning":91.7,"coding":83.9,"math":96.2,"language":87.7},"swe":{"verified":96.2},"openrouter":{"share":1.2}}},{"id":"kimik3","mod":"ti","name":"Kimi K3","vendor":"Moonshot","url":"https://www.kimi.com/","open":true,"scores":{"arena":{"overall":1485,"coding":1538,"math":1501},"aa":{"index":44},"livebench":{"avg":79.2,"reasoning":90.7,"coding":81.4,"math":84.4,"language":85.5},"swe":{"verified":93.4},"openrouter":{"share":2.2}}},{"id":"dsv41flash","mod":"ti","name":"DeepSeek V4.1 Flash","vendor":"DeepSeek","url":"https://www.deepseek.com/","open":true,"scores":{"arena":null,"aa":{"index":39},"livebench":{"avg":81.1,"reasoning":86.7,"coding":80,"math":93.3,"language":81.2},"swe":null,"openrouter":null}},{"id":"glm53","mod":"t","name":"GLM-5.3","vendor":"Z.ai","url":"https://z.ai/","open":true,"scores":{"arena":{"overall":1483,"coding":1524,"math":1504},"aa":{"index":45},"livebench":{"avg":76.1,"reasoning":85.8,"coding":79,"math":87.9,"language":79.9},"swe":{"verified":95.4},"openrouter":null}},{"id":"grok47","mod":"ti","name":"Grok 4.7","vendor":"xAI","url":"https://x.ai/grok","open":false,"scores":{"arena":null,"aa":{"index":46},"livebench":{"avg":77.4,"reasoning":82.7,"coding":77.2,"math":95.7,"language":80.1},"swe":null,"openrouter":null}},{"id":"qwen38max","mod":"ti","name":"Qwen3.8 Max","vendor":"Alibaba","url":"https://qwen.ai/","open":false,"scores":{"arena":{"overall":1481,"coding":1522,"math":1498},"aa":{"index":45},"livebench":{"avg":78.5,"reasoning":88.2,"coding":72.9,"math":91.3,"language":79.7},"swe":{"verified":85.6},"openrouter":null}},{"id":"terra","mod":"ti","name":"GPT-5.6 Terra","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":{"overall":1466,"coding":1518,"math":1475},"aa":{"index":42},"livebench":{"avg":77.9,"reasoning":90.6,"coding":78.2,"math":94.9,"language":82.9},"swe":{"verified":95.4},"openrouter":null}},{"id":"opus47","mod":"ti","name":"Claude Opus 4.7","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1502,"coding":1552,"math":1503},"aa":{"index":41},"livebench":{"avg":76.5,"reasoning":87.2,"coding":82.1,"math":92.9,"language":77.9},"swe":{"verified":82},"openrouter":{"share":5.8}}},{"id":"grok46","mod":"ti","name":"Grok 4.6","vendor":"xAI","url":"https://x.ai/grok","open":false,"scores":{"arena":{"overall":1456,"coding":1506,"math":1441},"aa":{"index":44},"livebench":{"avg":78,"reasoning":90.5,"coding":76.8,"math":92.6,"language":83.7},"swe":{"verified":95.6},"openrouter":null}},{"id":"gpt55","mod":"ti","name":"GPT-5.5","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":{"overall":1482,"coding":1520,"math":1491},"aa":{"index":38},"livebench":{"avg":80.2,"reasoning":89.7,"coding":82.1,"math":95.9,"language":87.4},"swe":{"verified":82.6},"openrouter":{"share":3.4}}},{"id":"g37flash","mod":"tiav","name":"Gemini 3.7 Flash","vendor":"Google","url":"https://deepmind.google/technologies/gemini/","open":false,"scores":{"arena":{"overall":1490,"coding":1521,"math":1522},"aa":{"index":39},"livebench":{"avg":78.8,"reasoning":87.8,"coding":78.9,"math":93.5,"language":85.5},"swe":{"verified":80.8},"openrouter":null}},{"id":"opus48","mod":"ti","name":"Claude Opus 4.8","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1481,"coding":1533,"math":1494},"aa":{"index":42},"livebench":{"avg":76.2,"reasoning":89.2,"coding":81.8,"math":94.3,"language":79.7},"swe":{"verified":88.6},"openrouter":{"share":2.6}}},{"id":"dsv4","mod":"t","name":"DeepSeek-V4 Pro","vendor":"DeepSeek","url":"https://www.deepseek.com/","open":true,"scores":{"arena":{"overall":1463,"coding":1503,"math":1463},"aa":{"index":36},"livebench":{"avg":77.4,"reasoning":85.8,"coding":77.2,"math":95.1,"language":82.1},"swe":{"verified":96.4},"openrouter":{"share":4.1}}},{"id":"g38flash","mod":"tiav","name":"Gemini 3.8 Flash","vendor":"Google","url":"https://deepmind.google/technologies/gemini/","open":false,"scores":{"arena":{"overall":1493,"coding":1535,"math":null},"aa":{"index":41},"livebench":{"avg":75.8,"reasoning":89.3,"coding":72.5,"math":91.6,"language":87.8},"swe":{"verified":80},"openrouter":null}},{"id":"opus55","mod":"ti","name":"Claude Opus 5.5","vendor":"Anthropic","url":"https://www.anthropic.com/claude/opus","open":false,"scores":{"arena":null,"aa":{"index":58},"livebench":{"avg":83.2,"reasoning":92.2,"coding":89.3,"math":97.1,"language":86.3},"swe":null,"openrouter":null}}]}</script>
+    <script type="application/json" id="rankingsData">{"snapshot":"2026-09-23","institutions":{"arena":{"name":"Arena","short":"Arena","url":"https://arena.ai/leaderboard/text","unit":"Elo"},"aa":{"name":"Artificial Analysis","short":"AA 指数","url":"https://artificialanalysis.ai/leaderboards/models","unit":"指数"},"livebench":{"name":"LiveBench","short":"LiveBench","url":"https://livebench.ai/","unit":"分"},"swe":{"name":"SWE-bench Verified(Vals.ai)","short":"SWE-V","url":"https://www.vals.ai/benchmarks/swebench","unit":"%"}},"defaultWeights":{"arena":30,"aa":25,"livebench":25,"swe":20},"dimensions":{"overall":{"label":"综合","metrics":{"arena":"overall","aa":"index","livebench":"avg","swe":"verified"}},"coding":{"label":"编程","metrics":{"arena":"coding","livebench":"coding","swe":"verified"}},"reasoning":{"label":"推理","metrics":{"aa":"index","livebench":"reasoning"}},"math":{"label":"数学","metrics":{"arena":"math","livebench":"math"}},"language":{"label":"语言写作","metrics":{"arena":"overall","livebench":"language"}},"finance":{"label":"金融分析","metrics":{"aa":"index","livebench":"math"}},"reliability":{"label":"省心度","metrics":{"aa":"reliability","livebench":"agentic"},"labels":{"aa":["AA 可靠性","三项均值"],"livebench":["LiveBench","智能体编程"]}}},"models":[{"id":"fable51","mod":"ti","name":"Claude Fable 5.1","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1498,"coding":1519,"math":1522},"aa":{"index":53,"automation":59.4,"terminal":52,"noHallucination":27.4,"reliability":46.3},"livebench":{"avg":83.4,"reasoning":91.7,"coding":86.4,"math":97,"language":89.5,"agentic":66.1},"swe":null}},{"id":"fable5","mod":"ti","name":"Claude Fable 5","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1506,"coding":1552,"math":1526},"aa":{"index":50,"automation":54.1,"terminal":42.4,"noHallucination":36.4,"reliability":44.3},"livebench":{"avg":83,"reasoning":89.7,"coding":86,"math":96,"language":90.7,"agentic":62.2},"swe":{"verified":95}}},{"id":"opus5","mod":"ti","name":"Claude Opus 5","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1493,"coding":1533,"math":1525},"aa":{"index":51,"automation":56.6,"terminal":49,"noHallucination":39.2,"reliability":48.2},"livebench":{"avg":80.1,"reasoning":91.2,"coding":81.4,"math":95.7,"language":88.7,"agentic":65.2},"swe":{"verified":97}}},{"id":"muse13","mod":"tiv","name":"Muse Spark 1.3","vendor":"Meta","url":"https://ai.meta.com/","open":false,"scores":{"arena":{"overall":1493,"coding":1537,"math":1496},"aa":{"index":48,"automation":57.9,"terminal":33.3,"noHallucination":67.1,"reliability":52.7},"livebench":{"avg":81.6,"reasoning":89.7,"coding":81.1,"math":95.9,"language":82.8,"agentic":64.1},"swe":null}},{"id":"astra","mod":"ti","name":"GPT-6 Astra","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":{"overall":1480,"coding":1543,"math":null},"aa":{"index":53,"automation":68.5,"terminal":59.1,"noHallucination":48.7,"reliability":58.7},"livebench":{"avg":82.2,"reasoning":92.7,"coding":80.4,"math":96.8,"language":89.4,"agentic":57.3},"swe":null}},{"id":"gpt56sol","mod":"ti","name":"GPT-5.6 Sol","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":{"overall":1483,"coding":1528,"math":1488},"aa":{"index":47,"automation":60.1,"terminal":39.9,"noHallucination":7.8,"reliability":35.9},"livebench":{"avg":81,"reasoning":91.7,"coding":83.9,"math":96.2,"language":87.7,"agentic":56.2},"swe":{"verified":96.2}}},{"id":"kimik3","mod":"ti","name":"Kimi K3","vendor":"Moonshot","url":"https://www.kimi.com/","open":true,"scores":{"arena":{"overall":1485,"coding":1538,"math":1501},"aa":{"index":44,"automation":58.3,"terminal":12.6,"noHallucination":46.8,"reliability":39.2},"livebench":{"avg":79.2,"reasoning":90.7,"coding":81.4,"math":84.4,"language":85.5,"agentic":62.2},"swe":{"verified":93.4}}},{"id":"dsv41flash","mod":"ti","name":"DeepSeek V4.1 Flash","vendor":"DeepSeek","url":"https://www.deepseek.com/","open":true,"scores":{"arena":null,"aa":{"index":39,"automation":68.9,"terminal":26.8,"noHallucination":3.5,"reliability":33.1},"livebench":{"avg":81.1,"reasoning":86.7,"coding":80,"math":93.3,"language":81.2,"agentic":77.3},"swe":null}},{"id":"glm53","mod":"t","name":"GLM-5.3","vendor":"Z.ai","url":"https://z.ai/","open":true,"scores":{"arena":{"overall":1483,"coding":1524,"math":1504},"aa":{"index":45,"automation":62.2,"terminal":41.9,"noHallucination":70.5,"reliability":58.2},"livebench":{"avg":76.1,"reasoning":85.8,"coding":79,"math":87.9,"language":79.9,"agentic":60.9},"swe":{"verified":95.4}}},{"id":"grok47","mod":"ti","name":"Grok 4.7","vendor":"xAI","url":"https://x.ai/grok","open":false,"scores":{"arena":null,"aa":{"index":46,"automation":65.6,"terminal":25.8,"noHallucination":70.7,"reliability":54},"livebench":{"avg":77.4,"reasoning":82.7,"coding":77.2,"math":95.7,"language":80.1,"agentic":54},"swe":null}},{"id":"qwen38max","mod":"ti","name":"Qwen3.8 Max","vendor":"Alibaba","url":"https://qwen.ai/","open":false,"scores":{"arena":{"overall":1481,"coding":1522,"math":1498},"aa":{"index":45,"automation":56.2,"terminal":38.9,"noHallucination":71.2,"reliability":55.4},"livebench":{"avg":78.5,"reasoning":88.2,"coding":72.9,"math":91.3,"language":79.7,"agentic":64.6},"swe":{"verified":85.6}}},{"id":"terra","mod":"ti","name":"GPT-5.6 Terra","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":{"overall":1466,"coding":1518,"math":1475},"aa":{"index":42,"automation":59.7,"terminal":35.4,"noHallucination":12.1,"reliability":35.7},"livebench":{"avg":77.9,"reasoning":90.6,"coding":78.2,"math":94.9,"language":82.9,"agentic":54.9},"swe":{"verified":95.4}}},{"id":"opus47","mod":"ti","name":"Claude Opus 4.7","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1502,"coding":1552,"math":1503},"aa":{"index":41,"automation":42.1,"terminal":null,"noHallucination":57.7,"reliability":49.9},"livebench":{"avg":76.5,"reasoning":87.2,"coding":82.1,"math":92.9,"language":77.9,"agentic":50.7},"swe":{"verified":82}}},{"id":"grok46","mod":"ti","name":"Grok 4.6","vendor":"xAI","url":"https://x.ai/grok","open":false,"scores":{"arena":{"overall":1456,"coding":1506,"math":1441},"aa":{"index":44,"automation":66.7,"terminal":21.2,"noHallucination":65.7,"reliability":51.2},"livebench":{"avg":78,"reasoning":90.5,"coding":76.8,"math":92.6,"language":83.7,"agentic":57},"swe":{"verified":95.6}}},{"id":"gpt55","mod":"ti","name":"GPT-5.5","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":{"overall":1482,"coding":1520,"math":1491},"aa":{"index":38,"automation":47.3,"terminal":14.6,"noHallucination":11,"reliability":24.3},"livebench":{"avg":80.2,"reasoning":89.7,"coding":82.1,"math":95.9,"language":87.4,"agentic":54},"swe":{"verified":82.6}}},{"id":"g37flash","mod":"tiav","name":"Gemini 3.7 Flash","vendor":"Google","url":"https://deepmind.google/technologies/gemini/","open":false,"scores":{"arena":{"overall":1490,"coding":1521,"math":1522},"aa":{"index":39,"automation":62,"terminal":13.6,"noHallucination":35.5,"reliability":37},"livebench":{"avg":78.8,"reasoning":87.8,"coding":78.9,"math":93.5,"language":85.5,"agentic":58.3},"swe":{"verified":80.8}}},{"id":"opus48","mod":"ti","name":"Claude Opus 4.8","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1481,"coding":1533,"math":1494},"aa":{"index":42,"automation":45.6,"terminal":21.7,"noHallucination":60.7,"reliability":42.7},"livebench":{"avg":76.2,"reasoning":89.2,"coding":81.8,"math":94.3,"language":79.7,"agentic":50.5},"swe":{"verified":88.6}}},{"id":"dsv4","mod":"t","name":"DeepSeek-V4 Pro","vendor":"DeepSeek","url":"https://www.deepseek.com/","open":true,"scores":{"arena":{"overall":1463,"coding":1503,"math":1463},"aa":{"index":36,"automation":56.7,"terminal":14.1,"noHallucination":5.2,"reliability":25.3},"livebench":{"avg":77.4,"reasoning":85.8,"coding":77.2,"math":95.1,"language":82.1,"agentic":54.9},"swe":{"verified":96.4}}},{"id":"opus55","mod":"ti","name":"Claude Opus 5.5","vendor":"Anthropic","url":"https://www.anthropic.com/claude/opus","open":false,"scores":{"arena":null,"aa":{"index":58,"automation":69.5,"terminal":59.6,"noHallucination":41.4,"reliability":56.8},"livebench":{"avg":83.2,"reasoning":92.2,"coding":89.3,"math":97.1,"language":86.3,"agentic":71.7},"swe":null}},{"id":"gpt6sol","mod":"ti","name":"GPT-6 Sol","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":null,"aa":{"index":48,"automation":61.6,"terminal":43.9,"noHallucination":39.9,"reliability":48.5},"livebench":{"avg":79.3,"reasoning":88.7,"coding":81.8,"math":96.4,"language":85.3,"agentic":52.9},"swe":null}}]}</script>
   </div>
 </section>
 

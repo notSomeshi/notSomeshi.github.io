@@ -377,7 +377,231 @@ document.addEventListener('DOMContentLoaded', function () {
      ========================================== */
   var pageObservers = [];
 
+  /* ==========================================
+     液态玻璃(2026-09-24)
+     顶栏、导航、分段切换、天梯行共用一套"玻璃":
+     每个 .lg 元素按自身尺寸与形状逐像素生成一张位移贴图 —— 有向距离场(SDF)给出离边缘多远、法线朝哪,
+     边缘"斜面"里的背景沿法线向内取样,于是背后的格线、logo 在玻璃边缘被弯折;按钮类再做 RGB 三通道色散。
+     只有 Chromium 支持 backdrop-filter: url(#svg);其他浏览器与"减少透明度"用户由 CSS 兜底为磨砂 + 高光。
+     ⚠ 坑:祖先带 filter / clip-path / opacity<1 / mask 会成为 Backdrop Root,玻璃只看得到容器内部,
+       整块变成一层蒙版(预览 v1 就栽在外层 filter: drop-shadow 上)。玻璃的祖先链上不要放这些属性。
+     参考实现与调参记录:.claude/skills/update-site-data/reference/glass-demo/
+     ========================================== */
+  var LG = (function () {
+    var NS = 'http://www.w3.org/2000/svg';
+    var UA = navigator.userAgent;
+    var mq = function (q) { return window.matchMedia && window.matchMedia(q).matches; };
+    var ON = /Chrome\/\d/.test(UA) && !/Firefox\//.test(UA) && !mq('(prefers-reduced-transparency: reduce)');
+    // 低配设备:大面积的行(data-lg-heavy)只做磨砂 —— 滚动时每一帧都要重算折射
+    var LITE = (navigator.hardwareConcurrency || 8) <= 4;
+    var defs = null, cache = {}, uid = 0, watched = [];
+    var CM = ['1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0',
+              '0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0',
+              '0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0'];
+
+    function ensureDefs() {
+      if (defs) return;
+      var svg = document.createElementNS(NS, 'svg');
+      svg.setAttribute('aria-hidden', 'true');
+      svg.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden';
+      svg.innerHTML = '<defs></defs>' +
+        // 天梯重排时水印的"液体扭曲":噪声位移,强度由 jelly() 在 0 → 峰值 → 0 之间推
+        '<filter id="lgJelly" x="-30%" y="-30%" width="160%" height="160%">' +
+        '<feTurbulence type="fractalNoise" baseFrequency="0.018 0.045" numOctaves="2" seed="7" result="n"/>' +
+        '<feDisplacementMap id="lgJellyMap" in="SourceGraphic" in2="n" scale="0" xChannelSelector="R" yChannelSelector="G"/></filter>';
+      document.body.appendChild(svg);
+      defs = svg.querySelector('defs');
+    }
+
+    function sdf(x, y, hw, hh, shape) {
+      var qx, qy;
+      if (shape === 'pill') {
+        var r = Math.min(hh, hw);
+        qx = Math.abs(x) - (hw - r); qy = Math.abs(y) - (hh - r);
+        return Math.hypot(Math.max(qx, 0), Math.max(qy, 0)) + Math.min(Math.max(qx, qy), 0) - r;
+      }
+      qx = Math.abs(x) - hw; qy = Math.abs(y) - hh;
+      return Math.hypot(Math.max(qx, 0), Math.max(qy, 0)) + Math.min(Math.max(qx, qy), 0);
+    }
+
+    function buildMap(w, h, shape, bevel) {
+      var cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+      var ctx = cv.getContext('2d'), img = ctx.createImageData(w, h), D = img.data;
+      var hw = w / 2, hh = h / 2, e = 0.75;
+      for (var y = 0; y < h; y++) for (var x = 0; x < w; x++) {
+        var px = x + 0.5 - hw, py = y + 0.5 - hh, d = sdf(px, py, hw, hh, shape), dx = 0, dy = 0;
+        if (d < 0 && -d < bevel) {
+          var m = Math.pow(1 + d / bevel, 2.2);   // 越靠边位移越大
+          var gx = sdf(px + e, py, hw, hh, shape) - sdf(px - e, py, hw, hh, shape);
+          var gy = sdf(px, py + e, hw, hh, shape) - sdf(px, py - e, hw, hh, shape);
+          var len = Math.hypot(gx, gy) || 1;
+          dx = -gx / len * m; dy = -gy / len * m;  // 沿法线向内取样
+        }
+        var i = (y * w + x) * 4;
+        D[i] = 128 + dx * 127; D[i + 1] = 128 + dy * 127; D[i + 2] = 128; D[i + 3] = 255;
+      }
+      ctx.putImageData(img, 0, 0);
+      return cv.toDataURL();
+    }
+
+    function makeFilter(id) {
+      var f = document.createElementNS(NS, 'filter');
+      f.id = id;
+      f.setAttribute('x', 0); f.setAttribute('y', 0);
+      f.setAttribute('filterUnits', 'userSpaceOnUse');
+      f.setAttribute('primitiveUnits', 'userSpaceOnUse');
+      f.setAttribute('color-interpolation-filters', 'sRGB');
+      defs.appendChild(f);
+      return f;
+    }
+
+    function fillFilter(f, w, h, shape, bevel, S, chroma) {
+      var html = '<feImage x="0" y="0" width="' + w + '" height="' + h + '" preserveAspectRatio="none" href="' +
+                 buildMap(w, h, shape, bevel) + '" result="map"/>';
+      if (chroma) {   // 三通道各自位移 → 边缘一圈细彩边
+        ['r', 'g', 'b'].forEach(function (ch, k) {
+          html += '<feDisplacementMap in="SourceGraphic" in2="map" scale="' + (S * [1, 0.92, 0.84][k]) +
+                  '" xChannelSelector="R" yChannelSelector="G" result="d' + ch + '"/>' +
+                  '<feColorMatrix in="d' + ch + '" type="matrix" values="' + CM[k] + '" result="' + ch + '"/>';
+        });
+        html += '<feBlend in="r" in2="g" mode="screen" result="rg"/><feBlend in="rg" in2="b" mode="screen"/>';
+      } else {        // 单通道:省三分之二的计算,用在大面积的行上
+        html += '<feDisplacementMap in="SourceGraphic" in2="map" scale="' + S + '" xChannelSelector="R" yChannelSelector="G"/>';
+      }
+      f.setAttribute('width', w); f.setAttribute('height', h);
+      f.innerHTML = html;
+    }
+
+    function apply(el) {
+      if (!el.isConnected) return;
+      var w = Math.round(el.offsetWidth), h = Math.round(el.offsetHeight);
+      if (w < 4 || h < 4) return;
+      var d = el.dataset, shape = d.lgShape || 'rect';
+      var bevel = parseFloat(d.lgBevel) || Math.min(h * 0.5, 20);
+      var S = parseFloat(d.lgScale) || 34, blur = d.lgBlur || '1', chroma = d.lgChroma !== '0';
+      var key = [w, h, shape, bevel, S, chroma ? 1 : 0].join('|');
+      if (el._lgKey === key) return;
+      el._lgKey = key;
+      if (!ON || (LITE && d.lgHeavy)) return;      // 交给 CSS 的磨砂兜底
+      ensureDefs();
+      var id;
+      if (d.lgOwn) {   // 透镜:滑动时宽度逐帧在变,用自己的滤镜原地更新,别塞进缓存
+        id = el._lgOwnId || (el._lgOwnId = 'lgo' + (++uid));
+        fillFilter(document.getElementById(id) || makeFilter(id), w, h, shape, bevel, S, chroma);
+      } else {         // 同尺寸同参数共用一张贴图:天梯 20 行只算一次
+        id = cache[key];
+        if (!id) { id = cache[key] = 'lg' + (++uid); fillFilter(makeFilter(id), w, h, shape, bevel, S, chroma); }
+      }
+      el.style.backdropFilter = 'url(#' + id + ') blur(' + blur + 'px) saturate(1.8) brightness(1.03)';
+    }
+
+    var ro = 'ResizeObserver' in window ? new ResizeObserver(function (es) {
+      es.forEach(function (e) { apply(e.target); });
+    }) : null;
+
+    function watch(el) {
+      apply(el);
+      if (!ro || el._lgWatched) return;
+      el._lgWatched = true;
+      ro.observe(el);
+      watched.push(el);
+      // 天梯每次重排都会重建行,把已经离开页面的旧元素放掉
+      if (watched.length > 80) {
+        watched = watched.filter(function (x) {
+          if (x.isConnected) return true;
+          ro.unobserve(x); return false;
+        });
+      }
+    }
+
+    /* 分段切换:在容器里垫一块玻璃透镜,跟着 .is-active 走。
+       用 MutationObserver 盯 class 变化,不管是谁切的(点击、PJAX 同步、脚本初始化)透镜都会跟过去 */
+    function seg(box, itemSel) {
+      if (!box || box._lgSeg) return;
+      box._lgSeg = true;
+      box.classList.add('lg', 'lg-seg');
+      box.dataset.lgShape = 'pill';
+      var lens = document.createElement('span');
+      lens.className = 'lg-lens';
+      lens.setAttribute('aria-hidden', 'true');
+      lens.innerHTML = '<span class="lg-lens-body lg" data-lg-shape="pill" data-lg-scale="40" data-lg-blur="0" data-lg-bevel="999" data-lg-own="1"></span>';
+      box.insertBefore(lens, box.firstChild);
+      var cur = null;
+
+      function place(t, animate) {
+        if (!t) { lens.classList.add('is-empty'); return; }
+        lens.classList.remove('is-empty');
+        if (!animate) lens.classList.add('no-anim');
+        lens.style.setProperty('--x', t.offsetLeft + 'px');
+        lens.style.setProperty('--y', t.offsetTop + 'px');
+        lens.style.setProperty('--w', t.offsetWidth + 'px');
+        lens.style.setProperty('--h', t.offsetHeight + 'px');
+        if (!animate) { void lens.offsetWidth; lens.classList.remove('no-anim'); return; }
+        lens.classList.remove('is-moving'); void lens.offsetWidth; lens.classList.add('is-moving');
+      }
+      function sync(animate) {
+        var t = box.querySelector(itemSel + '.is-active');
+        if (t === cur) return;
+        var had = !!cur;
+        cur = t;
+        place(t, animate && had);
+      }
+
+      sync(false);
+      new MutationObserver(function () {
+        if (lens.parentNode !== box) box.insertBefore(lens, box.firstChild);  // 被别处的 innerHTML 冲掉了就放回去
+        sync(true);
+      })
+        .observe(box, { subtree: true, childList: true, attributes: true, attributeFilter: ['class'] });
+      // 导航点下去就先滑过去,不等 PJAX 取回新页面
+      box.addEventListener('click', function (e) {
+        var t = e.target.closest(itemSel);
+        if (t && t !== cur && box.contains(t)) { cur = t; place(t, true); }
+      });
+      if (ro) new ResizeObserver(function () { if (cur) place(cur, false); }).observe(box);
+      watch(box);
+      watch(lens.firstChild);
+    }
+
+    /* 水印液体扭曲:0 → 22 → 0,约 800ms。容器挂 .lg-jelly 期间 CSS 给水印套上 #lgJelly 滤镜 */
+    var jellyRaf = 0;
+    function jelly(box) {
+      if (!box || mq('(prefers-reduced-motion: reduce)')) return;
+      ensureDefs();
+      var map = document.getElementById('lgJellyMap'), t0 = performance.now();
+      cancelAnimationFrame(jellyRaf);
+      box.classList.remove('lg-jelly'); void box.offsetWidth; box.classList.add('lg-jelly');
+      (function step(t) {
+        var p = Math.min((t - t0) / 800, 1);
+        map.setAttribute('scale', (Math.sin(p * Math.PI) * 22 * (1 - p * 0.35)).toFixed(2));
+        if (p < 1) jellyRaf = requestAnimationFrame(step);
+        else { map.setAttribute('scale', 0); box.classList.remove('lg-jelly'); }
+      })(t0);
+    }
+
+    return { watch: watch, seg: seg, jelly: jelly };
+  })();
+
+  /* 把玻璃挂到当前页面的组件上。幂等:PJAX 换页后重复调用只会处理新出现的元素 */
+  function initGlass() {
+    // 顶栏:玻璃垫在一层独立的子元素上,而不是顶栏本身 —— 顶栏若自带背景滤镜,会成为导航玻璃的 Backdrop Root,
+    // 导航就只看得到顶栏内部。手机菜单同理,它在顶栏里面,只做 CSS 磨砂,不做折射
+    var hdr = document.getElementById('siteHeader');
+    if (hdr && !hdr._lgInit) {
+      hdr._lgInit = true;
+      var layer = document.createElement('span');
+      layer.className = 'site-header-glass lg';
+      layer.setAttribute('aria-hidden', 'true');
+      layer.dataset.lgBevel = '14'; layer.dataset.lgScale = '44'; layer.dataset.lgBlur = '1.2';
+      hdr.insertBefore(layer, hdr.firstChild);
+      LG.watch(layer);
+    }
+    LG.seg(document.getElementById('siteNav'), '.nav-link');
+    document.querySelectorAll('[data-lg-seg]').forEach(function (b) { LG.seg(b, 'button'); });
+  }
+
   function initPage() {
+    initGlass();
     // 断开上一页遗留的观察器
     pageObservers.forEach(function (o) { o.disconnect(); });
     pageObservers = [];
@@ -1299,9 +1523,12 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       var h = '<tr><th class="rk-col-rank">#</th><th class="rk-col-model">模型</th>';
+      // 维度可以覆盖表头:同一家机构在不同维度下取的是不同指标(如「省心度」里 AA 那一列是可靠性,不是智能指数)
+      var colLabels = DIMS[state.dim].labels || {};
       act.forEach(function (k) {
+        var lab = colLabels[k] || [INSTS[k].short, INSTS[k].unit];
         h += '<th class="rk-sortable' + (state.sortBy === k ? ' is-sorted' : '') + '" data-sort="' + k + '">' +
-          INSTS[k].short + '<span class="rk-unit">' + INSTS[k].unit + '</span></th>';
+          lab[0] + '<span class="rk-unit">' + lab[1] + '</span></th>';
       });
       h += '<th class="rk-sortable rk-col-comp' + (state.sortBy === 'composite' ? ' is-sorted' : '') + '" data-sort="composite">综合分<span class="rk-unit">0-100</span></th>' +
         '<th class="rk-col-cov">覆盖</th></tr>';
@@ -1316,7 +1543,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }).join('');
         var comp = r.composite == null ? '—' : r.composite.toFixed(1);
         return '<tr data-id="' + m.id + '">' +
-          '<td class="rk-col-rank">' + (i + 1 < 10 ? '0' + (i + 1) : i + 1) + '</td>' +
+          '<td class="rk-col-rank"><span class="rk-row-glass lg" data-lg-shape="pill" data-lg-chroma="0" data-lg-scale="30" data-lg-bevel="22" data-lg-blur="1.4" data-lg-heavy="1" aria-hidden="true"></span>' +
+            (i + 1 < 10 ? '0' + (i + 1) : i + 1) + '</td>' +
           '<td class="rk-col-model">' + ghostHtml(m.vendor) + '<span class="rk-mwrap"><span>' +
             '<a class="rk-model-link" href="' + m.url + '" target="_blank" rel="noopener">' + m.name + '</a>' +
             '<span class="rk-vendor">' + m.vendor + (m.open ? ' · <em class="rk-open">开源权重</em>' : '') + '</span>' +
@@ -1328,10 +1556,16 @@ document.addEventListener('DOMContentLoaded', function () {
           '</tr>';
       }).join('');
       emptyEl.hidden = res.rows.length > 0;
+      bodyEl.querySelectorAll('.rk-row-glass').forEach(LG.watch);
 
-      // FLIP 第二步:从旧位置平滑滑入新位置;新出现的行淡入
+      // FLIP 第二步:从旧位置弹到新位置(回弹曲线、逐行错开);新出现的行淡入。
+      // 移动的这 0.8 秒里行玻璃降级成普通磨砂(.is-sorting)—— 行在动,折射要逐帧重算,而注意力在弹跳和水印上
       if (animate) {
-        bodyEl.querySelectorAll('tr[data-id]').forEach(function (tr) {
+        var moved = 0;
+        app.classList.add('is-sorting');
+        clearTimeout(app._sortT);
+        app._sortT = setTimeout(function () { app.classList.remove('is-sorting'); }, 1000);
+        bodyEl.querySelectorAll('tr[data-id]').forEach(function (tr, idx) {
           var was = prev[tr.dataset.id];
           if (was == null) {
             tr.style.opacity = '0';
@@ -1343,14 +1577,16 @@ document.addEventListener('DOMContentLoaded', function () {
           }
           var dy = was - tr.getBoundingClientRect().top;
           if (dy) {
+            moved++;
             tr.style.transform = 'translateY(' + dy + 'px)';
             tr.style.transition = 'none';
             requestAnimationFrame(function () {
-              tr.style.transition = 'transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1)';
+              tr.style.transition = 'transform 0.78s var(--lg-spring) ' + (Math.min(idx, 20) * 18) + 'ms';
               tr.style.transform = '';
             });
           }
         });
+        if (moved) LG.jelly(bodyEl);
       }
     }
 
@@ -1369,9 +1605,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // 维度切换
-    dimsEl.innerHTML = Object.keys(DIMS).map(function (d) {
+    // 用追加而不是 innerHTML:容器里已经垫了玻璃透镜(initGlass),整段替换会把它抹掉
+    dimsEl.insertAdjacentHTML('beforeend', Object.keys(DIMS).map(function (d) {
       return '<button type="button" class="rk-dim' + (d === state.dim ? ' is-active' : '') + '" data-dim="' + d + '">' + DIMS[d].label + '</button>';
-    }).join('');
+    }).join(''));
     dimsEl.addEventListener('click', function (e) {
       var btn = e.target.closest('.rk-dim');
       if (!btn || btn.dataset.dim === state.dim) return;
@@ -1773,7 +2010,13 @@ document.addEventListener('DOMContentLoaded', function () {
         // 同步导航当前页高亮(服务端渲染的 is-active)
         var newNav = doc.getElementById('siteNav');
         var curNav = document.getElementById('siteNav');
-        if (newNav && curNav) curNav.innerHTML = newNav.innerHTML;
+        if (newNav && curNav) {
+          var activeHref = (newNav.querySelector('.nav-link.is-active') || {}).getAttribute
+            ? newNav.querySelector('.nav-link.is-active').getAttribute('href') : null;
+          curNav.querySelectorAll('.nav-link').forEach(function (a) {
+            a.classList.toggle('is-active', a.getAttribute('href') === activeHref);
+          });
+        }
         var newMobile = doc.getElementById('mobileNav');
         if (newMobile && mobileNav) mobileNav.innerHTML = newMobile.innerHTML;
         if (push) history.pushState({ pjax: true }, '', url);
