@@ -1248,9 +1248,10 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     /* 厂商水印:品牌 logo 放大、调淡,压在模型名下面当背景(css/brands.css 的 .g-*)。
-       Z.ai 和 xAI 没有可用的矢量 logo(Simple Icons 里的 x 是 X/推特的标,不能冒用),
-       用大号首字母代替。查不到厂商就不画 —— 以前 Muse Spark 就是因为这里漏了 Meta 而没有图标 */
-    var GHOST_SVG = ['anthropic', 'openai', 'google', 'deepseek', 'qwen', 'moonshot', 'minimax', 'mistral', 'meta'];
+       GHOST_SVG 之外的厂商用大号首字母代替(Z.ai / xAI 用的是 LobeHub 的智谱、Grok 标,
+       不是 Simple Icons 里 X/推特的那个 x —— 那不能冒用)。查不到厂商就不画 —— 以前 Muse Spark 就是因为这里漏了 Meta 而没有图标 */
+    var GHOST_SVG = ['anthropic', 'openai', 'google', 'deepseek', 'qwen', 'moonshot', 'minimax', 'mistral', 'meta',
+                     'zai', 'xai', 'yuanbao', 'doubao'];
 
     function ghostSpan(brand, letter) {
       if (brand && GHOST_SVG.indexOf(brand) !== -1) {
