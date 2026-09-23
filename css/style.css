@@ -5501,3 +5501,96 @@ html.cover-lock { overflow: hidden; }
   }
   .site-header-glass { background-color: var(--bg-primary) !important; }
 }
+
+/* ============================================
+   液态玻璃 · 第二轮(2026-09-24 用户反馈)
+   ============================================ */
+
+/* ---------- 天梯:排序时右侧不再闪出竖向滚动条 ----------
+   行在做 FLIP 位移时会短暂越出容器,容器(横向可滚)就顺带冒出竖向滚动条。竖向本来就不需要滚 */
+#rankingsApp .rk-table-wrap { overflow-y: hidden; }
+
+/* ---------- 天梯下方的说明与来源:与模型行同一种玻璃面板,不再用边框 ---------- */
+:root { --panel-tint: rgba(28, 28, 34, .46); }
+[data-theme='light'] { --panel-tint: rgba(255, 255, 255, .76); }
+[data-rain] { --panel-tint: rgba(20, 22, 30, .5); }
+
+.lg-panel {
+  position: relative;
+  border: 0;
+  border-radius: 20px;
+  background-color: var(--panel-tint);
+}
+/* 面板里是正文:高光垫到文字下面(面板自身是 isolation 层叠上下文,-1 仍在底色之上) */
+.lg-panel::after { z-index: -1; }
+#rankingsApp .rk-notes > .rk-fold.lg-panel {
+  margin: 0 0 12px;
+  border: 0;
+  border-radius: 20px;
+  background-color: var(--panel-tint);
+}
+#rankingsApp .rk-notes > .rk-fold.lg-panel > summary { padding: 12px 20px; }
+#rankingsApp .rk-notes > .rk-fold.lg-panel .rk-fold-body {
+  border-top: 1px solid var(--glass-rim-lo);
+  padding: 6px 20px 12px;
+}
+#rankingsApp .rk-notes > .rk-note.lg-panel { padding: 14px 20px; margin: 0 0 12px; }
+
+/* ---------- 白天模式:天梯区域文字加深,玻璃再实一点 —— 背后是演草纸,淡字会被格线吃掉 ---------- */
+[data-theme='light'] {
+  --row-tint: rgba(255, 255, 255, .6);
+  --row-tint-hover: rgba(255, 255, 255, .74);
+}
+[data-theme='light'] #rankingsApp,
+[data-theme='light'] .rk-density {
+  --text-secondary: #37373e;
+  --text-tertiary: #54545c;
+}
+
+/* ---------- 两张宽表:鼠标拖动 + 顶部同步滚动条 ---------- */
+.rk-table-wrap.is-draggable { cursor: grab; }
+.rk-table-wrap.is-grabbing,
+.rk-table-wrap.is-grabbing * { cursor: grabbing !important; user-select: none; }
+.rk-hbar {
+  position: sticky;
+  top: calc(var(--header-height) + var(--safe-t));
+  z-index: 6;
+  height: 14px;
+  margin: 0 0 6px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) var(--glass-tint);
+}
+.rk-hbar > div { height: 1px; }
+.rk-hbar::-webkit-scrollbar { height: 10px; }
+.rk-hbar::-webkit-scrollbar-track { background: var(--glass-tint); border-radius: 999px; }
+.rk-hbar::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+/* ---------- 白天模式的阅读区:在演草纸上压一张纸 ----------
+   格线只留在页边;正文与左右两栏是干净的纸色,读者的注意力不被格子分散 */
+[data-theme='light'] { --paper-sheet: rgba(252, 251, 247, .97); }
+[data-theme='light'] .post-content-main,
+[data-theme='light'] .page-detail {
+  background: var(--paper-sheet);
+  padding: 36px 40px 80px;
+  border-radius: 18px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), 0 12px 36px rgba(70, 60, 30, .10);
+}
+[data-theme='light'] .post-sidebar-left,
+[data-theme='light'] .post-sidebar-right {
+  background: var(--paper-sheet);
+  padding: 18px 16px;
+  border-radius: 16px;
+  border-right-color: transparent;
+  box-shadow: 0 8px 24px rgba(70, 60, 30, .08);
+}
+@media (max-width: 768px) {
+  [data-theme='light'] .post-content-main,
+  [data-theme='light'] .page-detail { padding: 20px 16px 60px; border-radius: 14px; }
+}

@@ -413,10 +413,10 @@ document.addEventListener('DOMContentLoaded', function () {
       defs = svg.querySelector('defs');
     }
 
-    function sdf(x, y, hw, hh, shape) {
+    function sdf(x, y, hw, hh, shape, rad) {
       var qx, qy;
-      if (shape === 'pill') {
-        var r = Math.min(hh, hw);
+      if (shape === 'pill' || shape === 'round') {
+        var r = shape === 'pill' ? Math.min(hh, hw) : Math.min(rad, hh, hw);
         qx = Math.abs(x) - (hw - r); qy = Math.abs(y) - (hh - r);
         return Math.hypot(Math.max(qx, 0), Math.max(qy, 0)) + Math.min(Math.max(qx, qy), 0) - r;
       }
@@ -424,16 +424,16 @@ document.addEventListener('DOMContentLoaded', function () {
       return Math.hypot(Math.max(qx, 0), Math.max(qy, 0)) + Math.min(Math.max(qx, qy), 0);
     }
 
-    function buildMap(w, h, shape, bevel) {
+    function buildMap(w, h, shape, bevel, rad) {
       var cv = document.createElement('canvas'); cv.width = w; cv.height = h;
       var ctx = cv.getContext('2d'), img = ctx.createImageData(w, h), D = img.data;
       var hw = w / 2, hh = h / 2, e = 0.75;
       for (var y = 0; y < h; y++) for (var x = 0; x < w; x++) {
-        var px = x + 0.5 - hw, py = y + 0.5 - hh, d = sdf(px, py, hw, hh, shape), dx = 0, dy = 0;
+        var px = x + 0.5 - hw, py = y + 0.5 - hh, d = sdf(px, py, hw, hh, shape, rad), dx = 0, dy = 0;
         if (d < 0 && -d < bevel) {
           var m = Math.pow(1 + d / bevel, 2.2);   // 越靠边位移越大
-          var gx = sdf(px + e, py, hw, hh, shape) - sdf(px - e, py, hw, hh, shape);
-          var gy = sdf(px, py + e, hw, hh, shape) - sdf(px, py - e, hw, hh, shape);
+          var gx = sdf(px + e, py, hw, hh, shape, rad) - sdf(px - e, py, hw, hh, shape, rad);
+          var gy = sdf(px, py + e, hw, hh, shape, rad) - sdf(px, py - e, hw, hh, shape, rad);
           var len = Math.hypot(gx, gy) || 1;
           dx = -gx / len * m; dy = -gy / len * m;  // 沿法线向内取样
         }
@@ -455,9 +455,9 @@ document.addEventListener('DOMContentLoaded', function () {
       return f;
     }
 
-    function fillFilter(f, w, h, shape, bevel, S, chroma) {
+    function fillFilter(f, w, h, shape, bevel, S, chroma, rad) {
       var html = '<feImage x="0" y="0" width="' + w + '" height="' + h + '" preserveAspectRatio="none" href="' +
-                 buildMap(w, h, shape, bevel) + '" result="map"/>';
+                 buildMap(w, h, shape, bevel, rad) + '" result="map"/>';
       if (chroma) {   // 三通道各自位移 → 边缘一圈细彩边
         ['r', 'g', 'b'].forEach(function (ch, k) {
           html += '<feDisplacementMap in="SourceGraphic" in2="map" scale="' + (S * [1, 0.92, 0.84][k]) +
@@ -479,7 +479,8 @@ document.addEventListener('DOMContentLoaded', function () {
       var d = el.dataset, shape = d.lgShape || 'rect';
       var bevel = parseFloat(d.lgBevel) || Math.min(h * 0.5, 20);
       var S = parseFloat(d.lgScale) || 34, blur = d.lgBlur || '1', chroma = d.lgChroma !== '0';
-      var key = [w, h, shape, bevel, S, chroma ? 1 : 0].join('|');
+      var rad = parseFloat(d.lgRadius) || 20;
+      var key = [w, h, shape, bevel, S, chroma ? 1 : 0, rad].join('|');
       if (el._lgKey === key) return;
       el._lgKey = key;
       if (!ON || (LITE && d.lgHeavy)) return;      // 交给 CSS 的磨砂兜底
@@ -487,10 +488,10 @@ document.addEventListener('DOMContentLoaded', function () {
       var id;
       if (d.lgOwn) {   // 透镜:滑动时宽度逐帧在变,用自己的滤镜原地更新,别塞进缓存
         id = el._lgOwnId || (el._lgOwnId = 'lgo' + (++uid));
-        fillFilter(document.getElementById(id) || makeFilter(id), w, h, shape, bevel, S, chroma);
+        fillFilter(document.getElementById(id) || makeFilter(id), w, h, shape, bevel, S, chroma, rad);
       } else {         // 同尺寸同参数共用一张贴图:天梯 20 行只算一次
         id = cache[key];
-        if (!id) { id = cache[key] = 'lg' + (++uid); fillFilter(makeFilter(id), w, h, shape, bevel, S, chroma); }
+        if (!id) { id = cache[key] = 'lg' + (++uid); fillFilter(makeFilter(id), w, h, shape, bevel, S, chroma, rad); }
       }
       el.style.backdropFilter = 'url(#' + id + ') blur(' + blur + 'px) saturate(1.8) brightness(1.03)';
     }
@@ -598,6 +599,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     LG.seg(document.getElementById('siteNav'), '.nav-link');
     document.querySelectorAll('[data-lg-seg]').forEach(function (b) { LG.seg(b, 'button'); });
+    // 天梯下方的说明与来源:和模型行同一种玻璃,不再用边框框起来。
+    // 面板里是整段文字,所以折射更弱、模糊更重,背后的演草纸格线不抢字
+    document.querySelectorAll('#rankingsApp .rk-notes > .rk-fold, #rankingsApp .rk-notes > .rk-note').forEach(function (el) {
+      if (el._lgInit) return;
+      el._lgInit = true;
+      el.classList.add('lg', 'lg-panel');
+      el.dataset.lgShape = 'round'; el.dataset.lgRadius = '20';
+      el.dataset.lgChroma = '0'; el.dataset.lgScale = '24'; el.dataset.lgBevel = '18'; el.dataset.lgBlur = '4';
+      LG.watch(el);
+    });
   }
 
   function initPage() {
@@ -1593,7 +1604,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function renderInsts() {
       instsEl.innerHTML = instKeys.map(function (k) {
         var has = !!metricOf(k);
-        return '<div class="rk-inst' + (has ? '' : ' is-na') + '">' +
+        if (!has) return '';   // 该维度没有这家机构的指标:不显示,免得一行灰掉的空控件
+        return '<div class="rk-inst">' +
           '<input type="checkbox" data-inst="' + k + '"' + (state.enabled[k] ? ' checked' : '') + (has ? '' : ' disabled') + ' aria-label="启用 ' + INSTS[k].name + '">' +
           '<a href="' + INSTS[k].url + '" target="_blank" rel="noopener" class="rk-inst-name">' + INSTS[k].name + '</a>' +
           (has
@@ -1805,6 +1817,71 @@ document.addEventListener('DOMContentLoaded', function () {
 
     makeResizable(document.querySelector('.rk-price-table'));
     makeResizable(document.querySelector('.rk-plat-table'));
+
+    /* 两张宽表:按住鼠标左右拖动,并在表格上方放一条与底部同步的滚动条(吸顶,长表滚到中间也看得到)。
+       触屏本来就能手指滑,只接管鼠标;链接、按钮、列宽拖把、悬停卡上的点击不拦 */
+    function dragScroll(table) {
+      var wrap = table && table.closest('.rk-table-wrap');
+      if (!wrap || wrap._drag) return;
+      wrap._drag = true;
+      wrap.classList.add('is-draggable');
+
+      var bar = document.createElement('div');
+      bar.className = 'rk-hbar';
+      bar.setAttribute('aria-hidden', 'true');
+      bar.innerHTML = '<div></div>';
+      wrap.parentNode.insertBefore(bar, wrap);
+      var syncing = false;
+      function size() {
+        bar.firstChild.style.width = wrap.scrollWidth + 'px';
+        bar.hidden = wrap.scrollWidth <= wrap.clientWidth + 1;
+      }
+      bar.addEventListener('scroll', function () {
+        if (syncing) { syncing = false; return; }
+        syncing = true; wrap.scrollLeft = bar.scrollLeft;
+      });
+      wrap.addEventListener('scroll', function () {
+        if (syncing) { syncing = false; return; }
+        syncing = true; bar.scrollLeft = wrap.scrollLeft;
+      });
+      if ('ResizeObserver' in window) {
+        var r = new ResizeObserver(size);
+        r.observe(wrap); r.observe(table);
+      }
+      size();
+
+      var down = null, moved = false;
+      wrap.addEventListener('pointerdown', function (e) {
+        if (e.pointerType !== 'mouse' || e.button !== 0) return;
+        if (e.target.closest('a, button, input, select, textarea, summary, .rk-resizer, .rk-tipcard')) return;
+        down = { x: e.clientX, left: wrap.scrollLeft, id: e.pointerId };
+        moved = false;
+      });
+      wrap.addEventListener('pointermove', function (e) {
+        if (!down || e.pointerId !== down.id) return;
+        var dx = e.clientX - down.x;
+        if (!moved && Math.abs(dx) < 5) return;   // 小于 5px 当作点击/选字,不当拖动
+        if (!moved) { moved = true; wrap.classList.add('is-grabbing'); wrap.setPointerCapture(down.id); }
+        wrap.scrollLeft = down.left - dx;
+        e.preventDefault();
+      });
+      function up() {
+        if (!down) return;
+        if (moved) {
+          wrap.classList.remove('is-grabbing');
+          // 拖完松手时浏览器会补一个 click,别让它误触发单元格里的东西(只拦松手后 50ms 内的那一次)
+          wrap._noClickUntil = Date.now() + 50;
+        }
+        down = null;
+      }
+      wrap.addEventListener('click', function (ev) {
+        if (Date.now() < (wrap._noClickUntil || 0)) { ev.stopPropagation(); ev.preventDefault(); }
+      }, true);
+      wrap.addEventListener('pointerup', up);
+      wrap.addEventListener('pointercancel', up);
+    }
+    dragScroll(document.querySelector('.rk-price-table'));
+    dragScroll(document.querySelector('.rk-plat-table'));
 
     /* --- 两张平台表:品牌水印 ---
        与天梯同一套「背后灵」:平台名在左上,品牌 logo 放大调淡压在单元格右下;
