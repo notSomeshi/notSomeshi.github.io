@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>自己办一场 AI 斗蛐蛐:七个回合,一个下午测出谁更适合你 | ByteVibe</title>
+<meta name="description" content="AI 模型的价格、评测口径与选购判断。模型天梯、订阅性价比、评测成本对比，数据只认厂商官网、均标注快照日期。">
+<meta name="author" content="ByteVibe">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='0,0 100,0 100,78 78,100 0,100' fill='%23ffd802'/><text x='50' y='70' font-size='58' font-weight='800' font-family='ui-monospace,monospace' fill='%230d0d0f' text-anchor='middle'>B</text></svg>">
+<link rel="alternate" type="application/atom+xml" title="ByteVibe" href="/atom.xml">
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<link rel="stylesheet" href="/css/brands.css">
+
+
+<script src="/js/main.js" defer></script>
+<script>
+  // 暗色优先:light 显式切亮色;rain 提前打上标记避免闪烁
+  (function() {
+    try {
+      // 大字版:必须在首次绘制前打上,否则会先渲染小字再跳大
+      if (localStorage.getItem('fontsize') === 'large') {
+        document.documentElement.setAttribute('data-fontsize', 'large');
+      }
+      var t = localStorage.getItem('theme');
+      if (t === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else if (t === 'rain') {
+        document.documentElement.setAttribute('data-rain', '');
+        // 雨夜模式:页面加载的同时就开始预载雨声(与 main.js 的 RAIN_SRC 保持一致)
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.as = 'audio';
+        l.href = '/audio/rain.mp3?v=3';
+        document.head.appendChild(l);
+      }
+    } catch (e) {}
+  })();
+</script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+  
+  <canvas class="rain-canvas" id="rainCanvas" aria-hidden="true"></canvas>
+  <div class="reading-progress" id="readingProgress"></div>
+  <header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a class="site-logo" href="/">
+      ByteVibe
+    </a>
+    <nav class="site-nav" id="siteNav">
+      
+      
+        
+        
+        <a class="nav-link" href="/">首页</a>
+      
+        
+        
+        <a class="nav-link" href="/archives/">归档</a>
+      
+        
+        
+        <a class="nav-link" href="/categories/">分类</a>
+      
+        
+        
+        <a class="nav-link" href="/tags/">标签</a>
+      
+        
+        
+        <a class="nav-link" href="/about/">关于</a>
+      
+    </nav>
+    <div class="header-actions">
+      <button class="header-icon-btn" id="searchToggle" aria-label="搜索" title="搜索 (Ctrl+K)">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+      <button class="header-icon-btn theme-toggle" id="themeToggle" aria-label="切换显示模式(浅色 / 深色 / 雨夜)" title="显示模式:浅色 → 深色 → 雨夜">
+        <span class="icon-sun"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+        <span class="icon-moon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+        <span class="icon-umbrella"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 12a11.05 11.05 0 0 0-22 0Z"></path><path d="M12 12v7a2 2 0 0 0 4 0"></path></svg></span>
+      </button>
+      <button class="header-icon-btn fontsize-toggle" id="fontsizeToggle" aria-label="切换大字版" aria-pressed="false" title="大字版:放大字号并提高对比度">
+        <span class="icon-fs-large" aria-hidden="true">大</span>
+        <span class="icon-fs-small" aria-hidden="true">小</span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打开菜单">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    
+      <a class="mobile-nav-link" href="/">首页</a>
+    
+      <a class="mobile-nav-link" href="/archives/">归档</a>
+    
+      <a class="mobile-nav-link" href="/categories/">分类</a>
+    
+      <a class="mobile-nav-link" href="/tags/">标签</a>
+    
+      <a class="mobile-nav-link" href="/about/">关于</a>
+    
+  </div>
+</header>
+
+  <main class="main-content">
+    <article class="post-detail">
+  <div class="container-docs">
+    <div class="post-layout-grid">
+      <!-- 1. Left Sidebar: Documentation Navigation -->
+      <aside class="post-sidebar-left">
+        <div class="sidebar-sticky">
+          <h3 class="sidebar-title">全部文章</h3>
+          <ul class="sidebar-list">
+            
+              <li class="sidebar-item active">
+                <a href="/2026/10/05/ai-model-cricket-fight/">自己办一场 AI 斗蛐蛐:七个回合,一个下午测出谁更适合你</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/09/23/meta-muse-spark-13-price-tags/">Meta 给同一个模型开了四种价,其中一种用数据付</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/09/20/code-that-maintains-itself/">能算出来的数,就别写死</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/09/20/elo-anchor-shift/">把尺子的零点挪到谁身上</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/09/17/anthropic-brake-paradox/">先摘掉自己的刹车,再请人装一个所有人都得踩的</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/09/05/benchmark-shelf-life/">换了套卷子,全榜掉了 9 到 12 分</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/09/03/captcha-stops-humans/">机器人和你,过验证码的次数一样多</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/29/model-supply-as-leverage/">当模型访问权变成筹码:一周三件事,和中国开源的意外位置</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/20/relay-api-verification/">中转站选购与验货:怎么测出模型被&#34;降智&#34;或货不对板</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/15/what-is-agent-harness/">同一个模型,换个壳分数差 24 分:harness 入门</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/15/what-august-deleted/">这个月,AI 圈删掉了什么</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/15/ai-becomes-utility/">峰谷电价来了:AI 正在变成一门电力生意</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/08/reasoning-effort-hidden-dimension/">你买的不是模型,是&#34;让它想多久&#34;</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/08/seat-pricing-sunset/">席位制的黄昏:当软件的边际成本不再是零</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/05/benchmark-trust-crisis/">当考卷泄题成为常态:AI 评测的信任危机</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/05/pilot-to-production-gap/">88% 的 AI 试点走不到生产,而输的不是模型</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/04/agent-liability-2026/">Agent 闯了祸算谁的:自主系统的责任正在被法律钉死</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/04/ai-power-grid-2026/">电网成为 AI 的硬约束:一场从机房烧到居民电费的挤占</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/03/cloud-price-war-2026-08/">云端在降价,本地在涨价:2026 年夏天的两个反方向</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/03/hardware-price-surge-2026/">最贵装机季:AI 抢走了你的内存条</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/31/ai-briefing-2026-07-late/">七月下半月速览:开源权重贴身、Agent 越狱进生产环境、监管转向市场结构</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/31/zero-cost-ai-2026/">零成本用上 AI:2026 年 7 月的羊毛地图</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/what-is-multimodal/">什么是多模态?——一篇给非技术读者的说明</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/subscription-tier-fragmentation/">订阅档位正在碎片化:当&#34;买哪个&#34;比&#34;用哪个&#34;更难</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/ai-finance-pitfalls/">AI 做金融分析的三个致命陷阱:在你把钱交给它之前</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/opus5-price-war/">「半价」的参照物是谁:一句宣传语引发的集体误读</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/one-model-many-scores/">一个模型,N 个分数:当 effort 和编排模式让榜单失去唯一解</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/20/grok45-ide-native-models/">Grok 4.5 与「IDE 原生」模型:当编辑器成为训练场</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/20/frontier-convergence-2026/">前沿收敛:为什么 2026 年榜单顶部挤成了一团</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/17/openrouter-power-shift/">OpenRouter 上的权力转移:中国开源模型如何吃下一半流量</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/17/ai-frontier-briefing-2026-07/">2026 年中前沿速览:模型分层、Agent 落地与监管转折</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-prospects-and-strata/">前景、困难与阶层重排:AI 正在改写谁的命运?</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-dividend-paradox/">AI 红利悖论:我们为 AI 买单三年,红利为何还没普惠?</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-capital-markets-2026/">资本市场视角下的 AI 局势:7250 亿美元 Capex、循环交易与泡沫之辩</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/no-code-mvp-to-solopreneur/">从 Vibe Coding 到超级个体：2026 年全栈独立开发的新叙事</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/yolo-mode-and-ai-safety-guardrails/">YOLO 模式下的安全边界：如何防止 AI 删库跑路</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/high-performance-ai-prompts-library/">如何撰写黄金级 AI Prompt：从“做个功能”到“系统级交付”</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/mcp-server-practical-recipes/">Model Context Protocol (MCP) 深度指南：连接你的 AI 与现实数据</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/advanced-vibe-coding-roo-clinic/">Cline 与 Roo Code 实战：下一代 Vibe Coding 的工程范式</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/04/01/claude-code-complete-guide/">Claude Code 从入门到精通：面向工程师与产品经理的 AI 编程完全指南</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/30/future-of-vibe-coding/">Vibe Coding 的未来：当编程不再需要编程</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/25/ai-coding-tools-2025/">2025 年最值得关注的 AI 编程工具全景</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/20/vibe-coding-best-practices/">Vibe Coding 最佳实践：如何高效地与 AI 结对编程</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/15/what-is-vibe-coding/">什么是 Vibe Coding？一文读懂 AI 时代的编程新范式</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/10/hello-world/">欢迎来到 ByteVibe</a>
+              </li>
+            
+          </ul>
+        </div>
+      </aside>
+
+      <!-- 2. Middle Column: Main Article Content -->
+      <div class="post-content-main">
+        <header class="post-header">
+          <div class="post-meta">
+            <time class="post-date">2026年10月05日</time>
+            
+            <span class="post-meta-sep">·</span>
+            <span class="post-category">
+              
+                <a href="/categories/%E5%AE%9E%E7%94%A8%E6%8C%87%E5%8D%97/">实用指南</a>
+              
+            </span>
+            
+            <span class="post-meta-sep">·</span>
+            <span class="reading-time">11 分钟阅读</span>
+          </div>
+          <h1 class="post-title">自己办一场 AI 斗蛐蛐:七个回合,一个下午测出谁更适合你</h1>
+          
+          <div class="post-tags">
+            
+              <a class="tag-pill" href="/tags/%E8%AF%84%E6%B5%8B%E6%96%B9%E6%B3%95/">#评测方法</a>
+            
+              <a class="tag-pill" href="/tags/%E6%A8%A1%E5%9E%8B%E9%80%89%E5%9E%8B/">#模型选型</a>
+            
+              <a class="tag-pill" href="/tags/%E5%85%A5%E9%97%A8/">#入门</a>
+            
+          </div>
+          
+        </header>
+
+        
+
+        
+        
+        <details class="mobile-toc">
+          <summary>目录 / Contents</summary>
+          <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%BC%80%E6%89%93%E4%B9%8B%E5%89%8D-%E5%9B%9B%E6%9D%A1%E8%A7%84%E7%9F%A9"><span class="toc-list-text">开打之前:四条规矩</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E7%AC%AC%E4%B8%80%E5%9B%9E%E5%90%88-%E5%81%9A%E7%BD%91%E7%AB%99-%E7%9C%8B%E4%B8%80%E6%AC%A1%E5%87%BA%E6%B4%BB%E7%9A%84%E5%AE%8C%E6%95%B4%E5%BA%A6"><span class="toc-list-text">第一回合:做网站(看一次出活的完整度)</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E7%AC%AC%E4%BA%8C%E5%9B%9E%E5%90%88-%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD-%E7%9C%8B%E5%86%99%E5%87%BA%E6%9D%A5%E7%9A%84%E4%BB%A3%E7%A0%81%E5%BF%AB%E4%B8%8D%E5%BF%AB"><span class="toc-list-text">第二回合:前端性能(看写出来的代码快不快)</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E7%AC%AC%E4%B8%89%E5%9B%9E%E5%90%88-%E6%94%B9%E4%BB%A3%E7%A0%81-%E7%94%A8%E2%80%9D%E9%9A%90%E8%97%8F%E6%B5%8B%E8%AF%95%E2%80%9D%E5%88%A4%E5%AF%B9%E9%94%99"><span class="toc-list-text">第三回合:改代码(用”隐藏测试”判对错)</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E7%AC%AC%E5%9B%9B%E5%9B%9E%E5%90%88-%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-%E7%9C%8B%E5%AE%83%E4%BC%9A%E4%B8%8D%E4%BC%9A%E8%87%AA%E5%B7%B1%E5%8A%A8%E6%89%8B%E9%AA%8C%E8%AF%81"><span class="toc-list-text">第四回合:工具使用(看它会不会自己动手验证)</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E7%AC%AC%E4%BA%94%E5%9B%9E%E5%90%88-%E7%89%B9%E5%AE%9A%E8%AF%AD%E8%A8%80-%E6%B5%8B%E4%BD%A0%E7%9C%9F%E6%AD%A3%E8%A6%81%E7%94%A8%E7%9A%84%E9%82%A3%E9%97%A8"><span class="toc-list-text">第五回合:特定语言(测你真正要用的那门)</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E7%AC%AC%E5%85%AD%E5%9B%9E%E5%90%88-%E5%A4%9A%E6%A8%A1%E6%80%81-%E7%9C%8B%E5%AE%83%E6%98%AF%E7%9C%9F%E7%9C%8B%E6%87%82%E4%BA%86%E8%BF%98%E6%98%AF%E5%9C%A8%E7%BC%96"><span class="toc-list-text">第六回合:多模态(看它是真看懂了还是在编)</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E7%AC%AC%E4%B8%83%E5%9B%9E%E5%90%88-%E6%89%A7%E8%A1%8C%E5%8A%9B%E5%92%8C%E7%90%86%E8%A7%A3%E5%8A%9B-%E7%9C%8B%E5%AE%83%E5%90%AC%E4%B8%8D%E5%90%AC%E8%AF%9D%E3%80%81%E4%BC%9A%E4%B8%8D%E4%BC%9A%E5%A4%9A%E6%83%B3%E4%B8%80%E6%AD%A5"><span class="toc-list-text">第七回合:执行力和理解力(看它听不听话、会不会多想一步)</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E8%AE%B0%E5%88%86-%E5%88%AB%E5%8F%AA%E7%9C%8B%E6%80%BB%E5%88%86"><span class="toc-list-text">记分:别只看总分</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-list-text">结语</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+        </details>
+        
+
+        <div class="post-body">
+          <p>榜单告诉你”谁平均更强”,但你关心的是”<strong>谁在我的活儿上更强</strong>“。这两件事经常对不上:同一个模型换个工具壳、换个推理强度,分数就能差出一截;公开题目还可能早被模型背过。</p>
+<p>最靠谱的办法是自己出题、自己比。不需要写评测框架,也不需要花钱——准备几个模型的免费额度、一个浏览器、一个下午就够。下面是一套<strong>七回合的斗蛐蛐流程</strong>,每回合给一道能直接复制的题、一个看得见的判分标准。</p>
+<h2 id="开打之前-四条规矩"><a href="#开打之前-四条规矩" class="headerlink" title="开打之前:四条规矩"></a>开打之前:四条规矩</h2><div class="report-box">
+<strong>1. 同条件。</strong>同一道题、同样的推理强度、每次开新对话(关掉记忆功能),在同一类工具里跑。<br>
+<strong>2. 盲评。</strong>把输出复制出来,标成甲乙丙,让朋友打乱顺序再给你看——你知道是哪家写的,打分就会偏。<br>
+<strong>3. 每题跑两次。</strong>模型有随机性,一次赢不算赢;两次结果差很大,本身就是一个扣分项。<br>
+<strong>4. 只计看得见的结果。</strong>能打开、能运行、能数出来的才算分,"感觉写得更有深度"不算。
+</div>
+
+<p>为什么要自己出题?公开题目会进训练数据,模型可能是”背出来”的。LiveBench 这类榜单定期换新题,就是为了对付这个问题(<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2406.19314">论文</a>)。你自己编的题,模型一定没见过。</p>
+<p>打分统一用三档:<strong>0 &#x3D; 没做到,1 &#x3D; 部分做到,2 &#x3D; 完全做到</strong>。比十分制好判,吵不起来。</p>
+<h2 id="第一回合-做网站-看一次出活的完整度"><a href="#第一回合-做网站-看一次出活的完整度" class="headerlink" title="第一回合:做网站(看一次出活的完整度)"></a>第一回合:做网站(看一次出活的完整度)</h2><p>把下面这段原样发给每个模型:</p>
+<pre><code class="hljs text">做一个单文件 HTML 页面,是一家虚构奶茶店「半糖」的点单页。要求:
+1. 不用任何外部库和图片链接,所有样式和脚本写在同一个文件里
+2. 手机宽度下单列排布,电脑宽度下三列
+3. 右上角有亮色 / 暗色切换按钮,刷新后记住选择
+4. 至少 6 款饮品,每款可选甜度(全糖 / 半糖 / 无糖)
+5. 点&quot;加入&quot;后,购物车角标数字 +1,底部显示总价
+6. 购物车可以删除单项,总价同步更新</code></pre>
+
+<p><strong>怎么判</strong>:存成 <code>.html</code> 双击打开,对着六条逐条点。每条做到得 1 分,满分 6。再把浏览器窗口拉窄,看手机布局有没有乱。</p>
+<p><strong>这回合看什么</strong>:能不能一次把多条要求都落实。弱一点的模型通常前三条做得漂亮,第 5、6 条的交互要么没写,要么点了没反应。</p>
+<h2 id="第二回合-前端性能-看写出来的代码快不快"><a href="#第二回合-前端性能-看写出来的代码快不快" class="headerlink" title="第二回合:前端性能(看写出来的代码快不快)"></a>第二回合:前端性能(看写出来的代码快不快)</h2><pre><code class="hljs text">做一个单文件 HTML 页面:一张 10,000 行的表格(列:编号、姓名、城市、金额,数据用脚本随机生成),
+上方一个搜索框,输入时实时筛选。搜索框监听 input 事件,不要加防抖。不用外部库。</code></pre>
+
+<p><strong>怎么判</strong>:打开页面,按 F12 打开控制台,粘贴下面这段回车,记下毫秒数,每个页面测三次取中间值:</p>
+<pre><code class="hljs js"><span class="hljs-keyword">const</span> box = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;input&#x27;</span>);
+<span class="hljs-keyword">const</span> t0 = performance.<span class="hljs-title function_">now</span>();
+box.<span class="hljs-property">value</span> = <span class="hljs-string">&#x27;7&#x27;</span>;
+box.<span class="hljs-title function_">dispatchEvent</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Event</span>(<span class="hljs-string">&#x27;input&#x27;</span>, &#123; <span class="hljs-attr">bubbles</span>: <span class="hljs-literal">true</span> &#125;));
+<span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function"><span class="hljs-params">r</span> =&gt;</span> <span class="hljs-title function_">requestAnimationFrame</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">setTimeout</span>(r)));
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;筛选耗时&#x27;</span>, <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">round</span>(performance.<span class="hljs-title function_">now</span>() - t0), <span class="hljs-string">&#x27;ms&#x27;</span>);</code></pre>
+
+<p>想再多一项,可以用 Chrome 开发者工具自带的 <a target="_blank" rel="noopener" href="https://developer.chrome.com/docs/lighthouse/overview">Lighthouse</a> 给第一回合的页面跑一次性能分。</p>
+<p><strong>这回合看什么</strong>:差距通常很明显——有的模型每敲一个字就重建一万行 DOM,有的只切换显示或做了虚拟滚动。数字差几倍到几十倍,不用争。</p>
+<h2 id="第三回合-改代码-用”隐藏测试”判对错"><a href="#第三回合-改代码-用”隐藏测试”判对错" class="headerlink" title="第三回合:改代码(用”隐藏测试”判对错)"></a>第三回合:改代码(用”隐藏测试”判对错)</h2><p>发给模型的只有这一段:</p>
+<pre><code class="hljs text">下面这个 Python 函数有 bug,请修好它,只输出修好的函数。
+
+def merge(intervals):
+    &quot;&quot;&quot;合并重叠区间,首尾相接也算重叠。
+    例:[(1,3),(2,6),(8,10)] → [(1,6),(8,10)]&quot;&quot;&quot;
+    result = []
+    for start, end in intervals:
+        if result and start &lt; result[-1][1]:
+            result[-1] = (result[-1][0], end)
+        else:
+            result.append((start, end))
+    return result</code></pre>
+
+<p><strong>怎么判</strong>:下面这组测试<strong>不要给模型看</strong>。把模型的答案和它放进同一个文件,运行一下,看通过几个:</p>
+<pre><code class="hljs python">cases = [
+    ([], []),
+    ([(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>), (<span class="hljs-number">2</span>, <span class="hljs-number">6</span>), (<span class="hljs-number">8</span>, <span class="hljs-number">10</span>)], [(<span class="hljs-number">1</span>, <span class="hljs-number">6</span>), (<span class="hljs-number">8</span>, <span class="hljs-number">10</span>)]),
+    ([(<span class="hljs-number">8</span>, <span class="hljs-number">10</span>), (<span class="hljs-number">1</span>, <span class="hljs-number">3</span>), (<span class="hljs-number">2</span>, <span class="hljs-number">6</span>)], [(<span class="hljs-number">1</span>, <span class="hljs-number">6</span>), (<span class="hljs-number">8</span>, <span class="hljs-number">10</span>)]),   <span class="hljs-comment"># 输入乱序</span>
+    ([(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>), (<span class="hljs-number">3</span>, <span class="hljs-number">5</span>)], [(<span class="hljs-number">1</span>, <span class="hljs-number">5</span>)]),                     <span class="hljs-comment"># 首尾相接</span>
+    ([(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>), (<span class="hljs-number">2</span>, <span class="hljs-number">3</span>)], [(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>)]),                   <span class="hljs-comment"># 大区间包住小区间</span>
+    ([(<span class="hljs-number">1</span>, <span class="hljs-number">4</span>), (<span class="hljs-number">0</span>, <span class="hljs-number">2</span>), (<span class="hljs-number">3</span>, <span class="hljs-number">5</span>)], [(<span class="hljs-number">0</span>, <span class="hljs-number">5</span>)]),
+    ([(<span class="hljs-number">5</span>, <span class="hljs-number">5</span>)], [(<span class="hljs-number">5</span>, <span class="hljs-number">5</span>)]),
+]
+ok = <span class="hljs-number">0</span>
+<span class="hljs-keyword">for</span> inp, want <span class="hljs-keyword">in</span> cases:
+    <span class="hljs-keyword">try</span>:
+        ok += merge(<span class="hljs-built_in">list</span>(inp)) == want
+    <span class="hljs-keyword">except</span> Exception:
+        <span class="hljs-keyword">pass</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;ok&#125;</span>/<span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(cases)&#125;</span>&quot;</span>)</code></pre>
+
+<p>原函数藏了三个 bug:没先排序、相接时用了 <code>&lt;</code> 而不是 <code>&lt;=</code>、合并时没取较大的终点。原版只能过 3&#x2F;7,全修好才是 7&#x2F;7。<strong>只修了题干例子能看出来的那个,是这回合最常见的失分方式。</strong></p>
+<h2 id="第四回合-工具使用-看它会不会自己动手验证"><a href="#第四回合-工具使用-看它会不会自己动手验证" class="headerlink" title="第四回合:工具使用(看它会不会自己动手验证)"></a>第四回合:工具使用(看它会不会自己动手验证)</h2><p>这回合要在能调工具的环境里跑:Claude Code、Codex、Cursor、Trae 都行,或者网页版里打开联网搜索。两道题:</p>
+<p><strong>4a. 自己跑测试。</strong>把第三回合的原函数存成 <code>merge.py</code>,测试代码存成 <code>test_merge.py</code>,放进一个空文件夹,然后说:</p>
+<pre><code class="hljs text">这个文件夹里的测试没通过,请修好 merge.py。不许修改 test_merge.py。</code></pre>
+
+<p><strong>怎么判</strong>:看过程,不只看结果。运行了测试 +1,改完<strong>又跑了一次确认</strong>再 +1,没碰测试文件 +1,最终全通过 +1,满分 4。偷改测试文件让它”通过”的,这回合直接 0 分。</p>
+<p><strong>4b. 该查就查。</strong></p>
+<pre><code class="hljs text">Python 当前最新的正式版本号是多少?给出你的信息来源链接。</code></pre>
+
+<p><strong>怎么判</strong>:自己打开 python.org 对答案。用了搜索、答对、给了真链接得 2 分;没搜、凭记忆报了个旧版本得 0 分。<strong>这道题测的不是知识,是它知不知道自己的知识会过期。</strong></p>
+<h2 id="第五回合-特定语言-测你真正要用的那门"><a href="#第五回合-特定语言-测你真正要用的那门" class="headerlink" title="第五回合:特定语言(测你真正要用的那门)"></a>第五回合:特定语言(测你真正要用的那门)</h2><p>这回合按你自己的需要换题,下面给两个例子。</p>
+<p><strong>5a. 中文语感。</strong></p>
+<pre><code class="hljs text">把下面这段改得像中国人自然说话,意思不变:
+&quot;该功能的实现使得用户能够在进行文件上传的操作的过程中获得关于进度的实时的反馈。&quot;</code></pre>
+
+<p><strong>怎么判</strong>:几个模型的答案打乱顺序给家人看,问”哪句最像人话”。还嫌长、还堆着”的”的,排后面。</p>
+<p><strong>5b. 小众编程语言。</strong>假设你写 Rust:</p>
+<pre><code class="hljs text">用 Rust 写一个函数,统计一段文本里出现次数最多的 3 个单词(忽略大小写和标点),
+返回 Vec&lt;(String, usize)&gt;,并写一个 main 演示。只用标准库。</code></pre>
+
+<p><strong>怎么判</strong>:粘进官方的 <a target="_blank" rel="noopener" href="https://play.rust-lang.org/">Rust Playground</a> 点运行。一次编译通过得 2 分;把报错贴回去改一轮能过得 1 分;两轮还过不了得 0 分。换成你常用的语言也是一样的判法——<strong>编译器是最公正的裁判。</strong></p>
+<h2 id="第六回合-多模态-看它是真看懂了还是在编"><a href="#第六回合-多模态-看它是真看懂了还是在编" class="headerlink" title="第六回合:多模态(看它是真看懂了还是在编)"></a>第六回合:多模态(看它是真看懂了还是在编)</h2><p><strong>6a. 小票对账。</strong>拍一张超市小票,发给模型:</p>
+<pre><code class="hljs text">把这张小票上的每一项商品和价格列成表格,最后算出合计,并和小票上印的合计对比。</code></pre>
+
+<p><strong>怎么判</strong>:数它列对了几项(名称和价格都对才算)。最后合计跟小票对得上加 2 分。<strong>看不清就说看不清的,比硬编一个数字强</strong>——编出小票上没有的商品直接扣 2 分。</p>
+<p><strong>6b. 截图复刻。</strong>随便截一个网页的局部(比如某个登录框),发给模型:”用单文件 HTML 复刻这个界面”。打开后和原图左右对比,布局、配色、文字三项各给 0&#x2F;1&#x2F;2。</p>
+<p>想再玩得花一点,可以学 Simon Willison 的经典题”画一只骑自行车的鹈鹕(SVG)”(<a target="_blank" rel="noopener" href="https://simonwillison.net/tags/pelican-riding-a-bicycle/">他的历次结果</a>)——它测的是空间理解,结果一眼就能看出高下。</p>
+<h2 id="第七回合-执行力和理解力-看它听不听话、会不会多想一步"><a href="#第七回合-执行力和理解力-看它听不听话、会不会多想一步" class="headerlink" title="第七回合:执行力和理解力(看它听不听话、会不会多想一步)"></a>第七回合:执行力和理解力(看它听不听话、会不会多想一步)</h2><p><strong>7a. 约束清单。</strong></p>
+<pre><code class="hljs text">写一段介绍你最喜欢的季节的文字,要求:
+1. 正好 3 段
+2. 每段不超过 60 个字
+3. 全文不能出现&quot;的&quot;字
+4. 第二段必须提到一种食物
+5. 最后一句以问号结尾
+6. 不要用任何标题、列表或加粗</code></pre>
+
+<p><strong>怎么判</strong>:六条逐条数,满分 6。第 3 条最难,也最拉开差距——很多模型写着写着就忘了。</p>
+<p><strong>7b. 陷阱题。</strong>两道各发一次:</p>
+<pre><code class="hljs text">请用 100 字总结下面这篇文章的核心观点。</code></pre>
+
+<p>(什么都不附。)</p>
+<pre><code class="hljs text">鲁迅为什么在《红楼梦》里安排林黛玉进贾府?</code></pre>
+
+<p><strong>怎么判</strong>:第一题,指出”你没给文章”的得 2 分,凭空编一段总结的得 0 分。第二题,纠正前提(《红楼梦》是曹雪芹写的)得 2 分,顺着编下去的得 0 分。<strong>这两道题测的是理解力里最值钱的那部分:发现问题本身有问题。</strong></p>
+<h2 id="记分-别只看总分"><a href="#记分-别只看总分" class="headerlink" title="记分:别只看总分"></a>记分:别只看总分</h2><p>把结果填进一张表:</p>
+<table>
+<thead>
+<tr>
+<th>回合</th>
+<th>满分</th>
+<th>模型甲</th>
+<th>模型乙</th>
+<th>模型丙</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1 做网站</td>
+<td>6</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2 前端性能</td>
+<td>毫秒,越低越好</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>3 改代码</td>
+<td>7</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>4 工具使用</td>
+<td>4 + 2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>5 特定语言</td>
+<td>2 + 2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6 多模态</td>
+<td>按项数 + 6</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>7 执行与理解</td>
+<td>6 + 4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>然后<strong>只圈出跟你有关的回合</strong>。你主要写前端,就看 1、2、4;你主要处理文档和表格,就看 5、6、7。总分第一的模型,在你的场景里未必第一——这正是自己测的意义。</p>
+<p>几个容易踩的坑:</p>
+<ul>
+<li><strong>别拿免费版和付费版比。</strong>同一个名字,免费档常常用的是更低的推理强度,详见<a href="/2026/08/08/reasoning-effort-hidden-dimension/">你买的不是模型,是”让它想多久”</a></li>
+<li><strong>别拿网页版和编程工具比。</strong>同一个模型换个外壳,工具回合能差出一大截,原理见<a href="/2026/08/15/what-is-agent-harness/">harness 入门</a></li>
+<li><strong>走中转站的先验货。</strong>如果你用的是第三方中转 API,先确认拿到的是真模型:<a href="/2026/08/20/relay-api-verification/">中转站验货指南</a></li>
+<li><strong>题目别公开。</strong>你的题一旦发到网上,迟早会被模型背下来。想长期用,就每隔几个月换一批</li>
+</ul>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>榜单是体检报告,斗蛐蛐是试驾。前者告诉你车的参数,后者告诉你开着顺不顺手。七个回合跑下来大约两三个小时,得到的结论只对你有效——但这恰好就是你要的。</p>
+<p>想先看看大家公认的排名,再挑几个来试驾,可以从<a href="/rankings/">模型天梯</a>开始;免费额度去哪里领,看那一页的羊毛速查框。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li>Colin White、Samuel Dooley 等,<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2406.19314">LiveBench: A Challenging, Contamination-Limited LLM Benchmark</a>——定期换新题以降低训练数据污染</li>
+<li>Simon Willison,<a target="_blank" rel="noopener" href="https://simonwillison.net/tags/pelican-riding-a-bicycle/">pelican-riding-a-bicycle 系列</a>——“画一只骑自行车的鹈鹕”这道个人基准题的历次结果</li>
+<li>Chrome for Developers,<a target="_blank" rel="noopener" href="https://developer.chrome.com/docs/lighthouse/overview">Lighthouse 简介</a>——浏览器自带的网页性能评分工具</li>
+<li>Rust 官方,<a target="_blank" rel="noopener" href="https://play.rust-lang.org/">Rust Playground</a>——在线编译运行 Rust 代码</li>
+</ol>
+<p>本站相关:<a href="/2026/08/05/benchmark-trust-crisis/">当考卷泄题成为常态:AI 评测的信任危机</a> · <a href="/2026/07/27/one-model-many-scores/">一个模型,N 个分数</a> · <a href="/rankings/">模型天梯</a></p>
+<blockquote>
+<p>本文由 ByteVibe 撰写(AI 辅助研究整理)。文中观点的原始出处均已在正文与参考文献中标注,版权归原作者所有。</p>
+</blockquote>
+
+        </div>
+        
+        <footer class="post-footer">
+          <nav class="post-nav">
+            
+            
+            <a class="post-nav-item post-nav-next" href="/2026/09/23/meta-muse-spark-13-price-tags/">
+              <span class="post-nav-label">下一篇 →</span>
+              <span class="post-nav-title">Meta 给同一个模型开了四种价,其中一种用数据付</span>
+            </a>
+            
+          </nav>
+        </footer>
+      </div>
+
+      <!-- 3. Right Sidebar: Outline TOC Jump -->
+      <aside class="post-sidebar-right">
+        
+          <div class="toc-sticky">
+            <h3 class="toc-title">目录大纲</h3>
+            <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%BC%80%E6%89%93%E4%B9%8B%E5%89%8D-%E5%9B%9B%E6%9D%A1%E8%A7%84%E7%9F%A9"><span class="toc-list-text">开打之前:四条规矩</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E7%AC%AC%E4%B8%80%E5%9B%9E%E5%90%88-%E5%81%9A%E7%BD%91%E7%AB%99-%E7%9C%8B%E4%B8%80%E6%AC%A1%E5%87%BA%E6%B4%BB%E7%9A%84%E5%AE%8C%E6%95%B4%E5%BA%A6"><span class="toc-list-text">第一回合:做网站(看一次出活的完整度)</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E7%AC%AC%E4%BA%8C%E5%9B%9E%E5%90%88-%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD-%E7%9C%8B%E5%86%99%E5%87%BA%E6%9D%A5%E7%9A%84%E4%BB%A3%E7%A0%81%E5%BF%AB%E4%B8%8D%E5%BF%AB"><span class="toc-list-text">第二回合:前端性能(看写出来的代码快不快)</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E7%AC%AC%E4%B8%89%E5%9B%9E%E5%90%88-%E6%94%B9%E4%BB%A3%E7%A0%81-%E7%94%A8%E2%80%9D%E9%9A%90%E8%97%8F%E6%B5%8B%E8%AF%95%E2%80%9D%E5%88%A4%E5%AF%B9%E9%94%99"><span class="toc-list-text">第三回合:改代码(用”隐藏测试”判对错)</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E7%AC%AC%E5%9B%9B%E5%9B%9E%E5%90%88-%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-%E7%9C%8B%E5%AE%83%E4%BC%9A%E4%B8%8D%E4%BC%9A%E8%87%AA%E5%B7%B1%E5%8A%A8%E6%89%8B%E9%AA%8C%E8%AF%81"><span class="toc-list-text">第四回合:工具使用(看它会不会自己动手验证)</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E7%AC%AC%E4%BA%94%E5%9B%9E%E5%90%88-%E7%89%B9%E5%AE%9A%E8%AF%AD%E8%A8%80-%E6%B5%8B%E4%BD%A0%E7%9C%9F%E6%AD%A3%E8%A6%81%E7%94%A8%E7%9A%84%E9%82%A3%E9%97%A8"><span class="toc-list-text">第五回合:特定语言(测你真正要用的那门)</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E7%AC%AC%E5%85%AD%E5%9B%9E%E5%90%88-%E5%A4%9A%E6%A8%A1%E6%80%81-%E7%9C%8B%E5%AE%83%E6%98%AF%E7%9C%9F%E7%9C%8B%E6%87%82%E4%BA%86%E8%BF%98%E6%98%AF%E5%9C%A8%E7%BC%96"><span class="toc-list-text">第六回合:多模态(看它是真看懂了还是在编)</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E7%AC%AC%E4%B8%83%E5%9B%9E%E5%90%88-%E6%89%A7%E8%A1%8C%E5%8A%9B%E5%92%8C%E7%90%86%E8%A7%A3%E5%8A%9B-%E7%9C%8B%E5%AE%83%E5%90%AC%E4%B8%8D%E5%90%AC%E8%AF%9D%E3%80%81%E4%BC%9A%E4%B8%8D%E4%BC%9A%E5%A4%9A%E6%83%B3%E4%B8%80%E6%AD%A5"><span class="toc-list-text">第七回合:执行力和理解力(看它听不听话、会不会多想一步)</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E8%AE%B0%E5%88%86-%E5%88%AB%E5%8F%AA%E7%9C%8B%E6%80%BB%E5%88%86"><span class="toc-list-text">记分:别只看总分</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-list-text">结语</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+          </div>
+        
+      </aside>
+    </div>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <p class="copyright">&copy; 2026 ByteVibe. All rights reserved.</p>
+      <p class="powered-by">Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a></p>
+      
+      <div class="social-links">
+        
+          <a class="social-link" href="https://github.com/notSomeshi" target="_blank" rel="noopener noreferrer">GitHub</a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+
+  <div class="search-overlay" id="searchOverlay" hidden>
+  <div class="search-backdrop" id="searchBackdrop"></div>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="站内搜索">
+    <div class="search-input-wrap">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="searchInput" class="search-input" placeholder="搜索文章…" autocomplete="off" spellcheck="false">
+      <button class="search-close" id="searchClose" aria-label="关闭搜索">ESC</button>
+    </div>
+    <div class="search-results" id="searchResults">
+      <p class="search-hint">输入关键词搜索标题、标签与正文</p>
+    </div>
+  </div>
+</div>
+
+  <button class="scroll-to-top" id="scrollToTop" aria-label="回到顶部">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+</body>
+</html>
