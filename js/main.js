@@ -1996,14 +1996,15 @@ document.addEventListener('DOMContentLoaded', function () {
           // 先处理区间价 "$25–30 / 席":两端都要换算,否则会变成 "≈¥169–30" 这种错值
           // 原文自带的 "≈ $3" 一并吞掉:折算值本身就带 ≈,不吞会渲染成 "≈ ≈¥20"
           var html = el.dataset.usdOrig.replace(
-            /(?:≈\s*)?\$([\d,]+(?:\.\d+)?)\s*([–—~-])\s*([\d,]+(?:\.\d+)?)/g,
+            /(?:≈\s*)?\$(\d+(?:,\d{3})*(?:\.\d+)?)\s*([–—~-])\s*(\d+(?:,\d{3})*(?:\.\d+)?)/g,
             function (m, a, dash, b) {
               var x = num(a), y = num(b);
               if (isNaN(x) || isNaN(y)) return m;
               return '≈¥' + cnyNum(x) + dash + cnyNum(y);
             });
           // 再处理单值。$ 后必须紧跟数字——"$/分""$/M" 这类单位写法不会被命中
-          html = html.replace(/(?:≈\s*)?\$([\d,]+(?:\.\d+)?)/g, function (m, n) {
+          // 千分位只认 ",ddd":"$330,每分" 里的逗号是标点,不能被吞进数字(10-08 踩过)
+          html = html.replace(/(?:≈\s*)?\$(\d+(?:,\d{3})*(?:\.\d+)?)/g, function (m, n) {
             var v = num(n);
             return isNaN(v) ? m : cny(v);
           });
