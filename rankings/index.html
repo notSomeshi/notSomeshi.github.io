@@ -260,12 +260,12 @@
           <summary>读懂这张表:徽章含义、综合分算法、各维度口径</summary>
           <div class="rk-fold-body">
             <p class="rk-note"><strong><a class="term-tip" href="/2026/07/27/what-is-multimodal/" data-tip="多模态 = 模型能直接“看懂图片、听懂声音、看懂视频”,而不只是读文字。徽章依次为 文/图/音/视,亮起表示原生支持。点击阅读科普 →">模态徽章</a></strong> <i class="rk-mod is-on">文</i><i class="rk-mod is-on">图</i><i class="rk-mod">音</i><i class="rk-mod">视</i>:亮起=原生支持,是能力矩阵不是评分。目前只有 Gemini 四种输入全收;Muse Spark、Kimi K2.6、MiniMax M3 另收视频;<strong>Claude 与 GPT 全系只收图像</strong>,GLM-5.3、GLM-5.2、Qwen3.7 Max 与 DeepSeek V4 Pro 只收文字。</p>
-            <p class="rk-note"><strong>综合分</strong>:各机构分数在 20 个模型内 min-max 归一化后加权平均;缺失项不计权重、按剩余项重新归一,<span class="rk-miss-mark">—</span> 表示该机构未收录。点列头排序,点模型名跳官网。</p>
-            <p class="rk-note"><strong>可靠性</strong>:交给它的活能不能做完、会不会编造。由两家独立机构组成:<a href="https://artificialanalysis.ai/evaluations" target="_blank" rel="noopener">Artificial Analysis</a> 的三项(AutomationBench-AA 业务流程自动化、Terminal-Bench 4.0 自主多步执行、AA-Omniscience 不幻觉率 = 1 − 幻觉率)取平均,加上 LiveBench 的「智能体编程」。<br>原来的「社区体感」(Arena 投票 + OpenRouter 用量份额)已撤下:投票样本集中在单一网站的用户,份额数据自 2026-07-24 起停更、且只覆盖 8 个模型 —— 都不足以代表"好不好用"。</p>
-            <p class="rk-note"><strong>金融分析维度的两个代理指标</strong>:AA 智能指数与 LiveBench 数学子项(数值严谨性)。<strong>⚠ 2026-09-07 起这条口径更弱了</strong>:AA 在 v4.3(09-07)把<strong>唯一的金融向评测 τ³-Banking 移除</strong>,换成了 Zapier 的 AutomationBench-AA(通用业务流程自动化)。也就是说<strong>AA 指数里现在已不含任何银行/金融专项</strong>,本维度的代理性比之前更远——请务必按代理指标看待,不要当金融能力评分。真正的领域基准可参考 <a href="https://arxiv.org/abs/2402.12659" target="_blank" rel="noopener">FinBen</a>、<a href="https://arxiv.org/html/2505.19457v1" target="_blank" rel="noopener">BizFinBench</a>、FinanceBench。</p>
+            <p class="rk-note"><strong>综合分</strong>:各机构分数在 20 个模型内 min-max 归一化后加权平均;缺失项不计权重、按剩余项重新归一,<span class="rk-miss-mark">—</span> 表示该机构未收录。点列头排序,点模型名跳官网。<br><strong>LiveBench 2026-10-14 起换成 2.0</strong>(给模型交付真实长任务:智能体、编程、浏览器操作、数据分析、研究、设计),分数与 1.0 不可比,本站已整列换用 2.0。2.0 <strong>没有数学与语言写作两项</strong>,所以这两个维度现在只看 Arena;2.0 还没收录的模型 LiveBench 记 <span class="rk-miss-mark">—</span>。</p>
+            <p class="rk-note"><strong>可靠性</strong>:交给它的活能不能做完、会不会编造。由两家独立机构组成:<a href="https://artificialanalysis.ai/evaluations" target="_blank" rel="noopener">Artificial Analysis</a> 的三项(AutomationBench-AA 业务流程自动化、Terminal-Bench 4.0 自主多步执行、AA-Omniscience 不幻觉率 = 1 − 幻觉率)取平均,加上 LiveBench 2.0 的「智能体」套题(连续几小时的运维、系统工程、性能优化等长任务)。<br>原来的「社区体感」(Arena 投票 + OpenRouter 用量份额)已撤下:投票样本集中在单一网站的用户,份额数据自 2026-07-24 起停更、且只覆盖 8 个模型 —— 都不足以代表"好不好用"。</p>
+            <p class="rk-note"><strong>金融分析维度的两个代理指标</strong>:AA 智能指数与 LiveBench 2.0 的「数据分析」(表格合并、重排、连续事件推断等数据处理;10-15 前用的是 LiveBench 1.0 数学子项,2.0 已无此项)。<strong>⚠ 2026-09-07 起这条口径更弱了</strong>:AA 在 v4.3(09-07)把<strong>唯一的金融向评测 τ³-Banking 移除</strong>,换成了 Zapier 的 AutomationBench-AA(通用业务流程自动化)。也就是说<strong>AA 指数里现在已不含任何银行/金融专项</strong>,本维度的代理性比之前更远——请务必按代理指标看待,不要当金融能力评分。真正的领域基准可参考 <a href="https://arxiv.org/abs/2402.12659" target="_blank" rel="noopener">FinBen</a>、<a href="https://arxiv.org/html/2505.19457v1" target="_blank" rel="noopener">BizFinBench</a>、FinanceBench。</p>
           </div>
         </details>
-        <p class="rk-note rk-note-key"><strong>⚠ 两条务必知道的</strong>:① <a class="term-tip" href="https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-3" target="_blank" rel="noopener" data-tip="Artificial Analysis 在 v4.1 把评测重心转向智能体工作负载;v4.1.1(2026-08-06)升级评分管线;v4.2(2026-09-04)新增私有测试集 AA-Briefcase 与长文档评测 GDP.pdf、移除已饱和的 GPQA Diamond,把私有留出题权重提到 40%;v4.3(2026-09-07)又把 Terminal-Bench 升到 v4.0(更难的 66 题,执行框架换成 mini-SWE-agent),并用 Zapier 的 AutomationBench-AA 替掉 τ³-Banking。四天内两次升版,每次都重算全部分数,跨版本不可比——本页已全部换用 v4.3.2 实测值,上榜模型全部已有该版本实测分。引用他处分数时务必核对是哪个版本。">AA 指数为 v4.3.2 口径</a>,与旧分数不可比;② <a class="term-tip" href="/2026/07/27/ai-finance-pitfalls/" data-tip="金融维度用的是代理指标(AA 指数 + LiveBench 数学),不是真正的金融基准——目前没有覆盖全部 20 个模型的公开金融基准,本站不编造金融分。更重要的是:实测显示六个主流模型中有四个会在源文档不完整时捏造财务数据。点击阅读详细分析 →">金融维度是代理指标</a>,且高分≠可信任其财务输出。</p>
+        <p class="rk-note rk-note-key"><strong>⚠ 两条务必知道的</strong>:① <a class="term-tip" href="https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-3" target="_blank" rel="noopener" data-tip="Artificial Analysis 在 v4.1 把评测重心转向智能体工作负载;v4.1.1(2026-08-06)升级评分管线;v4.2(2026-09-04)新增私有测试集 AA-Briefcase 与长文档评测 GDP.pdf、移除已饱和的 GPQA Diamond,把私有留出题权重提到 40%;v4.3(2026-09-07)又把 Terminal-Bench 升到 v4.0(更难的 66 题,执行框架换成 mini-SWE-agent),并用 Zapier 的 AutomationBench-AA 替掉 τ³-Banking。四天内两次升版,每次都重算全部分数,跨版本不可比——本页已全部换用 v4.3.2 实测值,上榜模型全部已有该版本实测分。引用他处分数时务必核对是哪个版本。">AA 指数为 v4.3.2 口径</a>,与旧分数不可比;② <a class="term-tip" href="/2026/07/27/ai-finance-pitfalls/" data-tip="金融维度用的是代理指标(AA 指数 + LiveBench 2.0 数据分析),不是真正的金融基准——目前没有覆盖全部 20 个模型的公开金融基准,本站不编造金融分。更重要的是:实测显示六个主流模型中有四个会在源文档不完整时捏造财务数据。点击阅读详细分析 →">金融维度是代理指标</a>,且高分≠可信任其财务输出。</p>
         <details class="rk-fold">
           <summary>候补:合格但综合分未进前 20 的模型</summary>
           <div class="rk-fold-body">
@@ -277,39 +277,39 @@
               <tbody>
                 
                 <tr>
-                  <td><strong>Claude Opus 4.8</strong>（Anthropic）</td>
+                  <td><strong>GLM-5.3</strong>（Z.ai）</td>
                   <td>#21 / 45</td>
-                  <td>1481</td>
-                  <td>42</td>
-                  <td>76.2</td>
-                  <td>88.6</td>
+                  <td>1478</td>
+                  <td>45</td>
+                  <td>60.7</td>
+                  <td>95.4</td>
                 </tr>
                 
                 <tr>
-                  <td><strong>DeepSeek-V4 Pro</strong>（DeepSeek）</td>
+                  <td><strong>DeepSeek V4.1 Flash</strong>（DeepSeek）</td>
                   <td>#22 / 45</td>
-                  <td>1465</td>
-                  <td>36</td>
-                  <td>77.4</td>
-                  <td>96.4</td>
-                </tr>
-                
-                <tr>
-                  <td><strong>GPT-6 Sol</strong>（OpenAI）</td>
-                  <td>#23 / 45</td>
-                  <td>1456</td>
-                  <td>48</td>
-                  <td>79.3</td>
+                  <td>1475</td>
+                  <td>39</td>
+                  <td>77.3</td>
                   <td>—</td>
                 </tr>
                 
                 <tr>
-                  <td><strong>Gemini 3.7 Flash</strong>（Google）</td>
+                  <td><strong>DeepSeek-V4 Pro</strong>（DeepSeek）</td>
+                  <td>#23 / 45</td>
+                  <td>1465</td>
+                  <td>36</td>
+                  <td>—</td>
+                  <td>96.4</td>
+                </tr>
+                
+                <tr>
+                  <td><strong>Qwen3.8 Max</strong>（Alibaba）</td>
                   <td>#24 / 45</td>
-                  <td>1486</td>
-                  <td>39</td>
-                  <td>78.8</td>
-                  <td>80.8</td>
+                  <td>1483</td>
+                  <td>45</td>
+                  <td>64.2</td>
+                  <td>85.6</td>
                 </tr>
                 
                 <tr>
@@ -317,106 +317,106 @@
                   <td>#25 / 45</td>
                   <td>1497</td>
                   <td>41</td>
-                  <td>75.8</td>
+                  <td>67.3</td>
                   <td>80</td>
                 </tr>
                 
                 <tr>
-                  <td><strong>Qwen3.8 Flash Next</strong>（Alibaba）</td>
+                  <td><strong>GPT-5.5</strong>（OpenAI）</td>
                   <td>#26 / 45</td>
-                  <td>—</td>
-                  <td>40</td>
-                  <td>76.2</td>
-                  <td>—</td>
-                </tr>
-                
-                <tr>
-                  <td><strong>GLM-5.3 Flash</strong>（Z.ai）</td>
-                  <td>#27 / 45</td>
-                  <td>1475</td>
-                  <td>42</td>
-                  <td>71.6</td>
-                  <td>92</td>
+                  <td>1482</td>
+                  <td>38</td>
+                  <td>68.7</td>
+                  <td>82.6</td>
                 </tr>
                 
                 <tr>
                   <td><strong>Grok 4.5</strong>（xAI）</td>
-                  <td>#28 / 45</td>
+                  <td>#27 / 45</td>
                   <td>1466</td>
                   <td>39</td>
-                  <td>75.8</td>
+                  <td>70.1</td>
                   <td>86.6</td>
                 </tr>
                 
                 <tr>
-                  <td><strong>Gemini 3.1 Pro</strong>（Google）</td>
-                  <td>#29 / 45</td>
-                  <td>1487</td>
-                  <td>30</td>
-                  <td>77</td>
-                  <td>78.8</td>
+                  <td><strong>Gemini 3.7 Flash</strong>（Google）</td>
+                  <td>#28 / 45</td>
+                  <td>1486</td>
+                  <td>39</td>
+                  <td>67.2</td>
+                  <td>80.8</td>
                 </tr>
                 
                 <tr>
                   <td><strong>Grok 4.7</strong>（xAI）</td>
-                  <td>#30 / 45</td>
+                  <td>#29 / 45</td>
                   <td>1443</td>
                   <td>46</td>
-                  <td>77.4</td>
+                  <td>74.1</td>
                   <td>—</td>
                 </tr>
                 
                 <tr>
                   <td><strong>GPT-5.6 Luna</strong>（OpenAI）</td>
-                  <td>#31 / 45</td>
+                  <td>#30 / 45</td>
                   <td>1452</td>
                   <td>37</td>
-                  <td>73.6</td>
+                  <td>66.1</td>
                   <td>93</td>
                 </tr>
                 
                 <tr>
-                  <td><strong>Claude Haiku 5.5</strong>（Anthropic）</td>
-                  <td>#32 / 45</td>
+                  <td><strong>GLM-5.2</strong>（Z.ai）</td>
+                  <td>#31 / 45</td>
+                  <td>1475</td>
+                  <td>34</td>
                   <td>—</td>
-                  <td>43</td>
-                  <td>72.1</td>
-                  <td>—</td>
+                  <td>82.8</td>
                 </tr>
                 
                 <tr>
                   <td><strong>Claude Sonnet 5</strong>（Anthropic）</td>
-                  <td>#33 / 45</td>
+                  <td>#32 / 45</td>
                   <td>1461</td>
                   <td>38</td>
-                  <td>76</td>
+                  <td>74.6</td>
                   <td>79.6</td>
                 </tr>
                 
                 <tr>
                   <td><strong>Gemini 3.6 Flash</strong>（Google）</td>
-                  <td>#34 / 45</td>
+                  <td>#33 / 45</td>
                   <td>1482</td>
                   <td>34</td>
-                  <td>73.6</td>
+                  <td>—</td>
                   <td>79.6</td>
                 </tr>
                 
                 <tr>
-                  <td><strong>GLM-5.2</strong>（Z.ai）</td>
-                  <td>#35 / 45</td>
-                  <td>1475</td>
-                  <td>34</td>
-                  <td>73.2</td>
-                  <td>82.8</td>
+                  <td><strong>Qwen3.8 Flash Next</strong>（Alibaba）</td>
+                  <td>#34 / 45</td>
+                  <td>—</td>
+                  <td>40</td>
+                  <td>61.9</td>
+                  <td>—</td>
                 </tr>
                 
                 <tr>
                   <td><strong>Step 5 Preview</strong>（StepFun）</td>
-                  <td>#36 / 45</td>
+                  <td>#35 / 45</td>
                   <td>1447</td>
                   <td>44</td>
                   <td>—</td>
+                  <td>—</td>
+                </tr>
+                
+                <tr>
+                  <td><strong>GPT-6 Luna</strong>（OpenAI）</td>
+                  <td>#36 / 45</td>
+                  <td>1443</td>
+                  <td>38</td>
+                  <td>69.4</td>
                   <td>—</td>
                 </tr>
                 
@@ -430,21 +430,21 @@
                 </tr>
                 
                 <tr>
-                  <td><strong>Qwen3.8 27B</strong>（Alibaba）</td>
+                  <td><strong>Gemini 3.1 Pro</strong>（Google）</td>
                   <td>#38 / 45</td>
-                  <td>1438</td>
-                  <td>34</td>
-                  <td>75.3</td>
-                  <td>—</td>
+                  <td>1487</td>
+                  <td>30</td>
+                  <td>54.9</td>
+                  <td>78.8</td>
                 </tr>
                 
                 <tr>
-                  <td><strong>GPT-6 Luna</strong>（OpenAI）</td>
+                  <td><strong>Kimi K2.6</strong>（Moonshot）</td>
                   <td>#39 / 45</td>
-                  <td>1443</td>
-                  <td>38</td>
-                  <td>72</td>
+                  <td>1461</td>
+                  <td>27</td>
                   <td>—</td>
+                  <td>76.2</td>
                 </tr>
                 
                 <tr>
@@ -452,35 +452,35 @@
                   <td>#40 / 45</td>
                   <td>1475</td>
                   <td>29</td>
-                  <td>73.1</td>
+                  <td>—</td>
                   <td>68.8</td>
                 </tr>
                 
                 <tr>
-                  <td><strong>Kimi K2.6</strong>（Moonshot）</td>
+                  <td><strong>Qwen3.8 27B</strong>（Alibaba）</td>
                   <td>#41 / 45</td>
-                  <td>1461</td>
-                  <td>27</td>
-                  <td>70.5</td>
-                  <td>76.2</td>
-                </tr>
-                
-                <tr>
-                  <td><strong>Mistral Large 4</strong>（Mistral）</td>
-                  <td>#42 / 45</td>
-                  <td>1429</td>
-                  <td>38</td>
-                  <td>71.8</td>
+                  <td>1438</td>
+                  <td>34</td>
+                  <td>58.1</td>
                   <td>—</td>
                 </tr>
                 
                 <tr>
                   <td><strong>MiniMax M3</strong>（MiniMax）</td>
-                  <td>#43 / 45</td>
+                  <td>#42 / 45</td>
                   <td>1440</td>
                   <td>29</td>
-                  <td>67.3</td>
+                  <td>52.6</td>
                   <td>75</td>
+                </tr>
+                
+                <tr>
+                  <td><strong>Mistral Large 4</strong>（Mistral）</td>
+                  <td>#43 / 45</td>
+                  <td>1429</td>
+                  <td>38</td>
+                  <td>47.7</td>
+                  <td>—</td>
                 </tr>
                 
                 <tr>
@@ -488,7 +488,7 @@
                   <td>#44 / 45</td>
                   <td>1414</td>
                   <td>17</td>
-                  <td>—</td>
+                  <td>46</td>
                   <td>66.6</td>
                 </tr>
                 
@@ -1062,7 +1062,7 @@
     </div>
 
 
-    <script type="application/json" id="rankingsData">{"snapshot":"2026-10-15","institutions":{"arena":{"name":"Arena","short":"Arena","url":"https://arena.ai/leaderboard/text","unit":"Elo"},"aa":{"name":"Artificial Analysis","short":"AA 指数","url":"https://artificialanalysis.ai/leaderboards/models","unit":"指数"},"livebench":{"name":"LiveBench","short":"LiveBench","url":"https://livebench.ai/","unit":"分"},"swe":{"name":"SWE-bench Verified(Vals.ai)","short":"SWE-V","url":"https://www.vals.ai/benchmarks/swebench","unit":"%"}},"defaultWeights":{"arena":30,"aa":25,"livebench":25,"swe":20},"dimensions":{"overall":{"label":"综合","metrics":{"arena":"overall","aa":"index","livebench":"avg","swe":"verified"}},"coding":{"label":"编程","metrics":{"arena":"coding","livebench":"coding","swe":"verified"}},"reasoning":{"label":"推理","metrics":{"aa":"index","livebench":"reasoning"}},"math":{"label":"数学","metrics":{"arena":"math","livebench":"math"}},"language":{"label":"语言写作","metrics":{"arena":"overall","livebench":"language"}},"finance":{"label":"金融分析","metrics":{"aa":"index","livebench":"math"}},"reliability":{"label":"可靠性","metrics":{"aa":"reliability","livebench":"agentic"},"labels":{"aa":["AA 可靠性","三项均值"],"livebench":["LiveBench","智能体编程"]}}},"models":[{"id":"fable51","mod":"ti","name":"Claude Fable 5.1","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1501,"coding":1534,"math":1522},"aa":{"index":53,"automation":59.4,"terminal":52,"noHallucination":27.4,"reliability":46.3},"livebench":{"avg":83.4,"reasoning":91.7,"coding":86.4,"math":97,"language":89.5,"agentic":66.1},"swe":null}},{"id":"fable5","mod":"ti","name":"Claude Fable 5","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1504,"coding":1551,"math":1524},"aa":{"index":50,"automation":54.1,"terminal":42.4,"noHallucination":36.4,"reliability":44.3},"livebench":{"avg":83,"reasoning":89.7,"coding":86,"math":96,"language":90.7,"agentic":62.2},"swe":{"verified":95}}},{"id":"opus5","mod":"ti","name":"Claude Opus 5","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1490,"coding":1534,"math":1521},"aa":{"index":51,"automation":56.6,"terminal":49,"noHallucination":39.2,"reliability":48.2},"livebench":{"avg":80.1,"reasoning":91.2,"coding":81.4,"math":95.7,"language":88.7,"agentic":65.2},"swe":{"verified":97}}},{"id":"muse13","mod":"tiv","name":"Muse Spark 1.3","vendor":"Meta","url":"https://ai.meta.com/","open":false,"scores":{"arena":{"overall":1494,"coding":1538,"math":1502},"aa":{"index":48,"automation":57.9,"terminal":33.3,"noHallucination":67.1,"reliability":52.7},"livebench":{"avg":81.6,"reasoning":89.7,"coding":81.1,"math":95.9,"language":82.8,"agentic":64.1},"swe":null}},{"id":"astra","mod":"ti","name":"GPT-6 Astra","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":{"overall":1475,"coding":1542,"math":1486},"aa":{"index":53,"automation":68.5,"terminal":59.1,"noHallucination":48.7,"reliability":58.7},"livebench":{"avg":82.2,"reasoning":92.7,"coding":80.4,"math":96.8,"language":89.4,"agentic":57.3},"swe":null}},{"id":"gpt56sol","mod":"ti","name":"GPT-5.6 Sol","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":{"overall":1485,"coding":1535,"math":1496},"aa":{"index":47,"automation":60.1,"terminal":39.9,"noHallucination":7.8,"reliability":35.9},"livebench":{"avg":81,"reasoning":91.7,"coding":83.9,"math":96.2,"language":87.7,"agentic":56.2},"swe":{"verified":96.2}}},{"id":"kimik3","mod":"ti","name":"Kimi K3","vendor":"Moonshot","url":"https://www.kimi.com/","open":true,"scores":{"arena":{"overall":1488,"coding":1540,"math":1498},"aa":{"index":44,"automation":58.3,"terminal":12.6,"noHallucination":46.8,"reliability":39.2},"livebench":{"avg":79.2,"reasoning":90.7,"coding":81.4,"math":84.4,"language":85.5,"agentic":62.2},"swe":{"verified":93.4}}},{"id":"dsv41flash","mod":"ti","name":"DeepSeek V4.1 Flash","vendor":"DeepSeek","url":"https://www.deepseek.com/","open":true,"scores":{"arena":{"overall":1475,"coding":1528,"math":1493},"aa":{"index":39,"automation":68.9,"terminal":26.8,"noHallucination":3.5,"reliability":33.1},"livebench":{"avg":81.1,"reasoning":86.7,"coding":80,"math":93.3,"language":81.2,"agentic":77.3},"swe":null}},{"id":"glm53","mod":"t","name":"GLM-5.3","vendor":"Z.ai","url":"https://z.ai/","open":true,"scores":{"arena":{"overall":1478,"coding":1520,"math":1492},"aa":{"index":45,"automation":62.2,"terminal":41.9,"noHallucination":70.5,"reliability":58.2},"livebench":{"avg":76.1,"reasoning":85.8,"coding":79,"math":87.9,"language":79.9,"agentic":60.9},"swe":{"verified":95.4}}},{"id":"qwen38max","mod":"ti","name":"Qwen3.8 Max","vendor":"Alibaba","url":"https://qwen.ai/","open":false,"scores":{"arena":{"overall":1483,"coding":1524,"math":1497},"aa":{"index":45,"automation":56.2,"terminal":38.9,"noHallucination":71.2,"reliability":55.4},"livebench":{"avg":78.5,"reasoning":88.2,"coding":72.9,"math":91.3,"language":79.7,"agentic":64.6},"swe":{"verified":85.6}}},{"id":"terra","mod":"ti","name":"GPT-5.6 Terra","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":{"overall":1466,"coding":1516,"math":1482},"aa":{"index":42,"automation":59.7,"terminal":35.4,"noHallucination":12.1,"reliability":35.7},"livebench":{"avg":77.9,"reasoning":90.6,"coding":78.2,"math":94.9,"language":82.9,"agentic":54.9},"swe":{"verified":95.4}}},{"id":"opus47","mod":"ti","name":"Claude Opus 4.7","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1501,"coding":1550,"math":1504},"aa":{"index":41,"automation":42.1,"terminal":null,"noHallucination":57.7,"reliability":49.9},"livebench":{"avg":76.5,"reasoning":87.2,"coding":82.1,"math":92.9,"language":77.9,"agentic":50.7},"swe":{"verified":82}}},{"id":"grok46","mod":"ti","name":"Grok 4.6","vendor":"xAI","url":"https://x.ai/grok","open":false,"scores":{"arena":{"overall":1454,"coding":1508,"math":1451},"aa":{"index":44,"automation":66.7,"terminal":21.2,"noHallucination":65.7,"reliability":51.2},"livebench":{"avg":78,"reasoning":90.5,"coding":76.8,"math":92.6,"language":83.7,"agentic":57},"swe":{"verified":95.6}}},{"id":"gpt55","mod":"ti","name":"GPT-5.5","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":{"overall":1482,"coding":1519,"math":1493},"aa":{"index":38,"automation":47.3,"terminal":14.6,"noHallucination":11,"reliability":24.3},"livebench":{"avg":80.2,"reasoning":89.7,"coding":82.1,"math":95.9,"language":87.4,"agentic":54},"swe":{"verified":82.6}}},{"id":"opus55","mod":"ti","name":"Claude Opus 5.5","vendor":"Anthropic","url":"https://www.anthropic.com/claude/opus","open":false,"scores":{"arena":{"overall":1507,"coding":1550,"math":1499},"aa":{"index":58,"automation":69.5,"terminal":59.6,"noHallucination":41.4,"reliability":56.8},"livebench":{"avg":83.2,"reasoning":92.2,"coding":89.3,"math":97.1,"language":86.3,"agentic":71.7},"swe":null}},{"id":"mimo26pro","mod":"tiav","name":"MiMo-V2.6-Pro","vendor":"Xiaomi","url":"https://mimo.mi.com/models/en-US/mimo-v2.6-pro","open":true,"scores":{"arena":{"overall":1480,"coding":1539,"math":1483},"aa":{"index":46,"automation":58.6,"terminal":34.8,"noHallucination":59.4,"reliability":50.9},"livebench":null,"swe":null}},{"id":"sonnet55","mod":"ti","name":"Claude Sonnet 5.5","vendor":"Anthropic","url":"https://www.anthropic.com/claude-sonnet-5-5","open":false,"scores":{"arena":{"overall":1476,"coding":1532,"math":1512},"aa":{"index":56,"automation":71.8,"terminal":63.6,"noHallucination":53,"reliability":62.8},"livebench":{"avg":77.8,"reasoning":86.8,"coding":88.9,"math":96.7,"language":83.4,"agentic":39.3},"swe":null}},{"id":"argon4","mod":"ti","name":"Gemini 4 Argon","vendor":"Google","url":"https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/","open":false,"scores":{"arena":{"overall":1525,"coding":1562,"math":1528},"aa":{"index":53,"automation":77.5,"terminal":57.1,"noHallucination":84.9,"reliability":73.2},"livebench":null,"swe":null}},{"id":"gpt61sol","mod":"ti","name":"GPT-6.1 Sol","vendor":"OpenAI","url":"https://openai.com/index/introducing-gpt-6-1-sol/","open":false,"scores":{"arena":{"overall":1484,"coding":1545,"math":1488},"aa":{"index":52,"automation":64.9,"terminal":56.1,"noHallucination":45.7,"reliability":55.6},"livebench":{"avg":81.6,"reasoning":92.6,"coding":80.4,"math":96.8,"language":90.1,"agentic":54.5},"swe":null}},{"id":"musewonder","mod":"tiav","name":"Muse Wonder","vendor":"Meta","url":"https://research.meta.ai/blog/muse-wonder","open":false,"scores":{"arena":null,"aa":{"index":52,"automation":68.1,"terminal":52,"noHallucination":73.5,"reliability":64.5},"livebench":{"avg":81.2,"reasoning":90.6,"coding":80.7,"math":96.5,"language":82.9,"agentic":62.7},"swe":null}}]}</script>
+    <script type="application/json" id="rankingsData">{"snapshot":"2026-10-15","institutions":{"arena":{"name":"Arena","short":"Arena","url":"https://arena.ai/leaderboard/chat/text","unit":"Elo"},"aa":{"name":"Artificial Analysis","short":"AA 指数","url":"https://artificialanalysis.ai/leaderboards/models","unit":"指数"},"livebench":{"name":"LiveBench 2.0","short":"LiveBench","url":"https://livebench.ai/","unit":"分"},"swe":{"name":"SWE-bench Verified(Vals.ai)","short":"SWE-V","url":"https://www.vals.ai/benchmarks/swebench","unit":"%"}},"defaultWeights":{"arena":30,"aa":25,"livebench":25,"swe":20},"dimensions":{"overall":{"label":"综合","metrics":{"arena":"overall","aa":"index","livebench":"avg","swe":"verified"}},"coding":{"label":"编程","metrics":{"arena":"coding","livebench":"coding","swe":"verified"}},"reasoning":{"label":"推理","metrics":{"aa":"index","livebench":"reasoning"}},"math":{"label":"数学","metrics":{"arena":"math"}},"language":{"label":"语言写作","metrics":{"arena":"overall"}},"finance":{"label":"金融分析","metrics":{"aa":"index","livebench":"data"}},"reliability":{"label":"可靠性","metrics":{"aa":"reliability","livebench":"agentic"},"labels":{"aa":["AA 可靠性","三项均值"],"livebench":["LiveBench 2.0","智能体"]}}},"models":[{"id":"fable51","mod":"ti","name":"Claude Fable 5.1","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1501,"coding":1534,"math":1522},"aa":{"index":53,"automation":59.4,"terminal":52,"noHallucination":27.4,"reliability":46.3},"livebench":{"avg":88,"agentic":80.8,"reasoning":91.7,"coding":97.7,"browser":100,"data":80.3,"research":82,"design":83.4},"swe":null}},{"id":"fable5","mod":"ti","name":"Claude Fable 5","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1504,"coding":1551,"math":1524},"aa":{"index":50,"automation":54.1,"terminal":42.4,"noHallucination":36.4,"reliability":44.3},"livebench":{"avg":83.6,"agentic":53.2,"reasoning":89.7,"coding":98.3,"browser":92,"data":80.5,"research":86.9,"design":84.7},"swe":{"verified":95}}},{"id":"opus5","mod":"ti","name":"Claude Opus 5","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1490,"coding":1534,"math":1521},"aa":{"index":51,"automation":56.6,"terminal":49,"noHallucination":39.2,"reliability":48.2},"livebench":{"avg":82.1,"agentic":62.1,"reasoning":91.2,"coding":90.8,"browser":84,"data":74.6,"research":88.9,"design":83},"swe":{"verified":97}}},{"id":"muse13","mod":"tiv","name":"Muse Spark 1.3","vendor":"Meta","url":"https://ai.meta.com/","open":false,"scores":{"arena":{"overall":1494,"coding":1538,"math":1502},"aa":{"index":48,"automation":57.9,"terminal":33.3,"noHallucination":67.1,"reliability":52.7},"livebench":{"avg":74.9,"agentic":40.4,"reasoning":89.7,"coding":90.2,"browser":81,"data":79.6,"research":68.6,"design":74.8},"swe":null}},{"id":"astra","mod":"ti","name":"GPT-6 Astra","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":{"overall":1475,"coding":1542,"math":1486},"aa":{"index":53,"automation":68.5,"terminal":59.1,"noHallucination":48.7,"reliability":58.7},"livebench":{"avg":86.1,"agentic":82.4,"reasoning":92.7,"coding":93.7,"browser":84,"data":83,"research":85.2,"design":82},"swe":null}},{"id":"gpt56sol","mod":"ti","name":"GPT-5.6 Sol","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":{"overall":1485,"coding":1535,"math":1496},"aa":{"index":47,"automation":60.1,"terminal":39.9,"noHallucination":7.8,"reliability":35.9},"livebench":{"avg":76.3,"agentic":48.5,"reasoning":91.7,"coding":89.7,"browser":88,"data":79.8,"research":54.5,"design":81.6},"swe":{"verified":96.2}}},{"id":"kimik3","mod":"ti","name":"Kimi K3","vendor":"Moonshot","url":"https://www.kimi.com/","open":true,"scores":{"arena":{"overall":1488,"coding":1540,"math":1498},"aa":{"index":44,"automation":58.3,"terminal":12.6,"noHallucination":46.8,"reliability":39.2},"livebench":{"avg":63.4,"agentic":42.8,"reasoning":90.7,"coding":59.3,"browser":16,"data":78.7,"research":79,"design":77.2},"swe":{"verified":93.4}}},{"id":"terra","mod":"ti","name":"GPT-5.6 Terra","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":{"overall":1466,"coding":1516,"math":1482},"aa":{"index":42,"automation":59.7,"terminal":35.4,"noHallucination":12.1,"reliability":35.7},"livebench":{"avg":75,"agentic":48.4,"reasoning":90.6,"coding":86.2,"browser":84,"data":79.3,"research":60.4,"design":76},"swe":{"verified":95.4}}},{"id":"opus47","mod":"ti","name":"Claude Opus 4.7","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1501,"coding":1550,"math":1504},"aa":{"index":41,"automation":42.1,"terminal":null,"noHallucination":57.7,"reliability":49.9},"livebench":null,"swe":{"verified":82}}},{"id":"grok46","mod":"ti","name":"Grok 4.6","vendor":"xAI","url":"https://x.ai/grok","open":false,"scores":{"arena":{"overall":1454,"coding":1508,"math":1451},"aa":{"index":44,"automation":66.7,"terminal":21.2,"noHallucination":65.7,"reliability":51.2},"livebench":{"avg":74.6,"agentic":40.7,"reasoning":90.5,"coding":89.1,"browser":64,"data":73.9,"research":84.5,"design":79.8},"swe":{"verified":95.6}}},{"id":"opus55","mod":"ti","name":"Claude Opus 5.5","vendor":"Anthropic","url":"https://www.anthropic.com/claude/opus","open":false,"scores":{"arena":{"overall":1507,"coding":1550,"math":1499},"aa":{"index":58,"automation":69.5,"terminal":59.6,"noHallucination":41.4,"reliability":56.8},"livebench":{"avg":86.5,"agentic":85,"reasoning":92.2,"coding":96.3,"browser":80,"data":80.3,"research":85,"design":86.9},"swe":null}},{"id":"mimo26pro","mod":"tiav","name":"MiMo-V2.6-Pro","vendor":"Xiaomi","url":"https://mimo.mi.com/models/en-US/mimo-v2.6-pro","open":true,"scores":{"arena":{"overall":1480,"coding":1539,"math":1483},"aa":{"index":46,"automation":58.6,"terminal":34.8,"noHallucination":59.4,"reliability":50.9},"livebench":{"avg":74.9,"agentic":47.5,"reasoning":79.6,"coding":81.5,"browser":88,"data":72.3,"research":76.7,"design":78.5},"swe":null}},{"id":"sonnet55","mod":"ti","name":"Claude Sonnet 5.5","vendor":"Anthropic","url":"https://www.anthropic.com/claude-sonnet-5-5","open":false,"scores":{"arena":{"overall":1476,"coding":1532,"math":1512},"aa":{"index":56,"automation":71.8,"terminal":63.6,"noHallucination":53,"reliability":62.8},"livebench":{"avg":82.5,"agentic":78.8,"reasoning":91.6,"coding":94.7,"browser":84,"data":59.5,"research":83.6,"design":85},"swe":null}},{"id":"argon4","mod":"ti","name":"Gemini 4 Argon","vendor":"Google","url":"https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/","open":false,"scores":{"arena":{"overall":1525,"coding":1562,"math":1528},"aa":{"index":53,"automation":77.5,"terminal":57.1,"noHallucination":84.9,"reliability":73.2},"livebench":{"avg":84.1,"agentic":69.9,"reasoning":95.1,"coding":89.7,"browser":92,"data":85.2,"research":83.1,"design":73.7},"swe":null}},{"id":"gpt61sol","mod":"ti","name":"GPT-6.1 Sol","vendor":"OpenAI","url":"https://openai.com/index/introducing-gpt-6-1-sol/","open":false,"scores":{"arena":{"overall":1484,"coding":1545,"math":1488},"aa":{"index":52,"automation":64.9,"terminal":56.1,"noHallucination":45.7,"reliability":55.6},"livebench":{"avg":85.4,"agentic":73,"reasoning":92.6,"coding":96,"browser":88,"data":82.7,"research":83.5,"design":82.1},"swe":null}},{"id":"musewonder","mod":"tiav","name":"Muse Wonder","vendor":"Meta","url":"https://research.meta.ai/blog/muse-wonder","open":false,"scores":{"arena":null,"aa":{"index":52,"automation":68.1,"terminal":52,"noHallucination":73.5,"reliability":64.5},"livebench":{"avg":78.1,"agentic":53.2,"reasoning":90.6,"coding":86.2,"browser":72,"data":81.6,"research":88,"design":75.1},"swe":null}},{"id":"haiku55","mod":"ti","name":"Claude Haiku 5.5","vendor":"Anthropic","url":"https://www.anthropic.com/claude-haiku-5-5","open":false,"scores":{"arena":null,"aa":{"index":43,"automation":35.4,"terminal":32.8,"noHallucination":59.6,"reliability":42.6},"livebench":{"avg":74.5,"agentic":56.6,"reasoning":84.6,"coding":84.5,"browser":88,"data":51.8,"research":73.7,"design":82.2},"swe":null}},{"id":"opus48","mod":"ti","name":"Claude Opus 4.8","vendor":"Anthropic","url":"https://www.anthropic.com/claude","open":false,"scores":{"arena":{"overall":1481,"coding":1533,"math":1494},"aa":{"index":42,"automation":45.6,"terminal":21.7,"noHallucination":60.7,"reliability":42.7},"livebench":{"avg":76.8,"agentic":48.3,"reasoning":89.2,"coding":77.3,"browser":96,"data":66,"research":81.8,"design":78.8},"swe":{"verified":88.6}}},{"id":"gpt6sol","mod":"ti","name":"GPT-6 Sol","vendor":"OpenAI","url":"https://openai.com/","open":false,"scores":{"arena":{"overall":1456,"coding":1519,"math":1446},"aa":{"index":48,"automation":61.6,"terminal":43.9,"noHallucination":39.9,"reliability":48.5},"livebench":{"avg":81.9,"agentic":66.9,"reasoning":88.7,"coding":93.1,"browser":92,"data":81.2,"research":69.3,"design":82.2},"swe":null}},{"id":"glm53flash","mod":"ti","name":"GLM-5.3 Flash","vendor":"Z.ai","url":"https://z.ai/","open":true,"scores":{"arena":{"overall":1475,"coding":1525,"math":1502},"aa":{"index":42,"automation":60.4,"terminal":32.8,"noHallucination":72.4,"reliability":55.2},"livebench":{"avg":70.6,"agentic":28.4,"reasoning":77.6,"coding":80.6,"browser":84,"data":76.4,"research":70.1,"design":77.2},"swe":{"verified":92}}}]}</script>
   </div>
 </section>
 
