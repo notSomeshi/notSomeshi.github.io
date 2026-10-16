@@ -1481,7 +1481,9 @@ document.addEventListener('DOMContentLoaded', function () {
       'Mistral': ['mistral', 'M'],
       'Meta': ['meta', 'M'],
       'Xiaomi': ['xiaomi', 'Mi'],
-      'StepFun': ['stepfun', '阶']
+      'StepFun': ['stepfun', '阶'],
+      'NVIDIA': ['nvidia', 'NV'],
+      'Thinking Machines': ['tml', 'TM']
     };
 
     /* 厂商水印:品牌 logo 放大、调淡,压在模型名下面当背景(css/brands.css 的 .g-*)。
