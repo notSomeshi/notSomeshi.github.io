@@ -1243,8 +1243,68 @@ body.pjax-loading .main-content { opacity: 0.45; }
   white-space: nowrap;
 }
 
+/* --- 阶段时间轴:上方色带看"多久",下方逐段写"凭什么" --- */
+.fig-strip {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 14px;
+}
+
+.fig-strip > span {
+  flex: var(--f, 1) 1 0;
+  min-width: 0;
+  padding: 7px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #111;
+  background: var(--border-strong);
+}
+
+.fig-strip > span b { display: block; font-size: 0.8125rem; }
+
+.fig-tl { display: flex; flex-direction: column; gap: 10px; }
+
+.fig-tl-item {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: 12px;
+  padding: 10px 12px;
+  background: var(--bg-secondary);
+  border-left: 3px solid var(--border-strong);
+  font-size: 0.8125rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.fig-tl-item > b {
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+}
+
+.fig-tl-item > b em {
+  display: block;
+  font-style: normal;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  color: var(--text-tertiary);
+}
+
+.fig-strip .is-hot { background: #e5484d; }
+.fig-strip .is-warm { background: #f08c00; }
+.fig-strip .is-turn { background: #e3b341; }
+.fig-strip .is-cool { background: #3fb950; }
+.fig-tl-item.is-hot { border-left-color: #e5484d; }
+.fig-tl-item.is-warm { border-left-color: #f08c00; }
+.fig-tl-item.is-turn { border-left-color: #e3b341; }
+.fig-tl-item.is-cool { border-left-color: #3fb950; }
+
 @media (max-width: 768px) {
   .fig { padding: 14px; }
+  .fig-strip > span { padding: 6px 5px; font-size: 0.5625rem; min-width: 46px; }
+  .fig-strip > span b { font-size: 0.6875rem; }
+  .fig-tl-item { grid-template-columns: 1fr; gap: 4px; }
   .fig-bar-row { grid-template-columns: minmax(70px, 100px) 1fr auto; gap: 8px; }
   .fig-bar-label { font-size: 0.71875rem; }
   .fig-bar-val { font-size: 0.71875rem; min-width: 52px; }
