@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+
+<title>DeepSeek 开源了自家“后厨”:你用不上,但它会改变你买到的 DeepSeek | ByteVibe</title>
+<meta name="description" content="10 月下旬,DeepSeek 在 GitHub 上放出了 DeepInfer——它自己线上服务用的那套推理引擎。几天之内收获近两万颗星,中文圈的标题大多是”DeepSeek 又开源了”。 先说结论:绝大多数读者自己用不上它,但它会实实在在地影响你从第三方平台买到的 DeepS…">
+<meta name="keywords" content="开源,DeepSeek,推理引擎,API 中转,基准测试">
+<meta name="author" content="ByteVibe">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+<link rel="canonical" href="https://notsomeshi.github.io/2026/10/22/deepseek-deepinfer-open-source/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ByteVibe">
+<meta property="og:title" content="DeepSeek 开源了自家“后厨”:你用不上,但它会改变你买到的 DeepSeek">
+<meta property="og:description" content="10 月下旬,DeepSeek 在 GitHub 上放出了 DeepInfer——它自己线上服务用的那套推理引擎。几天之内收获近两万颗星,中文圈的标题大多是”DeepSeek 又开源了”。 先说结论:绝大多数读者自己用不上它,但它会实实在在地影响你从第三方平台买到的 DeepS…">
+<meta property="og:url" content="https://notsomeshi.github.io/2026/10/22/deepseek-deepinfer-open-source/">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-10-22T15:00:00.000Z">
+<meta property="article:modified_time" content="2026-10-22T15:00:00.000Z">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"DeepSeek 开源了自家“后厨”:你用不上,但它会改变你买到的 DeepSeek","description":"10 月下旬,DeepSeek 在 GitHub 上放出了 DeepInfer——它自己线上服务用的那套推理引擎。几天之内收获近两万颗星,中文圈的标题大多是”DeepSeek 又开源了”。 先说结论:绝大多数读者自己用不上它,但它会实实在在地影响你从第三方平台买到的 DeepS…","inLanguage":"zh-CN","datePublished":"2026-10-22T15:00:00.000Z","dateModified":"2026-10-22T15:00:00.000Z","keywords":"开源, DeepSeek, 推理引擎, API 中转, 基准测试","articleSection":"技术解析","author":{"@type":"Organization","name":"ByteVibe","url":"https://notsomeshi.github.io/"},"publisher":{"@type":"Organization","name":"ByteVibe","url":"https://notsomeshi.github.io/"},"mainEntityOfPage":"https://notsomeshi.github.io/2026/10/22/deepseek-deepinfer-open-source/"}</script>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='0,0 100,0 100,78 78,100 0,100' fill='%23ffd802'/><text x='50' y='70' font-size='58' font-weight='800' font-family='ui-monospace,monospace' fill='%230d0d0f' text-anchor='middle'>B</text></svg>">
+<link rel="alternate" type="application/atom+xml" title="ByteVibe" href="/atom.xml">
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<link rel="stylesheet" href="/css/brands.css">
+
+
+<script src="/js/main.js" defer></script>
+<script>
+  // 暗色优先:light 显式切亮色;rain 提前打上标记避免闪烁
+  (function() {
+    try {
+      // 大字版:必须在首次绘制前打上,否则会先渲染小字再跳大
+      if (localStorage.getItem('fontsize') === 'large') {
+        document.documentElement.setAttribute('data-fontsize', 'large');
+      }
+      var t = localStorage.getItem('theme');
+      if (t === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else if (t === 'rain') {
+        document.documentElement.setAttribute('data-rain', '');
+        // 雨夜模式:页面加载的同时就开始预载雨声(与 main.js 的 RAIN_SRC 保持一致)
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.as = 'audio';
+        l.href = '/audio/rain.mp3?v=3';
+        document.head.appendChild(l);
+      }
+    } catch (e) {}
+  })();
+</script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+  
+  <canvas class="rain-canvas" id="rainCanvas" aria-hidden="true"></canvas>
+  <div class="reading-progress" id="readingProgress"></div>
+  <header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a class="site-logo" href="/">
+      ByteVibe
+    </a>
+    <nav class="site-nav" id="siteNav">
+      
+      
+        
+        
+        <a class="nav-link" href="/">首页</a>
+      
+        
+        
+        <a class="nav-link" href="/archives/">归档</a>
+      
+        
+        
+        <a class="nav-link" href="/categories/">分类</a>
+      
+        
+        
+        <a class="nav-link" href="/tags/">标签</a>
+      
+        
+        
+        <a class="nav-link" href="/about/">关于</a>
+      
+    </nav>
+    <div class="header-actions">
+      <button class="header-icon-btn" id="searchToggle" aria-label="搜索" title="搜索 (Ctrl+K)">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+      <button class="header-icon-btn theme-toggle" id="themeToggle" aria-label="切换显示模式(浅色 / 深色 / 雨夜)" title="显示模式:浅色 → 深色 → 雨夜">
+        <span class="icon-sun"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+        <span class="icon-moon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+        <span class="icon-umbrella"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 12a11.05 11.05 0 0 0-22 0Z"></path><path d="M12 12v7a2 2 0 0 0 4 0"></path></svg></span>
+      </button>
+      <button class="header-icon-btn fontsize-toggle" id="fontsizeToggle" aria-label="切换大字版" aria-pressed="false" title="大字版:放大字号并提高对比度">
+        <span class="icon-fs-large" aria-hidden="true">大</span>
+        <span class="icon-fs-small" aria-hidden="true">小</span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打开菜单">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    
+      <a class="mobile-nav-link" href="/">首页</a>
+    
+      <a class="mobile-nav-link" href="/archives/">归档</a>
+    
+      <a class="mobile-nav-link" href="/categories/">分类</a>
+    
+      <a class="mobile-nav-link" href="/tags/">标签</a>
+    
+      <a class="mobile-nav-link" href="/about/">关于</a>
+    
+  </div>
+</header>
+
+  <main class="main-content">
+    <article class="post-detail">
+  <div class="container-docs">
+    <div class="post-layout-grid">
+      <!-- 1. Left Sidebar: Documentation Navigation -->
+      <aside class="post-sidebar-left">
+        <div class="sidebar-sticky">
+          <h3 class="sidebar-title">全部文章</h3>
+          <ul class="sidebar-list">
+            
+              <li class="sidebar-item active">
+                <a href="/2026/10/22/deepseek-deepinfer-open-source/">DeepSeek 开源了自家“后厨”:你用不上,但它会改变你买到的 DeepSeek</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/10/22/electronics-price-outlook-2030/">显卡还要涨多久?一张时间表看清电子产品涨价到 2030</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/10/22/reading-dario-amodei/">六篇文章读懂 Anthropic 的 CEO:他为什么一边描绘乌托邦,一边要求放慢 AI</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/10/05/ai-model-cricket-fight/">自己办一场 AI 斗蛐蛐:七个回合,一个下午测出谁更适合你</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/09/23/meta-muse-spark-13-price-tags/">Meta 给同一个模型开了四种价,其中一种用数据付</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/09/20/code-that-maintains-itself/">能算出来的数,就别写死</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/09/20/elo-anchor-shift/">把尺子的零点挪到谁身上</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/09/17/anthropic-brake-paradox/">先摘掉自己的刹车,再请人装一个所有人都得踩的</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/09/05/benchmark-shelf-life/">换了套卷子,全榜掉了 9 到 12 分</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/09/03/captcha-stops-humans/">机器人和你,过验证码的次数一样多</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/29/model-supply-as-leverage/">当模型访问权变成筹码:一周三件事,和中国开源的意外位置</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/20/relay-api-verification/">中转站选购与验货:怎么测出模型被&#34;降智&#34;或货不对板</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/15/what-is-agent-harness/">同一个模型,换个壳分数差 24 分:harness 入门</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/15/what-august-deleted/">这个月,AI 圈删掉了什么</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/15/ai-becomes-utility/">峰谷电价来了:AI 正在变成一门电力生意</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/08/reasoning-effort-hidden-dimension/">你买的不是模型,是&#34;让它想多久&#34;</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/08/seat-pricing-sunset/">席位制的黄昏:当软件的边际成本不再是零</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/05/benchmark-trust-crisis/">当考卷泄题成为常态:AI 评测的信任危机</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/05/pilot-to-production-gap/">88% 的 AI 试点走不到生产,而输的不是模型</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/04/agent-liability-2026/">Agent 闯了祸算谁的:自主系统的责任正在被法律钉死</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/04/ai-power-grid-2026/">电网成为 AI 的硬约束:一场从机房烧到居民电费的挤占</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/03/cloud-price-war-2026-08/">云端在降价,本地在涨价:2026 年夏天的两个反方向</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/03/hardware-price-surge-2026/">最贵装机季:AI 抢走了你的内存条</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/31/ai-briefing-2026-07-late/">七月下半月速览:开源权重贴身、Agent 越狱进生产环境、监管转向市场结构</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/31/zero-cost-ai-2026/">零成本用上 AI:2026 年 7 月的羊毛地图</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/what-is-multimodal/">什么是多模态?——一篇给非技术读者的说明</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/subscription-tier-fragmentation/">订阅档位正在碎片化:当&#34;买哪个&#34;比&#34;用哪个&#34;更难</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/ai-finance-pitfalls/">AI 做金融分析的三个致命陷阱:在你把钱交给它之前</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/opus5-price-war/">「半价」的参照物是谁:一句宣传语引发的集体误读</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/one-model-many-scores/">一个模型,N 个分数:当 effort 和编排模式让榜单失去唯一解</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/20/grok45-ide-native-models/">Grok 4.5 与「IDE 原生」模型:当编辑器成为训练场</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/20/frontier-convergence-2026/">前沿收敛:为什么 2026 年榜单顶部挤成了一团</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/17/openrouter-power-shift/">OpenRouter 上的权力转移:中国开源模型如何吃下一半流量</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/17/ai-frontier-briefing-2026-07/">2026 年中前沿速览:模型分层、Agent 落地与监管转折</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-prospects-and-strata/">前景、困难与阶层重排:AI 正在改写谁的命运?</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-dividend-paradox/">AI 红利悖论:我们为 AI 买单三年,红利为何还没普惠?</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-capital-markets-2026/">资本市场视角下的 AI 局势:7250 亿美元 Capex、循环交易与泡沫之辩</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/no-code-mvp-to-solopreneur/">从 Vibe Coding 到超级个体：2026 年全栈独立开发的新叙事</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/yolo-mode-and-ai-safety-guardrails/">YOLO 模式下的安全边界：如何防止 AI 删库跑路</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/high-performance-ai-prompts-library/">如何撰写黄金级 AI Prompt：从“做个功能”到“系统级交付”</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/mcp-server-practical-recipes/">Model Context Protocol (MCP) 深度指南：连接你的 AI 与现实数据</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/advanced-vibe-coding-roo-clinic/">Cline 与 Roo Code 实战：下一代 Vibe Coding 的工程范式</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/04/01/claude-code-complete-guide/">Claude Code 从入门到精通：面向工程师与产品经理的 AI 编程完全指南</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/30/future-of-vibe-coding/">Vibe Coding 的未来：当编程不再需要编程</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/25/ai-coding-tools-2025/">2025 年最值得关注的 AI 编程工具全景</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/20/vibe-coding-best-practices/">Vibe Coding 最佳实践：如何高效地与 AI 结对编程</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/15/what-is-vibe-coding/">什么是 Vibe Coding？一文读懂 AI 时代的编程新范式</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/10/hello-world/">欢迎来到 ByteVibe</a>
+              </li>
+            
+          </ul>
+        </div>
+      </aside>
+
+      <!-- 2. Middle Column: Main Article Content -->
+      <div class="post-content-main">
+        <header class="post-header">
+          <div class="post-meta">
+            <time class="post-date" datetime="2026-10-22T15:00:00.000Z">2026年10月22日</time>
+            
+            <span class="post-meta-sep">·</span>
+            <span class="post-category">
+              
+                <a href="/categories/%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/">技术解析</a>
+              
+            </span>
+            
+            <span class="post-meta-sep">·</span>
+            <span class="reading-time">11 分钟阅读</span>
+          </div>
+          <h1 class="post-title">DeepSeek 开源了自家“后厨”:你用不上,但它会改变你买到的 DeepSeek</h1>
+          
+          <div class="post-tags">
+            
+              <a class="tag-pill" href="/tags/%E5%BC%80%E6%BA%90/">#开源</a>
+            
+              <a class="tag-pill" href="/tags/DeepSeek/">#DeepSeek</a>
+            
+              <a class="tag-pill" href="/tags/%E6%8E%A8%E7%90%86%E5%BC%95%E6%93%8E/">#推理引擎</a>
+            
+              <a class="tag-pill" href="/tags/API-%E4%B8%AD%E8%BD%AC/">#API 中转</a>
+            
+              <a class="tag-pill" href="/tags/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/">#基准测试</a>
+            
+          </div>
+          
+        </header>
+
+        
+
+        
+        
+        <details class="mobile-toc">
+          <summary>目录 / Contents</summary>
+          <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E8%BF%99%E6%AC%A1%E5%88%B0%E5%BA%95%E5%BC%80%E6%BA%90%E4%BA%86%E4%BB%80%E4%B9%88"><span class="toc-list-text">一、这次到底开源了什么</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E5%AE%B6%E6%94%BE%E4%B8%8D%E4%B8%8B%E8%BF%99%E5%8F%A3%E9%94%85"><span class="toc-list-text">二、为什么你家放不下这口锅</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E7%9C%9F%E6%AD%A3%E5%8F%97%E7%9B%8A%E7%9A%84%E6%98%AF%E8%B0%81-%E6%89%98%E7%AE%A1%E5%95%86-%E4%BB%A5%E5%8F%8A%E9%97%B4%E6%8E%A5%E7%9A%84%E4%BD%A0"><span class="toc-list-text">三、真正受益的是谁:托管商,以及间接的你</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E6%9C%80%E5%80%BC%E5%BE%97%E5%85%B3%E6%B3%A8%E7%9A%84%E5%8A%9F%E8%83%BD-%E8%AE%A9%E8%B7%91%E5%88%86%E5%8F%AF%E4%BB%A5%E5%A4%8D%E7%8E%B0"><span class="toc-list-text">四、最值得关注的功能:让跑分可以复现</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E4%B8%80%E4%B8%AA%E8%A1%8C%E4%B8%9A%E4%BF%A1%E5%8F%B7-%E8%8B%B1%E4%BC%9F%E8%BE%BE%E5%92%8C%E6%98%87%E8%85%BE%E4%B8%A4%E6%9D%A1%E8%85%BF"><span class="toc-list-text">五、一个行业信号:英伟达和昇腾两条腿</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%AD%E3%80%81%E8%AF%BB%E8%80%85%E8%AF%A5%E6%80%8E%E4%B9%88%E7%94%A8%E8%BF%99%E6%9D%A1%E6%B6%88%E6%81%AF"><span class="toc-list-text">六、读者该怎么用这条消息</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+        </details>
+        
+
+        <div class="post-body">
+          <p>10 月下旬,DeepSeek 在 GitHub 上放出了 <a target="_blank" rel="noopener" href="https://github.com/deepseek-ai/DeepInfer">DeepInfer</a>——它自己线上服务用的那套推理引擎。几天之内收获近两万颗星,中文圈的标题大多是”DeepSeek 又开源了”。</p>
+<p>先说结论:<strong>绝大多数读者自己用不上它,但它会实实在在地影响你从第三方平台买到的 DeepSeek 是什么成色</strong>。这篇讲清楚三件事:开源了什么、为什么你家放不下、它对”同一个模型各家跑分不一样”这个老问题意味着什么。</p>
+<span id="more"></span>
+
+<div class="report-box">
+<div class="report-box-title">// 一句话摘要</div>
+<ul>
+<li><strong>开源了什么</strong>:推理引擎 DeepInfer(Apache 2.0),配套 1017 版模型权重(MIT)、提示词编码库 deepseek-recipe(MIT)和一套评测脚本。目前只支持 V4.1 Flash 1017 一个模型。</li>
+<li><strong>你家放不下</strong>:光权重文件就有 510GB,一张 RTX 5090 只有 32GB 显存;何况 DeepInfer 只支持英伟达 SM100 数据中心卡和华为昇腾 950。</li>
+<li><strong>真正受益的是托管商</strong>:云平台和中转站可以直接用官方同款内核与调度,第三方 DeepSeek 的质量有望更接近官方。但 KV 缓存、预填充/生成分离、负载均衡这三块官方没给,还得各家自己补。</li>
+<li><strong>最有意思的功能</strong>:批次无关推理和确定性采样——同样的输入,不管和谁挤在一批,结果都一样。这让"复现官方跑分"第一次变得可操作。</li>
+<li><strong>对你的影响</strong>:用官方 API 的人,账单不变;用第三方的人,以后可以多问一句"你用的什么引擎、哪个版本"。</li>
+</ul>
+</div>
+
+<h2 id="一、这次到底开源了什么"><a href="#一、这次到底开源了什么" class="headerlink" title="一、这次到底开源了什么"></a>一、这次到底开源了什么</h2><p>“开源”这个词这次涵盖了好几样东西,性质完全不同:</p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>许可</th>
+<th>是什么</th>
+<th>普通人能拿来干什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DeepSeek V4.1 Flash 1017 权重</td>
+<td>MIT</td>
+<td>模型本体,10-17 发布</td>
+<td>基本干不了,太大(见下节)</td>
+</tr>
+<tr>
+<td><strong>DeepInfer</strong></td>
+<td>Apache 2.0</td>
+<td>官方线上推理引擎,本次的主角</td>
+<td>同上,且只支持数据中心卡</td>
+</tr>
+<tr>
+<td>deepseek-recipe</td>
+<td>MIT</td>
+<td>把各种 API 格式的请求编码成 DeepSeek 提示词、再把输出解析回来的工具库</td>
+<td>开发者做适配时省事</td>
+</tr>
+<tr>
+<td>评测脚本</td>
+<td>Apache 2.0(随 DeepInfer)</td>
+<td>AIME 2026、HLE、GPQA Diamond 三套离线评测</td>
+<td>有算力的人能复现官方分数</td>
+</tr>
+<tr>
+<td>昇腾版矩阵运算 &#x2F; 通信库</td>
+<td>MIT 等</td>
+<td>9 月底先行放出的 DeepGEMM-Ascend、DeepEP-Ascend</td>
+<td>给华为昇腾平台用</td>
+</tr>
+</tbody></table>
+<p>DeepInfer 的 README 写得很坦白:它最初主要基于开源引擎 vLLM 打造,另外参考了 SGLang 和 TensorRT-LLM;这次放出的是”离线推理”部分,支持的功能包括 DeepSeek 自家的一整套优化内核、注意力与专家并行、草稿加速解码、结构化输出等。</p>
+<p>同样坦白的是缺什么。README 明确列出,<strong>要组成完整的推理服务,还缺三样</strong>:</p>
+<ol>
+<li>KV 缓存系统(多轮对话、长上下文复用的关键)</li>
+<li>预填充与生成分离部署(README 说大部分引擎功能已经实现,但没给完整方案)</li>
+<li>数据并行副本之间的负载均衡</li>
+</ol>
+<p>换句话说,DeepSeek 开放的是”灶台和刀工”,不是整间”后厨”。</p>
+<h2 id="二、为什么你家放不下这口锅"><a href="#二、为什么你家放不下这口锅" class="headerlink" title="二、为什么你家放不下这口锅"></a>二、为什么你家放不下这口锅</h2><p>上一篇<a href="/2026/10/22/electronics-price-outlook-2030/">《显卡还要涨多久》</a>刚算过,RTX 5090 在美国网店的最低价已经到了 7,998 美元。拿它来对照这次开源的东西:</p>
+<div class="fig">
+<div class="fig-title">想在家跑 1017 版,先过这几道门槛</div>
+<div class="fig-sub">权重体积来自 Hugging Face 上的官方模型文件合计;显卡数量和金额是本站的纯算术换算,只为直观对比,<strong>不代表这样真能跑起来</strong>——还没算 KV 缓存的显存,DeepInfer 也不支持消费级显卡。</div>
+<div class="fig-delta">
+  <div class="fig-delta-item is-up">
+    <div class="fig-delta-k">权重文件</div>
+    <div class="fig-delta-v"><strong>510 GB</strong></div>
+    <div class="fig-delta-note">一张 RTX 5090 的显存是 32GB</div>
+  </div>
+  <div class="fig-delta-item is-up">
+    <div class="fig-delta-k">光装下权重</div>
+    <div class="fig-delta-v"><strong>16 张 5090</strong></div>
+    <div class="fig-delta-note">510 ÷ 32 ≈ 15.9,向上取整</div>
+  </div>
+  <div class="fig-delta-item is-up">
+    <div class="fig-delta-k">按 10 月网店价</div>
+    <div class="fig-delta-v"><strong>≈ $12.8 万</strong></div>
+    <div class="fig-delta-note">16 × $7,998,只算显卡</div>
+  </div>
+  <div class="fig-delta-item is-down">
+    <div class="fig-delta-k">同样的钱买官方 API</div>
+    <div class="fig-delta-v"><strong>≈ 2,100 亿</strong></div>
+    <div class="fig-delta-note">输出 token(谷时 $0.60 / 百万);峰时减半</div>
+  </div>
+</div>
+<div class="fig-sub" style="margin:18px 0 8px"><strong>官方给出的硬件要求</strong></div>
+<div class="fig-bars">
+  <div class="fig-bar-row">
+    <span class="fig-bar-label"><b>DeepInfer 测速</b>生成阶段</span>
+    <span class="fig-bar-track"><i class="fig-bar-fill is-warn" style="--w:100%"></i></span>
+    <span class="fig-bar-val">64 张<em>SM100 卡</em></span>
+  </div>
+  <div class="fig-bar-row">
+    <span class="fig-bar-label"><b>官方最小示例</b>张量并行</span>
+    <span class="fig-bar-track"><i class="fig-bar-fill is-warn" style="--w:12.5%"></i></span>
+    <span class="fig-bar-val">8 路</span>
+  </div>
+  <div class="fig-bar-row">
+    <span class="fig-bar-label"><b>DeepInfer 测速</b>预填充阶段</span>
+    <span class="fig-bar-track"><i class="fig-bar-fill is-warn" style="--w:6.25%"></i></span>
+    <span class="fig-bar-val">4 张<em>SM100 卡</em></span>
+  </div>
+</div>
+<p class="fig-src"><a href="https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017" target="_blank" rel="noopener">DeepSeek-V4.1-Flash-1017 模型页</a>(权重文件合计约 510.3GB;最小推理示例默认 8 路张量并行);<a href="https://github.com/deepseek-ai/DeepInfer" target="_blank" rel="noopener">DeepInfer README</a>(支持硬件与测速配置);RTX 5090 价格见 <a href="https://www.tomshardware.com/pc-components/gpus/lowest-gpu-prices-tracking" target="_blank" rel="noopener">Tom's Hardware 价格追踪</a>;API 价见 <a href="https://api-docs.deepseek.com/quick_start/pricing" target="_blank" rel="noopener">DeepSeek 官方定价页</a>。快照 2026-10-22。</p>
+</div>
+
+<p>2,100 亿输出 token 是什么概念?按本站天梯里 Artificial Analysis 的实测,1017 版跑完一整套智能指数测试大约花 445 美元。<strong>对个人和小团队来说,”自己部署更省钱”在这个量级上完全不成立</strong>;DeepSeek 官方 API 谷时每百万输出 token 0.60 美元的价格,本身就已经是它自家这套引擎规模化之后的结果。</p>
+<h2 id="三、真正受益的是谁-托管商-以及间接的你"><a href="#三、真正受益的是谁-托管商-以及间接的你" class="headerlink" title="三、真正受益的是谁:托管商,以及间接的你"></a>三、真正受益的是谁:托管商,以及间接的你</h2><p>既然个人用不上,开源给谁?答案是<strong>云平台、推理服务商和中转站</strong>——那些本来就在用 DeepSeek 开源权重对外卖 API 的人。</p>
+<p>以前它们拿到权重之后,要自己在 vLLM、SGLang 之类的通用引擎上做适配。DeepSeek 的模型结构越来越特殊(1017 的模型页列出了滑动窗口加压缩稀疏注意力、两级索引器、多模态编码器等一长串组件),<strong>各家自己的实现和官方之间难免有出入</strong>。</p>
+<p>这种出入不是假想的。2025 年 9 月,月之暗面专门开源了一个 <a target="_blank" rel="noopener" href="https://github.com/MoonshotAI/K2-Vendor-Verifier">K2 Vendor Verifier</a>,起因就是用户反馈:同一个 Kimi K2,在不同托管商那里的工具调用表现差异明显。月之暗面在说明里提醒,用户挑服务商时往往只看延迟和价格,忽略了更隐蔽的精度差异。</p>
+<p>DeepInfer 等于把”官方怎么跑”的答案直接摆了出来。对第三方来说,可以照着做;对用户来说,<strong>以后有了一个可以追问的标准</strong>:”你们跑 DeepSeek 用的是不是官方引擎?是哪个版本的权重?”</p>
+<p>但别高估它:</p>
+<ul>
+<li>只支持英伟达 SM100 和昇腾 950 两种硬件。用其他卡的托管商,仍然只能参考,不能直接搬。</li>
+<li>缺的那三样(KV 缓存、分离部署、负载均衡)恰恰是线上服务的核心,各家自己补的部分,依然可能和官方不一样。</li>
+<li>托管商为了省钱可能做额外的量化或截断,这和用什么引擎无关。</li>
+</ul>
+<p>所以准确的说法是:<strong>第三方 DeepSeek 的成色”有条件变得更接近官方”,而不是”从此和官方一样”</strong>。中转站的验货方法,本站的<a href="/2026/08/20/relay-api-verification/">《中转站选购与验货》</a>仍然适用。</p>
+<h2 id="四、最值得关注的功能-让跑分可以复现"><a href="#四、最值得关注的功能-让跑分可以复现" class="headerlink" title="四、最值得关注的功能:让跑分可以复现"></a>四、最值得关注的功能:让跑分可以复现</h2><p>DeepInfer 的功能清单里,有两项对普通读者的意义比”快多少”更大:<strong>批次无关推理</strong>和<strong>确定性采样</strong>。</p>
+<p>先说问题是什么。很多人以为,大模型在温度设为 0 时应该每次输出一样,但实际上并不是。Thinking Machines 的研究员 Horace He 在 2025 年 9 月的一篇<a target="_blank" rel="noopener" href="https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/">长文</a>里拆解过原因:线上服务会把很多人的请求拼成一批一起算,而<strong>批次的大小和组成会微妙地改变计算的数值顺序</strong>,于是同一个问题,在服务器忙的时候和闲的时候,可能得到不同的答案。</p>
+<p>DeepInfer 把这个变成了一个开关:开启批次无关模式后,模型结果不受同批其他请求影响;再固定随机种子,同样的输入就能得到完全一样的输出(README 注明这两项目前只在英伟达平台上可用)。</p>
+<p>这和本站一直在追的问题直接相关。我们在<a href="/2026/07/27/one-model-many-scores/">《一个模型,N 个分数》</a>和<a href="/2026/08/05/benchmark-trust-crisis/">《当考卷泄题成为常态》</a>里反复写过:同一个模型,换个跑法、换个平台,分数可以差很多;而厂商自报的分数,外人很难核对。</p>
+<p>DeepInfer 这次把这两样拼在了一起——<strong>确定性推理 + 随引擎附带的评测脚本</strong>(AIME 2026 每题采样 32 次、HLE 全量 2,500 题、GPQA Diamond 每题 8 次)。理论上,任何有算力的第三方都可以按同样的设置跑一遍,看能不能复现模型页上的数字。</p>
+<div class="risk-box">
+<div class="risk-box-title">// 但要分清:自报分和第三方实测是两回事</div>
+<p>1017 的模型页列了一张对比表(和 Kimi K3、GLM-5.3、GPT-5.6 Sol、Opus 5 比),用的都是 DeepSeek 自己挑的测试和设置。本站天梯不用厂商自报分,只收第三方实测:截至 10-22,1017 版在 Artificial Analysis 智能指数为 45(旧版 39),在 LiveBench 2.0 为 79.2,综合排第 12。<strong>可复现是好事,但复现的仍是厂商选的考卷。</strong></p>
+</div>
+
+<h2 id="五、一个行业信号-英伟达和昇腾两条腿"><a href="#五、一个行业信号-英伟达和昇腾两条腿" class="headerlink" title="五、一个行业信号:英伟达和昇腾两条腿"></a>五、一个行业信号:英伟达和昇腾两条腿</h2><p>DeepInfer 的 README 把华为昇腾 950 和英伟达 SM100 并列写为支持硬件;9 月底,DeepSeek 还单独放出了昇腾版的矩阵运算库 DeepGEMM-Ascend 和通信库 DeepEP-Ascend。</p>
+<p>从工程角度看,这说明 DeepSeek 的线上服务至少在两种完全不同的硬件上都做了深度优化。对国内用户的直接含义是:<strong>跑在国产算力上的 DeepSeek 服务,也能用到官方同款的引擎</strong>,不必因为硬件不同而打折扣。</p>
+<p>至于这对供应链、对芯片厂商意味着什么,已经超出本站”帮读者把 AI 的账算清楚”的范围,这里不展开,也不构成任何投资判断。</p>
+<h2 id="六、读者该怎么用这条消息"><a href="#六、读者该怎么用这条消息" class="headerlink" title="六、读者该怎么用这条消息"></a>六、读者该怎么用这条消息</h2><ul>
+<li><strong>用官方 App 或 API 的</strong>:什么都不用变。开源不改变官方价格,本站<a href="/rankings/">天梯</a>的性价比表照常有效。</li>
+<li><strong>用第三方平台或中转站的</strong>:可以开始问”用的什么引擎、哪个版本的权重(是不是 1017)”。答不上来或者含糊其辞的,用<a href="/2026/08/20/relay-api-verification/">验货方法</a>测一测,尤其是工具调用和结构化输出这两项。</li>
+<li><strong>企业想私有化部署的</strong>:DeepInfer 降低了”跑对”的难度,但没降低”跑起来”的门槛。先确认手里有 SM100 或昇腾 950 集群,再评估补齐 KV 缓存、分离部署和负载均衡的工程量。</li>
+<li><strong>想在家跑本地模型的</strong>:这次的东西不适合你。参考上一篇的显卡价格,再看看小尺寸的开源模型。</li>
+</ul>
+<div class="risk-box">
+<div class="risk-box-title">// 数据说明</div>
+<ul>
+<li>本文为 <strong>2026-10-22</strong> 快照。DeepInfer 仓库创建于 10-16,公开时间以二手报道的 10 月下旬为准;星标数为写作时的 GitHub 数据,会变。</li>
+<li>"16 张 5090""2,100 亿 token"是本站按公开数字做的算术换算,只为直观对比,不是部署方案。</li>
+<li>本文对 DeepInfer 功能的描述全部来自其 README 与随附文档;本站没有实际部署测试。</li>
+</ul>
+</div>
+
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li>DeepSeek-AI,<a target="_blank" rel="noopener" href="https://github.com/deepseek-ai/DeepInfer">DeepInfer: High-performance, large-scale inference framework for DeepSeek models</a>(GitHub,README、examples 与 eval 文档)</li>
+<li>DeepSeek-AI,<a target="_blank" rel="noopener" href="https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017">DeepSeek-V4.1-Flash-1017 模型页</a>(Hugging Face)——权重许可、自报基准、最小推理示例</li>
+<li>DeepSeek-AI,<a target="_blank" rel="noopener" href="https://github.com/deepseek-ai/deepseek-recipe">deepseek-recipe</a>、<a target="_blank" rel="noopener" href="https://github.com/deepseek-ai/DeepGEMM-Ascend">DeepGEMM-Ascend</a>、<a target="_blank" rel="noopener" href="https://github.com/deepseek-ai/DeepEP-Ascend">DeepEP-Ascend</a>(GitHub)</li>
+<li>DeepSeek,<a target="_blank" rel="noopener" href="https://api-docs.deepseek.com/quick_start/pricing">API 定价</a>与<a target="_blank" rel="noopener" href="https://api-docs.deepseek.com/updates/">更新日志</a></li>
+<li>Moonshot AI,<a target="_blank" rel="noopener" href="https://github.com/MoonshotAI/K2-Vendor-Verifier">K2 Vendor Verifier</a>(GitHub,2025-09)——托管商之间工具调用表现差异</li>
+<li>Horace He 等(Thinking Machines Lab),<a target="_blank" rel="noopener" href="https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/">Defeating Nondeterminism in LLM Inference</a>(2025-09-10)</li>
+<li>Tom’s Hardware,<a target="_blank" rel="noopener" href="https://www.tomshardware.com/pc-components/gpus/lowest-gpu-prices-tracking">GPU price tracking 2026</a>——RTX 5090 价格</li>
+<li>本站,<a href="/rankings/">模型天梯</a>——1017 版的 Artificial Analysis 与 LiveBench 2.0 实测分、整卷测试成本</li>
+</ol>
+<blockquote>
+<p>本文由 ByteVibe 撰写(AI 辅助研究整理)。文中观点的原始出处均已在正文与参考文献中标注,版权归原作者所有。数据快照 2026-10-22。</p>
+</blockquote>
+
+        </div>
+        
+        <footer class="post-footer">
+          <nav class="post-nav">
+            
+            
+            <a class="post-nav-item post-nav-next" href="/2026/10/22/electronics-price-outlook-2030/">
+              <span class="post-nav-label">下一篇 →</span>
+              <span class="post-nav-title">显卡还要涨多久?一张时间表看清电子产品涨价到 2030</span>
+            </a>
+            
+          </nav>
+        </footer>
+      </div>
+
+      <!-- 3. Right Sidebar: Outline TOC Jump -->
+      <aside class="post-sidebar-right">
+        
+          <div class="toc-sticky">
+            <h3 class="toc-title">目录大纲</h3>
+            <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E8%BF%99%E6%AC%A1%E5%88%B0%E5%BA%95%E5%BC%80%E6%BA%90%E4%BA%86%E4%BB%80%E4%B9%88"><span class="toc-list-text">一、这次到底开源了什么</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E5%AE%B6%E6%94%BE%E4%B8%8D%E4%B8%8B%E8%BF%99%E5%8F%A3%E9%94%85"><span class="toc-list-text">二、为什么你家放不下这口锅</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E7%9C%9F%E6%AD%A3%E5%8F%97%E7%9B%8A%E7%9A%84%E6%98%AF%E8%B0%81-%E6%89%98%E7%AE%A1%E5%95%86-%E4%BB%A5%E5%8F%8A%E9%97%B4%E6%8E%A5%E7%9A%84%E4%BD%A0"><span class="toc-list-text">三、真正受益的是谁:托管商,以及间接的你</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E6%9C%80%E5%80%BC%E5%BE%97%E5%85%B3%E6%B3%A8%E7%9A%84%E5%8A%9F%E8%83%BD-%E8%AE%A9%E8%B7%91%E5%88%86%E5%8F%AF%E4%BB%A5%E5%A4%8D%E7%8E%B0"><span class="toc-list-text">四、最值得关注的功能:让跑分可以复现</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E4%B8%80%E4%B8%AA%E8%A1%8C%E4%B8%9A%E4%BF%A1%E5%8F%B7-%E8%8B%B1%E4%BC%9F%E8%BE%BE%E5%92%8C%E6%98%87%E8%85%BE%E4%B8%A4%E6%9D%A1%E8%85%BF"><span class="toc-list-text">五、一个行业信号:英伟达和昇腾两条腿</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%AD%E3%80%81%E8%AF%BB%E8%80%85%E8%AF%A5%E6%80%8E%E4%B9%88%E7%94%A8%E8%BF%99%E6%9D%A1%E6%B6%88%E6%81%AF"><span class="toc-list-text">六、读者该怎么用这条消息</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+          </div>
+        
+      </aside>
+    </div>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <p class="copyright">&copy; 2026 ByteVibe. All rights reserved.</p>
+      <p class="powered-by">Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a></p>
+      
+      <div class="social-links">
+        
+          <a class="social-link" href="https://github.com/notSomeshi" target="_blank" rel="noopener noreferrer">GitHub</a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+
+  <div class="search-overlay" id="searchOverlay" hidden>
+  <div class="search-backdrop" id="searchBackdrop"></div>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="站内搜索">
+    <div class="search-input-wrap">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="searchInput" class="search-input" placeholder="搜索文章…" autocomplete="off" spellcheck="false">
+      <button class="search-close" id="searchClose" aria-label="关闭搜索">ESC</button>
+    </div>
+    <div class="search-results" id="searchResults">
+      <p class="search-hint">输入关键词搜索标题、标签与正文</p>
+    </div>
+  </div>
+</div>
+
+  <button class="scroll-to-top" id="scrollToTop" aria-label="回到顶部">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+</body>
+</html>

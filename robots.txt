@@ -1,0 +1,22 @@
+# ByteVibe 欢迎所有搜索引擎与 AI 检索爬虫
+User-agent: *
+Allow: /
+
+# AI 搜索 / 问答引擎(显式列出,便于各家识别)
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: Bytespider
+User-agent: Baiduspider
+User-agent: Sogou web spider
+User-agent: YisouSpider
+Allow: /
+
+Sitemap: https://notsomeshi.github.io/sitemap.xml
