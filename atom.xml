@@ -16,8 +16,8 @@
       <name>ByteVibe</name>
     </author>
     <category term="技术解析" scheme="https://notsomeshi.github.io/categories/%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/"/>
-    <category term="开源" scheme="https://notsomeshi.github.io/tags/%E5%BC%80%E6%BA%90/"/>
     <category term="DeepSeek" scheme="https://notsomeshi.github.io/tags/DeepSeek/"/>
+    <category term="开源" scheme="https://notsomeshi.github.io/tags/%E5%BC%80%E6%BA%90/"/>
     <category term="推理引擎" scheme="https://notsomeshi.github.io/tags/%E6%8E%A8%E7%90%86%E5%BC%95%E6%93%8E/"/>
     <category term="API 中转" scheme="https://notsomeshi.github.io/tags/API-%E4%B8%AD%E8%BD%AC/"/>
     <category term="基准测试" scheme="https://notsomeshi.github.io/tags/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/"/>
