@@ -6,35 +6,35 @@
 
 ## 核心页面
 
-- [模型天梯](https://notsomeshi.github.io/rankings/):前 20 个大模型的综合排名(Arena、Artificial Analysis、LiveBench 2.0、SWE-bench Verified 四家实测分加权),附订阅与 API 性价比表、Agent 平台表、评测成本图。快照 2026-10-28
+- [模型天梯](https://notsomeshi.github.io/rankings/):前 20 个大模型的综合排名(Arena、Artificial Analysis、LiveBench 2.0、SWE-bench Verified 四家实测分加权),附订阅与 API 性价比表、Agent 平台表、评测成本图。快照 2026-10-30
 - [选购助手](https://notsomeshi.github.io/advisor/):按预算和用途推荐 AI 订阅或 API 方案
 - [关于](https://notsomeshi.github.io/about/):数据口径与更新规则
 - [RSS](https://notsomeshi.github.io/atom.xml) · [Sitemap](https://notsomeshi.github.io/sitemap.xml)
 
-## 模型天梯(快照 2026-10-28,默认权重)
+## 模型天梯(快照 2026-10-30,默认权重)
 
 | 名次 | 模型 | 厂商 | 综合分 | Arena | AA 指数 | LiveBench | SWE-V |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Claude Opus 5.5 | Anthropic | 89.7 | 1507 | 58 | 85.1 | — |
-| 2 | Gemini 4 Argon | Google | 81.9 | 1525 | 50 | 79.3 | — |
+| 1 | Claude Opus 5.5 | Anthropic | 89.6 | 1507 | 58 | 85.1 | — |
+| 2 | Gemini 4 Argon | Google | 80.9 | 1525 | 50 | 79.3 | — |
 | 3 | Claude Fable 5 | Anthropic | 76.9 | 1504 | — | — | 95 |
 | 4 | Claude Fable 5.1 | Anthropic | 76.5 | 1501 | 49 | 85.7 | — |
-| 5 | GPT-6.1 Sol | OpenAI | 72.6 | 1484 | 55 | 84.1 | — |
-| 6 | GPT-6 Astra | OpenAI | 72.3 | 1475 | 57 | 85.6 | — |
+| 5 | GPT-6.1 Sol | OpenAI | 72.4 | 1484 | 55 | 84.1 | — |
+| 6 | GPT-6 Astra | OpenAI | 72.2 | 1475 | 57 | 85.6 | — |
 | 7 | Claude Opus 5 | Anthropic | 70.4 | 1490 | — | — | 97 |
-| 8 | GPT-6.1 Terra | OpenAI | 68.5 | — | 51 | 77.2 | — |
+| 8 | GPT-6.1 Terra | OpenAI | 66.4 | — | 51 | 77.2 | — |
 | 9 | GPT-5.6 Sol | OpenAI | 64.1 | 1485 | — | — | 96.2 |
-| 10 | Claude Sonnet 5.5 | Anthropic | 61.8 | 1476 | 54 | 80 | — |
-| 11 | Muse Wonder | Meta | 46.8 | — | 43 | 74.2 | — |
-| 12 | Kimi K3.1 Pro | Moonshot | 46.4 | — | 46 | 71.3 | — |
-| 13 | Kimi K3(开源) | Moonshot | 43.0 | 1488 | — | 64.6 | 93.4 |
-| 14 | Claude Opus 4.8 | Anthropic | 40.4 | 1481 | — | — | 88.6 |
-| 15 | Claude Opus 4.7 | Anthropic | 39.7 | 1501 | — | — | 82 |
-| 16 | GPT-5.6 Terra | OpenAI | 38.6 | 1466 | — | 67.8 | 95.4 |
-| 17 | GLM-5.3(开源) | Z.ai | 37.3 | 1478 | 32 | — | 95.4 |
-| 18 | Grok 4.6 | xAI | 32.2 | 1454 | — | 67.8 | 95.6 |
-| 19 | GLM-5.3 Flash(开源) | Z.ai | 29.6 | 1475 | — | 62.1 | 92 |
-| 20 | GPT-5.5 | OpenAI | 25.3 | 1482 | — | — | 82.6 |
+| 10 | Claude Sonnet 5.5 | Anthropic | 60.9 | 1476 | 54 | 80 | — |
+| 11 | Muse Wonder | Meta | 43.9 | — | 43 | 74.2 | — |
+| 12 | Kimi K3.1 Pro | Moonshot | 42.8 | — | 46 | 71.3 | — |
+| 13 | Claude Opus 4.8 | Anthropic | 40.4 | 1481 | — | — | 88.6 |
+| 14 | Claude Opus 4.7 | Anthropic | 39.7 | 1501 | — | — | 82 |
+| 15 | Kimi K3(开源) | Moonshot | 39.4 | 1488 | — | 64.6 | 93.4 |
+| 16 | GLM-5.3(开源) | Z.ai | 37.3 | 1478 | 32 | — | 95.4 |
+| 17 | GPT-5.6 Terra | OpenAI | 35.6 | 1466 | — | 67.8 | 95.4 |
+| 18 | Grok 4.6 | xAI | 29.2 | 1454 | — | 67.8 | 95.6 |
+| 19 | GPT-5.5 | OpenAI | 25.3 | 1482 | — | — | 82.6 |
+| 20 | DeepSeek V4.1 Flash 1017(开源) | DeepSeek | 22.3 | — | 32 | 74 | — |
 
 综合分 = 各机构分数在上榜 20 个模型内 min-max 归一到 0–100 后按权重平均,缺失项不计权重。权重:Arena 30%、Artificial Analysis 25%、LiveBench 2.0 25%、SWE-bench Verified(Vals.ai) 20%。
 
