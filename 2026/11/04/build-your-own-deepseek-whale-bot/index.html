@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+
+<title>从零养一只 DeepSeek 小鲸鱼:QQ、微信、冷热记忆,还能远程帮你操作电脑 | ByteVibe</title>
+<meta name="description" content="最近 QQ 群里冒出不少”小鲸鱼”:一个用 DeepSeek 当大脑、住在聊天软件里的 AI 群友。GitHub 上同名或同类的项目已经有好几个,做法各不相同。 这篇不推荐某一个现成项目,而是带你用官方和主流开源组件,自己拼一只。目标是四件事: 能在 QQ 和 微信里聊天; 有…">
+<meta name="keywords" content="DeepSeek,DeepSeek Harness,聊天机器人,QQ,微信,记忆,教程">
+<meta name="author" content="ByteVibe">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+<link rel="canonical" href="https://notsomeshi.github.io/2026/11/04/build-your-own-deepseek-whale-bot/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ByteVibe">
+<meta property="og:title" content="从零养一只 DeepSeek 小鲸鱼:QQ、微信、冷热记忆,还能远程帮你操作电脑">
+<meta property="og:description" content="最近 QQ 群里冒出不少”小鲸鱼”:一个用 DeepSeek 当大脑、住在聊天软件里的 AI 群友。GitHub 上同名或同类的项目已经有好几个,做法各不相同。 这篇不推荐某一个现成项目,而是带你用官方和主流开源组件,自己拼一只。目标是四件事: 能在 QQ 和 微信里聊天; 有…">
+<meta property="og:url" content="https://notsomeshi.github.io/2026/11/04/build-your-own-deepseek-whale-bot/">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-11-04T12:00:00.000Z">
+<meta property="article:modified_time" content="2026-11-04T12:00:00.000Z">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"从零养一只 DeepSeek 小鲸鱼:QQ、微信、冷热记忆,还能远程帮你操作电脑","description":"最近 QQ 群里冒出不少”小鲸鱼”:一个用 DeepSeek 当大脑、住在聊天软件里的 AI 群友。GitHub 上同名或同类的项目已经有好几个,做法各不相同。 这篇不推荐某一个现成项目,而是带你用官方和主流开源组件,自己拼一只。目标是四件事: 能在 QQ 和 微信里聊天; 有…","inLanguage":"zh-CN","datePublished":"2026-11-04T12:00:00.000Z","dateModified":"2026-11-04T12:00:00.000Z","keywords":"DeepSeek, DeepSeek Harness, 聊天机器人, QQ, 微信, 记忆, 教程","articleSection":"技术解析","author":{"@type":"Organization","name":"ByteVibe","url":"https://notsomeshi.github.io/"},"publisher":{"@type":"Organization","name":"ByteVibe","url":"https://notsomeshi.github.io/"},"mainEntityOfPage":"https://notsomeshi.github.io/2026/11/04/build-your-own-deepseek-whale-bot/"}</script>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='0,0 100,0 100,78 78,100 0,100' fill='%23ffd802'/><text x='50' y='70' font-size='58' font-weight='800' font-family='ui-monospace,monospace' fill='%230d0d0f' text-anchor='middle'>B</text></svg>">
+<link rel="alternate" type="application/atom+xml" title="ByteVibe" href="/atom.xml">
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<link rel="stylesheet" href="/css/brands.css">
+
+
+<script src="/js/main.js" defer></script>
+<script>
+  // 暗色优先:light 显式切亮色;rain 提前打上标记避免闪烁
+  (function() {
+    try {
+      // 大字版:必须在首次绘制前打上,否则会先渲染小字再跳大
+      if (localStorage.getItem('fontsize') === 'large') {
+        document.documentElement.setAttribute('data-fontsize', 'large');
+      }
+      var t = localStorage.getItem('theme');
+      if (t === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else if (t === 'rain') {
+        document.documentElement.setAttribute('data-rain', '');
+        // 雨夜模式:页面加载的同时就开始预载雨声(与 main.js 的 RAIN_SRC 保持一致)
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.as = 'audio';
+        l.href = '/audio/rain.mp3?v=3';
+        document.head.appendChild(l);
+      }
+    } catch (e) {}
+  })();
+</script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+  
+  <canvas class="rain-canvas" id="rainCanvas" aria-hidden="true"></canvas>
+  <div class="reading-progress" id="readingProgress"></div>
+  <header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a class="site-logo" href="/">
+      ByteVibe
+    </a>
+    <nav class="site-nav" id="siteNav">
+      
+      
+        
+        
+        <a class="nav-link" href="/">首页</a>
+      
+        
+        
+        <a class="nav-link" href="/archives/">归档</a>
+      
+        
+        
+        <a class="nav-link" href="/categories/">分类</a>
+      
+        
+        
+        <a class="nav-link" href="/tags/">标签</a>
+      
+        
+        
+        <a class="nav-link" href="/about/">关于</a>
+      
+    </nav>
+    <div class="header-actions">
+      <button class="header-icon-btn" id="searchToggle" aria-label="搜索" title="搜索 (Ctrl+K)">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+      <button class="header-icon-btn theme-toggle" id="themeToggle" aria-label="切换显示模式(浅色 / 深色 / 雨夜)" title="显示模式:浅色 → 深色 → 雨夜">
+        <span class="icon-sun"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+        <span class="icon-moon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+        <span class="icon-umbrella"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 12a11.05 11.05 0 0 0-22 0Z"></path><path d="M12 12v7a2 2 0 0 0 4 0"></path></svg></span>
+      </button>
+      <button class="header-icon-btn fontsize-toggle" id="fontsizeToggle" aria-label="切换大字版" aria-pressed="false" title="大字版:放大字号并提高对比度">
+        <span class="icon-fs-large" aria-hidden="true">大</span>
+        <span class="icon-fs-small" aria-hidden="true">小</span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="打开菜单">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    
+      <a class="mobile-nav-link" href="/">首页</a>
+    
+      <a class="mobile-nav-link" href="/archives/">归档</a>
+    
+      <a class="mobile-nav-link" href="/categories/">分类</a>
+    
+      <a class="mobile-nav-link" href="/tags/">标签</a>
+    
+      <a class="mobile-nav-link" href="/about/">关于</a>
+    
+  </div>
+</header>
+
+  <main class="main-content">
+    <article class="post-detail">
+  <div class="container-docs">
+    <div class="post-layout-grid">
+      <!-- 1. Left Sidebar: Documentation Navigation -->
+      <aside class="post-sidebar-left">
+        <div class="sidebar-sticky">
+          <h3 class="sidebar-title">全部文章</h3>
+          <ul class="sidebar-list">
+            
+              <li class="sidebar-item active">
+                <a href="/2026/11/04/build-your-own-deepseek-whale-bot/">从零养一只 DeepSeek 小鲸鱼:QQ、微信、冷热记忆,还能远程帮你操作电脑</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/10/22/deepseek-deepinfer-open-source/">DeepSeek 开源了自家“后厨”:你用不上,但它会改变你买到的 DeepSeek</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/10/22/electronics-price-outlook-2030/">显卡还要涨多久?一张时间表看清电子产品涨价到 2030</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/10/22/reading-dario-amodei/">六篇文章读懂 Anthropic 的 CEO:他为什么一边描绘乌托邦,一边要求放慢 AI</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/10/05/ai-model-cricket-fight/">自己办一场 AI 斗蛐蛐:七个回合,一个下午测出谁更适合你</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/09/23/meta-muse-spark-13-price-tags/">Meta 给同一个模型开了四种价,其中一种用数据付</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/09/20/code-that-maintains-itself/">能算出来的数,就别写死</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/09/20/elo-anchor-shift/">把尺子的零点挪到谁身上</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/09/17/anthropic-brake-paradox/">先摘掉自己的刹车,再请人装一个所有人都得踩的</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/09/05/benchmark-shelf-life/">换了套卷子,全榜掉了 9 到 12 分</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/09/03/captcha-stops-humans/">机器人和你,过验证码的次数一样多</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/29/model-supply-as-leverage/">当模型访问权变成筹码:一周三件事,和中国开源的意外位置</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/20/relay-api-verification/">中转站选购与验货:怎么测出模型被&#34;降智&#34;或货不对板</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/15/what-is-agent-harness/">同一个模型,换个壳分数差 24 分:harness 入门</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/15/what-august-deleted/">这个月,AI 圈删掉了什么</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/15/ai-becomes-utility/">峰谷电价来了:AI 正在变成一门电力生意</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/08/reasoning-effort-hidden-dimension/">你买的不是模型,是&#34;让它想多久&#34;</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/08/seat-pricing-sunset/">席位制的黄昏:当软件的边际成本不再是零</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/05/benchmark-trust-crisis/">当考卷泄题成为常态:AI 评测的信任危机</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/05/pilot-to-production-gap/">88% 的 AI 试点走不到生产,而输的不是模型</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/04/agent-liability-2026/">Agent 闯了祸算谁的:自主系统的责任正在被法律钉死</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/04/ai-power-grid-2026/">电网成为 AI 的硬约束:一场从机房烧到居民电费的挤占</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/03/cloud-price-war-2026-08/">云端在降价,本地在涨价:2026 年夏天的两个反方向</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/08/03/hardware-price-surge-2026/">最贵装机季:AI 抢走了你的内存条</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/31/ai-briefing-2026-07-late/">七月下半月速览:开源权重贴身、Agent 越狱进生产环境、监管转向市场结构</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/31/zero-cost-ai-2026/">零成本用上 AI:2026 年 7 月的羊毛地图</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/what-is-multimodal/">什么是多模态?——一篇给非技术读者的说明</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/subscription-tier-fragmentation/">订阅档位正在碎片化:当&#34;买哪个&#34;比&#34;用哪个&#34;更难</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/ai-finance-pitfalls/">AI 做金融分析的三个致命陷阱:在你把钱交给它之前</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/opus5-price-war/">「半价」的参照物是谁:一句宣传语引发的集体误读</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/27/one-model-many-scores/">一个模型,N 个分数:当 effort 和编排模式让榜单失去唯一解</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/20/grok45-ide-native-models/">Grok 4.5 与「IDE 原生」模型:当编辑器成为训练场</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/20/frontier-convergence-2026/">前沿收敛:为什么 2026 年榜单顶部挤成了一团</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/17/openrouter-power-shift/">OpenRouter 上的权力转移:中国开源模型如何吃下一半流量</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/17/ai-frontier-briefing-2026-07/">2026 年中前沿速览:模型分层、Agent 落地与监管转折</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-prospects-and-strata/">前景、困难与阶层重排:AI 正在改写谁的命运?</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-dividend-paradox/">AI 红利悖论:我们为 AI 买单三年,红利为何还没普惠?</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/08/ai-capital-markets-2026/">资本市场视角下的 AI 局势:7250 亿美元 Capex、循环交易与泡沫之辩</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/no-code-mvp-to-solopreneur/">从 Vibe Coding 到超级个体：2026 年全栈独立开发的新叙事</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/yolo-mode-and-ai-safety-guardrails/">YOLO 模式下的安全边界：如何防止 AI 删库跑路</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/high-performance-ai-prompts-library/">如何撰写黄金级 AI Prompt：从“做个功能”到“系统级交付”</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/mcp-server-practical-recipes/">Model Context Protocol (MCP) 深度指南：连接你的 AI 与现实数据</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/07/01/advanced-vibe-coding-roo-clinic/">Cline 与 Roo Code 实战：下一代 Vibe Coding 的工程范式</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2026/04/01/claude-code-complete-guide/">Claude Code 从入门到精通：面向工程师与产品经理的 AI 编程完全指南</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/30/future-of-vibe-coding/">Vibe Coding 的未来：当编程不再需要编程</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/25/ai-coding-tools-2025/">2025 年最值得关注的 AI 编程工具全景</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/20/vibe-coding-best-practices/">Vibe Coding 最佳实践：如何高效地与 AI 结对编程</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/15/what-is-vibe-coding/">什么是 Vibe Coding？一文读懂 AI 时代的编程新范式</a>
+              </li>
+            
+              <li class="sidebar-item ">
+                <a href="/2025/06/10/hello-world/">欢迎来到 ByteVibe</a>
+              </li>
+            
+          </ul>
+        </div>
+      </aside>
+
+      <!-- 2. Middle Column: Main Article Content -->
+      <div class="post-content-main">
+        <header class="post-header">
+          <div class="post-meta">
+            <time class="post-date" datetime="2026-11-04T12:00:00.000Z">2026年11月04日</time>
+            
+            <span class="post-meta-sep">·</span>
+            <span class="post-category">
+              
+                <a href="/categories/%E6%8A%80%E6%9C%AF%E8%A7%A3%E6%9E%90/">技术解析</a>
+              
+            </span>
+            
+            <span class="post-meta-sep">·</span>
+            <span class="reading-time">13 分钟阅读</span>
+          </div>
+          <h1 class="post-title">从零养一只 DeepSeek 小鲸鱼:QQ、微信、冷热记忆,还能远程帮你操作电脑</h1>
+          
+          <div class="post-tags">
+            
+              <a class="tag-pill" href="/tags/DeepSeek/">#DeepSeek</a>
+            
+              <a class="tag-pill" href="/tags/DeepSeek-Harness/">#DeepSeek Harness</a>
+            
+              <a class="tag-pill" href="/tags/%E8%81%8A%E5%A4%A9%E6%9C%BA%E5%99%A8%E4%BA%BA/">#聊天机器人</a>
+            
+              <a class="tag-pill" href="/tags/QQ/">#QQ</a>
+            
+              <a class="tag-pill" href="/tags/%E5%BE%AE%E4%BF%A1/">#微信</a>
+            
+              <a class="tag-pill" href="/tags/%E8%AE%B0%E5%BF%86/">#记忆</a>
+            
+              <a class="tag-pill" href="/tags/%E6%95%99%E7%A8%8B/">#教程</a>
+            
+          </div>
+          
+        </header>
+
+        
+
+        
+        
+        <details class="mobile-toc">
+          <summary>目录 / Contents</summary>
+          <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E5%85%88%E7%9C%8B%E6%87%82%E2%80%9D%E5%B0%8F%E9%B2%B8%E9%B1%BC%E2%80%9D%E6%98%AF%E6%80%8E%E4%B9%88%E6%8B%BC%E8%B5%B7%E6%9D%A5%E7%9A%84"><span class="toc-list-text">一、先看懂”小鲸鱼”是怎么拼起来的</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-list-text">二、准备工作</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E8%A3%85%E5%A4%A7%E8%84%91-DeepSeek-Harness"><span class="toc-list-text">三、装大脑:DeepSeek Harness</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E6%8E%A5-QQ-%E5%92%8C%E5%BE%AE%E4%BF%A1-dsh-im"><span class="toc-list-text">四、接 QQ 和微信:dsh-im</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E5%86%B7%E7%83%AD%E8%AE%B0%E5%BF%86"><span class="toc-list-text">五、冷热记忆</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%AD%E3%80%81%E8%BF%9C%E7%A8%8B%E6%93%8D%E4%BD%9C%E7%94%B5%E8%84%91-%E5%8F%AA%E7%BB%99%E4%B8%80%E5%8F%AA%E9%B2%B8%E9%B1%BC%E5%BC%80%E5%B7%A5%E5%85%B7"><span class="toc-list-text">六、远程操作电脑:只给一只鲸鱼开工具</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%83%E3%80%81%E4%B8%8A%E7%BA%BF%E5%89%8D%E7%9A%84%E6%A3%80%E6%9F%A5%E6%B8%85%E5%8D%95"><span class="toc-list-text">七、上线前的检查清单</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%AB%E3%80%81%E5%AE%83%E5%92%8C%E2%80%9D%E7%8E%B0%E6%88%90%E7%9A%84%E5%B0%8F%E9%B2%B8%E9%B1%BC%E2%80%9D%E5%B7%AE%E5%9C%A8%E5%93%AA"><span class="toc-list-text">八、它和”现成的小鲸鱼”差在哪</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+        </details>
+        
+
+        <div class="post-body">
+          <p>最近 QQ 群里冒出不少”小鲸鱼”:一个用 DeepSeek 当大脑、住在聊天软件里的 AI 群友。GitHub 上同名或同类的项目已经有好几个,做法各不相同。</p>
+<p>这篇不推荐某一个现成项目,而是带你<strong>用官方和主流开源组件,自己拼一只</strong>。目标是四件事:</p>
+<ol>
+<li>能在 <strong>QQ</strong> 和 <strong>微信</strong>里聊天;</li>
+<li>有<strong>冷热两层记忆</strong>:常用的事随口就记得,久远的事需要时能翻出来;</li>
+<li>主人能用一句自然语言<strong>远程让它帮忙操作电脑</strong>;</li>
+<li>全程<strong>不碰非官方的账号注入</strong>,并且把”远程操作电脑”这件危险的事关进笼子里。</li>
+</ol>
+<span id="more"></span>
+
+<div class="report-box">
+<div class="report-box-title">// 一句话摘要</div>
+<ul>
+<li><strong>四个零件</strong>:大脑用 DeepSeek 官方开源的 <strong>DeepSeek Harness(DSH)</strong>;嘴巴用社区插件 <strong>dsh-im</strong> 接 QQ 和微信;记忆用 <strong>dsh-fish-memory</strong> 或 <strong>dsh-mnemon</strong>;手就是 DSH 自带的命令行与文件工具。</li>
+<li><strong>QQ 和微信都走官方通道</strong>:QQ 是 QQ 开放平台的机器人,微信是腾讯开放的 iLink 个人号 Bot 接口,都是扫码绑定。</li>
+<li><strong>冷热记忆</strong>:热记忆(人设、主人画像、约定)每轮都带上;冷记忆(过往事件、长期资料)按需检索,而且会随时间淡忘。</li>
+<li><strong>远程操作电脑</strong>:只给"私聊 + 白名单只有你"的那只鲸鱼开工具,权限停在"只能动工作区",越界操作在聊天里回复"批准"才执行,而且每次都要批。</li>
+<li><strong>成本</strong>:日常聊天按本站估算一天不到 1 块钱;真正要花心思的是安全,不是钱。</li>
+</ul>
+</div>
+
+<h2 id="一、先看懂”小鲸鱼”是怎么拼起来的"><a href="#一、先看懂”小鲸鱼”是怎么拼起来的" class="headerlink" title="一、先看懂”小鲸鱼”是怎么拼起来的"></a>一、先看懂”小鲸鱼”是怎么拼起来的</h2><p>把一只聊天机器人拆开,其实就四个零件:</p>
+<div class="fig">
+<div class="fig-title">一只小鲸鱼的四个零件</div>
+<div class="fig-sub">每一行是一个零件、本文选用的组件和它的来历。都是开源项目,可以换成同类替代品。</div>
+<div class="fig-tl">
+  <div class="fig-tl-item is-hot"><b>大脑<em>思考与调工具</em></b><span><strong>DeepSeek Harness(dsh)</strong>:DeepSeek 官方开源的 Agent 框架,MIT 许可,"一切皆插件"。负责调用模型、管理会话、执行工具、审批权限。目前是<strong>开发者预览版</strong>,官方明说还会有不兼容的改动。</span></div>
+  <div class="fig-tl-item is-warm"><b>嘴巴<em>收发消息</em></b><span><strong>dsh-im</strong>:社区开发者维护的 DSH 插件(MIT 许可,获得 DSH 官方 Token 赞助),一个插件接 QQ、微信、飞书、钉钉、企业微信、Telegram 等十几个渠道,扫码就能绑定。</span></div>
+  <div class="fig-tl-item is-turn"><b>记忆<em>冷热分层</em></b><span>DSH 本身<strong>不带长期记忆</strong>,靠插件补。本文推荐 <strong>dsh-fish-memory</strong>(会淡忘、带时间戳)或 <strong>dsh-mnemon</strong>(分层记忆,常用的放上下文、长期资料按需检索)。</span></div>
+  <div class="fig-tl-item is-cool"><b>手<em>操作电脑</em></b><span>DSH 自带的命令行与文件工具,配合<strong>权限预设和审批</strong>。图形界面的"计算机操作"(看屏幕、点鼠标)目前只有 macOS 的实验性提供方,本文先不用。</span></div>
+</div>
+<p class="fig-src"><a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">DeepSeek Harness</a> · <a href="https://github.com/xmanrui/dsh-im" target="_blank" rel="noopener">dsh-im</a> · <a href="https://github.com/Yuuyuko-uu/dsh-fish-memory" target="_blank" rel="noopener">dsh-fish-memory</a> · <a href="https://github.com/omdsh-dev/dsh-mnemon" target="_blank" rel="noopener">dsh-mnemon</a> · <a href="https://github.com/deepseek-ai/deepseek-harness/blob/HEAD/docs/subsystems/computer-use.zh.md" target="_blank" rel="noopener">DSH 计算机操作文档</a>。截至 2026-11-04。</p>
+</div>
+
+<p><strong>社区里那些现成的小鲸鱼呢?</strong> 比如 <a href="https://github.com/Frostyume/xiaojingyu" target="_blank" rel="noopener">Frostyume&#x2F;xiaojingyu</a> 做得相当完整:有人设、心情、跨会话记忆,”规则先筛、模型后判”省 token,群友碰不到本机命令,高风险动作要主人私聊确认。它的设计思路很值得抄。但它收发 QQ 消息靠的是 SnowLuma 这类<strong>注入个人 QQ 号</strong>的方案,不是官方接口,有被风控的风险。想省心的话,先用本文的官方通道;想要”像真人群友”的体验,再去研究它。</p>
+<h2 id="二、准备工作"><a href="#二、准备工作" class="headerlink" title="二、准备工作"></a>二、准备工作</h2><table>
+<thead>
+<tr>
+<th>准备什么</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>一台专门的电脑或虚拟机</td>
+<td>DSH 官方安全说明建议用<strong>一次性虚拟机、容器或专用环境</strong>,别直接放在装着你全部资料的主力机上</td>
+</tr>
+<tr>
+<td>Node.js 22 以上</td>
+<td>DSH 用 <code>npx</code> 启动;dsh-mnemon 要求 22.19 及以上</td>
+</tr>
+<tr>
+<td>DeepSeek API Key</td>
+<td>去 DeepSeek 开放平台充值即用,没有订阅</td>
+</tr>
+<tr>
+<td>一个手机 QQ、一个微信</td>
+<td>用来扫码建机器人</td>
+</tr>
+</tbody></table>
+<p><strong>先算一笔账。</strong> DeepSeek 的 <code>deepseek-flash</code>(当前是 V4.1 Flash 1017)峰时每百万 token 输入 $0.30、缓存命中 $0.006、输出 $1.20,谷时再减半(<a href="https://api-docs.deepseek.com/quick_start/pricing" target="_blank" rel="noopener">官方定价</a>)。聊天机器人的上下文大部分能命中缓存,按本站的粗略假设:</p>
+<ul>
+<li>每天 200 轮对话;</li>
+<li>每轮输入 4,000 token,其中八成命中缓存;</li>
+<li>每轮输出 400 token;</li>
+<li>全按峰时价算。</li>
+</ul>
+<p>那么一天约 $0.15,一个月约 $4.4。让它干活(读文件、跑命令)时一轮会多调几次工具,账单会翻几倍,但量级仍然很小。</p>
+<h2 id="三、装大脑-DeepSeek-Harness"><a href="#三、装大脑-DeepSeek-Harness" class="headerlink" title="三、装大脑:DeepSeek Harness"></a>三、装大脑:DeepSeek Harness</h2><p>在准备好的机器上打开终端:</p>
+<pre><code class="hljs sh">npx @deepseek-ai/dsh web</code></pre>
+
+<p>浏览器会打开 <code>http://127.0.0.1:3080</code>,这就是 DSH 的 Web 界面。按引导填好 DeepSeek 的 API Key,先在网页里随便聊两句,确认模型能正常回复。</p>
+<div class="risk-box">
+<div class="risk-box-title">// 先读一遍官方的安全说明</div>
+<p>DSH 官方 <a href="https://github.com/deepseek-ai/deepseek-harness/blob/HEAD/SAFETY.md" target="_blank" rel="noopener">SAFETY.md</a> 写得很直白:它<strong>没有经过安全审计</strong>,会执行模型生成的代码和命令、加载第三方插件、访问网络和文件;沙箱、审批和权限控制<strong>能降低风险,但不能保证隔离</strong>。建议用最小权限运行,放在可丢弃的环境里,并备份它能碰到的文件。下面所有关于"操作电脑"的设计,都是围绕这段话来的。</p>
+</div>
+
+<h2 id="四、接-QQ-和微信-dsh-im"><a href="#四、接-QQ-和微信-dsh-im" class="headerlink" title="四、接 QQ 和微信:dsh-im"></a>四、接 QQ 和微信:dsh-im</h2><p>在启动 DSH 的那个终端里装插件(包名认准 <code>@xmanrui/dsh-im</code>,有同名的其他项目):</p>
+<pre><code class="hljs sh">dsh plugin --profile web add -w @xmanrui/dsh-im</code></pre>
+
+<p>重启 <code>dsh web</code>,刷新浏览器,打开「设置 → IM机器人」。</p>
+<p><strong>QQ</strong>:用手机 QQ 扫码,插件会帮你在 QQ 开放平台创建一个官方机器人(也可以填已有机器人的 AppID 和 AppSecret)。私聊里它会显示”正在输入”,群聊里要 @ 它才回。</p>
+<p><strong>⚠ 第一件事是收紧权限。</strong> dsh-im 的说明里写明:<strong>扫码新建的 QQ 机器人默认允许所有用户在私聊和群聊里聊天、执行内置命令</strong>。马上到机器人的访问设置里把白名单改成只有你(或你允许的人),命令权限也一起收紧。</p>
+<p><strong>微信</strong>:同样在设置页用微信扫码绑定。底层是腾讯开放的 <strong>iLink 个人号 Bot 接口</strong>,腾讯自己在 npm 上发布并维护了对应的微信渠道插件 <a href="https://www.npmjs.com/package/@tencent-weixin/openclaw-weixin" target="_blank" rel="noopener">@tencent-weixin&#x2F;openclaw-weixin</a>,这条路是官方的,不是逆向协议。几个现实限制:</p>
+<ul>
+<li>回复只有纯文本,长回复按 1,800 字分段发送;</li>
+<li>群聊支持在各方资料里说法不一,按私聊来规划最稳;</li>
+<li>登录态可能过期,需要重新扫码。</li>
+</ul>
+<p><strong>一个渠道可以接多只机器人</strong>,而且每只的工作区、模型、Agent 预设都是独立的。下文会用到这一点。</p>
+<h2 id="五、冷热记忆"><a href="#五、冷热记忆" class="headerlink" title="五、冷热记忆"></a>五、冷热记忆</h2><p>“记忆”最常见的两种失败:一是什么都塞进上下文,很快塞满,还越来越贵;二是什么都存进数据库,结果该想起来的时候想不起来。冷热分层就是为了两头都不踩坑。</p>
+<div class="fig">
+<div class="fig-title">记忆的温度带</div>
+<div class="fig-sub">越靠左越"热":每轮都带上,贵但随时在场。越靠右越"冷":平时不占上下文,问到才检索,还会随时间淡忘。色带宽度只是示意。</div>
+<div class="fig-strip">
+  <span class="is-hot" style="--f:2"><b>热</b>每轮都在</span>
+  <span class="is-warm" style="--f:3"><b>温</b>本次会话</span>
+  <span class="is-turn" style="--f:4"><b>冷</b>按需检索</span>
+  <span class="is-cool" style="--f:3"><b>淡</b>慢慢遗忘</span>
+</div>
+<div class="fig-tl">
+  <div class="fig-tl-item is-hot"><b>热记忆<em>常驻</em></b><span>人设、主人是谁、你的喜好、你们的约定。dsh-fish-memory 把这类标成"长期事实",<strong>每轮都固定带上,不管这句话问了什么</strong>,也不会过期。</span></div>
+  <div class="fig-tl-item is-warm"><b>温记忆<em>当前对话</em></b><span>就是 DSH 会话本身的上下文。聊得太长会被压缩;想换个话题就发 <code>/new</code> 开新会话。</span></div>
+  <div class="fig-tl-item is-turn"><b>冷记忆<em>检索</em></b><span>过去发生的事、项目资料。dsh-fish-memory 按"命中的词够不够特别"去找,再按鲜活度、重要度、情绪排序,最多注入几条;dsh-mnemon 的做法类似,长期资料只在问题需要时才检索。</span></div>
+  <div class="fig-tl-item is-cool"><b>淡忘<em>半衰期</em></b><span>dsh-fish-memory 给每条事件记忆一个"鲜活度",<strong>默认 30 天淡一半</strong>:不删除,只是越来越难被想起。每条都带时间,跨年了会写"去年 09-17"。</span></div>
+</div>
+<p class="fig-src"><a href="https://github.com/Yuuyuko-uu/dsh-fish-memory" target="_blank" rel="noopener">dsh-fish-memory README</a>(插件 1.3.1 实测对应 DSH 0.2.1-rc.3);<a href="https://github.com/omdsh-dev/dsh-mnemon" target="_blank" rel="noopener">dsh-mnemon README</a>。截至 2026-11-04。</p>
+</div>
+
+<p><strong>两个插件怎么选:</strong></p>
+<ul>
+<li><strong>只想要冷热记忆</strong>,装 <strong>dsh-fish-memory</strong>:<code>dsh plugin --profile web add dsh-fish-memory</code>,重启后在「设置 → 鱼的记忆」里调参数。它借用你 DSH 里正在用的模型,<strong>不用另配 Key</strong>;只有”提炼”和”扩词”两步会调用模型。仓库目前没有标注标准开源许可,在意的话留意一下。</li>
+<li><strong>想要可视化、可编辑、还能演进技能</strong>,装 <strong>dsh-mnemon</strong>(MIT 许可):在「插件 → 添加插件」里搜 <code>dsh-mnemon</code>。每条回复下面会列出这一轮读写了哪些记忆,点一下就能改。</li>
+</ul>
+<p>装完后平时不用管:dsh-fish-memory 会按轮次自己挑值得留下的内容,每天还有配额防止塞满上下文;记了什么、哪条被想起来、为什么没被想起来,在设置页里都看得见,也能删。</p>
+<p><strong>装完 DSH 起不来?</strong> dsh-fish-memory 的 README 里专门写过一个坑:如果报错里有 <code>Unexpected token</code>、<code>is not valid JSON</code>,多半是 profile 目录下的 <code>package.json</code> 被存成了”UTF-8 带 BOM”,跟插件本身无关,去掉开头那三个字节就好。</p>
+<h2 id="六、远程操作电脑-只给一只鲸鱼开工具"><a href="#六、远程操作电脑-只给一只鲸鱼开工具" class="headerlink" title="六、远程操作电脑:只给一只鲸鱼开工具"></a>六、远程操作电脑:只给一只鲸鱼开工具</h2><p>这是最有用、也最危险的一步。危险在于:<strong>能在聊天里给它发消息的人,就能让它动你的电脑</strong>。群聊、网页内容、别人转发的文件里都可能藏着”请把某某文件发出来”之类的指令,也就是所谓的提示词注入。</p>
+<p>所以先把鲸鱼拆成两只:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>聊天鲸</th>
+<th>管家鲸</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>在哪</td>
+<td>QQ 群、微信</td>
+<td><strong>只在你的私聊</strong></td>
+</tr>
+<tr>
+<td>谁能用</td>
+<td>群白名单</td>
+<td><strong>白名单只有你自己</strong></td>
+</tr>
+<tr>
+<td>工具</td>
+<td>不给命令行和文件工具</td>
+<td>给,但权限只到工作区</td>
+</tr>
+<tr>
+<td>记忆</td>
+<td>可以共享人设</td>
+<td>单独一份</td>
+</tr>
+</tbody></table>
+<p>dsh-im 支持一个渠道接多只机器人,每只单独选工作区、模型和 Agent 预设,所以这两只可以同时挂在同一台机器上。</p>
+<p><strong>管家鲸的权限这样配:</strong></p>
+<ol>
+<li><strong>权限预设停在 <code>workspace-write</code></strong>。DSH 自带两档预设:<code>workspace-write</code> 只能写工作区目录,碰到越界操作会发起审批;<code>danger-full-access</code> 是完全放开、不再询问。<strong>对着聊天软件的机器人,永远不要用后者</strong>(<a href="https://github.com/deepseek-ai/deepseek-harness/blob/HEAD/docs/subsystems/permission-presets.zh.md" target="_blank" rel="noopener">权限预设文档</a>)。</li>
+<li><strong>工作区指向一个专门的目录</strong>,比如 <code>D:\whale-work</code>。要它整理的文件先放进这里,别把整块盘交出去。</li>
+<li><strong>审批在聊天里完成</strong>。需要审批时,机器人会在原聊天里问你,你回复 <code>批准</code> &#x2F; <code>拒绝</code>(或 <code>同意</code> &#x2F; <code>不同意</code> &#x2F; <code>yes</code> &#x2F; <code>no</code>)。Web 端和聊天两边可以同时处理,先提交的生效。<strong>dsh-im 不提供”永久批准”</strong>,每次都要你点头。这对远程操作来说是好事(<a href="https://github.com/xmanrui/dsh-im" target="_blank" rel="noopener">dsh-im 机器人命令说明</a>)。</li>
+<li><strong>DSH 的审批本身是”失败即拒绝”</strong>:只有明确的”允许一次”才放行,拒绝、取消、没人应答一律不执行(<a href="https://github.com/deepseek-ai/deepseek-harness/blob/HEAD/docs/subsystems/approval.zh.md" target="_blank" rel="noopener">审批文档</a>)。</li>
+</ol>
+<p><strong>能让它干什么?</strong> 都是一句话的事:</p>
+<ul>
+<li>“看一下 D 盘还剩多少空间”;</li>
+<li>“把工作区里上周的 PDF 按日期改名,再打包发给我”;</li>
+<li>“跑一下 <code>npm test</code>,把失败的那几行发我”;</li>
+<li>“每天早上 9 点把昨天的日志摘要发我”。</li>
+</ul>
+<p>文件可以直接回传到聊天里;私聊绑定的会话还能开”双向同步”,Web 端和定时任务的结果也会推到你手机上。</p>
+<p><strong>想让它点鼠标、看屏幕呢?</strong> DSH 有”计算机操作”(computer use)子系统,但官方文档里目前只有 macOS 的实验性提供方,需要单独授予辅助功能和屏幕录制权限。Windows 用户先用命令行和文件工具,覆盖面已经很大了。</p>
+<h2 id="七、上线前的检查清单"><a href="#七、上线前的检查清单" class="headerlink" title="七、上线前的检查清单"></a>七、上线前的检查清单</h2><div class="risk-box">
+<div class="risk-box-title">// 每一条都做到再让它上线</div>
+<ul>
+<li><strong>白名单</strong>:扫码新建的 QQ 机器人默认对所有人开放,先改;管家鲸的白名单只留你自己。</li>
+<li><strong>两只分开</strong>:群里那只不给命令行和文件工具,只有私聊那只有。</li>
+<li><strong>权限</strong>:管家鲸停在 <code>workspace-write</code>,工作区是专门目录,绝不用 <code>danger-full-access</code>。</li>
+<li><strong>隔离</strong>:最好跑在虚拟机或专用电脑上,并定期备份它能碰到的文件。</li>
+<li><strong>密钥</strong>:API Key、机器人凭据不要放进工作区,也别让它把配置文件发到聊天里。</li>
+<li><strong>预期管理</strong>:DSH 和这些插件都还在快速迭代,升级后可能不兼容。先在网页里测通,再放进群里。</li>
+</ul>
+</div>
+
+<h2 id="八、它和”现成的小鲸鱼”差在哪"><a href="#八、它和”现成的小鲸鱼”差在哪" class="headerlink" title="八、它和”现成的小鲸鱼”差在哪"></a>八、它和”现成的小鲸鱼”差在哪</h2><p>本文拼出来的是一个<strong>能聊天、记得事、能远程跑腿</strong>的助手,但它不会自己”潜水看气氛、挑时机插话”。社区的 xiaojingyu 在这方面下了很多功夫:规则先筛不花 token、8 秒内的消息合并成一次唤醒、有夜间静默和每日上限、有心情和精力。</p>
+<p>想往这个方向走,可以在 DSH 里用 Agent 预设写一份人设,再参考它的”唤醒条件”和”频率上限”来调教你的聊天鲸。至于收发 QQ 消息的通道,建议仍然留在官方机器人上。</p>
+<p>本站相关:<a href="/2026/10/22/deepseek-deepinfer-open-source/">DeepSeek 开源了自家”后厨”</a> 讲了它官方推理引擎的事;<a href="/2026/08/20/relay-api-verification/">中转站选购与验货</a> 适合不直连官方 API、想走第三方的读者;各模型的价格和能力对比见<a href="/rankings/">模型天梯</a>。</p>
+<div class="risk-box">
+<div class="risk-box-title">// 数据说明</div>
+<ul>
+<li>本文为 <strong>2026-11-04</strong> 快照。DSH 当前 npm 最新版是 0.2.1-rc.5,仍是开发者预览;插件界面和命令可能随版本变化,以各项目 README 为准。</li>
+<li>每天 $0.15 的成本是本站按上文假设做的粗算,不是实测账单;让它跑工具时会明显更高。</li>
+<li>本站没有对文中插件做安全审计。远程操作电脑的风险由使用者自行承担,请务必先读 DSH 的安全说明。</li>
+</ul>
+</div>
+
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li>DeepSeek-AI,<a target="_blank" rel="noopener" href="https://github.com/deepseek-ai/deepseek-harness">DeepSeek Harness</a>(GitHub,README 与 <a target="_blank" rel="noopener" href="https://github.com/deepseek-ai/deepseek-harness/blob/HEAD/SAFETY.md">SAFETY.md</a>)</li>
+<li>DeepSeek-AI,DSH 子系统文档:<a target="_blank" rel="noopener" href="https://github.com/deepseek-ai/deepseek-harness/blob/HEAD/docs/subsystems/permission-presets.zh.md">权限预设</a>、<a target="_blank" rel="noopener" href="https://github.com/deepseek-ai/deepseek-harness/blob/HEAD/docs/subsystems/approval.zh.md">用户审批</a>、<a target="_blank" rel="noopener" href="https://github.com/deepseek-ai/deepseek-harness/blob/HEAD/docs/subsystems/computer-use.zh.md">计算机操作</a></li>
+<li>xmanrui,<a target="_blank" rel="noopener" href="https://github.com/xmanrui/dsh-im">dsh-im:通过扫码或机器人凭据把 IM 机器人接入 DeepSeek Harness</a>(README、<a target="_blank" rel="noopener" href="https://github.com/xmanrui/dsh-im/blob/HEAD/docs/%E8%AE%BF%E9%97%AE%E6%A8%A1%E5%BC%8F.md">访问模式说明</a>)</li>
+<li>Tencent,<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/@tencent-weixin/openclaw-weixin">@tencent-weixin&#x2F;openclaw-weixin</a>(npm,微信渠道插件,扫码登录、长轮询收发)</li>
+<li>Yuuyuko-uu,<a target="_blank" rel="noopener" href="https://github.com/Yuuyuko-uu/dsh-fish-memory">dsh-fish-memory:鱼的记忆</a>(GitHub)</li>
+<li>omdsh-dev,<a target="_blank" rel="noopener" href="https://github.com/omdsh-dev/dsh-mnemon">dsh-mnemon</a>(GitHub)</li>
+<li>Frostyume,<a target="_blank" rel="noopener" href="https://github.com/Frostyume/xiaojingyu">xiaojingyu:住在 QQ 群聊和私聊里的陪伴型 AI</a>(GitHub)</li>
+<li>DeepSeek,<a target="_blank" rel="noopener" href="https://api-docs.deepseek.com/quick_start/pricing">API 定价</a></li>
+</ol>
+<blockquote>
+<p>本文由 ByteVibe 撰写(AI 辅助研究整理)。文中观点的原始出处均已在正文与参考文献中标注,版权归原作者所有。数据快照 2026-11-04。</p>
+</blockquote>
+
+        </div>
+        
+        <footer class="post-footer">
+          <nav class="post-nav">
+            
+            
+            <a class="post-nav-item post-nav-next" href="/2026/10/22/deepseek-deepinfer-open-source/">
+              <span class="post-nav-label">下一篇 →</span>
+              <span class="post-nav-title">DeepSeek 开源了自家“后厨”:你用不上,但它会改变你买到的 DeepSeek</span>
+            </a>
+            
+          </nav>
+        </footer>
+      </div>
+
+      <!-- 3. Right Sidebar: Outline TOC Jump -->
+      <aside class="post-sidebar-right">
+        
+          <div class="toc-sticky">
+            <h3 class="toc-title">目录大纲</h3>
+            <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E5%85%88%E7%9C%8B%E6%87%82%E2%80%9D%E5%B0%8F%E9%B2%B8%E9%B1%BC%E2%80%9D%E6%98%AF%E6%80%8E%E4%B9%88%E6%8B%BC%E8%B5%B7%E6%9D%A5%E7%9A%84"><span class="toc-list-text">一、先看懂”小鲸鱼”是怎么拼起来的</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-list-text">二、准备工作</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E8%A3%85%E5%A4%A7%E8%84%91-DeepSeek-Harness"><span class="toc-list-text">三、装大脑:DeepSeek Harness</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E6%8E%A5-QQ-%E5%92%8C%E5%BE%AE%E4%BF%A1-dsh-im"><span class="toc-list-text">四、接 QQ 和微信:dsh-im</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E5%86%B7%E7%83%AD%E8%AE%B0%E5%BF%86"><span class="toc-list-text">五、冷热记忆</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%AD%E3%80%81%E8%BF%9C%E7%A8%8B%E6%93%8D%E4%BD%9C%E7%94%B5%E8%84%91-%E5%8F%AA%E7%BB%99%E4%B8%80%E5%8F%AA%E9%B2%B8%E9%B1%BC%E5%BC%80%E5%B7%A5%E5%85%B7"><span class="toc-list-text">六、远程操作电脑:只给一只鲸鱼开工具</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%83%E3%80%81%E4%B8%8A%E7%BA%BF%E5%89%8D%E7%9A%84%E6%A3%80%E6%9F%A5%E6%B8%85%E5%8D%95"><span class="toc-list-text">七、上线前的检查清单</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%AB%E3%80%81%E5%AE%83%E5%92%8C%E2%80%9D%E7%8E%B0%E6%88%90%E7%9A%84%E5%B0%8F%E9%B2%B8%E9%B1%BC%E2%80%9D%E5%B7%AE%E5%9C%A8%E5%93%AA"><span class="toc-list-text">八、它和”现成的小鲸鱼”差在哪</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+          </div>
+        
+      </aside>
+    </div>
+  </div>
+</article>
+
+  </main>
+  <footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <p class="copyright">&copy; 2026 ByteVibe. All rights reserved.</p>
+      <p class="powered-by">Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a></p>
+      
+      <div class="social-links">
+        
+          <a class="social-link" href="https://github.com/notSomeshi" target="_blank" rel="noopener noreferrer">GitHub</a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+
+  <div class="search-overlay" id="searchOverlay" hidden>
+  <div class="search-backdrop" id="searchBackdrop"></div>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="站内搜索">
+    <div class="search-input-wrap">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="searchInput" class="search-input" placeholder="搜索文章…" autocomplete="off" spellcheck="false">
+      <button class="search-close" id="searchClose" aria-label="关闭搜索">ESC</button>
+    </div>
+    <div class="search-results" id="searchResults">
+      <p class="search-hint">输入关键词搜索标题、标签与正文</p>
+    </div>
+  </div>
+</div>
+
+  <button class="scroll-to-top" id="scrollToTop" aria-label="回到顶部">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+</body>
+</html>
