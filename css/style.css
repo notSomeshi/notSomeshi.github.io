@@ -2567,6 +2567,11 @@ body::before {
   .side-entries { display: none !important; }
 }
 
+/* 顶栏已有「模型天梯 / 选购助手」;窗口窄到容器贴边时悬浮条会盖住首页标题,这一段直接收起 */
+@media (min-width: 769px) and (max-width: 1200px) {
+  .side-entries { display: none; }
+}
+
 /* --- 天梯页 --- */
 .rankings-section {
   padding: 56px 0 80px;
@@ -4896,6 +4901,39 @@ body::before {
   color: var(--text-tertiary);
 }
 
+/* 折叠按钮:只在手机上出现;桌面横向空间够,7 条全摊开也就半屏 */
+.rk-expiry-more { display: none; }
+
+@media (max-width: 768px) {
+  .rk-expiry:not(.is-open) .rk-expiry-item.is-extra { display: none; }
+  .rk-expiry-more {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 44px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-top: 1px solid var(--border-color);
+    background: none;
+    font: inherit;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--accent-ink);
+    cursor: pointer;
+  }
+  .rk-expiry-more::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    margin-left: 8px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+  }
+  .rk-expiry.is-open .rk-expiry-more::after { transform: translateY(2px) rotate(-135deg); }
+}
+
 @media (max-width: 600px) {
   .rk-expiry { padding: 12px 14px 8px; }
   /* 窄屏把日期挪到天数下面,正文独占右侧两行 */
@@ -5535,6 +5573,34 @@ html.cover-lock { overflow: hidden; }
 /* ---------- 触屏 / 窄屏 ---------- */
 @media (hover: none), (max-width: 768px) {
   .lg-seg > button { min-height: 44px; }
+}
+/* 手机上天梯表 780px 宽、屏幕只有三百多,往右滑看分数时模型名一起滑走,分不清哪行是谁。
+   模型列钉在左边:半透明底 + 磨砂,分数从它下面滑过;名字允许换行,把列宽压到 8.5rem。
+   sticky 本身就是定位元素,水印(absolute)的定位基准不变;overflow:hidden 照旧裁水印 */
+@media (max-width: 768px) {
+  #rankingsApp .rk-table th.rk-col-model,
+  #rankingsApp .rk-table td.rk-col-model {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    width: 8.5rem;
+    min-width: 8.5rem;
+    max-width: 8.5rem;
+    padding-left: 10px;
+    padding-right: 8px;
+    white-space: normal;
+    background: color-mix(in srgb, var(--bg-primary) 80%, transparent);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    box-shadow: 6px 0 8px -6px rgba(0, 0, 0, .35);
+  }
+  #rankingsApp .rk-table td.rk-col-model { border-radius: 14px; }
+  #rankingsApp .rk-col-model .rk-model-link { font-size: .875rem; line-height: 1.3; }
+}
+/* 导航 7 项;大字版放大 25% 后在 900px 以下挤不下,提前换汉堡菜单 */
+@media (max-width: 900px) {
+  [data-fontsize='large'] .site-nav.lg-seg { display: none; }
+  [data-fontsize='large'] .mobile-menu-toggle { display: flex; }
 }
 @media (max-width: 768px) {
   /* 手机上顶部导航本来就隐藏(改用汉堡菜单);.lg-seg 的 inline-flex 写在后面会把它顶出来,这里压回去 */

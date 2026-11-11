@@ -74,6 +74,14 @@
       
         
         
+        <a class="nav-link" href="/rankings/">模型天梯</a>
+      
+        
+        
+        <a class="nav-link" href="/advisor/">选购助手</a>
+      
+        
+        
         <a class="nav-link" href="/archives/">归档</a>
       
         
@@ -112,6 +120,10 @@
   <div class="mobile-nav" id="mobileNav">
     
       <a class="mobile-nav-link" href="/">首页</a>
+    
+      <a class="mobile-nav-link" href="/rankings/">模型天梯</a>
+    
+      <a class="mobile-nav-link" href="/advisor/">选购助手</a>
     
       <a class="mobile-nav-link" href="/archives/">归档</a>
     
@@ -392,14 +404,14 @@
 <li><strong>失败不在模型</strong>:IDC 称失败集中于治理、数据就绪、可观测性;另有分析称 <strong>70% 是人与流程问题</strong>。</li>
 <li><strong>五个缺口解释了 89% 的规模化失败</strong>:遗留系统集成、规模下的输出质量不稳、缺监控工具、归属不清、领域数据不足。</li>
 <li><strong>部署 ≠ 价值</strong>:88% 的组织在至少一个业务环节用了 AI,但只有 <strong>39%</strong> 报告了可见的 EBIT 影响。</li>
-<li><strong>试点思维是陷阱</strong>:试点优化的是"能不能work",生产要求的是"出错时怎么办"——两者几乎不重叠。</li>
+<li><strong>试点思维是陷阱</strong>:试点优化的是“能不能work”,生产要求的是“出错时怎么办”——两者几乎不重叠。</li>
 </ul>
 </div>
 
 <h2 id="一、漏斗有多窄"><a href="#一、漏斗有多窄" class="headerlink" title="一、漏斗有多窄"></a>一、漏斗有多窄</h2><p>先把数字排开。</p>
 <div class="fig">
 <div class="fig-title">从试点到全组织落地的漏斗</div>
-<div class="fig-sub">2026 年多项行业调查的口径汇总。柱长按"有试点"的 78% 归一。</div>
+<div class="fig-sub">2026 年多项行业调查的口径汇总。柱长按“有试点”的 78% 归一。</div>
 <div class="fig-bars">
   <div class="fig-bar-row">
     <span class="fig-bar-label"><b>有 AI 试点</b>至少一个</span>
@@ -433,8 +445,8 @@
 <p class="fig-src">数据见 <a href="https://www.digitalapplied.com/blog/ai-agent-scaling-gap-march-2026-pilot-to-production" target="_blank" rel="noopener">2026 年 3 月 AI Agent 规模化调查</a>与 <a href="https://www.vaasblock.com/news/enterprise-ai-deployment-gap-pilots-vs-production-2026/" target="_blank" rel="noopener">企业 AI 部署缺口报告</a>(转引 IDC)。不同机构口径差异较大,详见文末风险提示。快照 2026-08-05。</p>
 </div>
 
-<p>需要说明的是,失败率的统计口径分歧很大——从 IDC 的 88% 到 MIT《GenAI Divide》报告的 95% 不等,取决于怎么定义”失败”和”生产”。但<strong>方向高度一致:漏斗的最窄处不在开始,而在中间</strong>。</p>
-<h2 id="二、输的是哪一段"><a href="#二、输的是哪一段" class="headerlink" title="二、输的是哪一段"></a>二、输的是哪一段</h2><p>把失败原因归类之后,一个反直觉的结论浮出来:<strong>几乎没有一条是”模型不够聪明”。</strong></p>
+<p>需要说明的是,失败率的统计口径分歧很大——从 IDC 的 88% 到 MIT《GenAI Divide》报告的 95% 不等,取决于怎么定义“失败”和“生产”。但<strong>方向高度一致:漏斗的最窄处不在开始,而在中间</strong>。</p>
+<h2 id="二、输的是哪一段"><a href="#二、输的是哪一段" class="headerlink" title="二、输的是哪一段"></a>二、输的是哪一段</h2><p>把失败原因归类之后,一个反直觉的结论浮出来:<strong>几乎没有一条是“模型不够聪明”。</strong></p>
 <p>行业分析归纳的五个缺口,合计解释了 <strong>89%</strong> 的规模化失败:</p>
 <table>
 <thead>
@@ -465,10 +477,10 @@
 </tr>
 </tbody></table>
 <p>这五条里,<strong>只有第二条勉强沾模型的边</strong>,其余全是工程与组织问题。</p>
-<p>这也解释了为什么”换一个更强的模型”通常救不了一个失败的试点——<strong>瓶颈根本不在那里</strong>。前沿模型之间的能力差距在收窄(参见<a href="/2026/07/20/frontier-convergence-2026/">《前沿收敛》</a>),而组织能力的差距没有。</p>
+<p>这也解释了为什么“换一个更强的模型”通常救不了一个失败的试点——<strong>瓶颈根本不在那里</strong>。前沿模型之间的能力差距在收窄(参见<a href="/2026/07/20/frontier-convergence-2026/">《前沿收敛》</a>),而组织能力的差距没有。</p>
 <h2 id="三、为什么试点会骗人"><a href="#三、为什么试点会骗人" class="headerlink" title="三、为什么试点会骗人"></a>三、为什么试点会骗人</h2><p>试点之所以成功率高、推广成功率低,是因为<strong>两者优化的目标不一样</strong>。</p>
-<p><strong>试点回答的是”能不能work”。</strong> 精心挑选的场景、干净的数据、由最积极的人操作、失败了没有后果。在这个环境里,现代模型几乎总能给出令人惊艳的 demo。</p>
-<p><strong>生产回答的是”出错时怎么办”。</strong> 这是一整套完全不同的问题:</p>
+<p><strong>试点回答的是“能不能work”。</strong> 精心挑选的场景、干净的数据、由最积极的人操作、失败了没有后果。在这个环境里,现代模型几乎总能给出令人惊艳的 demo。</p>
+<p><strong>生产回答的是“出错时怎么办”。</strong> 这是一整套完全不同的问题:</p>
 <ul>
 <li>它错了谁发现?<strong>监控</strong></li>
 <li>发现之后谁改?<strong>归属</strong></li>
@@ -478,21 +490,21 @@
 </ul>
 <p>这几项在试点阶段<strong>全部可以省略</strong>,而在生产阶段<strong>一项都不能少</strong>。所以试点的成功并不预测生产的成功——它甚至可能误导决策者低估后面的工作量。</p>
 <p>一个具体的例子是 Agent 的权限边界。试点里给 Agent 开全权限最省事;推到生产时,<strong>权限、日志、人在环这三层要补,而且补的成本远高于一开始就做</strong>。这一点在<a href="/2026/08/04/agent-liability-2026/">《Agent 闯了祸算谁的》</a>里有更完整的展开——现在它已经不只是工程问题,还是法律问题。</p>
-<h2 id="四、怎么提高走通的概率"><a href="#四、怎么提高走通的概率" class="headerlink" title="四、怎么提高走通的概率"></a>四、怎么提高走通的概率</h2><p><strong>其一,把试点的验收标准写成生产标准。</strong> 不要问”它能不能做对”,要问”它做错的时候我们怎么知道”。一个没有监控方案的试点,即使 demo 完美也不该通过验收。</p>
+<h2 id="四、怎么提高走通的概率"><a href="#四、怎么提高走通的概率" class="headerlink" title="四、怎么提高走通的概率"></a>四、怎么提高走通的概率</h2><p><strong>其一,把试点的验收标准写成生产标准。</strong> 不要问“它能不能做对”,要问“它做错的时候我们怎么知道”。一个没有监控方案的试点,即使 demo 完美也不该通过验收。</p>
 <p><strong>其二,先选有明确 owner 的场景。</strong> 归属不清是五大缺口之一,而它在立项阶段就能解决——<strong>没有人愿意为这个场景的结果负责,就不要立项</strong>。</p>
-<p><strong>其三,把评估基线当成第一个交付物,而不是最后一个。</strong> 没有基线,你无法回答”换个模型&#x2F;换个提示词之后变好还是变坏”,于是每次迭代都变成拍脑袋。这套东西建起来不贵,但<strong>事后补极难</strong>——因为你已经没有干净的对照数据了。</p>
+<p><strong>其三,把评估基线当成第一个交付物,而不是最后一个。</strong> 没有基线,你无法回答“换个模型&#x2F;换个提示词之后变好还是变坏”,于是每次迭代都变成拍脑袋。这套东西建起来不贵,但<strong>事后补极难</strong>——因为你已经没有干净的对照数据了。</p>
 <p><strong>其四,把领域数据的准备当成项目本身,而不是前置条件。</strong> “等数据整理好再上 AI”通常等不到那一天。更现实的做法是选一个数据已经相对干净的窄场景先跑通,用它换取组织对数据治理的投入。</p>
-<p><strong>其五,接受大部分试点本来就该死掉。</strong> 88% 走不到生产,部分原因是<strong>试点本来就是用来筛选的</strong>。问题不在于失败率高,而在于很多组织把失败归因于”模型不行”或”时机未到”,于是换个模型再试一次——<strong>重复同一个错误</strong>。</p>
+<p><strong>其五,接受大部分试点本来就该死掉。</strong> 88% 走不到生产,部分原因是<strong>试点本来就是用来筛选的</strong>。问题不在于失败率高,而在于很多组织把失败归因于“模型不行”或“时机未到”,于是换个模型再试一次——<strong>重复同一个错误</strong>。</p>
 <h2 id="五、一个更长期的判断"><a href="#五、一个更长期的判断" class="headerlink" title="五、一个更长期的判断"></a>五、一个更长期的判断</h2><p>这个数据结构和历史上的企业软件浪潮高度相似:<strong>技术成熟度跑在组织成熟度前面,而后者才是速率限制步骤。</strong></p>
 <p>ERP、云计算、数据中台都经历过同样的阶段——早期的失败被归因于产品不成熟,若干年后回看,真正的瓶颈是流程重构与责任重新分配的速度。</p>
-<p>这对判断 AI 的宏观回报节奏有直接含义:<strong>如果瓶颈是组织而非技术,那么模型能力的进一步提升不会显著加快落地速度。</strong> 这也是<a href="/2026/07/08/ai-dividend-paradox/">《AI 红利悖论》</a>里那个”买单三年、红利未至”的微观解释——钱花在了技术上,而卡点在组织里。</p>
-<p><strong>对个人的含义可能更实际</strong>:在这个结构下,稀缺的不是”会用模型的人”,而是<strong>能把一个 AI 能力接进现有流程、并为其结果负责的人</strong>。前者的供给正在快速增加,后者没有。</p>
+<p>这对判断 AI 的宏观回报节奏有直接含义:<strong>如果瓶颈是组织而非技术,那么模型能力的进一步提升不会显著加快落地速度。</strong> 这也是<a href="/2026/07/08/ai-dividend-paradox/">《AI 红利悖论》</a>里那个“买单三年、红利未至”的微观解释——钱花在了技术上,而卡点在组织里。</p>
+<p><strong>对个人的含义可能更实际</strong>:在这个结构下,稀缺的不是“会用模型的人”,而是<strong>能把一个 AI 能力接进现有流程、并为其结果负责的人</strong>。前者的供给正在快速增加,后者没有。</p>
 <div class="risk-box">
 <div class="risk-box-title">// 数据说明与风险提示</div>
 <ul>
-<li>本文为 <strong>2026-08-05</strong> 快照。<strong>失败率的统计口径分歧极大</strong>(IDC 88%、MIT 95%、其他机构 70–80%),差异主要来自"失败"与"生产"的定义不同,引用时务必看清口径。</li>
+<li>本文为 <strong>2026-08-05</strong> 快照。<strong>失败率的统计口径分歧极大</strong>(IDC 88%、MIT 95%、其他机构 70–80%),差异主要来自“失败”与“生产”的定义不同,引用时务必看清口径。</li>
 <li>文中比例来自行业调查与咨询机构报告,<strong>样本构成、行业分布与地域差异都会显著影响结果</strong>,不宜直接套用到具体企业。</li>
-<li>"70% 的失败是组织问题"是分析性归因,不同归因框架会得出不同结论。</li>
+<li>“70% 的失败是组织问题”是分析性归因,不同归因框架会得出不同结论。</li>
 <li>本文不构成任何投资或采购建议。</li>
 </ul>
 </div>

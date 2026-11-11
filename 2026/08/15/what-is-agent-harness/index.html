@@ -74,6 +74,14 @@
       
         
         
+        <a class="nav-link" href="/rankings/">模型天梯</a>
+      
+        
+        
+        <a class="nav-link" href="/advisor/">选购助手</a>
+      
+        
+        
         <a class="nav-link" href="/archives/">归档</a>
       
         
@@ -112,6 +120,10 @@
   <div class="mobile-nav" id="mobileNav">
     
       <a class="mobile-nav-link" href="/">首页</a>
+    
+      <a class="mobile-nav-link" href="/rankings/">模型天梯</a>
+    
+      <a class="mobile-nav-link" href="/advisor/">选购助手</a>
     
       <a class="mobile-nav-link" href="/archives/">归档</a>
     
@@ -396,13 +408,13 @@
   <p class="fig-src">来源:<a href="https://arxiv.org/pdf/2605.27922" target="_blank" rel="noopener">Harness-Bench: Measuring Harness Effects across Models in Realistic Agent Workflows</a>(Yilun Yao 等,北京大学 / 奇元科技)。快照 2026-08-15。</p>
 </div>
 
-<p><strong>23.8 个百分点。</strong> 模型没换,题没换,换的只是”外面那层东西”。</p>
+<p><strong>23.8 个百分点。</strong> 模型没换,题没换,换的只是“外面那层东西”。</p>
 <h2 id="那层东西是什么"><a href="#那层东西是什么" class="headerlink" title="那层东西是什么"></a>那层东西是什么</h2><p>论文给了一个挺完整的定义:harness 是<strong>管理上下文、工具、状态、约束、权限、追踪与恢复的系统层</strong>,负责把模型的输出变成真正能执行的动作。</p>
 <p>一个公式概括:</p>
 <blockquote>
 <p><strong>Agent &#x3D; Model + Harness</strong></p>
 </blockquote>
-<p>模型负责”想”,harness 负责把想法变成事。具体到日常,harness 在替你做这些决定:</p>
+<p>模型负责“想”,harness 负责把想法变成事。具体到日常,harness 在替你做这些决定:</p>
 <ul>
 <li><strong>给模型看什么</strong> —— 上下文里塞哪些文件、塞多少、什么时候截断</li>
 <li><strong>给模型什么工具</strong> —— 能不能读文件、能不能跑命令、工具描述怎么写</li>
@@ -410,12 +422,12 @@
 <li><strong>什么时候停</strong> —— 循环几轮算够、什么情况判定失败</li>
 <li><strong>哪些事要问你</strong> —— 删文件要不要确认、能不能自己 git push</li>
 </ul>
-<p>你平时用的 Claude Code、Cursor、Codex、Trae,<strong>本质上都是 harness</strong>。它们背后往往可以接同一批模型——所以”用哪个工具”这个选择,和”用哪个模型”是两个独立的维度。</p>
+<p>你平时用的 Claude Code、Cursor、Codex、Trae,<strong>本质上都是 harness</strong>。它们背后往往可以接同一批模型——所以“用哪个工具”这个选择,和“用哪个模型”是两个独立的维度。</p>
 <h2 id="一个反直觉的发现"><a href="#一个反直觉的发现" class="headerlink" title="一个反直觉的发现"></a>一个反直觉的发现</h2><p>如果只记一条,记这个:</p>
 <blockquote>
 <p><strong>模型越弱,换 harness 时的分数波动越大;模型越强,对 harness 差异越不敏感。</strong></p>
 </blockquote>
-<p>这是 Harness-Bench 的结论之一:强模型后端的跨 harness 方差更低,弱模型则”对周围的执行基质更敏感”。</p>
+<p>这是 Harness-Bench 的结论之一:强模型后端的跨 harness 方差更低,弱模型则“对周围的执行基质更敏感”。</p>
 <p>意味着什么?</p>
 <p><strong>如果你在用旗舰模型</strong>,harness 选择的收益相对有限——强模型自己就能扛过糟糕的上下文管理和粗糙的工具描述。</p>
 <p><strong>如果你在用便宜模型</strong>(开源自部署、国产平价 API、免费额度),<strong>harness 才是你最该优化的地方</strong>。同样一个中等模型,配好 harness 和配差 harness,差距可能比你升级到下一档模型还大。</p>
@@ -426,15 +438,15 @@
 
 <h2 id="但要小心谁在给你看数字"><a href="#但要小心谁在给你看数字" class="headerlink" title="但要小心谁在给你看数字"></a>但要小心谁在给你看数字</h2><p>这里有个陷阱。</p>
 <p>Harness 的对比数据,<strong>很多是 harness 厂商自己发的</strong>。而 <a target="_blank" rel="noopener" href="https://futureagi.com/blog/coding-agent-harness-benchmark/">FutureAGI 的一篇分析</a>注意到一个规律:同一个模型在 SWE-bench Pro 上,独立标准化评测(Scale AI 的 SEAL 实验室)跑出的分数,<strong>低于三家厂商对比表里的全部数字</strong>。</p>
-<p>这不难理解——厂商用自家 harness 时会调到最优,对照组则往往是默认配置。<strong>你看到的”我们比他们高 5 分”里,有多少是 harness 真实差距,有多少是调参投入差距,外人无从分辨。</strong></p>
-<p>另外,Epoch AI 的一项研究发现同一模型在 SWE-bench Verified 上,<strong>仅因脚手架不同,分数就能从 62.3% 变到 70.2%</strong>。这也提示了另一件事:当你看到某个模型”刷新 SOTA”时,<strong>那个数字里有一部分不属于模型</strong>。</p>
+<p>这不难理解——厂商用自家 harness 时会调到最优,对照组则往往是默认配置。<strong>你看到的“我们比他们高 5 分”里,有多少是 harness 真实差距,有多少是调参投入差距,外人无从分辨。</strong></p>
+<p>另外,Epoch AI 的一项研究发现同一模型在 SWE-bench Verified 上,<strong>仅因脚手架不同,分数就能从 62.3% 变到 70.2%</strong>。这也提示了另一件事:当你看到某个模型“刷新 SOTA”时,<strong>那个数字里有一部分不属于模型</strong>。</p>
 <p>关于评测数字为什么越来越不能直接信,<a href="/2026/08/05/benchmark-trust-crisis/">之前那篇文章</a>讲得更细。</p>
 <h2 id="这对你选工具意味着什么"><a href="#这对你选工具意味着什么" class="headerlink" title="这对你选工具意味着什么"></a>这对你选工具意味着什么</h2><p><strong>第一,别把模型排名当工具排名。</strong> 本站<a href="/rankings/">天梯页</a>排的是模型能力,<a href="/rankings/">Agent 平台板块</a>比的是 harness——<strong>这是两张表,不能互相替代</strong>。榜单第一的模型装进糟糕的 harness 里,可能不如第五名装进好 harness。</p>
-<p><strong>第二,评估工具时,试你自己的真实任务。</strong> harness 的差距体现在长任务、多轮工具调用、出错恢复这些地方,而不是”写个快排”。跑十个玩具题看不出区别,跑一个真实重构立刻见分晓。</p>
+<p><strong>第二,评估工具时,试你自己的真实任务。</strong> harness 的差距体现在长任务、多轮工具调用、出错恢复这些地方,而不是“写个快排”。跑十个玩具题看不出区别,跑一个真实重构立刻见分晓。</p>
 <p><strong>第三,注意 harness 也在变。</strong> 它是软件,会更新。你半年前对某个工具的判断,可能已经过期了——LangChain 曾在 Terminal-Bench 上只改系统提示、工具和中间件,分数就涨了 13.7 分,模型一行没动。</p>
-<p><strong>第四,论文给业界的建议同样适用于你</strong>:能力应该按<strong>“模型–harness 配置”</strong>这个组合来报告,而不是记在模型头上。所以下次有人跟你说”某某模型很强”,值得追问一句:<strong>你在什么 harness 里用的?</strong></p>
+<p><strong>第四,论文给业界的建议同样适用于你</strong>:能力应该按<strong>“模型–harness 配置”</strong>这个组合来报告,而不是记在模型头上。所以下次有人跟你说“某某模型很强”,值得追问一句:<strong>你在什么 harness 里用的?</strong></p>
 <hr>
-<p>2026 年上半年,行业的注意力几乎全在模型参数和榜单名次上。到了下半年,”harness”这个词突然到处都是——因为大家发现,把同一个模型的能力真正兑现出来的那部分工程,<strong>长期被算进了模型的功劳簿</strong>。</p>
+<p>2026 年上半年,行业的注意力几乎全在模型参数和榜单名次上。到了下半年,“harness”这个词突然到处都是——因为大家发现,把同一个模型的能力真正兑现出来的那部分工程,<strong>长期被算进了模型的功劳簿</strong>。</p>
 <p>模型决定了天花板,harness 决定你能摸到多高。</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
 <li>Yilun Yao、Xinyu Tan、Chao-Hsuan Liu 等(北京大学 &#x2F; 奇元科技),<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2605.27922">Harness-Bench: Measuring Harness Effects across Models in Realistic Agent Workflows</a>——harness 定义、5,194 条轨迹的跨 harness 方差、强弱模型敏感度差异</li>
@@ -442,7 +454,7 @@
 <li>arXiv,<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2606.12882">HarnessBridge: Learnable Bidirectional Controller for LLM Agent Harness</a>——harness 层的可学习控制</li>
 <li>arXiv,<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2606.05009">DAR: Deontic Reasoning with Agentic Harnesses</a>——harness 中的权限与义务推理</li>
 </ol>
-<p>本站相关:<a href="/rankings/">模型天梯与 Agent 平台对照</a> · <a href="/2026/08/05/benchmark-trust-crisis/">当考卷泄题成为常态:AI 评测的信任危机</a> · <a href="/2026/08/08/reasoning-effort-hidden-dimension/">你买的不是模型,是”让它想多久”</a></p>
+<p>本站相关:<a href="/rankings/">模型天梯与 Agent 平台对照</a> · <a href="/2026/08/05/benchmark-trust-crisis/">当考卷泄题成为常态:AI 评测的信任危机</a> · <a href="/2026/08/08/reasoning-effort-hidden-dimension/">你买的不是模型,是“让它想多久”</a></p>
 <blockquote>
 <p>本文由 ByteVibe 撰写(AI 辅助研究整理)。文中观点的原始出处均已在正文与参考文献中标注,版权归原作者所有。数据快照 2026-08-15。</p>
 </blockquote>

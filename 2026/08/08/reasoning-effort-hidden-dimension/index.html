@@ -74,6 +74,14 @@
       
         
         
+        <a class="nav-link" href="/rankings/">模型天梯</a>
+      
+        
+        
+        <a class="nav-link" href="/advisor/">选购助手</a>
+      
+        
+        
         <a class="nav-link" href="/archives/">归档</a>
       
         
@@ -112,6 +120,10 @@
   <div class="mobile-nav" id="mobileNav">
     
       <a class="mobile-nav-link" href="/">首页</a>
+    
+      <a class="mobile-nav-link" href="/rankings/">模型天梯</a>
+    
+      <a class="mobile-nav-link" href="/advisor/">选购助手</a>
     
       <a class="mobile-nav-link" href="/archives/">归档</a>
     
@@ -385,13 +397,13 @@
         <div class="post-body">
           <p>打开任何一份 AI 模型对比表,你会看到一列分数、一列价格。这个结构暗示了一件事:<strong>模型是个固定的东西,你买它,它给你确定的能力。</strong></p>
 <p>这个前提在推理模型时代已经不成立了。</p>
-<p>以 Artificial Analysis 智能指数 v4.1.1 的实测数据为例,<strong>同一个 GPT-5.6 Luna,在不同推理强度下的得分是 27、34、39、47、50、52</strong>——最高档接近最低档的两倍。它们是同一个模型、同一套权重、同一个 API 端点,唯一的区别是你让它”想多久”。</p>
+<p>以 Artificial Analysis 智能指数 v4.1.1 的实测数据为例,<strong>同一个 GPT-5.6 Luna,在不同推理强度下的得分是 27、34、39、47、50、52</strong>——最高档接近最低档的两倍。它们是同一个模型、同一套权重、同一个 API 端点,唯一的区别是你让它“想多久”。</p>
 <p>换句话说:<strong>你买的不是一个模型,而是一条从便宜笨到昂贵聪明的连续曲线。而绝大多数对比表只截取了这条曲线上的一个点——通常还是最贵的那个点。</strong></p>
 <div class="report-box">
 <strong>核心判断</strong>:推理强度(effort)是模型选型里被系统性忽略的第三个维度。忽略它会导致两类错误——按榜单的 max effort 分数做选型,却按默认档位使用(能力对不上);或者把所有任务都开到最高档,为不需要的思考付钱(成本对不上)。而研究显示,思考过头不只是浪费,还会<strong>主动损害准确率</strong>。
 </div>
 
-<h2 id="一、现象-一个模型-六个分数"><a href="#一、现象-一个模型-六个分数" class="headerlink" title="一、现象:一个模型,六个分数"></a>一、现象:一个模型,六个分数</h2><p>先看数据。下面两条”阶梯”来自 AA 智能指数 v4.1.1 的公开榜单,同一模型的不同 effort 档位各自独立评测:</p>
+<h2 id="一、现象-一个模型-六个分数"><a href="#一、现象-一个模型-六个分数" class="headerlink" title="一、现象:一个模型,六个分数"></a>一、现象:一个模型,六个分数</h2><p>先看数据。下面两条“阶梯”来自 AA 智能指数 v4.1.1 的公开榜单,同一模型的不同 effort 档位各自独立评测:</p>
 <div class="fig">
   <div class="fig-title">同一模型在不同推理强度下的智能指数(AA v4.1.1)</div>
   <div class="fig-sub">柱长按本图最高值(Claude Opus 5 max/xhigh 的 63 分)统一归一为 100%,两个模型可直接横向比较。同一模型的各档为独立评测条目。</div>
@@ -451,26 +463,26 @@
 </div>
 
 <p>这张图里藏着两个结论。</p>
-<p><strong>第一个:Luna 开到最高档(52),恰好等于 Opus 5 开到最低档(52)。</strong> 两条路径能到达同一个能力点,但成本、延迟、失败模式完全不同。选型时如果只比”Opus 5 是 63 分、Luna 是 52 分”,你根本看不到这个交叉点的存在。</p>
+<p><strong>第一个:Luna 开到最高档(52),恰好等于 Opus 5 开到最低档(52)。</strong> 两条路径能到达同一个能力点,但成本、延迟、失败模式完全不同。选型时如果只比“Opus 5 是 63 分、Luna 是 52 分”,你根本看不到这个交叉点的存在。</p>
 <p><strong>第二个:Opus 5 的 xhigh 与 max 得分完全相同,都是 63。</strong> 也就是说从 xhigh 再往上加算力,收益是<strong>零</strong>——但账单不是零。这就是边际收益递减最直白的证据。</p>
-<h2 id="二、机制-为什么曲线是这个形状"><a href="#二、机制-为什么曲线是这个形状" class="headerlink" title="二、机制:为什么曲线是这个形状"></a>二、机制:为什么曲线是这个形状</h2><h3 id="力量一-思考预算的收益曲线是凹的-而且会封顶"><a href="#力量一-思考预算的收益曲线是凹的-而且会封顶" class="headerlink" title="力量一:思考预算的收益曲线是凹的,而且会封顶"></a>力量一:思考预算的收益曲线是凹的,而且会封顶</h3><p>推理模型的”思考”消耗的是<strong>输出 token</strong>——也就是最贵的那一类。所以 effort 每上一档,成本上升是线性甚至超线性的,而分数上升越来越慢。</p>
+<h2 id="二、机制-为什么曲线是这个形状"><a href="#二、机制-为什么曲线是这个形状" class="headerlink" title="二、机制:为什么曲线是这个形状"></a>二、机制:为什么曲线是这个形状</h2><h3 id="力量一-思考预算的收益曲线是凹的-而且会封顶"><a href="#力量一-思考预算的收益曲线是凹的-而且会封顶" class="headerlink" title="力量一:思考预算的收益曲线是凹的,而且会封顶"></a>力量一:思考预算的收益曲线是凹的,而且会封顶</h3><p>推理模型的“思考”消耗的是<strong>输出 token</strong>——也就是最贵的那一类。所以 effort 每上一档,成本上升是线性甚至超线性的,而分数上升越来越慢。</p>
 <p>多项研究得出了一致结论:性能随思考 token 预算增加而提升,<strong>随后趋于平坦</strong>;超过某个阈值后,继续加预算带来的边际收益迅速衰减。上图里 Opus 5 从 high(61)到 xhigh(63)只涨 2 分,再到 max 涨 0 分,正是这条曲线的尾部。</p>
-<p>值得注意的是,<strong>曲线的形状因模型而异</strong>。Opus 5 在 medium 档就已经拿到 59 分(最高分的 94%),而 Luna 在 medium 档只有 39 分(其最高分的 75%)。<strong>强模型的曲线更早饱和,弱模型更依赖长思考来补足</strong>。这意味着”开高一档”这个动作,对不同模型的性价比完全不同。</p>
+<p>值得注意的是,<strong>曲线的形状因模型而异</strong>。Opus 5 在 medium 档就已经拿到 59 分(最高分的 94%),而 Luna 在 medium 档只有 39 分(其最高分的 75%)。<strong>强模型的曲线更早饱和,弱模型更依赖长思考来补足</strong>。这意味着“开高一档”这个动作,对不同模型的性价比完全不同。</p>
 <h3 id="力量二-想得太多会主动损害准确率"><a href="#力量二-想得太多会主动损害准确率" class="headerlink" title="力量二:想得太多会主动损害准确率"></a>力量二:想得太多会主动损害准确率</h3><p>这一条最反直觉,但证据相当明确。</p>
-<p>学界的多项工作发现,<strong>超过某个阈值后,准确率不是持平而是下降</strong>——额外的推理在某些情况下会<strong>主动降低</strong>正确率。ACL 2026 的一项研究专门考察了模型在基础数学题上的”过度思考”现象:面对本该一步得出的问题,推理模型会生成冗长的自我怀疑与反复验算,反而把原本正确的答案推翻。</p>
-<p>机制上这不难理解:更长的思维链意味着更多的中间步骤,每一步都是一次引入错误的机会;而模型缺乏”这题已经做对了,可以停了”的可靠判断力。<strong>在简单任务上开高 effort,是在花钱买风险。</strong></p>
-<p>这也解释了 Anthropic 的一个产品决策:较新的模型<strong>取消了手动设定思考预算</strong>,改为由模型自适应控制,只留一个 effort 参数来调节深度。把”想多久”的决定权从用户手里收回一部分,恰恰是因为用户很难判断该给多少。</p>
+<p>学界的多项工作发现,<strong>超过某个阈值后,准确率不是持平而是下降</strong>——额外的推理在某些情况下会<strong>主动降低</strong>正确率。ACL 2026 的一项研究专门考察了模型在基础数学题上的“过度思考”现象:面对本该一步得出的问题,推理模型会生成冗长的自我怀疑与反复验算,反而把原本正确的答案推翻。</p>
+<p>机制上这不难理解:更长的思维链意味着更多的中间步骤,每一步都是一次引入错误的机会;而模型缺乏“这题已经做对了,可以停了”的可靠判断力。<strong>在简单任务上开高 effort,是在花钱买风险。</strong></p>
+<p>这也解释了 Anthropic 的一个产品决策:较新的模型<strong>取消了手动设定思考预算</strong>,改为由模型自适应控制,只留一个 effort 参数来调节深度。把“想多久”的决定权从用户手里收回一部分,恰恰是因为用户很难判断该给多少。</p>
 <h3 id="力量三-榜单默认最高档-而你默认不是"><a href="#力量三-榜单默认最高档-而你默认不是" class="headerlink" title="力量三:榜单默认最高档,而你默认不是"></a>力量三:榜单默认最高档,而你默认不是</h3><p>第三条力量属于信息结构问题。</p>
 <p>评测机构为了衡量模型的<strong>能力上限</strong>,普遍采用最高 effort 设置——AA 的成本页明确标注推理模型均取厂商披露的最高档。这在方法论上完全正确:比较上限才有可比性。</p>
 <p>但用户在实际使用中,极少运行在最高档。IDE 插件、Agent 框架、聊天界面,默认档位通常是 medium 或 high;很多产品甚至根本不暴露这个参数。</p>
 <p><strong>于是形成了一道系统性的落差:你看到的排名是 max effort 下的,你得到的体验是默认档位下的。</strong> 对 Opus 5 这类早饱和的模型,落差只有 4 分(63 → 59);对 Luna 这类依赖长思考的模型,落差是 13 分(52 → 39)——<strong>同样的榜单,对不同模型的失真程度差了三倍多</strong>。</p>
 <p>这一点也是本站在成本对照表上强制标注 <code>MAX EFFORT</code> 徽章的原因:不标清 effort 前提的成本数字,是没有意义的。</p>
-<h2 id="三、影响-三类使用者-三种错法"><a href="#三、影响-三类使用者-三种错法" class="headerlink" title="三、影响:三类使用者,三种错法"></a>三、影响:三类使用者,三种错法</h2><h3 id="只看榜单选型的人-买到的能力比预期低"><a href="#只看榜单选型的人-买到的能力比预期低" class="headerlink" title="只看榜单选型的人:买到的能力比预期低"></a>只看榜单选型的人:买到的能力比预期低</h3><p>这是最常见的错法。看到”Opus 5 排第一”就选它,却在默认档位下使用——<strong>实际拿到的是 59 分而不是 63 分</strong>,却付着旗舰的价钱。</p>
-<p>更糟的情况是反过来:看到某个便宜模型”分数只差一点”就选了它,而那个分数是 max effort 跑出来的,你的默认档位离它很远。Luna 的 52 分和 39 分之间,隔着的是”能不能完成任务”的分界线。</p>
+<h2 id="三、影响-三类使用者-三种错法"><a href="#三、影响-三类使用者-三种错法" class="headerlink" title="三、影响:三类使用者,三种错法"></a>三、影响:三类使用者,三种错法</h2><h3 id="只看榜单选型的人-买到的能力比预期低"><a href="#只看榜单选型的人-买到的能力比预期低" class="headerlink" title="只看榜单选型的人:买到的能力比预期低"></a>只看榜单选型的人:买到的能力比预期低</h3><p>这是最常见的错法。看到“Opus 5 排第一”就选它,却在默认档位下使用——<strong>实际拿到的是 59 分而不是 63 分</strong>,却付着旗舰的价钱。</p>
+<p>更糟的情况是反过来:看到某个便宜模型“分数只差一点”就选了它,而那个分数是 max effort 跑出来的,你的默认档位离它很远。Luna 的 52 分和 39 分之间,隔着的是“能不能完成任务”的分界线。</p>
 <h3 id="无脑开最高档的人-为不需要的思考付双倍"><a href="#无脑开最高档的人-为不需要的思考付双倍" class="headerlink" title="无脑开最高档的人:为不需要的思考付双倍"></a>无脑开最高档的人:为不需要的思考付双倍</h3><p>另一个极端同样常见,尤其是在企业环境里——“预算够,全开最高档,别出错”。</p>
 <p>这个策略有三重代价:<strong>成本</strong>(输出 token 是最贵的)、<strong>延迟</strong>(思考时间直接体现为等待)、以及前面说过的<strong>准确率反噬</strong>。对于分类、格式转换、简单问答这类任务,高 effort 不仅没用,还可能把简单题做错。</p>
 <h3 id="做-Agent-的人-成本会以平方级爆炸"><a href="#做-Agent-的人-成本会以平方级爆炸" class="headerlink" title="做 Agent 的人:成本会以平方级爆炸"></a>做 Agent 的人:成本会以平方级爆炸</h3><p>Agent 场景下这个问题被放大得最厉害。Agent 的每一轮循环都要调用模型,而循环次数本身又受模型质量影响——<strong>effort 调低导致单轮质量下降,可能反而需要更多轮次</strong>。</p>
-<p>有研究比较了单 Agent 与多 Agent 系统在<strong>同等思考 token 预算</strong>下的表现,发现单 Agent 在多跳推理任务上反而更优。这提示了一个容易被忽略的事实:<strong>在固定预算下,把 token 花在”更深的思考”还是”更多的 Agent 协作”上,是一个需要实测的取舍,而不是”多 Agent 一定更强”。</strong></p>
+<p>有研究比较了单 Agent 与多 Agent 系统在<strong>同等思考 token 预算</strong>下的表现,发现单 Agent 在多跳推理任务上反而更优。这提示了一个容易被忽略的事实:<strong>在固定预算下,把 token 花在“更深的思考”还是“更多的 Agent 协作”上,是一个需要实测的取舍,而不是“多 Agent 一定更强”。</strong></p>
 <div class="risk-box">
 <strong>方法论提示</strong>:本文引用的所有分数均为 AA 智能指数 v4.1.1 口径(2026-08-06 发布,该版本重算了全部模型分数)。<strong>跨版本的分数不可直接比较</strong>——引用任何评测数字前,务必确认是哪个版本、哪个 effort 档位。缺少这两个前提的分数对比,结论可能完全反向。
 </div>
@@ -512,14 +524,14 @@
 <p>任何一个模型分数,如果没有说明<strong>评测版本</strong>和<strong>effort 档位</strong>,它就不具备可比性。这不是学究,而是实用:v4.1.1 相对 v4.1 整体上移了 2–3 分,而 max 与 medium 之间又差 4–13 分——两个前提都不交代的话,误差范围足以覆盖大多数模型之间的真实差距。</p>
 <hr>
 <p>推理强度这个维度之所以长期被忽略,是因为它打破了一个让人舒服的心智模型:<strong>模型是个名词,你选一个就完事了</strong>。</p>
-<p>实际情况更接近于:模型是个动词。同一套权重,可以表现得像个 27 分的快速应答器,也可以表现得像个 52 分的深思者,取决于你愿意为这次调用付多少。而”付多少最划算”这个问题,没有通用答案——它取决于你的任务难度分布,而那个分布只有你自己知道。</p>
-<p>下一次看到”某模型排名第几”时,值得多问一句:<strong>这是它开到几档时的成绩?我会开到几档?</strong></p>
+<p>实际情况更接近于:模型是个动词。同一套权重,可以表现得像个 27 分的快速应答器,也可以表现得像个 52 分的深思者,取决于你愿意为这次调用付多少。而“付多少最划算”这个问题,没有通用答案——它取决于你的任务难度分布,而那个分布只有你自己知道。</p>
+<p>下一次看到“某模型排名第几”时,值得多问一句:<strong>这是它开到几档时的成绩?我会开到几档?</strong></p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
 <li>Artificial Analysis,<a target="_blank" rel="noopener" href="https://artificialanalysis.ai/leaderboards/models">Intelligence Index 榜单</a> 与 <a target="_blank" rel="noopener" href="https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-1-1">v4.1.1 版本说明</a>——各 effort 档位的独立评测分数与版本重算说明</li>
 <li>Artificial Analysis,<a target="_blank" rel="noopener" href="https://artificialanalysis.ai/methodology/intelligence-benchmarking">Intelligence Benchmarking Methodology</a>——推理模型统一取最高 effort 的方法论依据</li>
 <li>ACL 2026 Findings,<a target="_blank" rel="noopener" href="https://aclanthology.org/2026.findings-acl.1285.pdf">Do LLMs Overthink Basic Math Reasoning?</a>——过度思考导致准确率下降的实证</li>
 <li>arXiv,<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2508.17196">BudgetThinker: Empowering Budget-aware LLM Reasoning with Control Tokens</a>——思考预算的可控分配</li>
-<li>arXiv,<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2504.07128">DeepSeek-R1 Thoughtology: Let’s think about LLM Reasoning</a>——思考长度与性能关系的系统分析</li>
+<li>arXiv,<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2504.07128">DeepSeek-R1 Thoughtology: Let&#39;s think about LLM Reasoning</a>——思考长度与性能关系的系统分析</li>
 <li>arXiv,<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2604.02460">Single-Agent LLMs Outperform Multi-Agent Systems on Multi-Hop Reasoning Under Equal Thinking Token Budgets</a>——同等预算下的单&#x2F;多 Agent 对比</li>
 <li>Redis,<a target="_blank" rel="noopener" href="https://redis.io/blog/token-budget-aware-llm-reasoning/">Token-Budget-Aware LLM Reasoning</a>——按题目难度动态分配思考预算的工程实践</li>
 </ol>

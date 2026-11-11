@@ -74,6 +74,14 @@
       
         
         
+        <a class="nav-link" href="/rankings/">模型天梯</a>
+      
+        
+        
+        <a class="nav-link" href="/advisor/">选购助手</a>
+      
+        
+        
         <a class="nav-link" href="/archives/">归档</a>
       
         
@@ -112,6 +120,10 @@
   <div class="mobile-nav" id="mobileNav">
     
       <a class="mobile-nav-link" href="/">首页</a>
+    
+      <a class="mobile-nav-link" href="/rankings/">模型天梯</a>
+    
+      <a class="mobile-nav-link" href="/advisor/">选购助手</a>
     
       <a class="mobile-nav-link" href="/archives/">归档</a>
     
@@ -370,7 +382,7 @@
         
         <details class="mobile-toc">
           <summary>目录 / Contents</summary>
-          <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%99%B7%E9%98%B1%E4%B8%80-%E5%AE%83%E4%BC%9A%E4%B8%80%E6%9C%AC%E6%AD%A3%E7%BB%8F%E5%9C%B0%E7%BC%96%E9%80%A0%E6%95%B0%E5%AD%97"><span class="toc-list-text">陷阱一:它会一本正经地编造数字</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%99%B7%E9%98%B1%E4%BA%8C-%E5%AE%83%E4%BC%9A%E5%B8%AE%E4%BD%A0%E5%86%99%E5%87%BA%E2%80%9D%E8%BF%87%E6%8B%9F%E5%90%88%E2%80%9D%E7%9A%84%E6%BC%82%E4%BA%AE%E5%9B%9E%E6%B5%8B"><span class="toc-list-text">陷阱二:它会帮你写出”过拟合”的漂亮回测</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%99%B7%E9%98%B1%E4%B8%89-%E5%AE%83%E6%B2%A1%E6%9C%89%E2%80%9D%E6%88%91%E4%B8%8D%E7%9F%A5%E9%81%93%E2%80%9D%E7%9A%84%E6%9C%AC%E8%83%BD"><span class="toc-list-text">陷阱三:它没有”我不知道”的本能</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%82%A3-AI-%E5%88%B0%E5%BA%95%E9%80%82%E5%90%88%E9%87%91%E8%9E%8D%E9%87%8C%E7%9A%84%E4%BB%80%E4%B9%88"><span class="toc-list-text">那 AI 到底适合金融里的什么?</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%80%89%E5%9E%8B%E5%BB%BA%E8%AE%AE-%E5%B7%A5%E5%85%B7%E5%B1%82%E9%9D%A2"><span class="toc-list-text">选型建议(工具层面)</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E6%9C%80%E5%90%8E-%E4%B8%80%E6%9D%A1%E4%B8%8D%E8%AF%A5%E8%B6%8A%E8%BF%87%E7%9A%84%E7%BA%BF"><span class="toc-list-text">最后:一条不该越过的线</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+          <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%99%B7%E9%98%B1%E4%B8%80-%E5%AE%83%E4%BC%9A%E4%B8%80%E6%9C%AC%E6%AD%A3%E7%BB%8F%E5%9C%B0%E7%BC%96%E9%80%A0%E6%95%B0%E5%AD%97"><span class="toc-list-text">陷阱一:它会一本正经地编造数字</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%99%B7%E9%98%B1%E4%BA%8C-%E5%AE%83%E4%BC%9A%E5%B8%AE%E4%BD%A0%E5%86%99%E5%87%BA-%E8%BF%87%E6%8B%9F%E5%90%88-%E7%9A%84%E6%BC%82%E4%BA%AE%E5%9B%9E%E6%B5%8B"><span class="toc-list-text">陷阱二:它会帮你写出“过拟合”的漂亮回测</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%99%B7%E9%98%B1%E4%B8%89-%E5%AE%83%E6%B2%A1%E6%9C%89-%E6%88%91%E4%B8%8D%E7%9F%A5%E9%81%93-%E7%9A%84%E6%9C%AC%E8%83%BD"><span class="toc-list-text">陷阱三:它没有“我不知道”的本能</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%82%A3-AI-%E5%88%B0%E5%BA%95%E9%80%82%E5%90%88%E9%87%91%E8%9E%8D%E9%87%8C%E7%9A%84%E4%BB%80%E4%B9%88"><span class="toc-list-text">那 AI 到底适合金融里的什么?</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%80%89%E5%9E%8B%E5%BB%BA%E8%AE%AE-%E5%B7%A5%E5%85%B7%E5%B1%82%E9%9D%A2"><span class="toc-list-text">选型建议(工具层面)</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E6%9C%80%E5%90%8E-%E4%B8%80%E6%9D%A1%E4%B8%8D%E8%AF%A5%E8%B6%8A%E8%BF%87%E7%9A%84%E7%BA%BF"><span class="toc-list-text">最后:一条不该越过的线</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
         </details>
         
 
@@ -382,30 +394,30 @@
 <div class="risk-box-title">// 阅读前须知</div>
 <ul>
 <li>本文讨论的是<strong>把 AI 当作研究与分析工具</strong>,不涉及、也不提供任何投资建议或证券标的推荐。</li>
-<li>在中国,未经中国证监会批准从事证券、期货投资咨询业务属违法行为。本站不提供任何"荐股"类内容或服务评测。</li>
+<li>在中国,未经中国证监会批准从事证券、期货投资咨询业务属违法行为。本站不提供任何“荐股”类内容或服务评测。</li>
 <li>本文作者不是持牌投资顾问。文中所有内容仅为技术与风险讨论,不构成投资建议。</li>
 </ul>
 </div>
 
-<h2 id="陷阱一-它会一本正经地编造数字"><a href="#陷阱一-它会一本正经地编造数字" class="headerlink" title="陷阱一:它会一本正经地编造数字"></a>陷阱一:它会一本正经地编造数字</h2><p>这是最致命的一条,因为它违反直觉——<strong>我们默认”计算器不会撒谎”</strong>。</p>
+<h2 id="陷阱一-它会一本正经地编造数字"><a href="#陷阱一-它会一本正经地编造数字" class="headerlink" title="陷阱一:它会一本正经地编造数字"></a>陷阱一:它会一本正经地编造数字</h2><p>这是最致命的一条,因为它违反直觉——<strong>我们默认“计算器不会撒谎”</strong>。</p>
 <p>但 LLM 不是计算器。有实测对 Claude Opus、Gemini 3.1、GPT-5、GLM-5.1、Qwen 3.6、Kimi K2.5 六个主流模型做了幻觉测试,结论是:<strong>当源文档不完整时,六个中有四个会凭空生成看似合理的财务数据</strong>——不是拒绝回答,不是提示信息缺失,而是<strong>给出一个格式正确、语气笃定、但根本不存在的数字</strong>。</p>
 <p>FinanceBench(基于 SEC 10-K、10-Q、8-K 与财报电话会实录构建的 10,231 道题)的研究者也得出类似结论:即使配上检索系统,模型仍然频繁给出错误答案或拒答。</p>
-<p><strong>为什么这比”能力不够”更危险?</strong> 因为能力不够是显性的——它答不上来,你知道要另找方法。而编造是隐性的:数字看着对、格式规整、还能自圆其说,你很可能直接拿去用了。</p>
-<p><strong>唯一可靠的应对</strong>:任何 AI 给出的财务数字,<strong>必须回原始文件逐项核对</strong>。把 AI 当作”帮你定位到第 47 页那张表”的助手,而不是”直接告诉你毛利率是多少”的信源。</p>
-<h2 id="陷阱二-它会帮你写出”过拟合”的漂亮回测"><a href="#陷阱二-它会帮你写出”过拟合”的漂亮回测" class="headerlink" title="陷阱二:它会帮你写出”过拟合”的漂亮回测"></a>陷阱二:它会帮你写出”过拟合”的漂亮回测</h2><p>AI 写回测代码的能力很强,这恰恰是风险所在。</p>
-<p>量化研究里最经典的失败模式是<strong>过拟合(overfitting)</strong>:在历史数据上反复调参,直到曲线漂亮为止。这个错误人类会犯,而 AI 会<strong>极大地加速这个过程</strong>——你说”收益率不够高”,它就给你换指标、调参数、加条件,几轮之后你得到一条完美的净值曲线,和一个在未来必然失效的策略。</p>
-<p>更隐蔽的是<strong>前视偏差(look-ahead bias)</strong>:代码里不小心用了当时还不可能知道的信息。比如用当日收盘价决定当日开盘的买入、用未经调整的复权价、用财报公布日之前的财报数据。AI 生成的回测代码<strong>很容易引入这类 bug</strong>,因为它是按”逻辑上合理”而非”时间上可得”来组织代码的。</p>
+<p><strong>为什么这比“能力不够”更危险?</strong> 因为能力不够是显性的——它答不上来,你知道要另找方法。而编造是隐性的:数字看着对、格式规整、还能自圆其说,你很可能直接拿去用了。</p>
+<p><strong>唯一可靠的应对</strong>:任何 AI 给出的财务数字,<strong>必须回原始文件逐项核对</strong>。把 AI 当作“帮你定位到第 47 页那张表”的助手,而不是“直接告诉你毛利率是多少”的信源。</p>
+<h2 id="陷阱二-它会帮你写出-过拟合-的漂亮回测"><a href="#陷阱二-它会帮你写出-过拟合-的漂亮回测" class="headerlink" title="陷阱二:它会帮你写出&quot;过拟合&quot;的漂亮回测"></a>陷阱二:它会帮你写出“过拟合”的漂亮回测</h2><p>AI 写回测代码的能力很强,这恰恰是风险所在。</p>
+<p>量化研究里最经典的失败模式是<strong>过拟合(overfitting)</strong>:在历史数据上反复调参,直到曲线漂亮为止。这个错误人类会犯,而 AI 会<strong>极大地加速这个过程</strong>——你说“收益率不够高”,它就给你换指标、调参数、加条件,几轮之后你得到一条完美的净值曲线,和一个在未来必然失效的策略。</p>
+<p>更隐蔽的是<strong>前视偏差(look-ahead bias)</strong>:代码里不小心用了当时还不可能知道的信息。比如用当日收盘价决定当日开盘的买入、用未经调整的复权价、用财报公布日之前的财报数据。AI 生成的回测代码<strong>很容易引入这类 bug</strong>,因为它是按“逻辑上合理”而非“时间上可得”来组织代码的。</p>
 <p><strong>务实做法</strong>:</p>
 <ul>
 <li>严格划分样本内&#x2F;样本外,<strong>样本外只测一次</strong>(测多了它就变成样本内了)</li>
 <li>让 AI 写代码,但<strong>你必须逐行审查数据的时间对齐</strong></li>
-<li>对任何”惊人的”回测结果,默认假设是 bug 而不是发现</li>
+<li>对任何“惊人的”回测结果,默认假设是 bug 而不是发现</li>
 </ul>
-<h2 id="陷阱三-它没有”我不知道”的本能"><a href="#陷阱三-它没有”我不知道”的本能" class="headerlink" title="陷阱三:它没有”我不知道”的本能"></a>陷阱三:它没有”我不知道”的本能</h2><p>金融决策的核心是<strong>认识不确定性</strong>。而 LLM 的训练目标是生成流畅的续写,不是校准置信度。</p>
+<h2 id="陷阱三-它没有-我不知道-的本能"><a href="#陷阱三-它没有-我不知道-的本能" class="headerlink" title="陷阱三:它没有&quot;我不知道&quot;的本能"></a>陷阱三:它没有“我不知道”的本能</h2><p>金融决策的核心是<strong>认识不确定性</strong>。而 LLM 的训练目标是生成流畅的续写,不是校准置信度。</p>
 <p>于是你会看到:问它一只股票的前景,它能写出条理清晰的多空分析;问它一个根本无法预测的宏观变量,它同样能给出笃定的判断。<strong>语气的确定性与实际的可靠性之间,没有相关性。</strong></p>
-<p>Artificial Analysis 的智能指数 v4.1 引入了 <strong>AA-Omniscience</strong> 这类专门测”知道自己不知道”的评测,正是因为业界意识到这个能力短板。但目前没有任何模型解决了它。</p>
+<p>Artificial Analysis 的智能指数 v4.1 引入了 <strong>AA-Omniscience</strong> 这类专门测“知道自己不知道”的评测,正是因为业界意识到这个能力短板。但目前没有任何模型解决了它。</p>
 <p><strong>这意味着</strong>:AI 适合做<strong>有确定答案的活</strong>(这段财报说了什么、这个公式怎么算、这段代码有什么 bug),不适合做<strong>本质不确定的判断</strong>(该不该买、会不会涨)。这个边界不是能力问题,是任务性质问题——再强的模型也不会改变它。</p>
-<h2 id="那-AI-到底适合金融里的什么"><a href="#那-AI-到底适合金融里的什么" class="headerlink" title="那 AI 到底适合金融里的什么?"></a>那 AI 到底适合金融里的什么?</h2><p>按”错误可被发现的程度”排序,越靠前越适合:</p>
+<h2 id="那-AI-到底适合金融里的什么"><a href="#那-AI-到底适合金融里的什么" class="headerlink" title="那 AI 到底适合金融里的什么?"></a>那 AI 到底适合金融里的什么?</h2><p>按“错误可被发现的程度”排序,越靠前越适合:</p>
 <table>
 <thead>
 <tr>
@@ -455,9 +467,9 @@
 <p><strong>⚠ 2026-09-23 更正:这条口径已经比本文发表时更弱了。</strong> 本文原文写的代理指标是「AA 智能指数含 τ³-Banking 银行业智能体任务 + LiveBench 数学子项」。但 <strong>AA 在 2026-09-07 的 v4.3 里移除了 τ³-Banking</strong>,换成了 Zapier 的 AutomationBench-AA(通用业务流程自动化)——也就是说,<strong>AA 指数里现在已不含任何银行 &#x2F; 金融专项评测</strong>,该维度只剩下「通用智能 + 数学严谨性」两个更远的代理。请务必按代理指标看待,不要当成金融能力评分。<strong>2026-10-15 再更正</strong>:LiveBench 换成 2.0 后不再有数学子项,天梯改用其「数据分析」套题作第二个代理。<br>真正的领域基准可参考 FinBen、BizFinBench、FinanceBench——但它们的覆盖模型有限、更新滞后。</p>
 </blockquote>
 <p><strong>一个比看榜单更实际的建议</strong>:拿你自己真实的三份财报、五个典型问题,把候选模型各跑一遍,<strong>重点看它在信息缺失时会不会硬答</strong>。这个测试花不了一小时,比任何榜单都更能反映它在你场景下的可靠性。</p>
-<p>至于该买哪个方案,可以用本站<a href="/advisor/">选购助手</a>——选择”金融分析 &#x2F; 量化研究”用途后,会先显示合规与幻觉风险提示,再给出工具推荐。</p>
+<p>至于该买哪个方案,可以用本站<a href="/advisor/">选购助手</a>——选择“金融分析 &#x2F; 量化研究”用途后,会先显示合规与幻觉风险提示,再给出工具推荐。</p>
 <h2 id="最后-一条不该越过的线"><a href="#最后-一条不该越过的线" class="headerlink" title="最后:一条不该越过的线"></a>最后:一条不该越过的线</h2><p>技术讨论到此为止,剩下的是法律问题,必须说清楚。</p>
-<p>根据《证券法》与《证券、期货投资咨询管理暂行办法》,<strong>从事证券、期货投资咨询业务必须经中国证监会批准</strong>。中国证券业协会公布的典型案例明确指出:向投资者销售或提供”荐股软件”,并直接或间接获取经济利益,即构成非法证券投资咨询业务。</p>
+<p>根据《证券法》与《证券、期货投资咨询管理暂行办法》,<strong>从事证券、期货投资咨询业务必须经中国证监会批准</strong>。中国证券业协会公布的典型案例明确指出:向投资者销售或提供“荐股软件”,并直接或间接获取经济利益,即构成非法证券投资咨询业务。</p>
 <p>也就是说:<strong>用 AI 做自己的研究,合法;用 AI 生成投资建议提供给他人(尤其涉及收费),是需要持牌的特许业务。</strong>这条线与技术能力无关,再好的模型也不能替代资质。</p>
 <p>至于市场操纵——拉抬打压、虚假申报、蛊惑交易——那是《证券法》明令禁止的违法行为,不在任何技术讨论的范围内。</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
@@ -498,7 +510,7 @@
         
           <div class="toc-sticky">
             <h3 class="toc-title">目录大纲</h3>
-            <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%99%B7%E9%98%B1%E4%B8%80-%E5%AE%83%E4%BC%9A%E4%B8%80%E6%9C%AC%E6%AD%A3%E7%BB%8F%E5%9C%B0%E7%BC%96%E9%80%A0%E6%95%B0%E5%AD%97"><span class="toc-list-text">陷阱一:它会一本正经地编造数字</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%99%B7%E9%98%B1%E4%BA%8C-%E5%AE%83%E4%BC%9A%E5%B8%AE%E4%BD%A0%E5%86%99%E5%87%BA%E2%80%9D%E8%BF%87%E6%8B%9F%E5%90%88%E2%80%9D%E7%9A%84%E6%BC%82%E4%BA%AE%E5%9B%9E%E6%B5%8B"><span class="toc-list-text">陷阱二:它会帮你写出”过拟合”的漂亮回测</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%99%B7%E9%98%B1%E4%B8%89-%E5%AE%83%E6%B2%A1%E6%9C%89%E2%80%9D%E6%88%91%E4%B8%8D%E7%9F%A5%E9%81%93%E2%80%9D%E7%9A%84%E6%9C%AC%E8%83%BD"><span class="toc-list-text">陷阱三:它没有”我不知道”的本能</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%82%A3-AI-%E5%88%B0%E5%BA%95%E9%80%82%E5%90%88%E9%87%91%E8%9E%8D%E9%87%8C%E7%9A%84%E4%BB%80%E4%B9%88"><span class="toc-list-text">那 AI 到底适合金融里的什么?</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%80%89%E5%9E%8B%E5%BB%BA%E8%AE%AE-%E5%B7%A5%E5%85%B7%E5%B1%82%E9%9D%A2"><span class="toc-list-text">选型建议(工具层面)</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E6%9C%80%E5%90%8E-%E4%B8%80%E6%9D%A1%E4%B8%8D%E8%AF%A5%E8%B6%8A%E8%BF%87%E7%9A%84%E7%BA%BF"><span class="toc-list-text">最后:一条不该越过的线</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
+            <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%99%B7%E9%98%B1%E4%B8%80-%E5%AE%83%E4%BC%9A%E4%B8%80%E6%9C%AC%E6%AD%A3%E7%BB%8F%E5%9C%B0%E7%BC%96%E9%80%A0%E6%95%B0%E5%AD%97"><span class="toc-list-text">陷阱一:它会一本正经地编造数字</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%99%B7%E9%98%B1%E4%BA%8C-%E5%AE%83%E4%BC%9A%E5%B8%AE%E4%BD%A0%E5%86%99%E5%87%BA-%E8%BF%87%E6%8B%9F%E5%90%88-%E7%9A%84%E6%BC%82%E4%BA%AE%E5%9B%9E%E6%B5%8B"><span class="toc-list-text">陷阱二:它会帮你写出“过拟合”的漂亮回测</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%99%B7%E9%98%B1%E4%B8%89-%E5%AE%83%E6%B2%A1%E6%9C%89-%E6%88%91%E4%B8%8D%E7%9F%A5%E9%81%93-%E7%9A%84%E6%9C%AC%E8%83%BD"><span class="toc-list-text">陷阱三:它没有“我不知道”的本能</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%82%A3-AI-%E5%88%B0%E5%BA%95%E9%80%82%E5%90%88%E9%87%91%E8%9E%8D%E9%87%8C%E7%9A%84%E4%BB%80%E4%B9%88"><span class="toc-list-text">那 AI 到底适合金融里的什么?</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E9%80%89%E5%9E%8B%E5%BB%BA%E8%AE%AE-%E5%B7%A5%E5%85%B7%E5%B1%82%E9%9D%A2"><span class="toc-list-text">选型建议(工具层面)</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E6%9C%80%E5%90%8E-%E4%B8%80%E6%9D%A1%E4%B8%8D%E8%AF%A5%E8%B6%8A%E8%BF%87%E7%9A%84%E7%BA%BF"><span class="toc-list-text">最后:一条不该越过的线</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-list-text">参考文献</span></a></li></ol>
           </div>
         
       </aside>

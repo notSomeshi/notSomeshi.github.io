@@ -74,6 +74,14 @@
       
         
         
+        <a class="nav-link" href="/rankings/">模型天梯</a>
+      
+        
+        
+        <a class="nav-link" href="/advisor/">选购助手</a>
+      
+        
+        
         <a class="nav-link" href="/archives/">归档</a>
       
         
@@ -112,6 +120,10 @@
   <div class="mobile-nav" id="mobileNav">
     
       <a class="mobile-nav-link" href="/">首页</a>
+    
+      <a class="mobile-nav-link" href="/rankings/">模型天梯</a>
+    
+      <a class="mobile-nav-link" href="/advisor/">选购助手</a>
     
       <a class="mobile-nav-link" href="/archives/">归档</a>
     
@@ -401,8 +413,8 @@
   <p class="fig-src">来源:<a href="https://api-docs.deepseek.com/quick_start/pricing" target="_blank" rel="noopener">DeepSeek 官方定价页</a>。快照 2026-08-15。</p>
 </div>
 
-<p>先把一个常见误读挡掉:<strong>这不是”峰时加价、平时不变”。</strong></p>
-<p>涨价前 V4 Pro 的输出是 $0.87&#x2F;M。新规下<strong>连最便宜的谷时都是 $1.98</strong>——比原价高 128%。峰时 $3.96,是原价的 4.6 倍。峰谷之间那个 2 倍差,是<strong>新价内部</strong>的差,不是”给你的优惠”。</p>
+<p>先把一个常见误读挡掉:<strong>这不是“峰时加价、平时不变”。</strong></p>
+<p>涨价前 V4 Pro 的输出是 $0.87&#x2F;M。新规下<strong>连最便宜的谷时都是 $1.98</strong>——比原价高 128%。峰时 $3.96,是原价的 4.6 倍。峰谷之间那个 2 倍差,是<strong>新价内部</strong>的差,不是“给你的优惠”。</p>
 <p>那家把前沿模型价格打到地板、逼得所有人跟进的公司,涨价了。而且是在自己刚发布 0813 检查点、智能指数从 45 跳到 53 的时候涨的。</p>
 <h2 id="一百三十四年前的同一道题"><a href="#一百三十四年前的同一道题" class="headerlink" title="一百三十四年前的同一道题"></a>一百三十四年前的同一道题</h2><p>1892 年 11 月 4 日,英国工程师 John Hopkinson 在 Junior Engineering Society 宣读了一篇叫《The Cost of Electric Supply》的论文。</p>
 <p>当时的电力公司面对一个想不通的问题:他们按用电量收费,可成本根本不在用电量上。<strong>成本在峰值。</strong> 一个工厂全天用电平缓,和另一个工厂只在下午三点猛拉一下但总量相同,前者几乎不增加电网负担,后者却逼着电力公司为那一下多建一整套发电和输电容量。</p>
@@ -417,26 +429,26 @@
 <h2 id="顺着这条线往下看"><a href="#顺着这条线往下看" class="headerlink" title="顺着这条线往下看"></a>顺着这条线往下看</h2><p>如果 AI 推理真的在往公用事业的形态收敛,那么电力行业过去一百多年发明的东西,大概率会一个个出现在 AI 的账单上。已经能看到苗头的有这些:</p>
 <p><strong>批处理折扣 &#x3D; 可中断负荷。</strong> 各家的 Batch API 普遍打五折、承诺 24 小时内返回。这在电力里叫可中断负荷合同:你允许我在紧张时把你甩掉,我给你便宜。名字不同,机制一模一样。</p>
 <p><strong>优先通道 &#x3D; 尖峰电价。</strong> OpenAI 用 Fast 模式替换了原来的 Priority Processing,本质是花钱插队。这是尖峰定价的反面——不是惩罚你在高峰用,而是让你付费买高峰的优先权。</p>
-<p><strong>缓存命中价 &#x3D; 需量管理。</strong> DeepSeek 缓存命中的输入价只有未命中的三十分之一。这在鼓励你把重复的上下文变成”可预测的基础负荷”,而不是每次都发起新的尖峰请求。</p>
+<p><strong>缓存命中价 &#x3D; 需量管理。</strong> DeepSeek 缓存命中的输入价只有未命中的三十分之一。这在鼓励你把重复的上下文变成“可预测的基础负荷”,而不是每次都发起新的尖峰请求。</p>
 <p><strong>还没出现、但很可能会来的:</strong></p>
 <ul>
 <li><strong>容量预留合约</strong>——按月付一笔钱锁定并发额度,用不用都付。这就是 Hopkinson 的容量费。</li>
 <li><strong>实时浮动价</strong>——不再是固定的峰谷两档,而是像电力现货市场那样按实际负载浮动。</li>
 <li><strong>算力期货</strong>——一旦价格开始浮动,对冲需求就会出现。</li>
 </ul>
-<p>这些不是科幻。它们是一门”不能库存、供给刚性、需求有时间结构”的生意必然演化出的东西,电力行业已经把这条路走完了。</p>
+<p>这些不是科幻。它们是一门“不能库存、供给刚性、需求有时间结构”的生意必然演化出的东西,电力行业已经把这条路走完了。</p>
 <div class="risk-box">
-<strong>提醒</strong>:本文的价格与生效日期取自 2026-08-15 的官方页面。DeepSeek 在定价页明确保留调整权("Product prices may vary and DeepSeek reserves the right to adjust them")。真要按峰谷做成本测算,请以调用当天的官网为准。
+<strong>提醒</strong>:本文的价格与生效日期取自 2026-08-15 的官方页面。DeepSeek 在定价页明确保留调整权(“Product prices may vary and DeepSeek reserves the right to adjust them”)。真要按峰谷做成本测算,请以调用当天的官网为准。
 </div>
 
 <h2 id="对你意味着什么"><a href="#对你意味着什么" class="headerlink" title="对你意味着什么"></a>对你意味着什么</h2><p><strong>如果你在做批量任务</strong>——恭喜,你刚拿到一个五折工具。把能异步的活儿挪到谷时,这是纯赚。真正的门槛不是技术,是你得先知道自己哪些任务其实不急。</p>
-<p><strong>如果你在做实时产品</strong>——你的成本刚跟你的用户作息绑在了一起。用户白天用得最多的那几个小时,恰好是你成本最高的几个小时。这会让”每用户成本”这个指标变得比以前难算得多。</p>
-<p><strong>如果你正靠”国产 API 便宜”做成本模型</strong>——重算一遍。V4 Pro 输出从 $0.87 到谷时 $1.98,这个幅度足以掀翻不少方案的经济性。<a href="/rankings/">成本对照表</a>里的数字已按新规更新。</p>
-<p><strong>如果你在选平台</strong>——多问一个以前不用问的问题:<strong>它的定价条款里有没有”保留调整权”这句话,以及它上一次调价是什么时候。</strong> 在一个价格可以一夜之间涨三倍的市场里,厂商的调价历史比它当前的标价更能说明问题。</p>
+<p><strong>如果你在做实时产品</strong>——你的成本刚跟你的用户作息绑在了一起。用户白天用得最多的那几个小时,恰好是你成本最高的几个小时。这会让“每用户成本”这个指标变得比以前难算得多。</p>
+<p><strong>如果你正靠“国产 API 便宜”做成本模型</strong>——重算一遍。V4 Pro 输出从 $0.87 到谷时 $1.98,这个幅度足以掀翻不少方案的经济性。<a href="/rankings/">成本对照表</a>里的数字已按新规更新。</p>
+<p><strong>如果你在选平台</strong>——多问一个以前不用问的问题:<strong>它的定价条款里有没有“保留调整权”这句话,以及它上一次调价是什么时候。</strong> 在一个价格可以一夜之间涨三倍的市场里,厂商的调价历史比它当前的标价更能说明问题。</p>
 <hr>
 <p>DeepSeek 这次涨价,新闻价值其实不大——一家公司调了个价而已。真正值得记下来的是它选择的<strong>形式</strong>。</p>
 <p>选择峰谷计价,意味着它不再把自己当成一家卖软件许可的公司,而是当成一家管理负荷的供电商。这个身份切换一旦发生,后面的一整套东西都会跟着来。</p>
-<p><strong>便宜的日子不是结束了,是结束了”便宜且简单”的日子。</strong> 接下来的成本优化,会越来越像一门运筹学:什么时候跑、跑多急、留多少余量、锁不锁容量。1892 年的工厂主学会了这套,现在轮到我们了。</p>
+<p><strong>便宜的日子不是结束了,是结束了“便宜且简单”的日子。</strong> 接下来的成本优化,会越来越像一门运筹学:什么时候跑、跑多急、留多少余量、锁不锁容量。1892 年的工厂主学会了这套,现在轮到我们了。</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
 <li>DeepSeek,<a target="_blank" rel="noopener" href="https://api-docs.deepseek.com/quick_start/pricing">官方定价页</a>——峰谷价目、生效日期与时段定义</li>
 <li>John Hopkinson,<em>The Cost of Electric Supply</em>(1892-11-04,Junior Engineering Society)——两部制电价的原始论述,见 <a target="_blank" rel="noopener" href="https://bear.warrington.ufl.edu/centers/purc/docs//papers/9908_Woo_The_Hopkinson_Tariff.pdf">University of Florida PURC 对 Hopkinson 电价的分析</a></li>

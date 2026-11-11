@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 
 <title>能算出来的数,就别写死 | ByteVibe</title>
-<meta name="description" content="有个 bug 在我维护的站点上挂了很久。 图例写着:“红柱为成本最高的三名”。而图上有四根红柱。 没人报错,没人报 bug,构建全绿。因为这两件事——图例里的”三”和标记了 is-costly 的四行 HTML——在代码里根本没有关系。它们只是碰巧在同一个页面上,曾经一致过。 …">
+<meta name="description" content="有个 bug 在我维护的站点上挂了很久。 图例写着:“红柱为成本最高的三名”。而图上有四根红柱。 没人报错,没人报 bug,构建全绿。因为这两件事——图例里的“三”和标记了 is-costly 的四行 HTML——在代码里根本没有关系。它们只是碰巧在同一个页面上,曾经一致过。 …">
 <meta name="keywords" content="Vibe Coding,工程实践,自动化,可维护性">
 <meta name="author" content="ByteVibe">
 <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
@@ -13,14 +13,14 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="ByteVibe">
 <meta property="og:title" content="能算出来的数,就别写死">
-<meta property="og:description" content="有个 bug 在我维护的站点上挂了很久。 图例写着:“红柱为成本最高的三名”。而图上有四根红柱。 没人报错,没人报 bug,构建全绿。因为这两件事——图例里的”三”和标记了 is-costly 的四行 HTML——在代码里根本没有关系。它们只是碰巧在同一个页面上,曾经一致过。 …">
+<meta property="og:description" content="有个 bug 在我维护的站点上挂了很久。 图例写着:“红柱为成本最高的三名”。而图上有四根红柱。 没人报错,没人报 bug,构建全绿。因为这两件事——图例里的“三”和标记了 is-costly 的四行 HTML——在代码里根本没有关系。它们只是碰巧在同一个页面上,曾经一致过。 …">
 <meta property="og:url" content="https://notsomeshi.github.io/2026/09/20/code-that-maintains-itself/">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-09-20T07:00:00.000Z">
 <meta property="article:modified_time" content="2026-09-22T12:36:34.143Z">
 <meta name="twitter:card" content="summary">
 <link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"能算出来的数,就别写死","description":"有个 bug 在我维护的站点上挂了很久。 图例写着:“红柱为成本最高的三名”。而图上有四根红柱。 没人报错,没人报 bug,构建全绿。因为这两件事——图例里的”三”和标记了 is-costly 的四行 HTML——在代码里根本没有关系。它们只是碰巧在同一个页面上,曾经一致过。 …","inLanguage":"zh-CN","datePublished":"2026-09-20T07:00:00.000Z","dateModified":"2026-09-22T12:36:34.143Z","keywords":"Vibe Coding, 工程实践, 自动化, 可维护性","articleSection":"实践技巧","author":{"@type":"Organization","name":"ByteVibe","url":"https://notsomeshi.github.io/"},"publisher":{"@type":"Organization","name":"ByteVibe","url":"https://notsomeshi.github.io/"},"mainEntityOfPage":"https://notsomeshi.github.io/2026/09/20/code-that-maintains-itself/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"能算出来的数,就别写死","description":"有个 bug 在我维护的站点上挂了很久。 图例写着:“红柱为成本最高的三名”。而图上有四根红柱。 没人报错,没人报 bug,构建全绿。因为这两件事——图例里的“三”和标记了 is-costly 的四行 HTML——在代码里根本没有关系。它们只是碰巧在同一个页面上,曾经一致过。 …","inLanguage":"zh-CN","datePublished":"2026-09-20T07:00:00.000Z","dateModified":"2026-09-22T12:36:34.143Z","keywords":"Vibe Coding, 工程实践, 自动化, 可维护性","articleSection":"实践技巧","author":{"@type":"Organization","name":"ByteVibe","url":"https://notsomeshi.github.io/"},"publisher":{"@type":"Organization","name":"ByteVibe","url":"https://notsomeshi.github.io/"},"mainEntityOfPage":"https://notsomeshi.github.io/2026/09/20/code-that-maintains-itself/"}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='0,0 100,0 100,78 78,100 0,100' fill='%23ffd802'/><text x='50' y='70' font-size='58' font-weight='800' font-family='ui-monospace,monospace' fill='%230d0d0f' text-anchor='middle'>B</text></svg>">
 <link rel="alternate" type="application/atom+xml" title="ByteVibe" href="/atom.xml">
 
@@ -74,6 +74,14 @@
       
         
         
+        <a class="nav-link" href="/rankings/">模型天梯</a>
+      
+        
+        
+        <a class="nav-link" href="/advisor/">选购助手</a>
+      
+        
+        
         <a class="nav-link" href="/archives/">归档</a>
       
         
@@ -112,6 +120,10 @@
   <div class="mobile-nav" id="mobileNav">
     
       <a class="mobile-nav-link" href="/">首页</a>
+    
+      <a class="mobile-nav-link" href="/rankings/">模型天梯</a>
+    
+      <a class="mobile-nav-link" href="/advisor/">选购助手</a>
     
       <a class="mobile-nav-link" href="/archives/">归档</a>
     
@@ -372,17 +384,17 @@
         
         <details class="mobile-toc">
           <summary>目录 / Contents</summary>
-          <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E7%AC%AC%E4%B8%80%E5%8E%9F%E5%88%99-%E8%83%BD%E7%AE%97%E5%87%BA%E6%9D%A5%E7%9A%84-%E5%B0%B1%E5%88%AB%E5%AD%98"><span class="toc-list-text">一、第一原则:能算出来的,就别存</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E5%88%A4%E6%96%AD%E6%A0%87%E5%87%86%E5%B0%B1%E4%B8%80%E5%8F%A5%E8%AF%9D"><span class="toc-list-text">判断标准就一句话</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E6%8A%8A%E2%80%9D%E4%BA%BA%E9%9C%80%E8%A6%81%E8%AE%B0%E4%BD%8F%E7%9A%84%E4%BA%8B%E2%80%9D%E5%BE%80%E4%B8%8A%E6%B8%B8%E6%8E%A8"><span class="toc-list-text">二、把”人需要记住的事”往上游推</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E4%BD%86%E4%B8%8D%E6%98%AF%E6%89%80%E6%9C%89%E4%B8%9C%E8%A5%BF%E9%83%BD%E8%AF%A5%E6%8A%BD%E6%88%90%E6%95%B0%E6%8D%AE"><span class="toc-list-text">三、但不是所有东西都该抽成数据</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E9%82%A3%E6%9D%A1%E5%88%86%E7%95%8C%E7%BA%BF"><span class="toc-list-text">那条分界线</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E6%8A%8A%E6%A3%80%E6%9F%A5%E5%86%99%E6%88%90%E4%BB%A3%E7%A0%81-%E8%80%8C%E4%B8%8D%E6%98%AF%E5%86%99%E8%BF%9B%E6%96%87%E6%A1%A3"><span class="toc-list-text">四、把检查写成代码,而不是写进文档</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E4%B8%80%E6%9D%A1-%E6%B2%89%E9%BB%98%E4%B8%8D%E7%AD%89%E4%BA%8E%E9%80%9A%E8%BF%87"><span class="toc-list-text">五、最重要的一条:沉默不等于通过</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%AD%E3%80%81%E7%BB%99-vibe-coding-%E7%9A%84%E5%87%A0%E6%9D%A1%E5%85%B7%E4%BD%93%E5%BB%BA%E8%AE%AE"><span class="toc-list-text">六、给 vibe coding 的几条具体建议</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB"><span class="toc-list-text">延伸阅读</span></a></li></ol>
+          <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E7%AC%AC%E4%B8%80%E5%8E%9F%E5%88%99-%E8%83%BD%E7%AE%97%E5%87%BA%E6%9D%A5%E7%9A%84-%E5%B0%B1%E5%88%AB%E5%AD%98"><span class="toc-list-text">一、第一原则:能算出来的,就别存</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E5%88%A4%E6%96%AD%E6%A0%87%E5%87%86%E5%B0%B1%E4%B8%80%E5%8F%A5%E8%AF%9D"><span class="toc-list-text">判断标准就一句话</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E6%8A%8A-%E4%BA%BA%E9%9C%80%E8%A6%81%E8%AE%B0%E4%BD%8F%E7%9A%84%E4%BA%8B-%E5%BE%80%E4%B8%8A%E6%B8%B8%E6%8E%A8"><span class="toc-list-text">二、把“人需要记住的事”往上游推</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E4%BD%86%E4%B8%8D%E6%98%AF%E6%89%80%E6%9C%89%E4%B8%9C%E8%A5%BF%E9%83%BD%E8%AF%A5%E6%8A%BD%E6%88%90%E6%95%B0%E6%8D%AE"><span class="toc-list-text">三、但不是所有东西都该抽成数据</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E9%82%A3%E6%9D%A1%E5%88%86%E7%95%8C%E7%BA%BF"><span class="toc-list-text">那条分界线</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E6%8A%8A%E6%A3%80%E6%9F%A5%E5%86%99%E6%88%90%E4%BB%A3%E7%A0%81-%E8%80%8C%E4%B8%8D%E6%98%AF%E5%86%99%E8%BF%9B%E6%96%87%E6%A1%A3"><span class="toc-list-text">四、把检查写成代码,而不是写进文档</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E4%B8%80%E6%9D%A1-%E6%B2%89%E9%BB%98%E4%B8%8D%E7%AD%89%E4%BA%8E%E9%80%9A%E8%BF%87"><span class="toc-list-text">五、最重要的一条:沉默不等于通过</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%AD%E3%80%81%E7%BB%99-vibe-coding-%E7%9A%84%E5%87%A0%E6%9D%A1%E5%85%B7%E4%BD%93%E5%BB%BA%E8%AE%AE"><span class="toc-list-text">六、给 vibe coding 的几条具体建议</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB"><span class="toc-list-text">延伸阅读</span></a></li></ol>
         </details>
         
 
         <div class="post-body">
           <p>有个 bug 在我维护的站点上挂了很久。</p>
 <p>图例写着:<strong>“红柱为成本最高的三名”<strong>。而图上有</strong>四根</strong>红柱。</p>
-<p>没人报错,没人报 bug,构建全绿。因为这两件事——图例里的”三”和标记了 <code>is-costly</code> 的四行 HTML——在代码里根本没有关系。它们只是碰巧在同一个页面上,曾经一致过。</p>
+<p>没人报错,没人报 bug,构建全绿。因为这两件事——图例里的“三”和标记了 <code>is-costly</code> 的四行 HTML——在代码里根本没有关系。它们只是碰巧在同一个页面上,曾经一致过。</p>
 <p>后来加了一行新数据,第四名的成本超过了原来的第三名,而那行 HTML 上的 <code>is-costly</code> 没人记得去掉。</p>
 <div class="report-box">
-<strong>这类 bug 有个共同特征:它不是写错的,是"写对之后放着不管,自己变错的"。</strong><br>
+<strong>这类 bug 有个共同特征:它不是写错的,是“写对之后放着不管,自己变错的”。</strong><br>
 代码没改,数据变了,于是原本正确的描述变成了错误的描述。
 </div>
 
@@ -452,12 +464,12 @@
   .<span class="hljs-title function_">slice</span>(<span class="hljs-number">0</span>, cc.<span class="hljs-property">costlyTop</span>)
   .<span class="hljs-title function_">map</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">r</span>) &#123; <span class="hljs-keyword">return</span> r.<span class="hljs-property">name</span>; &#125;);</code></pre>
 
-<p><strong>现在”最贵的三名”这句话和那三根红柱是同一个 <code>costlyTop: 3</code> 算出来的。</strong> 它们不可能再各说各话。</p>
+<p><strong>现在“最贵的三名”这句话和那三根红柱是同一个 <code>costlyTop: 3</code> 算出来的。</strong> 它们不可能再各说各话。</p>
 <h3 id="判断标准就一句话"><a href="#判断标准就一句话" class="headerlink" title="判断标准就一句话"></a>判断标准就一句话</h3><blockquote>
 <p><strong>这个数能不能从别的数算出来?能,就别存它。</strong></p>
 </blockquote>
-<p>存了派生值,你就是承诺”每次源数据变了,我都会记得同步更新它”。这个承诺你迟早会违约。不是会不会,是什么时候。</p>
-<h2 id="二、把”人需要记住的事”往上游推"><a href="#二、把”人需要记住的事”往上游推" class="headerlink" title="二、把”人需要记住的事”往上游推"></a>二、把”人需要记住的事”往上游推</h2><p>图表上方有四块统计:</p>
+<p>存了派生值,你就是承诺“每次源数据变了,我都会记得同步更新它”。这个承诺你迟早会违约。不是会不会,是什么时候。</p>
+<h2 id="二、把-人需要记住的事-往上游推"><a href="#二、把-人需要记住的事-往上游推" class="headerlink" title="二、把&quot;人需要记住的事&quot;往上游推"></a>二、把“人需要记住的事”往上游推</h2><p>图表上方有四块统计:</p>
 <pre><code class="hljs plaintext">47×        评测总成本极差    $280 → $13,129
 17 分      智能指数跨度      36 → 53
 37×        每分智能成本极差  $6.7 → $247.7 /分
@@ -487,12 +499,12 @@
 <p>第二块统计自己从 <strong>「17 分 &#x2F; 36 → 53」</strong> 变成了 <strong>「36 分 &#x2F; 17 → 53」</strong>。</p>
 <p>我什么都没做。<strong>如果它还是手写的 HTML,我几乎肯定会漏掉它</strong>——因为我当时满脑子在核对新增那五行的成本数字,不会想到去改图表上方一块看起来跟这次更新无关的统计芯片。</p>
 <div class="report-box">
-<strong>这就是"代码自己维护自己"的真正含义。</strong><br>
-不是加个定时任务去跑什么,而是<strong>把"需要人记住的事"的数量降下来</strong>。人能记住的事情数量是固定的,而项目里需要同步的东西只会越来越多。
+<strong>这就是“代码自己维护自己”的真正含义。</strong><br>
+不是加个定时任务去跑什么,而是<strong>把“需要人记住的事”的数量降下来</strong>。人能记住的事情数量是固定的,而项目里需要同步的东西只会越来越多。
 </div>
 
 <h2 id="三、但不是所有东西都该抽成数据"><a href="#三、但不是所有东西都该抽成数据" class="headerlink" title="三、但不是所有东西都该抽成数据"></a>三、但不是所有东西都该抽成数据</h2><p>这一点很容易走过头。</p>
-<p>同一个页面上还有一张表,13 个平台 × 7 列。看起来更”表格”,按理说更该抽成 JSON。我没有抽。</p>
+<p>同一个页面上还有一张表,13 个平台 × 7 列。看起来更“表格”,按理说更该抽成 JSON。我没有抽。</p>
 <p>因为它的单元格长这样:</p>
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Fable 5.1 $10 / $50（新）<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span>
@@ -521,7 +533,7 @@
 </tr>
 <tr>
 <td><strong>含派生值</strong>:有东西能从别的字段算出来</td>
-<td>纯叙述:没有”算错”的可能</td>
+<td>纯叙述:没有“算错”的可能</td>
 </tr>
 <tr>
 <td>会被程序读取、校验、排序</td>
@@ -536,11 +548,11 @@
 
 <p>改一处文案,现在打开的是 248 行的文件,不是 626 行的。<strong>同样降低了维护成本,但用的是完全不同的手段。</strong></p>
 <div class="risk-box">
-<strong>⚠ "全部抽成配置"是一种很常见的过度设计。</strong><br>
+<strong>⚠ “全部抽成配置”是一种很常见的过度设计。</strong><br>
 抽数据的收益来自<strong>消除派生值不一致</strong>和<strong>让程序能校验</strong>。如果一块内容两样都不沾,抽出去只是把它换了个更难编辑的地方放着。
 </div>
 
-<h2 id="四、把检查写成代码-而不是写进文档"><a href="#四、把检查写成代码-而不是写进文档" class="headerlink" title="四、把检查写成代码,而不是写进文档"></a>四、把检查写成代码,而不是写进文档</h2><p>派生值解决了”同一个事实的两份拷贝”。但还有一类问题它管不了:<strong>两个文件里的两个独立数字,本来应该相等。</strong></p>
+<h2 id="四、把检查写成代码-而不是写进文档"><a href="#四、把检查写成代码-而不是写进文档" class="headerlink" title="四、把检查写成代码,而不是写进文档"></a>四、把检查写成代码,而不是写进文档</h2><p>派生值解决了“同一个事实的两份拷贝”。但还有一类问题它管不了:<strong>两个文件里的两个独立数字,本来应该相等。</strong></p>
 <p>比如这个站有两处独立维护的价格:选购助手的方案库里有 <code>priceIn / priceOut</code>,价格对照表里有一份 API 标价。它们<strong>写的是同一个事实,但是两套手写数字</strong>。</p>
 <p>真实后果:有一次 DeepSeek 的按量价在对照表里更新了,在助手里没有——助手用着一个月前的旧价算月账单,把用户的成本算少了一半。页面没报错,没人发现,直到有一次逐条核对才查出来。</p>
 <p>这类问题的解法是写成可执行的检查:</p>
@@ -555,8 +567,8 @@
   &#125;
 &#125;</code></pre>
 
-<p>还有一类更隐蔽的:<strong>写过的”预告”到期了</strong>。</p>
-<p>页面上写”促销至 11 月 21 日”——这句话今天是对的,三个月后就是假的。而它比一开始就写错更难发现,<strong>因为它当时是对的</strong>。</p>
+<p>还有一类更隐蔽的:<strong>写过的“预告”到期了</strong>。</p>
+<p>页面上写“促销至 11 月 21 日”——这句话今天是对的,三个月后就是假的。而它比一开始就写错更难发现,<strong>因为它当时是对的</strong>。</p>
 <pre><code class="hljs js"><span class="hljs-comment">// 到期看板:所有比当前快照新的日期,按剩余天数列出</span>
 <span class="hljs-keyword">const</span> today = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(snapshot);
 <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> [ctx, d] <span class="hljs-keyword">of</span> <span class="hljs-title function_">scanDates</span>(html)) &#123;
@@ -574,8 +586,8 @@
      2027-01-01  还有 103 天</code></pre>
 
 <p><strong>这些日期原本存在于我的记忆里和一份维护文档里。</strong> 记忆会忘,文档不会主动跳出来。现在它们每次构建都自己喊一遍。</p>
-<h2 id="五、最重要的一条-沉默不等于通过"><a href="#五、最重要的一条-沉默不等于通过" class="headerlink" title="五、最重要的一条:沉默不等于通过"></a>五、最重要的一条:沉默不等于通过</h2><p>写完一套检查,最危险的时刻是它第一次输出”全部通过”。</p>
-<p>因为”全部通过”有两种可能:<strong>真的没问题</strong>,或者<strong>你的检查根本没在查</strong>。这两种在屏幕上长得一模一样。</p>
+<h2 id="五、最重要的一条-沉默不等于通过"><a href="#五、最重要的一条-沉默不等于通过" class="headerlink" title="五、最重要的一条:沉默不等于通过"></a>五、最重要的一条:沉默不等于通过</h2><p>写完一套检查,最危险的时刻是它第一次输出“全部通过”。</p>
+<p>因为“全部通过”有两种可能:<strong>真的没问题</strong>,或者<strong>你的检查根本没在查</strong>。这两种在屏幕上长得一模一样。</p>
 <p>所以每加一条规则,我都会故意把数据改坏,确认它真的报错、退出码真的是 1:</p>
 <pre><code class="hljs bash"><span class="hljs-comment"># 故障注入:把某一行的 $/分 改成错的</span>
 node -e <span class="hljs-string">&quot;const f=&#x27;source/_data/cost-chart.json&#x27;,d=require(&#x27;./&#x27;+f);</span>
@@ -588,27 +600,27 @@ node tools/check.js; <span class="hljs-built_in">echo</span> <span class="hljs-s
 退出码 1</code></pre>
 
 <p>好,它是活的。<strong>没经过这一步的检查脚本,你不知道它是在保护你,还是只是在每次构建时打印一行绿色的字让你安心。</strong></p>
-<p>同理,检查脚本本身也会有 bug。这次就抓到一个:长文案检查一直在误报两条已经收进折叠区的说明——它只认页面上第一个折叠块,后面几个里的内容全被当成”常驻可见文字”。</p>
+<p>同理,检查脚本本身也会有 bug。这次就抓到一个:长文案检查一直在误报两条已经收进折叠区的说明——它只认页面上第一个折叠块,后面几个里的内容全被当成“常驻可见文字”。</p>
 <p>修完之后我做的第一件事不是提交,而是<strong>再注入一条真正超长的常驻文案</strong>,确认它还会报错。<strong>修误报最容易顺手把真报警也关掉。</strong></p>
 <h2 id="六、给-vibe-coding-的几条具体建议"><a href="#六、给-vibe-coding-的几条具体建议" class="headerlink" title="六、给 vibe coding 的几条具体建议"></a>六、给 vibe coding 的几条具体建议</h2><p>让 AI 帮你写代码时,这几件事值得主动说:</p>
-<p><strong>1. 明确要求”不要存派生值”。</strong> 模型默认会生成看起来最直白的代码——把算好的数字直接写进 HTML。你得明确说”这个百分比按数据算,不要写死”。</p>
-<p><strong>2. 把校验规则和功能一起要。</strong> 写完一个数据结构,顺手问一句:”这份数据里有哪些字段之间应该满足固定关系?写成检查。” 模型很擅长找出这种关系,但你不问它不会主动写。</p>
-<p><strong>3. 重构时要求输出等价证明,而不是”我改好了”。</strong> 我这次的验证方式是:把重构后的渲染结果和线上旧版本逐行比对。</p>
+<p><strong>1. 明确要求“不要存派生值”。</strong> 模型默认会生成看起来最直白的代码——把算好的数字直接写进 HTML。你得明确说“这个百分比按数据算,不要写死”。</p>
+<p><strong>2. 把校验规则和功能一起要。</strong> 写完一个数据结构,顺手问一句:“这份数据里有哪些字段之间应该满足固定关系?写成检查。” 模型很擅长找出这种关系,但你不问它不会主动写。</p>
+<p><strong>3. 重构时要求输出等价证明,而不是“我改好了”。</strong> 我这次的验证方式是:把重构后的渲染结果和线上旧版本逐行比对。</p>
 <pre><code class="hljs plaintext">天梯 JSON 语义相同: true
 总行数 旧 1736 / 新 1736
 唯一差异: 一行 is-costly → 普通   ← 就是那个预期的红柱修正</code></pre>
 
-<p><strong>“总行数 1736 &#x3D; 1736,唯一差异是预期内的那一处”</strong> 比任何”已完成”的承诺都有说服力。没有这个,你不知道重构悄悄改坏了什么。</p>
+<p><strong>“总行数 1736 &#x3D; 1736,唯一差异是预期内的那一处”</strong> 比任何“已完成”的承诺都有说服力。没有这个,你不知道重构悄悄改坏了什么。</p>
 <p><strong>4. 让检查脚本长在仓库里,别长在对话里。</strong> 这条我踩过很多次:每次更新都临时写一个一次性脚本,用完就扔,下次重写一遍。现在规则都进了 <code>tools/check.js</code>,<code>npm run build</code> 自动跑。</p>
 <p><strong>发现一条新的一致性规则,就加一条进去,下次白拿。</strong></p>
 <hr>
 <p>回到开头那个 bug。</p>
-<p>修它花了大概十分钟:把 <code>is-costly</code> 从手写改成按成本排序取前三。但真正的收获不是少了一个 bug——是<strong>这类 bug 从此不可能再发生</strong>。图例里的”三”和红柱的数量,现在是同一个数字。</p>
-<p>代码不会自己维护自己。但你可以把它写成一种形状:<strong>让”忘记同步”这件事,在结构上没有发生的余地。</strong></p>
+<p>修它花了大概十分钟:把 <code>is-costly</code> 从手写改成按成本排序取前三。但真正的收获不是少了一个 bug——是<strong>这类 bug 从此不可能再发生</strong>。图例里的“三”和红柱的数量,现在是同一个数字。</p>
+<p>代码不会自己维护自己。但你可以把它写成一种形状:<strong>让“忘记同步”这件事,在结构上没有发生的余地。</strong></p>
 <hr>
 <h2 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h2><ul>
 <li><a href="/2026/09/05/benchmark-shelf-life/">换了套卷子,全榜掉了 9 到 12 分</a>——数据会过时,而页面不会自己知道</li>
-<li><a href="/2026/09/20/elo-anchor-shift/">把尺子的零点挪到谁身上</a>——本文提到的那次”统计芯片自己变了”的更新</li>
+<li><a href="/2026/09/20/elo-anchor-shift/">把尺子的零点挪到谁身上</a>——本文提到的那次“统计芯片自己变了”的更新</li>
 </ul>
 <p>本文涉及的页面是<a href="/rankings/">模型天梯</a>,文中所有代码片段均来自其生产代码。</p>
 <blockquote>
@@ -640,7 +652,7 @@ node tools/check.js; <span class="hljs-built_in">echo</span> <span class="hljs-s
         
           <div class="toc-sticky">
             <h3 class="toc-title">目录大纲</h3>
-            <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E7%AC%AC%E4%B8%80%E5%8E%9F%E5%88%99-%E8%83%BD%E7%AE%97%E5%87%BA%E6%9D%A5%E7%9A%84-%E5%B0%B1%E5%88%AB%E5%AD%98"><span class="toc-list-text">一、第一原则:能算出来的,就别存</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E5%88%A4%E6%96%AD%E6%A0%87%E5%87%86%E5%B0%B1%E4%B8%80%E5%8F%A5%E8%AF%9D"><span class="toc-list-text">判断标准就一句话</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E6%8A%8A%E2%80%9D%E4%BA%BA%E9%9C%80%E8%A6%81%E8%AE%B0%E4%BD%8F%E7%9A%84%E4%BA%8B%E2%80%9D%E5%BE%80%E4%B8%8A%E6%B8%B8%E6%8E%A8"><span class="toc-list-text">二、把”人需要记住的事”往上游推</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E4%BD%86%E4%B8%8D%E6%98%AF%E6%89%80%E6%9C%89%E4%B8%9C%E8%A5%BF%E9%83%BD%E8%AF%A5%E6%8A%BD%E6%88%90%E6%95%B0%E6%8D%AE"><span class="toc-list-text">三、但不是所有东西都该抽成数据</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E9%82%A3%E6%9D%A1%E5%88%86%E7%95%8C%E7%BA%BF"><span class="toc-list-text">那条分界线</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E6%8A%8A%E6%A3%80%E6%9F%A5%E5%86%99%E6%88%90%E4%BB%A3%E7%A0%81-%E8%80%8C%E4%B8%8D%E6%98%AF%E5%86%99%E8%BF%9B%E6%96%87%E6%A1%A3"><span class="toc-list-text">四、把检查写成代码,而不是写进文档</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E4%B8%80%E6%9D%A1-%E6%B2%89%E9%BB%98%E4%B8%8D%E7%AD%89%E4%BA%8E%E9%80%9A%E8%BF%87"><span class="toc-list-text">五、最重要的一条:沉默不等于通过</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%AD%E3%80%81%E7%BB%99-vibe-coding-%E7%9A%84%E5%87%A0%E6%9D%A1%E5%85%B7%E4%BD%93%E5%BB%BA%E8%AE%AE"><span class="toc-list-text">六、给 vibe coding 的几条具体建议</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB"><span class="toc-list-text">延伸阅读</span></a></li></ol>
+            <ol class="toc-list"><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%80%E3%80%81%E7%AC%AC%E4%B8%80%E5%8E%9F%E5%88%99-%E8%83%BD%E7%AE%97%E5%87%BA%E6%9D%A5%E7%9A%84-%E5%B0%B1%E5%88%AB%E5%AD%98"><span class="toc-list-text">一、第一原则:能算出来的,就别存</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E5%88%A4%E6%96%AD%E6%A0%87%E5%87%86%E5%B0%B1%E4%B8%80%E5%8F%A5%E8%AF%9D"><span class="toc-list-text">判断标准就一句话</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%8C%E3%80%81%E6%8A%8A-%E4%BA%BA%E9%9C%80%E8%A6%81%E8%AE%B0%E4%BD%8F%E7%9A%84%E4%BA%8B-%E5%BE%80%E4%B8%8A%E6%B8%B8%E6%8E%A8"><span class="toc-list-text">二、把“人需要记住的事”往上游推</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%B8%89%E3%80%81%E4%BD%86%E4%B8%8D%E6%98%AF%E6%89%80%E6%9C%89%E4%B8%9C%E8%A5%BF%E9%83%BD%E8%AF%A5%E6%8A%BD%E6%88%90%E6%95%B0%E6%8D%AE"><span class="toc-list-text">三、但不是所有东西都该抽成数据</span></a><ol class="toc-list-child"><li class="toc-list-item toc-list-level-3"><a class="toc-list-link" href="#%E9%82%A3%E6%9D%A1%E5%88%86%E7%95%8C%E7%BA%BF"><span class="toc-list-text">那条分界线</span></a></li></ol></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%9B%9B%E3%80%81%E6%8A%8A%E6%A3%80%E6%9F%A5%E5%86%99%E6%88%90%E4%BB%A3%E7%A0%81-%E8%80%8C%E4%B8%8D%E6%98%AF%E5%86%99%E8%BF%9B%E6%96%87%E6%A1%A3"><span class="toc-list-text">四、把检查写成代码,而不是写进文档</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E4%BA%94%E3%80%81%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E4%B8%80%E6%9D%A1-%E6%B2%89%E9%BB%98%E4%B8%8D%E7%AD%89%E4%BA%8E%E9%80%9A%E8%BF%87"><span class="toc-list-text">五、最重要的一条:沉默不等于通过</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%85%AD%E3%80%81%E7%BB%99-vibe-coding-%E7%9A%84%E5%87%A0%E6%9D%A1%E5%85%B7%E4%BD%93%E5%BB%BA%E8%AE%AE"><span class="toc-list-text">六、给 vibe coding 的几条具体建议</span></a></li><li class="toc-list-item toc-list-level-2"><a class="toc-list-link" href="#%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB"><span class="toc-list-text">延伸阅读</span></a></li></ol>
           </div>
         
       </aside>

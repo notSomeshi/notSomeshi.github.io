@@ -806,6 +806,13 @@ document.addEventListener('DOMContentLoaded', function () {
         li.classList.add(d <= 30 ? 'is-soon' : (d <= 90 ? 'is-near' : 'is-far'));
       }
     });
+    // 手机上只露最近 3 条(CSS 控制),其余点按钮展开 —— 7 条全摊开要翻一屏多才到天梯
+    var more = box.querySelector('.rk-expiry-more');
+    if (more) more.addEventListener('click', function () {
+      var open = box.classList.toggle('is-open');
+      more.setAttribute('aria-expanded', open ? 'true' : 'false');
+      more.firstElementChild.textContent = more.getAttribute(open ? 'data-less' : 'data-more');
+    });
   }
 
   /* ==========================================
