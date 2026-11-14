@@ -6,12 +6,12 @@
 
 ## 核心页面
 
-- [模型天梯](https://notsomeshi.github.io/rankings/):前 20 个大模型的综合排名(Arena、Artificial Analysis、LiveBench 2.0、SWE-bench Verified 四家实测分加权),附订阅与 API 性价比表、Agent 平台表、评测成本图。快照 2026-11-13
+- [模型天梯](https://notsomeshi.github.io/rankings/):前 20 个大模型的综合排名(Arena、Artificial Analysis、LiveBench 2.0、SWE-bench Verified 四家实测分加权),附订阅与 API 性价比表、Agent 平台表、评测成本图。快照 2026-11-14
 - [选购助手](https://notsomeshi.github.io/advisor/):按预算和用途推荐 AI 订阅或 API 方案
 - [关于](https://notsomeshi.github.io/about/):数据口径与更新规则
 - [RSS](https://notsomeshi.github.io/atom.xml) · [Sitemap](https://notsomeshi.github.io/sitemap.xml)
 
-## 模型天梯(快照 2026-11-13,默认权重)
+## 模型天梯(快照 2026-11-14,默认权重)
 
 | 名次 | 模型 | 厂商 | 综合分 | Arena | AA 指数 | LiveBench | SWE-V |
 | --- | --- | --- | --- | --- | --- | --- | --- |
