@@ -5720,3 +5720,90 @@ html.cover-lock { overflow: hidden; }
   [data-theme='light'] .post-content-main,
   [data-theme='light'] .page-detail { padding: 20px 16px 60px; border-radius: 14px; }
 }
+
+/* ============================================
+   白天模式可读性(2026-11-19,用户反馈"有些字在明亮状态下看不太清")
+   1) 弱化文字的颜色加深:原 --text-tertiary #8a8a92 在演草纸上对比度只有 2.7、在白底上 3.4,低于 WCAG 正文 4.5
+   2) 状态色(红 / 琥珀 / 绿)用作文字时换深色版;作为柱子、边框时保持鲜亮原色
+   3) 直接压在格线上的文字区块垫一层磨砂玻璃(同天梯说明面板的材质);
+      已经在玻璃里的文字(天梯行、分段按钮)不再加底,只加纸色光晕,让格线不从字形中间穿过
+   ⚠ 新加 backdrop-filter 的元素会成为其后代的 Backdrop Root:这里选的容器内部都没有折射玻璃
+   ============================================ */
+[data-theme='light'] {
+  --text-secondary: #45454c;
+  --text-tertiary: #62626a;
+  --accent-ink: #685400;
+  --ink-red: #c0262c;
+  --ink-amber: #8a5a00;
+  --ink-green: #1a7f37;
+  --paper-halo: 0 0 2px rgba(250, 249, 244, .95), 0 0 6px rgba(250, 249, 244, .85);
+}
+
+/* 状态色:只改文字 */
+[data-theme='light'] .rk-expiry-item.is-soon .rk-expiry-days { color: var(--ink-red); }
+[data-theme='light'] .rk-expiry-item.is-near .rk-expiry-days,
+[data-theme='light'] .rk-expiry-stale { color: var(--ink-amber); }
+[data-theme='light'] .rkc-eff.good { color: var(--ink-green); }
+[data-theme='light'] .rk-plat-table td:nth-child(6) strong,
+[data-theme='light'] .adv-block-warn .adv-block-title { color: var(--ink-red); }
+[data-theme='light'] .fig-delta-item.is-down .fig-delta-v strong { color: var(--ink-green); }
+[data-theme='light'] .fig-delta-item.is-up .fig-delta-v strong { color: var(--ink-red); }
+
+/* 压在格线上的文字区块:磨砂玻璃面板 */
+[data-theme='light'] .rankings-section .archive-header,
+[data-theme='light'] #rankingsApp .rk-controls,
+[data-theme='light'] .rk-board > .rk-note {
+  background: rgba(252, 251, 247, .72);
+  -webkit-backdrop-filter: blur(8px) saturate(1.25);
+  backdrop-filter: blur(8px) saturate(1.25);
+  border-radius: 18px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .95), inset 0 -1px 0 rgba(255, 255, 255, .45), 0 8px 24px rgba(70, 60, 30, .08);
+}
+[data-theme='light'] .rankings-section .archive-header { padding: 18px 22px 16px; }
+[data-theme='light'] #rankingsApp .rk-controls { padding: 14px 16px; }
+[data-theme='light'] .rk-board > .rk-note { padding: 10px 16px; }
+
+/* 已在玻璃里、或直接压在格线上的小字:加深 + 纸色光晕 */
+[data-theme='light'] #rankingsApp .rk-table th,
+[data-theme='light'] #rankingsApp .rk-unit,
+[data-theme='light'] #rankingsApp .rk-vendor,
+[data-theme='light'] #rankingsApp .rk-norm,
+[data-theme='light'] #rankingsApp .rk-col-cov,
+[data-theme='light'] .rk-inst-name,
+[data-theme='light'] .rk-weight-num {
+  text-shadow: var(--paper-halo);
+}
+[data-theme='light'] #rankingsApp .rk-table th { color: #4a4a52; }
+[data-theme='light'] #rankingsApp .rk-vendor,
+[data-theme='light'] #rankingsApp .rk-norm { color: #4f4f57; font-weight: 500; }
+[data-theme='light'] .rk-mod { color: #55555d; background: rgba(255, 255, 255, .7); border-color: #c4c4cb; }
+[data-theme='light'] .rk-mod.is-on { color: var(--accent-contrast); background: var(--accent); border-color: #e0bd00; }
+
+/* 亮色:「显示 / 币种」两行开关原本直接压在演草纸上,小字被格线吃掉。
+   玻璃底放在 ::before 上而不是元素本身——.rk-seg 自带 backdrop-filter,
+   祖先若也加 backdrop-filter 会变成 Backdrop Root,分段按钮就采不到背后的纸面了。 */
+[data-theme='light'] .rk-density {
+  position: relative;
+  z-index: 0;
+  padding: 8px 14px;
+  width: fit-content;
+  max-width: 100%;
+}
+[data-theme='light'] .rk-density::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 16px;
+  background: rgba(252, 251, 247, .72);
+  -webkit-backdrop-filter: blur(8px) saturate(1.25);
+  backdrop-filter: blur(8px) saturate(1.25);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .95), inset 0 -1px 0 rgba(255, 255, 255, .45), 0 6px 18px rgba(70, 60, 30, .07);
+  pointer-events: none;
+}
+[data-theme='light'] .rk-currency { margin-top: -4px; }
+[data-theme='light'] .rk-density-label { color: #4a4a52; }
+[data-theme='light'] .rk-density-hint { color: #4f4f57; }
+[data-theme='light'] .rk-plan em { color: #4f4f57; }
+[data-theme='light'] .rkc-effort-badge { background: #c0262c; }
+[data-theme='light'] .risk-box-title { color: var(--ink-red); }

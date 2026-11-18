@@ -1499,7 +1499,7 @@ document.addEventListener('DOMContentLoaded', function () {
        不是 Simple Icons 里 X/推特的那个 x —— 那不能冒用)。查不到厂商就不画 —— 以前 Muse Spark 就是因为这里漏了 Meta 而没有图标 */
     var GHOST_SVG = ['anthropic', 'openai', 'google', 'deepseek', 'qwen', 'moonshot', 'minimax', 'mistral', 'meta',
                      'zai', 'xai', 'yuanbao', 'doubao',
-                     'cursor', 'github', 'trae', 'codebuddy', 'cline', 'manus', 'm365copilot', 'n8n', 'siliconcloud'];
+                     'cursor', 'github', 'trae', 'codebuddy', 'cline', 'manus', 'm365copilot', 'n8n', 'siliconcloud', 'lovable', 'replit'];
 
     function ghostSpan(brand, letter) {
       if (brand && GHOST_SVG.indexOf(brand) !== -1) {
